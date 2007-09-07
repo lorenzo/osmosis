@@ -7,18 +7,32 @@ class DepartmentTestCase extends CakeTestCase {
 
 	function setUp() {
 		$this->TestObject = new Department();
+		$this->TestObject->useDbConfig = 'test_suite';
+		$this->TestObject->tablePrefix = 'test_suite_';
+		//$this->TestObject->loadInfo(true);
 	}
 
 	function tearDown() {
 		unset($this->TestObject);
 	}
-
+	
 	/*
-	function testMe() {
-		$result = $this->TestObject->findAll();
-		$expected = 1;
-		$this->assertEqual($result, $expected);
+	 * Test field validation
+	 */
+	function testValidation() {
+		$data = array('Department'=>array('name'=>'','description'=>'Esta es una descripcion'));
+		$this->TestObject->data = $data;
+		$valid = $this->TestObject->validates();
+		$this->assertFalse($valid);
+		$this->assertEqual($this->TestObject->validationErrors,array('name'=>'Error.empty'));
+		
+		$this->TestObject->create();
+		$data = array('Department'=>array('name'=>'esto es un nombre','description'=>''));
+		$this->TestObject->data = $data;
+		$valid = $this->TestObject->validates();
+		$this->assertFalse($valid);
+		
+		$this->assertEqual($this->TestObject->validationErrors,array('description'=>'Error.empty'));
 	}
-	*/
 }
 ?>

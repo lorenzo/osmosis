@@ -3,8 +3,8 @@ class Department extends AppModel {
 
 	var $name = 'Department';
 	var $validate = array(
-		'name' => VALID_NOT_EMPTY,
-		'description' => VALID_NOT_EMPTY,
+		'name' => array('Error.empty' => VALID_NOT_EMPTY),
+		'description' => array('Error.empty' => VALID_NOT_EMPTY),
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
