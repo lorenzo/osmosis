@@ -9,7 +9,7 @@ class CourseTestCase extends CakeTestCase {
 		$this->TestObject = new Course();
 		$this->TestObject->useDbConfig = 'test_suite';
 		$this->TestObject->tablePrefix = 'test_suite_';
-		$this->TestObject->loadInfo(true);
+		//$this->TestObject->loadInfo(true);
 	}
 
 	function tearDown() {

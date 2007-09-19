@@ -1,5 +1,5 @@
 <?php
-/* SVN FILE: $Id: test.php 5318 2007-06-20 09:01:21Z phpnut $ */
+/* SVN FILE: $Id: test.php 5315 2007-06-20 07:51:52Z phpnut $ */
 /**
  * Short description for file.
  *
@@ -21,9 +21,9 @@
  * @package			cake
  * @subpackage		cake.cake.tests.libs
  * @since			CakePHP(tm) v 1.2.0.4433
- * @version			$Revision: 5318 $
+ * @version			$Revision: 5315 $
  * @modifiedby		$LastChangedBy: phpnut $
- * @lastmodified	$Date: 2007-06-20 05:01:21 -0400 (Wed, 20 Jun 2007) $
+ * @lastmodified	$Date: 2007-06-20 02:51:52 -0500 (Wed, 20 Jun 2007) $
  * @license			http://www.opensource.org/licenses/opengroup.php The Open Group Test Suite License
  */
 error_reporting(E_ALL);
@@ -39,7 +39,7 @@ if (!defined('APP_DIR')) {
 	define('APP_DIR', basename(dirname(dirname(__FILE__))));
 }
 if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-	 define('CAKE_CORE_INCLUDE_PATH', ROOT.DS.'cake1.2.x');
+	define('CAKE_CORE_INCLUDE_PATH', ROOT.DS.'cake1.2.x');
 }
 if (!defined('WEBROOT_DIR')) {
 	define('WEBROOT_DIR', basename(dirname(__FILE__)));
@@ -141,6 +141,8 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 			case CAKE_TEST_OUTPUT_HTML:
 				if (isset($_GET['app'])) {
 					echo HtmlTestManager::getTestCaseList(APP_TEST_CASES);
+				} elseif (isset($_GET['plugin'])) {
+					echo HtmlTestManager::getTestCaseList(APP . 'plugins' . DS . $_GET['plugin'] . DS. 'tests' . DS . 'cases');
 				} else {
 					echo HtmlTestManager::getTestCaseList(CORE_TEST_CASES);
 				}
@@ -149,6 +151,8 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 			default:
 				if (isset($_GET['app'])) {
 					echo TextTestManager::getTestCaseList(APP_TEST_CASES);
+				} elseif (isset($_GET['plugin'])) {
+					echo TextTestManager::getTestCaseList(APP . 'plugins' . DS . $_GET['plugin'] . DS. 'tests' . DS . 'cases');
 				} else {
 					echo TextTestManager::getTestCaseList(CORE_TEST_CASES);
 				}
@@ -161,6 +165,8 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 			case CAKE_TEST_OUTPUT_HTML:
 				if (isset($_GET['app'])) {
 					echo HtmlTestManager::getGroupTestList(APP_TEST_GROUPS);
+				} elseif (isset($_GET['plugin'])) {
+					echo HtmlTestManager::getGroupTestList(APP . 'plugins' . DS . $_GET['plugin'] . DS .'tests' . DS . 'groups');
 				} else {
 					echo HtmlTestManager::getGroupTestList(CORE_TEST_GROUPS);
 				}
@@ -169,6 +175,8 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 			default:
 				if (isset($_GET['app'])) {
 					echo TextTestManager::getGroupTestList(APP_TEST_GROUPS);
+				} elseif (isset($_GET['plugin'])) {
+					echo TextTestManager::getGroupTestList(APP . 'plugins' . DS . $_GET['plugin'] . DS. 'tests' . DS . 'groups');
 				} else {
 					echo TextTestManager::getGroupTestList(CORE_TEST_GROUPS);
 				}
@@ -195,6 +203,7 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 			case CAKE_TEST_OUTPUT_HTML:
 				$groups = $_SERVER['PHP_SELF'].'?show=groups';
 				$cases = $_SERVER['PHP_SELF'].'?show=cases';
+				$plugins = CakePHPPlugins();
 				include CAKE . 'tests' . DS . 'lib' . DS . 'content.php';
 			break;
 		}
@@ -208,6 +217,24 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 			break;
 		}
 	}
+	
+	function CakePHPPlugins() {
+		$path = APP . 'plugins';
+		$folder = new Folder($path);
+		
+		$folders = $folder->ls();
+		
+		$folders = $folders[0];
+		
+		$plugins = array();
+		for ($i=0; $i<count($folders); $i++){
+			if (file_exists(APP . 'plugins' . DS . $folders[$i] . DS . 'tests')){
+				$plugins[$folders[$i]] = Inflector::humanize($folders[$i]);
+			}
+		}
+		
+		return $plugins;
+	}
 
 	CakePHPTestHeader();
 	CakePHPTestSuiteHeader();
@@ -218,6 +245,8 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 		} else {
 			if (isset($_GET['app'])) {
 				TestManager::runGroupTest(ucfirst($_GET['group']), APP_TEST_GROUPS, CakeTestsGetReporter());
+			} elseif (isset($_GET['plugin'])) {
+				TestManager::runGroupTest(ucfirst($_GET['group']), APP . DS . 'plugins' . DS . $_GET['plugin'] . 'tests', CakeTestsGetReporter());
 			} else {
 				TestManager::runGroupTest(ucfirst($_GET['group']), CORE_TEST_GROUPS, CakeTestsGetReporter());
 			}
