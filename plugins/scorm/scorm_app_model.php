@@ -1,5 +1,5 @@
 <?php
-class ScormAppModel {
+class ScormAppModel extends Model {
 	
 }
 ?>

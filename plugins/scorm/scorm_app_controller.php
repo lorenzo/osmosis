@@ -1,5 +1,5 @@
 <?php
-class ScormAppController {
-	
+class ScormAppController extends Controller{
+ 
 }
 ?>
