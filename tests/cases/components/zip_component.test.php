@@ -7,15 +7,16 @@ class ZipComponentTestCase extends CakeTestCase {
 	var $temp_dir = null;
 	
 	function setUp() {
-		$this->temp_dir = ROOT . DS . APP_DIR . DS . 'tmp' . DS . 'zip_test' . DS;
+		$this->temp_dir = ROOT . DS . APP_DIR . DS . 'tmp' . DS . 'tests' . DS . 'zip' . DS;
 		$this->TestObject = new ZipComponent();
+		$this->TestObject->startup($dummy);
 	}
 
 	/**
 	 * Deletes all files created.
 	 */
 	function tearDown() {
-		shell_exec('rm -rf ' . $this->temp_dir );
+		//shell_exec('rm -rf ' . $this->temp_dir );
 		unset($this->TestObject);
 	}
 	
@@ -33,10 +34,11 @@ class ZipComponentTestCase extends CakeTestCase {
 	 */
 	function _createDummyZip() {
 		$this->_createTempDir();
-		$this->TestObject->create($this->temp_dir . 'prueba.zip');
+		$this->TestObject->begin($this->temp_dir . 'prueba.zip');
 		shell_exec('echo test > ' . $this->temp_dir . 'test.txt');
 		$this->TestObject->addFile($this->temp_dir . 'test.txt', 'other_name.txt');
 		$this->TestObject->close();
+		file_exists($this->temp_dir . 'prueba.zip');
 		shell_exec('rm -f ' . $this->temp_dir . 'test.txt');
 		$this->assertTrue(file_exists($this->temp_dir . 'prueba.zip'));
 	}
@@ -48,7 +50,7 @@ class ZipComponentTestCase extends CakeTestCase {
 	function _unzipDummyZip() {
 		$this->TestObject->begin($this->temp_dir . 'prueba.zip');
 		$this->TestObject->extract($this->temp_dir . 'unexistant_path');
-
+		$this->TestObject->close();
 		$this->assertTrue(is_dir($this->temp_dir . 'unexistant_path'));
 		$this->assertTrue(file_exists($this->temp_dir. 'unexistant_path' . DS . 'other_name.txt'));
 		
@@ -60,6 +62,23 @@ class ZipComponentTestCase extends CakeTestCase {
 	function testArchiveExtract() {
 		$this->_createDummyZip();
 		$this->_unzipDummyZip();
+		
+	
 	}
+	
+	/**
+	 * Test creating a zip file, adding a file on the go and its content and then extracting it to an unexistant directory.
+	 
+
+	function testAddByContent(){
+		$this->TestObject->begin($this->temp_dir . 'prueba.zip');
+		$this->TestObject->addByContent('another_file.txt', 'Hello World');
+		var_dump($this->TestObject->extract($this->temp_dir . 'another_unexistant_path'));
+		$this->TestObject->close();
+		$this->assertTrue(is_dir($this->temp_dir . 'another_unexistant_path'));
+		$this->assertTrue(file_exists($this->temp_dir. 'another_unexistant_path' . DS . 'other_name.txt'));	
+		$this->assertTrue(file_exists($this->temp_dir. 'another_unexistant_path' . DS . 'another_file.txt'));
+	}
+*/
 }	
 ?>

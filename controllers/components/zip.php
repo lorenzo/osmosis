@@ -3,93 +3,105 @@ class ZipComponent extends Object
 {
     
     var $controller;
-    
     var $zip;
-    
-    function __construct(){
-        parent::__construct();
-        $this->zip = new ZipArchive();
-    }
-    
-    function __destruct(){
-    }
     
     function __get($function){
         return $this->zip->{$function};
     }
     
-    function startup(&$controller){
-        
+    /**
+     * Initializes the zip object.
+     */
+    function startup(&$controller) {
+    	$this->zip = new ZipArchive();
     }
     
-    /*
-     * @return boolean
-     *
-     * @params string, boolean 
-     *
-     * $path : local path for zip
-     * $overwrite :   
+    /**
+     * Starts up the work on a zip file.
+     * @param $path string The path to the file.
+     * @param $mode int the mode in wich the zip file is going to be opened. 
      * 
-     * usage :   
+     * @return boolean true on success.
+     * 
+     * usage: Opens a zip file in one of the following modes:
+     * overwrite => Overwrite the file if it exists.
+     * create => Creates a new file
+     * excl => Fails if the file exists
+     * check => Makes additional consistency checks.
      */
-    function begin($path = '', $mode = 1) {
-        $mode = ( $mode>3 ) ? 0 : $mode ;
-        $mode = max(0,$mode);
+    function begin($path = '', $mode = 'create') {
         $modes = array(
-	      ZIPARCHIVE::OVERWRITE,
-	      ZIPARCHIVE::CREATE,
-	      ZIPARCHIVE::EXCL,
-	      ZIPARCHIVE::CHECKCONS
+	      'overwrite' => ZIPARCHIVE::OVERWRITE,
+	      'create' => ZIPARCHIVE::CREATE,
+	      'excl' => ZIPARCHIVE::EXCL,
+	      'check' => ZIPARCHIVE::CHECKCONS
         );
+        $mode = (array_key_exists($mode, $modes)) ? $mode : 'create';
         $mode = $modes[$mode];
         return $this->zip->open($path, $mode);
     }
     
+    /**
+     * Alias for ZipComponent::begin($path).
+     * @param $path string The path to the file.
+     * 
+     * usage: Opens a zip file in create mode.
+     */
     function create($path) {
     		$this->begin($path);
     }
     
+    /**
+     * Closes the zip file.
+     * 
+     * @return boolean true on success.
+     */
     function close(){
         return $this->zip->close();
     }
     
+    /**
+     * Alias for ZipComponent::close.
+     * 
+     * @return boolean true on success.
+     */
     function end(){
         return $this->close();
     }
     
-    /*
-     * @return boolean 
+    /**
+     * Adds file to the open zip archive.
+     * @param $file string path to the file to add to the zip archive.
+     * @param $localFile string name to give inside the zip archive.
      * 
-     * @params string, string (optional)
+     * @return boolean true if added successfully.
      * 
-     * $file : file to be included (full path)
-     * $localFile : name of file in zip, if different 
-     *  
+     * usage: add a file $file to the current zip archive, optionally rename it to
+     * $localFile inside the archive. 
      */
     function addFile($file, $localFile = null ){
         return $this->zip->addFile($file, (is_null($localFile) ? $file : $localFile)); 
     }
     
-    /*
-     * @return boolean 
+    /**
+     * Adds a file with the specified content to the zip archive.
+     * @param $localFile string name to give inside the zip archive.
+     * @param $contents string content of the file to add to the zip archive.
      * 
-     * @params string, string
-     *
-     * $localFile : name of file in zip
-     * $contents : contents of file
-     *
-     * usage : $this->Zip->addByContents('myTextFile.txt', 'Test text file');  
+     * @return boolean true on success 
+     * usage: adds the file $localFile with the content $contents to the open file.  
      */
     function addByContent($localFile, $contents){
         return $this->zip->addFromString($localFile, $contents);
     }
     
-    /*
-     * @return boolean
+    /**
+     * Adds a directory (and all its contents) to the open zip archive.
+     * @param $directory string path to the directory to add to the zip archive.
+     * @param $as string name to give the directory inside the zip archive.
      * 
-     * @params string, string
-     * 
-     * 
+     * @return boolean true on success 
+     * usage: adds the directory $directory renamed to $as, to the open zip archive 
      */
     function addDirectory($directory, $as){
         if(substr($directory, -1, 1) != DS){
@@ -120,21 +132,28 @@ class ZipComponent extends Object
         return true;
     }
     
+    /**
+     * Alias to ZipComponent::addDirectory.
+     * @param $directory string path to the directory to add to the zip archive.
+     * @param $as string name to give the directory inside the zip archive.
+     */
     function addDir($directory, $as){
         $this->addDirectory($directory, $as);
     }
     
-    /*
-     * @return boolean
+    /**
+     * Undos the changes applied to an element of the zip archive.
+     * @param $mixed mixed the element or elements to undo.
      * 
-     * @params mixed
+     * @return boolean true on success.
+     * usage: undos the changes made to the elements listed in $mixed.
+     * $mixed can be a string (name inse the zip archive), a comma separated list of file names,
+     * '*' or 'all' to undo all modified items, or an array of ints (indexes) and string (names)
      * 
-     * $mixed : undo changes to an archive by index(int), name(string), all ('all' | '*' | blank)
-     * 
-     * usage : $this->Zip->undo(1);
+     * Examples:
+     * 		   $this->Zip->undo(1);
      * 		   $this->Zip->undo('myText.txt');
      * 		   $this->Zip->undo('*');
-     * 
      * 		   $this->Zip->undo('myText.txt, myText1.txt');
      * 		   $this->Zip->undo(array(1, 'myText.txt'));
      */
@@ -163,24 +182,26 @@ class ZipComponent extends Object
         return true;
     }
     
-    /*
-     * @return boolean
+    /**
+     * Renames a file inside the zip archive.
+     * @param $file mixed names of the files to rename inside the zip archive.
+     * @param $new string new name to give to the file.
      * 
-     * @params mixed, string (optional)
-     * 
-     * 
+     * @return boolean true on success.
+     * usage: rename $file to $new if $file is not an array.
+     * Else, rename each file from $file keys to $file values.
      */
-    function rename($old, $new = null){
-        if(is_array($old)){
-            foreach($old as $cur => $new){
+    function rename($file, $new = null){
+        if(is_array($file)){
+            foreach($file as $cur => $new){
                 $constant = is_string($cur) ? 'Name' : 'Index';
-	            if(!$this->zip->rename{$constant}($ur, $new)){
+	            if(!$this->zip->rename{$constant}($cur, $new)){
 	               return false;
 	            }
             }
         }else{
-            $constant = is_string($old) ? 'Name' : 'Index';
-            if(!$this->zip->rename{$constant}($old, $new)){
+            $constant = is_string($file) ? 'Name' : 'Index';
+            if(!$this->zip->rename{$constant}($file, $new)){
                return false;
             }
         }
@@ -188,27 +209,33 @@ class ZipComponent extends Object
         return true;
     }
     
-    /*
-     * @return index, name or FALSE
+    /**
+     * Finds a file inside the zip archive.
+     * @param $mixed mixed name or index of the file to find.
+     * @param $options array mode in which the search has to be made.
      * 
-     * @params mixed, mixed (FL_NODIR, FL_NOCASE)
-     * 
+     * @return mixed index or name if the file was found, false otherwise.
      */
-    function find($mixed, $options = 0){     
+    function find($mixed, $options = array()){
+    	$flags = array(
+    		'nocase' => ZIPARCHIVE::FL_NOCASE,
+    		'nodirs' => ZIPARCHIVE::FL_NODIR 
+    	);
+    	$mode = ($options == array_keys($flags)) ? $flags['nocase'] | $flags['nodirs'] : $flags[array_pop($options)];
         if(is_string($mixed)){
-            return $this->zip->locatename($mixed, $options);
+            return $this->zip->locatename($mixed, $mode);
         }else{
             return $this->zip->getNameIndex($mixed);
         }
     }
     
-    /*
-     * @return boolean
+    /**
+     * Delete a file (or files) from the zip archive.
+     * @param mixed name or array of names and indexes of the files to delete.
      * 
-     * @params mixed
-     * 
-     * $mixed : undo changes to an archive by index(int), name(string), all ('all' | '*' | blank)
-     * 
+     * @return boolean true on success.
+     * usage: delete the file or files in $mixed. 
+     * If one fails no rollback is made.
      */
     function delete($mixed){
         if(is_array($mixed)){
@@ -229,16 +256,24 @@ class ZipComponent extends Object
         }
     }
     
-    /*
-     * @return boolean
+    /**
+     * Sets comments to the files inside the archive (or to the archive itself)
+     * @param mixed $mixed name of the file to add a comment, or array of files.
+     * @param string $comment comment to set to the file.
      * 
-     * @params mixed, string
-     * 
-     * $mixed : comment by index(int), name(string), entire archive ('archive')
+     * @return boolean true on success
+     * usage: set comment $comment to the archive if $mixed == 'archive', else
+     * set the comment to the file $mixed (filename or index).
+     * If $mixed is an array, sets the comment of each file, form $mixed's keys, to the comment form $mixed's values.  
      */
-    function comment($mixed = 'archive', $comment){
+    function comment($mixed = 'archive', $comment = null) {
         if(is_array($mixed)){
-            //unsupported currently
+        	foreach($mixed as $file => $comment){
+                $constant = is_string($value) ? 'Name' : 'Index';
+                if (!$this->zip->setComment{$constant}($comment)) {
+                    return false;
+                }
+            }
         }else{
             if(low($mixed) === 'archive'){
                 return $this->zip->setArchiveComment($comment);
@@ -249,10 +284,39 @@ class ZipComponent extends Object
         }
     }
     
-    
-    function stats($mixed){
+    /**
+     * Gets the details of the file identified by $mixed (key or name).
+     * @param mixed $mixed string (name) or int (key)
+     * @param array $flags wether to get the current file status or the original, and
+     * if $mixed is string wether to ignore case and directories.
+     * 
+     * @return mixed the details of the file or false on failure.
+     * usage: 
+     */
+    function stats($mixed, $original = array()){
         $constant = is_string($mixed) ? 'Name' : 'Index';
-        return $this->zip->stat{$constant}();
+        $flags = array(
+        	'nocase' => ZIPARCHIVE::FL_NOCASE,
+			'nodirs' => ZIPARCHIVE::FL_NODIR,
+			'original' => ZIPARCHIVE::FL_UNCHANGED 
+		);
+        if (is_string($mixed)) {
+        	$mode = null;
+        	foreach ($original as $key) {
+        		if (in_array($key, array_keys($flags))) {
+        			$mode = $mode | $flags[$key];
+        		}
+        	}
+        	if (!empty($original))
+        		return $this->zip->stat{$constant}($mixed, $mode);
+        	else
+        		return $this->zip->stat{$constant}($mixed);
+        } else {
+        	if ($original===array('original'))
+        		return $this->zip->stat{$constant}($mixed, $modes['original']);
+        	else
+        		return $this->zip->stat{$constant}($mixed);
+        }
     }
     
     
@@ -265,7 +329,7 @@ class ZipComponent extends Object
      * 
      */
     function extract($location, $entries = null){
-        if (!empty($entries))
+       if (!empty($entries))
                 return $this->zip->extractTo($location, $entries);
         return $this->zip->extractTo($location);
     }
