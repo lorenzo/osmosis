@@ -42,10 +42,11 @@ class Scorm extends ScormAppModel {
 		$m = $manifest->first();
 		$data['Scorm']['version'] = $this->getSchemaVersion($m);
 		$data['Scorm']['identifier'] = $this->getNodeIdentifier($m);
+		// TODO: Implement <imsss:sequencingCollection>
 		$data['Organization'] = $this->extractOrganizations($m);
-		$data['Scorm']['Resources'] = $this->extractResources($m);
-		//debug($data);
-
+		// TODO: Implement <adlnav:presentation>
+		$data['Resources'] = $this->extractResources($m);
+		return $data;
 	}
 	
 	/*
@@ -115,7 +116,7 @@ class Scorm extends ScormAppModel {
 	}
 	
 	/*
-	 * Unfinished
+	 * Doc missing
 	 */
 	function extractSequencing(XMLNode $parent) {
 		$data = array();
@@ -126,15 +127,36 @@ class Scorm extends ScormAppModel {
 			if(!empty($control)) {
 				$data['Control'] = $control[0]->attributes;
 			}
-			$data['SequencingRules'] = $this->extractSeqRules($seq);
-			$limit = $seq->children('limitConditions');
-			$aux = $seq->children('auxiliaryResources');
-			$rollup = $seq->children('rollupRules');
-			$objectives = $seq->children('objectives');
+			$data['SequencingRule'] = $this->extractSeqRules($seq);
+			$limit = $seq->children('imsss:limitConditions');
+			if(!empty($limit)) {
+				$data['LimitCondition'] = $limit[0]->attributes;	
+			}
+			//$aux = $seq->children('auxiliaryResources'); ADL discourages it's use
+			$rollup = $seq->children('imsss:rollupRules');
+			if(!empty($rollup)) {
+				$data['RollUpRule'] = $this->extractRulesData($rollup[0],'rollup');
+			}
+			$objectives = $seq->children('imss:objectives');
+			if(!empty($objectives)) {
+				$data['Objective'] = $this->extractObjectives($objectives[0]);
+			}
 			$randomization = $seq->children('randomizationControls');
+			if(!empty($randomization)) {
+				$data['Randomization'] = $randomization[0]->attributes;
+			}
 			$delivery = $seq->children('deliveryControls');
-			$considerations = $seq->children('adlseq:rollupConsiderations');
+			if(!empty($delivery)) {
+				$data['DeliveryControl'] = $delivery[0]->attributes;
+			}
 			$choice = $seq->children('adlseq:constrainedChoiceConsiderations');
+			if(!empty($choice)) {
+				$data['Choice'] = $choice->attributes;
+			}
+			$considerations = $seq->children('adlseq:rollupConsiderations');
+			if(!empty($considerations)) {
+				$data['Consideration'] = $considerations->attributes;
+			}
 		}
 		return $data;
 	}
@@ -160,8 +182,8 @@ class Scorm extends ScormAppModel {
 		return $rules;
 	}
 	
-	function extractRulesData(XMLNode $node) {
-		$conditions = $node->children('imsss:ruleConditions');
+	function extractRulesData(XMLNode $node,$name='rule') {
+		$conditions = $node->children("imsss:{$name}Conditions");
 		$conditions = $conditions[0];
 		$data = array();
 		$data['Condition'] = $conditions->attributes;
@@ -170,8 +192,30 @@ class Scorm extends ScormAppModel {
 			$data['Condition'][$i] = $condition->attributes;
 			$i++; 
 		}
-		$action = $node->children('imsss:ruleAction');
+		$action = $node->children("imsss:{$name}Action");
 		$data['Action'] = $action[0]->attributes;
+		return $data;
+	}
+	
+	function extractObjectives(XMLNode $node) {
+		$objectives = array();
+		$primary = $node->children('imsss:primaryObjective');
+		$objectives['Primary'] = $this->extractObjectiveData($primary[0]);
+		foreach($primary[0]->children('imsss:objective') as $objective) {
+			$objectives['Objective'][] =  $this->extractObjectiveData($objective);
+		}
+		return $objectives;
+	}
+	
+	function extractObjectiveData(XMLNode $node) {
+		$data = $node->attributes;
+		$measure = $node->children('imss:minNormalizedMeasure');
+		if(!empty($measure)) {
+			$data['minNormalizedMeasure'] = $measure->value;
+		}
+		foreach($node->children('imsss:mapInfo') as $map) {
+			$data['MapInfo'][] = $map->attributes;
+		}
 		return $data;
 	}
 	
@@ -192,6 +236,7 @@ class Scorm extends ScormAppModel {
 			$items[$identifier]['data_from_lms'] = $this->getItemData($item,'dataFromLMS');
 			$items[$identifier]['completion_threshold'] = $this->getItemData($item,'completionThreshold');
 			$items[$identifier]['Sequencing'] = $this->extractSequencing($item);
+			$items['Presentation'] = $this->extractPresentation($item);
 			$items[$identifier]['Item'] = $this->extractItems($item);
 		}
 		return $items;
@@ -209,4 +254,19 @@ class Scorm extends ScormAppModel {
 		}
 		return null;
 	}
+
+	function extractPresentation(XMLNode $node) {
+		$presentation = $node->children('adlnav:presentation');
+		$data = array();
+		if(!empty($presentation)) {
+			$navigation = $presentation[0]->children('adlnav:navigationInterface');
+			if(!empty($navigation)) {
+				foreach($navigation[0]->children as $hideLMS) {
+					$data[] = $hideLMS->value;
+				}
+			}
+		}
+		return $data;
+	}
+	
 }
