@@ -25,10 +25,9 @@ class Scorm extends ScormAppModel {
 	}
 	
 	/*
-	 * Returns an array with a representation of the xml manifest. 
+	 * Fills model data with a representation of the xml manifest. 
 	 * The array follows the array achitechture specified by cakephp to save data to a model
 	 * @param $path string the path where the imsmanifest.xml is.
-	 * @return array representation of imsmanifest.xml
 	 */
 	function parseManifest($path) {
 		uses('xml');
@@ -38,14 +37,13 @@ class Scorm extends ScormAppModel {
 		xml_parser_set_option($manifest->__parser, XML_OPTION_CASE_FOLDING, 0);
 		xml_parser_set_option($manifest->__parser, XML_OPTION_SKIP_WHITE, 1);
 		$manifest->load($path.DS.'imsmanifest.xml');
-		$data = array();
 		$m = $manifest->first();
-		$data['Scorm']['version'] = $this->getSchemaVersion($m);
-		$data['Scorm']['identifier'] = $this->getNodeIdentifier($m);
+		$this->data['Scorm']['version'] = $this->getSchemaVersion($m);
+		$this->data['Scorm']['identifier'] = $this->getNodeIdentifier($m);
+		$this->data['Resource'] = $this->extractResources($m);
 		// TODO: Implement <imsss:sequencingCollection>
-		$data['Organization'] = $this->extractOrganizations($m);
-		$data['Resources'] = $this->extractResources($m);
-		return $data;
+		$this->data['Organization'] = $this->extractOrganizations($m);
+		unset($this->data['Resource']);
 	}
 	
 	/*
@@ -228,16 +226,24 @@ class Scorm extends ScormAppModel {
 		$items = array();
 		$nodes = $parent->children('item');
 		foreach($nodes as $item) {
-			$items[$item->attributes['identifier']] = $item->attributes;
-			$title = $item->children('title');
 			$identifier = $this->getNodeIdentifier($item);
+			$items[$identifier] = $item->attributes;
+			$title = $item->children('title');
+			if(isset($item->attributes['identifierref'])) {
+				$resource = $this->data['Resource'][$item->attributes['identifierref']];
+				unset($resource['identifier']);
+				if((isset($this->data['Scorm']['xml:base']) || isset($this->data['Scorm']['xml:base'])) && isset($resource['href'])) {
+					@$resource['href'] = $this->data['Scorm']['xml:base'].$this->data['Resource']['xml:base'].$resource['href'];
+				}
+				$items[$identifier] = am($items[$identifier],$resource);
+			}
 			$items[$identifier]['title'] =  $title[0]->value;
-			$items[$identifier]['time_limit_action'] = $this->getItemData($item,'timeLimitAction');
-			$items[$identifier]['data_from_lms'] = $this->getItemData($item,'dataFromLMS');
-			$items[$identifier]['completion_threshold'] = $this->getItemData($item,'completionThreshold');
+			$items[$identifier]['timeLimitAction'] = $this->getItemData($item,'timeLimitAction');
+			$items[$identifier]['dataFromLMS'] = $this->getItemData($item,'dataFromLMS');
+			$items[$identifier]['completionThreshold'] = $this->getItemData($item,'completionThreshold');
 			$items[$identifier]['Sequencing'] = $this->extractSequencing($item);
 			$items['Presentation'] = $this->extractPresentation($item);
-			$items[$identifier]['Item'] = $this->extractItems($item);
+			$items[$identifier]['SubItem'] = $this->extractItems($item);
 		}
 		return $items;
 	}
@@ -268,5 +274,4 @@ class Scorm extends ScormAppModel {
 		}
 		return $data;
 	}
-	
 }
