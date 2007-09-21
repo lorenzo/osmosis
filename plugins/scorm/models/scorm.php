@@ -44,7 +44,6 @@ class Scorm extends ScormAppModel {
 		$data['Scorm']['identifier'] = $this->getNodeIdentifier($m);
 		// TODO: Implement <imsss:sequencingCollection>
 		$data['Organization'] = $this->extractOrganizations($m);
-		// TODO: Implement <adlnav:presentation>
 		$data['Resources'] = $this->extractResources($m);
 		return $data;
 	}
