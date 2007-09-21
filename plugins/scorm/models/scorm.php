@@ -59,11 +59,12 @@ class Scorm extends ScormAppModel {
 	
 	/*
 	 * Returns the value of the schemaversion tag inside metadata
-	 * @param $node XMLNode parent node with metadata child
+	 * @param $node XMLNode parent (manifest) node with metadata child
 	 * @return string value of schemaversion node
 	 */
 	function getSchemaVersion($node) {
 		$metadata = $node->children('metadata');
+		unset($metadata->__parent);
 		if(count($metadata)) {
 			$metadata = $metadata[0];
 			$version = $metadata->children('schemaversion');
