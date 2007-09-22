@@ -37,7 +37,7 @@ class CourseTestCase extends CakeTestCase {
 	}
 	
 	
-	function testExtractOrganizations() {
+	/*function testExtractOrganizations() {
 $xml = <<<eof
 	<organizations default="DMCE">
 	    <organization identifier="DMCE">
@@ -50,21 +50,15 @@ $xml = <<<eof
 			<adlcp:completionThreshold>0.75</adlcp:completionThreshold>
 	      <item identifier="WELCOME" identifierref="res_welcome" isvisible="false" parameters="?width=500&#038;length=300>
 	        <title>Welcome</title>
-	        <adlnav:presentation>
-	          <adlnav:navigationInterface>
-	            <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
-	            <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
-	          </adlnav:navigationInterface>
-	        </adlnav:presentation>
-	        <imsss:sequencing>
+		<imsss:sequencingCollection>
+   			<imsss:sequencing ID = "pretest">
 	          <imsss:controlMode 
 				choice="true" 
 				choiceExit="true" 
 				flow="true" 
 				forwardOnly="false" 
 				useCurrentAttemptObjectiveInfo = "false" 
-				useCurrentAttemptProgressInfo = "true"
-				/>
+				useCurrentAttemptProgressInfo = "true"/>
 				<imsss:sequencingRules>
 					<imsss:preConditionRule>
 						<imsss:ruleConditions conditionCombination="any">
@@ -72,18 +66,15 @@ $xml = <<<eof
 							referencedObjective = "some_objective_ID"
 							measureThreshold = "0.5000"
 							operator = "noOp"
-							condition = "satisfied"
-							/>
+							condition = "satisfied"/>
 							<imsss:ruleCondition 
 							referencedObjective = "some_objective_ID1"
 							measureThreshold = "0.8000"
 							operator = "not"
-							condition = "completed"
-							/>
+							condition = "completed"/>
 							</imsss:ruleConditions>
 						<imsss:ruleAction action = "disabled"/>
 					</imsss:preConditionRule>
-	
 					<imsss:postConditionRule>
 					   <imsss:ruleConditions>
 					      <imsss:ruleCondition condition="satisfied"/>
@@ -98,8 +89,14 @@ $xml = <<<eof
 					</imsss:exitConditionRule>
 				</imsss:sequencingRules>
 				<imsss:limitConditions attemptLimit="1" attemptAbsoluteDurationLimit="4 days"/><!-- xs>duration ??? --!>
-				<imsss:rollupRules rollupObjectiveSatisfied = "true" rollupProgressCompletion = "true" objectiveMeasureWeight = "1.0000">
-				   <imsss:rollupRule childActivitySet = "all" minimumCount = "0" minimumPercent = "0.0000" >
+				<imsss:rollupRules 
+						rollupObjectiveSatisfied = "true" 
+						rollupProgressCompletion = "true" 
+						objectiveMeasureWeight = "1.0000">
+				  <imsss:rollupRule 
+					childActivitySet = "all" 
+					minimumCount = "0" 
+					minimumPercent = "0.0000" >
 						<imsss:rollupConditions conditionCombination = "any">
 						   <imsss:rollupCondition condition = "attempted" operator = "noOp"/>
 						</imsss:rollupConditions>
@@ -107,23 +104,62 @@ $xml = <<<eof
 				   </imsss:rollupRule>
 				</imsss:rollupRules>
 			<imsss:objectives>
-			<imsss:primaryObjective objectiveID = "PRIMARYOBJ" satisfiedByMeasure = "true">
-				<imsss:minNormalizedMeasure>0.6</imsss:minNormalizedMeasure>
-					<imsss:mapInfo
-								targetObjectiveID = "obj_module_1"
-								readSatisfiedStatus="false"
-					          	readNormalizedMeasure = "false"
-					          	writeSatisfiedStatus = "true"
-								writeNormalizedMeasure="false"/>
+				<imsss:primaryObjective 
+						objectiveID = "PRIMARYOBJ" 
+						satisfiedByMeasure = "true">
+					<imsss:minNormalizedMeasure>0.6</imsss:minNormalizedMeasure>
+						<imsss:mapInfo
+						targetObjectiveID = "obj_module_1"
+						readSatisfiedStatus="false"
+						readNormalizedMeasure = "false"
+						writeSatisfiedStatus = "true"
+						WriteNormalizedMeasure="false"/>
+					</imsss:primaryObjective>
+					<imsss:objective satisfiedByMeasure = "false" objectiveID="obj_module_1">
+					   <imsss:mapInfo 
+						targetObjectiveID="obj_module_1"
+					    readSatisfiedStatus = "false"
+					    readNormalizedMeasure = "false"
+					    writeSatisfiedStatus = "true" />
+				</imsss:objective>
+			<imsss:randomizationControls 
+					randomizationTiming = "never"
+					selectCount="2"
+					reorderChildren = "false"
+                    selectionTiming="onEachNewAttempt" />
+			<imsss:deliveryControls 
+				    tracked = "false" 
+					completionSetByContent = "false" 
+					objectiveSetByContent = "false" />
+			<adlseq:constrainedChoiceConsiderations 
+					preventActivation = "false"
+					constrainChoice = "true" />
+			<adlseq:rollupConsiderations 
+					requiredForSatisfied = "always"
+					requiredForNotSatisfied = "ifAttempted"
+					requiredForCompleted = "ifNotSkipped"
+					requiredForIncomplete = "ifNotSuspended" 
+					measureSatisfactionIfActive = "false"/>
 	        </imsss:sequencing>
+			</imsss:sequencingCollection>
+			 <adlnav:presentation>
+			    <adlnav:navigationInterface>
+			       <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+			       <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+			    </adlnav:navigationInterface>
+			</adlnav:presentation>
 	      </item>
 		</organization>
 	</organizations>
 eof;
-	debug(new XML($xml));
+	$xml_test = new XML($xml);
+	debug($xml_test);
+	//$manifest = $xml_test->children;
+	//debug($xml_test->children);
+	debug($this->TestObject->extractOrganizations($xml_test));
 		
 	}
-
+*/
 	function testGetSchemaVersion() {
 		$manifest = new XMLNode('manifest');
 		$metadata = new XMLNode('metadata');
@@ -137,7 +173,32 @@ eof;
 			'2004 3rd Edition'
 		);
 	}
-
+	
+/**Test for the extraction of Secuencing in the XML. Status: incomplete, failed*/
+	
+	function testExtractSecuencing(){
+	$secuencing = new XMLNode('secuencing');
+	$control_Mode = new XMLNode('imsss:controlMode',array(
+				'choice'=> 'true', 
+				'choiceExit '=> 'true', 
+				'flow'=>'true', 
+				'forwardOnly'=> 'false', 
+				'useCurrentAttemptObjectiveInfo' => 'false', 
+				'useCurrentAttemptProgressInfo' => 'true'
+				)
+	);
+	$secuencing->append($contro_Mode);
+	debug($control_Mode);
+	$this->TestObject->extractSequencing($secuencing);
+	debug('HOLA');
+	debug($this->TestObject->extractSequencing($secuencing));
+	/**$xml = <<<eof	
+	<imsss:sequencing>
+            <imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false" />
+          </imsss:sequencing>
+	eof;*/
+	}
+	
 	function testExtractResources() {
 		$resources = new XMLNode('resources');
 		$resource1 = new XMLNode('resource', array(
