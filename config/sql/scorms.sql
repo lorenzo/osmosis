@@ -33,6 +33,19 @@ CREATE TABLE `scorms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a scorm asset in a course' AUTO_INCREMENT=1 ;
 
 -- 
--- Dumping data for table `scorms`
+-- Table structure for table `scoes`
 -- 
+
+CREATE TABLE `scoes` (
+  `id` int(11) unsigned NOT NULL auto_increment COMMENT 'Primary key',
+  `scorm_id` int(11) unsigned NOT NULL COMMENT 'Scorm package this sco belongs to',
+  `parent_id` int(11) unsigned NOT NULL COMMENT 'The parent sco',
+  `manifest` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'The manifest that contains this sco',
+  `organization` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'The organization that contains this sco',
+  `identifier` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'Identifier string for sco',
+  `href` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'Reference to the location to launch',
+  `title` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'Title for sco',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Holds each SCO from a SCORM package' AUTO_INCREMENT=1 ;
+
 
