@@ -31,11 +31,7 @@ class Scorm extends ScormAppModel {
 	 */
 	function parseManifest($path) {
 		uses('xml');
-		$manifest = new XML();
-		$manifest->__parser = xml_parser_create();
-		xml_set_object($manifest->__parser, $manifest);
-		xml_parser_set_option($manifest->__parser, XML_OPTION_CASE_FOLDING, 0);
-		xml_parser_set_option($manifest->__parser, XML_OPTION_SKIP_WHITE, 1);
+		$manifest = $this->__getXMLParser();
 		$manifest->load($path.DS.'imsmanifest.xml');
 		$m = $manifest->first();
 		$this->data['Scorm']['version'] = $this->getSchemaVersion($m);
@@ -44,6 +40,15 @@ class Scorm extends ScormAppModel {
 		// TODO: Implement <imsss:sequencingCollection>
 		$this->data['Organization'] = $this->extractOrganizations($m);
 		unset($this->data['Resource']);
+	}
+	
+	function __getXMLParser() {
+		$xml_obj = new XML();
+		$xml_obj->__parser = xml_parser_create();
+		xml_set_object($xml_obj->__parser, $xml_obj);
+		xml_parser_set_option($xml_obj->__parser, XML_OPTION_CASE_FOLDING, 0);
+		xml_parser_set_option($xml_obj->__parser, XML_OPTION_SKIP_WHITE, 1);
+		return $xml_obj;
 	}
 	
 	/*

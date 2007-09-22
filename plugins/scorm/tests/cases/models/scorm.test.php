@@ -2,7 +2,7 @@
 
 loadModel('scorm.Scorm');
 
-class CourseTestCase extends CakeTestCase {
+class ScormTestCase extends CakeTestCase {
 	var $TestObject = null;
 	function setUp() {
 		$this->TestObject = new Scorm();
@@ -176,8 +176,16 @@ eof;
 	
 /**Test for the extraction of Secuencing in the XML. Status: incomplete, failed*/
 	
-	function testExtractSecuencing(){
-	$secuencing = new XMLNode('secuencing');
+	function testExtractSequencing() {
+$xml = <<<eof
+	<imsss:sequencing>
+		<imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false" useCurrentAttemptObjectiveInfo="false" useCurrentAttemptProgressInfo="true"/>
+	</imsss:sequencing>
+eof;
+	$parent1 = $this->TestObject->__getXMLParser();
+	$parent1->load($xml);
+	$parent = new XMLNode('parent');
+	$sequencing = new XMLNode('imsss:sequencing');
 	$control_Mode = new XMLNode('imsss:controlMode',array(
 				'choice'=> 'true', 
 				'choiceExit '=> 'true', 
@@ -187,16 +195,11 @@ eof;
 				'useCurrentAttemptProgressInfo' => 'true'
 				)
 	);
-	$secuencing->append($contro_Mode);
-	debug($control_Mode);
-	$this->TestObject->extractSequencing($secuencing);
-	debug('HOLA');
-	debug($this->TestObject->extractSequencing($secuencing));
-	/**$xml = <<<eof	
-	<imsss:sequencing>
-            <imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false" />
-          </imsss:sequencing>
-	eof;*/
+
+	$sequencing->append($control_Mode);
+	$parent->append($sequencing);
+	debug($this->TestObject->extractSequencing($parent1));
+	debug($this->TestObject->extractSequencing($parent));
 	}
 	
 	function testExtractResources() {
