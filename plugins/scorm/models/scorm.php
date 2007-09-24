@@ -140,7 +140,7 @@ class Scorm extends ScormAppModel {
 			if(!empty($rollup)) {
 				$data['RollUpRule'] = $this->extractRulesData($rollup[0],'rollup');
 			}
-			$objectives = $seq->children('imss:objectives');
+			$objectives = $seq->children('imsss:objectives');
 			if(!empty($objectives)) {
 				$data['Objective'] = $this->extractObjectives($objectives[0]);
 			}
@@ -199,22 +199,35 @@ class Scorm extends ScormAppModel {
 		$data['Action'] = $action[0]->attributes;
 		return $data;
 	}
+	/*
+	 * Returns array with a representation of the objectives (primary and objective) 
+	 * @param $node XMLNode with imsss:objectives node
+	 * @return array representation of a node's elements and attributes
+	 */
 	
 	function extractObjectives(XMLNode $node) {
 		$objectives = array();
 		$primary = $node->children('imsss:primaryObjective');
 		$objectives['Primary'] = $this->extractObjectiveData($primary[0]);
-		foreach($primary[0]->children('imsss:objective') as $objective) {
+		debug($node->children('imsss:objective'));
+		foreach($node->children('imsss:objective') as $objective) {
 			$objectives['Objective'][] =  $this->extractObjectiveData($objective);
 		}
 		return $objectives;
 	}
+
 	
+	/*
+	 * Returns array with a representation of the elements and attributes of an objective node (primary or objective)
+	 * @param $node XMLNode with one objective node
+	 * @return array representation of a node's elements
+	 */
+
 	function extractObjectiveData(XMLNode $node) {
 		$data = $node->attributes;
 		$measure = $node->children('imsss:minNormalizedMeasure');
 		if(!empty($measure)) {
-			$data['minNormalizedMeasure'] = $measure->value;
+			$data['minNormalizedMeasure'] = $measure[0]->value;
 		}
 		foreach($node->children('imsss:mapInfo') as $map) {
 			$data['mapInfo'][] = $map->attributes;
