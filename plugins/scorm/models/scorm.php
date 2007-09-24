@@ -212,12 +212,12 @@ class Scorm extends ScormAppModel {
 	
 	function extractObjectiveData(XMLNode $node) {
 		$data = $node->attributes;
-		$measure = $node->children('imss:minNormalizedMeasure');
+		$measure = $node->children('imsss:minNormalizedMeasure');
 		if(!empty($measure)) {
 			$data['minNormalizedMeasure'] = $measure->value;
 		}
 		foreach($node->children('imsss:mapInfo') as $map) {
-			$data['MapInfo'][] = $map->attributes;
+			$data['mapInfo'][] = $map->attributes;
 		}
 		return $data;
 	}
