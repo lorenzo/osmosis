@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Test order is important.
+ */
 loadComponent('Zip');
 
 class ZipComponentTestCase extends CakeTestCase {
@@ -7,7 +9,7 @@ class ZipComponentTestCase extends CakeTestCase {
 	var $temp_dir = null;
 	
 	function setUp() {
-		$this->temp_dir = ROOT . DS . APP_DIR . DS . 'tmp' . DS . 'tests' . DS . 'zip' . DS;
+		$this->temp_dir = TMP . 'tests' . DS . 'zip' . DS;
 		$this->TestObject = new ZipComponent();
 		$this->TestObject->startup($dummy);
 	}
@@ -16,7 +18,7 @@ class ZipComponentTestCase extends CakeTestCase {
 	 * Deletes all files created.
 	 */
 	function tearDown() {
-		//shell_exec('rm -rf ' . $this->temp_dir );
+		shell_exec('rm -rf ' . $this->temp_dir );
 		unset($this->TestObject);
 	}
 	
@@ -55,30 +57,49 @@ class ZipComponentTestCase extends CakeTestCase {
 		$this->assertTrue(file_exists($this->temp_dir. 'unexistant_path' . DS . 'other_name.txt'));
 		
 	}
-	
-	/**
-	 * Test creating a zip file, adding a file and then extracting it to an unexistant directory.
-	 */
-	function testArchiveExtract() {
-		$this->_createDummyZip();
-		$this->_unzipDummyZip();
-		
-	
-	}
-	
-	/**
-	 * Test creating a zip file, adding a file on the go and its content and then extracting it to an unexistant directory.
-	 
 
-	function testAddByContent(){
+	/**
+	 * Test creating a zip file, adding a file by content and then extracting
+	 * it to an unexistant directory.
+	 */
+	function _testAddByContent(){
 		$this->TestObject->begin($this->temp_dir . 'prueba.zip');
 		$this->TestObject->addByContent('another_file.txt', 'Hello World');
-		var_dump($this->TestObject->extract($this->temp_dir . 'another_unexistant_path'));
 		$this->TestObject->close();
+		
+		$this->TestObject->begin($this->temp_dir . 'prueba.zip');
+		$this->TestObject->extract($this->temp_dir . 'another_unexistant_path');
+		$this->TestObject->close();
+		
 		$this->assertTrue(is_dir($this->temp_dir . 'another_unexistant_path'));
 		$this->assertTrue(file_exists($this->temp_dir. 'another_unexistant_path' . DS . 'other_name.txt'));	
 		$this->assertTrue(file_exists($this->temp_dir. 'another_unexistant_path' . DS . 'another_file.txt'));
 	}
-*/
-}	
+	
+	/**
+	 * Test renaming a file inside the zip archive.
+	 */
+	function _testRenaming() {
+		$this->TestObject->begin($this->temp_dir . 'prueba.zip');
+		$this->TestObject->rename('other_name.txt', 'new_name.file.txt');
+		$this->TestObject->close();
+
+		$this->TestObject->begin($this->temp_dir . 'prueba.zip');
+		$this->TestObject->extract($this->temp_dir . 'renaming');
+		$this->TestObject->close();
+		
+		$this->assertTrue(file_exists($this->temp_dir . 'renaming' . DS . 'new_name.file.txt'));
+	}
+	
+	/**
+	 * Runs the tests.
+	 * Test order is important.
+	 */
+	function testArchiveExtract() {
+		$this->_createDummyZip();
+		$this->_unzipDummyZip();
+		$this->_testAddByContent();
+		$this->_testRenaming();
+	}
+}
 ?>
