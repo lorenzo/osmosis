@@ -319,21 +319,21 @@ $xml = <<<eof
 		rollupObjectiveSatisfied = "true" 
 		rollupProgressCompletion = "true" 
 		objectiveMeasureWeight = "1.0000">
-		  <imsss:rollupRule 
+		<imsss:rollupRule 
 			childActivitySet = "all" 
 			minimumCount = "0" 
 			minimumPercent = "0.0000">
 				<imsss:rollupConditions conditionCombination = "any">
-				   <imsss:rollupCondition condition = "attempted" operator = "noOp"/>
+					<imsss:rollupCondition condition = "attempted" operator = "noOp"/>
 				</imsss:rollupConditions>
-		      	<imsss:rollupAction action = "completed"/>
-		  </imsss:rollupRule>
+				<imsss:rollupAction action = "completed"/>
+		</imsss:rollupRule>
 	</imsss:rollupRules>
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);
 	debug("Hola");
-	debug($parent1);
+//	debug($parent1);
 	debug($this->TestObject->extractRulesData($parent1->children[0], 'rollup'));
 }
 
@@ -385,10 +385,15 @@ $xml = <<<eof
 	<imsss:preConditionRule>
 			<imsss:ruleConditions conditionCombination="any">
 				<imsss:ruleCondition 
-						referencedObjective = "some_objective_ID"
-						measureThreshold = "0.5000"
-						operator = "noOp"
-						condition = "satisfied"/>
+					referencedObjective = "some_objective_ID"
+					measureThreshold = "0.5000"
+					operator = "noOp"
+					condition = "satisfied"/>
+				<imsss:ruleCondition 
+					referencedObjective = "some_other_objective_ID"
+					measureThreshold = "0.3000"
+					operator = "noOp"
+					condition = "satisfied"/>
 				</imsss:ruleConditions>
 			<imsss:ruleAction action = "disabled"/>
 	</imsss:preConditionRule>
@@ -397,7 +402,7 @@ eof;
 	$parent1->load($xml);
 	//debug(xml_error_string(xml_get_error_code($parent1->__parser)));
 	//debug("XML creado con la función para extractRulesData");
-	//debug($this->TestObject->extractRulesData($parent1->children[0],'rule'));	
+	debug($this->TestObject->extractRulesData($parent1->children[0],'rule'));
 	}
 
 
@@ -429,10 +434,7 @@ $xml = <<<eof
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);	
-	debug(xml_error_string(xml_get_error_code($parent1->__parser)));
-	debug($parent1);
-	debug("XML creado con la función para extractObjectives");
-	debug($this->TestObject->extractObjectives($parent1->children[0]));
+	//debug($this->TestObject->extractObjectives($parent1->children[0]));
 	}
 
 

@@ -2,15 +2,15 @@
 class Scorm extends ScormAppModel {
 	var $name = 'Scorm';
 	var $validate = array(
-		'name'		=> array(
-							'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
-						),
+		'name'=> array(
+			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		),
 		'description' => array(
-							'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
-						),
+			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		),
 		'course_id' => array(
-							'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
-						)
+			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		)
 	);
 	
 	/*
@@ -103,7 +103,7 @@ class Scorm extends ScormAppModel {
 		$i = 0;
 		foreach($nodes as $node) {
 			if($node->hasChildren()) {
-				$organization[$i]['default'] = $node->attributes['default'];
+$organization[$i]['default'] = $node->attributes['default'];
 			}
 			foreach ($node->children('organization') as $organization) {
                     $organizations[$organization->attributes['identifier']] = $organization->attributes;
@@ -128,37 +128,37 @@ class Scorm extends ScormAppModel {
 			$seq = $seq[0];
 			$control = $seq->children('imsss:controlMode');
 			if(!empty($control)) {
-				$data['Control'] = $control[0]->attributes;
+$data['Control'] = $control[0]->attributes;
 			}
 			$data['SequencingRule'] = $this->extractSeqRules($seq);
 			$limit = $seq->children('imsss:limitConditions');
 			if(!empty($limit)) {
-				$data['LimitCondition'] = $limit[0]->attributes;	
+$data['LimitCondition'] = $limit[0]->attributes;	
 			}
 			//$aux = $seq->children('auxiliaryResources'); ADL discourages it's use
 			$rollup = $seq->children('imsss:rollupRules');
 			if(!empty($rollup)) {
-				$data['RollUpRule'] = $this->extractRulesData($rollup[0],'rollup');
+$data['RollUpRule'] = $this->extractRulesData($rollup[0],'rollup');
 			}
 			$objectives = $seq->children('imsss:objectives');
 			if(!empty($objectives)) {
-				$data['Objective'] = $this->extractObjectives($objectives[0]);
+$data['Objective'] = $this->extractObjectives($objectives[0]);
 			}
 			$randomization = $seq->children('randomizationControls');
 			if(!empty($randomization)) {
-				$data['Randomization'] = $randomization[0]->attributes;
+$data['Randomization'] = $randomization[0]->attributes;
 			}
 			$delivery = $seq->children('deliveryControls');
 			if(!empty($delivery)) {
-				$data['DeliveryControl'] = $delivery[0]->attributes;
+$data['DeliveryControl'] = $delivery[0]->attributes;
 			}
 			$choice = $seq->children('adlseq:constrainedChoiceConsiderations');
 			if(!empty($choice)) {
-				$data['Choice'] = $choice->attributes;
+$data['Choice'] = $choice->attributes;
 			}
 			$considerations = $seq->children('adlseq:rollupConsiderations');
 			if(!empty($considerations)) {
-				$data['Consideration'] = $considerations->attributes;
+$data['Consideration'] = $considerations->attributes;
 			}
 		}
 		return $data;
@@ -171,24 +171,30 @@ class Scorm extends ScormAppModel {
 			$seqRules = $seqRules[0];
 			$pre = $seqRules->children('imsss:preConditionRule');
 			if(!empty($pre)) {
-				$rules['Pre'] = $this->extractRulesData($pre[0]);
+$rules['Pre'] = $this->extractRulesData($pre[0]);
 			}
 			$post = $seqRules->children('imsss:postConditionRule');
 			if(!empty($post)) {
-				$rules['Post'] = $this->extractRulesData($post[0]);
+$rules['Post'] = $this->extractRulesData($post[0]);
 			}
 			$exit = $seqRules->children('imsss:exitConditionRule');
 			if(!empty($exit)) {
-				$rules['Exit'] = $this->extractRulesData($exit[0]);
+$rules['Exit'] = $this->extractRulesData($exit[0]);
 			}
 		}
 		return $rules;
 	}
 	
 	function extractRulesData(XMLNode $node,$name='rule') {
+		$data = array();
+		// Special treatment of rollupRules. Adds 
+		if ($name == 'rollup') {
+			$data['RollUpRules'] = $node->attributes;
+			$node = $node->children("imsss:{$name}Rule");
+			$node = $node[0];
+		}
 		$conditions = $node->children("imsss:{$name}Conditions");
 		$conditions = $conditions[0];
-		$data = array();
 		$data['Condition'] = $conditions->attributes;
 		$i = 0;
 		foreach($conditions->children as $condition) {
@@ -199,7 +205,8 @@ class Scorm extends ScormAppModel {
 		$data['Action'] = $action[0]->attributes;
 		return $data;
 	}
-	/*
+	
+	/**
 	 * Returns array with a representation of the objectives (primary and objective) 
 	 * @param $node XMLNode with imsss:objectives node
 	 * @return array representation of a node's elements and attributes
@@ -217,12 +224,11 @@ class Scorm extends ScormAppModel {
 	}
 
 	
-	/*
+	/**
 	 * Returns array with a representation of the elements and attributes of an objective node (primary or objective)
 	 * @param $node XMLNode with one objective node
 	 * @return array representation of a node's elements
 	 */
-
 	function extractObjectiveData(XMLNode $node) {
 		$data = $node->attributes;
 		$measure = $node->children('imsss:minNormalizedMeasure');
@@ -235,7 +241,7 @@ class Scorm extends ScormAppModel {
 		return $data;
 	}
 	
-	/*
+	/**
 	 * Returns array with a representation of the items of a node
 	 * @param $parent XMLNode parent node with item child nodes
 	 * @return array representation of node's items
@@ -251,7 +257,10 @@ class Scorm extends ScormAppModel {
 				$resource = $this->data['Resource'][$item->attributes['identifierref']];
 				unset($resource['identifier']);
 				if((isset($this->data['Scorm']['xml:base']) || isset($this->data['Scorm']['xml:base'])) && isset($resource['href'])) {
-					@$resource['href'] = $this->data['Scorm']['xml:base'].$this->data['Resource']['xml:base'].$resource['href'];
+					@$resource['href'] =
+						$this->data['Scorm']['xml:base'] .
+						$this->data['Resource']['xml:base'] .
+						$resource['href'];
 				}
 				$items[$identifier] = am($items[$identifier],$resource);
 			}
@@ -265,7 +274,7 @@ class Scorm extends ScormAppModel {
 		}
 		return $items;
 	}
-	
+
 	/*
 	 * Returns value of $tagname inside parent $node
 	 * @param $parent XMLNode parent node with $tagname child node
@@ -293,3 +302,4 @@ class Scorm extends ScormAppModel {
 		return $data;
 	}
 }
+?>
