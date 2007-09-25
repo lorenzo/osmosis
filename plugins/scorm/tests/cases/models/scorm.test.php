@@ -34,6 +34,7 @@ class ScormTestCase extends CakeTestCase {
 	
 	function testParseManifest() {
 		$this->TestObject->parseManifest(TMP.'tests');
+		//debug($this->TestObject->data);
 	}
 	
 
@@ -82,6 +83,7 @@ function testExtractResources() {
 		
 		$manifest = new XMLNode('manifest');
 		$manifest->append($resources);
+		//debug($this->TestObject->extractResources($manifest));
 		
 		
 		$this->assertEqual(
@@ -110,38 +112,29 @@ function testExtractResources() {
 		);
 	}
 
-/*	
+	
 	function testExtractOrganizations() {
 $xml = <<<eof
 	<organizations default="DMCE">
 	    <organization identifier="DMCE">
 			<title>SCORM 2004 3rd Edition Data Model Content Example 1.1</title>
-			<item identifier="WELCOME" isvisible="true" parameters="?width=500&#038;length=300">
-			<title>Welcome</title>
-				<item identifier ="Welcome_item">
-					<title>Welcome_item</title>	
-				</item>        
+	      <item identifier="WELCOME" isvisible="false" parameters="?width=500&#038;length=300">
+	        <title>Welcome</title>
 			<metadata>
    				<adlcp:location>lesson1/lesson1MD.xml</adlcp:location>
 			</metadata>
-  			<adlcp:timeLimitAction>exit,no message</adlcp:timeLimitAction>
+			<adlcp:timeLimitAction>exit,no message</adlcp:timeLimitAction>
 			<adlcp:dataFromLMS>Some SCO Information</adlcp:dataFromLMS>
 			<adlcp:completionThreshold>0.75</adlcp:completionThreshold>
-			</item>
-		</organization>
-	</organizations>
-eof;
-/*
-			
-		<imsss:sequencingCollection>
-   			<imsss:sequencing ID = "pretest">
+	        <imsss:sequencing>
 	          <imsss:controlMode 
 				choice="true" 
 				choiceExit="true" 
 				flow="true" 
 				forwardOnly="false" 
 				useCurrentAttemptObjectiveInfo = "false" 
-				useCurrentAttemptProgressInfo = "true"/>
+				useCurrentAttemptProgressInfo = "true"
+				/>
 				<imsss:sequencingRules>
 					<imsss:preConditionRule>
 						<imsss:ruleConditions conditionCombination="any">
@@ -149,15 +142,18 @@ eof;
 							referencedObjective = "some_objective_ID"
 							measureThreshold = "0.5000"
 							operator = "noOp"
-							condition = "satisfied"/>
+							condition = "satisfied"
+							/>
 							<imsss:ruleCondition 
 							referencedObjective = "some_objective_ID1"
 							measureThreshold = "0.8000"
 							operator = "not"
-							condition = "completed"/>
+							condition = "completed"
+							/>
 							</imsss:ruleConditions>
 						<imsss:ruleAction action = "disabled"/>
 					</imsss:preConditionRule>
+	
 					<imsss:postConditionRule>
 					   <imsss:ruleConditions>
 					      <imsss:ruleCondition condition="satisfied"/>
@@ -171,15 +167,9 @@ eof;
 					   <imsss:ruleAction action="exit"/>
 					</imsss:exitConditionRule>
 				</imsss:sequencingRules>
-				<imsss:limitConditions attemptLimit="1" attemptAbsoluteDurationLimit="4 days"/><!-- xs>duration ??? --!>
-				<imsss:rollupRules 
-						rollupObjectiveSatisfied = "true" 
-						rollupProgressCompletion = "true" 
-						objectiveMeasureWeight = "1.0000">
-				  <imsss:rollupRule 
-					childActivitySet = "all" 
-					minimumCount = "0" 
-					minimumPercent = "0.0000" >
+				<imsss:limitConditions attemptLimit="1" attemptAbsoluteDurationLimit="4 days"/>
+				<imsss:rollupRules rollupObjectiveSatisfied = "true" rollupProgressCompletion = "true" objectiveMeasureWeight = "1.0000">
+				   <imsss:rollupRule childActivitySet = "all" minimumCount = "0" minimumPercent = "0.0000" >
 						<imsss:rollupConditions conditionCombination = "any">
 						   <imsss:rollupCondition condition = "attempted" operator = "noOp"/>
 						</imsss:rollupConditions>
@@ -187,68 +177,133 @@ eof;
 				   </imsss:rollupRule>
 				</imsss:rollupRules>
 			<imsss:objectives>
-				<imsss:primaryObjective 
-						objectiveID = "PRIMARYOBJ" 
-						satisfiedByMeasure = "true">
+				<imsss:primaryObjective objectiveID = "PRIMARYOBJ" satisfiedByMeasure = "true">
 					<imsss:minNormalizedMeasure>0.6</imsss:minNormalizedMeasure>
-						<imsss:mapInfo
+					<imsss:mapInfo
 						targetObjectiveID = "obj_module_1"
 						readSatisfiedStatus="false"
-						readNormalizedMeasure = "false"
-						writeSatisfiedStatus = "true"
-						WriteNormalizedMeasure="false"/>
-					</imsss:primaryObjective>
-					<imsss:objective satisfiedByMeasure = "false" objectiveID="obj_module_1">
-					   <imsss:mapInfo 
+			          	readNormalizedMeasure = "false"
+			          	writeSatisfiedStatus = "true"
+						writeNormalizedMeasure="false"/>
+				</imsss:primaryObjective>
+				<imsss:objective satisfiedByMeasure = "false" objectiveID="obj_module_1">
+				   <imsss:mapInfo 
 						targetObjectiveID="obj_module_1"
 					    readSatisfiedStatus = "false"
 					    readNormalizedMeasure = "false"
 					    writeSatisfiedStatus = "true" />
 				</imsss:objective>
-			<imsss:randomizationControls 
-					randomizationTiming = "never"
-					selectCount="2"
-					reorderChildren = "false"
-                    selectionTiming="onEachNewAttempt" />
-			<imsss:deliveryControls 
-				    tracked = "false" 
-					completionSetByContent = "false" 
-					objectiveSetByContent = "false" />
-			<adlseq:constrainedChoiceConsiderations 
-					preventActivation = "false"
-					constrainChoice = "true" />
-			<adlseq:rollupConsiderations 
-					requiredForSatisfied = "always"
-					requiredForNotSatisfied = "ifAttempted"
-					requiredForCompleted = "ifNotSkipped"
-					requiredForIncomplete = "ifNotSuspended" 
-					measureSatisfactionIfActive = "false"/>
+			</imsss:objectives>
 	        </imsss:sequencing>
-			</imsss:sequencingCollection>
-			 <adlnav:presentation>
-			    <adlnav:navigationInterface>
-			       <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
-			       <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
-			    </adlnav:navigationInterface>
-			</adlnav:presentation>
+			<adlnav:presentation>
+	          <adlnav:navigationInterface>
+	            <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+	            <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+	          </adlnav:navigationInterface>
+	        </adlnav:presentation>
 	      </item>
 		</organization>
 	</organizations>
 eof;
-$parent1 = $this->TestObject->__getXMLParser();
+	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);
-	$xml_test = new XML($xml);
-	debug("XML original");
-	debug($xml_test);
-	//$manifest = $xml_test->children;
-	//debug($xml_test->children);
-	debug($this->TestObject->extractOrganizations($parent1));
+	$this->TestObject->extractOrganizations($parent1);
 		
 	}
-*/	
-
+	
+	function testExtractItems() {
+		$xml = <<<eof
+		<item identifier="WELCOME1" isvisible="false" parameters="?width=500&#038;length=300">
+	        <title>Welcome</title>
+			<metadata>
+   				<adlcp:location>lesson1/lesson1MD.xml</adlcp:location>
+			</metadata>
+			<adlcp:timeLimitAction>exit,no message</adlcp:timeLimitAction>
+			<adlcp:dataFromLMS>Some SCO Information</adlcp:dataFromLMS>
+			<adlcp:completionThreshold>0.75</adlcp:completionThreshold>
+	        <imsss:sequencing>
+	          <imsss:controlMode 
+				choice="true" 
+				choiceExit="true" 
+				flow="true" 
+				forwardOnly="false" 
+				useCurrentAttemptObjectiveInfo = "false" 
+				useCurrentAttemptProgressInfo = "true"
+				/>
+				<imsss:sequencingRules>
+					<imsss:preConditionRule>
+						<imsss:ruleConditions conditionCombination="any">
+						   <imsss:ruleCondition 
+							referencedObjective = "some_objective_ID"
+							measureThreshold = "0.5000"
+							operator = "noOp"
+							condition = "satisfied"
+							/>
+							<imsss:ruleCondition 
+							referencedObjective = "some_objective_ID1"
+							measureThreshold = "0.8000"
+							operator = "not"
+							condition = "completed"
+							/>
+							</imsss:ruleConditions>
+						<imsss:ruleAction action = "disabled"/>
+					</imsss:preConditionRule>
+	
+					<imsss:postConditionRule>
+					   <imsss:ruleConditions>
+					      <imsss:ruleCondition condition="satisfied"/>
+					   </imsss:ruleConditions>
+					   <imsss:ruleAction action="exitParent"/>
+					</imsss:postConditionRule>
+					<imsss:exitConditionRule>
+					   <imsss:ruleConditions>
+					      <imsss:ruleCondition condition="satisfied"/>
+					   </imsss:ruleConditions>
+					   <imsss:ruleAction action="exit"/>
+					</imsss:exitConditionRule>
+				</imsss:sequencingRules>
+				<imsss:limitConditions attemptLimit="1" attemptAbsoluteDurationLimit="4 days"/>
+				<imsss:rollupRules rollupObjectiveSatisfied = "true" rollupProgressCompletion = "true" objectiveMeasureWeight = "1.0000">
+				   <imsss:rollupRule childActivitySet = "all" minimumCount = "0" minimumPercent = "0.0000" >
+						<imsss:rollupConditions conditionCombination = "any">
+						   <imsss:rollupCondition condition = "attempted" operator = "noOp"/>
+						</imsss:rollupConditions>
+				      <imsss:rollupAction action = "completed"/>
+				   </imsss:rollupRule>
+				</imsss:rollupRules>
+			<imsss:objectives>
+				<imsss:primaryObjective objectiveID = "PRIMARYOBJ" satisfiedByMeasure = "true">
+					<imsss:minNormalizedMeasure>0.6</imsss:minNormalizedMeasure>
+					<imsss:mapInfo
+						targetObjectiveID = "obj_module_1"
+						readSatisfiedStatus="false"
+			          	readNormalizedMeasure = "false"
+			          	writeSatisfiedStatus = "true"
+						writeNormalizedMeasure="false"/>
+				</imsss:primaryObjective>
+				<imsss:objective satisfiedByMeasure = "false" objectiveID="obj_module_1">
+				   <imsss:mapInfo 
+						targetObjectiveID="obj_module_1"
+					    readSatisfiedStatus = "false"
+					    readNormalizedMeasure = "false"
+					    writeSatisfiedStatus = "true" />
+				</imsss:objective>
+			</imsss:objectives>
+	        </imsss:sequencing>
+			<adlnav:presentation>
+	          <adlnav:navigationInterface>
+	            <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+	            <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+	          </adlnav:navigationInterface>
+	        </adlnav:presentation>
+	      </item>
+eof;
+		$parent1 = $this->TestObject->__getXMLParser();
+		$parent1->load($xml);
+		$this->TestObject->extractItems($parent1);
+	}
+		
 /**Test for the extraction of Secuencing in the XML. Status: incomplete, failed*/
-	/*
 	function testExtractSequencing() {
 $xml = <<<eof
 <imsss:sequencing ID = "pretest">
@@ -307,12 +362,10 @@ $xml = <<<eof
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);
-	//debug($parent1);
-	debug("XML creado con la función");
-	debug($this->TestObject->extractSequencing($parent1));
-	die;
+	//TODO: assert
+	$this->TestObject->extractSequencing($parent1);
 }
-*/
+
 function testExtractRollupRules() {
 $xml = <<<eof
 	<imsss:rollupRules 
@@ -332,9 +385,8 @@ $xml = <<<eof
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);
-	debug("Hola");
-//	debug($parent1);
-	debug($this->TestObject->extractRulesData($parent1->children[0], 'rollup'));
+	// TODO: assert
+	//$this->TestObject->extractRulesData($parent1->children[0], 'rollup');
 }
 
 
@@ -374,9 +426,8 @@ $xml = <<<eof
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);	
-	//debug("XML creado con la función para extractSeqRules");
-	//debug($this->TestObject->extractSeqRules($parent1));
-	$this->TestObject->extractSeqRules($parent1);
+	//TODO: assert
+	//$this->TestObject->extractSeqRules($parent1);
 	}
 	
 /**Test function extractObjectives. Status: DONE*/
@@ -400,17 +451,15 @@ $xml = <<<eof
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);
-	//debug(xml_error_string(xml_get_error_code($parent1->__parser)));
-	//debug("XML creado con la función para extractRulesData");
-	debug($this->TestObject->extractRulesData($parent1->children[0],'rule'));
+	//TODO: assert
+	$this->TestObject->extractRulesData($parent1->children[0],'rule');
 	}
 
 
 /**Test function extractObjectives. Status: incomplete, error in the output-> missing one array*/
 function testExtractObjectives() {
-debug("HOLA");
 $xml = <<<eof
-<imsss:objectives>
+	<imsss:objectives>
 				<imsss:primaryObjective 
 						objectiveID = "PRIMARYOBJ" 
 						satisfiedByMeasure = "true">
@@ -429,41 +478,57 @@ $xml = <<<eof
 					    readNormalizedMeasure = "false"
 					    writeSatisfiedStatus = "true" />
 				</imsss:objective>
-</imsss:objectives>
-
+	</imsss:objectives>
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);	
-	//debug($this->TestObject->extractObjectives($parent1->children[0]));
+	//TODO: assert
+	$this->TestObject->extractObjectives($parent1->children[0]);
 	}
 
 
 /**Test function extractObjectiveData. Status: DONE*/
 function testExtractObjectiveData(){
 $xml = <<<eof
-
-			<imsss:primaryObjective 
-						objectiveID = "PRIMARYOBJ" 
-						satisfiedByMeasure = "true">
-					<imsss:minNormalizedMeasure>0.6</imsss:minNormalizedMeasure>
-						<imsss:mapInfo
-						targetObjectiveID = "obj_module_1"
-						readSatisfiedStatus="false"
-						readNormalizedMeasure = "false"
-						writeSatisfiedStatus = "true"
-						WriteNormalizedMeasure="false"/>
-					</imsss:primaryObjective>
+	<imsss:primaryObjective 
+		objectiveID = "PRIMARYOBJ" 
+		satisfiedByMeasure = "true">
+			<imsss:minNormalizedMeasure>0.6</imsss:minNormalizedMeasure>
+				<imsss:mapInfo
+					targetObjectiveID = "obj_module_1"
+					readSatisfiedStatus="false"
+					readNormalizedMeasure = "false"
+					writeSatisfiedStatus = "true"
+					WriteNormalizedMeasure="false"/>
+	</imsss:primaryObjective>
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);	
-	//debug("XML creado con la función para extractObjectiveData");
-	//debug($this->TestObject->extractObjectiveData($parent1->children[0]));
+	//TODO: assert
+	debug($this->TestObject->extractObjectiveData($parent1->children[0]));
+	$objective_data = array (
+    'objectiveID' => 'PRIMARYOBJ',
+    'satisfiedByMeasure' => 'true',
+    'minNormalizedMeasure' => '0.6',
+    'mapInfo' => array (
+             		array (
+                    'targetObjectiveID' => 'obj_module_1',
+                    'readSatisfiedStatus' => 'false',
+                    'readNormalizedMeasure' => 'false',
+                    'writeSatisfiedStatus' => 'true',
+                    'WriteNormalizedMeasure' => 'false'
+                		)
 
+        			)
+			);
+	debug("Objective_data");
+	debug($objective_data);
+	$this->assertEqual(
+			$this->TestObject->extractObjectiveData($parent1->children[0]),$objective_data);
 }
 
 
 /**Test function extractPresentation. Status: DONE */
-
 	function testExtractPresentation() {
 $xml = <<<eof
 	 <adlnav:presentation>
@@ -475,9 +540,8 @@ $xml = <<<eof
 eof;
 $parent1 = $this->TestObject->__getXMLParser();
 $parent1->load($xml);	
-//debug("XML creado con la función para extractPresentation");
-//debug($this->TestObject->extractPresentation($parent1));
-$this->TestObject->extractPresentation($parent1);
+//TODO: assert
+//$this->TestObject->extractPresentation($parent1);
 	}
 }
 ?>
