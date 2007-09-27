@@ -92,25 +92,24 @@ class ScormTestCase extends CakeTestCase {
 		$this->assertEqual(
 			$this->TestObject->extractResources($manifest),
 			array (
-			    'RESOURCE1' => array (
-			            'identifier' => 'RESOURCE1',
-			            'adlcp:scormType' => 'sco',
-			            'type' => 'webcontent',
-			            'href' => 'localitem1.html',
-		        ),
-			    'RESOURCE2' => array (
-			            'identifier' => 'RESOURCE2',
-			            'adlcp:scormType' => 'sco',
-			            'type' => 'webcontent',
-			            'href' => 'localitem2.html'
-		        ),
-			    'RESOURCE3' => array (
-			            'identifier' => 'RESOURCE3',
-			            'adlcp:scormType' => 'sco',
-			            'type' => 'webcontent',
-			            'href' => 'localitem3.html'
-		        )
-
+				'RESOURCE1' => array (
+					'identifier' => 'RESOURCE1',
+					'adlcp:scormType' => 'sco',
+					'type' => 'webcontent',
+					'href' => 'localitem1.html',
+				),
+				'RESOURCE2' => array (
+					'identifier' => 'RESOURCE2',
+					'adlcp:scormType' => 'sco',
+					'type' => 'webcontent',
+					'href' => 'localitem2.html'
+				),
+				'RESOURCE3' => array (
+					'identifier' => 'RESOURCE3',
+					'adlcp:scormType' => 'sco',
+					'type' => 'webcontent',
+					'href' => 'localitem3.html'
+				)
 			)
 		);
 	}
@@ -141,7 +140,7 @@ $xml = <<<eof
 				<imsss:sequencingRules>
 					<imsss:preConditionRule>
 						<imsss:ruleConditions conditionCombination="any">
-						   <imsss:ruleCondition 
+						<imsss:ruleCondition 
 							referencedObjective = "some_objective_ID"
 							measureThreshold = "0.5000"
 							operator = "noOp"
@@ -158,26 +157,26 @@ $xml = <<<eof
 					</imsss:preConditionRule>
 	
 					<imsss:postConditionRule>
-					   <imsss:ruleConditions>
-					      <imsss:ruleCondition condition="satisfied"/>
-					   </imsss:ruleConditions>
-					   <imsss:ruleAction action="exitParent"/>
+					<imsss:ruleConditions>
+					 <imsss:ruleCondition condition="satisfied"/>
+					</imsss:ruleConditions>
+					<imsss:ruleAction action="exitParent"/>
 					</imsss:postConditionRule>
 					<imsss:exitConditionRule>
-					   <imsss:ruleConditions>
-					      <imsss:ruleCondition condition="satisfied"/>
-					   </imsss:ruleConditions>
-					   <imsss:ruleAction action="exit"/>
+					<imsss:ruleConditions>
+					 <imsss:ruleCondition condition="satisfied"/>
+					</imsss:ruleConditions>
+					<imsss:ruleAction action="exit"/>
 					</imsss:exitConditionRule>
 				</imsss:sequencingRules>
 				<imsss:limitConditions attemptLimit="1" attemptAbsoluteDurationLimit="4 days"/>
 				<imsss:rollupRules rollupObjectiveSatisfied = "true" rollupProgressCompletion = "true" objectiveMeasureWeight = "1.0000">
-				   <imsss:rollupRule childActivitySet = "all" minimumCount = "0" minimumPercent = "0.0000" >
+				<imsss:rollupRule childActivitySet = "all" minimumCount = "0" minimumPercent = "0.0000" >
 						<imsss:rollupConditions conditionCombination = "any">
-						   <imsss:rollupCondition condition = "attempted" operator = "noOp"/>
+						<imsss:rollupCondition condition = "attempted" operator = "noOp"/>
 						</imsss:rollupConditions>
-				      <imsss:rollupAction action = "completed"/>
-				   </imsss:rollupRule>
+				 <imsss:rollupAction action = "completed"/>
+				</imsss:rollupRule>
 				</imsss:rollupRules>
 			<imsss:objectives>
 				<imsss:primaryObjective objectiveID = "PRIMARYOBJ" satisfiedByMeasure = "true">
@@ -185,16 +184,16 @@ $xml = <<<eof
 					<imsss:mapInfo
 						targetObjectiveID = "obj_module_1"
 						readSatisfiedStatus="false"
-			          	readNormalizedMeasure = "false"
-			          	writeSatisfiedStatus = "true"
+			 	readNormalizedMeasure = "false"
+			 	writeSatisfiedStatus = "true"
 						writeNormalizedMeasure="false"/>
 				</imsss:primaryObjective>
 				<imsss:objective satisfiedByMeasure = "false" objectiveID="obj_module_1">
-				   <imsss:mapInfo 
+				<imsss:mapInfo 
 						targetObjectiveID="obj_module_1"
-					    readSatisfiedStatus = "false"
-					    readNormalizedMeasure = "false"
-					    writeSatisfiedStatus = "true" />
+					readSatisfiedStatus = "false"
+					readNormalizedMeasure = "false"
+					writeSatisfiedStatus = "true" />
 				</imsss:objective>
 			</imsss:objectives>
 	        </imsss:sequencing>
@@ -206,10 +205,14 @@ $xml = <<<eof
 	        </adlnav:presentation>
 	      </item>
 		</organization>
-	</organizations>
+	</
+	organizations>
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);
+	debug(htmlentities("testExtractOrganizations: falta probar <metadata> y <imsss:sequencing> de <organizations>"));
+	//debug($this->TestObject->extractOrganizations($parent1));
+
 	$organization = array (
     'DMCE' => array (
             'identifier' => 'DMCE',
@@ -327,6 +330,7 @@ eof;
 		),
 	);
 	$this->assertEqual($this->TestObject->extractOrganizations($parent1),$organization);	
+
 	}
 	
 /**Test function extractItems.*/	
@@ -352,7 +356,7 @@ eof;
 				<imsss:sequencingRules>
 					<imsss:preConditionRule>
 						<imsss:ruleConditions conditionCombination="any">
-						   <imsss:ruleCondition 
+						<imsss:ruleCondition 
 							referencedObjective = "some_objective_ID"
 							measureThreshold = "0.5000"
 							operator = "noOp"
@@ -369,26 +373,26 @@ eof;
 					</imsss:preConditionRule>
 	
 					<imsss:postConditionRule>
-					   <imsss:ruleConditions>
-					      <imsss:ruleCondition condition="satisfied"/>
-					   </imsss:ruleConditions>
-					   <imsss:ruleAction action="exitParent"/>
+					<imsss:ruleConditions>
+					 <imsss:ruleCondition condition="satisfied"/>
+					</imsss:ruleConditions>
+					<imsss:ruleAction action="exitParent"/>
 					</imsss:postConditionRule>
 					<imsss:exitConditionRule>
-					   <imsss:ruleConditions>
-					      <imsss:ruleCondition condition="satisfied"/>
-					   </imsss:ruleConditions>
-					   <imsss:ruleAction action="exit"/>
+					<imsss:ruleConditions>
+					 <imsss:ruleCondition condition="satisfied"/>
+					</imsss:ruleConditions>
+					<imsss:ruleAction action="exit"/>
 					</imsss:exitConditionRule>
 				</imsss:sequencingRules>
 				<imsss:limitConditions attemptLimit="1" attemptAbsoluteDurationLimit="4 days"/>
 				<imsss:rollupRules rollupObjectiveSatisfied = "true" rollupProgressCompletion = "true" objectiveMeasureWeight = "1.0000">
-				   <imsss:rollupRule childActivitySet = "all" minimumCount = "0" minimumPercent = "0.0000" >
+				<imsss:rollupRule childActivitySet = "all" minimumCount = "0" minimumPercent = "0.0000" >
 						<imsss:rollupConditions conditionCombination = "any">
-						   <imsss:rollupCondition condition = "attempted" operator = "noOp"/>
+						<imsss:rollupCondition condition = "attempted" operator = "noOp"/>
 						</imsss:rollupConditions>
-				      <imsss:rollupAction action = "completed"/>
-				   </imsss:rollupRule>
+				 <imsss:rollupAction action = "completed"/>
+				</imsss:rollupRule>
 				</imsss:rollupRules>
 			<imsss:objectives>
 				<imsss:primaryObjective objectiveID = "PRIMARYOBJ" satisfiedByMeasure = "true">
@@ -396,16 +400,16 @@ eof;
 					<imsss:mapInfo
 						targetObjectiveID = "obj_module_1"
 						readSatisfiedStatus="false"
-			          	readNormalizedMeasure = "false"
-			          	writeSatisfiedStatus = "true"
+			 	readNormalizedMeasure = "false"
+			 	writeSatisfiedStatus = "true"
 						writeNormalizedMeasure="false"/>
 				</imsss:primaryObjective>
 				<imsss:objective satisfiedByMeasure = "false" objectiveID="obj_module_1">
-				   <imsss:mapInfo 
+				<imsss:mapInfo 
 						targetObjectiveID="obj_module_1"
-					    readSatisfiedStatus = "false"
-					    readNormalizedMeasure = "false"
-					    writeSatisfiedStatus = "true" />
+					readSatisfiedStatus = "false"
+					readNormalizedMeasure = "false"
+					writeSatisfiedStatus = "true" />
 				</imsss:objective>
 			</imsss:objectives>
 	        </imsss:sequencing>
@@ -581,13 +585,20 @@ $xml = <<<eof
 			minimumCount = "0" 
 			minimumPercent = "0.0000">
 				<imsss:rollupConditions conditionCombination = "any">
-				   <imsss:rollupCondition condition = "attempted" operator = "noOp"/>
+				<imsss:rollupCondition condition = "attempted" operator = "noOp"/>
 				</imsss:rollupConditions>
 		      	<imsss:rollupAction action = "completed"/>
 		  </imsss:rollupRule>
 	</imsss:rollupRules>
 </imsss:sequencing>
 eof;
+debug(htmlentities('en testExtractSequencing no se prueban los siguientes: [CAM pag 184]
+• <objectives>
+• <randomizationControls>
+• <deliveryControls>
+• <adlseq:constrainedChoiceConsiderations>
+• <adlseq:rollupConsiderations>
+'));
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);
 	$secuencing = array (
@@ -828,11 +839,11 @@ $xml = <<<eof
 						WriteNormalizedMeasure="false"/>
 					</imsss:primaryObjective>
 				<imsss:objective satisfiedByMeasure = "false" objectiveID="obj_module_1">
-					   <imsss:mapInfo 
+					<imsss:mapInfo 
 						targetObjectiveID="obj_module_1"
-					    readSatisfiedStatus = "false"
-					    readNormalizedMeasure = "false"
-					    writeSatisfiedStatus = "true" />
+					readSatisfiedStatus = "false"
+					readNormalizedMeasure = "false"
+					writeSatisfiedStatus = "true" />
 				</imsss:objective>
 	</imsss:objectives>
 eof;
@@ -913,10 +924,10 @@ eof;
 	function testExtractPresentation() {
 $xml = <<<eof
 	 <adlnav:presentation>
-			    <adlnav:navigationInterface>
-			       <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
-			       <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
-			    </adlnav:navigationInterface>
+			<adlnav:navigationInterface>
+			  <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+			  <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+			</adlnav:navigationInterface>
 			</adlnav:presentation>
 eof;
 $parent1 = $this->TestObject->__getXMLParser();

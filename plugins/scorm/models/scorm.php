@@ -15,7 +15,7 @@ class Scorm extends ScormAppModel {
 	);
 	
 	/*
-	 * Returns if there is a imsmanifest.xml file in a folder
+	 * Returns whether there is a imsmanifest.xml file in a folder
 	 * @param $path String directory where imsmanifest.xml will be looked for
 	 * @return true if imsmanifest.xml file exist in $path, false otherwise
 	 */
@@ -42,6 +42,10 @@ class Scorm extends ScormAppModel {
 		unset($this->data['Resource']);
 	}
 	
+	/**
+	 * Returns a reference to the xml parser.
+	 * @return XML parser object.
+	 */
 	function __getXMLParser() {
 		$xml_obj = new XML();
 		$xml_obj->__parser = xml_parser_create();
@@ -53,17 +57,25 @@ class Scorm extends ScormAppModel {
 	
 	/*
 	 * Returns the identifier attribute of a node
-	 * @param $node XMLNode
+	 * @param $node XMLNode with identifier attribute.
 	 * @return string identifier attribute of $node
 	 */
 	function getNodeIdentifier(XMLNode $node) {
 		return $node->attributes['identifier'];
 	}
 	
-	/*
+	/**
 	 * Returns the value of the schemaversion tag inside metadata
-	 * @param $node XMLNode parent (manifest) node with metadata child
+	 * @param $node XMLNode manifest node with metadata child.
 	 * @return string value of schemaversion node
+	 * 
+	 * usage: given the xml
+	 * <manifest [...]>
+	 * 	<metadata>
+	 * 		<schemaversion>2004 3rd Edition</schemaversion>
+	 * 	</metadata>
+	 * </manifest>
+	 * Return the value of the schemaversion element.
 	 */
 	function getSchemaVersion($node) {
 		$metadata = $node->children('metadata');
@@ -76,26 +88,64 @@ class Scorm extends ScormAppModel {
 		return null;
 	}
 	
-	/*
-	 * Returns array with a representation of the resources of a manifest
+	/**
+	 * Returns array with a representation of the resources of a manifest.
 	 * @param $manifest XMLNode manifest node
 	 * @return array representation of the resources of a manifest
+	 * 
+	 * usage: given the xml
+	 * <resources>
+	 * 	<resource identifier="RESOURCE1" adlcp:scormType="sco" type="webcontent" href="lesson1.htm">
+	 * 		<file href="lesson1.htm"/>
+	 * 	</resource>
+	 * 	[...]
+	 * </resources>
+	 * Returns an array containing all <resource> elements data:
+	 * array (
+	 * 	array (
+	 * 		'RESOURCE1' => array (
+	 * 			'identifier' => 'RESOURCE1',
+	 * 			'adlcp:scormType' => 'sco',
+	 * 			'type' => 'webcontent',
+	 * 			'href' => 'localitem1.html',
+	 * 	), [...]
+	 * );
 	 */
 	function extractResources($manifest) {
 		$nodes = $manifest->children('resources');
 		$resources = array();
 		foreach($nodes as $node) {
 			foreach ($node->children('resource') as $resource) {
-                    $resources[$resource->attributes['identifier']] = $resource->attributes;
+				$resources[$resource->attributes['identifier']] = $resource->attributes;
 			}
 		}
 		return $resources;
 	}
 	
-	/*
-	 * Returns array with a representation of the organizations of a manifest
+	/**
+	 * Returns array with a representation of the organizations of a manifest.
 	 * @param $manifest XMLNode manifest node
 	 * @return array representation of the organizations of a manifest
+	 * @see extractSequencing
+	 * 
+	 * usage: given the xml
+	 * <organizations default="DMCE">
+	 * 	<organization identifier="DMCE">
+	 * 		<title>SCORM 2004 3rd Edition Data Model Content Example 1.1</title>
+	 * 		[...]
+	 * 	</organization>
+	 * 	[...]
+	 * </organizations>
+	 * Returns an array containing all <organization> elements:
+	 * array(
+	 * 	'DMCE' => array (
+	 * 		'identifier' => 'DMCE'
+	 * 		'title' => 'SCORM 2004 3rd Edition Data Model Content Example 1.1'
+	 * 		'Item' => ([...]),
+	 * 		'Sequencing' => array ([...])
+	 * 		'Metadata' => TODO: ??? (CAM página 54)
+	 * 	), [...]
+	 * );
 	 */
 	function extractOrganizations($manifest) {
 		$nodes = $manifest->children('organizations');
@@ -106,20 +156,32 @@ class Scorm extends ScormAppModel {
 				$organization[$i]['default'] = $node->attributes['default'];
 			}
 			foreach ($node->children('organization') as $organization) {
-                    $organizations[$organization->attributes['identifier']] = $organization->attributes;
-                    if($title =  $organization->children('title')) {
-                    	$organizations[$organization->attributes['identifier']]['title'] = $title[0]->value;
-                    }
-                    $organizations[$organization->attributes['identifier']]['Sequencing'] = $this->extractSequencing($organization);
-                    $organizations[$organization->attributes['identifier']]['Item'] = $this->extractItems($organization);
+				$organizations[$organization->attributes['identifier']] = $organization->attributes;
+				if($title =  $organization->children('title')) {
+					$organizations[$organization->attributes['identifier']]['title'] = $title[0]->value;
+				}
+				$organizations[$organization->attributes['identifier']]['Sequencing'] = $this->extractSequencing($organization);
+				$organizations[$organization->attributes['identifier']]['Item'] = $this->extractItems($organization);
 			}
 			$i++;
 		}
 		return $organizations;
 	}
 	
-	/*
-	 * Doc missing
+	/**
+	 * Returns array with a representation of the imsss:sequencing element.
+	 * Note: this function deliberately ignores the <auxiliaryResources> element.
+	 * @param $node XMLNode a node with a imsss:sequencing children node
+	 * @return array representation of the <imsss:sequencing> node and its element and attributes.
+	 * 
+	 * usage: given de xml 
+	 * <imsss:sequencing ID="pretest">dl
+	 * 	<imsss:controlMode .../>
+	 * 	<imsss:sequencingRules> [...] </imsss:sequencingRules>
+	 * 	<imsss:limitConditions .../>
+	 * 	<imsss:rollupRules ...> [...] </imsss:rollupRules>
+	 * TODO: faltan elementos CAM página 184
+	 * </imsss:sequencing>
 	 */
 	function extractSequencing(XMLNode $parent) {
 		$data = array();
@@ -128,42 +190,69 @@ class Scorm extends ScormAppModel {
 			$seq = $seq[0];
 			$control = $seq->children('imsss:controlMode');
 			if(!empty($control)) {
-$data['Control'] = $control[0]->attributes;
+				$data['Control'] = $control[0]->attributes;
 			}
 			$data['SequencingRule'] = $this->extractSeqRules($seq);
 			$limit = $seq->children('imsss:limitConditions');
 			if(!empty($limit)) {
-$data['LimitCondition'] = $limit[0]->attributes;	
+				$data['LimitCondition'] = $limit[0]->attributes;
 			}
 			//$aux = $seq->children('auxiliaryResources'); ADL discourages it's use
 			$rollup = $seq->children('imsss:rollupRules');
 			if(!empty($rollup)) {
-$data['RollUpRule'] = $this->extractRulesData($rollup[0],'rollup');
+				$data['RollUpRule'] = $this->extractRulesData($rollup[0],'rollup');
 			}
 			$objectives = $seq->children('imsss:objectives');
 			if(!empty($objectives)) {
-$data['Objective'] = $this->extractObjectives($objectives[0]);
+				$data['Objective'] = $this->extractObjectives($objectives[0]);
 			}
 			$randomization = $seq->children('randomizationControls');
 			if(!empty($randomization)) {
-$data['Randomization'] = $randomization[0]->attributes;
+				$data['Randomization'] = $randomization[0]->attributes;
 			}
 			$delivery = $seq->children('deliveryControls');
 			if(!empty($delivery)) {
-$data['DeliveryControl'] = $delivery[0]->attributes;
+				$data['DeliveryControl'] = $delivery[0]->attributes;
 			}
 			$choice = $seq->children('adlseq:constrainedChoiceConsiderations');
 			if(!empty($choice)) {
-$data['Choice'] = $choice->attributes;
+				$data['Choice'] = $choice->attributes;
 			}
 			$considerations = $seq->children('adlseq:rollupConsiderations');
 			if(!empty($considerations)) {
-$data['Consideration'] = $considerations->attributes;
+				$data['Consideration'] = $considerations->attributes;
 			}
 		}
 		return $data;
 	}
 	
+	/**
+	 * Returns array with a representation of the rules inside a <imsss:sequencingRules> element.
+	 * @param $seq XMLNode node parent of the <imsss:sequencingRules> element.
+	 * @return array representation of the <imsss:sequencingRules> node and its element and attributes.
+	 * 
+	 * usage: given the xml.
+	 * <imsss:sequencingRules>
+	 * 	<imsss:preConditionRule> [...] </imsss:preConditionRule>
+	 * 	<imsss:postConditionRule> [...] </imsss:postConditionRule>
+	 * 	<imsss:exitConditionRule> [...] </imsss:exitConditionRule>
+	 * </imsss:sequencingRules>
+	 * Return an array containing the representation of the contents of <imsss:sequencingRules>
+	 * array (
+	 *	'Pre' => array (
+	 * 		'Condition' => array ( ... ),
+	 * 		'Action' => array ( ... )
+	 * 	),
+	 * 	'Post' => array (
+	 * 		'Condition' => array ( ... ),
+	 * 		'Action' => array ( ... )
+	 * 	),
+	 * 	'Exit' => array (
+	 * 		'Condition' => array ( ... ),
+	 * 		'Action' => array( ... )
+	 * 	)
+	 * );
+	 */
 	function extractSeqRules(XMLNode $seq) {
 		$rules = array();
 		$seqRules = $seq->children('imsss:sequencingRules');
@@ -171,23 +260,45 @@ $data['Consideration'] = $considerations->attributes;
 			$seqRules = $seqRules[0];
 			$pre = $seqRules->children('imsss:preConditionRule');
 			if(!empty($pre)) {
-$rules['Pre'] = $this->extractRulesData($pre[0]);
+				$rules['Pre'] = $this->extractRulesData($pre[0]);
 			}
 			$post = $seqRules->children('imsss:postConditionRule');
 			if(!empty($post)) {
-$rules['Post'] = $this->extractRulesData($post[0]);
+				$rules['Post'] = $this->extractRulesData($post[0]);
 			}
 			$exit = $seqRules->children('imsss:exitConditionRule');
 			if(!empty($exit)) {
-$rules['Exit'] = $this->extractRulesData($exit[0]);
+				$rules['Exit'] = $this->extractRulesData($exit[0]);
 			}
 		}
 		return $rules;
 	}
 	
+	/**
+	 * Extracts the data of the rules inside <imsss:sequencingRules> elements (pre, post and exit) or 
+	 * inside <imsss:rollupRules> element (rollupRule element).
+	 * @param $node XMLNode node any of the following elements:
+	 * 	<imsss:preConditionRule>
+	 * 	<imsss:postConditionRule>
+	 * 	<imsss:exitConditionRule> or
+	 * 	<imsss:rollupRules>
+	 * @return array representation of the node and its element and attributes.
+	 * 
+	 * usage: given the xml 
+	 * 	<imsss:[pre|post|exit]ConditionRule> [...] </imsss:preConditionRule>
+	 * OR
+	 * 	<imsss:rollupRules> [...] </imsss:rollupRules>
+	 * 
+	 * Return an array representing the content of the node received (rollupConditions and rollupAction)
+	 * array (
+	 * 	'RollUpRules' => array ( ... ), // Only in case of RollUpRules element.
+	 * 	'Condition' => array ( ... ),
+	 * 	'Action' => array ( ... )
+	 * );
+	 */
 	function extractRulesData(XMLNode $node,$name='rule') {
 		$data = array();
-		// Special treatment of rollupRules. Adds 
+		// Special treatment of rollupRules. Adds a 'RollUpRules' index.
 		if ($name == 'rollup') {
 			$data['RollUpRules'] = $node->attributes;
 			$node = $node->children("imsss:{$name}Rule");
@@ -207,11 +318,34 @@ $rules['Exit'] = $this->extractRulesData($exit[0]);
 	}
 	
 	/**
-	 * Returns array with a representation of the objectives (primary and objective) 
-	 * @param $node XMLNode with imsss:objectives node
-	 * @return array representation of a node's elements and attributes
+	 * Returns array with a representation of the contents of the <imsss:objectives> element (primary and objective) 
+	 * @param $node XMLNode nore <imsss:objectives>
+	 * @return array representation of the <imsss:objectives> node's elements and attributes.
+	 * 
+	 * usage: given the xml
+	 * <imsss:objectives>
+	 * 	<imsss:primaryObjective objectiveID = "PRIMARYOBJ" satisfiedByMeasure = "true">
+	 * 		[...]
+	 * 	</imsss:primaryObjective>
+	 * 	<imsss:objective satisfiedByMeasure = "false" objectiveID="obj_module_1">
+	 * 		[...]
+	 * 	</imsss:objective>
+	 * </imsss:objectives>
+	 * Return an array containing the representation of the contents of <imsss:objectives>
+	 * array (
+	 * 	'Primary' => array (
+	 * 		'objectiveID' => 'PRIMARYOBJ',
+	 * 		'satisfiedByMeasure' => 'true',
+	 * 		'minNormalizedMeasure' => '0.6',
+	 * 		'mapInfo' => array ( ... )
+	 * 	),
+	 * 	'Objective' => array (
+	 * 		'satisfiedByMeasure' => 'false',
+	 * 		'objectiveID' => 'obj_module_1',
+	 * 		'mapInfo' => array ( ... )
+	 * 	)
+	 * );
 	 */
-	
 	function extractObjectives(XMLNode $node) {
 		$objectives = array();
 		$primary = $node->children('imsss:primaryObjective');
@@ -221,12 +355,19 @@ $rules['Exit'] = $this->extractRulesData($exit[0]);
 		}
 		return $objectives;
 	}
-
 	
 	/**
-	 * Returns array with a representation of the elements and attributes of an objective node (primary or objective)
-	 * @param $node XMLNode with one objective node
-	 * @return array representation of a node's elements
+	 * Returns array with a representation of an <objective> element (primary or objective)
+	 * @param $node XMLNode with either a <imsss:primaryObjective> or <imsss:objective>
+	 * @return array representation of a node's elements.
+	 * 
+	 * usage: given the xml.
+	 * <imsss:primaryObjective objectiveID = "PRIMARYOBJ" satisfiedByMeasure = "true">
+	 * 	<imsss:minNormalizedMeasure>0.6</imsss:minNormalizedMeasure>
+	 * 	<imsss:mapInfo ... />
+	 * </imsss:primaryObjective>
+	 * Return an array containing the representation of the contents of <objective> element.
+	 * See ScormModel::extractObjectives
 	 */
 	function extractObjectiveData(XMLNode $node) {
 		$data = $node->attributes;
@@ -243,7 +384,8 @@ $rules['Exit'] = $this->extractRulesData($exit[0]);
 	/**
 	 * Returns array with a representation of the items of a node
 	 * @param $parent XMLNode parent node with item child nodes
-	 * @return array representation of node's items
+	 * @return array representation of node's items.
+	 * TODO: completar la documentación.
 	 */
 	function extractItems($parent) {
 		$items = array();
@@ -267,11 +409,11 @@ $rules['Exit'] = $this->extractRulesData($exit[0]);
 			$metadata = $item->children('metadata');
 			if ($metadata != null){
 				$metadata = $metadata[0];
-				$items[$identifier]['metadata'] = $this->getItemData($metadata,'adlcp:location');
+				$items[$identifier]['metadata'] = $this->getChildrenValue($metadata,'adlcp:location');
 			}
-			$items[$identifier]['timeLimitAction'] = $this->getItemData($item,'adlcp:timeLimitAction');
-			$items[$identifier]['dataFromLMS'] = $this->getItemData($item,'adlcp:dataFromLMS');
-			$items[$identifier]['completionThreshold'] = $this->getItemData($item,'adlcp:completionThreshold');
+			$items[$identifier]['timeLimitAction'] = $this->getChildrenValue($item,'adlcp:timeLimitAction');
+			$items[$identifier]['dataFromLMS'] = $this->getChildrenValue($item,'adlcp:dataFromLMS');
+			$items[$identifier]['completionThreshold'] = $this->getChildrenValue($item,'adlcp:completionThreshold');
 			$items[$identifier]['Sequencing'] = $this->extractSequencing($item);
 			$items['Presentation'] = $this->extractPresentation($item);
 			$items[$identifier]['SubItem'] = $this->extractItems($item);
@@ -279,12 +421,12 @@ $rules['Exit'] = $this->extractRulesData($exit[0]);
 		return $items;
 	}
 
-	/*
-	 * Returns value of $tagname inside parent $node
+	/**
+	 * Returns value of the $node's $tagname children
 	 * @param $parent XMLNode parent node with $tagname child node
-	 * @return string value of $tagName
+	 * @return string value of $tagName.
 	 */
-	function getItemData($node,$tagName) {
+	function getChildrenValue($node,$tagName) {
 		if($node == null){
 			return null;
 		}
@@ -294,7 +436,25 @@ $rules['Exit'] = $this->extractRulesData($exit[0]);
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Returns array with a representation of the <adlnav:presentation> element and its elements and attributes.
+	 * @param $node XMLNode node with a <adlnav:presentation> children.
+	 * @return array representation of the <adlnav:presentation> node's elements and attributes.
+	 * 
+	 * usage: given the xml.
+	 * <adlnav:presentation>
+	 * 	<adlnav:navigationInterface>
+	 * 		<adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+	 * 		<adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+	 * 	</adlnav:navigationInterface>
+	 * </adlnav:presentation>
+	 * Returns the array:
+	 * array (
+	 * 	'continue',
+	 * 	'previous'
+	 * );
+	 */
 	function extractPresentation(XMLNode $node) {
 		$presentation = $node->children('adlnav:presentation');
 		$data = array();
