@@ -14,7 +14,7 @@ class Scorm extends ScormAppModel {
 		)
 	);
 	
-	/*
+	/**
 	 * Returns whether there is a imsmanifest.xml file in a folder
 	 * @param $path String directory where imsmanifest.xml will be looked for
 	 * @return true if imsmanifest.xml file exist in $path, false otherwise
@@ -25,7 +25,7 @@ class Scorm extends ScormAppModel {
 		return $manifest->exists();
 	}
 	
-	/*
+	/**
 	 * Fills model data with a representation of the xml manifest. 
 	 * The array follows the array achitechture specified by cakephp to save data to a model
 	 * @param $path string the path where the imsmanifest.xml is.
@@ -55,7 +55,7 @@ class Scorm extends ScormAppModel {
 		return $xml_obj;
 	}
 	
-	/*
+	/**
 	 * Returns the identifier attribute of a node
 	 * @param $node XMLNode with identifier attribute.
 	 * @return string identifier attribute of $node
@@ -383,9 +383,39 @@ class Scorm extends ScormAppModel {
 	
 	/**
 	 * Returns array with a representation of the items of a node
-	 * @param $parent XMLNode parent node with item child nodes
+	 * @param $parent XMLNode parent node with <item> child nodes
 	 * @return array representation of node's items.
-	 * TODO: completar la documentación.
+	 * 
+	 * usage: given the xml.
+	 * <whatever>
+	 * 	<item identifier="WELCOME1" isvisible="false" parameters="?width=500&#038;length=300">
+	 * 		<title>Welcome</title>
+	 * 		<item> [...] </item>
+	 * 		<metadata> [...] </metadata>
+	 * 		<adlcp:timeLimitAction>exit,no message</adlcp:timeLimitAction>
+	 * 		<adlcp:dataFromLMS>Some SCO Information</adlcp:dataFromLMS>
+	 * 		<adlcp:completionThreshold>0.75</adlcp:completionThreshold>
+	 * 		<imsss:sequencing> [...] </imsss:sequencing>
+	 * 		<adlnav:presentation> [...] </adlnav:presentation>
+	 * 	</item>
+	 * 	[...]
+	 * </whatever>
+	 * Returns the array representation of all items and its elements and attributes.
+	 * array (
+	 * 	'WELCOME1' => array (
+	 * 		'identifier' => 'WELCOME1',
+	 * 		'isvisible' => 'false',
+	 * 		'parameters' => '?width=500&length=300',
+	 * 		'title' => 'Welcome',
+	 * 		'metadata' => [...],
+	 * 		'timeLimitAction' => 'exit,no message',
+	 * 		'dataFromLMS' => 'Some SCO Information',
+	 * 		'completionThreshold' => '0.75',
+	 * 		'Sequencing' => array ( [...] ),
+	 * 		'SubItem' => array ( [...] ),
+	 * 		'Presentation' => array ( [...] )
+	 * 	)
+	 * );
 	 */
 	function extractItems($parent) {
 		$items = array();
