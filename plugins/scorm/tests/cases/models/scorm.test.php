@@ -14,7 +14,8 @@ class ScormTestCase extends CakeTestCase {
 	function tearDown() {
 		unset($this->TestObject);
 	}
-	
+
+/**Test function Validation. */
 	function testValidation1() {
 		$data = array();
 		$this->TestObject->data = $data;
@@ -26,18 +27,20 @@ class ScormTestCase extends CakeTestCase {
 		);
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
 	}
-	
+
+/**Test function manifestExists.*/
 	function testManifestExists() {
 		$this->assertTrue($this->TestObject->manifestExists(TMP.'tests'));
 		$this->assertFalse($this->TestObject->manifestExists(TMP.'fake'));
 	}
-	
+
+/**Test function parseManifest.*/
 	function testParseManifest() {
 		$this->TestObject->parseManifest(TMP.'tests');
 		//debug($this->TestObject->data);
 	}
 	
-
+/**Test function getSchemaVersion.*/
 	function testGetSchemaVersion() {
 		$manifest = new XMLNode('manifest');
 		$metadata = new XMLNode('metadata');
@@ -51,8 +54,9 @@ class ScormTestCase extends CakeTestCase {
 			'2004 3rd Edition'
 		);
 	}
-
-function testExtractResources() {
+	
+/**Test function extractResources. */
+	function testExtractResources() {
 		$resources = new XMLNode('resources');
 		$resource1 = new XMLNode('resource', array(
 				'identifier' => 'RESOURCE1',
@@ -83,7 +87,6 @@ function testExtractResources() {
 		
 		$manifest = new XMLNode('manifest');
 		$manifest->append($resources);
-		//debug($this->TestObject->extractResources($manifest));
 		
 		
 		$this->assertEqual(
@@ -112,7 +115,7 @@ function testExtractResources() {
 		);
 	}
 
-	
+/**Test function extractOrganizations. */	
 	function testExtractOrganizations() {
 $xml = <<<eof
 	<organizations default="DMCE">
@@ -207,10 +210,126 @@ $xml = <<<eof
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);
-	$this->TestObject->extractOrganizations($parent1);
-		
+	$organization = array (
+    'DMCE' => array (
+            'identifier' => 'DMCE',
+            'title' => 'SCORM 2004 3rd Edition Data Model Content Example 1.1',
+            'Sequencing' => array(),
+            'Item'=> array (
+			    'WELCOME' => array (
+			            'identifier' => 'WELCOME',
+			            'isvisible' => 'false',
+			            'parameters' => '?width=500&length=300',
+			            'title' => 'Welcome',
+			            'metadata' => 'lesson1/lesson1MD.xml',
+			            'timeLimitAction' => 'exit,no message',
+			            'dataFromLMS' => 'Some SCO Information',
+			            'completionThreshold' => '0.75',
+			            'Sequencing' => array (
+			                    'Control' => array (
+			                            'choice' => 'true',
+			                            'choiceExit' => 'true',
+			                            'flow' => 'true',
+			                            'forwardOnly' => 'false',
+			                            'useCurrentAttemptObjectiveInfo' => 'false',
+			                            'useCurrentAttemptProgressInfo' => 'true',
+			                        ),
+			                    'SequencingRule' => array (
+			                            'Pre' => array (
+			                                    'Condition' => array (
+			                                            'conditionCombination' => 'any',
+			                                            	array (
+			                                                    'referencedObjective' => 'some_objective_ID',
+			                                                    'measureThreshold' => '0.5000',
+			                                                    'operator' => 'noOp',
+			                                                    'condition' => 'satisfied',
+			                                                ),
+			
+			                                            	array (
+			                                                    'referencedObjective' => 'some_objective_ID1',
+			                                                    'measureThreshold' => '0.8000',
+			                                                    'operator' => 'not',
+			                                                    'condition' => 'completed',
+			                                                )
+			                                        ),
+			                                    'Action' => array ('action' => 'disabled',)
+			                                ),
+			                            'Post' => array (
+			                                    'Condition' => array (
+			                                            	array('condition' => 'satisfied',)
+			                                        ),
+			                                    'Action' => array ('action' => 'exitParent',)
+			                                ),
+			                            'Exit' => array (
+			                                    'Condition' => array (
+			                                            	array('condition' => 'satisfied',)
+			                                        ),
+			                                    'Action' => array('action' => 'exit',)
+			                                ),
+			                        ),
+			                    'LimitCondition' => array (
+			                            'attemptLimit' => '1',
+			                            'attemptAbsoluteDurationLimit' => '4 days',
+			                        ),
+			                    'RollUpRule' => array (
+			                            'RollUpRules' => array (
+			                                    'rollupObjectiveSatisfied' => 'true',
+			                                    'rollupProgressCompletion' => 'true',
+			                                    'objectiveMeasureWeight' => '1.0000',
+			                                ),
+			                            'Condition' => array (
+			                                    'conditionCombination' => 'any',
+			                                    	array (
+			                                            'condition' => 'attempted',
+			                                            'operator' => 'noOp',
+			                                        ),
+			                                ),
+			                            'Action' => array ('action' => 'completed',)
+			                        ),
+			                    'Objective' => array (
+			                            'Primary' => array (
+			                                    'objectiveID' => 'PRIMARYOBJ',
+			                                    'satisfiedByMeasure' => 'true',
+			                                    'minNormalizedMeasure' => '0.6',
+			                                    'mapInfo' => array (
+			                                            	array (
+			                                                    'targetObjectiveID' => 'obj_module_1',
+			                                                    'readSatisfiedStatus' => 'false',
+			                                                    'readNormalizedMeasure' => 'false',
+			                                                    'writeSatisfiedStatus' => 'true',
+			                                                    'writeNormalizedMeasure' => 'false',
+			                                                ),
+			                                        ),
+			                                ),
+			                            'Objective' => array (
+			                                    	array (
+			                                            'satisfiedByMeasure' => 'false',
+			                                            'objectiveID' => 'obj_module_1',
+			                                            'mapInfo' => array (
+			                                                    	array (
+			                                                            'targetObjectiveID' => 'obj_module_1',
+			                                                            'readSatisfiedStatus' => 'false',
+			                                                            'readNormalizedMeasure' => 'false',
+			                                                            'writeSatisfiedStatus' => 'true',
+			                                                        ),
+			                                                ),
+			                                        ),
+			                                ),
+			                        ),
+			                ),
+			            'SubItem' => array (),
+			        ),
+			    'Presentation' => array (
+			            'continue',
+			            'previous',
+			        	),
+			),
+		),
+	);
+	$this->assertEqual($this->TestObject->extractOrganizations($parent1),$organization);	
 	}
 	
+/**Test function extractItems.*/	
 	function testExtractItems() {
 		$xml = <<<eof
 		<item identifier="WELCOME1" isvisible="false" parameters="?width=500&#038;length=300">
@@ -300,10 +419,119 @@ eof;
 eof;
 		$parent1 = $this->TestObject->__getXMLParser();
 		$parent1->load($xml);
-		$this->TestObject->extractItems($parent1);
+		$items = array (
+	    'WELCOME1' => array (
+	            'identifier' => 'WELCOME1',
+	            'isvisible' => 'false',
+	            'parameters' => '?width=500&length=300',
+	            'title' => 'Welcome',
+	            'metadata' => 'lesson1/lesson1MD.xml',
+	            'timeLimitAction' => 'exit,no message',
+	            'dataFromLMS' => 'Some SCO Information',
+	            'completionThreshold' => '0.75',
+	            'Sequencing' => array (
+	                    'Control' => array (
+	                            'choice' => 'true',
+	                            'choiceExit' => 'true',
+	                            'flow' => 'true',
+	                            'forwardOnly' => 'false',
+	                            'useCurrentAttemptObjectiveInfo' => 'false',
+	                            'useCurrentAttemptProgressInfo' => 'true',
+	                        ),
+	                    'SequencingRule' => array (
+	                            'Pre' => array (
+	                                    'Condition' => array (
+	                                            'conditionCombination' => 'any',
+	                                            	array (
+	                                                    'referencedObjective' => 'some_objective_ID',
+	                                                    'measureThreshold' => '0.5000',
+	                                                    'operator' => 'noOp',
+	                                                    'condition' => 'satisfied',
+	                                                ),
+	
+	                                            	array (
+	                                                    'referencedObjective' => 'some_objective_ID1',
+	                                                    'measureThreshold' => '0.8000',
+	                                                    'operator' => 'not',
+	                                                    'condition' => 'completed',
+	                                                )
+	                                        ),
+	                                    'Action' => array ('action' => 'disabled',)
+	                                ),
+	                            'Post' => array (
+	                                    'Condition' => array (
+	                                            	array ('condition' => 'satisfied',)
+	                                        ),
+	                                    'Action' => array ('action' => 'exitParent',)
+	                                ),
+	                            'Exit' => array (
+	                                    'Condition' => array (
+	                                            	array ('condition' => 'satisfied',)
+	                                        ),
+	                                    'Action' => array ('action' => 'exit',)
+	                                ),
+	                        ),
+	                    'LimitCondition' => array (
+	                            'attemptLimit' => '1',
+	                            'attemptAbsoluteDurationLimit' => '4 days',
+	                        ),
+	                    'RollUpRule' => array (
+	                            'RollUpRules' => array (
+	                                    'rollupObjectiveSatisfied' => 'true',
+	                                    'rollupProgressCompletion' => 'true',
+	                                    'objectiveMeasureWeight' => '1.0000',
+	                                ),
+	                            'Condition' => array (
+	                                    'conditionCombination' => 'any',
+	                                    	array (
+	                                            'condition' => 'attempted',
+	                                            'operator' => 'noOp',
+	                                        ),
+	                                ),
+	                            'Action' => array ('action' => 'completed',)
+	                        ),
+	                    'Objective' => array (
+	                            'Primary' => array (
+	                                    'objectiveID' => 'PRIMARYOBJ',
+	                                    'satisfiedByMeasure' => 'true',
+	                                    'minNormalizedMeasure' => '0.6',
+	                                    'mapInfo' => array (
+	                                            	array (
+	                                                    'targetObjectiveID' => 'obj_module_1',
+	                                                    'readSatisfiedStatus' => 'false',
+	                                                    'readNormalizedMeasure' => 'false',
+	                                                    'writeSatisfiedStatus' => 'true',
+	                                                    'writeNormalizedMeasure' => 'false',
+	                                                ),
+	                                        ),
+	                                ),
+	                            'Objective' => array (
+	                                    	array (
+	                                            'satisfiedByMeasure' => 'false',
+	                                            'objectiveID' => 'obj_module_1',
+	                                            'mapInfo' => array (
+	                                                    	array (
+	                                                            'targetObjectiveID' => 'obj_module_1',
+	                                                            'readSatisfiedStatus' => 'false',
+	                                                            'readNormalizedMeasure' => 'false',
+	                                                            'writeSatisfiedStatus' => 'true',
+	                                                        ),
+	                                                ),
+	                                        ),	
+	                                ),
+	                        ),
+	                ),
+	            'SubItem' => array (),
+	        ),
+	    'Presentation' => array (
+	            'continue',
+	            'previous',
+	        ),
+	);
+		$this->assertEqual($this->TestObject->extractItems($parent1),$items);
 	}
 		
-/**Test for the extraction of Secuencing in the XML. Status: incomplete, failed*/
+/**Test function extractSequencing. */
 	function testExtractSequencing() {
 $xml = <<<eof
 <imsss:sequencing ID = "pretest">
@@ -362,10 +590,71 @@ $xml = <<<eof
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);
-	//TODO: assert
-	$this->TestObject->extractSequencing($parent1);
+	$secuencing = array (
+    'Control' => array (
+            'choice' => 'true',
+            'choiceExit' => 'true',
+            'flow' => 'true',
+            'forwardOnly' => 'false',
+            'useCurrentAttemptObjectiveInfo' => 'false',
+            'useCurrentAttemptProgressInfo' => 'true',
+        ),
+    'SequencingRule' => array (
+            'Pre' => array (
+                    'Condition' => array (
+                            'conditionCombination' => 'any',
+                            	array (
+                                    'referencedObjective' => 'some_objective_ID',
+                                    'measureThreshold' => '0.5000',
+                                    'operator' => 'noOp',
+                                    'condition' => 'satisfied',
+                                	),
+                            	array (
+                                    'referencedObjective' => 'some_objective_ID1',
+                                    'measureThreshold' => '0.8000',
+                                    'operator' => 'not',
+                                    'condition' => 'completed',
+                                	),
+                        ),
+                    'Action' => array ('action' => 'disabled',)
+             ),
+            'Post' => array (
+                    'Condition' => array (
+                            		array ('condition' => 'satisfied',)
+	                        		),
+                    'Action' => array ('action' => 'exitParent',)
+             ),
+            'Exit' => array (
+                    'Condition' => array (
+                            	array ('condition' => 'satisfied',)
+                        		),
+                    'Action' => array ('action' => 'exit',)
+                )
+        ),
+    'LimitCondition' => array (
+            'attemptLimit' => '1',
+            'attemptAbsoluteDurationLimit' => '4 days',
+        ),
+    'RollUpRule' => array (
+            'RollUpRules' => array (
+                    'rollupObjectiveSatisfied' => 'true',
+                    'rollupProgressCompletion' => 'true',
+                    'objectiveMeasureWeight' => '1.0000',
+                ),
+            'Condition' => array (
+                    'conditionCombination' => 'any',
+                    	array (
+                            'condition' => 'attempted',
+                            'operator' => 'noOp',
+                        )
+                ),
+            'Action' => array ('action' => 'completed',)
+        )
+	);
+	$this->assertEqual($this->TestObject->extractSequencing($parent1),$secuencing);
 }
 
+/**Test function extractRollupRules().*/
 function testExtractRollupRules() {
 $xml = <<<eof
 	<imsss:rollupRules 
@@ -385,14 +674,28 @@ $xml = <<<eof
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);
-	// TODO: assert
-	//$this->TestObject->extractRulesData($parent1->children[0], 'rollup');
+	$rollup_rules = array (
+	    'RollUpRules' => array (
+	            'rollupObjectiveSatisfied' => 'true',
+	            'rollupProgressCompletion' => 'true',
+	            'objectiveMeasureWeight' => '1.0000',
+	        ),
+	    'Condition' => array (
+	            'conditionCombination' => 'any',
+	            	array (
+	                    'condition' => 'attempted',
+	                    'operator' => 'noOp',
+	                )
+	        ),
+	    'Action' => array ('action' => 'completed',)
+	);
+	$this->assertEqual($this->TestObject->extractRulesData($parent1->children[0],'rollup'),$rollup_rules);
 }
 
 
-/**Test function extractSeqRules(). Status: DONE*/
+/**Test function extractSeqRules. */
 
-function testExtractSeqRules() {
+	function testExtractSeqRules() {
 $xml = <<<eof
 	<imsss:sequencingRules>
 		<imsss:preConditionRule>
@@ -426,12 +729,44 @@ $xml = <<<eof
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);	
-	//TODO: assert
-	//$this->TestObject->extractSeqRules($parent1);
+	$seq_rules = array (
+	    'Pre' => array (
+	            'Condition' => array (
+	                    'conditionCombination' => 'any',
+	                     array (
+	                            'referencedObjective' => 'some_objective_ID',
+	                            'measureThreshold' => '0.5000',
+	                            'operator' => 'noOp',
+	                            'condition' => 'satisfied',
+	                        ),
+	                    array (
+	                            'referencedObjective' => 'some_objective_ID1',
+	                            'measureThreshold' => '0.8000',
+	                            'operator' => 'not',
+	                            'condition' => 'completed',
+	                        )
+	                ),
+	            'Action' => array ('action' => 'disabled',)
+	        ),
+	    'Post' => array (
+	            'Condition' => array (
+	                    array ('condition' => 'satisfied',)
+	                ),
+	            'Action' => array ('action' => 'exitParent',)
+	        ),
+	    'Exit' => array (
+	            'Condition' => array (
+	                    array ('condition' => 'satisfied',)
+	                ),
+	            'Action' => array('action' => 'exit',)
+		        )
+		);
+	$this->assertEqual($this->TestObject->extractSeqRules($parent1),$seq_rules);
+	
 	}
 	
-/**Test function extractObjectives. Status: DONE*/
-function testExtractRulesData() {
+/**Test function extractRulesData. */
+	function testExtractRulesData() {
 $xml = <<<eof
 	<imsss:preConditionRule>
 			<imsss:ruleConditions conditionCombination="any">
@@ -451,13 +786,34 @@ $xml = <<<eof
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);
-	//TODO: assert
-	$this->TestObject->extractRulesData($parent1->children[0],'rule');
+	$rules_data = array (
+    'Condition' => array (
+            'conditionCombination' => 'any',
+            	array (
+                    'referencedObjective' => 'some_objective_ID',
+                    'measureThreshold' => '0.5000',
+                    'operator' => 'noOp',
+                    'condition' => 'satisfied'
+                	),
+
+            	array (
+                    'referencedObjective' => 'some_other_objective_ID',
+                    'measureThreshold' => '0.3000',
+                    'operator' => 'noOp',
+                    'condition' => 'satisfied',
+                	)
+	        ),
+
+    'Action' => array (
+            'action' => 'disabled',
+	        )
+	);
+	$this->assertEqual($this->TestObject->extractRulesData($parent1->children[0],'rule'),$rules_data);
 	}
 
 
-/**Test function extractObjectives. Status: incomplete, error in the output-> missing one array*/
-function testExtractObjectives() {
+/**Test function extractObjectives. */
+	function testExtractObjectives() {
 $xml = <<<eof
 	<imsss:objectives>
 				<imsss:primaryObjective 
@@ -482,13 +838,42 @@ $xml = <<<eof
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);	
-	//TODO: assert
-	$this->TestObject->extractObjectives($parent1->children[0]);
+	$objectives = array (
+    'Primary' => array (
+            'objectiveID' => 'PRIMARYOBJ',
+            'satisfiedByMeasure' => 'true',
+            'minNormalizedMeasure' => '0.6',
+            'mapInfo' => array (
+                    		array (
+                            'targetObjectiveID' => 'obj_module_1',
+                            'readSatisfiedStatus' => 'false',
+                            'readNormalizedMeasure' => 'false',
+                            'writeSatisfiedStatus' => 'true',
+                            'WriteNormalizedMeasure' => 'false',
+                        	)
+                	)	
+        	),
+    'Objective' => array (
+            		array (
+                    'satisfiedByMeasure' => 'false',
+                    'objectiveID' => 'obj_module_1',
+                    'mapInfo' => array (
+                            		array (
+                                    'targetObjectiveID' => 'obj_module_1',
+                                    'readSatisfiedStatus' => 'false',
+                                    'readNormalizedMeasure' => 'false',
+                                    'writeSatisfiedStatus' => 'true',
+                                	)
+                        		)
+		                )
+		        )
+	);
+	$this->assertEqual($this->TestObject->extractObjectives($parent1->children[0]),$objectives);
 	}
 
 
-/**Test function extractObjectiveData. Status: DONE*/
-function testExtractObjectiveData(){
+/**Test function extractObjectiveData. */
+	function testExtractObjectiveData(){
 $xml = <<<eof
 	<imsss:primaryObjective 
 		objectiveID = "PRIMARYOBJ" 
@@ -504,8 +889,6 @@ $xml = <<<eof
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);	
-	//TODO: assert
-	debug($this->TestObject->extractObjectiveData($parent1->children[0]));
 	$objective_data = array (
     'objectiveID' => 'PRIMARYOBJ',
     'satisfiedByMeasure' => 'true',
@@ -521,14 +904,12 @@ eof;
 
         			)
 			);
-	debug("Objective_data");
-	debug($objective_data);
 	$this->assertEqual(
 			$this->TestObject->extractObjectiveData($parent1->children[0]),$objective_data);
 }
 
 
-/**Test function extractPresentation. Status: DONE */
+/**Test function extractPresentation. */
 	function testExtractPresentation() {
 $xml = <<<eof
 	 <adlnav:presentation>
@@ -540,8 +921,11 @@ $xml = <<<eof
 eof;
 $parent1 = $this->TestObject->__getXMLParser();
 $parent1->load($xml);	
-//TODO: assert
-//$this->TestObject->extractPresentation($parent1);
+$presentation = array (
+				'continue', 
+				'previous'
+				);
+$this->assertEqual($this->TestObject->extractPresentation($parent1),$presentation);
 	}
 }
 ?>

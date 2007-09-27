@@ -1,4 +1,5 @@
 <?php
+uses('xml');
 class Scorm extends ScormAppModel {
 	var $name = 'Scorm';
 	var $validate = array(
@@ -30,7 +31,6 @@ class Scorm extends ScormAppModel {
 	 * @param $path string the path where the imsmanifest.xml is.
 	 */
 	function parseManifest($path) {
-		uses('xml');
 		$manifest = $this->__getXMLParser();
 		$manifest->load($path.DS.'imsmanifest.xml');
 		$m = $manifest->first();
@@ -103,7 +103,7 @@ class Scorm extends ScormAppModel {
 		$i = 0;
 		foreach($nodes as $node) {
 			if($node->hasChildren()) {
-$organization[$i]['default'] = $node->attributes['default'];
+				$organization[$i]['default'] = $node->attributes['default'];
 			}
 			foreach ($node->children('organization') as $organization) {
                     $organizations[$organization->attributes['identifier']] = $organization->attributes;
@@ -216,7 +216,6 @@ $rules['Exit'] = $this->extractRulesData($exit[0]);
 		$objectives = array();
 		$primary = $node->children('imsss:primaryObjective');
 		$objectives['Primary'] = $this->extractObjectiveData($primary[0]);
-		debug($node->children('imsss:objective'));
 		foreach($node->children('imsss:objective') as $objective) {
 			$objectives['Objective'][] =  $this->extractObjectiveData($objective);
 		}
@@ -265,9 +264,14 @@ $rules['Exit'] = $this->extractRulesData($exit[0]);
 				$items[$identifier] = am($items[$identifier],$resource);
 			}
 			$items[$identifier]['title'] =  $title[0]->value;
-			$items[$identifier]['timeLimitAction'] = $this->getItemData($item,'timeLimitAction');
-			$items[$identifier]['dataFromLMS'] = $this->getItemData($item,'dataFromLMS');
-			$items[$identifier]['completionThreshold'] = $this->getItemData($item,'completionThreshold');
+			$metadata = $item->children('metadata');
+			if ($metadata != null){
+				$metadata = $metadata[0];
+				$items[$identifier]['metadata'] = $this->getItemData($metadata,'adlcp:location');
+			}
+			$items[$identifier]['timeLimitAction'] = $this->getItemData($item,'adlcp:timeLimitAction');
+			$items[$identifier]['dataFromLMS'] = $this->getItemData($item,'adlcp:dataFromLMS');
+			$items[$identifier]['completionThreshold'] = $this->getItemData($item,'adlcp:completionThreshold');
 			$items[$identifier]['Sequencing'] = $this->extractSequencing($item);
 			$items['Presentation'] = $this->extractPresentation($item);
 			$items[$identifier]['SubItem'] = $this->extractItems($item);
@@ -281,6 +285,9 @@ $rules['Exit'] = $this->extractRulesData($exit[0]);
 	 * @return string value of $tagName
 	 */
 	function getItemData($node,$tagName) {
+		if($node == null){
+			return null;
+		}
 		$data = $node->children($tagName);
 		if(count($data)) {
 			return $data[0]->value;
