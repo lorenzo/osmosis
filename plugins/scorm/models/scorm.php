@@ -126,7 +126,8 @@ class Scorm extends ScormAppModel {
 	 * Returns array with a representation of the organizations of a manifest.
 	 * @param $manifest XMLNode manifest node
 	 * @return array representation of the organizations of a manifest
-	 * @see extractSequencing
+	 * @see extractSequencing 
+	 * @see getLocationFromMetadata
 	 * 
 	 * usage: given the xml
 	 * <organizations default="DMCE">
@@ -141,9 +142,9 @@ class Scorm extends ScormAppModel {
 	 * 	'DMCE' => array (
 	 * 		'identifier' => 'DMCE'
 	 * 		'title' => 'SCORM 2004 3rd Edition Data Model Content Example 1.1'
-	 * 		'Item' => ([...]),
+	 * 		'Item' => array([...]),
 	 * 		'Sequencing' => array ([...])
-	 * 		'Metadata' => TODO: ??? (CAM página 54)
+	 * 		'Metadata' => [...]
 	 * 	), [...]
 	 * );
 	 */
@@ -156,12 +157,15 @@ class Scorm extends ScormAppModel {
 				$organization[$i]['default'] = $node->attributes['default'];
 			}
 			foreach ($node->children('organization') as $organization) {
-				$organizations[$organization->attributes['identifier']] = $organization->attributes;
-				if($title =  $organization->children('title')) {
-					$organizations[$organization->attributes['identifier']]['title'] = $title[0]->value;
+				$identifier = $organization->attributes['identifier'];
+				$organizations[$identifier] = $organization->attributes;
+				$organizations[$identifier]['metadata'] = $this->getLocationFromMetadata($organization);
+				if($title = $organization->children('title')) {
+					$organizations[$identifier]['title'] = $title[0]->value;
 				}
-				$organizations[$organization->attributes['identifier']]['Sequencing'] = $this->extractSequencing($organization);
-				$organizations[$organization->attributes['identifier']]['Item'] = $this->extractItems($organization);
+				$organizations[$identifier]['Sequencing'] = $this->extractSequencing($organization);
+				$organizations[$identifier]['Item'] = $this->extractItems($organization);
+				
 			}
 			$i++;
 		}
@@ -436,11 +440,7 @@ class Scorm extends ScormAppModel {
 				$items[$identifier] = am($items[$identifier],$resource);
 			}
 			$items[$identifier]['title'] =  $title[0]->value;
-			$metadata = $item->children('metadata');
-			if ($metadata != null){
-				$metadata = $metadata[0];
-				$items[$identifier]['metadata'] = $this->getChildrenValue($metadata,'adlcp:location');
-			}
+			$items[$identifier]['metadata'] = $this->getLocationFromMetadata($item);
 			$items[$identifier]['timeLimitAction'] = $this->getChildrenValue($item,'adlcp:timeLimitAction');
 			$items[$identifier]['dataFromLMS'] = $this->getChildrenValue($item,'adlcp:dataFromLMS');
 			$items[$identifier]['completionThreshold'] = $this->getChildrenValue($item,'adlcp:completionThreshold');
@@ -497,6 +497,18 @@ class Scorm extends ScormAppModel {
 			}
 		}
 		return $data;
+	}
+	
+	/**
+	 * 
+	 */
+	function getLocationFromMetadata($parent) {
+		$metadata = $parent->children('metadata');
+		if ($metadata != null){
+			$metadata = $metadata[0];
+			return $this->getChildrenValue($metadata,'adlcp:location');
+		}
+		return null;
 	}
 }
 ?>
