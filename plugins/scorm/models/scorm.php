@@ -210,21 +210,21 @@ class Scorm extends ScormAppModel {
 			if(!empty($objectives)) {
 				$data['Objective'] = $this->extractObjectives($objectives[0]);
 			}
-			$randomization = $seq->children('randomizationControls');
+			$randomization = $seq->children('imsss:randomizationControls');
 			if(!empty($randomization)) {
 				$data['Randomization'] = $randomization[0]->attributes;
 			}
-			$delivery = $seq->children('deliveryControls');
+			$delivery = $seq->children('imsss:deliveryControls');
 			if(!empty($delivery)) {
 				$data['DeliveryControl'] = $delivery[0]->attributes;
 			}
 			$choice = $seq->children('adlseq:constrainedChoiceConsiderations');
 			if(!empty($choice)) {
-				$data['Choice'] = $choice->attributes;
+				$data['Choice'] = $choice[0]->attributes;
 			}
 			$considerations = $seq->children('adlseq:rollupConsiderations');
 			if(!empty($considerations)) {
-				$data['Consideration'] = $considerations->attributes;
+				$data['Consideration'] = $considerations[0]->attributes;
 			}
 		}
 		return $data;

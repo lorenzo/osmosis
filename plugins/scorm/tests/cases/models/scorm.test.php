@@ -200,6 +200,14 @@ $xml = <<<eof
 								writeSatisfiedStatus = "true" />
 						</imsss:objective>
 					</imsss:objectives>
+					<imsss:randomizationControls 
+							selectCount="2"
+		                    selectionTiming="onEachNewAttempt" />
+						<imsss:deliveryControls tracked = "false"/>
+						<adlseq:constrainedChoiceConsiderations constrainChoice = "true" />
+						<adlseq:rollupConsiderations 
+						measureSatisfactionIfActive = "false"
+	           			requiredForCompleted = "ifNotSkipped" />
 				</imsss:sequencing>
 				<adlnav:presentation>
 					<adlnav:navigationInterface>
@@ -208,31 +216,94 @@ $xml = <<<eof
 					</adlnav:navigationInterface>
 				</adlnav:presentation>
 			</item>
+			<imsss:sequencing>
+					<imsss:controlMode 
+						choice="true" 
+						choiceExit="true" 
+						flow="true" 
+						forwardOnly="false" 
+						useCurrentAttemptObjectiveInfo = "false" 
+						useCurrentAttemptProgressInfo = "true" />
+					<imsss:sequencingRules>
+						<imsss:preConditionRule>
+							<imsss:ruleConditions conditionCombination="any">
+							<imsss:ruleCondition 
+								referencedObjective = "some_objective_ID"
+								measureThreshold = "0.5000"
+								operator = "noOp"
+								condition = "satisfied"
+								/>
+								<imsss:ruleCondition 
+								referencedObjective = "some_objective_ID1"
+								measureThreshold = "0.8000"
+								operator = "not"
+								condition = "completed"
+								/>
+								</imsss:ruleConditions>
+							<imsss:ruleAction action = "disabled"/>
+						</imsss:preConditionRule>
+						<imsss:postConditionRule>
+							<imsss:ruleConditions>
+								<imsss:ruleCondition condition="satisfied"/>
+							</imsss:ruleConditions>
+							<imsss:ruleAction action="exitParent"/>
+						</imsss:postConditionRule>
+						<imsss:exitConditionRule>
+							<imsss:ruleConditions>
+								<imsss:ruleCondition condition="satisfied"/>
+							</imsss:ruleConditions>
+							<imsss:ruleAction action="exit"/>
+						</imsss:exitConditionRule>
+					</imsss:sequencingRules>
+					<imsss:limitConditions attemptLimit="1" attemptAbsoluteDurationLimit="4 days"/>
+					<imsss:rollupRules
+						rollupObjectiveSatisfied="true"
+						rollupProgressCompletion="true"
+						objectiveMeasureWeight = "1.0000">
+						<imsss:rollupRule childActivitySet = "all" minimumCount = "0" minimumPercent = "0.0000" >
+							<imsss:rollupConditions conditionCombination = "any">
+								<imsss:rollupCondition condition = "attempted" operator = "noOp"/>
+							</imsss:rollupConditions>
+							 <imsss:rollupAction action = "completed"/>
+						</imsss:rollupRule>
+					</imsss:rollupRules>
+					<imsss:objectives>
+						<imsss:primaryObjective objectiveID = "PRIMARYOBJ" satisfiedByMeasure = "true">
+							<imsss:minNormalizedMeasure>0.6</imsss:minNormalizedMeasure>
+							<imsss:mapInfo
+								targetObjectiveID = "obj_module_1"
+								readSatisfiedStatus="false"
+								readNormalizedMeasure = "false"
+								writeSatisfiedStatus = "true"
+								writeNormalizedMeasure="false"/>
+						</imsss:primaryObjective>
+						<imsss:objective satisfiedByMeasure = "false" objectiveID="obj_module_1">
+							<imsss:mapInfo 
+								targetObjectiveID="obj_module_1"
+								readSatisfiedStatus = "false"
+								readNormalizedMeasure = "false"
+								writeSatisfiedStatus = "true" />
+						</imsss:objective>
+					</imsss:objectives>
+					<imsss:randomizationControls 
+						selectCount="2"
+	                    selectionTiming="onEachNewAttempt" />
+					<imsss:deliveryControls tracked = "false"/>
+					<adlseq:constrainedChoiceConsiderations constrainChoice = "true" />
+					<adlseq:rollupConsiderations 
+					measureSatisfactionIfActive = "false"
+           			requiredForCompleted = "ifNotSkipped" />
+				</imsss:sequencing>
 		</organization>
 	</organizations>
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);
+	//debug($parent1);
 	// testExtractOrganizations: falta probar <imsss:sequencing> de <organization>.
 	// Sin embargo es equivalente al de <item>
-
-	$organization = array (
-		'DMCE' => array (
-			'identifier' => 'DMCE',
-			'title' => 'SCORM 2004 3rd Edition Data Model Content Example 1.1',
-			'metadata' => 'lesson1/lesson1MD.xml',
-			'Sequencing' => array(),
-			'Item'=> array (
-				'WELCOME' => array (
-					'identifier' => 'WELCOME',
-					'isvisible' => 'false',
-					'parameters' => '?width=500&length=300',
-					'title' => 'Welcome',
-					'metadata' => 'lesson1/lesson1MD.xml',
-					'timeLimitAction' => 'exit,no message',
-					'dataFromLMS' => 'Some SCO Information',
-					'completionThreshold' => '0.75',
-					'Sequencing' => array (
+	
+	$sequencing = array (
 						'Control' => array (
 								'choice' => 'true',
 								'choiceExit' => 'true',
@@ -322,7 +393,33 @@ eof;
 								),
 							),
 						),
-					),
+						'Randomization' => array (
+                            'selectCount' => '2',
+                            'selectionTiming' => 'onEachNewAttempt',
+                        ),
+                    	'DeliveryControl' => array ( 'tracked' => 'false'),
+                    	'Choice' => array ('constrainChoice' => 'true'),
+                    	'Consideration' => array (
+                            'measureSatisfactionIfActive' => 'false',
+                            'requiredForCompleted' => 'ifNotSkipped',
+                        ),
+					);
+	$organization = array (
+		'DMCE' => array (
+			'identifier' => 'DMCE',
+			'title' => 'SCORM 2004 3rd Edition Data Model Content Example 1.1',
+			'metadata' => 'lesson1/lesson1MD.xml',			
+			'Item'=> array (
+				'WELCOME' => array (
+					'identifier' => 'WELCOME',
+					'isvisible' => 'false',
+					'parameters' => '?width=500&length=300',
+					'title' => 'Welcome',
+					'metadata' => 'lesson1/lesson1MD.xml',
+					'timeLimitAction' => 'exit,no message',
+					'dataFromLMS' => 'Some SCO Information',
+					'completionThreshold' => '0.75',
+					'Sequencing' => $sequencing,
 					'SubItem' => array (),
 				),
 				'Presentation' => array (
@@ -330,11 +427,11 @@ eof;
 					'previous',
 				),
 			),
+			'Sequencing'=> $sequencing,
 		),
 		
 	);
 	$this->assertEqual($this->TestObject->extractOrganizations($parent1),$organization);	
-
 	}
 	
 /**Test function extractItems.*/	
@@ -416,6 +513,14 @@ eof;
 					writeSatisfiedStatus = "true" />
 				</imsss:objective>
 			</imsss:objectives>
+			<imsss:randomizationControls 
+					selectCount="2"
+                    selectionTiming="onEachNewAttempt" />
+			<imsss:deliveryControls tracked = "false"/>
+			<adlseq:constrainedChoiceConsiderations constrainChoice = "true" />
+			<adlseq:rollupConsiderations 
+					measureSatisfactionIfActive = "false"
+           			requiredForCompleted = "ifNotSkipped" />
 			</imsss:sequencing>
 			<adlnav:presentation>
 			  <adlnav:navigationInterface>
@@ -528,7 +633,17 @@ eof;
 											),	
 									),
 							),
-					),
+							'Randomization' => array (
+		                            'selectCount' => '2',
+		                            'selectionTiming' => 'onEachNewAttempt',
+		                        ),
+		                    	'DeliveryControl' => array ( 'tracked' => 'false'),
+		                    	'Choice' => array ('constrainChoice' => 'true'),
+		                    	'Consideration' => array (
+		                            'measureSatisfactionIfActive' => 'false',
+		                            'requiredForCompleted' => 'ifNotSkipped',
+		                        ),
+		                ),
 				'SubItem' => array (),
 			),
 		'Presentation' => array (
@@ -594,15 +709,35 @@ $xml = <<<eof
 			  	<imsss:rollupAction action = "completed"/>
 		  </imsss:rollupRule>
 	</imsss:rollupRules>
+	<imsss:objectives>
+				<imsss:primaryObjective objectiveID = "PRIMARYOBJ" satisfiedByMeasure = "true">
+					<imsss:minNormalizedMeasure>0.6</imsss:minNormalizedMeasure>
+					<imsss:mapInfo
+						targetObjectiveID = "obj_module_1"
+						readSatisfiedStatus="false"
+			 	readNormalizedMeasure = "false"
+			 	writeSatisfiedStatus = "true"
+						writeNormalizedMeasure="false"/>
+				</imsss:primaryObjective>
+				<imsss:objective satisfiedByMeasure = "false" objectiveID="obj_module_1">
+				<imsss:mapInfo 
+						targetObjectiveID="obj_module_1"
+					readSatisfiedStatus = "false"
+					readNormalizedMeasure = "false"
+					writeSatisfiedStatus = "true" />
+				</imsss:objective>
+			</imsss:objectives>
+			<imsss:randomizationControls 
+					selectCount="2"
+                    selectionTiming="onEachNewAttempt" />
+			<imsss:deliveryControls tracked = "false"/>
+			<adlseq:constrainedChoiceConsiderations constrainChoice = "true" />
+			<adlseq:rollupConsiderations 
+					measureSatisfactionIfActive = "false"
+           			requiredForCompleted = "ifNotSkipped" />
 </imsss:sequencing>
 eof;
-debug(htmlentities('en testExtractSequencing no se prueban los siguientes: [CAM pag 184]
-• <objectives>
-• <randomizationControls>
-• <deliveryControls>
-• <adlseq:constrainedChoiceConsiderations>
-• <adlseq:rollupConsiderations>
-'));
+
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);
 	$secuencing = array (
@@ -664,7 +799,47 @@ debug(htmlentities('en testExtractSequencing no se prueban los siguientes: [CAM 
 						)
 				),
 			'Action' => array ('action' => 'completed',)
-		)
+		),
+		'Objective' => array (
+								'Primary' => array (
+										'objectiveID' => 'PRIMARYOBJ',
+										'satisfiedByMeasure' => 'true',
+										'minNormalizedMeasure' => '0.6',
+										'mapInfo' => array (
+													array (
+														'targetObjectiveID' => 'obj_module_1',
+														'readSatisfiedStatus' => 'false',
+														'readNormalizedMeasure' => 'false',
+														'writeSatisfiedStatus' => 'true',
+														'writeNormalizedMeasure' => 'false',
+													),
+											),
+									),
+								'Objective' => array (
+											array (
+												'satisfiedByMeasure' => 'false',
+												'objectiveID' => 'obj_module_1',
+												'mapInfo' => array (
+															array (
+																'targetObjectiveID' => 'obj_module_1',
+																'readSatisfiedStatus' => 'false',
+																'readNormalizedMeasure' => 'false',
+																'writeSatisfiedStatus' => 'true',
+															),
+													),
+											),	
+									),
+							),
+					'Randomization' => array (
+                            'selectCount' => '2',
+                            'selectionTiming' => 'onEachNewAttempt',
+                        ),
+                    	'DeliveryControl' => array ( 'tracked' => 'false'),
+                    	'Choice' => array ('constrainChoice' => 'true'),
+                    	'Consideration' => array (
+                            'measureSatisfactionIfActive' => 'false',
+                            'requiredForCompleted' => 'ifNotSkipped',
+                        ),
 	);
 	$this->assertEqual($this->TestObject->extractSequencing($parent1),$secuencing);
 }
