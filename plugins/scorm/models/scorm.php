@@ -173,7 +173,7 @@ class Scorm extends ScormAppModel {
 	}
 	
 	/**
-	 * Returns array with a representation of the imsss:sequencing element.
+	 * Returns array with a representation of the <imsss:sequencing> element.
 	 * Note: this function deliberately ignores the <auxiliaryResources> element.
 	 * @param $node XMLNode a node with a imsss:sequencing children node
 	 * @return array representation of the <imsss:sequencing> node and its element and attributes.
@@ -184,8 +184,26 @@ class Scorm extends ScormAppModel {
 	 * 	<imsss:sequencingRules> [...] </imsss:sequencingRules>
 	 * 	<imsss:limitConditions .../>
 	 * 	<imsss:rollupRules ...> [...] </imsss:rollupRules>
-	 * TODO: faltan elementos CAM página 184
+	 * 	<imsss:objectives> [...] </imsss:objectives>
+	 * 	<imsss:randomizationControls ... />
+	 * 	<imsss:deliveryControls .../>
+	 * 	<adlseq:constrainedChoiceConsiderations .../>
+	 * 	<adlseq:rollupConsiderations .../>
 	 * </imsss:sequencing>
+	 * 
+	 * (AuxiliaryResources ignored)
+	 * Returns:
+	 * array (
+	 * 	'Control' => array ( ... ),
+	 * 	'SequencingRule' => array ( [...] ),
+	 * 	'LimitCondition' => array ( ... ),
+	 * 	'RollUpRule' => array ([...] ),
+	 * 	'Objective' => array ( [...] ),
+	 * 	'Randomization' => array ( ... ),
+	 * 	'DeliveryControl' => array ( ... ),
+	 * 	'Choice' => array ( ... ),
+	 * 	'Consideration' => array ( ... ),
+	 * )
 	 */
 	function extractSequencing(XMLNode $parent) {
 		$data = array();

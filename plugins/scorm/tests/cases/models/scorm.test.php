@@ -202,12 +202,12 @@ $xml = <<<eof
 					</imsss:objectives>
 					<imsss:randomizationControls 
 							selectCount="2"
-		                    selectionTiming="onEachNewAttempt" />
-						<imsss:deliveryControls tracked = "false"/>
-						<adlseq:constrainedChoiceConsiderations constrainChoice = "true" />
-						<adlseq:rollupConsiderations 
+							selectionTiming="onEachNewAttempt" />
+					<imsss:deliveryControls tracked = "false"/>
+					<adlseq:constrainedChoiceConsiderations constrainChoice = "true" />
+					<adlseq:rollupConsiderations 
 						measureSatisfactionIfActive = "false"
-	           			requiredForCompleted = "ifNotSkipped" />
+						requiredForCompleted = "ifNotSkipped" />
 				</imsss:sequencing>
 				<adlnav:presentation>
 					<adlnav:navigationInterface>
