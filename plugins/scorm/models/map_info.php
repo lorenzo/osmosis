@@ -5,6 +5,7 @@ class MapInfo extends ScormAppModel {
 	var $validate = null;
 	var $primaryKey = 'id';
 	var $table = 'map_infos';
+	
 	function __construct() {
 		$this->validate = array(
 			'targetObjectiveID' => array(

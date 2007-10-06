@@ -4,7 +4,7 @@ loadModel('scorm.MapInfo');
 
 class MapInfoTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('map_info');
+	var $fixtures = array('objective','map_info');
 
 	function setUp() {
 		$this->TestObject = new MapInfo();
@@ -62,6 +62,7 @@ class MapInfoTestCase extends CakeTestCase {
 	
 	function testSave() {
 		$data = array(
+			'objective_id'			=> 1,
     		'targetObjectiveID'		=> 'SADASdsafFA-FSDADSASD',
     		'readSatisfiedStatus'	=> 'false',
     		'readNormalizedMeasure'	=> 'true',
