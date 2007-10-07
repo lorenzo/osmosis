@@ -1,0 +1,41 @@
+#
+# migration YAML file
+#
+UP:
+	create_table:
+		rules:
+			type:
+				length: 4
+			conditionCombination:
+				default: all
+				length: 3
+			action:
+				length: 20
+			minimumPercent:
+				default: 0.0000
+				length: 6
+			minimumCount:
+				default: 0
+				length: 5
+			fkey: rollup
+		rollups:
+			rollupObjectiveSatisfied:
+				length: 5
+			rollupProgressCompletion:
+				length: 5
+			objectiveMeasureWeight:
+				length: 6
+		conditions:
+			referencedObjective:
+				length: 255
+			measureThreshold:
+				length: 7
+			operator:
+				default: noOp
+				length: 4
+			`codition`:
+				length: 27
+				- not_null
+			fkey: rule
+DOWN:
+	drop_tables: [rules,rollups,conditions]
