@@ -3,15 +3,15 @@ class Objective extends ScormAppModel {
 
 	var $name = 'Objective';
 	var $validate = null;
-	var $primaryKey = 'id';
-	var $table = 'objectives';
 	var $hasOne = array(
 			'MapInfo' => array('className' => 'MapInfo',
 								'foreignKey' => 'objective_id',
 								'dependent' => true)
 	);
-	
+	var $actsAs = array('transaction');
 	function __construct() {
+		loadModel('scorm.MapInfo');
+		parent::__construct();
 		$this->validate = array(
 			'objectiveID' => array(
 				'required' =>  array(
@@ -42,6 +42,21 @@ class Objective extends ScormAppModel {
 					'required' => false)
 			)	
 		);
+	}
+	
+	function save($data=null,$validate=true,$fields=array()) {
+		$this->begin();
+		$saved = parent::save($data,$validate,$fields);
+		if($saved && isset($data['MapInfo'])) {
+				$data['MapInfo']['objective_id'] = $this->getLastInsertId();
+				$saved = $this->MapInfo->save($data);
+		}
+		if($saved) {
+			$this->commit();
+		} else {
+			$this->rollback();
+		}
+		return $saved;
 	}
 }
 ?>
