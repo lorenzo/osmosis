@@ -3,9 +3,8 @@ class ChoiceConsideration extends ScormAppModel {
 
 	var $name = 'ChoiceConsideration';
 	var $validate = null;
-	var $table = 'choice_considerations';
-	var $primaryKey = 'id';
 	function __construct() {
+	parent::__construct();
 		$this->validate = array(
 			'preventActivation' => array(
 				'Boolean' =>  array(

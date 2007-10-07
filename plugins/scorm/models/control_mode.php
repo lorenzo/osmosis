@@ -3,9 +3,8 @@ class ControlMode extends ScormAppModel {
 
 	var $name = 'ControlMode';
 	var $validate = null;
-	var $table = 'control_modes';
-	var $primaryKey = 'id';
 	function __construct() {
+		parent::__construct();
 		$this->validate = array(
 			'choiceExit' => array(
 				'Boolean' =>  array(

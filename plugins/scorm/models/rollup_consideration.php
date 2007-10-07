@@ -3,9 +3,8 @@ class RollupConsideration extends ScormAppModel {
 
 	var $name = 'RollupConsideration';
 	var $validate = null;
-	var $table = 'rollup_considerations';
-	var $primaryKey = 'id';
 	function __construct() {
+	parent::__construct();
 		$this->validate = array(
 			'requiredForSatisfied' => array(
 				'Token' =>  array(

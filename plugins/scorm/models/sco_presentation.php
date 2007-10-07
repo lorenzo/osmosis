@@ -2,10 +2,9 @@
 class ScoPresentation extends ScormAppModel {
 
 	var $name = 'ScoPresentation';
-	var $validate = null;
-	var $table = 'sco_presentations';
 	var $primaryKey = 'id';
 	function __construct() {
+		parent::__construct();
 		$this->validate = array(
 			'hideKey' => array(
 				'Token' =>  array(
