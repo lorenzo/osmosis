@@ -1,5 +1,5 @@
 <?php
-class Condition extends AppModel {
+class Condition extends ScormAppModel {
 
 	var $name = 'Condition';
 	var $validate = null;
@@ -26,7 +26,7 @@ class Condition extends AppModel {
 			),
 			'measureThreshold' => array (
 				'Decimal' => array (
-					'rule' => '/\d+\.\d{4,}/',
+					'rule' => '/\-?\d+\.\d{4,}/',
 					'message' => 'scorm.condition.measurethreshold.decimal',
 					'required' => false,
 					'allowEmpty' => true

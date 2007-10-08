@@ -8,7 +8,7 @@ class Rule extends ScormAppModel {
 		parent::__construct();
 		$this->validate = array(
 			'type' => array (
-				'rule' => '/(pre|post|exit|rollup)',
+				'rule' => '/(pre|post|exit|rollup)/',
 				'message' => 'scorm.rule.type.allowedvalues',
 				'required' => true,
 				'allowEmpty' => false
@@ -27,29 +27,29 @@ class Rule extends ScormAppModel {
 			'minimumPercent' => array (
 				'Decimal' => array (
 					'rule' => '/\d+\.\d{4,}/',
-					'message' => 'scorm.condition.measurethreshold.decimal',
+					'message' => 'scorm.rule.minimumpercent.decimal',
 					'required' => false,
 					'allowEmpty' => true
 				),
 				'GreaterEqual1' => array (
 					'rule' => array('comparison', '>=', 0),
-					'message' => 'scorm.condition.measurethreshold.range'
+					'message' => 'scorm.rule.minimumpercent.range'
 				),
 				'LessEqual1' => array (
 					'rule' => array('comparison', '<=', 1),
-					'message' => 'scorm.condition.measurethreshold.range'
+					'message' => 'scorm.rule.minimumpercent.range'
 				),
 			),
 			'minimumCount' => array (
 				'Number' => array (
 					'rule' => '/\d+/',
-					'message' => 'scorm.condition.measurethreshold.number',
+					'message' => 'scorm.rule.minimumcount.number',
 					'required' => false,
 					'allowEmpty' => true
 				),
 				'NonNegative' => array (
 					'rule' => array('comparison', '>=', 0),
-					'message' => 'scorm.condition.measurethreshold.nonegative'
+					'message' => 'scorm.rule.minimumcount.nonegative'
 				)
 			),
 		);

@@ -6,9 +6,12 @@ loadModel('scorm.Rollup');
 
 class ConditionTestCase extends CakeTestCase {
 	var $TestObject = null;
+	var $fixtures = array('condition');
 
 	function setUp() {
 		$this->TestObject = new Condition();
+		$this->TestObject->useDbConfig = 'test';
+		$this->TestObject->tablePrefix = 'test_suite_';
 	}
 
 	function tearDown() {
@@ -79,6 +82,17 @@ class ConditionTestCase extends CakeTestCase {
 			$expectedErrors = array();
 			$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
 		}
+	}
+	
+	function testSave() {
+		$data = array (
+			'referencedObjective' => 'HOLA1',
+			'measureThreshold' => '0.0100',
+			'operator' => 'not',
+			'condition' => 'activityProgressKnown'
+		);
+		var_dump($this->TestObject->save($data));
+		$this->assertEqual(2, $this->TestObject->findCount());
 	}
 }
 ?>

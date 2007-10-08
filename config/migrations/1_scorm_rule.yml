@@ -18,24 +18,34 @@ UP:
 				default: 0
 				length: 5
 			fkey: rollup
+			no_dates: true
 		rollups:
 			rollupObjectiveSatisfied:
+				type: string
+				default: 'true'
 				length: 5
+				not_null: true
 			rollupProgressCompletion:
+				type: string
+				default: 'true'
 				length: 5
+				not_null: true
 			objectiveMeasureWeight:
-				length: 6
+				type: string
+				default: '1.0000'
+				length: 20
+				not_null: true
+			no_dates: true
 		conditions:
 			referencedObjective:
 				length: 255
 			measureThreshold:
 				length: 7
 			operator:
-				default: noOp
+				default: 'noOp'
 				length: 4
-			`codition`:
-				length: 27
-				- not_null
+			codition: [string, 27, not_null]
 			fkey: rule
+			no_dates: true
 DOWN:
 	drop_tables: [rules,rollups,conditions]
