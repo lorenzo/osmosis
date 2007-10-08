@@ -79,6 +79,40 @@ class RollupTestCase extends CakeTestCase {
 		$expectedErrors = array ();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
 	}
+	
+	function testCRUD() {
+		// Insert a new Condition
+		$data = array (
+			'rollupObjectiveSatisfied' => 'false',
+			'rollupProgressCompletion' => 'false',
+			'objectiveMeasureWeight' => '0.9931'
+		);
+		$this->TestObject->save($data);
+		$this->assertEqual(2, $this->TestObject->findCount());
+		
+		// Update the inserted Condition and Read
+		$data = array (
+			'rollupObjectiveSatisfied' => 'true',
+			'rollupProgressCompletion' => 'true',
+			'objectiveMeasureWeight' => '1.0000'
+		);
+		$this->TestObject->save($data);
+		$this->assertEqual(2, $this->TestObject->findCount());
+		$last_id = $this->TestObject->getLastInsertID();
+		$this->TestObject->id = $last_id;
+		$expectedData = array(
+			'Rollup' => Set::merge(
+				$data,
+				array('id' => $last_id) 
+			),
+			'Rule' => array()
+		);
+		$this->assertEqual($expectedData, $this->TestObject->read());
+
+		// Delete
+		$this->TestObject->delete();
+		$this->assertEqual(1, $this->TestObject->findCount());
+	}
 
 }
 ?>
