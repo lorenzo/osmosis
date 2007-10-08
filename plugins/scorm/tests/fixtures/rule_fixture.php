@@ -8,7 +8,7 @@ class RuleFixture extends CakeTestFixture {
 			'id'					=> 1,
 			'type'				=> 'pre',
 			'conditionCombination'	=> 'any',
-			'action'				=> 'incomplete',
+			'action'				=> 'disabled',
 			'minimumPercent'		=> '0.0000',
 			'minimumCount'			=> '1'
 		)

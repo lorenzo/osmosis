@@ -10,6 +10,8 @@ class RuleTestCase extends CakeTestCase {
 	
 	function setUp() {
 		$this->TestObject = new Rule();
+		$this->TestObject->useDbConfig = 'test';
+		$this->TestObject->tablePrefix = 'test_suite_';
 	}
 
 	function tearDown() {
@@ -132,6 +134,46 @@ class RuleTestCase extends CakeTestCase {
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array ();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
+	}
+	
+	function testCRUD() {
+		// Insert a new Condition
+		$data = array (
+			'type'				=> 'pre',
+			'conditionCombination'	=> 'any',
+			'action'				=> 'hiddenFromChoice',
+			'minimumPercent'		=> '0.0000',
+			'minimumCount'			=> '1'
+		);
+		
+		$this->TestObject->save($data);
+		$this->assertEqual(2, $this->TestObject->findCount());
+		
+		// Update the inserted Condition and Read
+		$data = array (
+			'type'				=> 'post',
+			'conditionCombination'	=> 'any',
+			'action'				=> 'exitAll',
+			'minimumPercent'		=> '1.0000',
+			'minimumCount'			=> '1'
+		);
+		$this->TestObject->save($data);
+		$this->assertEqual(2, $this->TestObject->findCount());
+		$last_id = $this->TestObject->getLastInsertID();
+		$this->TestObject->id = $last_id;
+		$expectedData = array(
+			'Rule' => Set::merge(
+				$data,
+				array('id' => $last_id, 'rollup_id' => '') 
+			),
+			'Rollup' => array(),
+			'Condition' => array()
+		);
+		$this->assertEqual($expectedData, $this->TestObject->read());
+		
+		// Delete
+		$this->TestObject->delete();
+		$this->assertEqual(1, $this->TestObject->findCount());
 	}
 }
 ?>
