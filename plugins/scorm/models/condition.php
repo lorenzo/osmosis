@@ -46,7 +46,7 @@ class Condition extends ScormAppModel {
 					'message' => 'scorm.condition.operator.token'
 				)
 			),
-			'condition' => array (
+			'ruleCondition' => array (
 				'Token' => array (
 					'rule' => 'validateConditionToken',
 					'message' => 'scorm.condition.condition.token'

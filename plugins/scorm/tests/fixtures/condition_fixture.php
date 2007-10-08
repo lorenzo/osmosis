@@ -9,7 +9,7 @@ class ConditionFixture extends CakeTestFixture {
 			'referencedObjective'	=> 'HOLA',
 			'measureThreshold'		=> '0.05832',
 			'operator'			=> 'noOp',
-			'condition'			=> 'always'
+			'ruleCondition'			=> 'always'
 		)
 	);
 }

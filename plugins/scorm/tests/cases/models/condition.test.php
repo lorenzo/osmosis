@@ -30,14 +30,14 @@ class ConditionTestCase extends CakeTestCase {
 		$data = array(
 			'measureThreshold' => '-1.01',
 			'operator' => 'bubby',
-			'condition' => 'greatWork'
+			'ruleCondition' => 'greatWork'
 		);
 		$this->TestObject->data = $data;
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
 			'measureThreshold' => 'scorm.condition.measurethreshold.range',
 			'operator' => 'scorm.condition.operator.token',
-			'condition' => 'scorm.condition.condition.token'
+			'ruleCondition' => 'scorm.condition.condition.token'
 		);
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
 	}
@@ -74,7 +74,7 @@ class ConditionTestCase extends CakeTestCase {
 			$data = array(
 				'measureThreshold' => '0.0010',
 				'operator' => 'not',
-				'condition' => $allowedCondition
+				'ruleCondition' => $allowedCondition
 			);
 			$this->TestObject->create();
 			$this->TestObject->data = $data;
@@ -84,15 +84,40 @@ class ConditionTestCase extends CakeTestCase {
 		}
 	}
 	
-	function testSave() {
+	function testCRUD() {
+		// Insert a new Condition
 		$data = array (
 			'referencedObjective' => 'HOLA1',
 			'measureThreshold' => '0.0100',
 			'operator' => 'not',
-			'condition' => 'activityProgressKnown'
+			'ruleCondition' => 'activityProgressKnown'
 		);
-		var_dump($this->TestObject->save($data));
+		$this->TestObject->save($data);
 		$this->assertEqual(2, $this->TestObject->findCount());
+		
+		// Update the inserted Condition and Read
+		$data = array (
+			'referencedObjective' => 'HOLA_UPDATE',
+			'measureThreshold' => '0.0100',
+			'operator' => 'noOp',
+			'ruleCondition' => 'activityProgressKnown'
+		);
+		$this->TestObject->save($data);
+		$this->assertEqual(2, $this->TestObject->findCount());
+		$last_id = $this->TestObject->getLastInsertID();
+		$this->TestObject->id = $last_id;
+		$expectedData = array(
+			'Condition' => Set::merge(
+				$data,
+				array('id' => $last_id, 'rule_id' => '') 
+			),
+			'Rule' => array()
+		);
+		$this->assertEqual($expectedData, $this->TestObject->read());
+		
+		// Delete
+		$this->TestObject->delete();
+		$this->assertEqual(1, $this->TestObject->findCount());
 	}
 }
 ?>

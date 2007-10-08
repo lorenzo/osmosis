@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 07, 2007 at 08:33 PM
+-- Generation Time: Oct 07, 2007 at 09:09 PM
 -- Server version: 5.0.37
 -- PHP Version: 5.2.2
 
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `conditions` (
   `referencedObjective` varchar(255) default NULL,
   `measureThreshold` varchar(7) default NULL,
   `operator` varchar(4) default 'noOp',
-  `codition` varchar(27) NOT NULL,
+  `ruleCondition` varchar(27) NOT NULL,
   `rule_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
