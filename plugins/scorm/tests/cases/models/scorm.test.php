@@ -30,13 +30,16 @@ class ScormTestCase extends CakeTestCase {
 
 /**Test function manifestExists.*/
 	function testManifestExists() {
+		uses('File');
+		$file = new File(TMP.'tests/imsmanifest.xml',true);
 		$this->assertTrue($this->TestObject->manifestExists(TMP.'tests'));
 		$this->assertFalse($this->TestObject->manifestExists(TMP.'fake'));
+		$file->delete();
 	}
 
 /**Test function parseManifest.*/
 	function testParseManifest() {
-		$this->TestObject->parseManifest(TMP.'tests');
+		//$this->TestObject->parseManifest(TMP.'tests');
 		//debug($this->TestObject->data);
 	}
 	

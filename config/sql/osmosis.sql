@@ -163,7 +163,68 @@ CREATE TABLE IF NOT EXISTS `scorms` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `scorms`
---
+CREATE TABLE `map_infos` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `objective_id` int(11) NOT NULL,
+  `targetObjectiveID` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'the identifier of the global shared objective',
+  `readSatisfiedStatus` varchar(5) collate utf8_unicode_ci default 'true',
+  `readNormalizedMeasure` varchar(5) collate utf8_unicode_ci NOT NULL default 'true',
+  `writeSatisfiedStatus` varchar(5) collate utf8_unicode_ci default 'false',
+  `writeNormalizedMeasure` varchar(5) collate utf8_unicode_ci default 'false',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents the mapping of an activity’s objective' AUTO_INCREMENT=2 ;
 
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `objectives`
+-- 
+
+CREATE TABLE `objectives` (
+  `id` int(11) NOT NULL auto_increment,
+  `sco_id` int(11) NOT NULL,
+  `satisfiedByMeasure` varchar(5) collate utf8_unicode_ci default 'false' COMMENT 'indicates that minNormalizedMeasure shall be used intead of other method',
+  `minNormalizedMeasure` varchar(3) collate utf8_unicode_ci NOT NULL default '1.0' COMMENT 'identifies minimum satisfaction measure for the objective',
+  `objectiveID` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'objective ID',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='identifies objectives that do not contribute to rollup assoc' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `randomizations`
+-- 
+
+CREATE TABLE `randomizations` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `randomizationTiming` varchar(16) collate utf8_unicode_ci default 'never' COMMENT 'indicates when the ordering of the children of the activity should occur',
+  `selectCount` int(11) unsigned default NULL COMMENT 'indicates the number of child activities that must be selected',
+  `reorderChildren` varchar(5) collate utf8_unicode_ci NOT NULL default 'false' COMMENT 'indicates that the order of the child activities is randomized',
+  `selectionTiming` varchar(16) collate utf8_unicode_ci default 'never' COMMENT 'indicates when the selection should occur',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `scos`
+-- 
+
+CREATE TABLE `scos` (
+  `id` int(11) unsigned NOT NULL auto_increment COMMENT 'Primary key',
+  `scorm_id` int(11) unsigned NOT NULL COMMENT 'Scorm package this sco belongs to',
+  `parent_id` int(11) unsigned default NULL COMMENT 'The parent sco',
+  `manifest` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'The manifest that contains this sco',
+  `organization` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'The organization that contains this sco',
+  `identifier` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'Identifier string for sco',
+  `href` varchar(255) collate utf8_unicode_ci default NULL COMMENT 'Reference to the location to launch',
+  `title` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'Title for sco',
+  `completionThreshold` varchar(3) collate utf8_unicode_ci default NULL COMMENT ' defines a threshold value that can be used by the SCO',
+  `parameters` text collate utf8_unicode_ci COMMENT 'static parameters to be passed to the resource at launch time',
+  `isvisible` varchar(5) collate utf8_unicode_ci NOT NULL default 'true' COMMENT 'indicates whether or not this SCO is displayed when the structure of the package is displayed or rendered',
+  `attemptAbsoluteDurationLimit` varchar(6) collate utf8_unicode_ci default NULL COMMENT 'maximum time duration that the learner is permitted to spend on any single learner attempt',
+  `dataFromLMS` text collate utf8_unicode_ci COMMENT 'provides initialization data expected by the',
+  `attemptLimit` varchar(10) collate utf8_unicode_ci default NULL COMMENT ' the maximum number of attempts for the activity',
+  `scormType` varchar(6) collate utf8_unicode_ci NOT NULL COMMENT 'type of SCORM resource',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Holds each SCO from a SCORM package' AUTO_INCREMENT=1 ;
