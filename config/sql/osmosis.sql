@@ -236,3 +236,69 @@ CREATE TABLE `scos` (
   `scormType` varchar(6) collate utf8_unicode_ci NOT NULL COMMENT 'type of SCORM resource',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Holds each SCO from a SCORM package' AUTO_INCREMENT=1 ;
+
+CREATE TABLE `choice_considerations` (
+  `id` int(11) NOT NULL auto_increment,
+  `preventActivation` varchar(5) NOT NULL default 'false',
+  `constrainChoice` varchar(5) NOT NULL default 'false',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='choice_considerations' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `control_modes`
+-- 
+
+CREATE TABLE `control_modes` (
+  `id` int(11) NOT NULL auto_increment,
+  `choiceExit` varchar(5) NOT NULL default 'true',
+  `choice` varchar(5) NOT NULL default 'true',
+  `flow` varchar(5) NOT NULL default 'false',
+  `forwardOnly` varchar(5) NOT NULL default 'false',
+  `useCurrentAttemptObjectiveInfo` varchar(5) NOT NULL default 'true',
+  `useCurrentAttemptProgressInfo` varchar(5) NOT NULL default 'true',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='ControlMode: contenedor de información del sequencing' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `delivery_controls`
+-- 
+
+CREATE TABLE `delivery_controls` (
+  `id` int(11) NOT NULL auto_increment,
+  `tracked` varchar(5) NOT NULL default 'true',
+  `completionSetByContent` varchar(5) NOT NULL default 'false',
+  `objectiveSetByContent` varchar(5) NOT NULL default 'false',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='DeliveryControl: secuencia que deben seguir las actividades' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `rollup_considerations`
+-- 
+
+CREATE TABLE `rollup_considerations` (
+  `id` int(11) NOT NULL auto_increment,
+  `requiredForSatisfied` varchar(15) NOT NULL default 'always',
+  `requiredForNotSatisfied` varchar(15) NOT NULL default 'always',
+  `requiredForComplete` varchar(15) NOT NULL default 'always',
+  `requiredForIncomplete` varchar(15) NOT NULL default 'always',
+  `measureSatisfactionIfActive` varchar(5) NOT NULL default 'true',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='RollupConsideration:indican cuándo una actividad debe ser i' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `sco_presentations`
+-- 
+
+CREATE TABLE `sco_presentations` (
+  `id` int(11) NOT NULL auto_increment,
+  `hideKey` varchar(10) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='SCOPresentation: información de la presentación de una act' AUTO_INCREMENT=1 ;
