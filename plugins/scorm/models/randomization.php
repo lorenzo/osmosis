@@ -1,11 +1,10 @@
 <?php
 class Randomization extends ScormAppModel {
 
-	var $name = 'Sco';
+	var $name = 'Randomization';
 	var $validate = null;
-	var $primaryKey = 'id';
-	var $table = 'randomizations';
 	function __construct() {
+		parent::__construct();
 		$this->validate = array(
 			'randomizationTiming' => array(
 				'required' =>  array(

@@ -107,6 +107,7 @@ class ObjectiveTestCase extends CakeTestCase {
 		$this->TestObject->save($data);
 		$id = $this->TestObject->getLastInsertId();
 		$data['Objective']['id'] = $id;
+		$data['Objective']['primary'] = 0;
 		$data['MapInfo']['objective_id'] = $id;
 		$data['MapInfo']['id'] =  $this->TestObject->MapInfo->getLastInsertId();
 		$this->assertEqual($data,$this->TestObject->findById($id));

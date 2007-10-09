@@ -1,25 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 2.11.0
+-- version 2.9.1.1-Debian-2ubuntu1
 -- http://www.phpmyadmin.net
---
+-- 
 -- Host: localhost
--- Generation Time: Oct 07, 2007 at 09:09 PM
--- Server version: 5.0.37
--- PHP Version: 5.2.2
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
---
--- Database: `osmosis2`
---
+-- Generation Time: Oct 09, 2007 at 06:36 PM
+-- Server version: 5.0.38
+-- PHP Version: 5.2.1
+-- 
+-- Database: `osmosis`
+-- 
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `conditions`
---
+-- 
 
-CREATE TABLE IF NOT EXISTS `conditions` (
+CREATE TABLE `conditions` (
   `id` int(11) NOT NULL auto_increment,
   `referencedObjective` varchar(255) default NULL,
   `measureThreshold` varchar(7) default NULL,
@@ -29,18 +26,13 @@ CREATE TABLE IF NOT EXISTS `conditions` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `conditions`
---
-
-
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `courses`
---
+-- 
 
-CREATE TABLE IF NOT EXISTS `courses` (
+CREATE TABLE `courses` (
   `id` int(11) unsigned NOT NULL auto_increment,
   `department_id` int(4) unsigned NOT NULL,
   `owner_id` int(11) NOT NULL,
@@ -51,125 +43,24 @@ CREATE TABLE IF NOT EXISTS `courses` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `courses`
---
-
-
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `departments`
---
+-- 
 
-CREATE TABLE IF NOT EXISTS `departments` (
+CREATE TABLE `departments` (
   `id` int(4) unsigned NOT NULL auto_increment,
   `name` varchar(150) collate utf8_unicode_ci NOT NULL,
   `description` text collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
---
--- Dumping data for table `departments`
---
-
-INSERT INTO `departments` (`id`, `name`, `description`) VALUES
-(1, 'Departamento de BiologÃ­a Celular', 'Todas las asignaturas cuyos cÃ³digos sean de la forma BC, EP, GP.');
-
 -- --------------------------------------------------------
 
---
--- Table structure for table `plugins`
---
-
-CREATE TABLE IF NOT EXISTS `plugins` (
-  `id` smallint(4) unsigned NOT NULL auto_increment,
-  `name` varchar(50) collate utf8_unicode_ci NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Holds installed plugin names and active status' AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `plugins`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rollups`
---
-
-CREATE TABLE IF NOT EXISTS `rollups` (
-  `id` int(11) NOT NULL auto_increment,
-  `rollupObjectiveSatisfied` varchar(5) default 'true',
-  `rollupProgressCompletion` varchar(5) default 'true',
-  `objectiveMeasureWeight` varchar(20) default '1.0000',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `rollups`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rules`
---
-
-CREATE TABLE IF NOT EXISTS `rules` (
-  `id` int(11) NOT NULL auto_increment,
-  `type` varchar(4) default NULL,
-  `conditionCombination` varchar(3) default 'all',
-  `action` varchar(20) default NULL,
-  `minimumPercent` varchar(6) default '0.0000',
-  `minimumCount` varchar(5) default '0',
-  `rollup_id` int(11) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `rules`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `schema_info`
---
-
-CREATE TABLE IF NOT EXISTS `schema_info` (
-  `version` int(10) unsigned NOT NULL default '0'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `schema_info`
---
-
-INSERT INTO `schema_info` (`version`) VALUES
-(1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `scorms`
---
-
-CREATE TABLE `scorms` (
-  `id` int(11) unsigned NOT NULL auto_increment COMMENT 'primary key',
-  `course_id` int(11) NOT NULL COMMENT 'foreign key to course',
-  `name` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'name for scorm asset',
-  `file_name` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'file name of scorm package',
-  `description` text collate utf8_unicode_ci NOT NULL COMMENT 'description of scorm asset',
-  `version` varchar(9) collate utf8_unicode_ci NOT NULL COMMENT 'scorm version',
-  `created` timestamp NOT NULL default '0000-00-00 00:00:00' COMMENT 'created time',
-  `modified` timestamp NOT NULL default '0000-00-00 00:00:00' COMMENT 'modified time',
-  `hash` varchar(35) collate utf8_unicode_ci NOT NULL COMMENT 'hash sum of file reference',
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a scorm asset in a course' AUTO_INCREMENT=1 ;
+-- 
+-- Table structure for table `map_infos`
+-- 
 
 CREATE TABLE `map_infos` (
   `id` int(11) unsigned NOT NULL auto_increment,
@@ -194,8 +85,22 @@ CREATE TABLE `objectives` (
   `satisfiedByMeasure` varchar(5) collate utf8_unicode_ci default 'false' COMMENT 'indicates that minNormalizedMeasure shall be used intead of other method',
   `minNormalizedMeasure` varchar(3) collate utf8_unicode_ci NOT NULL default '1.0' COMMENT 'identifies minimum satisfaction measure for the objective',
   `objectiveID` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'objective ID',
+  `primary` tinyint(1) NOT NULL default '0' COMMENT 'wheter is a primary objective or not',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='identifies objectives that do not contribute to rollup assoc' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `plugins`
+-- 
+
+CREATE TABLE `plugins` (
+  `id` smallint(4) unsigned NOT NULL auto_increment,
+  `name` varchar(50) collate utf8_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Holds installed plugin names and active status' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -205,12 +110,75 @@ CREATE TABLE `objectives` (
 
 CREATE TABLE `randomizations` (
   `id` int(11) unsigned NOT NULL auto_increment,
+  `sco_id` int(11) NOT NULL,
   `randomizationTiming` varchar(16) collate utf8_unicode_ci default 'never' COMMENT 'indicates when the ordering of the children of the activity should occur',
   `selectCount` int(11) unsigned default NULL COMMENT 'indicates the number of child activities that must be selected',
   `reorderChildren` varchar(5) collate utf8_unicode_ci NOT NULL default 'false' COMMENT 'indicates that the order of the child activities is randomized',
   `selectionTiming` varchar(16) collate utf8_unicode_ci default 'never' COMMENT 'indicates when the selection should occur',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `rollups`
+-- 
+
+CREATE TABLE `rollups` (
+  `id` int(11) NOT NULL auto_increment,
+  `sco_id` int(11) NOT NULL,
+  `rollupObjectiveSatisfied` varchar(5) default 'true',
+  `rollupProgressCompletion` varchar(5) default 'true',
+  `objectiveMeasureWeight` varchar(20) default '1.0000',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `rules`
+-- 
+
+CREATE TABLE `rules` (
+  `id` int(11) NOT NULL auto_increment,
+  `sco_id` int(11) default NULL,
+  `type` varchar(4) default NULL,
+  `conditionCombination` varchar(3) default 'all',
+  `action` varchar(20) default NULL,
+  `minimumPercent` varchar(6) default '0.0000',
+  `minimumCount` varchar(5) default '0',
+  `rollup_id` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `schema_info`
+-- 
+
+CREATE TABLE `schema_info` (
+  `version` int(10) unsigned NOT NULL default '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `scorms`
+-- 
+
+CREATE TABLE `scorms` (
+  `id` int(11) unsigned NOT NULL auto_increment COMMENT 'primary key',
+  `course_id` int(11) NOT NULL COMMENT 'foreign key to course',
+  `name` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'name for scorm asset',
+  `file_name` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'file name of scorm package',
+  `description` text collate utf8_unicode_ci NOT NULL COMMENT 'description of scorm asset',
+  `version` varchar(9) collate utf8_unicode_ci NOT NULL COMMENT 'scorm version',
+  `created` timestamp NOT NULL default '0000-00-00 00:00:00' COMMENT 'created time',
+  `modified` timestamp NOT NULL default '0000-00-00 00:00:00' COMMENT 'modified time',
+  `hash` varchar(35) collate utf8_unicode_ci NOT NULL COMMENT 'hash sum of file reference',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a scorm asset in a course' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -237,12 +205,6 @@ CREATE TABLE `scos` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Holds each SCO from a SCORM package' AUTO_INCREMENT=1 ;
 
-CREATE TABLE `choice_considerations` (
-  `id` int(11) NOT NULL auto_increment,
-  `preventActivation` varchar(5) NOT NULL default 'false',
-  `constrainChoice` varchar(5) NOT NULL default 'false',
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='choice_considerations' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

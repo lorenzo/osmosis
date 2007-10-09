@@ -9,6 +9,22 @@ class Sco extends ScormAppModel {
 								'dependent' => true),
 			'Objective' => array('className' => 'Objective',
 								'foreignKey' => 'sco_id',
+								'conditions' => 'Objective.primary = 0',
+								'dependent' => true),
+			'Rule' => array('className' => 'Rule',
+								'foreignKey' => 'sco_id',
+								'dependent' => true),
+	);
+	var $hasOne = array(
+			'PrimaryObjective' => array('className' => 'Objective',
+								'foreignKey' => 'sco_id',
+								'conditions' => 'PrimaryObjective.primary = 1',
+								'dependent' => true),
+			'Randomization' => array('className' => 'Randomization',
+								'foreignKey' => 'sco_id',
+								'dependent' => true),
+			'Rollup' => array('className' => 'Rollup',
+								'foreignKey' => 'sco_id',
 								'dependent' => true),
 	);
 	var $actsAs = array('transaction');
@@ -113,11 +129,39 @@ class Sco extends ScormAppModel {
 					break;
 			}
 		}
+		if($saved && isset($data['PrimaryObjective'])) {
+				$data['PrimaryObjective']['sco_id'] = $this->getLastInsertId();
+				$data['PrimaryObjective']['primary'] = 1;
+				$saved = $this->Objective->save($data['PrimaryObjective']);
+				if(!$saved)
+					break;
+		}
 		if($saved && isset($data['Objective'])) {
 			foreach($data['Objective'] as $objective){
 				$objective['sco_id'] = $this->getLastInsertId();
 				$this->Objective->create();
 				$saved = $this->Objective->save($objective);
+				if(!$saved)
+					break;
+			}
+		}
+		if($saved && isset($data['Randomization'])) {
+				$data['Randomization']['sco_id'] = $this->getLastInsertId();
+				$saved = $this->Randomization->save($data['Randomization']);
+				if(!$saved)
+					break;
+		}
+		if($saved && isset($data['Rollup'])) {
+				$data['Rollup']['sco_id'] = $this->getLastInsertId();
+				$saved = $this->Rollup->save($data['Rollup']);
+				if(!$saved)
+					break;
+		}
+		if($saved && isset($data['Rule'])) {
+			foreach($data['Rule'] as $rule){
+				$rule['sco_id'] = $this->getLastInsertId();
+				$this->Rule->create();
+				$saved = $this->Rule->save($rule);
 				if(!$saved)
 					break;
 			}
