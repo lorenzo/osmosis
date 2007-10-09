@@ -10,6 +10,8 @@ class ObjectiveTestCase extends CakeTestCase {
 		$this->TestObject = new Objective();
 		$this->TestObject->useDbConfig = 'test_suite';
 		$this->TestObject->tablePrefix = 'test_suite_';
+		$this->TestObject->MapInfo->useDbConfig = 'test_suite';
+		$this->TestObject->MapInfo->tablePrefix = 'test_suite_';
 	}
 
 	function tearDown() {
@@ -85,6 +87,29 @@ class ObjectiveTestCase extends CakeTestCase {
 		$data = array();
 		$this->TestObject->save($data);
 		$this->assertEqual(1,$this->TestObject->findCount());
+	}
+	
+	function testSave3() {
+		$data = array();
+		$data['Objective'] = array(
+    		'objectiveID'			=> 'FAADAS-GDFGDFGF',
+    		'sco_id'				=> 1,
+    		'satisfiedByMeasure'	=> 'true',
+    		'minNormalizedMeasure'	=> '0.6'
+		);
+		$data['MapInfo'] = array(
+    		'targetObjectiveID'		=> 'SADASFA-FSDADSASD',
+    		'readSatisfiedStatus'	=> 'true',
+    		'readNormalizedMeasure'	=> 'false',
+    		'writeSatisfiedStatus'	=> 'false',
+    		'writeNormalizedMeasure'=> 'true'
+		);
+		$this->TestObject->save($data);
+		$id = $this->TestObject->getLastInsertId();
+		$data['Objective']['id'] = $id;
+		$data['MapInfo']['objective_id'] = $id;
+		$data['MapInfo']['id'] =  $this->TestObject->MapInfo->getLastInsertId();
+		$this->assertEqual($data,$this->TestObject->findById($id));
 	}
 }
 ?>

@@ -1,15 +1,20 @@
 <?php 
 
 loadModel('scorm.Sco');
+loadModel('scorm.Objective');
 
 class ScoTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('scorm','sco');
+	var $fixtures = array('scorm','sco','objective');
 
 	function setUp() {
 		$this->TestObject = new Sco();
 		$this->TestObject->useDbConfig = 'test_suite';
 		$this->TestObject->tablePrefix = 'test_suite_';
+		$this->TestObject->SubItem->useDbConfig = 'test_suite';
+		$this->TestObject->SubItem->tablePrefix = 'test_suite_';
+		$this->TestObject->Objective->useDbConfig = 'test_suite';
+		$this->TestObject->Objective->tablePrefix = 'test_suite_';
 	}
 
 	function tearDown() {
@@ -97,6 +102,45 @@ class ScoTestCase extends CakeTestCase {
 		);
 		$this->TestObject->save($data);
 		$this->assertEqual(2,$this->TestObject->findCount());
+	}
+	
+	function testSave2() {
+		$data = array();
+		$data['Sco'] = array(
+    		'manifest'			=> 'ASDGSDS-SDFSADAS',
+    		'organization'		=> 'DMCQ',
+    		'identifier'		=> 'CDADASA-GSDGDEG-HRETSAS-SDSDSD',
+    		'title'				=> 'First sco',
+    		'completionThreshold' => '1.5',
+    		'isvisible'			=> 'true',
+    		'attemptAbsoluteDurationLimit' => '123',
+    		'dataFromLMS'		=> 'fdfhrertertert',
+    		'attemptLimit'		=> '12545',
+    		'scormType'			=> 'asset'
+		);
+		$data['SubItem'][] = array(
+    		'manifest'			=> 'ASDGSDS-SDFSADAS',
+    		'organization'		=> 'DMCQ',
+    		'identifier'		=> 'CDADASA-GSDGDEG-WEER-SDSDSD',
+    		'href'				=> 'index.html',
+    		'title'				=> 'Second sco',
+    		'parameters'		=> 'pa=13&f=5',
+    		'scormType'			=> 'sco'
+		);
+		$data['Objective'][] = array(
+    		'objectiveID'			=> 'FAADAS-GDFGDFGF',
+    		'satisfiedByMeasure'	=> 'true',
+    		'minNormalizedMeasure'	=> '0.6'
+		);
+		$data['Objective'][] = array(
+    		'objectiveID'			=> 'FAADAS-DDWWAAFF',
+    		'satisfiedByMeasure'	=> 'true',
+    		'minNormalizedMeasure'	=> '0.9'
+		);
+		$this->TestObject->save($data);
+		$this->assertEqual(3,$this->TestObject->findCount());
+		$this->assertEqual(1,$this->TestObject->findCount(array('parent_id'=>$this->TestObject->getLastInsertId())));
+		$this->assertEqual(2,$this->TestObject->Objective->findCount(array('sco_id'=>$this->TestObject->getLastInsertId())));
 	}
 }
 ?>

@@ -3,9 +3,17 @@ class Sco extends ScormAppModel {
 
 	var $name = 'Sco';
 	var $validate = null;
-	var $primaryKey = 'id';
-	var $table = 'scos';
+	var $hasMany = array(
+			'SubItem' => array('className' => 'Sco',
+								'foreignKey' => 'parent_id',
+								'dependent' => true),
+			'Objective' => array('className' => 'Objective',
+								'foreignKey' => 'sco_id',
+								'dependent' => true),
+	);
+	var $actsAs = array('transaction');
 	function __construct() {
+		parent::__construct();
 		$this->validate = array(
 			'manifest' => array(
 				'required' =>  array(
@@ -92,5 +100,35 @@ class Sco extends ScormAppModel {
 				)
 		);
 	}
+	
+	function save($data=null,$validate=true,$fields=array()) {
+		$this->begin();
+		$saved = parent::save($data,$validate,$fields);
+		if($saved && isset($data['SubItem'])) {
+			foreach($data['SubItem'] as $sco){
+				$sco['parent_id'] = $this->getLastInsertId();
+				$this->SubItem->create();
+				$saved = $this->SubItem->save($sco);
+				if(!$saved)
+					break;
+			}
+		}
+		if($saved && isset($data['Objective'])) {
+			foreach($data['Objective'] as $objective){
+				$objective['sco_id'] = $this->getLastInsertId();
+				$this->Objective->create();
+				$saved = $this->Objective->save($objective);
+				if(!$saved)
+					break;
+			}
+		}
+		if($saved) {
+			$this->commit();
+		} else {
+			$this->rollback();
+		}
+		return $saved;
+	}
+	
 }
 ?>
