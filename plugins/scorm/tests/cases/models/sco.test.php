@@ -218,7 +218,7 @@ class ScoTestCase extends CakeTestCase {
 		$data['Presentation'][] = array(
     		'hideKey'	=> 'continue'
 		);
-		$data['ControlMode'] = array(
+		$data['Control'] = array(
     		'choiceExit'					=> 'false',
 			'choice'						=> 'true',
 			'flow'							=> 'false',
@@ -242,7 +242,7 @@ class ScoTestCase extends CakeTestCase {
 		$this->assertFalse(empty($results['Choice']));
 		$this->assertFalse(empty($results['Consideration']));
 		$this->assertEqual(2,count($results['Presentation']));
-		$this->assertFalse(empty($results['ControlMode']));
+		$this->assertFalse(empty($results['Control']));
 		$this->assertFalse(empty($results['DeliveryControl']));
 	}
 }

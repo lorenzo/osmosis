@@ -35,7 +35,7 @@ class Sco extends ScormAppModel {
 			'Consideration' => array('className' => 'RollupConsideration',
 								'foreignKey' => 'sco_id',
 								'dependent' => true),
-			'ControlMode' => array('className' => 'ControlMode',
+			'Control' => array('className' => 'ControlMode',
 								'foreignKey' => 'sco_id',
 								'dependent' => true),
 			'DeliveryControl' => array('className' => 'DeliveryControl',
@@ -184,15 +184,15 @@ class Sco extends ScormAppModel {
 				if(!$saved)
 					break;
 		}
-		if($saved && isset($data['ControlMode'])) {
-				$data['ControlMode']['sco_id'] = $this->getLastInsertId();
-				$saved = $this->ControlMode->save($data['ControlMode']);
+		if($saved && isset($data['Control'])) {
+				$data['Control']['sco_id'] =$this->getLastInsertId();
+				$saved = $this->Control->save($data['Control']);
 				if(!$saved)
 					break;
 		}
 		if($saved && isset($data['DeliveryControl'])) {
 				$data['DeliveryControl']['sco_id'] = $this->getLastInsertId();
-				$saved = $this->ControlMode->save($data['DeliveryControl']);
+				$saved = $this->DeliveryControl->save($data['DeliveryControl']);
 				if(!$saved)
 					break;
 		}

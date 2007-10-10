@@ -1101,6 +1101,9 @@ eof;
 			$this->TestObject->extractObjectiveData($parent1->children[0]),$objective_data);
 }
 
+    function testSave(){
+        $this->TestObject->findAll();
+    }
 
 /**Test function extractPresentation. */
 	function testExtractPresentation() {

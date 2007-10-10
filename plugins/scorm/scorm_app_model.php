@@ -1,7 +1,7 @@
 <?php
 define('IS_BOOLEAN', '/(true|false)/');
 
-class ScormAppModel extends Model {
+class ScormAppModel extends AppModel {
 	
 }
 ?>

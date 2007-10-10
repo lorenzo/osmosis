@@ -13,6 +13,7 @@ class Scorm extends ScormAppModel {
 			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
 		)
 	);
+	var $actsAs = array('transaction');
 	
 	/**
 	 * Returns whether there is a imsmanifest.xml file in a folder
@@ -527,6 +528,18 @@ class Scorm extends ScormAppModel {
 			return $this->getChildrenValue($metadata,'adlcp:location');
 		}
 		return null;
+	}
+	
+	
+	function save($data=null,$validate=true,$fields=array()) {
+		$this->begin();
+		$saved = parent::save($data,$validate,$fields);
+		if($saved) {
+			$this->commit();
+		} else {
+			$this->rollback();
+		}
+		return $saved;
 	}
 }
 ?>
