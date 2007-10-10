@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Oct 09, 2007 at 06:36 PM
+-- Generation Time: Oct 10, 2007 at 01:59 PM
 -- Server version: 5.0.38
 -- PHP Version: 5.2.1
 -- 
@@ -13,18 +13,50 @@
 -- --------------------------------------------------------
 
 -- 
+-- Table structure for table `choice_considerations`
+-- 
+
+CREATE TABLE `choice_considerations` (
+  `id` int(11) NOT NULL auto_increment,
+  `sco_id` int(11) NOT NULL,
+  `preventActivation` varchar(5) NOT NULL default 'false',
+  `constrainChoice` varchar(5) NOT NULL default 'false',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='choice_considerations' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
 -- Table structure for table `conditions`
 -- 
 
 CREATE TABLE `conditions` (
   `id` int(11) NOT NULL auto_increment,
-  `referencedObjective` varchar(255) default NULL,
-  `measureThreshold` varchar(7) default NULL,
-  `operator` varchar(4) default 'noOp',
-  `ruleCondition` varchar(27) NOT NULL,
+  `referencedObjective` varchar(255) character set latin1 default NULL,
+  `measureThreshold` varchar(7) character set latin1 default NULL,
+  `operator` varchar(4) character set latin1 default 'noOp',
+  `ruleCondition` varchar(27) character set latin1 NOT NULL,
   `rule_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `control_modes`
+-- 
+
+CREATE TABLE `control_modes` (
+  `id` int(11) NOT NULL auto_increment,
+  `sco_id` int(11) NOT NULL,
+  `choiceExit` varchar(5) NOT NULL default 'true',
+  `choice` varchar(5) NOT NULL default 'true',
+  `flow` varchar(5) NOT NULL default 'false',
+  `forwardOnly` varchar(5) NOT NULL default 'false',
+  `useCurrentAttemptObjectiveInfo` varchar(5) NOT NULL default 'true',
+  `useCurrentAttemptProgressInfo` varchar(5) NOT NULL default 'true',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='ControlMode: contenedor de información del sequencing' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -41,7 +73,22 @@ CREATE TABLE `courses` (
   `description` text collate utf8_unicode_ci NOT NULL,
   `created` date NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `delivery_controls`
+-- 
+
+CREATE TABLE `delivery_controls` (
+  `id` int(11) NOT NULL auto_increment,
+  `sco_id` int(11) NOT NULL,
+  `tracked` varchar(5) NOT NULL default 'true',
+  `completionSetByContent` varchar(5) NOT NULL default 'false',
+  `objectiveSetByContent` varchar(5) NOT NULL default 'false',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='DeliveryControl: secuencia que deben seguir las actividades' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -54,7 +101,7 @@ CREATE TABLE `departments` (
   `name` varchar(150) collate utf8_unicode_ci NOT NULL,
   `description` text collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -85,7 +132,7 @@ CREATE TABLE `objectives` (
   `satisfiedByMeasure` varchar(5) collate utf8_unicode_ci default 'false' COMMENT 'indicates that minNormalizedMeasure shall be used intead of other method',
   `minNormalizedMeasure` varchar(3) collate utf8_unicode_ci NOT NULL default '1.0' COMMENT 'identifies minimum satisfaction measure for the objective',
   `objectiveID` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'objective ID',
-  `primary` tinyint(1) NOT NULL default '0' COMMENT 'wheter is a primary objective or not',
+  `primary` tinyint(1) NOT NULL default '0' COMMENT 'indicates whether is a primary objective or not',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='identifies objectives that do not contribute to rollup assoc' AUTO_INCREMENT=1 ;
 
@@ -121,6 +168,23 @@ CREATE TABLE `randomizations` (
 -- --------------------------------------------------------
 
 -- 
+-- Table structure for table `rollup_considerations`
+-- 
+
+CREATE TABLE `rollup_considerations` (
+  `id` int(11) NOT NULL auto_increment,
+  `sco_id` int(11) NOT NULL,
+  `requiredForSatisfied` varchar(15) NOT NULL default 'always',
+  `requiredForNotSatisfied` varchar(15) NOT NULL default 'always',
+  `requiredForComplete` varchar(15) NOT NULL default 'always',
+  `requiredForIncomplete` varchar(15) NOT NULL default 'always',
+  `measureSatisfactionIfActive` varchar(5) NOT NULL default 'true',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='RollupConsideration:indican cuándo una actividad debe ser i' AUTO_INCREMENT=14 ;
+
+-- --------------------------------------------------------
+
+-- 
 -- Table structure for table `rollups`
 -- 
 
@@ -131,7 +195,7 @@ CREATE TABLE `rollups` (
   `rollupProgressCompletion` varchar(5) default 'true',
   `objectiveMeasureWeight` varchar(20) default '1.0000',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -149,17 +213,20 @@ CREATE TABLE `rules` (
   `minimumCount` varchar(5) default '0',
   `rollup_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `schema_info`
+-- Table structure for table `sco_presentations`
 -- 
 
-CREATE TABLE `schema_info` (
-  `version` int(10) unsigned NOT NULL default '0'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+CREATE TABLE `sco_presentations` (
+  `id` int(11) NOT NULL auto_increment,
+  `hideKey` varchar(10) NOT NULL,
+  `sco_id` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='SCOPresentation: información de la presentación de una act' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -205,62 +272,3 @@ CREATE TABLE `scos` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Holds each SCO from a SCORM package' AUTO_INCREMENT=1 ;
 
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `control_modes`
--- 
-
-CREATE TABLE `control_modes` (
-  `id` int(11) NOT NULL auto_increment,
-  `choiceExit` varchar(5) NOT NULL default 'true',
-  `choice` varchar(5) NOT NULL default 'true',
-  `flow` varchar(5) NOT NULL default 'false',
-  `forwardOnly` varchar(5) NOT NULL default 'false',
-  `useCurrentAttemptObjectiveInfo` varchar(5) NOT NULL default 'true',
-  `useCurrentAttemptProgressInfo` varchar(5) NOT NULL default 'true',
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='ControlMode: contenedor de información del sequencing' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `delivery_controls`
--- 
-
-CREATE TABLE `delivery_controls` (
-  `id` int(11) NOT NULL auto_increment,
-  `tracked` varchar(5) NOT NULL default 'true',
-  `completionSetByContent` varchar(5) NOT NULL default 'false',
-  `objectiveSetByContent` varchar(5) NOT NULL default 'false',
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='DeliveryControl: secuencia que deben seguir las actividades' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `rollup_considerations`
--- 
-
-CREATE TABLE `rollup_considerations` (
-  `id` int(11) NOT NULL auto_increment,
-  `requiredForSatisfied` varchar(15) NOT NULL default 'always',
-  `requiredForNotSatisfied` varchar(15) NOT NULL default 'always',
-  `requiredForComplete` varchar(15) NOT NULL default 'always',
-  `requiredForIncomplete` varchar(15) NOT NULL default 'always',
-  `measureSatisfactionIfActive` varchar(5) NOT NULL default 'true',
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='RollupConsideration:indican cuándo una actividad debe ser i' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `sco_presentations`
--- 
-
-CREATE TABLE `sco_presentations` (
-  `id` int(11) NOT NULL auto_increment,
-  `hideKey` varchar(10) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='SCOPresentation: información de la presentación de una act' AUTO_INCREMENT=1 ;

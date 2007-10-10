@@ -5,6 +5,7 @@ class DeliveryControlFixture extends CakeTestFixture {
     var $records = array(
     	array(
     		'id'						=> 1,
+    		'sco_id'                    => 1,
     		'tracked'					=> 'true',
 			'completionSetByContent'	=> 'false',
 			'objectiveSetByContent'		=> 'true'

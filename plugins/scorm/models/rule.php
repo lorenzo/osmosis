@@ -3,7 +3,7 @@ class Rule extends ScormAppModel {
 
 	var $name = 'Rule';
 	var $validate = null;
-
+    var $actsAs = array('transaction');
 	function __construct() {
 		parent::__construct();
 		$this->validate = array(
@@ -55,17 +55,6 @@ class Rule extends ScormAppModel {
 		);
 	}
 
-	var $belongsTo = array(
-		'Rollup' => array(
-			'className' => 'Rollup',
-			'foreignKey' => 'rollup_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'counterCache' => ''
-		)
-	);
-
 	var $hasMany = array(
 		'Condition' => array(
 			'className' => 'Condition',
@@ -91,6 +80,26 @@ class Rule extends ScormAppModel {
 			'rollup' => '/satisfied|notSatisfied|completed|incomplete/'
 		);
 		return preg_match($regexes[$type], $value);
+	}
+	
+	function save($data=null,$validate=true,$fields=array()) {
+		$this->begin();
+		$saved = parent::save($data,$validate,$fields);
+		if($saved && isset($data['Condition'])) {
+			foreach($data['Condition'] as $condition){
+				$condition['parent_id'] = $this->getLastInsertId();
+				$this->Condition->create();
+				$saved = $this->Condition->save($condition);
+				if(!$saved)
+					break;
+			}
+		}	
+		if($saved) {
+			$this->commit();
+		} else {
+			$this->rollback();
+		}
+		return $saved;
 	}
 
 }

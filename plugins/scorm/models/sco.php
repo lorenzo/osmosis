@@ -14,6 +14,9 @@ class Sco extends ScormAppModel {
 			'Rule' => array('className' => 'Rule',
 								'foreignKey' => 'sco_id',
 								'dependent' => true),
+			'Presentation' => array('className' => 'ScoPresentation',
+								'foreignKey' => 'sco_id',
+								'dependent' => true),
 	);
 	var $hasOne = array(
 			'PrimaryObjective' => array('className' => 'Objective',
@@ -26,6 +29,18 @@ class Sco extends ScormAppModel {
 			'Rollup' => array('className' => 'Rollup',
 								'foreignKey' => 'sco_id',
 								'dependent' => true),
+			'Choice' => array('className' => 'ChoiceConsideration',
+								'foreignKey' => 'sco_id',
+								'dependent' => true),
+			'Consideration' => array('className' => 'RollupConsideration',
+								'foreignKey' => 'sco_id',
+								'dependent' => true),
+			'ControlMode' => array('className' => 'ControlMode',
+								'foreignKey' => 'sco_id',
+								'dependent' => true),
+			'DeliveryControl' => array('className' => 'DeliveryControl',
+								'foreignKey' => 'sco_id',
+								'dependent' => true)
 	);
 	var $actsAs = array('transaction');
 	function __construct() {
@@ -157,6 +172,30 @@ class Sco extends ScormAppModel {
 				if(!$saved)
 					break;
 		}
+		if($saved && isset($data['Choice'])) {
+				$data['Choice']['sco_id'] = $this->getLastInsertId();
+				$saved = $this->Choice->save($data['Choice']);
+				if(!$saved)
+					break;
+		}
+		if($saved && isset($data['Consideration'])) {
+				$data['Consideration']['sco_id'] = $this->getLastInsertId();
+				$saved = $this->Consideration->save($data['Consideration']);
+				if(!$saved)
+					break;
+		}
+		if($saved && isset($data['ControlMode'])) {
+				$data['ControlMode']['sco_id'] = $this->getLastInsertId();
+				$saved = $this->ControlMode->save($data['ControlMode']);
+				if(!$saved)
+					break;
+		}
+		if($saved && isset($data['DeliveryControl'])) {
+				$data['DeliveryControl']['sco_id'] = $this->getLastInsertId();
+				$saved = $this->ControlMode->save($data['DeliveryControl']);
+				if(!$saved)
+					break;
+		}
 		if($saved && isset($data['Rule'])) {
 			foreach($data['Rule'] as $rule){
 				$rule['sco_id'] = $this->getLastInsertId();
@@ -166,6 +205,15 @@ class Sco extends ScormAppModel {
 					break;
 			}
 		}
+		if($saved && isset($data['Presentation'])) {
+			foreach($data['Presentation'] as $p){
+				$p['sco_id'] = $this->getLastInsertId();
+				$this->Presentation->create();
+				$saved = $this->Presentation->save($p);
+				if(!$saved)
+					break;
+			}
+		}	
 		if($saved) {
 			$this->commit();
 		} else {

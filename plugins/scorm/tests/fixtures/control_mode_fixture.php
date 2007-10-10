@@ -5,6 +5,7 @@ class ControlModeFixture extends CakeTestFixture {
     var $records = array(
     	array(
     		'id'							=> 1,
+    		'sco_id'                        => 1,
     		'choiceExit'					=> 'false',
 			'choice'						=> 'true',
 			'flow'							=> 'false',

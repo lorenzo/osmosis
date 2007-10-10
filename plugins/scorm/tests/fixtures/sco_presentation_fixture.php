@@ -5,6 +5,7 @@ class ScoPresentationFixture extends CakeTestFixture {
     var $records = array(
     	array(
     		'id'				=> 1,
+    		'sco_id'    => 1,
     		'hideKey'	=> 'previous'
 		),
     );

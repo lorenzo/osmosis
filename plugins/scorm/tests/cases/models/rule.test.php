@@ -164,7 +164,7 @@ class RuleTestCase extends CakeTestCase {
 		$expectedData = array(
 			'Rule' => Set::merge(
 				$data,
-				array('id' => $last_id, 'rollup_id' => '') 
+				array('id' => $last_id, 'rollup_id' => '','sco_id'=>'') 
 			),
 			'Rollup' => array(),
 			'Condition' => array()

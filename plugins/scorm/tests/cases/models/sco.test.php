@@ -6,9 +6,24 @@ loadModel('scorm.Randomization');
 loadModel('scorm.Rollup');
 loadModel('scorm.Rule');
 loadModel('scorm.Condition');
+loadModel('scorm.ChoiceConsideration');
+loadModel('scorm.RollupConsideration');
+loadModel('scorm.ScoPresentation');
+loadModel('scorm.ControlMode');
+loadModel('scorm.DeliveryControl');
 class ScoTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('scorm','sco','objective','randomization','rollup','rule');
+	var $fixtures = array('scorm',
+                        	'sco',
+                        	'objective',
+                        	'randomization',
+                        	'rollup',
+                        	'rule',
+                        	'choice_consideration',
+                        	'rollup_consideration',
+                        	'sco_presentation',
+                        	'control_mode',
+                        	'delivery_control');
 
 	function setUp() {
 		$this->TestObject = new Sco();
@@ -26,6 +41,15 @@ class ScoTestCase extends CakeTestCase {
 		$this->TestObject->Rollup->tablePrefix = 'test_suite_';
 		$this->TestObject->Rule->useDbConfig = 'test_suite';
 		$this->TestObject->Rule->tablePrefix = 'test_suite_';
+		$this->TestObject->Choice->useDbConfig = 'test_suite';
+		$this->TestObject->Choice->tablePrefix = 'test_suite_';
+		$this->TestObject->Presentation->useDbConfig = 'test_suite';
+		$this->TestObject->Presentation->tablePrefix = 'test_suite_';
+		$this->TestObject->ControlMode->useDbConfig = 'test_suite';
+		$this->TestObject->ControlMode->tablePrefix = 'test_suite_';
+		$this->TestObject->DeliveryControl->useDbConfig = 'test_suite';
+		$this->TestObject->DeliveryControl->tablePrefix = 'test_suite_';
+		
 	}
 
 	function tearDown() {
@@ -173,9 +197,39 @@ class ScoTestCase extends CakeTestCase {
 		$data['Rule'][] = array(
 			'type'				=> 'post',
 			'conditionCombination'	=> 'any',
-			'action'				=> 'disabled',
+			'action'				=> 'retry',
 			'minimumPercent'		=> '0.0000',
 			'minimumCount'			=> '1'
+		);
+		$data['Choice'] = array(
+    		'preventActivation'	=> 'true',
+    		'constrainChoice'	=> 'false'
+		);
+		$data['Consideration'] = array(
+			'requiredForSatisfied'		=> 'always',
+			'requiredForNotSatisfied'	=> 'ifAttempted',
+			'requiredForComplete'		=> 'ifNotSkipped',
+			'requiredForIncomplete'		=> 'ifNotSuspended',
+			'measureSatisfactionIfActive'=> 'true',
+		);
+		$data['Presentation'][] = array(
+    		'hideKey'	=> 'previous'
+		);
+		$data['Presentation'][] = array(
+    		'hideKey'	=> 'continue'
+		);
+		$data['ControlMode'] = array(
+    		'choiceExit'					=> 'false',
+			'choice'						=> 'true',
+			'flow'							=> 'false',
+			'forwardOnly'					=> 'false',
+			'useCurrentAttemptObjectiveInfo'=> 'true',
+			'useCurrentAttemptProgressInfo'	=> 'true'
+		);
+		$data['DeliveryControl'] = array(
+    		'tracked'					=> 'true',
+			'completionSetByContent'	=> 'false',
+			'objectiveSetByContent'		=> 'true'
 		);
 		$this->TestObject->save($data);
 		$this->assertEqual(3,$this->TestObject->findCount());
@@ -185,6 +239,11 @@ class ScoTestCase extends CakeTestCase {
 		$this->assertFalse(empty($results['PrimaryObjective']));
 		$this->assertFalse(empty($results['Randomization']));
 		$this->assertEqual(2,count($results['Rule']));
+		$this->assertFalse(empty($results['Choice']));
+		$this->assertFalse(empty($results['Consideration']));
+		$this->assertEqual(2,count($results['Presentation']));
+		$this->assertFalse(empty($results['ControlMode']));
+		$this->assertFalse(empty($results['DeliveryControl']));
 	}
 }
 ?>
