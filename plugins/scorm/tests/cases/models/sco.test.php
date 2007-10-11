@@ -122,6 +122,7 @@ class ScoTestCase extends CakeTestCase {
 	function testSave() {
 		$data = array(
     		'manifest'			=> 'ASDGSDS-SDFSADAS',
+    		'scorm_id'            => 1,
     		'organization'		=> 'DMCQ',
     		'identifier'		=> 'CDADASA-GSDGDEG-HRETSAS-SDSDSD',
     		'href'				=> 'index.html',
@@ -143,6 +144,7 @@ class ScoTestCase extends CakeTestCase {
 		$data['Sco'] = array(
     		'manifest'			=> 'ASDGSDS-SDFSADAS',
     		'organization'		=> 'DMCQ',
+    		'scorm_id'            => 1,
     		'identifier'		=> 'CDADASA-GSDGDEG-HRETSAS-SDSDSD',
     		'title'				=> 'First sco',
     		'completionThreshold' => '1.5',

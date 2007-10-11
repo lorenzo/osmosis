@@ -555,6 +555,7 @@ class Scorm extends ScormAppModel {
 		            $this->Sco->create();
 		            $sco['organization'] = $org['identifier'];
 		            $sco['manifest'] = $data['Scorm']['identifier'];
+		            $sco['scorm_id'] = $this->getLastInsertId();
 		            $saved = $this->Sco->save($sco);
 		            if(!$saved)
 					    break;

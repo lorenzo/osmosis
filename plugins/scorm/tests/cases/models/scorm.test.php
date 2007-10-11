@@ -1175,6 +1175,7 @@ $this->assertEqual($this->TestObject->extractPresentation($parent1),$presentatio
 		$this->assertTrue($this->TestObject->parseManifest(TMP.'tests'));
 		$this->TestObject->save($data);
         $this->assertEqual(2,$this->TestObject->findCount());
+        $this->assertEqual(324,$this->TestObject->Sco->findCount(array('scorm_id'=>$this->TestObject->getLastInsertId())));
     }
 }
 ?>

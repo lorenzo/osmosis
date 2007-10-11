@@ -137,11 +137,13 @@ class Sco extends ScormAppModel {
 		$saved = parent::save($data,$validate,$fields);
 		$organization = isset($data['Sco']) ? $data['Sco']['organization'] : $data['organization'];
 		$manifest = isset($data['Sco']) ? $data['Sco']['manifest'] : $data['manifest'];
+		$scorm = isset($data['Sco']) ? $data['Sco']['scorm_id'] : $data['scorm_id'];
 		if($saved && isset($data['SubItem'])) {
 			foreach($data['SubItem'] as $sco){
 				$sco['parent_id'] = $this->getLastInsertId();
 				$sco['organization'] = $manifest;
 				$sco['manifest'] = $manifest;
+				$sco['scorm_id'] = $scorm;
 				$this->SubItem->create();
 				$saved = $this->SubItem->save($sco);
 				if(!$saved)
