@@ -998,77 +998,74 @@ eof;
 	$this->assertEqual($this->TestObject->extractSeqRules($parent1),$seq_rules);
 	
 	}
-	
-/**Test function extractRulesData. */
+
+	/**Test function extractRulesData. */
 	function testExtractRulesData() {
-$xml = <<<eof
-	<imsss:preConditionRule>
-			<imsss:ruleConditions conditionCombination="any">
-				<imsss:ruleCondition 
-					referencedObjective = "some_objective_ID"
-					measureThreshold = "0.5000"
-					operator = "noOp"
-					condition = "satisfied"/>
-				<imsss:ruleCondition 
-					referencedObjective = "some_other_objective_ID"
-					measureThreshold = "0.3000"
-					operator = "noOp"
-					condition = "satisfied"/>
-				</imsss:ruleConditions>
-			<imsss:ruleAction action = "disabled"/>
-	</imsss:preConditionRule>
+		$xml = <<<eof
+			<imsss:preConditionRule>
+				<imsss:ruleConditions conditionCombination="any">
+					<imsss:ruleCondition 
+						referencedObjective = "some_objective_ID"
+						measureThreshold = "0.5000"
+						operator = "noOp"
+						condition = "satisfied"/>
+					<imsss:ruleCondition 
+						referencedObjective = "some_other_objective_ID"
+						measureThreshold = "0.3000"
+						operator = "noOp"
+						condition = "satisfied"/>
+					</imsss:ruleConditions>
+				<imsss:ruleAction action = "disabled"/>
+			</imsss:preConditionRule>
 eof;
-	$parent1 = $this->TestObject->__getXMLParser();
-	$parent1->load($xml);
-	$rules_data = array (
-	'Condition' => array (
-			'conditionCombination' => 'any',
+		$parent1 = $this->TestObject->__getXMLParser();
+		$parent1->load($xml);
+		$rules_data = array (
+			'Condition' => array (
+				'conditionCombination' => 'any',
 				array (
 					'referencedObjective' => 'some_objective_ID',
 					'measureThreshold' => '0.5000',
 					'operator' => 'noOp',
 					'condition' => 'satisfied'
-					),
-
+				),
 				array (
 					'referencedObjective' => 'some_other_objective_ID',
 					'measureThreshold' => '0.3000',
 					'operator' => 'noOp',
 					'condition' => 'satisfied',
-					)
+				)
 			),
-
-	'Action' => array (
-			'action' => 'disabled',
+			'Action' => array (
+				'action' => 'disabled',
 			)
-	);
-	$this->assertEqual($this->TestObject->extractRulesData($parent1->children[0],'rule'),$rules_data);
+		);
+		$this->assertEqual($this->TestObject->extractRulesData($parent1->children[0],'rule'),$rules_data);
 	}
 
-
-/**Test function extractObjectives. */
+	/**Test function extractObjectives. */
 	function testExtractObjectives() {
-$xml = <<<eof
-	<imsss:objectives>
+		$xml = <<<eof
+			<imsss:objectives>
 				<imsss:primaryObjective 
 						objectiveID = "PRIMARYOBJ" 
 						satisfiedByMeasure = "true">
 					<imsss:minNormalizedMeasure>0.6</imsss:minNormalizedMeasure>
 						<imsss:mapInfo
-						targetObjectiveID = "obj_module_1"
-						readSatisfiedStatus="false"
-						readNormalizedMeasure = "false"
-						writeSatisfiedStatus = "true"
-						WriteNormalizedMeasure="false"/>
-					</imsss:primaryObjective>
+							targetObjectiveID = "obj_module_1"
+							readSatisfiedStatus="false"
+							readNormalizedMeasure = "false"
+							writeSatisfiedStatus = "true"
+							WriteNormalizedMeasure="false"/>
+				</imsss:primaryObjective>
 				<imsss:objective satisfiedByMeasure = "false" objectiveID="obj_module_1">
 					<imsss:mapInfo 
 						targetObjectiveID="obj_module_1"
-					readSatisfiedStatus = "false"
-					readNormalizedMeasure = "false"
-					writeSatisfiedStatus = "true" />
+						readSatisfiedStatus = "false"
+						readNormalizedMeasure = "false"
+						writeSatisfiedStatus = "true" />
 				</imsss:objective>
-	</imsss:objectives>
+		</imsss:objectives>
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);	
@@ -1105,77 +1102,76 @@ eof;
 	$this->assertEqual($this->TestObject->extractObjectives($parent1->children[0]),$objectives);
 	}
 
-
-/**Test function extractObjectiveData. */
+	/**Test function extractObjectiveData. */
 	function testExtractObjectiveData(){
-$xml = <<<eof
-	<imsss:primaryObjective 
-		objectiveID = "PRIMARYOBJ" 
-		satisfiedByMeasure = "true">
-			<imsss:minNormalizedMeasure>0.6</imsss:minNormalizedMeasure>
-				<imsss:mapInfo
-					targetObjectiveID = "obj_module_1"
-					readSatisfiedStatus="false"
-					readNormalizedMeasure = "false"
-					writeSatisfiedStatus = "true"
-					WriteNormalizedMeasure="false"/>
-	</imsss:primaryObjective>
+		$xml = <<<eof
+			<imsss:primaryObjective 
+				objectiveID = "PRIMARYOBJ" 
+				satisfiedByMeasure = "true">
+					<imsss:minNormalizedMeasure>0.6</imsss:minNormalizedMeasure>
+						<imsss:mapInfo
+							targetObjectiveID = "obj_module_1"
+							readSatisfiedStatus="false"
+							readNormalizedMeasure = "false"
+							writeSatisfiedStatus = "true"
+							WriteNormalizedMeasure="false"/>
+			</imsss:primaryObjective>
 eof;
 	$parent1 = $this->TestObject->__getXMLParser();
-	$parent1->load($xml);	
+	$parent1->load($xml);
 	$objective_data = array (
-	'objectiveID' => 'PRIMARYOBJ',
-	'satisfiedByMeasure' => 'true',
-	'minNormalizedMeasure' => '0.6',
-	'mapInfo' => array (
-			 		array (
-					'targetObjectiveID' => 'obj_module_1',
-					'readSatisfiedStatus' => 'false',
-					'readNormalizedMeasure' => 'false',
-					'writeSatisfiedStatus' => 'true',
-					'WriteNormalizedMeasure' => 'false'
-						)
-
-					)
-			);
+		'objectiveID' => 'PRIMARYOBJ',
+		'satisfiedByMeasure' => 'true',
+		'minNormalizedMeasure' => '0.6',
+		'mapInfo' => array (
+			array (
+				'targetObjectiveID' => 'obj_module_1',
+				'readSatisfiedStatus' => 'false',
+				'readNormalizedMeasure' => 'false',
+				'writeSatisfiedStatus' => 'true',
+				'WriteNormalizedMeasure' => 'false'
+			)
+		)
+	);
 	$this->assertEqual(
-			$this->TestObject->extractObjectiveData($parent1->children[0]),$objective_data);
+		$this->TestObject->extractObjectiveData($parent1->children[0]),
+		$objective_data
+	);
 }
 
-
-/**Test function extractPresentation. */
+	/**Test function extractPresentation. */
 	function testExtractPresentation() {
-$xml = <<<eof
-	 <adlnav:presentation>
-			<adlnav:navigationInterface>
-			  <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
-			  <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
-			</adlnav:navigationInterface>
+		$xml = <<<eof
+			<adlnav:presentation>
+				<adlnav:navigationInterface>
+					<adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+					<adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+				</adlnav:navigationInterface>
 			</adlnav:presentation>
 eof;
-$parent1 = $this->TestObject->__getXMLParser();
-$parent1->load($xml);	
-$presentation = array (
-				'continue', 
-				'previous'
-				);
-$this->assertEqual($this->TestObject->extractPresentation($parent1),$presentation);
+		$parent1 = $this->TestObject->__getXMLParser();
+		$parent1->load($xml);
+		$presentation = array (
+			'continue', 
+			'previous'
+		);
+		$this->assertEqual($this->TestObject->extractPresentation($parent1),$presentation);
 	}
-	
-	 function testSave(){
-	    $data['Scorm'] = array(
-    		'course_id'	=>	1,
-    		'name'	=> 'testScorm',
-    		'file_name' => 'ScromTest.zip',
-    		'description' => 'A scorm test_suite',
-    		'created' => '2007-1-1',
-    		'modified'	=> '2007-1-1',
-    		'hash'		=> 'slsdaslkfwerew498fwlw'
+
+	function testSave(){
+		$data['Scorm'] = array(
+			'course_id'		=> 1,
+			'name'		=> 'testScorm',
+			'file_name'		=> 'ScromTest.zip',
+			'description'	=> 'A scorm test_suite',
+			'created'		=> '2007-1-1',
+			'modified'		=> '2007-1-1',
+			'hash'		=> 'slsdaslkfwerew498fwlw'
 		);
 		$this->assertTrue($this->TestObject->parseManifest(TMP.'tests'));
 		$this->TestObject->save($data);
-        $this->assertEqual(2,$this->TestObject->findCount());
-        $this->assertEqual(324,$this->TestObject->Sco->findCount(array('scorm_id'=>$this->TestObject->getLastInsertId())));
-    }
+		$this->assertEqual(2,$this->TestObject->findCount());
+		$this->assertEqual(324,$this->TestObject->Sco->findCount(array('scorm_id'=>$this->TestObject->getLastInsertId())));
+	}
 }
 ?>

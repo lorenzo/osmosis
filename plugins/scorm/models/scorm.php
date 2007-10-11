@@ -336,6 +336,7 @@ class Scorm extends ScormAppModel {
 		if ($name == 'rollup') {
 			$data['RollUpRules'] = $node->attributes;
 			$node = $node->children("imsss:{$name}Rule");
+			if ($node==null) return $data;
 			$node = $node[0];
 		}
 		$conditions = $node->children("imsss:{$name}Conditions");

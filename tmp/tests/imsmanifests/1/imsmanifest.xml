@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns="http://www.imsglobal.org/xsd/imscp_v1p1" xmlns:lom="http://ltsc.ieee.org/xsd/LOM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_v1p3" xmlns:imsss="http://www.imsglobal.org/xsd/imsss" xmlns:adlnav="http://www.adlnet.org/xsd/adlnav_v1p3" identifier="MANIFEST-FDC59F51-B25F-70CF-3923-B549F45F83F0" xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 imscp_v1p1.xsd http://ltsc.ieee.org/xsd/LOM lom.xsd http://www.adlnet.org/xsd/adlcp_v1p3 adlcp_v1p3.xsd http://www.imsglobal.org/xsd/imsss imsss_v1p0.xsd http://www.adlnet.org/xsd/adlnav_v1p3 adlnav_v1p3.xsd" version="1.3">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>2004 3rd Edition</schemaversion>
+  </metadata>
+  <organizations default="ORG-AAE040C6-5D31-FF80-7A74-C93346D3DE42">
+    <organization identifier="ORG-AAE040C6-5D31-FF80-7A74-C93346D3DE42" structure="hierarchical">
+      <title>SCORM 2004 3rd Edition Sequencing Essentials Content Example 1.1</title>
+      <item identifier="ITEM-C2D1FAF9-FF04-07BD-9A28-CDC8DC6EC0B8" isvisible="true" identifierref="RES-65C9FBA6-5173-A9A8-C1A0-FE9EDFAB4788">
+        <title>Introduction</title>
+        <adlnav:presentation>
+          <adlnav:navigationInterface>
+            <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+            <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+          </adlnav:navigationInterface>
+        </adlnav:presentation>
+        <imsss:sequencing>
+          <imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false" useCurrentAttemptObjectiveInfo="true" useCurrentAttemptProgressInfo="true" />
+        </imsss:sequencing>
+      </item>
+      <item identifier="ITEM-231E0CBA-AA25-A2B1-3D5D-8B2B8AF1F819" isvisible="true" identifierref="RES-8EB166DA-A6B5-CEFA-7F8D-10AB9BAA6151">
+        <title>Sequencing Terms</title>
+        <adlnav:presentation>
+          <adlnav:navigationInterface>
+            <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+            <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+          </adlnav:navigationInterface>
+        </adlnav:presentation>
+        <imsss:sequencing>
+          <imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false" useCurrentAttemptObjectiveInfo="true" useCurrentAttemptProgressInfo="true" />
+        </imsss:sequencing>
+      </item>
+      <item identifier="ITEM-A52F015C-D98D-13A3-040B-4A6DD3AC6421" isvisible="true" identifierref="RES-6AFF8BC5-8B84-1B79-151E-A4F99718ACE8">
+        <title>The Tracking Model</title>
+        <adlnav:presentation>
+          <adlnav:navigationInterface>
+            <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+            <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+          </adlnav:navigationInterface>
+        </adlnav:presentation>
+        <imsss:sequencing>
+          <imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false" useCurrentAttemptObjectiveInfo="true" useCurrentAttemptProgressInfo="true" />
+        </imsss:sequencing>
+      </item>
+      <item identifier="ITEM-89D2EBA5-91A4-D04E-EDA5-8541CA5077C0" isvisible="true" identifierref="RES-D33C3500-4541-BB47-9774-0C815CFB30E9">
+        <title>Sequencing Control Modes</title>
+        <adlnav:presentation>
+          <adlnav:navigationInterface>
+            <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+            <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+          </adlnav:navigationInterface>
+        </adlnav:presentation>
+        <imsss:sequencing>
+          <imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false" useCurrentAttemptObjectiveInfo="true" useCurrentAttemptProgressInfo="true" />
+        </imsss:sequencing>
+      </item>
+      <item identifier="ITEM-50905A28-2551-3016-F584-3E58232266C5" isvisible="true" identifierref="RES-1049C360-6473-4FBE-5C3D-2FB7894291FD">
+        <title>Constrained Choice</title>
+        <adlnav:presentation>
+          <adlnav:navigationInterface>
+            <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+            <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+          </adlnav:navigationInterface>
+        </adlnav:presentation>
+        <imsss:sequencing>
+          <imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false" useCurrentAttemptObjectiveInfo="true" useCurrentAttemptProgressInfo="true" />
+        </imsss:sequencing>
+      </item>
+      <item identifier="ITEM-DFEE9C6A-CB3F-FC3C-6361-C3346BEE6B21" isvisible="true" identifierref="RES-7CE20F53-C192-51DF-873B-D1201ABE35DE">
+        <title>Sequencing Rules Overview</title>
+        <adlnav:presentation>
+          <adlnav:navigationInterface>
+            <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+            <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+          </adlnav:navigationInterface>
+        </adlnav:presentation>
+        <imsss:sequencing>
+          <imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false" useCurrentAttemptObjectiveInfo="true" useCurrentAttemptProgressInfo="true" />
+        </imsss:sequencing>
+      </item>
+      <item identifier="ITEM-EC3ED913-3442-6D93-643F-56BFA5E3FBFA" isvisible="true" identifierref="RES-A083AD23-0D9D-5022-9B75-A4EE09A1C29C">
+        <title>Limit Conditions</title>
+        <adlnav:presentation>
+          <adlnav:navigationInterface>
+            <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+            <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+          </adlnav:navigationInterface>
+        </adlnav:presentation>
+        <imsss:sequencing>
+          <imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false" useCurrentAttemptObjectiveInfo="true" useCurrentAttemptProgressInfo="true" />
+        </imsss:sequencing>
+      </item>
+
+      <item identifier="ITEM-E99115F0-D4CF-7229-10F2-B96F18D1D771" isvisible="true" identifierref="RES-7E7A3EA4-0113-CA7D-17B0-7C71422E700B">
+        <title>Rollup Overview</title>
+        <adlnav:presentation>
+          <adlnav:navigationInterface>
+            <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+            <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+          </adlnav:navigationInterface>
+        </adlnav:presentation>
+        <imsss:sequencing>
+          <imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false" useCurrentAttemptObjectiveInfo="true" useCurrentAttemptProgressInfo="true" />
+        </imsss:sequencing>
+      </item>
+
+	  <item identifier="ITEM-8A3D8BF0-F47A-B6F2-0A62-01E712CAE37E" isvisible="true" identifierref="RES-F813D8EC-1806-8653-B793-513E9AFC6D04">
+        <title>Rollup Rules</title>
+        <adlnav:presentation>
+          <adlnav:navigationInterface>
+            <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+            <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+          </adlnav:navigationInterface>
+        </adlnav:presentation>
+        <imsss:sequencing>
+          <imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false" useCurrentAttemptObjectiveInfo="true" useCurrentAttemptProgressInfo="true" />
+        </imsss:sequencing>
+      </item>
+
+      <item identifier="ITEM-69BD40F3-0A2C-1F6D-B562-2DD56FE4BD35" isvisible="true" identifierref="RES-0A23028C-4AF5-1A9F-2D9E-6554F4F392EA">
+        <title>Sequencing Objectives</title>
+        <adlnav:presentation>
+          <adlnav:navigationInterface>
+            <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+            <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+          </adlnav:navigationInterface>
+        </adlnav:presentation>
+        <imsss:sequencing>
+          <imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false" useCurrentAttemptObjectiveInfo="true" useCurrentAttemptProgressInfo="true" />
+        </imsss:sequencing>
+      </item>
+
+
+      <item identifier="ITEM-29BD2C69-846C-ED58-44B3-4A65D77A08B6" isvisible="true" identifierref="RES-884C6B7F-FA45-B872-AF75-7A2230757FEC">
+        <title>Conclusion</title>
+        <adlnav:presentation>
+          <adlnav:navigationInterface>
+            <adlnav:hideLMSUI>continue</adlnav:hideLMSUI>
+            <adlnav:hideLMSUI>previous</adlnav:hideLMSUI>
+          </adlnav:navigationInterface>
+        </adlnav:presentation>
+        <imsss:sequencing>
+          <imsss:controlMode choice="true" choiceExit="true" flow="false" forwardOnly="false" useCurrentAttemptObjectiveInfo="true" useCurrentAttemptProgressInfo="true" />
+          <imsss:sequencingRules>
+            <imsss:postConditionRule>
+              <imsss:ruleConditions conditionCombination="all">
+                <imsss:ruleCondition operator="noOp" condition="attempted" />
+              </imsss:ruleConditions>
+              <imsss:ruleAction action="exitAll" />
+            </imsss:postConditionRule>
+          </imsss:sequencingRules>
+          <imsss:rollupRules objectiveMeasureWeight="1.0000" />
+        </imsss:sequencing>
+      </item>
+      <imsss:sequencing>
+        <imsss:controlMode choice="true" choiceExit="true" flow="true" forwardOnly="false" useCurrentAttemptObjectiveInfo="true" useCurrentAttemptProgressInfo="true" />
+      </imsss:sequencing>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-65C9FBA6-5173-A9A8-C1A0-FE9EDFAB4788" type="webcontent" href="Introduction/Introduction.html" adlcp:scormType="sco">
+      <file href="Introduction/Introduction.html" />
+      <dependency identifierref="RES-E6C525FC-6B51-6E14-5B91-46B8F1D0A10A" />
+    </resource>
+    <resource identifier="RES-8EB166DA-A6B5-CEFA-7F8D-10AB9BAA6151" type="webcontent" href="Sequencing%20Terms/SequencingTerms.html" adlcp:scormType="sco">
+      <file href="Sequencing%20Terms/SequencingTerms.html" />
+      <file href="Sequencing%20Terms/flash/st1.swf" />
+      <file href="Sequencing%20Terms/images/st3.jpg" />
+      <file href="Sequencing%20Terms/flash/st4.swf" />
+      <file href="Sequencing%20Terms/flash/st5.swf" />
+      <file href="Sequencing%20Terms/flash/st7.swf" />
+      <dependency identifierref="RES-E6C525FC-6B51-6E14-5B91-46B8F1D0A10A" />
+    </resource>
+    <resource identifier="RES-6AFF8BC5-8B84-1B79-151E-A4F99718ACE8" type="webcontent" href="The%20Tracking%20Model/TheTrackingModel.html" adlcp:scormType="sco">
+      <file href="The%20Tracking%20Model/TheTrackingModel.html" />
+      <file href="The%20Tracking%20Model/images/tm1.jpg" />
+      <file href="The%20Tracking%20Model/flash/tm2.swf" />
+      <file href="The%20Tracking%20Model/images/tm3.jpg" />
+      <file href="The%20Tracking%20Model/images/tm6.jpg" />
+      <file href="The%20Tracking%20Model/images/tm8.jpg" />
+      <file href="The%20Tracking%20Model/flash/tm11.swf" />
+      <file href="The%20Tracking%20Model/flash/tm12.swf" />
+      <file href="The%20Tracking%20Model/images/tm13.jpg" />
+      <dependency identifierref="RES-E6C525FC-6B51-6E14-5B91-46B8F1D0A10A" />
+    </resource>
+    <resource identifier="RES-A083AD23-0D9D-5022-9B75-A4EE09A1C29C" type="webcontent" href="Limit%20Conditions/LimitConditions.html" adlcp:scormType="sco">
+      <file href="Limit%20Conditions/LimitConditions.html" />
+      <file href="Limit%20Conditions/images/lc2.jpg" />
+      <dependency identifierref="RES-E6C525FC-6B51-6E14-5B91-46B8F1D0A10A" />
+    </resource>
+    <resource identifier="RES-D33C3500-4541-BB47-9774-0C815CFB30E9" type="webcontent" href="Sequencing%20Control%20Modes/SequencingControlModes.html" adlcp:scormType="sco">
+      <file href="Sequencing%20Control%20Modes/SequencingControlModes.html" />
+      <file href="Sequencing%20Control%20Modes/images/scm3.jpg" />
+      <file href="Sequencing%20Control%20Modes/flash/scm4.swf" />
+      <file href="Sequencing%20Control%20Modes/images/scm5.jpg" />
+      <file href="Sequencing%20Control%20Modes/images/scm6.jpg" />
+      <file href="Sequencing%20Control%20Modes/images/scm7.jpg" />
+      <file href="Sequencing%20Control%20Modes/images/scm8.jpg" />
+      <file href="Sequencing%20Control%20Modes/images/scm9.jpg" />
+      <file href="Sequencing%20Control%20Modes/images/scm10.jpg" />
+      <dependency identifierref="RES-E6C525FC-6B51-6E14-5B91-46B8F1D0A10A" />
+    </resource>
+    <resource identifier="RES-1049C360-6473-4FBE-5C3D-2FB7894291FD" type="webcontent" href="Constrained%20Choice/ConstrainedChoice.html" adlcp:scormType="sco">
+      <file href="Constrained%20Choice/ConstrainedChoice.html" />
+      <file href="Constrained%20Choice/flash/cc2.swf" />
+      <file href="Constrained%20Choice/images/cc3.jpg" />
+      <file href="Constrained%20Choice/images/cc4.jpg" />
+      <file href="Constrained%20Choice/images/cc5.jpg" />
+    </resource>
+    <resource identifier="RES-7CE20F53-C192-51DF-873B-D1201ABE35DE" type="webcontent" href="Sequencing%20Rules%20Overview/SequencingRulesOverview.html" adlcp:scormType="sco">
+      <file href="Sequencing%20Rules%20Overview/SequencingRulesOverview.html" />
+      <file href="Sequencing%20Rules%20Overview/images/sro2.jpg" />
+      <file href="Sequencing%20Rules%20Overview/images/sro3.jpg" />
+      <file href="Sequencing%20Rules%20Overview/images/sro4.jpg" />
+      <file href="Sequencing%20Rules%20Overview/images/sro8.jpg" />
+      <file href="Sequencing%20Rules%20Overview/images/sro9.jpg" />
+      <file href="Sequencing%20Rules%20Overview/images/sro10.jpg" />
+      <dependency identifierref="RES-E6C525FC-6B51-6E14-5B91-46B8F1D0A10A" />
+    </resource>
+    <resource identifier="RES-7E7A3EA4-0113-CA7D-17B0-7C71422E700B" type="webcontent" href="Rollup%20Overview/RollupOverview.html" adlcp:scormType="sco">
+      <file href="Rollup%20Overview/RollupOverview.html" />
+      <file href="Rollup%20Overview/images/ro2.jpg" />
+      <file href="Rollup%20Overview/images/ro3.jpg" />
+      <dependency identifierref="RES-E6C525FC-6B51-6E14-5B91-46B8F1D0A10A" />
+    </resource>
+    <resource identifier="RES-F813D8EC-1806-8653-B793-513E9AFC6D04" type="webcontent" href="Rollup%20Rules/RollupRules.html" adlcp:scormType="sco">
+      <file href="Rollup%20Rules/RollupRules.html" />
+      <file href="Rollup%20Rules/images/rr1.jpg" />
+      <file href="Rollup%20Rules/images/rr4.jpg" />
+      <file href="Rollup%20Rules/images/rr5.jpg" />
+      <file href="Rollup%20Rules/images/rr6.jpg" />
+      <file href="Rollup%20Rules/images/rr8.jpg" />
+      <file href="Rollup%20Rules/images/rr9.jpg" />
+      <dependency identifierref="RES-E6C525FC-6B51-6E14-5B91-46B8F1D0A10A" />
+    </resource>
+	    <resource identifier="RES-0A23028C-4AF5-1A9F-2D9E-6554F4F392EA" type="webcontent" href="Sequencing%20Objectives/SequencingObjectives.html" adlcp:scormType="sco">
+      <file href="Sequencing%20Objectives/SequencingObjectives.html" />
+      <file href="Sequencing%20Objectives/images/so2.jpg" />
+      <file href="Sequencing%20Objectives/images/so3.jpg" />
+      <file href="Sequencing%20Objectives/images/so4.jpg" />
+      <file href="Sequencing%20Objectives/images/so6.jpg" />
+      <dependency identifierref="RES-E6C525FC-6B51-6E14-5B91-46B8F1D0A10A" />
+    </resource>
+    <resource identifier="RES-884C6B7F-FA45-B872-AF75-7A2230757FEC" type="webcontent" href="Conclusion/Conclusion.html" adlcp:scormType="sco">
+      <file href="Conclusion/Conclusion.html" />
+      <dependency identifierref="RES-E6C525FC-6B51-6E14-5B91-46B8F1D0A10A" />
+    </resource>
+    <resource identifier="RES-E6C525FC-6B51-6E14-5B91-46B8F1D0A10A" type="webcontent" adlcp:scormType="asset">
+      <file href="Shared%20Files/scripts/APIWrapper.js" />
+      <file href="Shared%20Files/scripts/courseFunctions.js" />
+	  <file href="Shared%20Files/images/bottom.gif" />
+      <file href="Shared%20Files/images/next.gif" />
+      <file href="Shared%20Files/images/next_rollover.gif" />
+      <file href="Shared%20Files/images/previous.gif" />
+      <file href="Shared%20Files/images/previous_rollover.gif" />
+      <file href="Shared%20Files/images/top.gif" />
+      <file href="Shared%20Files/css/snstyle.css" />
+    </resource>
+  </resources>
+</manifest>
+
