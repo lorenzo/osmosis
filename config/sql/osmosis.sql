@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Oct 10, 2007 at 01:59 PM
+-- Generation Time: Oct 11, 2007 at 04:07 PM
 -- Server version: 5.0.38
 -- PHP Version: 5.2.1
 -- 
@@ -118,7 +118,7 @@ CREATE TABLE `map_infos` (
   `writeSatisfiedStatus` varchar(5) collate utf8_unicode_ci default 'false',
   `writeNormalizedMeasure` varchar(5) collate utf8_unicode_ci default 'false',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents the mapping of an activity’s objective' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents the mapping of an activity’s objective' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -180,7 +180,7 @@ CREATE TABLE `rollup_considerations` (
   `requiredForIncomplete` varchar(15) NOT NULL default 'always',
   `measureSatisfactionIfActive` varchar(5) NOT NULL default 'true',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='RollupConsideration:indican cuándo una actividad debe ser i' AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='RollupConsideration:indican cuándo una actividad debe ser i' AUTO_INCREMENT=22 ;
 
 -- --------------------------------------------------------
 
@@ -214,6 +214,16 @@ CREATE TABLE `rules` (
   `rollup_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `schema_info`
+-- 
+
+CREATE TABLE `schema_info` (
+  `version` int(10) unsigned NOT NULL default '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -268,7 +278,7 @@ CREATE TABLE `scos` (
   `attemptAbsoluteDurationLimit` varchar(6) collate utf8_unicode_ci default NULL COMMENT 'maximum time duration that the learner is permitted to spend on any single learner attempt',
   `dataFromLMS` text collate utf8_unicode_ci COMMENT 'provides initialization data expected by the',
   `attemptLimit` varchar(10) collate utf8_unicode_ci default NULL COMMENT ' the maximum number of attempts for the activity',
-  `scormType` varchar(6) collate utf8_unicode_ci NOT NULL COMMENT 'type of SCORM resource',
+  `scormType` varchar(6) collate utf8_unicode_ci default NULL COMMENT 'type of SCORM resource',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Holds each SCO from a SCORM package' AUTO_INCREMENT=1 ;
 
