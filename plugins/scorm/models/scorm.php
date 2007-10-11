@@ -190,7 +190,7 @@ class Scorm extends ScormAppModel {
 	 * @param $node XMLNode a node with a imsss:sequencing children node
 	 * @return array representation of the <imsss:sequencing> node and its element and attributes.
 	 * 
-	 * usage: given de xml 
+	 * usage: given the xml 
 	 * <imsss:sequencing ID="pretest">dl
 	 * 	<imsss:controlMode .../>
 	 * 	<imsss:sequencingRules> [...] </imsss:sequencingRules>
@@ -209,7 +209,7 @@ class Scorm extends ScormAppModel {
 	 * 	'Control' => array ( ... ),
 	 * 	'SequencingRule' => array ( [...] ),
 	 * 	'LimitCondition' => array ( ... ),
-	 * 	'RollUpRule' => array ([...] ),
+	 * 	'RollupRule' => array ([...] ),
 	 * 	'Objective' => array ( [...] ),
 	 * 	'Randomization' => array ( ... ),
 	 * 	'DeliveryControl' => array ( ... ),
@@ -234,7 +234,7 @@ class Scorm extends ScormAppModel {
 			//$aux = $seq->children('auxiliaryResources'); ADL discourages it's use
 			$rollup = $seq->children('imsss:rollupRules');
 			if(!empty($rollup)) {
-				$data['RollUpRule'] = $this->extractRulesData($rollup[0],'rollup');
+				$data['RollupRule'] = $this->extractRulesData($rollup,'rollup');
 			}
 			$objectives = $seq->children('imsss:objectives');
 			if(!empty($objectives)) {
@@ -294,15 +294,15 @@ class Scorm extends ScormAppModel {
 			$seqRules = $seqRules[0];
 			$pre = $seqRules->children('imsss:preConditionRule');
 			if(!empty($pre)) {
-				$rules['Pre'] = $this->extractRulesData($pre[0]);
+				$rules['Pre'] = $this->extractRulesData($pre);
 			}
 			$post = $seqRules->children('imsss:postConditionRule');
 			if(!empty($post)) {
-				$rules['Post'] = $this->extractRulesData($post[0]);
+				$rules['Post'] = $this->extractRulesData($post);
 			}
 			$exit = $seqRules->children('imsss:exitConditionRule');
 			if(!empty($exit)) {
-				$rules['Exit'] = $this->extractRulesData($exit[0]);
+				$rules['Exit'] = $this->extractRulesData($exit);
 			}
 		}
 		return $rules;
@@ -325,30 +325,31 @@ class Scorm extends ScormAppModel {
 	 * 
 	 * Return an array representing the content of the node received (rollupConditions and rollupAction)
 	 * array (
-	 * 	'RollUpRules' => array ( ... ), // Only in case of RollUpRules element.
+	 * 	[rollupRule attributes] // Only in case of RollUpRules element.
 	 * 	'Condition' => array ( ... ),
 	 * 	'Action' => array ( ... )
 	 * );
 	 */
-	function extractRulesData(XMLNode $node,$name='rule') {
+	function extractRulesData($nodes,$name='rule') {
 		$data = array();
-		// Special treatment of rollupRules. Adds a 'RollUpRules' index.
-		if ($name == 'rollup') {
-			$data['RollUpRules'] = $node->attributes;
-			$node = $node->children("imsss:{$name}Rule");
-			if ($node==null) return $data;
-			$node = $node[0];
+		foreach($nodes as $key => $node) {
+    		if ($name == 'rollup') {
+    			$data[$key] = $node->attributes;
+    			$node = $node->children("imsss:{$name}Rule");
+    			if ($node==null) return $data;
+    			$node = $node[0];
+    		}
+    		$conditions = $node->children("imsss:{$name}Conditions");
+    		$conditions = $conditions[0];
+    		$data[$key]['Condition'] = $conditions->attributes;
+    		$i = 0;
+    		foreach($conditions->children as $condition) {
+    			$data[$key]['Condition'][$i] = $condition->attributes;
+    			$i++; 
+    		}
+    		$action = $node->children("imsss:{$name}Action");
+    		$data[$key]['Action'] = $action[0]->attributes;
 		}
-		$conditions = $node->children("imsss:{$name}Conditions");
-		$conditions = $conditions[0];
-		$data['Condition'] = $conditions->attributes;
-		$i = 0;
-		foreach($conditions->children as $condition) {
-			$data['Condition'][$i] = $condition->attributes;
-			$i++; 
-		}
-		$action = $node->children("imsss:{$name}Action");
-		$data['Action'] = $action[0]->attributes;
 		return $data;
 	}
 	

@@ -357,55 +357,61 @@ eof;
 								'useCurrentAttemptProgressInfo' => 'true',
 						),
 						'SequencingRule' => array (
-							'Pre' => array (
-								'Condition' => array (
-									'conditionCombination' => 'any',
-									array (
-										'referencedObjective' => 'some_objective_ID',
-										'measureThreshold' => '0.5000',
-										'operator' => 'noOp',
-										'condition' => 'satisfied',
-									),
-									array (
-										'referencedObjective' => 'some_objective_ID1',
-										'measureThreshold' => '0.8000',
-										'operator' => 'not',
-										'condition' => 'completed',
-									)
-								),
-								'Action' => array ('action' => 'disabled',)
+							'Pre' => array ( 
+							    0 => array(
+    								'Condition' => array (
+    									'conditionCombination' => 'any',
+    									array (
+    										'referencedObjective' => 'some_objective_ID',
+    										'measureThreshold' => '0.5000',
+    										'operator' => 'noOp',
+    										'condition' => 'satisfied',
+    									),
+    									array (
+    										'referencedObjective' => 'some_objective_ID1',
+    										'measureThreshold' => '0.8000',
+    										'operator' => 'not',
+    										'condition' => 'completed',
+    									)
+    								),
+    								'Action' => array ('action' => 'disabled',)
+							    )
 							),
 							'Post' => array (
-								'Condition' => array (
-									array('condition' => 'satisfied')
-								),
-								'Action' => array ('action' => 'exitParent')
+							    0 => array(
+    								'Condition' => array (
+    									array('condition' => 'satisfied')
+    								),
+    								'Action' => array ('action' => 'exitParent')
+    							)
 							),
 							'Exit' => array (
-								'Condition' => array (
-									array('condition' => 'satisfied',)
-								),
-								'Action' => array('action' => 'exit',)
-							),
+							    0 => array(
+    								'Condition' => array (
+    									array('condition' => 'satisfied',)
+    								),
+    								'Action' => array('action' => 'exit',)
+    							)
+    						)
 						),
 						'LimitCondition' => array (
 							'attemptLimit' => '1',
 							'attemptAbsoluteDurationLimit' => '4 days',
 						),
-						'RollUpRule' => array (
-							'RollUpRules' => array (
+						'RollupRule' => array (
+							'0' => array (
 								'rollupObjectiveSatisfied' => 'true',
 								'rollupProgressCompletion' => 'true',
 								'objectiveMeasureWeight' => '1.0000',
+    							'Condition' => array (
+    								'conditionCombination' => 'any',
+    								array (
+    									'condition' => 'attempted',
+    									'operator' => 'noOp',
+    								),
+    							),
+    							'Action' => array ('action' => 'completed',)
 							),
-							'Condition' => array (
-								'conditionCombination' => 'any',
-								array (
-									'condition' => 'attempted',
-									'operator' => 'noOp',
-								),
-							),
-							'Action' => array ('action' => 'completed',)
 						),
 						'Objective' => array (
 							'Primary' => array (
@@ -597,6 +603,7 @@ eof;
 							),
 						'SequencingRule' => array (
 								'Pre' => array (
+								    0 => array(
 										'Condition' => array (
 												'conditionCombination' => 'any',
 													array (
@@ -614,38 +621,43 @@ eof;
 													)
 											),
 										'Action' => array ('action' => 'disabled',)
+									)
 									),
 								'Post' => array (
+								    0 => array(
 										'Condition' => array (
 													array ('condition' => 'satisfied',)
 											),
 										'Action' => array ('action' => 'exitParent',)
+									)
 									),
 								'Exit' => array (
+								    0 => array(
 										'Condition' => array (
 													array ('condition' => 'satisfied',)
 											),
 										'Action' => array ('action' => 'exit',)
+									)
 									),
 							),
 						'LimitCondition' => array (
 								'attemptLimit' => '1',
 								'attemptAbsoluteDurationLimit' => '4 days',
 							),
-						'RollUpRule' => array (
-								'RollUpRules' => array (
-										'rollupObjectiveSatisfied' => 'true',
-										'rollupProgressCompletion' => 'true',
-										'objectiveMeasureWeight' => '1.0000',
-									),
-								'Condition' => array (
-										'conditionCombination' => 'any',
-											array (
-												'condition' => 'attempted',
-												'operator' => 'noOp',
-											),
-									),
-								'Action' => array ('action' => 'completed',)
+						'RollupRule' => array (
+								'0' => array (
+									'rollupObjectiveSatisfied' => 'true',
+									'rollupProgressCompletion' => 'true',
+									'objectiveMeasureWeight' => '1.0000',
+    								'Condition' => array (
+    										'conditionCombination' => 'any',
+    											array (
+    												'condition' => 'attempted',
+    												'operator' => 'noOp',
+    											),
+    									),
+    								'Action' => array ('action' => 'completed',)
+								)
 							),
 						'Objective' => array (
 								'Primary' => array (
@@ -795,6 +807,7 @@ eof;
 		),
 	'SequencingRule' => array (
 			'Pre' => array (
+			    0 => array(
 					'Condition' => array (
 							'conditionCombination' => 'any',
 								array (
@@ -811,30 +824,34 @@ eof;
 									),
 						),
 					'Action' => array ('action' => 'disabled',)
+				)
 			 ),
 			'Post' => array (
+			    0 => array(
 					'Condition' => array (
 									array ('condition' => 'satisfied',)
 									),
 					'Action' => array ('action' => 'exitParent',)
+				)
 			 ),
 			'Exit' => array (
+			    0 => array (
 					'Condition' => array (
 								array ('condition' => 'satisfied',)
 								),
 					'Action' => array ('action' => 'exit',)
 				)
+			)
 		),
 	'LimitCondition' => array (
 			'attemptLimit' => '1',
 			'attemptAbsoluteDurationLimit' => '4 days',
 		),
-	'RollUpRule' => array (
-			'RollUpRules' => array (
-					'rollupObjectiveSatisfied' => 'true',
-					'rollupProgressCompletion' => 'true',
-					'objectiveMeasureWeight' => '1.0000',
-				),
+	'RollupRule' => array (
+			'0' => array (
+			'rollupObjectiveSatisfied' => 'true',
+			'rollupProgressCompletion' => 'true',
+			'objectiveMeasureWeight' => '1.0000',
 			'Condition' => array (
 					'conditionCombination' => 'any',
 						array (
@@ -843,6 +860,7 @@ eof;
 						)
 				),
 			'Action' => array ('action' => 'completed',)
+			)
 		),
 		'Objective' => array (
 								'Primary' => array (
@@ -909,21 +927,21 @@ eof;
 	$parent1 = $this->TestObject->__getXMLParser();
 	$parent1->load($xml);
 	$rollup_rules = array (
-		'RollUpRules' => array (
-				'rollupObjectiveSatisfied' => 'true',
-				'rollupProgressCompletion' => 'true',
-				'objectiveMeasureWeight' => '1.0000',
-			),
-		'Condition' => array (
-				'conditionCombination' => 'any',
-					array (
-						'condition' => 'attempted',
-						'operator' => 'noOp',
-					)
-			),
-		'Action' => array ('action' => 'completed',)
+		'0' => array (
+    		'rollupObjectiveSatisfied' => 'true',
+    		'rollupProgressCompletion' => 'true',
+    		'objectiveMeasureWeight' => '1.0000',
+    		'Condition' => array (
+    				'conditionCombination' => 'any',
+    					array (
+    						'condition' => 'attempted',
+    						'operator' => 'noOp',
+    					)
+    			),
+    		'Action' => array ('action' => 'completed',)
+		)
 	);
-	$this->assertEqual($this->TestObject->extractRulesData($parent1->children[0],'rollup'),$rollup_rules);
+	$this->assertEqual($this->TestObject->extractRulesData($parent1->children,'rollup'),$rollup_rules);
 }
 
 
@@ -965,6 +983,7 @@ eof;
 	$parent1->load($xml);	
 	$seq_rules = array (
 		'Pre' => array (
+		    0 => array(
 				'Condition' => array (
 						'conditionCombination' => 'any',
 						 array (
@@ -981,18 +1000,23 @@ eof;
 							)
 					),
 				'Action' => array ('action' => 'disabled',)
+			)
 			),
 		'Post' => array (
+		    0 => array(
 				'Condition' => array (
 						array ('condition' => 'satisfied',)
 					),
 				'Action' => array ('action' => 'exitParent',)
+				)
 			),
 		'Exit' => array (
+		    0 => array(
 				'Condition' => array (
 						array ('condition' => 'satisfied',)
 					),
 				'Action' => array('action' => 'exit',)
+			)
 				)
 		);
 	$this->assertEqual($this->TestObject->extractSeqRules($parent1),$seq_rules);
@@ -1021,6 +1045,7 @@ eof;
 		$parent1 = $this->TestObject->__getXMLParser();
 		$parent1->load($xml);
 		$rules_data = array (
+		    0 => array(
 			'Condition' => array (
 				'conditionCombination' => 'any',
 				array (
@@ -1039,8 +1064,9 @@ eof;
 			'Action' => array (
 				'action' => 'disabled',
 			)
+		)
 		);
-		$this->assertEqual($this->TestObject->extractRulesData($parent1->children[0],'rule'),$rules_data);
+		$this->assertEqual($this->TestObject->extractRulesData($parent1->children,'rule'),$rules_data);
 	}
 
 	/**Test function extractObjectives. */
