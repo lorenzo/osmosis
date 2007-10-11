@@ -1,14 +1,56 @@
 <?php 
 
 loadModel('scorm.Scorm');
-
+loadModel('scorm.Sco');
+loadModel('scorm.Objective');
+loadModel('scorm.Randomization');
+loadModel('scorm.Rollup');
+loadModel('scorm.Rule');
+loadModel('scorm.Condition');
+loadModel('scorm.ChoiceConsideration');
+loadModel('scorm.RollupConsideration');
+loadModel('scorm.ScoPresentation');
+loadModel('scorm.ControlMode');
+loadModel('scorm.DeliveryControl');
 class ScormTestCase extends CakeTestCase {
 	var $TestObject = null;
+	var $fixtures = array('scorm',
+                        	'sco',
+                        	'objective',
+                        	'randomization',
+                        	'rollup',
+                        	'rule',
+                        	'choice_consideration',
+                        	'rollup_consideration',
+                        	'sco_presentation',
+                        	'control_mode',
+                        	'delivery_control');
 	function setUp() {
 		$this->TestObject = new Scorm();
 		$this->TestObject->useDbConfig = 'test_suite';
 		$this->TestObject->tablePrefix = 'test_suite_';
-		//$this->TestObject->loadInfo(true);
+		$this->TestObject->Sco->useDbConfig = 'test_suite';
+		$this->TestObject->Sco->tablePrefix = 'test_suite_';
+		$this->TestObject->Sco->SubItem->useDbConfig = 'test_suite';
+		$this->TestObject->Sco->SubItem->tablePrefix = 'test_suite_';
+		$this->TestObject->Sco->Objective->useDbConfig = 'test_suite';
+		$this->TestObject->Sco->Objective->tablePrefix = 'test_suite_';
+		$this->TestObject->Sco->PrimaryObjective->useDbConfig = 'test_suite';
+		$this->TestObject->Sco->PrimaryObjective->tablePrefix = 'test_suite_';
+		$this->TestObject->Sco->Randomization->useDbConfig = 'test_suite';
+		$this->TestObject->Sco->Randomization->tablePrefix = 'test_suite_';
+		$this->TestObject->Sco->Rollup->useDbConfig = 'test_suite';
+		$this->TestObject->Sco->Rollup->tablePrefix = 'test_suite_';
+		$this->TestObject->Sco->Rule->useDbConfig = 'test_suite';
+		$this->TestObject->Sco->Rule->tablePrefix = 'test_suite_';
+		$this->TestObject->Sco->Choice->useDbConfig = 'test_suite';
+		$this->TestObject->Sco->Choice->tablePrefix = 'test_suite_';
+		$this->TestObject->Sco->Presentation->useDbConfig = 'test_suite';
+		$this->TestObject->Sco->Presentation->tablePrefix = 'test_suite_';
+		$this->TestObject->Sco->ControlMode->useDbConfig = 'test_suite';
+		$this->TestObject->Sco->ControlMode->tablePrefix = 'test_suite_';
+		$this->TestObject->Sco->DeliveryControl->useDbConfig = 'test_suite';
+		$this->TestObject->Sco->DeliveryControl->tablePrefix = 'test_suite_';
 	}
 
 	function tearDown() {
@@ -34,7 +76,6 @@ class ScormTestCase extends CakeTestCase {
 		$file = new File(TMP.'tests/imsmanifest.xml',true);
 		$this->assertTrue($this->TestObject->manifestExists(TMP.'tests'));
 		$this->assertFalse($this->TestObject->manifestExists(TMP.'fake'));
-		$file->delete();
 	}
 
 /**Test function parseManifest.*/
@@ -424,10 +465,10 @@ eof;
 					'completionThreshold' => '0.75',
 					'Sequencing' => $sequencing,
 					'SubItem' => array (),
-				),
-				'Presentation' => array (
-					'continue',
-					'previous',
+					'Presentation' => array (
+    					'continue',
+    					'previous',
+    				),
 				),
 			),
 			'Sequencing'=> $sequencing,
@@ -648,11 +689,11 @@ eof;
 		                        ),
 		                ),
 				'SubItem' => array (),
-			),
-		'Presentation' => array (
-				'continue',
-				'previous',
-			),
+				'Presentation' => array (
+				    'continue',
+				    'previous',
+			    ),
+			)
 	);
 		$this->assertEqual($this->TestObject->extractItems($parent1),$items);
 	}
@@ -1101,9 +1142,6 @@ eof;
 			$this->TestObject->extractObjectiveData($parent1->children[0]),$objective_data);
 }
 
-    function testSave(){
-        $this->TestObject->findAll();
-    }
 
 /**Test function extractPresentation. */
 	function testExtractPresentation() {
@@ -1123,5 +1161,20 @@ $presentation = array (
 				);
 $this->assertEqual($this->TestObject->extractPresentation($parent1),$presentation);
 	}
+	
+	 function testSave(){
+	    $data['Scorm'] = array(
+    		'course_id'	=>	1,
+    		'name'	=> 'testScorm',
+    		'file_name' => 'ScromTest.zip',
+    		'description' => 'A scorm test_suite',
+    		'created' => '2007-1-1',
+    		'modified'	=> '2007-1-1',
+    		'hash'		=> 'slsdaslkfwerew498fwlw'
+		);
+		$this->assertTrue($this->TestObject->parseManifest(TMP.'tests'));
+		$this->TestObject->save($data);
+        $this->assertEqual(2,$this->TestObject->findCount());
+    }
 }
 ?>

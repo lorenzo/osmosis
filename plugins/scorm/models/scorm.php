@@ -14,7 +14,10 @@ class Scorm extends ScormAppModel {
 		)
 	);
 	var $actsAs = array('transaction');
-	
+	var $parsed = false;
+	var $hasMany = array('Sco' => array('className' => 'Sco',
+								'foreignKey' => 'scorm_id',
+								'dependent' => true));
 	/**
 	 * Returns whether there is a imsmanifest.xml file in a folder
 	 * @param $path String directory where imsmanifest.xml will be looked for
@@ -30,17 +33,25 @@ class Scorm extends ScormAppModel {
 	 * Fills model data with a representation of the xml manifest. 
 	 * The array follows the array achitechture specified by cakephp to save data to a model
 	 * @param $path string the path where the imsmanifest.xml is.
+	 * @return boolean true if it was parsed false if manifest does not exist
 	 */
 	function parseManifest($path) {
-		$manifest = $this->__getXMLParser();
-		$manifest->load($path.DS.'imsmanifest.xml');
-		$m = $manifest->first();
-		$this->data['Scorm']['version'] = $this->getSchemaVersion($m);
-		$this->data['Scorm']['identifier'] = $this->getNodeIdentifier($m);
-		$this->data['Resource'] = $this->extractResources($m);
-		// TODO: Implement <imsss:sequencingCollection>
-		$this->data['Organization'] = $this->extractOrganizations($m);
-		unset($this->data['Resource']);
+	    if(!$this->parsed) {
+	         if(!$this->manifestExists($path)) {
+	            return false;
+    	    }
+    		$manifest = $this->__getXMLParser();
+    		$manifest->load($path.DS.'imsmanifest.xml');
+    		$m = $manifest->first();
+    		$this->data['Scorm']['version'] = $this->getSchemaVersion($m);
+    		$this->data['Scorm']['identifier'] = $this->getNodeIdentifier($m);
+    		$this->data['Resource'] = $this->extractResources($m);
+    		// TODO: Implement <imsss:sequencingCollection>
+    		$this->data['Organization'] = $this->extractOrganizations($m);
+    		unset($this->data['Resource']);
+    		$this->parsed = true;
+	    }
+	    return true;
 	}
 	
 	/**
@@ -457,6 +468,7 @@ class Scorm extends ScormAppModel {
 						$resource['href'];
 				}
 				$items[$identifier] = am($items[$identifier],$resource);
+				$items[$identifier]['scormType'] = $items[$identifier]['adlcp:scormType'];
 			}
 			$items[$identifier]['title'] =  $title[0]->value;
 			$items[$identifier]['metadata'] = $this->getLocationFromMetadata($item);
@@ -464,7 +476,7 @@ class Scorm extends ScormAppModel {
 			$items[$identifier]['dataFromLMS'] = $this->getChildrenValue($item,'adlcp:dataFromLMS');
 			$items[$identifier]['completionThreshold'] = $this->getChildrenValue($item,'adlcp:completionThreshold');
 			$items[$identifier]['Sequencing'] = $this->extractSequencing($item);
-			$items['Presentation'] = $this->extractPresentation($item);
+			$items[$identifier]['Presentation'] = $this->extractPresentation($item);
 			$items[$identifier]['SubItem'] = $this->extractItems($item);
 		}
 		return $items;
@@ -532,8 +544,24 @@ class Scorm extends ScormAppModel {
 	
 	
 	function save($data=null,$validate=true,$fields=array()) {
+	    if($this->parsed) {
+	        $data= Set::merge($data,$this->data); 
+	    }
 		$this->begin();
 		$saved = parent::save($data,$validate,$fields);
+		foreach($data['Organization'] as $org){
+		    $scos = Set::extract($org,'Item');
+		        foreach($scos as $sco) {
+		            $this->Sco->create();
+		            $sco['organization'] = $org['identifier'];
+		            $sco['manifest'] = $data['Scorm']['identifier'];
+		            $saved = $this->Sco->save($sco);
+		            if(!$saved)
+					    break;
+		        }	
+				if(!$saved)
+					break;
+		}
 		if($saved) {
 			$this->commit();
 		} else {

@@ -64,8 +64,7 @@ class ScoTestCase extends CakeTestCase {
     		'manifest'			=> 'scormplugin.sco.manifest.empty',
     		'organization'		=> 'scormplugin.sco.organization.empty',
     		'identifier'		=> 'scormplugin.sco.identifier.empty',
-    		'title'				=> 'scormplugin.sco.title.empty',
-    		'scormType'			=> 'scormplugin.sco.scormtype.token'
+    		'title'				=> 'scormplugin.sco.title.empty'
 		);
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
 	}
@@ -154,8 +153,6 @@ class ScoTestCase extends CakeTestCase {
     		'scormType'			=> 'asset'
 		);
 		$data['SubItem'][] = array(
-    		'manifest'			=> 'ASDGSDS-SDFSADAS',
-    		'organization'		=> 'DMCQ',
     		'identifier'		=> 'CDADASA-GSDGDEG-WEER-SDSDSD',
     		'href'				=> 'index.html',
     		'title'				=> 'Second sco',

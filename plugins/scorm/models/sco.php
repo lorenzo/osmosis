@@ -119,7 +119,7 @@ class Sco extends ScormAppModel {
 				'required' =>  array(
 					'rule' => '/(sco|asset)/',
 					'message' => __('scormplugin.sco.scormtype.token', true),
-					'required' => true
+					'required' => false
 					)
 				),
 			'parameters' => array(
@@ -135,9 +135,13 @@ class Sco extends ScormAppModel {
 	function save($data=null,$validate=true,$fields=array()) {
 		$this->begin();
 		$saved = parent::save($data,$validate,$fields);
+		$organization = isset($data['Sco']) ? $data['Sco']['organization'] : $data['organization'];
+		$manifest = isset($data['Sco']) ? $data['Sco']['manifest'] : $data['manifest'];
 		if($saved && isset($data['SubItem'])) {
 			foreach($data['SubItem'] as $sco){
 				$sco['parent_id'] = $this->getLastInsertId();
+				$sco['organization'] = $manifest;
+				$sco['manifest'] = $manifest;
 				$this->SubItem->create();
 				$saved = $this->SubItem->save($sco);
 				if(!$saved)
