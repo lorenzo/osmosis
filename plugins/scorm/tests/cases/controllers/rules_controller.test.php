@@ -1,0 +1,24 @@
+<?php 
+
+loadController('scorm.Rules');
+
+class RulesControllerTestCase extends CakeTestCase {
+	var $TestObject = null;
+
+	function setUp() {
+		$this->TestObject = new RulesController();
+	}
+
+	function tearDown() {
+		unset($this->TestObject);
+	}
+
+	/*
+	function testMe() {
+		$result = $this->TestObject->index();
+		$expected = 1;
+		$this->assertEqual($result, $expected);
+	}
+	*/
+}
+?>
