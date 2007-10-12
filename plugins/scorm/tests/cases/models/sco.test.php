@@ -181,24 +181,26 @@ class ScoTestCase extends CakeTestCase {
     		'reorderChildren'		=> 'true',
     		'selectionTiming'		=> 'onEachNewAttempt'
 		);
-		$data['Rollup'] = array(
+		$data['Rollup'][] = array(
 			'rollupObjectiveSatisfied'	=> 'true',
 			'rollupProgressCompletion'	=> 'false',
 			'objectiveMeasureWeight'	=> '0.5000'
 		);
-		$data['Rule'][] = array(
-			'type'				=> 'pre',
+		$data['Rule']['Pre'] = array( 
+			array(
 			'conditionCombination'	=> 'any',
 			'action'				=> 'disabled',
 			'minimumPercent'		=> '0.0000',
 			'minimumCount'			=> '1'
+			)
 		);
-		$data['Rule'][] = array(
-			'type'				=> 'post',
+		$data['Rule']['Post'] = array(
+			array(
 			'conditionCombination'	=> 'any',
 			'action'				=> 'retry',
 			'minimumPercent'		=> '0.0000',
 			'minimumCount'			=> '1'
+			)
 		);
 		$data['Choice'] = array(
     		'preventActivation'	=> 'true',
