@@ -72,7 +72,10 @@ class Rule extends ScormAppModel {
 	);
 	
 	function checkAllowedRules($value) {
-		$type = $this->data['Rule']['type'];
+		if(isset($this->data['Rule']))
+			$type = $this->data['Rule']['type'];
+		else 
+			$type = $this->data['type'];
 		$regexes = array (
 			'pre' => '/(skip|disabled|hiddenFromChoice|stopForwardTraversal)/',
 			'post' => '/(exitParent|exitAll|retry|retryAll|continue|previous)/',
@@ -83,23 +86,30 @@ class Rule extends ScormAppModel {
 	}
 	
 	function save($data=null,$validate=true,$fields=array()) {
-		$this->begin();
 		$saved = parent::save($data,$validate,$fields);
-		if($saved && isset($data['Condition'])) {
-			foreach($data['Condition'] as $condition){
-				$condition['parent_id'] = $this->getLastInsertId();
+		if($saved && isset($data['Rule']['Condition'])) {
+			foreach($data['Rule']['Condition'] as $condition){
+				$condition['rule_id'] = $this->getLastInsertId();
 				$this->Condition->create();
 				$saved = $this->Condition->save($condition);
-				if(!$saved)
+				if(!$saved) {
 					break;
+				}
+					
 			}
 		}	
-		if($saved) {
-			$this->commit();
-		} else {
-			$this->rollback();
-		}
 		return $saved;
+	}
+	
+	function beforeValidate() {
+		if(isset($this->data['Action'])) {
+			if(isset($this->data['Rule'])) {
+				$this->data['Rule']['action'] = $this->data['Action']['action'];
+			}
+		}elseif(isset($this->data['Rule']['Action'])) {
+			$this->data['Rule']['action'] = $this->data['Rule']['Action']['action'];
+		}
+		return parent::beforeValidate();
 	}
 
 }

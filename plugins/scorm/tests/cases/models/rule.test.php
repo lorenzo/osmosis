@@ -6,12 +6,14 @@ loadModel('scorm.Condition');
 
 class RuleTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('rule');
+	var $fixtures = array('rule','condition');
 	
 	function setUp() {
 		$this->TestObject = new Rule();
-		$this->TestObject->useDbConfig = 'test';
+		$this->TestObject->useDbConfig = 'test_suite';
 		$this->TestObject->tablePrefix = 'test_suite_';
+		$this->TestObject->Condition->useDbConfig = 'test_suite';
+		$this->TestObject->Condition->tablePrefix = 'test_suite_';
 	}
 
 	function tearDown() {
@@ -136,6 +138,17 @@ class RuleTestCase extends CakeTestCase {
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
 	}
 	
+	function testValidation8() {
+		$data = array(
+				'type' => 'exit',
+				'action' => 'exit',
+		);
+		$this->TestObject->data = $data;
+		$valid = $this->TestObject->validates();
+		$expectedErrors = array ();
+		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
+	}
+	
 	function testCRUD() {
 		// Insert a new Condition
 		$data = array (
@@ -166,7 +179,6 @@ class RuleTestCase extends CakeTestCase {
 				$data,
 				array('id' => $last_id, 'rollup_id' => '','sco_id'=>'') 
 			),
-			'Rollup' => array(),
 			'Condition' => array()
 		);
 		$this->assertEqual($expectedData, $this->TestObject->read());
@@ -174,6 +186,19 @@ class RuleTestCase extends CakeTestCase {
 		// Delete
 		$this->TestObject->delete();
 		$this->assertEqual(1, $this->TestObject->findCount());
+	}
+	
+	function testSave() {
+		$data = array ('Rule' => array(
+			'type'		=> 'exit',
+			'Action'	=> array('action'=>'exit'),
+			'Condition'	=> array(array('condition'=>'completed')),
+			'sco_id'	=> 255
+			)
+		);
+		$this->TestObject->save($data);
+		$this->assertEqual(2, $this->TestObject->findCount());
+		$this->assertEqual(1, $this->TestObject->Condition->findCount(array('rule_id'=>$this->TestObject->getLastInsertID())));
 	}
 }
 ?>

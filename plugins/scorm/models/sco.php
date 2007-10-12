@@ -133,22 +133,23 @@ class Sco extends ScormAppModel {
 	}
 	
 	function save($data=null,$validate=true,$fields=array()) {
-		$this->begin();
 		$saved = parent::save($data,$validate,$fields);
 		$organization = isset($data['Sco']) ? $data['Sco']['organization'] : $data['organization'];
 		$manifest = isset($data['Sco']) ? $data['Sco']['manifest'] : $data['manifest'];
 		$scorm = isset($data['Sco']) ? $data['Sco']['scorm_id'] : $data['scorm_id'];
-		if($saved && isset($data['SubItem'])) {
-			foreach($data['SubItem'] as $sco){
-				$sco['parent_id'] = $this->getLastInsertId();
-				$sco['organization'] = $manifest;
-				$sco['manifest'] = $manifest;
-				$sco['scorm_id'] = $scorm;
-				$this->SubItem->create();
-				$saved = $this->SubItem->save($sco);
-				if(!$saved)
-					break;
-			}
+		if($saved && !empty($data['Sequencing'])) {
+			@$data['Objective'] = $data['Sequencing']['Objective'];
+			@$data['Randomization'] = $data['Sequencing']['Randomization'];
+			@$data['Rollup'] = $data['Sequencing']['Rollup'];
+			@$data['Choice'] = $data['Sequencing']['Choice'];
+			@$data['Consideration'] = $data['Sequencing']['Consideration'];
+			@$data['Objective'] = $data['Sequencing']['Objective'];
+			@$data['Control'] = $data['Sequencing']['Control'];
+			@$data['DeliveryControl'] = $data['Sequencing']['DeliveryControl'];
+			@$data['Choice'] = $data['Sequencing']['Choice'];
+			@$data['PrimaryObjective'] = $data['Sequencing']['Objective']['Primary'];
+			@$data['Rule'] = $data['Sequencing']['SequencingRule'];
+			unset($data['Objective']['Primary']);
 		}
 		if($saved && isset($data['PrimaryObjective'])) {
 				$data['PrimaryObjective']['sco_id'] = $this->getLastInsertId();
@@ -203,12 +204,14 @@ class Sco extends ScormAppModel {
 					break;
 		}
 		if($saved && isset($data['Rule'])) {
-			foreach($data['Rule'] as $rule){
-				$rule['sco_id'] = $this->getLastInsertId();
-				$this->Rule->create();
-				$saved = $this->Rule->save($rule);
-				if(!$saved)
-					break;
+			if(isset($data['Rule']['Pre'])) {
+				$saved = $this->_saveRule($data['Rule']['Pre'],'pre');
+			}
+			if($saved && isset($data['Rule']['Post'])) {
+				$saved = $this->_saveRule($data['Rule']['Post'],'post');
+			}
+			if($saved && isset($data['Rule']['Exit'])) {
+				$saved = $this->_saveRule($data['Rule']['Exit'],'exit');
 			}
 		}
 		if($saved && isset($data['Presentation'])) {
@@ -219,11 +222,33 @@ class Sco extends ScormAppModel {
 				if(!$saved)
 					break;
 			}
-		}	
-		if($saved) {
-			$this->commit();
-		} else {
-			$this->rollback();
+		}
+		// Here is the function's bottleneck
+		if($saved && isset($data['SubItem'])) {
+			foreach($data['SubItem'] as $sco){
+				$sco['parent_id'] = $this->getLastInsertId();
+				$sco['organization'] = $manifest;
+				$sco['manifest'] = $manifest;
+				$sco['scorm_id'] = $scorm;
+				$this->SubItem->create();
+				$saved = $this->SubItem->save($sco);
+				if(!$saved) 
+					break;
+			}
+		}
+		return $saved;
+	}
+	
+	function _saveRule($data,$type) {
+		$saved = true;
+		foreach($data as $rule){
+			$rule['type'] = $type;
+			$rule['sco_id'] = $this->getLastInsertId();
+			$this->Rule->create();
+			$saved = $this->Rule->save(array('Rule'=>$rule));
+			if(!$saved) {
+				break;
+			}
 		}
 		return $saved;
 	}

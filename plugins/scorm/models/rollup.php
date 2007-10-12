@@ -52,7 +52,6 @@ class Rollup extends ScormAppModel {
 	}
 	
 	function save($data=null,$validate=true,$fields=array()) {
-		$this->begin();
 		$saved = parent::save($data,$validate,$fields);
 		if($saved && isset($data['Rule'])) {
 			foreach($data['Rule'] as $rule){
@@ -62,11 +61,6 @@ class Rollup extends ScormAppModel {
 				if(!$saved)
 					break;
 			}
-		}
-		if($saved) {
-			$this->commit();
-		} else {
-			$this->rollback();
 		}
 		return $saved;
 	}

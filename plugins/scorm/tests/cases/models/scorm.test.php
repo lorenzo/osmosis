@@ -20,6 +20,7 @@ class ScormTestCase extends CakeTestCase {
                         	'randomization',
                         	'rollup',
                         	'rule',
+							'condition',
                         	'choice_consideration',
                         	'rollup_consideration',
                         	'sco_presentation',
@@ -43,6 +44,8 @@ class ScormTestCase extends CakeTestCase {
 		$this->TestObject->Sco->Rollup->tablePrefix = 'test_suite_';
 		$this->TestObject->Sco->Rule->useDbConfig = 'test_suite';
 		$this->TestObject->Sco->Rule->tablePrefix = 'test_suite_';
+		$this->TestObject->Sco->Rule->Condition->useDbConfig = 'test_suite';
+		$this->TestObject->Sco->Rule->Condition->tablePrefix = 'test_suite_';
 		$this->TestObject->Sco->Choice->useDbConfig = 'test_suite';
 		$this->TestObject->Sco->Choice->tablePrefix = 'test_suite_';
 		$this->TestObject->Sco->Presentation->useDbConfig = 'test_suite';
@@ -73,9 +76,10 @@ class ScormTestCase extends CakeTestCase {
 /**Test function manifestExists.*/
 	function testManifestExists() {
 		uses('File');
-		$file = new File(TMP.'tests/imsmanifest.xml',true);
+		$file = new File(TMP.'tests/imsmanifests/imsmanifest.xml',true);
 		$this->assertTrue($this->TestObject->manifestExists(TMP.'tests'));
 		$this->assertFalse($this->TestObject->manifestExists(TMP.'fake'));
+		$file->delete();
 	}
 
 /**Test function parseManifest.*/
@@ -1194,10 +1198,13 @@ eof;
 			'modified'		=> '2007-1-1',
 			'hash'		=> 'slsdaslkfwerew498fwlw'
 		);
-		$this->assertTrue($this->TestObject->parseManifest(TMP.'tests'));
+		$this->assertTrue($this->TestObject->parseManifest(TMP.'tests'.DS.'imsmanifests'.DS.'2'));
 		$this->TestObject->save($data);
 		$this->assertEqual(2,$this->TestObject->findCount());
 		$this->assertEqual(324,$this->TestObject->Sco->findCount(array('scorm_id'=>$this->TestObject->getLastInsertId())));
+		$this->assertEqual(2,$this->TestObject->Sco->Rule->findCount());
+		$this->assertEqual(2,$this->TestObject->Sco->Rule->Condition->findCount()); 
+		
 	}
 }
 ?>

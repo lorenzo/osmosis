@@ -37,7 +37,7 @@ class Scorm extends ScormAppModel {
 	 */
 	function parseManifest($path) {
 	    if(!$this->parsed) {
-	         if(!$this->manifestExists($path)) {
+	         if(!$this->manifestExists($path)) { debug($path);
 	            return false;
     	    }
     		$manifest = $this->__getXMLParser();
