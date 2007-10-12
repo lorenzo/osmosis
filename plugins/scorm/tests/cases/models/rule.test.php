@@ -196,9 +196,30 @@ class RuleTestCase extends CakeTestCase {
 			'sco_id'	=> 255
 			)
 		);
+		$expected = array(
+			'Rule' => array(
+				'id'		=> 2,
+				'type'		=> 'exit',
+				'action'	=> 'exit',
+				'sco_id'	=> 255,
+				'conditionCombination' => 'all',
+				'minimumCount' => '',
+				'minimumPercent' => 0.0000,
+				'rollup_id' => ''
+				),
+			'Condition' => array( 
+				array(
+					'id' => 2,
+					'referencedObjective' => '',
+	                'measureThreshold' => '',
+	                'operator' => 'noOp',
+	                'ruleCondition '=> 'completed',
+	                'rule_id' => 2
+					)
+				)
+			);
 		$this->TestObject->save($data);
-		$this->assertEqual(2, $this->TestObject->findCount());
-		$this->assertEqual(1, $this->TestObject->Condition->findCount(array('rule_id'=>$this->TestObject->getLastInsertID())));
+		$this->assertEqual($expected, $this->TestObject->findById($this->TestObject->getLastInsertID()));
 	}
 }
 ?>

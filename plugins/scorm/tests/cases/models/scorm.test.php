@@ -1203,7 +1203,25 @@ eof;
 		$this->assertEqual(2,$this->TestObject->findCount());
 		$this->assertEqual(324,$this->TestObject->Sco->findCount(array('scorm_id'=>$this->TestObject->getLastInsertId())));
 		$this->assertEqual(2,$this->TestObject->Sco->Rule->findCount());
-		$this->assertEqual(2,$this->TestObject->Sco->Rule->Condition->findCount()); 
+		$this->assertEqual(2,$this->TestObject->Sco->Rule->Condition->findCount());
+		
+	}
+	
+	function testSave2() {
+		$data['Scorm'] = array(
+			'course_id'		=> 1,
+			'name'		=> 'testScorm',
+			'file_name'		=> 'ScromTest.zip',
+			'description'	=> 'A scorm test_suite',
+			'created'		=> '2007-1-1',
+			'modified'		=> '2007-1-1',
+			'hash'		=> 'slsdaslkfwerew498fwlw'
+		);
+		$this->assertTrue($this->TestObject->parseManifest(TMP.'tests'.DS.'imsmanifests'.DS.'1'));
+		$this->TestObject->save($data);
+		$this->assertEqual(2,$this->TestObject->findCount());
+		$this->assertEqual(11,$this->TestObject->Sco->findCount(array('scorm_id'=>$this->TestObject->getLastInsertId())));
+		$this->assertEqual(2,$this->TestObject->Sco->Rollup->findCount());
 		
 	}
 }

@@ -54,10 +54,11 @@ class Rollup extends ScormAppModel {
 	function save($data=null,$validate=true,$fields=array()) {
 		$saved = parent::save($data,$validate,$fields);
 		if($saved && isset($data['Rule'])) {
-			foreach($data['Rule'] as $rule){
+			foreach($data['Rule'] as $rule){ 
 				$rule['rollup_id'] = $this->getLastInsertId();
+				$rule['type'] = 'rollup';
 				$this->Rule->create();
-				$saved = $this->Rule->save($rule);
+				$saved = $this->Rule->save(array('Rule'=>$rule));
 				if(!$saved)
 					break;
 			}

@@ -6,12 +6,17 @@ loadModel('scorm.Condition');
 
 class RollupTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('rollup');
+	var $fixtures = array('rollup','rule','condition');
 
 	function setUp() {
 		$this->TestObject = new Rollup();
 		$this->TestObject->useDbConfig = 'test_suite';
 		$this->TestObject->tablePrefix = 'test_suite_';
+		$this->TestObject->Rule->useDbConfig = 'test_suite';
+		$this->TestObject->Rule->tablePrefix = 'test_suite_';
+		$this->TestObject->Rule->Condition->useDbConfig = 'test_suite';
+		$this->TestObject->Rule->Condition->tablePrefix = 'test_suite_';
+	
 	}
 
 	function tearDown() {
@@ -94,7 +99,8 @@ class RollupTestCase extends CakeTestCase {
 		$data = array (
 			'rollupObjectiveSatisfied' => 'true',
 			'rollupProgressCompletion' => 'true',
-			'objectiveMeasureWeight' => '1.0000'
+			'objectiveMeasureWeight' => '1.0000',
+			'sco_id' => 1
 		);
 		$this->TestObject->save($data);
 		$this->assertEqual(2, $this->TestObject->findCount());
@@ -112,6 +118,22 @@ class RollupTestCase extends CakeTestCase {
 		// Delete
 		$this->TestObject->delete();
 		$this->assertEqual(1, $this->TestObject->findCount());
+	}
+	
+	function testSave() {
+		$data = array (
+			'rollupObjectiveSatisfied' => 'false',
+			'rollupProgressCompletion' => 'false',
+			'objectiveMeasureWeight' => '0.9931'
+		);
+		$data['Rule'][] = array(
+			'Condition' =>array( array('condition'=>'completed')),
+			'Action' => array('action'=>'satisfied')
+			);
+		$this->TestObject->save($data);
+		$this->assertEqual(2,$this->TestObject->findCount());
+		$this->assertEqual(1,$this->TestObject->Rule->findCount(array('rollup_id'=>$this->TestObject->getLastInsertID())));
+		$this->assertEqual(1,$this->TestObject->Rule->Condition->findCount(array('rule_id'=>$this->TestObject->Rule->getLastInsertID())));
 	}
 
 }

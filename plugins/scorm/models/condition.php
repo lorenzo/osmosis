@@ -67,5 +67,12 @@ class Condition extends ScormAppModel {
 	function objectiveExists($value) {
 		return true;
 	}
+	
+	function beforeValidate() {
+		if(isset($this->data['Condition']['condition'])) {
+			$this->data['Condition']['ruleCondition'] = $this->data['Condition']['condition'];
+		}
+		return parent::beforeValidate();
+	}
 }
 ?>

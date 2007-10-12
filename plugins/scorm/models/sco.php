@@ -140,7 +140,7 @@ class Sco extends ScormAppModel {
 		if($saved && !empty($data['Sequencing'])) {
 			@$data['Objective'] = $data['Sequencing']['Objective'];
 			@$data['Randomization'] = $data['Sequencing']['Randomization'];
-			@$data['Rollup'] = $data['Sequencing']['Rollup'];
+			@$data['Rollup'] = $data['Sequencing']['RollupRule'];
 			@$data['Choice'] = $data['Sequencing']['Choice'];
 			@$data['Consideration'] = $data['Sequencing']['Consideration'];
 			@$data['Objective'] = $data['Sequencing']['Objective'];
@@ -174,10 +174,12 @@ class Sco extends ScormAppModel {
 					break;
 		}
 		if($saved && isset($data['Rollup'])) {
-				$data['Rollup']['sco_id'] = $this->getLastInsertId();
-				$saved = $this->Rollup->save($data['Rollup']);
-				if(!$saved)
-					break;
+				foreach($data['Rollup'] as $roll){
+					$roll['sco_id'] = $this->getLastInsertId();
+					$saved = $this->Rollup->save($roll);
+					if(!$saved)
+						break;
+				}
 		}
 		if($saved && isset($data['Choice'])) {
 				$data['Choice']['sco_id'] = $this->getLastInsertId();

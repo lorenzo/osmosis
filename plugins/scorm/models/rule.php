@@ -108,7 +108,8 @@ class Rule extends ScormAppModel {
 			}
 		}elseif(isset($this->data['Rule']['Action'])) {
 			$this->data['Rule']['action'] = $this->data['Rule']['Action']['action'];
-		}
+		} 
+		unset($this->data['Rule']['Action']);
 		return parent::beforeValidate();
 	}
 
