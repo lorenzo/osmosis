@@ -249,4 +249,4 @@ class TransactionBehavior extends ModelBehavior {
         $this->_error('Not valid transaction state');
     }
 }
-?> 
+?>

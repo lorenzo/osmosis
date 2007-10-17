@@ -1,5 +1,5 @@
 <div class="scorm">
-<?php echo $form->create('Scorm', array('enctype'=>'multipart/form-data'));?>
+<?php echo $form->create('Scorm', array('type'=>'file'));?>
 	<fieldset>
  		<legend><?php __('Add');?> <?php __('Scorm');?></legend>
  		<p>

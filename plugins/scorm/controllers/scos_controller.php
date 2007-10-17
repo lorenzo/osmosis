@@ -3,6 +3,7 @@ class ScosController extends ScormAppController {
 
 	var $name = 'Scos';
 	var $helpers = array('Html', 'Form' );
+	var $uses = array('Sco', 'Scorm');
 
 	function index() {
 		$this->Sco->recursive = 0;
@@ -14,7 +15,11 @@ class ScosController extends ScormAppController {
 			$this->Session->setFlash('Invalid Sco.');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-		$this->set('sco', $this->Sco->read(null, $id));
+		$sco = $this->Sco->read(null, $id);
+		$path = $this->Scorm->field('path', array('id' => $sco['Sco']['scorm_id']));
+		$this->set(compact('sco', 'path'));
+		$this->layout = 'ajax';
+		$this->render('view2');
 	}
 
 	function add() {

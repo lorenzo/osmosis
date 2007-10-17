@@ -15,25 +15,31 @@ class ScormsController extends ScormAppController {
 			$this->Session->setFlash('Invalid Scorm.');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
+		debug($this->Scorm->read(null, $id));
+		
 		$this->set('scorm', $this->Scorm->read(null, $id));
+		$this->render('view2');
 	}
 
 	function add() {
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			$this->Scorm->create();
-			debug($this->data);
+
 			$uploaded_file = $this->data['Scorm']['file_name'];
-			$is_uploaded = is_uploaded_file($uploaded_file['tmp_name']);
+			$is_uploaded = is_uploaded_file($uploaded_file['tmp_name']); 
 			if ($is_uploaded) {
 				$this->data['Scorm']['file_name'] = $uploaded_file['name'];
+				// TODO: md5 of zip file
 				// Extract the zip file to TMP
 				$this->Zip->begin($uploaded_file['tmp_name']);
 				$scorm_files_location = TMP.'tests'.DS.'imsmanifests'.DS.'uploads'.DS.$uploaded_file['name'].DS;
-				if (!$this->Zip->extract($scorm_files_location)) {
+				$this->data['Scorm']['path']= $scorm_files_location;
+				if ($this->Zip->extract($scorm_files_location)===false) {
 					$this->Session->setFlash('The Scorm file could not be unzipped.');
 					return;
 				}
+				
 				// Parse
 				if (!$this->Scorm->parseManifest($scorm_files_location)){
 					$this->Session->setFlash('The Scorm file could not be parsed.');

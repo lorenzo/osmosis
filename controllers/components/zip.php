@@ -17,6 +17,10 @@ class ZipComponent extends Object {
 		$this->zip = new ZipArchive();
 	}
 	
+	function __construct() {
+		$this->zip = new ZipArchive();
+	}
+	
 	/**
 	 * Starts up the work on a zip file.
 	 * @param $path string The path to the file.
