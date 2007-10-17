@@ -3,7 +3,7 @@ class ScormsController extends ScormAppController {
 
 	var $name = 'Scorms';
 	var $components = array('Zip');
-	var $helpers = array('Html', 'Form' );
+	var $helpers = array('Html', 'Form', 'Tree');
 
 	function index() {
 		$this->Scorm->recursive = 0;
@@ -15,9 +15,9 @@ class ScormsController extends ScormAppController {
 			$this->Session->setFlash('Invalid Scorm.');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-		debug($this->Scorm->read(null, $id));
-		
-		$this->set('scorm', $this->Scorm->read(null, $id));
+		$this->Scorm->recursive = -1;
+		$this->set('scorm', $this->Scorm->find(array('id' => $id), array('Scorm.*')));
+		$this->set('scos', $this->Scorm->Sco->findAllThreaded(array('Sco.scorm_id' => $id), array('Sco.*')));
 		$this->render('view2');
 	}
 
@@ -39,7 +39,7 @@ class ScormsController extends ScormAppController {
 					$this->Session->setFlash('The Scorm file could not be unzipped.');
 					return;
 				}
-				
+				$this->Zip->close();
 				// Parse
 				if (!$this->Scorm->parseManifest($scorm_files_location)){
 					$this->Session->setFlash('The Scorm file could not be parsed.');

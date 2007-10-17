@@ -44,7 +44,7 @@ class Objective extends ScormAppModel {
 		);
 	}
 	
-	function save($data=null,$validate=true,$fields=array()) {
+	/*function save($data=null,$validate=true,$fields=array()) {
 		$this->begin();
 		$saved = parent::save($data,$validate,$fields);
 		if($saved && isset($data['MapInfo'])) {
@@ -57,6 +57,6 @@ class Objective extends ScormAppModel {
 			$this->rollback();
 		}
 		return $saved;
-	}
+	}*/
 }
 ?>

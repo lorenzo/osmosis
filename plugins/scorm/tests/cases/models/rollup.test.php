@@ -129,7 +129,7 @@ class RollupTestCase extends CakeTestCase {
 		$data['Rule'][] = array(
 			'Condition' =>array( array('condition'=>'completed')),
 			'Action' => array('action'=>'satisfied')
-			);
+		);
 		$this->TestObject->save($data);
 		$this->assertEqual(2,$this->TestObject->findCount());
 		$this->assertEqual(1,$this->TestObject->Rule->findCount(array('rollup_id'=>$this->TestObject->getLastInsertID())));

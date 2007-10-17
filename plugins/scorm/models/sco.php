@@ -174,12 +174,10 @@ class Sco extends ScormAppModel {
 					break;
 		}
 		if($saved && isset($data['Rollup'])) {
-				foreach($data['Rollup'] as $roll){
-					$roll['sco_id'] = $this->getLastInsertId();
-					$saved = $this->Rollup->save($roll);
-					if(!$saved)
-						break;
-				}
+			$data['Rollup']['sco_id'] = $this->getLastInsertId();
+			$saved = $this->Rollup->save($data['Rollup']);
+			if(!$saved)
+				break;
 		}
 		if($saved && isset($data['Choice'])) {
 				$data['Choice']['sco_id'] = $this->getLastInsertId();
@@ -187,25 +185,26 @@ class Sco extends ScormAppModel {
 				if(!$saved)
 					break;
 		}
-		if($saved && isset($data['Consideration'])) {
+		/*if($saved && isset($data['Consideration'])) {
 				$data['Consideration']['sco_id'] = $this->getLastInsertId();
 				$saved = $this->Consideration->save($data['Consideration']);
 				if(!$saved)
 					break;
-		}
-		if($saved && isset($data['Control'])) {
+		}*/
+		/*if($saved && isset($data['Control'])) {
 				$data['Control']['sco_id'] =$this->getLastInsertId();
 				$saved = $this->Control->save($data['Control']);
 				if(!$saved)
 					break;
-		}
-		if($saved && isset($data['DeliveryControl'])) {
+		}*/
+		/*if($saved && isset($data['DeliveryControl'])) {
 				$data['DeliveryControl']['sco_id'] = $this->getLastInsertId();
+				debug($this->getLastInsertId());
 				$saved = $this->DeliveryControl->save($data['DeliveryControl']);
 				if(!$saved)
 					break;
-		}
-		if($saved && isset($data['Rule'])) {
+		}*/
+		if(isset($data['Rule'])) {
 			if(isset($data['Rule']['Pre'])) {
 				$saved = $this->_saveRule($data['Rule']['Pre'],'pre');
 			}
@@ -216,7 +215,7 @@ class Sco extends ScormAppModel {
 				$saved = $this->_saveRule($data['Rule']['Exit'],'exit');
 			}
 		}
-		if($saved && isset($data['Presentation'])) {
+		/*if($saved && isset($data['Presentation'])) {
 			foreach($data['Presentation'] as $p){
 				$p['sco_id'] = $this->getLastInsertId();
 				$this->Presentation->create();
@@ -224,16 +223,17 @@ class Sco extends ScormAppModel {
 				if(!$saved)
 					break;
 			}
-		}
+		}*/
 		// Here is the function's bottleneck
 		if($saved && isset($data['SubItem'])) {
 			foreach($data['SubItem'] as $sco){
-				$sco['parent_id'] = $this->getLastInsertId();
+				$sco['parent_id'] = $this->getInsertId();
 				$sco['organization'] = $manifest;
 				$sco['manifest'] = $manifest;
 				$sco['scorm_id'] = $scorm;
-				$this->SubItem->create();
+				$this->SubItem = new Sco();
 				$saved = $this->SubItem->save($sco);
+				unset($this->SubItem);
 				if(!$saved) 
 					break;
 			}

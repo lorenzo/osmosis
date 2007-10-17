@@ -3,7 +3,7 @@ class ScoFixture extends CakeTestFixture {
     var $name = 'Sco';
   	var $import = array('model' => 'Sco'); 
     var $records = array(
-    	array(
+/*    	array(
     		'id'				=> 1,
     		'scorm_id'			=> 1,
     		'manifest'			=> 'ASDGSDS-SDFSADAS',
@@ -12,7 +12,7 @@ class ScoFixture extends CakeTestFixture {
     		'href'				=> 'index.html',
     		'title'				=> 'First sco',
     		'scormType'			=> 'sco'
-		),
+		),*/
     );
 } 
 ?>
