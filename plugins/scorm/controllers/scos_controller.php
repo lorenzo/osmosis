@@ -2,24 +2,30 @@
 class ScosController extends ScormAppController {
 
 	var $name = 'Scos';
-	var $helpers = array('Html', 'Form' );
+	var $helpers = array('Html', 'Form', 'Cache' );
 	var $uses = array('Sco', 'Scorm');
-
+	var $cacheAction = array('view/' => '1 hour');
+	
 	function index() {
 		$this->Sco->recursive = 0;
 		$this->set('scos', $this->paginate());
 	}
 
 	function view($id = null) {
+		$params = $this->params['pass'];
+		unset($params[0]);
+		$path = implode(DS , $params);
 		if (!$id) {
 			$this->Session->setFlash('Invalid Sco.');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-		$sco = $this->Sco->read(null, $id);
-		$path = $this->Scorm->field('path', array('id' => $sco['Sco']['scorm_id']));
-		$this->set(compact('sco', 'path'));
-		$this->layout = 'ajax';
-		$this->render('view2');
+		$scorm_id = $this->Sco->field('scorm_id', array('id' => $id));
+		$path = $this->Scorm->field('path', array('id' => $scorm_id)) . $path;
+		$extension = str_replace('.', '', strrchr($path, '.'));
+		$this->set('extension', $extension);
+		$this->set('path', urldecode($path));
+		$this->view = 'Media';
+		//$this->render('view2');
 	}
 
 	function add() {

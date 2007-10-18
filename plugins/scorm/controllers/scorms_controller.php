@@ -9,7 +9,13 @@ class ScormsController extends ScormAppController {
 		$this->Scorm->recursive = 0;
 		$this->set('scorms', $this->paginate());
 	}
-
+	
+	function toc($id) {
+		$this->set('scorm', $this->Scorm->find(array('id' => $id), array('Scorm.*')));
+		$this->set('scos', $this->Scorm->Sco->findAllThreaded(array('Sco.scorm_id' => $id), array('Sco.*')));
+		$this->plugin = 'scorm';
+	}
+	
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash('Invalid Scorm.');
@@ -17,7 +23,7 @@ class ScormsController extends ScormAppController {
 		}
 		$this->Scorm->recursive = -1;
 		$this->set('scorm', $this->Scorm->find(array('id' => $id), array('Scorm.*')));
-		$this->set('scos', $this->Scorm->Sco->findAllThreaded(array('Sco.scorm_id' => $id), array('Sco.*')));
+		//$this->set('scos', $this->Scorm->Sco->findAllThreaded(array('Sco.scorm_id' => $id), array('Sco.*')));
 		$this->render('view2');
 	}
 
@@ -34,7 +40,7 @@ class ScormsController extends ScormAppController {
 				// Extract the zip file to TMP
 				$this->Zip->begin($uploaded_file['tmp_name']);
 				$scorm_files_location = TMP.'tests'.DS.'imsmanifests'.DS.'uploads'.DS.$uploaded_file['name'].DS;
-				$this->data['Scorm']['path']= $scorm_files_location;
+				$this->data['Scorm']['path']= str_replace(APP, '', $scorm_files_location);
 				if ($this->Zip->extract($scorm_files_location)===false) {
 					$this->Session->setFlash('The Scorm file could not be unzipped.');
 					return;
