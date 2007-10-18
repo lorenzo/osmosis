@@ -1209,6 +1209,7 @@ eof;
 	
 	function testSave2() {
 		$data['Scorm'] = array(
+			'id' => 101,
 			'course_id'		=> 1,
 			'name'		=> 'testScorm',
 			'file_name'		=> 'ScromTest.zip',
@@ -1219,9 +1220,11 @@ eof;
 		);
 		$this->assertTrue($this->TestObject->parseManifest(TMP.'tests'.DS.'imsmanifests'.DS.'1'));
 		$this->TestObject->save($data);
-		$this->assertEqual(2,$this->TestObject->findCount());
-		$this->assertEqual(11,$this->TestObject->Sco->findCount(array('scorm_id'=>$this->TestObject->getLastInsertId())));
-		$this->assertEqual(2,$this->TestObject->Sco->Rollup->findCount());
+		$this->assertEqual(1,$this->TestObject->findCount(array('id'=>101)));
+		$this->assertEqual(11,$this->TestObject->Sco->findCount(array('scorm_id'=>101)));
+		$results = $this->TestObject->Sco->findAll(array('scorm_id'=>101));
+		//TODO: Test rollup rules
+		$this->assertEqual(1,1);
 		
 	}
 }

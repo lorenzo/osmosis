@@ -185,25 +185,24 @@ class Sco extends ScormAppModel {
 				if(!$saved)
 					break;
 		}
-		/*if($saved && isset($data['Consideration'])) {
+		if($saved && isset($data['Consideration'])) {
 				$data['Consideration']['sco_id'] = $this->getLastInsertId();
 				$saved = $this->Consideration->save($data['Consideration']);
 				if(!$saved)
 					break;
-		}*/
-		/*if($saved && isset($data['Control'])) {
+		}
+		if($saved && isset($data['Control'])) {
 				$data['Control']['sco_id'] =$this->getLastInsertId();
 				$saved = $this->Control->save($data['Control']);
 				if(!$saved)
 					break;
-		}*/
-		/*if($saved && isset($data['DeliveryControl'])) {
+		}
+		if($saved && isset($data['DeliveryControl'])) {
 				$data['DeliveryControl']['sco_id'] = $this->getLastInsertId();
-				debug($this->getLastInsertId());
 				$saved = $this->DeliveryControl->save($data['DeliveryControl']);
 				if(!$saved)
 					break;
-		}*/
+		}
 		if(isset($data['Rule'])) {
 			if(isset($data['Rule']['Pre'])) {
 				$saved = $this->_saveRule($data['Rule']['Pre'],'pre');
@@ -215,7 +214,7 @@ class Sco extends ScormAppModel {
 				$saved = $this->_saveRule($data['Rule']['Exit'],'exit');
 			}
 		}
-		/*if($saved && isset($data['Presentation'])) {
+		if($saved && isset($data['Presentation'])) {
 			foreach($data['Presentation'] as $p){
 				$p['sco_id'] = $this->getLastInsertId();
 				$this->Presentation->create();
@@ -223,7 +222,7 @@ class Sco extends ScormAppModel {
 				if(!$saved)
 					break;
 			}
-		}*/
+		}
 		// Here is the function's bottleneck
 		if($saved && isset($data['SubItem'])) {
 			foreach($data['SubItem'] as $sco){
@@ -231,9 +230,12 @@ class Sco extends ScormAppModel {
 				$sco['organization'] = $manifest;
 				$sco['manifest'] = $manifest;
 				$sco['scorm_id'] = $scorm;
-				$this->SubItem = new Sco();
-				$saved = $this->SubItem->save($sco);
-				unset($this->SubItem);
+				$sub = new Sco();
+				$sub->useDbConfig = $this->SubItem->useDbConfig;
+				$sub->tablePrefix = $this->SubItem->tablePrefix;
+				$sub->primaryKey = $this->SubItem->primaryKey;
+				$saved = $sub->save($sco);
+				unset($sub);
 				if(!$saved) 
 					break;
 			}

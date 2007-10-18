@@ -41,8 +41,12 @@ class ScoTestCase extends CakeTestCase {
 		$this->TestObject->Rollup->tablePrefix = 'test_suite_';
 		$this->TestObject->Rule->useDbConfig = 'test';
 		$this->TestObject->Rule->tablePrefix = 'test_suite_';
+		$this->TestObject->Rule->Condition->useDbConfig = 'test';
+		$this->TestObject->Rule->Condition->tablePrefix = 'test_suite_';
 		$this->TestObject->Choice->useDbConfig = 'test';
 		$this->TestObject->Choice->tablePrefix = 'test_suite_';
+		$this->TestObject->Consideration->useDbConfig = 'test';
+		$this->TestObject->Consideration->tablePrefix = 'test_suite_';
 		$this->TestObject->Presentation->useDbConfig = 'test';
 		$this->TestObject->Presentation->tablePrefix = 'test_suite_';
 		$this->TestObject->ControlMode->useDbConfig = 'test';
@@ -251,9 +255,10 @@ class ScoTestCase extends CakeTestCase {
 	function testSaveWithSubitems() {
 		$data = array();
 		$data['Sco'] = array(
+		'id'				=> 2,
 		'manifest'			=> 'ASDGSDS-SDFSADAS',
 		'organization'		=> 'DMCQ',
-		'scorm_id'            => 1,
+		'scorm_id'            => 99,
 		'identifier'		=> 'CDADASA-GSDGDEG-HRETSAS-SDSDSD',
 		'title'				=> 'First sco',
 		'completionThreshold' => '1.5',
@@ -264,7 +269,6 @@ class ScoTestCase extends CakeTestCase {
 		'scormType'			=> 'asset'
 		);
 		$data['SubItem'][] = array(
-				'id' 			=> '40',
 				'identifier'	=> 'CDADASA-GSDGDEG-WEER-SDSDSD',
 				'href'		=> 'index.html',
 				'title'		=> 'Second sco',
@@ -347,21 +351,26 @@ class ScoTestCase extends CakeTestCase {
 			'objectiveSetByContent'		=> 'true'
 		);
 		$this->TestObject->save($data);
-		$this->TestObject->recursive = 2;
-		debug($this->TestObject->findAll());
-		/*$this->TestObject->save($data);
-		$this->assertEqual(3,$this->TestObject->findCount());
-		$results = $this->TestObject->findById($this->TestObject->getLastInsertId());
+		$this->assertEqual(2,$this->TestObject->findCount(array('scorm_id'=>99)));
+		$results = $this->TestObject->findById(2);
 		$this->assertEqual(1,count($results['SubItem']));
 		$this->assertEqual(2,count($results['Objective']));
 		$this->assertFalse(empty($results['PrimaryObjective']));
 		$this->assertFalse(empty($results['Randomization']));
 		$this->assertEqual(2,count($results['Rule']));
-		$this->assertFalse(empty($results['Choice']));
-		$this->assertFalse(empty($results['Consideration']));
+		$data['Choice']['sco_id'] = 2;
+		unset($results['Choice']['id']);
+		$this->assertEqual($data['Choice'],$results['Choice']);
+		$data['Consideration']['sco_id'] = 2;
+		unset($results['Consideration']['id']);
+		$this->assertEqual($data['Consideration'],$results['Consideration']);
 		$this->assertEqual(2,count($results['Presentation']));
-		$this->assertFalse(empty($results['Control']));
-		$this->assertFalse(empty($results['DeliveryControl']));*/
+		$data['Control']['sco_id'] = 2;
+		unset($results['Control']['id']);
+		$this->assertEqual($data['Control'],$results['Control']);
+		$data['DeliveryControl']['sco_id'] = 2;
+		unset($results['DeliveryControl']['id']);
+	$this->assertEqual($data['DeliveryControl'],$results['DeliveryControl']);
 	}
 }
 ?>
