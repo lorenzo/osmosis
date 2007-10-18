@@ -23,7 +23,8 @@ class ScoTestCase extends CakeTestCase {
                     	'rollup_consideration',
                     	'sco_presentation',
                     	'control_mode',
-                    	'delivery_control');
+                    	'delivery_control',
+                    	'condition');
 
 	function setUp() {
 		$this->TestObject = new Sco();
