@@ -1,7 +1,7 @@
 <?php
 loadModel('scorm.RollupConsideration');
 
-class ChoiceConsiderationTestCase extends CakeTestCase {
+class RollupConsiderationTestCase extends CakeTestCase {
 	var $TestObject = null;
 	var $fixtures = array('rollup_consideration');
 

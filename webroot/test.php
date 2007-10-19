@@ -252,7 +252,7 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 			if (isset($_GET['app'])) {
 				TestManager::runGroupTest(ucfirst($_GET['group']), APP_TEST_GROUPS, CakeTestsGetReporter());
 			}elseif (isset($_GET['plugin'])) {
-				TestManager::runGroupTest(ucfirst($_GET['group']), APP . DS . 'plugins' . DS . $_GET['plugin'] . 'tests', CakeTestsGetReporter());
+				TestManager::runGroupTest(ucfirst($_GET['group']), APP. 'plugins' . DS . $_GET['plugin']. DS . 'tests'. DS . 'groups', CakeTestsGetReporter());
 			}
 			 else {
 				TestManager::runGroupTest(ucfirst($_GET['group']), CORE_TEST_GROUPS, CakeTestsGetReporter());

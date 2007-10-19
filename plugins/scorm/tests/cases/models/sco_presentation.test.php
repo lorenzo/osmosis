@@ -1,7 +1,7 @@
 <?php
 loadModel('scorm.ScoPresentation');
 
-class ChoiceConsiderationTestCase extends CakeTestCase {
+class ScoPresentationTestCase extends CakeTestCase {
 	var $TestObject = null;
 	var $fixtures = array('sco_presentation');
 
