@@ -283,3 +283,35 @@ CREATE TABLE `scos` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Holds each SCO from a SCORM package' AUTO_INCREMENT=336 ;
 
+-- 
+-- Table structure for table `members`
+-- 
+
+CREATE TABLE `members` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `institution_id` varchar(20) collate utf8_unicode_ci default NULL,
+  `email` varchar(50) collate utf8_unicode_ci NOT NULL,
+  `phone` varchar(20) collate utf8_unicode_ci default NULL,
+  `country` varchar(20) collate utf8_unicode_ci NOT NULL,
+  `city` varchar(50) collate utf8_unicode_ci NOT NULL,
+  `age` int(2) NOT NULL,
+  `sex` enum('M','F') collate utf8_unicode_ci NOT NULL default 'M',
+  `role_id` int(11) unsigned NOT NULL,
+  `username` varchar(15) collate utf8_unicode_ci NOT NULL,
+  `password` varchar(50) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a registered user' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `roles`
+-- 
+
+CREATE TABLE `roles` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `parent_id` int(11) NOT NULL,
+  `role` varchar(10) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents groups of users with permissions' AUTO_INCREMENT=1 ;
+
