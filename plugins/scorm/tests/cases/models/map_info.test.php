@@ -61,8 +61,8 @@ class MapInfoTestCase extends CakeTestCase {
 	}
 	
 	function testSave() {
-		$data = array(
-			'objective_id'			=> 1,
+		$data['MapInfo'] = array(
+		'objective_id'			=> 1,
     		'targetObjectiveID'		=> 'SADASdsafFA-FSDADSASD',
     		'readSatisfiedStatus'	=> 'false',
     		'readNormalizedMeasure'	=> 'true',

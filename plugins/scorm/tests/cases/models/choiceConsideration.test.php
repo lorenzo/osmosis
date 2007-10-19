@@ -69,13 +69,15 @@ class ChoiceConsiderationTestCase extends CakeTestCase {
 	function testInsert() {
 		$data = array(
 			'ChoiceConsideration' => array(
+				'id'				=> 3,
+				'sco_id'			=> 2,
 				'preventActivation'		=> 'false',
 				'constrainChoice'		=> 'false'
 			)
 		);
 		$this->TestObject->data = $data;
 		$valid = $this->TestObject->save();
-		debug($this->TestObject->findAll());
+		$this->assertEqual($data,$this->TestObject->findById(3));
 	}
 }
 ?>
