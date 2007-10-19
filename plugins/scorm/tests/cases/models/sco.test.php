@@ -97,7 +97,6 @@ class ScoTestCase extends CakeTestCase {
 		'isvisible'						=> 'scormplugin.sco.isvisible.boolean',
 		'attemptAbsoluteDurationLimit'	=> 'scormplugin.sco.attemptabsolutedurationlimit.empty',
 		'attemptLimit'					=> 'scormplugin.sco.attemptlimit.integer',
-		'dataFromLMS'					=> 'scormplugin.sco.datafromlms.empty',
 		'scormType'						=> 'scormplugin.sco.scormtype.token',
 		);
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
