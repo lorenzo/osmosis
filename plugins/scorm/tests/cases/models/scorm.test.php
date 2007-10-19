@@ -77,7 +77,7 @@ class ScormTestCase extends CakeTestCase {
 	function testManifestExists() {
 		uses('File');
 		$file = new File(TMP.'tests/imsmanifests/imsmanifest.xml',true);
-		$this->assertTrue($this->TestObject->manifestExists(TMP.'tests'));
+		$this->assertTrue($this->TestObject->manifestExists(TMP.'tests'.DS.'imsmanifests'));
 		$this->assertFalse($this->TestObject->manifestExists(TMP.'fake'));
 		$file->delete();
 	}
@@ -1194,9 +1194,8 @@ eof;
 			'name'		=> 'testScorm',
 			'file_name'		=> 'ScromTest.zip',
 			'description'	=> 'A scorm test_suite',
-			'created'		=> '2007-1-1',
-			'modified'		=> '2007-1-1',
-			'hash'		=> 'slsdaslkfwerew498fwlw'
+			'hash'		=> 'slsdaslkfwerew498fwlw',
+			'path'		=> 'a path'
 		);
 		$this->assertTrue($this->TestObject->parseManifest(TMP.'tests'.DS.'imsmanifests'.DS.'2'));
 		$this->TestObject->save($data);

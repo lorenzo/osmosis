@@ -551,19 +551,21 @@ class Scorm extends ScormAppModel {
 	    }
 		$this->begin();
 		$saved = parent::save($data,$validate,$fields);
-		foreach($data['Organization'] as $org){
-		    $scos = Set::extract($org,'Item');
-		        foreach($scos as $sco) {
-		            $this->Sco->create();
-		            $sco['organization'] = $org['identifier'];
-		            $sco['manifest'] = $data['Scorm']['identifier'];
-		            $sco['scorm_id'] = $this->getLastInsertId();
-		            $saved = $this->Sco->save($sco);
-		            if(!$saved)
-					    break;
-		        }	
+		if($saved) {
+			foreach($data['Organization'] as $org){
+			$scos = Set::extract($org,'Item');
+				foreach($scos as $sco) {
+				$this->Sco->create();
+				$sco['organization'] = $org['identifier'];
+				$sco['manifest'] = $data['Scorm']['identifier'];
+				$sco['scorm_id'] = $this->getLastInsertId();
+				$saved = $this->Sco->save($sco);
 				if(!$saved)
-					break;
+						break;
+				}	
+					if(!$saved)
+						break;
+			}
 		}
 		if($saved) {
 			$this->commit();

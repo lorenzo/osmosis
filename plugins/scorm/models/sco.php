@@ -84,7 +84,8 @@ class Sco extends ScormAppModel {
 				'required' =>  array(
 					'rule' => 'decimal',
 					'message' => __('scormplugin.sco.completionthreshold.decimal', true),
-					'required' => false
+					'required' => false,
+					'allowEmpty' => true
 					)
 				),
 			'isvisible' => array(
@@ -112,7 +113,8 @@ class Sco extends ScormAppModel {
 				'required' =>  array(
 					'rule' => VALID_NOT_EMPTY,
 					'message' => __('scormplugin.sco.datafromlms.empty', true),
-					'required' => false
+					'required' => false,
+					'allowEmpty' => true
 					)
 				),
 			'scormType' => array(
