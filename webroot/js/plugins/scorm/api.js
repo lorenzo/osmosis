@@ -1,4 +1,4 @@
-function Scorm_2004 (){
+Scorm_2004 = function (){
 	var errorCode;
 	var Initialized;
 	var Terminated;
@@ -95,15 +95,111 @@ function Scorm_2004 (){
 	    Whether or not specific data model elements are supported.
 	*/
 	function GetValue(element){
-		return '';
-	}
+		errorCode = "0";
+        diagnostic = "";
+        if ((Initialized) && (!Terminated)) {
+            if (element !="") {
+                expression = new RegExp(CMIIndex,'g');
+                elementmodel = element.replace(expression,'.n.');
+				// CMIIndex = '[._](\\d+).';
+                if ((typeof eval('datamodel["'+elementmodel+'"]')) != "undefined") {
+                    if (eval('datamodel["'+elementmodel+'"].mod') != 'w') {
+
+                        element = element.replace(/\.(\d+)\./, ".N$1.");
+                        element = element.replace(/\.(\d+)\./, ".N$1.");
+
+                        elementIndexes = element.split('.');
+                        subelement = element.substr(0,3);
+                        i = 1;
+
+                        while ((i < elementIndexes.length) && (typeof eval(subelement) != "undefined")) {
+                            subelement += '.'+elementIndexes[i++];
+                        }
+
+                        if (subelement == element) {
+
+                            if ((typeof eval(subelement) != "undefined") && (eval(subelement) != null)) {
+                                errorCode = "0";
+                                return eval(element);
+                            } else {
+                                errorCode = "403";
+                            }
+                        } else {
+                            errorCode = "301";
+                        }
+                    } else {
+                        //errorCode = eval('datamodel["'+elementmodel+'"].readerror');
+                        errorCode = "405";
+                    }
+                } else {
+                    childrenstr = '._children';
+                    countstr = '._count';
+                    if (elementmodel.substr(elementmodel.length-childrenstr.length,elementmodel.length) == childrenstr) {
+                        parentmodel = elementmodel.substr(0,elementmodel.length-childrenstr.length);
+                        if ((typeof eval('datamodel["'+parentmodel+'"]')) != "undefined") {
+                            errorCode = "301";
+                            diagnostic = "Data Model Element Does Not Have Children";
+                        } else {
+                            errorCode = "401";
+                        }
+                    } else if (elementmodel.substr(elementmodel.length-countstr.length,elementmodel.length) == countstr) {
+                        parentmodel = elementmodel.substr(0,elementmodel.length-countstr.length);
+                        if ((typeof eval('datamodel["'+parentmodel+'"]')) != "undefined") {
+                            errorCode = "301";
+                            diagnostic = "Data Model Element Cannot Have Count";
+                        } else {
+                            errorCode = "401";
+                        }
+                    } else {
+                        parentmodel = 'adl.nav.request_valid.';
+                        if (element.substr(0,parentmodel.length) == parentmodel) {
+                            if (element.substr(parentmodel.length).match(NAVTarget) == null) {
+                                errorCode = "301";
+                            } else {
+                                if (adl.nav.request == element.substr(parentmodel.length)) {
+                                    return "true";
+                                } else if (adl.nav.request == '_none_') {
+                                    return "unknown";
+                                } else {
+                                    return "false";
+                                }
+                            }
+                        } else {
+                            errorCode = "401";
+                        }
+                    }
+                }
+            } else {
+                errorCode = "301";
+            }
+        } else {
+            if (Terminated) {                
+                errorCode = "123";
+            } else {
+                errorCode = "122";
+            }
+        }
+        return '';
+    }
 	
 	/* Description: The method is used to request the transfer to the LMS of the value of
 	parameter_2 for the data element specified as parameter_1. This method allows the
 	SCO to send information to the LMS for storage. The API Instance may be designed to
 	immediately persist data that was set (to the server-side component) or store data in a
 	local (client-side) cache.
+		Return Value: The method can return one of two values. The return value shall be
+	represented as a characterstring. The quotes ("") are not part of the characterstring
+	returned, they are used purely to delineate the values returned.
+    - "true"  The characterstring "true" shall be returned if the LMS accepts the
+       content of parameter_2 to set the value of parameter_1.
+    - "false"  The characterstring "false" shall be returned if the LMS encounters
+       an error in setting the contents of parameter_1 with the value of parameter_2.
+       The SCO may call GetLastError() to determine the type of error. More detailed
+       information pertaining to the error may be provided by the LMS through the
+       GetDiagnostic() function.
+
 	*/
+	
 	function SetValue(element, value){
 		return '';
 	}
@@ -126,7 +222,22 @@ function Scorm_2004 (){
 	abnormally or otherwise terminates prematurely prior to a call to Terminate("").
 	*/
 	function Commit(empty){
-		return '';	
+		errorCode = "0";
+        if (param == "") {
+            if ((Initialized) && (!Terminated)) {
+                result = StoreData(cmi,false);
+                return "true";
+            } else {
+                if (Terminated) {
+                    errorCode = "143";
+                } else {
+                    errorCode = "142";
+                }
+            }
+        } else {
+            errorCode = "201";
+        }
+        return "false";
 	}
 	
 	/*Description: This method requests the error code for the current error state of the API
@@ -136,6 +247,10 @@ function Scorm_2004 (){
 	Method was successful. The GetLastError() can be used to return the current error
 	code. If an error was encountered during the processing of a function, the SCO may take
 	appropriate steps to alleviate the problem.
+		Return Value: The API Instance shall return the error code reflecting the current error
+	state of the API Instance. The return value shall be a characterstring (convertible to an
+	integer in the range from 0 to 65536 inclusive) representing the error code of the last
+	error encountered.
 	*/
 	function GetLastError(){
 		return '0';
@@ -147,6 +262,18 @@ function Scorm_2004 (){
 	shall be responsible for supporting the error codes identified in Section 3.1.7: API
 	Implementation Error Codes. This call has no effect on the current error state; it simply
 	returns the requested information.
+		Return Value: The method shall return a textual message containing a description of the
+	error code specified by the value of the parameter. The following requirements shall be
+	adhered to for all return values:
+    - The return value shall be a characterstring that has a maximum length of 255
+      characters.
+    - SCORM makes no requirement on what the text of the characterstring shall
+      contain. The error codes themselves are explicitly and exclusively defined. The
+      textual description for the error code is LMS specific.
+    - If the requested error code is unknown by the LMS, an empty characterstring ("")
+      shall be returned. This is the only time that an empty characterstring shall be
+      returned.
+
 	*/
 	function GetErrorString(error_code){
 		return '';	
