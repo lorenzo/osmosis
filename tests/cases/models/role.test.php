@@ -3,16 +3,16 @@
 loadModel('Member');
 loadModel('Role');
 
-class MemberTestCase extends CakeTestCase {
+class RoleTestCase extends CakeTestCase {
 	var $TestObject = null;
 	var $fixtures = array('member','role');
 
 	function setUp() {
-		$this->TestObject = new Member();
+		$this->TestObject = new Role();
 		$this->TestObject->useDbConfig = 'test_suite';
 		$this->TestObject->tablePrefix = 'test_suite_';
-		$this->TestObject->Role->useDbConfig = 'test_suite';
-		$this->TestObject->Role->tablePrefix = 'test_suite_';
+		$this->TestObject->Member->useDbConfig = 'test_suite';
+		$this->TestObject->Member->tablePrefix = 'test_suite_';
 	}
 
 	function tearDown() {
@@ -23,9 +23,13 @@ class MemberTestCase extends CakeTestCase {
 	function testParentNode() {
 		$this->TestObject->id = 1;
 		$result = $this->TestObject->parentNode();
-		$expected = array('model'=>'Role','foreign_key'=>1);
+		$expected = null;
+		$this->assertEqual($result, $expected);
+		$this->TestObject->id = 3;
+		$result = $this->TestObject->parentNode();
+		$expected = 2;
 		$this->assertEqual($result, $expected);
 	}
-
+	
 }
 ?>

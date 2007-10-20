@@ -2,7 +2,7 @@
 class Role extends AppModel {
 
 	var $name = 'Role';
-	var $validate = /*array(
+	var $validate = null;/*array(
 		'parent_id' => VALID_NOT_EMPTY,
 		'role' => VALID_NOT_EMPTY,
 	);*/
@@ -35,10 +35,10 @@ class Role extends AppModel {
             return null;
         }
         $data = $this->read();
-        if (!$data[$this->name][$this->Parent->foreignKey]){
+        if (!$data[$this->name]['parent_id']){
             return null;
         } else {
-            return $data[$this->name][$this->Parent->foreignKey];
+            return $data[$this->name]['parent_id'];
         }
     }
 

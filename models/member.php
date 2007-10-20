@@ -39,10 +39,10 @@ class Member extends AppModel {
             return null;
         }
         $data = $this->read();
-        if (!$data[$this->name][$this->Role->foreignKey]){
+        if (!$data[$this->name]['role_id']){
             return null;
         } else {
-            return array('model' => 'Role', 'foreign_key' => $data[$this->Name][$this->Role->foreignKey]);
+            return array('model' => 'Role', 'foreign_key' => $data[$this->name]['role_id']);
         }
     }
 
