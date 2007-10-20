@@ -3,7 +3,7 @@ class ScormsController extends ScormAppController {
 
 	var $name = 'Scorms';
 	var $components = array('Zip');
-	var $helpers = array('Html', 'Form', 'Tree');
+	var $helpers = array('Html', 'Form', 'Tree', 'Javascript');
 
 	function index() {
 		$this->Scorm->recursive = 0;

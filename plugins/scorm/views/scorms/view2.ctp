@@ -1,4 +1,5 @@
 <?php
+	echo $javascript->link('plugins/scorm/api', false);
 	echo $this->renderElement('scorms/scorm_toc', array('cache' => '1 day', 'scorm' => $scorm,"foo". $scorm['Scorm']['id'] =>'foo'));
 ?>
 <div id="scorm_viewport">

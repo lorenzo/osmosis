@@ -9,6 +9,7 @@
 	</title>
 
 	<?php echo $html->charset();?>
+	<?php echo $scripts_for_layout;?>
 
 	<link rel="icon" href="<?php echo $this->webroot;?>favicon.ico" type="image/x-icon" />
 	<link rel="shortcut icon" href="<?php echo $this->webroot;?>favicon.ico" type="image/x-icon" />
