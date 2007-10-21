@@ -201,7 +201,17 @@ Scorm_2004 = function (){
 	*/
 	
 	function SetValue(element, value){
-		return '';
+		errorCode = "0";
+		diagnostic = "";
+		
+		if ((Initialized) && (!Terminated)) {
+			if (element=="") {
+				errorCode = "351";
+				return "";
+			}
+			
+		}
+		return "";
 	}
 	
 	/* Description: The method requests forwarding to the persistent data store any data from
@@ -222,7 +232,7 @@ Scorm_2004 = function (){
 	abnormally or otherwise terminates prematurely prior to a call to Terminate("").
 	*/
 	function Commit(empty){
-		errorCode = "0";
+	errorCode = "0";
         if (param == "") {
             if ((Initialized) && (!Terminated)) {
                 result = StoreData(cmi,false);
@@ -253,7 +263,7 @@ Scorm_2004 = function (){
 	error encountered.
 	*/
 	function GetLastError(){
-		return '0';
+		return this.errorCode;
 	}
 	
 	/*Description: The GetErrorString() function can be used to retrieve a textual
@@ -276,7 +286,7 @@ Scorm_2004 = function (){
 
 	*/
 	function GetErrorString(error_code){
-		return '';	
+		return this.GetErrorString(code);
 	}
 	
 	/*Description: The GetDiagnostic() function exists for LMS specific use. It allows the
@@ -284,7 +294,7 @@ Scorm_2004 = function (){
 	no effect on the current error state; it simply returns the requested information.
 	*/
 	function GetDiagnostic(wtf){
-		return '';	
+		return '';
 	}
 	
 	function GetErrorString (param) {
