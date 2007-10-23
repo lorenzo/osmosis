@@ -2,25 +2,22 @@
 class ChoiceConsideration extends ScormAppModel {
 
 	var $name = 'ChoiceConsideration';
-	var $validate = null;
-	function __construct() {
-	parent::__construct();
-		$this->validate = array(
+	var	$validate = array(
 			'preventActivation' => array(
 				'Boolean' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.choiseconsideration.preventactivation.boolean', true),
+					'message' => 'scormplugin.choiseconsideration.preventactivation.boolean',
 					'required' => false
 				)
 			),
 			'constrainChoice' => array(
 				'Boolean' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.choiseconsideration.constrainchoice.boolean', true),
+					'message' => 'scormplugin.choiseconsideration.constrainchoice.boolean',
 					'required' => false
 				)
 			)
 		);
-	}
+
 }
 ?>

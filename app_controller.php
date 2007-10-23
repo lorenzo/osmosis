@@ -1,6 +1,6 @@
 <?php
 class AppController extends Controller {
-    var $components = array('Acl','Auth');
+  //  var $components = array('Acl','Auth');
  	
 	function beforeFilter() {
 		if (isset($this->Auth)) {

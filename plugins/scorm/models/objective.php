@@ -2,47 +2,42 @@
 class Objective extends ScormAppModel {
 
 	var $name = 'Objective';
-	var $validate = null;
 	var $hasOne = array(
 			'MapInfo' => array('className' => 'MapInfo',
 								'foreignKey' => 'objective_id',
 								'dependent' => true)
 	);
 	var $actsAs = array('transaction');
-	function __construct() {
-		loadModel('scorm.MapInfo');
-		parent::__construct();
-		$this->validate = array(
+	var $validate = array(
 			'objectiveID' => array(
 				'required' =>  array(
 					'rule' => VALID_NOT_EMPTY,
-					'message' => __('scormplugin.objective.objectiveid.empty', true),
+					'message' => 'scormplugin.objective.objectiveid.empty',
 					'required' => true,
 				)
 			),
 			'satisfiedByMeasure' => array(
 				'required' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.objective.satisfiedbymeasure.boolean', true),
+					'message' => 'scormplugin.objective.satisfiedbymeasure.boolean',
 					'required' => false
 				)
 			),
 			'minNormalizedMeasure' => array(
 				'required' =>  array(
 					'rule' => 'decimal',
-					'message' => __('scormplugin.objective.minnormalizedmeasure.decimal', true),
+					'message' => 'scormplugin.objective.minnormalizedmeasure.decimal',
 					'required' => false),
 				'greater' =>  array(
 					'rule' => array('comparison','>=',-1),
-					'message' => __('scormplugin.objective.minnormalizedmeasure.between', true),
+					'message' => 'scormplugin.objective.minnormalizedmeasure.between',
 					'required' => false),
 				'less' =>  array(
 					'rule' => array('comparison','<=',1),
-					'message' => __('scormplugin.objective.minnormalizedmeasure.between', true),
+					'message' => 'scormplugin.objective.minnormalizedmeasure.between',
 					'required' => false)
 			)	
 		);
-	}
 	
 	function save($data=null,$validate=true,$fields=array()) {
 		$this->begin();

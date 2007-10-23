@@ -2,8 +2,6 @@
 class Condition extends ScormAppModel {
 
 	var $name = 'Condition';
-	var $validate = null;
-
 	var $belongsTo = array(
 		'Rule' => array('className' => 'Rule',
 			'foreignKey' => 'rule_id',
@@ -14,9 +12,7 @@ class Condition extends ScormAppModel {
 		)
 	);
 
-	function __construct() {
-		parent::__construct();
-		$this->validate = array(
+	var	$validate = array(
 			'referencedObjective' => array (
 				'NotEmpty' => array (
 					'rule' => 'objectiveExists',
@@ -53,7 +49,6 @@ class Condition extends ScormAppModel {
 				)
 			)
 		);
-	}
 
 	/**
 	 * Validates the allowed values of the condition field.

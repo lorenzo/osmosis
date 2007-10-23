@@ -2,53 +2,50 @@
 class ControlMode extends ScormAppModel {
 
 	var $name = 'ControlMode';
-	var $validate = null;
-	function __construct() {
-		parent::__construct();
-		$this->validate = array(
+	var	$validate = array(
 			'choiceExit' => array(
 				'Boolean' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.controlmode.choiceexit.boolean', true),
+					'message' => 'scormplugin.controlmode.choiceexit.boolean',
 					'required' => false
 				)
 			),
 			'choice' => array(
 				'Boolean' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.controlmode.choice.boolean', true),
+					'message' => 'scormplugin.controlmode.choice.boolean',
 					'required' => false
 				)
 			),
 			'flow' => array(
 				'Boolean' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.controlmode.flow.boolean', true),
+					'message' => 'scormplugin.controlmode.flow.boolean',
 					'required' => false
 				)
 			),
 			'forwardOnly' => array(
 				'Boolean' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.controlmode.forwardonly.boolean', true),
+					'message' => 'scormplugin.controlmode.forwardonly.boolean',
 					'required' => false
 				)
 			),
 			'useCurrentAttemptObjectiveInfo' => array(
 				'Boolean' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.controlmode.usecurrentattemptobjectiveinfo.boolean', true),
+					'message' => 'scormplugin.controlmode.usecurrentattemptobjectiveinfo.boolean',
 					'required' => false
 				)
 			),
 			'useCurrentAttemptProgressInfo' => array(
 				'Boolean' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.controlmode.usecurrentattemptprogressinfo.boolean', true),
+					'message' => 'scormplugin.controlmode.usecurrentattemptprogressinfo.boolean',
 					'required' => false
 				)
 			)
 		);
-	}
+
 }
 ?>

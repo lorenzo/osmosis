@@ -2,11 +2,8 @@
 class Rule extends ScormAppModel {
 
 	var $name = 'Rule';
-	var $validate = null;
-    var $actsAs = array('transaction');
-	function __construct() {
-		parent::__construct();
-		$this->validate = array(
+  var $actsAs = array('transaction');
+	var $validate = array(
 			'type' => array (
 				'rule' => '/(pre|post|exit|rollup)/',
 				'message' => 'scorm.rule.type.allowedvalues',
@@ -53,7 +50,6 @@ class Rule extends ScormAppModel {
 				)
 			),
 		);
-	}
 
 	var $hasMany = array(
 		'Condition' => array(

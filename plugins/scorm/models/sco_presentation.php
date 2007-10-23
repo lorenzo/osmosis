@@ -3,18 +3,15 @@ class ScoPresentation extends ScormAppModel {
 
 	var $name = 'ScoPresentation';
 	var $primaryKey = 'id';
-	function __construct() {
-		parent::__construct();
-		$this->validate = array(
+	var $validate = array(
 			'hideKey' => array(
 				'Token' =>  array(
 					'rule' => 'ValidateHidekeyToken',
-					'message' => __('scormplugin.scopresentation.hidekey.token', true),
+					'message' => 'scormplugin.scopresentation.hidekey.token',
 					'required' => false
 				)
 			),
 		);
-	}
 	
 	function ValidateHidekeyToken($field){
 	$regex = ('/(previous|continue|exit|exitAll|abandon|abandonAll|suspendAll)/');

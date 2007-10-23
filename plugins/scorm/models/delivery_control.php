@@ -2,32 +2,29 @@
 class DeliveryControl extends ScormAppModel {
 
 	var $name = 'DeliveryControl';
-	var $validate = null;
-	function __construct() {
-	parent::__construct();
-		$this->validate = array(
+	var	$validate = array(
 			'tracked' => array(
 				'Boolean' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.deliverycontrol.tracked.boolean', true),
+					'message' => 'scormplugin.deliverycontrol.tracked.boolean',
 					'required' => false
 				)
 			),
 			'completionSetByContent' => array(
 				'Boolean' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.deliverycontrol.completionsetbycontent.boolean', true),
+					'message' => 'scormplugin.deliverycontrol.completionsetbycontent.boolean',
 					'required' => false
 				)
 			),
 			'objectiveSetByContent' => array(
 				'Boolean' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.deliverycontrol.objectivesetbycontent.boolean', true),
+					'message' => 'scormplugin.deliverycontrol.objectivesetbycontent.boolean',
 					'required' => false
 				)
 			)
 		);
-	}
+
 }
 ?>

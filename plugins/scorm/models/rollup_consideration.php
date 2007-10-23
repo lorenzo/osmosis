@@ -2,47 +2,43 @@
 class RollupConsideration extends ScormAppModel {
 
 	var $name = 'RollupConsideration';
-	var $validate = null;
-	function __construct() {
-	parent::__construct();
-		$this->validate = array(
+	var $validate = array(
 			'requiredForSatisfied' => array(
 				'Token' =>  array(
 					'rule' => 'ValidateToken',
-					'message' => __('scormplugin.rollupconsideration.requiredforsatisfied.token', true),
+					'message' => 'scormplugin.rollupconsideration.requiredforsatisfied.token',
 					'required' => false
 				)
 			),
 			'requiredForNotSatisfied' => array(
 				'Token' =>  array(
 					'rule' => 'ValidateToken',
-					'message' => __('scormplugin.rollupconsideration.requiredfornotsatisfied.token', true),
+					'message' => 'scormplugin.rollupconsideration.requiredfornotsatisfied.token',
 					'required' => false
 				)
 			),
 			'requiredForComplete' => array(
 				'Token' =>  array(
 					'rule' => 'ValidateToken',
-					'message' => __('scormplugin.rollupconsideration.requiredforcomplete.token', true),
+					'message' => 'scormplugin.rollupconsideration.requiredforcomplete.token',
 					'required' => false
 				)
 			),
 			'requiredForIncomplete' => array(
 				'Token' =>  array(
 					'rule' => 'ValidateToken',
-					'message' => __('scormplugin.rollupconsideration.requiredforincomplete.token', true),
+					'message' => 'scormplugin.rollupconsideration.requiredforincomplete.token',
 					'required' => false
 				)
 			),
 			'measureSatisfactionIfActive' => array(
 				'Boolean' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.rollupconsideration.measuresatisfactionifactive.boolean', true),
+					'message' => 'scormplugin.rollupconsideration.measuresatisfactionifactive.boolean',
 					'required' => false
 				)
 			)
 		);
-	}
 	
 function ValidateToken($field){
 	$regex = ('/(always|ifAttempted|ifNotSkipped|ifNotSuspended)/');

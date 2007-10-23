@@ -2,7 +2,6 @@
 class Sco extends ScormAppModel {
 
 	var $name = 'Sco';
-	var $validate = null;
 	var $hasMany = array(
 			'SubItem' => array('className' => 'Sco',
 								'foreignKey' => 'parent_id',
@@ -43,47 +42,45 @@ class Sco extends ScormAppModel {
 								'dependent' => true)
 	);
 	var $actsAs = array('transaction');
-	function __construct() {
-		parent::__construct();
-		$this->validate = array(
+	var $validate = array(
 			'manifest' => array(
 				'required' =>  array(
 					'rule' => VALID_NOT_EMPTY,
-					'message' => __('scormplugin.sco.manifest.empty', true),
+					'message' => 'scormplugin.sco.manifest.empty',
 					'required' => true
 				)
 			),
 			'organization' => array(
 				'required' =>  array(
 					'rule' => VALID_NOT_EMPTY,
-					'message' => __('scormplugin.sco.organization.empty', true),
+					'message' => 'scormplugin.sco.organization.empty',
 					'required' => true
 				)
 			),
 			'identifier' => array(
 				'required' =>  array(
 					'rule' => VALID_NOT_EMPTY,
-					'message' => __('scormplugin.sco.identifier.empty', true),
+					'message' => 'scormplugin.sco.identifier.empty',
 					'required' => true)
 				),
 			'title' => array(
 				'required' =>  array(
 					'rule' => VALID_NOT_EMPTY,
-					'message' => __('scormplugin.sco.title.empty', true),
+					'message' => 'scormplugin.sco.title.empty',
 					'required' => true
 					)
 				),
 			'href' => array(
 				'required' =>  array(
 					'rule' => VALID_NOT_EMPTY,
-					'message' => __('scormplugin.sco.href.empty', true),
+					'message' => 'scormplugin.sco.href.empty',
 					'required' => false
 					)
 				),
 			'completionThreshold' => array(
 				'required' =>  array(
 					'rule' => 'decimal',
-					'message' => __('scormplugin.sco.completionthreshold.decimal', true),
+					'message' => 'scormplugin.sco.completionthreshold.decimal',
 					'required' => false,
 					'allowEmpty' => true
 					)
@@ -91,28 +88,28 @@ class Sco extends ScormAppModel {
 			'isvisible' => array(
 				'required' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.sco.isvisible.boolean', true),
+					'message' => 'scormplugin.sco.isvisible.boolean',
 					'required' => false
 					)
 				),
 			'attemptLimit' => array(
 				'required' =>  array(
 					'rule' => 'numeric',
-					'message' => __('scormplugin.sco.attemptlimit.integer', true),
+					'message' => 'scormplugin.sco.attemptlimit.integer',
 					'required' => false
 					)
 				),
 			'attemptAbsoluteDurationLimit' => array(
 				'required' =>  array(
 					'rule' => VALID_NOT_EMPTY,
-					'message' => __('scormplugin.sco.attemptabsolutedurationlimit.empty', true),
+					'message' => 'scormplugin.sco.attemptabsolutedurationlimit.empty',
 					'required' => false
 					)
 				),
 			'dataFromLMS' => array(
 				'required' =>  array(
 					'rule' => VALID_NOT_EMPTY,
-					'message' => __('scormplugin.sco.datafromlms.empty', true),
+					'message' => 'scormplugin.sco.datafromlms.empty',
 					'required' => false,
 					'allowEmpty' => true
 					)
@@ -120,19 +117,18 @@ class Sco extends ScormAppModel {
 			'scormType' => array(
 				'required' =>  array(
 					'rule' => '/(sco|asset)/',
-					'message' => __('scormplugin.sco.scormtype.token', true),
+					'message' => 'scormplugin.sco.scormtype.token',
 					'required' => false
 					)
 				),
 			'parameters' => array(
 				'required' =>  array(
 					'rule' => VALID_NOT_EMPTY,
-					'message' => __('scormplugin.sco.parameters.empty', true),
+					'message' => 'scormplugin.sco.parameters.empty',
 					'required' => false
 					)
 				)
 		);
-	}
 	
 	function save($data=null,$validate=true,$fields=array()) {
 		$saved = parent::save($data,$validate,$fields);

@@ -1,8 +1,7 @@
 <?php
 class Rollup extends ScormAppModel {
 	var $name = 'Rollup';
-	var $validate = null;
-    var $actsAs = array('transaction');
+  var $actsAs = array('transaction');
 	var $hasMany = array(
 		'Rule' => array(
 			'className' => 'Rule',
@@ -19,9 +18,7 @@ class Rollup extends ScormAppModel {
 		)
 	);
 
-	function __construct() {
-		parent::__construct();
-		$this->validate = array(
+	var $validate = array(
 			'rollupObjectiveSatisfied' => array (
 				'rule' => IS_BOOLEAN,
 				'message' => 'scorm.rollup.rollupobjectivesatisfied.boolean',
@@ -49,7 +46,6 @@ class Rollup extends ScormAppModel {
 				),
 			)
 		);
-	}
 	
 	function save($data=null,$validate=true,$fields=array()) {
 		$saved = parent::save($data,$validate,$fields);

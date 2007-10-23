@@ -2,46 +2,42 @@
 class MapInfo extends ScormAppModel {
 
 	var $name = 'MapInfo';
-	var $validate = null;
-	
-	function __construct($id = false, $table = null, $ds = null) {
-		parent::__construct($id,$table,$ds);
-		$this->validate = array(
+	var $validate = array(
 			'targetObjectiveID' => array(
 				'required' =>  array(
 					'rule' => VALID_NOT_EMPTY,
-					'message' => __('scormplugin.mapinfo.targetobjectiveid.empty', true),
+					'message' => 'scormplugin.mapinfo.targetobjectiveid.empty',
 					'required' => true,
 				)
 			),
 			'readSatisfiedStatus' => array(
 				'required' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.mapinfo.readsatisfiedstatus.boolean', true),
+					'message' => 'scormplugin.mapinfo.readsatisfiedstatus.boolean',
 					'required' => false
 				)
 			),
 			'readNormalizedMeasure' => array(
 				'required' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.mapinfo.readnormalizedmeasure.boolean', true),
+					'message' => 'scormplugin.mapinfo.readnormalizedmeasure.boolean',
 					'required' => false)
 				),
 			'writeSatisfiedStatus' => array(
 				'required' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.mapinfo.writesatisfiedstatus.boolean', true),
+					'message' => 'scormplugin.mapinfo.writesatisfiedstatus.boolean',
 					'required' => false
 					)
 				),
 			'writeNormalizedMeasure' => array(
 				'required' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.mapinfo.writenormalizedmeasure.boolean', true),
+					'message' => 'scormplugin.mapinfo.writenormalizedmeasure.boolean',
 					'required' => false
 					)
 				)
 		);
-	}
+
 }
 ?>

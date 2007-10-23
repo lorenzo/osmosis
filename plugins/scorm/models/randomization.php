@@ -2,39 +2,35 @@
 class Randomization extends ScormAppModel {
 
 	var $name = 'Randomization';
-	var $validate = null;
-	function __construct() {
-		parent::__construct();
-		$this->validate = array(
+	var $validate = array(
 			'randomizationTiming' => array(
 				'required' =>  array(
 					'rule' => 'validTiming',
-					'message' => __('scormplugin.randomization.randomizationtiming.token', true),
+					'message' => 'scormplugin.randomization.randomizationtiming.token',
 					'required' => false,
 				)
 			),
 			'selectCount' => array(
 				'required' =>  array(
 					'rule' => 'numeric',
-					'message' => __('scormplugin.randomization.selectcount.integer', true),
+					'message' => 'scormplugin.randomization.selectcount.integer',
 					'required' => false
 				)
 			),
 			'reorderChildren' => array(
 				'required' =>  array(
 					'rule' => IS_BOOLEAN,
-					'message' => __('scormplugin.randomization.reorderchildren.empty', true),
+					'message' => 'scormplugin.randomization.reorderchildren.empty',
 					'required' => false)
 				),
 			'selectionTiming' => array(
 				'required' =>  array(
 					'rule' => 'validTiming',
-					'message' => __('scormplugin.randomization.selectiontiming.token', true),
+					'message' => 'scormplugin.randomization.selectiontiming.token',
 					'required' => false
 					)
 				)
 		);
-	}
 	
 	function validTiming($check) {
 		return preg_match('/(never|once|onEachNewAttempt)/',$check);
