@@ -153,8 +153,6 @@ class Sco extends ScormAppModel {
 				$data['PrimaryObjective']['sco_id'] = $this->getLastInsertId();
 				$data['PrimaryObjective']['primary'] = 1;
 				$saved = $this->Objective->save($data['PrimaryObjective']);
-				if(!$saved)
-					break;
 		}
 		if($saved && isset($data['Objective'])) {
 			foreach($data['Objective'] as $objective){
@@ -168,38 +166,26 @@ class Sco extends ScormAppModel {
 		if($saved && isset($data['Randomization'])) {
 				$data['Randomization']['sco_id'] = $this->getLastInsertId();
 				$saved = $this->Randomization->save($data['Randomization']);
-				if(!$saved)
-					break;
 		}
 		if($saved && isset($data['Rollup'])) {
 			$data['Rollup']['sco_id'] = $this->getLastInsertId();
 			$saved = $this->Rollup->save($data['Rollup']);
-			if(!$saved)
-				break;
 		}
 		if($saved && isset($data['Choice'])) {
 				$data['Choice']['sco_id'] = $this->getLastInsertId();
 				$saved = $this->Choice->save($data['Choice']);
-				if(!$saved)
-					break;
 		}
 		if($saved && isset($data['Consideration'])) {
 				$data['Consideration']['sco_id'] = $this->getLastInsertId();
 				$saved = $this->Consideration->save($data['Consideration']);
-				if(!$saved)
-					break;
 		}
 		if($saved && isset($data['Control'])) {
 				$data['Control']['sco_id'] =$this->getLastInsertId();
 				$saved = $this->Control->save($data['Control']);
-				if(!$saved)
-					break;
 		}
 		if($saved && isset($data['DeliveryControl'])) {
 				$data['DeliveryControl']['sco_id'] = $this->getLastInsertId();
 				$saved = $this->DeliveryControl->save($data['DeliveryControl']);
-				if(!$saved)
-					break;
 		}
 		if(isset($data['Rule'])) {
 			if(isset($data['Rule']['Pre'])) {

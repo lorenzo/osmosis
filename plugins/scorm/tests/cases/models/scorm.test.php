@@ -12,6 +12,7 @@ loadModel('scorm.RollupConsideration');
 loadModel('scorm.ScoPresentation');
 loadModel('scorm.ControlMode');
 loadModel('scorm.DeliveryControl');
+loadModel('scorm.MapInfo');
 class ScormTestCase extends CakeTestCase {
 	var $TestObject = null;
 	var $fixtures = array('scorm',
@@ -1226,5 +1227,24 @@ eof;
 		$this->assertEqual(1,1);
 		
 	}
+
+	function testXMLBase() {
+		$data['Scorm'] = array(
+			'id' => 101,
+			'course_id'		=> 1,
+			'name'		=> 'testScorm',
+			'file_name'		=> 'ScromTest.zip',
+			'description'	=> 'A scorm test_suite',
+			'created'		=> '2007-1-1',
+			'modified'		=> '2007-1-1',
+			'hash'		=> 'slsdaslkfwerew498fwlw'
+		);
+		$this->assertTrue($this->TestObject->parseManifest(TMP.'tests'.DS.'imsmanifests'.DS.'3'));
+		$this->TestObject->save($data);
+		$expect = 'resources/';
+		$this->TestObject->Sco->recursive = -1;
+		$result = $this->TestObject->Sco->find(array('scorm_id'=>101),array('href'));
+		$this->assertTrue(strncmp($expect,$result['Sco']['href'],10)==0);
+	}	
 }
 ?>

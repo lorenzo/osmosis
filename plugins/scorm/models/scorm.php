@@ -463,10 +463,11 @@ class Scorm extends ScormAppModel {
 			if(isset($item->attributes['identifierref'])) {
 				$resource = $this->data['Resource'][$item->attributes['identifierref']];
 				unset($resource['identifier']);
-				if((isset($this->data['Scorm']['xml:base']) || isset($this->data['Scorm']['xml:base'])) && isset($resource['href'])) {
+				if((isset($this->data['Scorm']['xml:base']) || isset($this->data['Scorm']['xml:base']))  || isset($resource['xml:base']) && isset($resource['href'])) {
 					@$resource['href'] =
 						$this->data['Scorm']['xml:base'] .
 						$this->data['Resource']['xml:base'] .
+						$resource['xml:base'] .
 						$resource['href'];
 				}
 				$items[$identifier] = am($items[$identifier],$resource);
