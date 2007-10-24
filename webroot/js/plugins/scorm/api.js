@@ -12,7 +12,7 @@ var adminEmail = 'joaquin@aikon.com.ve';
 var Scorm_2004 = function(){
 	/* Allowed Children values */
 	this.cmi_children = '_version, comments_from_learner, comments_from_lms, completion_status, credit, entry, exit, interactions, launch_data, learner_id, learner_name, learner_preference, location, max_time_allowed, mode, objectives, progress_measure, scaled_passing_score, score, session_time, success_status, suspend_data, time_limit_action, total_time';
-	this.comments_children = 'comment, timestamp, location';
+//	this.comments_children = 'comment, timestamp, location';
 	this.interactions_children = 'id, type, objectives, timestamp, correct_responses, weighting, learner_response, result, latency, description';
 	this.score_children = 'max, raw, scaled, min';
 	this.student_preference_children = 'audio_level, audio_captioning, delivery_speed, language';
@@ -68,17 +68,17 @@ var Scorm_2004 = function(){
 	//this.NAVBoolean = '^unknown$|^true$|^false$'; // Not used
 
 	this.datamodel = {
-		'cmi._children' : {
+		/*'cmi._children' : {
 			'defaultvalue': this.cmi_children,
 			'mode':'r'
 		},
 		'cmi._version' : {
 			'defaultvalue':'1.0',
 			'mode':'r'
-		},
+		},*/
 		// cmi.comments_from_learner is a Collection of records of data
 		'cmi.comments_from_learner._children':{
-			'defaultvalue': this.comments_children,
+			'defaultvalue': 'comment, timestamp, location',
 			'mode':'r'
 		},
 		'cmi.comments_from_learner._count':{
@@ -96,7 +96,7 @@ var Scorm_2004 = function(){
 		'cmi.comments_from_learner.n.timestamp':{
 			'format': this.CMITime,
 			'mode':'rw'
-		},
+		},/*
 		// cmi.comments_from_lms is a Collection of records of data
 		'cmi.comments_from_lms._children':{
 			'defaultvalue': this.comments_children,
@@ -117,12 +117,12 @@ var Scorm_2004 = function(){
 		'cmi.comments_from_lms.n.timestamp':{
 			'format': this.CMITime,
 			'mode':'r'
-		},
+		},*/
 		'cmi.completion_status':{
 //			'defaultvalue':'<?php echo isset($userdata->{'cmi.completion_status'})?$userdata->{'cmi.completion_status'}:'unknown' ?>',
 			'format': this.CMICStatus,
 			'mode':'rw'
-		},
+		},/*
 		'cmi.completion_threshold':{
 //			'defaultvalue':<?php echo isset($userdata->threshold)?'\''.$userdata->threshold.'\'':'null' ?>,
 			'mode':'r'
@@ -130,16 +130,16 @@ var Scorm_2004 = function(){
 		'cmi.credit':{
 //			'defaultvalue':'<?php echo isset($userdata->credit)?$userdata->credit:'' ?>',
 			'mode':'r'
-		},
+		},*/
 		'cmi.entry':{
-//			'defaultvalue':'<?php echo $userdata->entry ?>',
+			'defaultvalue':'<?php echo $userdata->entry ?>',
 			'mode':'r'
 		},
 		'cmi.exit':{
 //			'defaultvalue':'<?php echo isset($userdata->{'cmi.exit'})?$userdata->{'cmi.exit'}:'' ?>',
 			'format': this.CMIExit,
 			'mode':'w'
-		},
+		},/*
 		// cmi.interactions is a Collection of records of data	
 		'cmi.interactions._children':{
 			'defaultvalue': this.interactions_children,
@@ -216,11 +216,11 @@ var Scorm_2004 = function(){
 		'cmi.learner_id':{
 //			'defaultvalue':'<?php echo $userdata->student_id ?>',
 			'mode':'r'
-		},
+		},*/
 		'cmi.learner_name':{
-//			'defaultvalue':'<?php echo addslashes($userdata->student_name) ?>',
+			'defaultvalue':'<?php echo addslashes($userdata->student_name) ?>',
 			'mode':'r'
-		},
+		},/*
 		'cmi.learner_preference._children':{
 			'defaultvalue': this.student_preference_children,
 			'mode':'r'
@@ -247,12 +247,12 @@ var Scorm_2004 = function(){
 			'format': this.CMISInteger,
 			'range': this.text_range,
 			'mode':'rw'
-		},
+		},*/
 		'cmi.location':{
 //			'defaultvalue':<?php echo isset($userdata->{'cmi.location'})?'\''.$userdata->{'cmi.location'}.'\'':'null' ?>,
 			'format': this.CMIString1000,
 			'mode':'rw'
-		},
+		},/*
 		'cmi.max_time_allowed':{
 //			'defaultvalue':<?php echo isset($userdata->maxtimeallowed)?'\''.$userdata->maxtimeallowed.'\'':'null' ?>,
 			'mode':'r'
@@ -392,7 +392,7 @@ var Scorm_2004 = function(){
 			'defaultvalue':'_none_',
 			'format': this.NAVEvent,
 			'mode':'rw'
-		}
+		}*/
 	};
 	
 	this.errorCode = "0";
@@ -470,17 +470,21 @@ var Scorm_2004 = function(){
 	//
 	this.cmi = {
 		comments_from_learner : {
-			_count : 0
+			_count : 0,
+			elements : new Array()
 		},
 		comments_from_lms : {
-			_count : 0
+			_count : 0,
+			elements : new Array()
 		},
 		interactions : {
-			_count : 0
+			_count : 0,
+			elements : new Array()
 		},
 		learner_preference : new Object(),
 		objectives : {
-			_count : 0
+			_count : 0,
+			elements : new Array()
 		},
 		score : new Object(),
 	};
@@ -544,6 +548,32 @@ var Scorm_2004 = function(){
 		Whether or not specific data model elements are supported.
 	*/
 	this.GetValue = function(element){
+		var indexes = new RegExp(this.CMIIndex,'g');
+		var index_match = element.match(indexes);
+		if (index_match!=null) index_match = index_match[0];
+		element = element.replace(indexes,'.n.');
+		
+		if (this.datamodel[element]==null) { // Temporary: Catch unhandled element
+			alert(element + " not found in datamodel. Report to: " + adminEmail);
+			this.errorCode = "402";
+			return "false";
+		}
+		
+		if (index_match!=null) {
+			index_match = index_match.replace(/\.(\d)+\./, "elements[$1]");
+			element = element.replace('.n.', '.' + index_match + '.');
+		}
+		debugGroup("GetValue: '"+element+"'");
+		debug(eval('this.' + element));
+		debug(typeof eval('this.' + element));
+		debugGroupClose();
+
+		var value = eval('this.' + element);
+		// Try to get the default value if none is set.
+		if (value == null && this.datamodel[element]!=null && this.datamodel[element].defaultvalue!=null) {
+			value = this.datamodel[element].defaultvalue;
+		}
+		return value;
 		/*errorCode = "0";
 		diagnostic = "";
 		if ((this.Initialized) && (!this.Terminated)) {
@@ -632,6 +662,18 @@ var Scorm_2004 = function(){
 		return '';
 	};
 	
+	this._validateDataModelElement = function(element, value) {
+		var rules = this.datamodel[element];
+		var formatRegex = new RegExp(rules.format);
+		value = new String(value);
+		var matches = value.match(formatRegex);
+		debugGroup("validateDataModelElement " + element + " '" + value + "'");
+		debug("Matches: '" + matches + "'");
+		debug("Join: '" + matches.join('') + "'");
+		debugGroupClose();
+		if (matches==null) return false;
+		return matches.join('').length != 0 || value.length == 0;
+	}
 	/* Description: The method is used to request the transfer to the LMS of the value of
 	parameter_2 for the data element specified as parameter_1. This method allows the
 	SCO to send information to the LMS for storage. The API Instance may be designed to
@@ -650,7 +692,7 @@ var Scorm_2004 = function(){
 	   GetDiagnostic() function.
 
 	*/
-	
+	// TODO: hay que revisar que los element de las colecciones sean válidos. (ver por ejemplo cmi.comments_from_learner._children)
 	this.SetValue = function(element, value){
 		this.errorCode = "0";
 		this.diagnostic = "";
@@ -661,66 +703,38 @@ var Scorm_2004 = function(){
 				return "false";
 			}
 			
+			var indexes = new RegExp(this.CMIIndex,'g');
+			var index_match = element.match(indexes);
+			if (index_match!=null) index_match = index_match[0];
+			element = element.replace(indexes,'.n.');
+			
 			if (this.datamodel[element]==null) { // Temporary: Catch unhandled element
 				alert(element + " not found in datamodel. Report to: " + adminEmail);
 				this.errorCode = "402";
 				return "false";
 			}
-			
-			var rules = this.datamodel[element];
-			var formatRegex = new RegExp(rules.format);
-			value = new String(value);
-			var matches = value.match(formatRegex);
+			debugGroup("Processing: " + element + " = '" + value + "'");
+			var validates = this._validateDataModelElement(element, value);
 
 			// If there was no match or if the match is empty (when value is not empty)
-			if ((matches == null) || ((matches.join('').length == 0) && (value.length != 0))) {
+			if (!validates) {
+				debug("!!Validates");
 				this.errorCode = "406";
 				return "false";
 			}
 			
-			var expression = new RegExp(this.CMIIndex,'g');
-			var elementmodel = element.replace(expression,'.n.');
-			debugGroup("element Vs. elementmodel");
-			debug("Element: " + element);
-			debug("ElementModel: " + elementmodel);
-			debugGroupClose();
-			if (element != elementmodel) { // 
-				var elementIndexes = element.split('.');
-				var subElement = 'cmi';
-				var parentElement = 'cmi';
-				var i = 0;
-				while (++i<elementIndexes.length-1 && this.errorCode=="0") {
-					elementIndex = elementIndexes[i];
-					if (elementIndexes[i+1].match(/^\d+$/)) {
-						if ((parseInt(elementIndexes[i+1]) > 0) && (elementIndexes[i+1].charAt(0) == "0")) {
-							// Index has a leading 0 (zero), this is not a number
-							errorCode = "351";
-						}
-						parentElement = subElement + '.' + elementIndex;
-						if (elementIndexes[i+1] > eval(parentElement+'._count')) {
-							errorCode = "351";
-							diagnostic = "Data Model Element Collection Set Out Of Order";
-						}
-						subelement = subelement.concat('.'+elementIndex+'.N'+elementIndexes[i+1]);
-						i++;
-						if (((typeof eval(subelement)) == "undefined") && (i < elementIndexes.length-2)) {
-							errorCode="408";
-						}
-					} else {
-						subelement = subelement.concat('.'+elementIndex);
-					}
-				}
-			}
-			
-			if (false && this.errorCode == "0") {
-				debugGroup("Type OF this.datamodel[elementmodel]");
-				debug("ElementModel: " + elementmodel);
-				debug("this.datamodel[elementmodel]");
-				debug(this.datamodel[elementmodel]);
-				debug("Type: " + (typeof this.datamodel[elementmodel]));
+			var elementPath = element.split('.');
+
+			//if (this.errorCode == "0") {
+				debugGroup("Type OF this.datamodel[element]");
+				debug("ElementModel: " + element);
+				debug("this.datamodel[element]");
+				debug(this.datamodel[element]);
+				debug("Type: " + (typeof this.datamodel[element]));
 				debugGroupClose();
-				if (typeof this.datamodel[elementmodel] != 'undefined') {
-					range = this.datamodel[elementmodel].range;
+				if (typeof this.datamodel[element].range != 'undefined') {
+					debug("has range");
+					/*range = this.datamodel[elementmodel].range;
 					debug(range);
 					ranges = range.split('#');
 					value = value * 1.0;
@@ -733,22 +747,39 @@ var Scorm_2004 = function(){
 						if ((ranges[1] == '*') || (value <= ranges[1])) {
 							eval(element+'="'+value+'";');
 							errorCode = "0";
-							<?php 
-								if (debugging('',DEBUG_DEVELOPER)) {
-									echo 'alert("SetValue("+element+","+value+") -> OK");';
-								}
-							?>
+							debug("SetValue(" + element + ", " + value + ") -> OK");
 							return "true";
 						} else {
 							errorCode = '407';
 						}
 					} else {
 						errorCode = '407';
+					}*/
+				} 
+				if (index_match!=null) {
+					index_match = index_match.replace(/\.(\d)+\./, "elements[$1]");
+					element = element.replace('.n.', '.' + index_match + '.');
+					var instantiate = element.split(index_match + '.');
+					var count = 'this.' + instantiate[0] + "_count";
+					instantiate = 'this.' + instantiate[0] + index_match;
+					debugGroup("Aregando elemento.");
+					debug(instantiate);
+					debug(eval(instantiate));
+					debugGroupClose();
+					if (eval(instantiate)==null) {
+						eval(count + '+=' + 1);
+						eval(instantiate + ' = new Object()');
 					}
-			}
-			}
-			
-			
+				}
+				eval("this." + element + " = '" + value + "';");
+				debugGroup("SetValue this." + element + " = " + value);
+				debug(eval("this." + element));
+				debug(this.cmi);
+				debugGroupClose();
+				debugGroupClose();
+				this.errorCode = "0"; 
+				return "true";
+			//}
 		}
 		return "";
 	};
@@ -928,4 +959,3 @@ var Scorm_2004 = function(){
 	
 }
 var API_1484_11 = new Scorm_2004();
-console.debug(API_1484_11);
