@@ -471,7 +471,7 @@ class Scorm extends ScormAppModel {
 						$resource['href'];
 				}
 				$items[$identifier] = am($items[$identifier],$resource);
-				$items[$identifier]['scormType'] = $items[$identifier]['adlcp:scormType'];
+				$items[$identifier]['scormType'] = (!isset($items[$identifier]['adlcp:scormType'])) ? 'sco' : $items[$identifier]['adlcp:scormType'] ;
 			}
 			$items[$identifier]['title'] =  $title[0]->value;
 			$items[$identifier]['metadata'] = $this->getLocationFromMetadata($item);

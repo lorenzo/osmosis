@@ -139,7 +139,7 @@ var Scorm_2004 = function(){
 //			'defaultvalue':'<?php echo isset($userdata->{'cmi.exit'})?$userdata->{'cmi.exit'}:'' ?>',
 			'format': this.CMIExit,
 			'mode':'w'
-		},/*
+		},
 		// cmi.interactions is a Collection of records of data	
 		'cmi.interactions._children':{
 			'defaultvalue': this.interactions_children,
@@ -179,7 +179,7 @@ var Scorm_2004 = function(){
 			'pattern': this.CMIIndex,
 			'mode':'r'
 		},
-		'cmi.interactions.n.correct_responses.n.pattern':{
+		'cmi.interactions.n.correct_responses.n1.pattern':{
 			'pattern': this.CMIIndex,
 			'format':this.CMIFeedback,
 			'mode':'rw'
@@ -208,7 +208,7 @@ var Scorm_2004 = function(){
 			'pattern': this.CMIIndex,
 			'format': this.CMILangString250,
 			'mode':'rw'
-		},
+		},/*
 		'cmi.launch_data':{
 //			'defaultvalue':<?php echo isset($userdata->datafromlms)?'\''.$userdata->datafromlms.'\'':'null' ?>,
 			'mode':'r'
@@ -306,7 +306,10 @@ var Scorm_2004 = function(){
 			'mode':'rw'
 		},
 		'cmi.objectives.n.success_status':{
-			'defaultvalue':'unknown',
+		for (i=0;i<index_match.length;i++) {
+					element = element.replace(index_match[i], '.n' + index_str + '.')
+					index_str = i+1;
+				}	'defaultvalue':'unknown',
 			'pattern': this.CMIIndex,
 			'format': this.CMISStatus,
 			'mode':'rw'
@@ -387,12 +390,12 @@ var Scorm_2004 = function(){
 		'cmi.total_time':{
 //			'defaultvalue':'<?php echo isset($userdata->{'cmi.total_time'})?$userdata->{'cmi.total_time'}:'PT0H0M0S' ?>',
 			'mode':'r'
-		},
+		},*/
 		'adl.nav.request':{
 			'defaultvalue':'_none_',
 			'format': this.NAVEvent,
 			'mode':'rw'
-		}*/
+		}
 	};
 	
 	this.errorCode = "0";
@@ -470,20 +473,16 @@ var Scorm_2004 = function(){
 	//
 	this.cmi = {
 		comments_from_learner : {
-			_count : 0,
 			elements : new Array()
 		},
 		comments_from_lms : {
-			_count : 0,
 			elements : new Array()
 		},
 		interactions : {
-			_count : 0,
 			elements : new Array()
 		},
 		learner_preference : new Object(),
 		objectives : {
-			_count : 0,
 			elements : new Array()
 		},
 		score : new Object(),
@@ -548,13 +547,15 @@ var Scorm_2004 = function(){
 		Whether or not specific data model elements are supported.
 	*/
 	this.GetValue = function(element){
+		this.errorCode = "0";
 		var indexes = new RegExp(this.CMIIndex,'g');
 		var index_match = element.match(indexes);
 		if (index_match!=null) index_match = index_match[0];
 		element = element.replace(indexes,'.n.');
 		
 		if (this.datamodel[element]==null) { // Temporary: Catch unhandled element
-			alert(element + " not found in datamodel. Report to: " + adminEmail);
+			if (element.match('adl.')==null)
+				alert(element + " not found in datamodel. Report to: " + adminEmail);
 			this.errorCode = "402";
 			return "false";
 		}
@@ -563,11 +564,17 @@ var Scorm_2004 = function(){
 			index_match = index_match.replace(/\.(\d)+\./, "elements[$1]");
 			element = element.replace('.n.', '.' + index_match + '.');
 		}
+		
+		
 		debugGroup("GetValue: '"+element+"'");
 		debug(eval('this.' + element));
 		debug(typeof eval('this.' + element));
 		debugGroupClose();
-
+		
+		if (element.match('._count')!=null) {
+			element = element.replace('._count', '.elements.length');
+		}
+		
 		var value = eval('this.' + element);
 		// Try to get the default value if none is set.
 		if (value == null && this.datamodel[element]!=null && this.datamodel[element].defaultvalue!=null) {
@@ -705,7 +712,14 @@ var Scorm_2004 = function(){
 			
 			var indexes = new RegExp(this.CMIIndex,'g');
 			var index_match = element.match(indexes);
-			if (index_match!=null) index_match = index_match[0];
+			if (index_match!=null) {
+				var index_str = '';
+				for (i=0;i<index_match.length;i++) {
+					element = element.replace(index_match[i], '.n' + index_str + '.')
+					index_str = i+1;
+				}
+			}
+			//index_match = index_match[0];
 			element = element.replace(indexes,'.n.');
 			
 			if (this.datamodel[element]==null) { // Temporary: Catch unhandled element
@@ -756,26 +770,27 @@ var Scorm_2004 = function(){
 						errorCode = '407';
 					}*/
 				} 
-				if (index_match!=null) {
-					index_match = index_match.replace(/\.(\d)+\./, "elements[$1]");
-					element = element.replace('.n.', '.' + index_match + '.');
-					var instantiate = element.split(index_match + '.');
-					var count = 'this.' + instantiate[0] + "_count";
-					instantiate = 'this.' + instantiate[0] + index_match;
-					debugGroup("Aregando elemento.");
-					debug(instantiate);
-					debug(eval(instantiate));
-					debugGroupClose();
-					if (eval(instantiate)==null) {
-						eval(count + '+=' + 1);
-						eval(instantiate + ' = new Object()');
+				var element_parts = element.split('.');
+				var obj_str_parent = 'this';
+				
+				for (i=0;i<element_parts.length;i++) {
+					var collection_index = element_parts[i].match(/^n(\d*)$/);
+					if (collection_index!=null) {
+						if (eval(obj_str_parent) == null) {
+							eval(obj_str_parent + ' = new Object()');
+							eval(obj_str_parent + '.elements = new Array()');
+						}
+						collection_index[1] = (collection_index[1]=='') ? '0' : collection_index[1];
+						var subindex = index_match[collection_index[1]];
+						subindex = subindex.replace('.', '');
+						if (eval(obj_str_parent + ".elements[" + subindex + "]") == null)
+							eval(obj_str_parent + ".elements[" + subindex + "] = new Object();");
+						obj_str_parent += '.elements[' + subindex + ']';
+					} else {
+						obj_str_parent += '.' + element_parts[i];
 					}
 				}
-				eval("this." + element + " = '" + value + "';");
-				debugGroup("SetValue this." + element + " = " + value);
-				debug(eval("this." + element));
-				debug(this.cmi);
-				debugGroupClose();
+				eval(obj_str_parent + " = '" + value + "'");
 				debugGroupClose();
 				this.errorCode = "0"; 
 				return "true";
