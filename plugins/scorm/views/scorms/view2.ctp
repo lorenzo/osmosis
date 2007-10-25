@@ -2,6 +2,12 @@
 	<?php
 		echo $javascript->link('plugins/scorm/api', false);
 		echo $javascript->link('plugins/scorm/controls', false);
+		echo $javascript->link('jquery-plugins/treeview/jquery', false);
+		echo $javascript->link('jquery-plugins/treeview/jquery.treeview', false);
+		echo $html->css('../js/jquery-plugins/treeview/jquery.treeview', null, null, true);
+		echo $javascript->codeBlock('$(document).ready(function(){
+   $("#scorm_toc ul").treeview();
+ });');
 		echo $this->renderElement('scorms/scorm_toc', array('cache' => '1 day', 'scorm' => $scorm,"foo". $scorm['Scorm']['id'] =>'foo'));
 	?>
 	<div id="scorm_controls">
