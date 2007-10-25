@@ -1,0 +1,1 @@
+* lazy-loading: render the complete tree, but only apply hitzones and hiding of children to the first level on load
