@@ -1,18 +1,46 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    height: 100%;
+    width:100%;
+    overflow: hidden;
+}
+#scorm_ui {
+position:absolute;
+top:60px;
+bottom:40px;
+left:0;
+right:0;
+width:100%;
+background:#fff;
+}
+body #scorm_toc {
+overflow:auto;
+height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
 #scorm_toc {
 width:200px;
-float:left;
-padding-right:10px;
+padding:0 10px;
 border-right:#666 1px solid;
 font-size:0.9em
 }
-
-#scorm_viewport {
+#scorm_controls {
 margin-left:220px;
+margin-top:5px;
+text-align:right;
+margin-right:10px;
 }
-#scorm_viewport iframe {
-width:100%;
-height:500px;
-overflow:visible;
-margin-top:20px;
+iframe {
+position:absolute;
+left:230px;
+right:10px;
+bottom:30px;
+top:30px;
 border:#ccc 1px solid
 }

@@ -12,6 +12,11 @@
 					'url' => array('controller' => 'scos', 'action' => 'view', ':id', ':href'),
 					'ifPresent' => 'href'
 				)
+			),
+			array(
+				'target' => 'viewport',
+				'id' => 'sco-',
+				'onclick' => 'return ScormControl.updateUI(this)'
 			)
 		);
 	?>

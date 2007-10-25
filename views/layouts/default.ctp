@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>
-		CakePHP: the rapid development php framework:
+		Osmosis 2: e-learning innovation - 
 		<?php echo $title_for_layout;?>
 	</title>
 
@@ -19,7 +19,7 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $html->link('CakePHP: the rapid development php framework', 'http://cakephp.org');?></h1>
+			<h1><?php echo $html->link('Osmosis 2: e-learning innovation', '/');?></h1>
 		</div>
 		<div id="content">
 			<?php

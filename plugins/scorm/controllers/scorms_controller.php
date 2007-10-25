@@ -23,7 +23,6 @@ class ScormsController extends ScormAppController {
 		}
 		$this->Scorm->recursive = -1;
 		$this->set('scorm', $this->Scorm->find(array('id' => $id), array('Scorm.*')));
-		//$this->set('scos', $this->Scorm->Sco->findAllThreaded(array('Sco.scorm_id' => $id), array('Sco.*')));
 		$this->render('view2');
 	}
 

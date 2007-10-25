@@ -5,7 +5,7 @@ padding:0;
 
 /* General Style Info */
 body {
-	background-color: #2C6877;
+	background-color: #000;
 	color: #fff;
 	font-family: "frutiger linotype", "lucida grande", "verdana", sans-serif;
 }
@@ -58,24 +58,23 @@ ul, li {
 }
 
 #header{
-	background-color: #2C6877;
+	background-color: #000;
 	padding: 10px 20px 0 20px;
 	height: 5em;
 }
 #header h1 { 
 	color: #ffffff;
-	background: url('../img/cake.icon.png') no-repeat;
 	padding: 5px 50px;
 	height: 5em;
 }
 #header h1 a { 
 	color: #ffffff;
-	background: #2C6877;
+	background: #000;
 	text-decoration: none;
 }
 #header h1 a:hover { 
 	color: #ffffff;
-	background: #003d4c;
+	background: #333;
 	text-decoration: none;
 }
 #content{

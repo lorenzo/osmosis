@@ -22,15 +22,17 @@ class TreeHelper extends Helper
 {
 	var $tab = "	";
 	var $helpers = array('Html');
+	var $count = 1;
 	
-	function show($name, $data, $options=null) {
+	function show($name, $data, $options=null, $htmlOptions=null) {
 		list($modelName, $fieldName) = explode('/', $name);
-		$output = $this->listElement($data, $modelName, $fieldName, 0, $options);
+		$output = $this->listElement($data, $modelName, $fieldName, $options, $htmlOptions);
 		
 		return $this->output($output);
 	}
 	
-	function listElement($data, $modelName, $fieldName, $level, $options = null) {
+	function listElement($data, $modelName, $fieldName, $options = null, $htmlOptions=null) {
+		$htmlOp = $htmlOptions;
 		$url = array();
 		if (isset($options['link']['url']['controller'])) {
 			$url['controller'] = $options['link']['url']['controller'];
@@ -38,7 +40,7 @@ class TreeHelper extends Helper
 		if (isset($options['link']['url']['action'])) {
 			$url['action'] = $options['link']['url']['action'];
 		}
-		$tabs = "\n" . str_repeat($this->tab, $level * 2);
+		$tabs = "\n" . str_repeat($this->tab, $this->count * 2);
 		$li_tabs = $tabs . $this->tab;
 		
 		$output = $tabs. "<ul>";
@@ -50,19 +52,27 @@ class TreeHelper extends Helper
 				if ($condition) {
 					$params = $options['link']['url'];
 					foreach ($params as $index => $field) {
-						if (strpos($field, ':')===0) {
+						if ($field[0]==':') {
 							$field = substr($field, 1);
 							$params[$index] = $val[$modelName][$field];
 						}
 					}
+					$htmlOp['id'] = (isset($htmlOptions['id'])) ?
+					        $htmlOptions['id'] :
+					        'tree_element_';
+					$htmlOp['id'] .= $this->count++;
 					$params = Set::merge($url, $params);
-					$value = $this->Html->link($value, $params, array('target' => 'viewport'));
+					$value = $this->Html->link(
+					    $value,
+					    $params,
+					    $htmlOp
+					);
 				}
 			}
 			$output .= $li_tabs . "<li>".$value;
 			if(isset($val['children'][0]))
 			{
-				$output .= $this->listElement($val['children'], $modelName, $fieldName, $level+1, $options);
+				$output .= $this->listElement($val['children'], $modelName, $fieldName, $options, $htmlOptions);
 				$output .= $li_tabs . "</li>";
 			} else {
 				$output .= "</li>";
