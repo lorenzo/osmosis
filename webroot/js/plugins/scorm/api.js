@@ -8,8 +8,13 @@ function debugGroupClose() {
 	if (console!=null) console.groupEnd();
 }
 var adminEmail = 'joaquin@aikon.com.ve';
-
+function underscore(str) {
+    str = str.replace(/.N/g,".");
+    return str.replace(/\./g,"__");
+}
 var Scorm_2004 = function(){
+	/* URL to where the scoes data is sent */ 
+	this.serverside_url = webroot + '';
 	/* Allowed Children values */
 	this.cmi_children = '_version, comments_from_learner, comments_from_lms, completion_status, credit, entry, exit, interactions, launch_data, learner_id, learner_name, learner_preference, location, max_time_allowed, mode, objectives, progress_measure, scaled_passing_score, score, session_time, success_status, suspend_data, time_limit_action, total_time';
 //	this.comments_children = 'comment, timestamp, location';
@@ -421,14 +426,42 @@ var Scorm_2004 = function(){
 		}
 		return "false";
 	};
-	
+	this.CollectData = function(data, parent) {
+        var datastring = '';
+        for (property in data) {
+            if (typeof data[property] == 'object') {
+                datastring += this.CollectData(data[property],parent+'.'+property);
+            } else {
+                element = parent+'.'+property;
+                expression = new RegExp(this.CMIIndexStore,'g');
+                elementmodel = element.replace(expression,'.n.');
+                if (this.datamodel[elementmodel] != null) {
+                    if (this.datamodel[elementmodel].mode != 'r') {
+                        elementstring = '&'+underscore(element)+'='+escape(data[property]);
+                        if (this.datamodel[elementmodel].defaultvalue != null) {
+                            if (this.datamodel[elementmodel].defaultvalue != data[property]) {
+                                datastring += elementstring;
+                            }
+                        } else {
+                            datastring += elementstring;
+                        }
+                    }
+                }
+            }
+        }
+        return datastring;
+    }
+
 	this.StoreData = function(data, storetotaltime) {
-		return "";
-		/*datastring = '';
-		if (storetotaltime) {
-			if (cmi.mode == 'normal') {
-				if (cmi.credit == 'credit') {
-					if ((cmi.completion_threshold != null) && (cmi.progress_measure != null)) {
+		debugGroup("Storing Data...");
+		debug(datastring);
+		debugGroupClose();
+		
+		var datastring = '';
+		/*if (storetotaltime) {
+			if (this.cmi.mode == 'normal') {
+				if (this.cmi.credit == 'credit') {
+					if ((this.cmi.completion_threshold != null) && (this.cmi.progress_measure != null)) {
 						if (cmi.progress_measure >= cmi.completion_threshold) {
 							cmi.completion_status = 'completed';
 						} else {
@@ -445,14 +478,15 @@ var Scorm_2004 = function(){
 				}
 			}
 			datastring += TotalTime();
-		}
-		datastring += CollectData(data, 'cmi');
-		element = 'adl.nav.request';
-		navrequest = eval(element) != datamodel[element].defaultvalue ? '&'+underscore(element)+'='+escape(eval(element)) : '';
+		}*/
+		datastring += this.CollectData(data, 'cmi');
+		var navrequest = 
+			(this.adl.nav.request != this.datamodel[element].defaultvalue) ?
+			'&' + underscore(element) + '=' + this.adl.nav.request : '';
 		datastring += navrequest;
 		datastring += '&attempt=<?php echo $attempt ?>';
 		datastring += '&scoid=<?php echo $scoid ?>';
-		var myRequest = NewHttpReq();
+		/*var myRequest = NewHttpReq();
 		result = DoRequest(
 			myRequest,
 			"<?php p($CFG->wwwroot) ?>/mod/scorm/datamodel.php",
@@ -462,8 +496,8 @@ var Scorm_2004 = function(){
 		if ((results.length > 2) && (navrequest != '')) {
 			eval(results[2]);
 		}
-		errorCode = results[1];
-		return results[0];*/
+		errorCode = results[1];*/
+		return jQuery.post(this.serverside_url, datastring);
 	}
 	
 	
@@ -496,19 +530,22 @@ var Scorm_2004 = function(){
 	};
 	
 	this.Terminate = function(param) {
-		/*errorCode = "0";
+		debug("Terminando =)");
+		this.errorCode = "0";
 		if (param == "") {
 			if ((this.Initialized) && (!this.Terminated)) {
 				this.Initialized = false;
 				this.Terminated = true;
-				result = StoreData(cmi,true);
-				if (adl.nav.request != '_none_') {
-					switch (adl.nav.request) {
+				result = this.StoreData(this.cmi,true);
+				if (this.adl.nav.request != '_none_') {
+					switch (this.adl.nav.request) {
 						case 'continue':
-							setTimeout('top.nextSCO();',500);
+							debug("Show next SCO.");
+							//setTimeout('top.nextSCO();',500);
 						break;
 						case 'previous':
-							setTimeout('top.prevSCO();',500);
+							debug("Show previous SCO.");
+							//setTimeout('top.prevSCO();',500);
 						break;
 						case 'choice':
 						break;
@@ -522,21 +559,22 @@ var Scorm_2004 = function(){
 						break;
 					}
 				} else {
-					if (<?php //echo $scorm->auto ?> == 1) {
+					debug("Show next SCO (if auto next is enabled).");
+					/*if (<?php //echo $scorm->auto ?> == 1) {
 						setTimeout('top.nextSCO();',500);
-					}
+					}*/
 				}
 				return "true";
 			} else {
 				if (this.Terminated) {
-					errorCode = "113";
+					this.errorCode = "113";
 				} else {
-					errorCode = "112";
+					this.errorCode = "112";
 				}
 			}
 		} else {
-			errorCode = "201";
-		}*/
+			this.errorCode = "201";
+		}
 		return "false";
 	};
 	
@@ -554,7 +592,7 @@ var Scorm_2004 = function(){
 		element = element.replace(indexes,'.n.');
 		
 		if (this.datamodel[element]==null) { // Temporary: Catch unhandled element
-			if (element.match('adl.')==null)
+			if (!element.match(/^adl.nav/))
 				alert(element + " not found in datamodel. Report to: " + adminEmail);
 			this.errorCode = "402";
 			return "false";
@@ -723,7 +761,8 @@ var Scorm_2004 = function(){
 			element = element.replace(indexes,'.n.');
 			
 			if (this.datamodel[element]==null) { // Temporary: Catch unhandled element
-				alert(element + " not found in datamodel. Report to: " + adminEmail);
+				if (!element.match(/^adl.nav/))
+					alert(element + " not found in datamodel. Report to: " + adminEmail);
 				this.errorCode = "402";
 				return "false";
 			}
@@ -747,7 +786,7 @@ var Scorm_2004 = function(){
 				debug("Type: " + (typeof this.datamodel[element]));
 				debugGroupClose();
 				if (typeof this.datamodel[element].range != 'undefined') {
-					debug("has range");
+					alert("Range not implemented.");
 					/*range = this.datamodel[elementmodel].range;
 					debug(range);
 					ranges = range.split('#');
