@@ -1,11 +1,11 @@
 function debug(elem) {
-	if (console!=null) console.debug(elem);
+	if (typeof console != 'undefined') console.debug(elem);
 }
 function debugGroup(title) {
-	if (console!=null) console.group(title);
+	if (typeof console != 'undefined') console.group(title);
 }
 function debugGroupClose() {
-	if (console!=null) console.groupEnd();
+	if (typeof console != 'undefined') console.groupEnd();
 }
 var adminEmail = 'joaquin@aikon.com.ve';
 function underscore(str) {
@@ -14,7 +14,7 @@ function underscore(str) {
 }
 var Scorm_2004 = function(){
 	/* URL to where the scoes data is sent */ 
-	this.serverside_url = webroot + '';
+	this.serverside_url = webroot + 'scorm/scorm_attendee_trackings/store_data/';
 	/* Allowed Children values */
 	this.cmi_children = '_version, comments_from_learner, comments_from_lms, completion_status, credit, entry, exit, interactions, launch_data, learner_id, learner_name, learner_preference, location, max_time_allowed, mode, objectives, progress_measure, scaled_passing_score, score, session_time, success_status, suspend_data, time_limit_action, total_time';
 //	this.comments_children = 'comment, timestamp, location';
@@ -426,13 +426,13 @@ var Scorm_2004 = function(){
 		}
 		return "false";
 	};
-	this.CollectData = function(data, parent) {
+	this.CollectData = function(data, parent_str) {
         var datastring = '';
         for (property in data) {
             if (typeof data[property] == 'object') {
-                datastring += this.CollectData(data[property],parent+'.'+property);
+                datastring += this.CollectData(data[property],parent_str+'.'+property);
             } else {
-                element = parent+'.'+property;
+                element = parent_str+'.'+property;
                 expression = new RegExp(this.CMIIndexStore,'g');
                 elementmodel = element.replace(expression,'.n.');
                 if (this.datamodel[elementmodel] != null) {
@@ -453,10 +453,6 @@ var Scorm_2004 = function(){
     }
 
 	this.StoreData = function(data, storetotaltime) {
-		debugGroup("Storing Data...");
-		debug(datastring);
-		debugGroupClose();
-		
 		var datastring = '';
 		/*if (storetotaltime) {
 			if (this.cmi.mode == 'normal') {
@@ -484,24 +480,15 @@ var Scorm_2004 = function(){
 			(this.adl.nav.request != this.datamodel[element].defaultvalue) ?
 			'&' + underscore(element) + '=' + this.adl.nav.request : '';
 		datastring += navrequest;
-		datastring += '&attempt=<?php echo $attempt ?>';
-		datastring += '&scoid=<?php echo $scoid ?>';
-		/*var myRequest = NewHttpReq();
-		result = DoRequest(
-			myRequest,
-			"<?php p($CFG->wwwroot) ?>/mod/scorm/datamodel.php",
-			"id=<?php p($id) ?>&sesskey=<?php p($USER->sesskey) ?>"+datastring
-		);
-		results = result.split('\n');
-		if ((results.length > 2) && (navrequest != '')) {
-			eval(results[2]);
-		}
-		errorCode = results[1];*/
-		return jQuery.post(this.serverside_url, datastring);
+		//datastring += '&attempt=<?php echo $attempt ?>';
+		//datastring += '&scoid=<?php echo $scoid ?>';
+		debugGroup("Storing Data...");
+		debug('Data: \n' + datastring);
+		debug('URL: \n' + this.serverside_url);
+		debugGroupClose();
+		return jQuery.post(this.serverside_url + 'scorm:' + scorm_id + '/sco:' + sco_number, datastring);
 	}
-	
-	
-	
+
 	//
 	// Datamodel inizialization
 	//
@@ -519,7 +506,7 @@ var Scorm_2004 = function(){
 		objectives : {
 			elements : new Array()
 		},
-		score : new Object(),
+		score : new Object()
 	};
 
 	// Navigation Object
@@ -536,7 +523,7 @@ var Scorm_2004 = function(){
 			if ((this.Initialized) && (!this.Terminated)) {
 				this.Initialized = false;
 				this.Terminated = true;
-				result = this.StoreData(this.cmi,true);
+				result = this.StoreData(this.cmi, true);
 				if (this.adl.nav.request != '_none_') {
 					switch (this.adl.nav.request) {
 						case 'continue':

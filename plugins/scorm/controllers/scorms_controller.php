@@ -23,7 +23,6 @@ class ScormsController extends ScormAppController {
 		}
 		$this->Scorm->recursive = -1;
 		$this->set('scorm', $this->Scorm->find(array('id' => $id), array('Scorm.*')));
-		$this->render('view2');
 	}
 
 	function add() {
@@ -89,6 +88,5 @@ class ScormsController extends ScormAppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}
-
 }
 ?>

@@ -1,23 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 2.10.3deb1
+-- version 2.11.1.2
 -- http://www.phpmyadmin.net
--- 
+--
 -- Host: localhost
--- Generation Time: Oct 20, 2007 at 07:32 PM
+-- Generation Time: Nov 03, 2007 at 07:58 PM
 -- Server version: 5.0.45
--- PHP Version: 5.2.3-1ubuntu6
+-- PHP Version: 5.2.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
--- 
--- Database: `osmosis`
--- 
+--
+-- Database: `osmosis2`
+--
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `acos`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `acos` (
   `id` int(11) NOT NULL auto_increment,
@@ -28,13 +28,13 @@ CREATE TABLE IF NOT EXISTS `acos` (
   `lft` int(11) default NULL,
   `rght` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `aros`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `aros` (
   `id` int(11) NOT NULL auto_increment,
@@ -45,13 +45,13 @@ CREATE TABLE IF NOT EXISTS `aros` (
   `lft` int(11) default NULL,
   `rght` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `aros_acos`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `aros_acos` (
   `id` int(11) NOT NULL auto_increment,
@@ -62,13 +62,13 @@ CREATE TABLE IF NOT EXISTS `aros_acos` (
   `_update` int(11) NOT NULL default '0',
   `_delete` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `choice_considerations`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `choice_considerations` (
   `id` int(11) NOT NULL auto_increment,
@@ -80,9 +80,9 @@ CREATE TABLE IF NOT EXISTS `choice_considerations` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `conditions`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `conditions` (
   `id` int(11) NOT NULL auto_increment,
@@ -92,13 +92,13 @@ CREATE TABLE IF NOT EXISTS `conditions` (
   `ruleCondition` varchar(27) character set latin1 NOT NULL,
   `rule_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `control_modes`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `control_modes` (
   `id` int(11) NOT NULL auto_increment,
@@ -110,13 +110,13 @@ CREATE TABLE IF NOT EXISTS `control_modes` (
   `useCurrentAttemptObjectiveInfo` varchar(5) NOT NULL default 'true',
   `useCurrentAttemptProgressInfo` varchar(5) NOT NULL default 'true',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='ControlMode: contenedor de información del sequencing' AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='ControlMode: contenedor de información del sequencing' AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `courses`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `courses` (
   `id` int(11) unsigned NOT NULL auto_increment,
@@ -131,9 +131,9 @@ CREATE TABLE IF NOT EXISTS `courses` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `delivery_controls`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `delivery_controls` (
   `id` int(11) NOT NULL auto_increment,
@@ -146,9 +146,9 @@ CREATE TABLE IF NOT EXISTS `delivery_controls` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `departments`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `departments` (
   `id` int(4) unsigned NOT NULL auto_increment,
@@ -159,9 +159,9 @@ CREATE TABLE IF NOT EXISTS `departments` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `map_infos`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `map_infos` (
   `id` int(11) unsigned NOT NULL auto_increment,
@@ -176,9 +176,9 @@ CREATE TABLE IF NOT EXISTS `map_infos` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `members`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int(11) unsigned NOT NULL auto_increment,
@@ -194,13 +194,13 @@ CREATE TABLE IF NOT EXISTS `members` (
   `username` varchar(15) collate utf8_unicode_ci NOT NULL,
   `password` varchar(50) collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a registered user' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a registered user' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `objectives`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `objectives` (
   `id` int(11) NOT NULL auto_increment,
@@ -214,9 +214,9 @@ CREATE TABLE IF NOT EXISTS `objectives` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `plugins`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `plugins` (
   `id` smallint(4) unsigned NOT NULL auto_increment,
@@ -227,9 +227,9 @@ CREATE TABLE IF NOT EXISTS `plugins` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `randomizations`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `randomizations` (
   `id` int(11) unsigned NOT NULL auto_increment,
@@ -243,22 +243,22 @@ CREATE TABLE IF NOT EXISTS `randomizations` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `roles`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) unsigned NOT NULL auto_increment,
   `parent_id` int(11) default NULL,
   `role` varchar(10) collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents groups of users with permissions' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents groups of users with permissions' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `rollups`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `rollups` (
   `id` int(11) NOT NULL auto_increment,
@@ -271,9 +271,9 @@ CREATE TABLE IF NOT EXISTS `rollups` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `rollup_considerations`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `rollup_considerations` (
   `id` int(11) NOT NULL auto_increment,
@@ -288,9 +288,9 @@ CREATE TABLE IF NOT EXISTS `rollup_considerations` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `rules`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `rules` (
   `id` int(11) NOT NULL auto_increment,
@@ -302,13 +302,13 @@ CREATE TABLE IF NOT EXISTS `rules` (
   `minimumCount` varchar(5) default '0',
   `rollup_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `schema_info`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `schema_info` (
   `version` int(10) unsigned NOT NULL default '0'
@@ -316,9 +316,9 @@ CREATE TABLE IF NOT EXISTS `schema_info` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `scorms`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `scorms` (
   `id` int(11) unsigned NOT NULL auto_increment COMMENT 'primary key',
@@ -332,13 +332,29 @@ CREATE TABLE IF NOT EXISTS `scorms` (
   `hash` varchar(35) collate utf8_unicode_ci NOT NULL COMMENT 'hash sum of file reference',
   `path` text collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a scorm asset in a course' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a scorm asset in a course' AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
--- 
+--
+-- Table structure for table `scorm_attendee_trackings`
+--
+
+CREATE TABLE IF NOT EXISTS `scorm_attendee_trackings` (
+  `id` int(11) NOT NULL auto_increment,
+  `scorm_id` int(11) NOT NULL,
+  `sco_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `datamodel_element` varchar(255) NOT NULL COMMENT 'Some SCORM-RTE datamodel element',
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='Keeps information of each sco relative to each student' AUTO_INCREMENT=8 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `scos`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `scos` (
   `id` int(11) unsigned NOT NULL auto_increment COMMENT 'Primary key',
@@ -357,13 +373,13 @@ CREATE TABLE IF NOT EXISTS `scos` (
   `attemptLimit` varchar(10) collate utf8_unicode_ci default NULL COMMENT ' the maximum number of attempts for the activity',
   `scormType` varchar(6) collate utf8_unicode_ci default NULL COMMENT 'type of SCORM resource',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Holds each SCO from a SCORM package' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Holds each SCO from a SCORM package' AUTO_INCREMENT=325 ;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `sco_presentations`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `sco_presentations` (
   `id` int(11) NOT NULL auto_increment,

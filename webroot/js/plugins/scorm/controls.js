@@ -1,5 +1,6 @@
 var ScormControl = new function(){
 	this.updateUI = function(link) {
+		API_1484_11 = new Scorm_2004();
 		debugGroup("Activado el link " + link.id);
 		debug(link.href);
 		debugGroupClose();
@@ -15,7 +16,7 @@ var ScormControl = new function(){
 		this.updateLink(id+prev, 'previous');
 		this.updateLink(id+next, 'next');
 	}
-	
+
 	this.updateLink = function(id, which) {
 		link_id = 'scorm_control_' + which;
 		if (document.getElementById(id)!=null) {

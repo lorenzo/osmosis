@@ -13,7 +13,6 @@
 	<link rel="icon" href="<?php echo $this->webroot;?>favicon.ico" type="image/x-icon" />
 	<link rel="shortcut icon" href="<?php echo $this->webroot;?>favicon.ico" type="image/x-icon" />
 	<?php echo $html->css('cake.generic');?>
-	<?php echo $html->css('scorm');?>
 	<?php echo $javascript->codeBlock('var webroot = "' . $this->webroot .'"'); ?>
 	<?php echo $scripts_for_layout;?>
 </head>

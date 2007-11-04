@@ -1,5 +1,6 @@
 <?php
-class ScormAppController extends Controller{
+class ScormAppController extends AppController {
+	var $helpers = array('Javascript');
 
 	function beforeRender() {
 		parent::beforeRender();
