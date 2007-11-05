@@ -10,6 +10,11 @@ class ScosController extends ScormAppController {
 		$this->Sco->recursive = 0;
 		$this->set('scos', $this->paginate());
 	}
+	
+	function api() {
+		Configure::write('debug',0);
+		$this->RequestHandler->respondAs('js');
+	}
 
 	function view($id = null) {
 		$params = $this->params['pass'];

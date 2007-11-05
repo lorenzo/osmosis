@@ -12,6 +12,7 @@
 
 	<link rel="icon" href="<?php echo $this->webroot;?>favicon.ico" type="image/x-icon" />
 	<link rel="shortcut icon" href="<?php echo $this->webroot;?>favicon.ico" type="image/x-icon" />
+	<script type="text/javascript" src="<?php echo $html->url('/scorm/scos/api.js'); ?>" ></script>
 	<?php echo $html->css('cake.generic');?>
 	<?php echo $javascript->codeBlock('var webroot = "' . $this->webroot .'"'); ?>
 	<?php echo $scripts_for_layout;?>
