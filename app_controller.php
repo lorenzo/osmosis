@@ -1,10 +1,10 @@
 <?php
 class AppController extends Controller {
 	var $components = array('Acl','Auth','RequestHandler');
-	var $helpers = array('Javascript', 'Html', 'Form');
+	var $helpers = array('Javascript', 'Html', 'Form', 'Dynamicjs');
 
 	function beforeFilter() {
-//		if (isset($this->Auth)) {
+		if (isset($this->Auth)) {
 			$this->Auth->authorize = 'controller';
 			$this->Auth->userModel = 'Member'; 
 			$this->Auth->loginAction = '/members/login';
@@ -18,7 +18,7 @@ class AppController extends Controller {
 					$this->Session->write('Member.name', 'Mr. Admin');
 				}
 			}
-//		}
+		}
 	}
 
 	function isAuthorized() {

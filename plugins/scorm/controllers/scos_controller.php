@@ -3,21 +3,39 @@ class ScosController extends ScormAppController {
 
 	var $name = 'Scos';
 	var $helpers = array('Html', 'Form', 'Cache' );
-	var $uses = array('Sco', 'Scorm');
+	var $uses = array('Sco', 'Scorm', 'ScormAttendeeTracking');
 	var $cacheAction = array('view/' => '1 hour');
+	
+	function beforeFilter() {
+		if (isset($this->RequestHandler) && $this->action == 'view')
+			unset($this->RequestHandler);
+		parent::beforeFilter();
+	}
 	
 	function index() {
 		$this->Sco->recursive = 0;
 		$this->set('scos', $this->paginate());
 	}
 	
-	function api() {
+	function api($id) {
 		Configure::write('debug',0);
-		$this->RequestHandler->respondAs('js');
+		$trackings = $this->ScormAttendeeTracking->findAll(
+			array(
+				'student_id' => $this->Session->read('Member.id'),
+				'sco_id' => $id
+			)
+		);
+		$t = array();
+		foreach($trackings as $tracking) {
+			$t[$tracking['ScormAttendeeTracking']['datamodel_element']] = 
+				$tracking['ScormAttendeeTracking']['value'];
+		}
+		$trackings = $t;
+		$this->set(compact('trackings'));
 	}
 
 	function view($id = null) {
-		$params = $this->params['pass'];
+		$params = $this->params['pass']; 
 		unset($params[0]);
 		$path = implode(DS , $params);
 		if (!$id) {
@@ -26,11 +44,11 @@ class ScosController extends ScormAppController {
 		}
 		$scorm_id = $this->Sco->field('scorm_id', array('id' => $id));
 		$path = $this->Scorm->field('path', array('id' => $scorm_id)) . $path;
-		$extension = str_replace('.', '', strrchr($path, '.'));
+		$extension = str_replace('.', '', strrchr($this->params['url']['url'], '.'));
+		$path = isset($this->params['url']['ext']) ? $path . '.' . $extension : $path;
 		$this->set('extension', $extension);
-		$this->set('path', urldecode($path));
+		$this->set('path', $path);
 		$this->view = 'Media';
-		//$this->render('view2');
 	}
 
 	function add() {

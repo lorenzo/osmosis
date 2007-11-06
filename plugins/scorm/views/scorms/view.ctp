@@ -1,6 +1,6 @@
 <div id="scorm_ui">
 	<?php
-		echo $javascript->link('plugins/scorm/api', false);
+		echo $dynamicjs->link('scorm/scos/api/2', false);
 		echo $javascript->link('plugins/scorm/controls', false);
 		echo $javascript->link('jquery/jquery', false);
 		echo $javascript->link('jquery/plugins/treeview/jquery.treeview', false);

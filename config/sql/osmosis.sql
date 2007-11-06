@@ -1,23 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 2.11.1.2
+-- version 2.10.3deb1
 -- http://www.phpmyadmin.net
---
+-- 
 -- Host: localhost
--- Generation Time: Nov 03, 2007 at 07:58 PM
+-- Generation Time: Nov 06, 2007 at 02:33 PM
 -- Server version: 5.0.45
--- PHP Version: 5.2.4
+-- PHP Version: 5.2.3-1ubuntu6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
---
--- Database: `osmosis2`
---
+-- 
+-- Database: `osmosis`
+-- 
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `acos`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `acos` (
   `id` int(11) NOT NULL auto_increment,
@@ -32,9 +32,9 @@ CREATE TABLE IF NOT EXISTS `acos` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `aros`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `aros` (
   `id` int(11) NOT NULL auto_increment,
@@ -49,9 +49,9 @@ CREATE TABLE IF NOT EXISTS `aros` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `aros_acos`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `aros_acos` (
   `id` int(11) NOT NULL auto_increment,
@@ -66,9 +66,9 @@ CREATE TABLE IF NOT EXISTS `aros_acos` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `choice_considerations`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `choice_considerations` (
   `id` int(11) NOT NULL auto_increment,
@@ -80,9 +80,9 @@ CREATE TABLE IF NOT EXISTS `choice_considerations` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `conditions`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `conditions` (
   `id` int(11) NOT NULL auto_increment,
@@ -96,9 +96,9 @@ CREATE TABLE IF NOT EXISTS `conditions` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `control_modes`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `control_modes` (
   `id` int(11) NOT NULL auto_increment,
@@ -114,9 +114,9 @@ CREATE TABLE IF NOT EXISTS `control_modes` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `courses`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `courses` (
   `id` int(11) unsigned NOT NULL auto_increment,
@@ -131,9 +131,9 @@ CREATE TABLE IF NOT EXISTS `courses` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `delivery_controls`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `delivery_controls` (
   `id` int(11) NOT NULL auto_increment,
@@ -146,9 +146,9 @@ CREATE TABLE IF NOT EXISTS `delivery_controls` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `departments`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `departments` (
   `id` int(4) unsigned NOT NULL auto_increment,
@@ -159,9 +159,9 @@ CREATE TABLE IF NOT EXISTS `departments` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `map_infos`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `map_infos` (
   `id` int(11) unsigned NOT NULL auto_increment,
@@ -176,9 +176,9 @@ CREATE TABLE IF NOT EXISTS `map_infos` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `members`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int(11) unsigned NOT NULL auto_increment,
@@ -198,9 +198,9 @@ CREATE TABLE IF NOT EXISTS `members` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `objectives`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `objectives` (
   `id` int(11) NOT NULL auto_increment,
@@ -214,9 +214,9 @@ CREATE TABLE IF NOT EXISTS `objectives` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `plugins`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `plugins` (
   `id` smallint(4) unsigned NOT NULL auto_increment,
@@ -227,9 +227,9 @@ CREATE TABLE IF NOT EXISTS `plugins` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `randomizations`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `randomizations` (
   `id` int(11) unsigned NOT NULL auto_increment,
@@ -243,9 +243,9 @@ CREATE TABLE IF NOT EXISTS `randomizations` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `roles`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) unsigned NOT NULL auto_increment,
@@ -256,9 +256,9 @@ CREATE TABLE IF NOT EXISTS `roles` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `rollups`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `rollups` (
   `id` int(11) NOT NULL auto_increment,
@@ -271,9 +271,9 @@ CREATE TABLE IF NOT EXISTS `rollups` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `rollup_considerations`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `rollup_considerations` (
   `id` int(11) NOT NULL auto_increment,
@@ -288,9 +288,9 @@ CREATE TABLE IF NOT EXISTS `rollup_considerations` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `rules`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `rules` (
   `id` int(11) NOT NULL auto_increment,
@@ -306,9 +306,9 @@ CREATE TABLE IF NOT EXISTS `rules` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `schema_info`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `schema_info` (
   `version` int(10) unsigned NOT NULL default '0'
@@ -316,9 +316,9 @@ CREATE TABLE IF NOT EXISTS `schema_info` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `scorms`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `scorms` (
   `id` int(11) unsigned NOT NULL auto_increment COMMENT 'primary key',
@@ -336,25 +336,25 @@ CREATE TABLE IF NOT EXISTS `scorms` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `scorm_attendee_trackings`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `scorm_attendee_trackings` (
   `id` int(11) NOT NULL auto_increment,
-  `scorm_id` int(11) NOT NULL,
   `sco_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
-  `datamodel_element` varchar(255) NOT NULL COMMENT 'Some SCORM-RTE datamodel element',
-  `value` varchar(255) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='Keeps information of each sco relative to each student' AUTO_INCREMENT=8 ;
+  `datamodel_element` varchar(255) character set utf8 collate utf8_unicode_ci NOT NULL COMMENT 'Some SCORM-RTE datamodel element',
+  `value` varchar(255) character set utf8 collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `scorm_id` (`sco_id`,`student_id`,`datamodel_element`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='Keeps information of each sco relative to each student' AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `scos`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `scos` (
   `id` int(11) unsigned NOT NULL auto_increment COMMENT 'Primary key',
@@ -377,9 +377,9 @@ CREATE TABLE IF NOT EXISTS `scos` (
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Table structure for table `sco_presentations`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `sco_presentations` (
   `id` int(11) NOT NULL auto_increment,

@@ -1,3 +1,7 @@
+/**
+Jojo
+<?php var_dump($trackings); ?>
+*/
 function debug(elem) {
 	if (typeof console != 'undefined') console.debug(elem);
 }
@@ -9,8 +13,8 @@ function debugGroupClose() {
 }
 var adminEmail = 'joaquin@aikon.com.ve';
 function underscore(str) {
-    str = str.replace(/.N/g,".");
-    return str.replace(/\./g,"__");
+	str = str.replace(/.N/g,".");
+	return str.replace(/\./g,"__");
 }
 var Scorm_2004 = function(){
 	/* URL to where the scoes data is sent */ 
@@ -124,7 +128,7 @@ var Scorm_2004 = function(){
 			'mode':'r'
 		},*/
 		'cmi.completion_status':{
-//			'defaultvalue':'<?php echo isset($userdata->{'cmi.completion_status'})?$userdata->{'cmi.completion_status'}:'unknown' ?>',
+			'defaultvalue':'<?php echo isset($trackings['cmi__completion_status']) ? $trackings['cmi__completion_status']:'unknown' ?>',
 			'format': this.CMICStatus,
 			'mode':'rw'
 		},/*
@@ -254,7 +258,7 @@ var Scorm_2004 = function(){
 			'mode':'rw'
 		},*/
 		'cmi.location':{
-//			'defaultvalue':<?php echo isset($userdata->{'cmi.location'})?'\''.$userdata->{'cmi.location'}.'\'':'null' ?>,
+			'defaultvalue':<?php echo isset($trackings['cmi__location']) ? '"'.$trackings['cmi__location'].'"':'null' ?>,
 			'format': this.CMIString1000,
 			'mode':'rw'
 		},/*
@@ -426,31 +430,32 @@ var Scorm_2004 = function(){
 		}
 		return "false";
 	};
+	
 	this.CollectData = function(data, parent_str) {
-        var datastring = '';
-        for (property in data) {
-            if (typeof data[property] == 'object') {
-                datastring += this.CollectData(data[property],parent_str+'.'+property);
-            } else {
-                element = parent_str+'.'+property;
-                expression = new RegExp(this.CMIIndexStore,'g');
-                elementmodel = element.replace(expression,'.n.');
-                if (this.datamodel[elementmodel] != null) {
-                    if (this.datamodel[elementmodel].mode != 'r') {
-                        elementstring = '&'+underscore(element)+'='+escape(data[property]);
-                        if (this.datamodel[elementmodel].defaultvalue != null) {
-                            if (this.datamodel[elementmodel].defaultvalue != data[property]) {
-                                datastring += elementstring;
-                            }
-                        } else {
-                            datastring += elementstring;
-                        }
-                    }
-                }
-            }
-        }
-        return datastring;
-    }
+		var datastring = '';
+		for (property in data) {
+			if (typeof data[property] == 'object') {
+				datastring += this.CollectData(data[property],parent_str+'.'+property);
+			} else {
+				element = parent_str+'.'+property;
+				expression = new RegExp(this.CMIIndexStore,'g');
+				elementmodel = element.replace(expression,'.n.');
+				if (this.datamodel[elementmodel] != null) {
+					if (this.datamodel[elementmodel].mode != 'r') {
+						elementstring = '&'+underscore(element)+'='+escape(data[property]);
+						if (this.datamodel[elementmodel].defaultvalue != null) {
+							if (this.datamodel[elementmodel].defaultvalue != data[property]) {
+								datastring += elementstring;
+							}
+						} else {
+							datastring += elementstring;
+						}
+					}
+				}
+			}
+		}
+		return datastring;
+	}
 
 	this.StoreData = function(data, storetotaltime) {
 		var datastring = '';
@@ -477,8 +482,8 @@ var Scorm_2004 = function(){
 		}*/
 		datastring += this.CollectData(data, 'cmi');
 		var navrequest = 
-			(this.adl.nav.request != this.datamodel[element].defaultvalue) ?
-			'&' + underscore(element) + '=' + this.adl.nav.request : '';
+			(this.adl.nav.request != this.datamodel['adl.nav.request'].defaultvalue) ?
+			'&' + underscore('adl.nav.request') + '=' + this.adl.nav.request : '';
 		datastring += navrequest;
 		//datastring += '&attempt=<?php echo $attempt ?>';
 		//datastring += '&scoid=<?php echo $scoid ?>';
@@ -512,7 +517,8 @@ var Scorm_2004 = function(){
 	// Navigation Object
 	this.adl = {
 		nav : {
-			request_valid : new Array()
+			request_valid : new Array(),
+			request : this.datamodel['adl.nav.request'].defaultvalue
 		}
 	};
 	
