@@ -11,6 +11,10 @@ var ScormControl = new function(){
 		return true;
 	}
 	
+	this.setupLinks = function() {
+		
+	}
+	
 	this.updateLinks = function(prev, next, id) {
 		this.updateLink(id+prev, 'previous');
 		this.updateLink(id+next, 'next');

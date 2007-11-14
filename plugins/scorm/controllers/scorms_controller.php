@@ -4,6 +4,7 @@ class ScormsController extends ScormAppController {
 	var $name = 'Scorms';
 	var $components = array('Zip');
 	var $helpers = array('Html', 'Form', 'Tree', 'Javascript');
+	var $uses = array('Scorm', 'ScormAttendeeTracking');
 
 	function index() {
 		$this->Scorm->recursive = 0;
@@ -21,6 +22,33 @@ class ScormsController extends ScormAppController {
 			$this->Session->setFlash('Invalid Scorm.');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
+		$trackings = $this->ScormAttendeeTracking->findAll(
+			array(
+				'student_id' => ''.$this->Session->read('Member.id'),
+				'datamodel_element' => 'cmi__completion_status',
+				'value' => 'completed'
+			), 
+			'sco_id', 'sco_id ASC'
+		);
+		$trackings = Set::extract($trackings, '{n}.ScormAttendeeTracking.sco_id');
+		$scos = $this->Scorm->Sco->findAll(
+			array('scorm_id' => $id, 'href IS NOT NULL'),
+			null, 'id ASC', null, 1, -1
+		);
+		$show_sco = array();
+		foreach ($scos as $sco) {
+			$sco = $sco['Sco'];
+			if (in_array($sco['id'], $trackings)) continue;
+			$show_sco['id'] = $sco['id']; 
+			$show_sco['href'] = $sco['href'];
+			break;
+		}
+		// If no sco was found show first
+		if (empty($show_sco)) {
+			$show_sco['id'] = $scos[0]['Sco']['id'];
+			$show_sco['href'] = $scos[0]['Sco']['href'];
+		}
+		$this->set('show_sco', $show_sco);
 		$this->Scorm->recursive = -1;
 		$this->set('scorm', $this->Scorm->find(array('id' => $id), array('Scorm.*')));
 	}

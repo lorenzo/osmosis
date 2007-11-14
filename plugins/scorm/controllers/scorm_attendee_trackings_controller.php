@@ -51,7 +51,7 @@ class ScormAttendeeTrackingsController extends ScormAppController {
 	function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash('Invalid id for Scorm Attendee Tracking');
-			$this->redirect(array('action'=>'index'), null, true);
+			$this[cmi__location]->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->ScormAttendeeTracking->del($id)) {
 			$this->Session->setFlash('Scorm Attendee Tracking #'.$id.' deleted');
@@ -70,6 +70,7 @@ class ScormAttendeeTrackingsController extends ScormAppController {
 			if ($existant) $data['id'] = $existant['ScormAttendeeTracking']['id'];
 			$data['value'] = $value;
 			$this->ScormAttendeeTracking->create();
+			$this->log('\n\nGuardando el tracking\n\n');
 			$this->ScormAttendeeTracking->save($data);
 		}
 		die;

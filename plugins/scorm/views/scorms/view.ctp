@@ -32,5 +32,18 @@
 			);
 		?>
 	</div>
-	<iframe id="viewport" name="viewport" <?php echo isset($start_path) ? "src='$start_path'" : ''; ?> />
+	<iframe id="viewport" name="viewport" <?php
+		if (!empty($show_sco))
+			echo "src='" . $html->url('/scorm/scos/view/' . $show_sco['id'] . '/' . $show_sco['href']) ."'";
+	?>></iframe>
+	<?php
+		if (!empty($show_sco)) {
+			echo $javascript->codeBlock(
+				'$(document).ready(function(){'. "\n" .
+				'	var link = $("a[href='.$html->url('/scorm/scos/view/' . $show_sco['id'] . '/' . $show_sco['href']).']");' . "\n" .
+				'	debug(link);ScormControl.updateUI(link[0]);' . "\n" .
+				'});'
+			);
+		}
+	?>
 </div>
