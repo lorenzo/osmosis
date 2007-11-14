@@ -60,7 +60,7 @@ class ScormAttendeeTrackingsController extends ScormAppController {
 	}
 
 	function store_data() {
-		$params = $this->params['named'];
+		$params = $this->passedArgs;
 		$member_id = $this->Session->read('Member.id');
 		$data['student_id'] = $member_id;
 		$data['sco_id'] = $params['sco'];

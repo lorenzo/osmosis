@@ -141,7 +141,7 @@ var Scorm_2004 = function(){
 			'mode':'r'
 		},*/
 		'cmi.entry':{
-			'defaultvalue':'<?php echo $userdata->entry ?>',
+			'defaultvalue':'<?php echo $trackings['entry']; ?>',
 			'mode':'r'
 		},
 		'cmi.exit':{
@@ -227,7 +227,7 @@ var Scorm_2004 = function(){
 			'mode':'r'
 		},*/
 		'cmi.learner_name':{
-			'defaultvalue':'<?php echo addslashes($userdata->student_name) ?>',
+			'defaultvalue':'<?php echo addslashes($user['name']) ?>',
 			'mode':'r'
 		},/*
 		'cmi.learner_preference._children':{
