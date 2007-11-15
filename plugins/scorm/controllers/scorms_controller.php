@@ -1,4 +1,5 @@
 <?php
+uses('Folder');
 class ScormsController extends ScormAppController {
 
 	var $name = 'Scorms';
@@ -55,9 +56,9 @@ class ScormsController extends ScormAppController {
 
 	function add() {
 		if (!empty($this->data)) {
+			//debug($this->data);
 			$this->cleanUpFields();
 			$this->Scorm->create();
-
 			$uploaded_file = $this->data['Scorm']['file_name'];
 			$is_uploaded = is_uploaded_file($uploaded_file['tmp_name']); 
 			if ($is_uploaded) {
@@ -74,12 +75,20 @@ class ScormsController extends ScormAppController {
 				$this->Zip->close();
 				// Parse
 				if (!$this->Scorm->parseManifest($scorm_files_location)){
+					$folder = new Folder($scorm_files_location);
+					$folder->delete($scorm_files_location);
 					$this->Session->setFlash('The Scorm file could not be parsed.');
 					return;
 				}
-				if ($this->Scorm->save($this->data)){
-					$this->Session->setFlash('The Scorm has been saved');
-					$this->redirect(array('action'=>'index'), null, true);
+				if ($this->Scorm->data['Scorm']['version']!= '2004 3rd Edition'){
+				$folder = new Folder($scorm_files_location);
+						$folder->delete($scorm_files_location);
+						$this->Session->setFlash('The Scorm has not a right version');
+				
+				}else {
+						$this->Scorm->save($this->data);
+						$this->Session->setFlash('The Scorm has been saved');
+						$this->redirect(array('action'=>'index'), null, true);
 				}
 			} else {
 				$this->Session->setFlash('The Scorm could not be uploaded. Please, try again.');
@@ -105,16 +114,23 @@ class ScormsController extends ScormAppController {
 			$this->data = $this->Scorm->read(null, $id);
 		}
 	}
-
+	
 	function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash('Invalid id for Scorm');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-		if ($this->Scorm->del($id)) {
+		$this->data = $this->Scorm->find(array('id'=> $id),null,null,null);			
+			$uploaded_file = $this->data['Scorm']['file_name'];
+			$scorm_files_location = TMP.'tests'.DS.'imsmanifests'.DS.'uploads'.DS.$uploaded_file;
+			$folder = new Folder($scorm_files_location);
+			$folder->delete($scorm_files_location);
+		if ($this->Scorm->del($id)) {			
 			$this->Session->setFlash('Scorm #'.$id.' deleted');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}
+	
+	
 }
 ?>
