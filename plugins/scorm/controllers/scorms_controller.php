@@ -19,6 +19,7 @@ class ScormsController extends ScormAppController {
 	}
 	
 	function view($id = null) {
+		Configure::write('debug',0);
 		if (!$id) {
 			$this->Session->setFlash('Invalid Scorm.');
 			$this->redirect(array('action'=>'index'), null, true);
@@ -31,14 +32,19 @@ class ScormsController extends ScormAppController {
 			), 
 			'sco_id', 'sco_id ASC'
 		);
+		debug($trackings);
 		$trackings = Set::extract($trackings, '{n}.ScormAttendeeTracking.sco_id');
 		$scos = $this->Scorm->Sco->findAll(
 			array('scorm_id' => $id, 'href IS NOT NULL'),
 			null, 'id ASC', null, 1, -1
 		);
+		debug($scos);
 		$show_sco = array();
 		foreach ($scos as $sco) {
 			$sco = $sco['Sco'];
+			debug("In Array: " . $sco['id']);
+			debug($trackings);
+			var_dump(in_array($sco['id'], $trackings));
 			if (in_array($sco['id'], $trackings)) continue;
 			$show_sco['id'] = $sco['id']; 
 			$show_sco['href'] = $sco['href'];
@@ -49,6 +55,7 @@ class ScormsController extends ScormAppController {
 			$show_sco['id'] = $scos[0]['Sco']['id'];
 			$show_sco['href'] = $scos[0]['Sco']['href'];
 		}
+		debug($show_sco);
 		$this->set('show_sco', $show_sco);
 		$this->Scorm->recursive = -1;
 		$this->set('scorm', $this->Scorm->find(array('id' => $id), array('Scorm.*')));

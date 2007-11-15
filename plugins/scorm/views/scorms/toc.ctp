@@ -16,6 +16,7 @@
 			array(
 				'target' => 'viewport',
 				'id' => 'sco-',
+				'class' => array('sco-', ':id'),
 				'onclick' => 'return ScormControl.updateUI(this)'
 			)
 		);

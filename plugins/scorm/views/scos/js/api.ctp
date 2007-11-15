@@ -17,6 +17,7 @@ function underscore(str) {
 	return str.replace(/\./g,"__");
 }
 var Scorm_2004 = function(){
+	this.sco_id = <?php $sco_id?>;
 	/* URL to where the scoes data is sent */ 
 	this.serverside_url = webroot + 'scorm/scorm_attendee_trackings/store_data/';
 	/* Allowed Children values */
@@ -491,7 +492,7 @@ var Scorm_2004 = function(){
 		debug('Data: \n' + datastring);
 		debug('URL: \n' + this.serverside_url);
 		debugGroupClose();
-		return jQuery.post(this.serverside_url + 'scorm:' + scorm_id + '/sco:' + sco_number, datastring);
+		return jQuery.post(this.serverside_url + 'scorm:' + scorm_id + '/sco:' + sco_id, datastring);
 	}
 
 	//

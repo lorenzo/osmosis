@@ -32,6 +32,7 @@ class ScosController extends ScormAppController {
 		}
 		$trackings = $t;
 		$this->set(compact('trackings'));
+		$this->set('sco_id', $id);
 	}
 
 	function view($id = null) {

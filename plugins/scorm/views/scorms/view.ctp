@@ -1,13 +1,14 @@
 <div id="scorm_ui">
 	<?php
-		echo $dynamicjs->link('scorm/scos/api/2', false);
-		echo $javascript->link('plugins/scorm/controls', false);
-		echo $javascript->link('jquery/jquery', false);
-		echo $javascript->link('jquery/plugins/treeview/jquery.treeview', false);
+		$dynamicjs->link('scorm/scos/api/' . $show_sco['id'], false, 'api');
+		$javascript->link('plugins/scorm/controls', false);
+		$javascript->link('jquery/jquery', false);
+		$javascript->link('jquery/plugins/treeview/jquery.treeview', false);
+		$javascript->link('jquery/plugins/jquery.flydom', false);
 		echo $html->css('scorm', null, null, true);
 		echo $html->css('../js/jquery/plugins/treeview/jquery.treeview', null, null, true);
 		echo $javascript->codeBlock('var scorm_id = "' . $scorm['Scorm']['id'] . '";');
-		echo $javascript->codeBlock('var sco_number = null;');
+		echo $javascript->codeBlock('var sco_id = ' . $show_sco['id'] . ';');
 		echo $javascript->codeBlock('$(document).ready(function(){ $("#scorm_toc ul").treeview(); });');
 		echo $this->renderElement('scorms/scorm_toc', array('cache' => '1 day', 'scorm' => $scorm,"foo". $scorm['Scorm']['id'] =>'foo'));
 	?>
@@ -34,7 +35,7 @@
 	</div>
 	<iframe id="viewport" name="viewport" <?php
 		if (!empty($show_sco))
-			echo "src='" . $html->url('/scorm/scos/view/' . $show_sco['id'] . '/' . $show_sco['href']) ."'";
+			echo "src=''";
 	?>></iframe>
 	<?php
 		if (!empty($show_sco)) {

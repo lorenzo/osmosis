@@ -3,12 +3,31 @@ var ScormControl = new function(){
 		debugGroup("Activado el link " + link.id);
 		debug(link.href);
 		debugGroupClose();
-		id = link.id;
+		var href = link.href;
+		var id = link.id;
+		var id_data = id.match(/(.*)(\d+)/);
+		var local_sco_id = id_data[1];
+		var local_sco_number =  parseInt(id_data[2]);
+		this.updateLinks(local_sco_number-1, local_sco_number+1, local_sco_id);
+		//alert('Luego de cerrar esta ventana, espere un momento... ' +href);
+		var className = link.className;
 		id_data = id.match(/(.*)(\d+)/);
-		sco_id = id_data[1];
-		sco_number =  parseInt(id_data[2]);
-		this.updateLinks(sco_number-1, sco_number+1, sco_id);
-		return true;
+		sco_id = parseInt(id_data[2]);		
+
+		$('script#api').remove();
+
+		$('head').createAppend(
+			'script',
+			{
+				'id' : 'api',
+				'src' : webroot + 'scorm/scos/api/' + sco_id + '.js',
+				'type' : 'text/javascript',
+				'onload' : function() {alert('cargué');}
+			}
+		);
+
+		$('iframe#viewport')[0].src = href;
+		return false;
 	}
 	
 	this.setupLinks = function() {
