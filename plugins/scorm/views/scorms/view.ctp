@@ -5,10 +5,11 @@
 		$javascript->link('jquery/jquery', false);
 		$javascript->link('jquery/plugins/treeview/jquery.treeview', false);
 		$javascript->link('jquery/plugins/jquery.flydom', false);
+		$javascript->link('jquery/plugins/jquery.blockUI', false);
 		echo $html->css('scorm', null, null, true);
 		echo $html->css('../js/jquery/plugins/treeview/jquery.treeview', null, null, true);
 		echo $javascript->codeBlock('var scorm_id = "' . $scorm['Scorm']['id'] . '";');
-		echo $javascript->codeBlock('var sco_id = ' . $show_sco['id'] . ';');
+		echo $javascript->codeBlock('var sco_id = "yokjojojo";');
 		echo $javascript->codeBlock('$(document).ready(function(){ $("#scorm_toc ul").treeview(); });');
 		echo $this->renderElement('scorms/scorm_toc', array('cache' => '1 day', 'scorm' => $scorm,"foo". $scorm['Scorm']['id'] =>'foo'));
 	?>

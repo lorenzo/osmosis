@@ -11,22 +11,26 @@ var ScormControl = new function(){
 		this.updateLinks(local_sco_number-1, local_sco_number+1, local_sco_id);
 		//alert('Luego de cerrar esta ventana, espere un momento... ' +href);
 		var className = link.className;
-		id_data = id.match(/(.*)(\d+)/);
-		sco_id = parseInt(id_data[2]);		
+		debug('ClassName' + className);
+		id_data = className.match(/(.*)(\d+)/);
+		var sco_id = parseInt(id_data[2]);		
 
 		$('script#api').remove();
-
+		$.blockUI('<h1><img src="' + webroot + '/img/loading.gif" /> Cargando...</h1>'); 
 		$('head').createAppend(
 			'script',
 			{
 				'id' : 'api',
 				'src' : webroot + 'scorm/scos/api/' + sco_id + '.js',
 				'type' : 'text/javascript',
-				'onload' : function() {alert('cargué');}
+				'onload' : function() {
+					$('iframe#viewport')[0].src = href;
+					$.unblockUI();
+				}
 			}
 		);
 
-		$('iframe#viewport')[0].src = href;
+		
 		return false;
 	}
 	
