@@ -72,7 +72,7 @@ class ScormAttendeeTrackingsController extends ScormAppController {
 			$data['value'] = $value;
 			$this->ScormAttendeeTracking->save($data);
 		}
-		die;
+		die('ok');
 	}
 
 }
