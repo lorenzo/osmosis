@@ -61,7 +61,6 @@ class ScormAttendeeTrackingsController extends ScormAppController {
 
 	function store_data() {
 		$params = $this->passedArgs;
-		debug($params);
 		$member_id = $this->Session->read('Member.id');
 		$data['student_id'] = $member_id;
 		$data['sco_id'] = $params['sco'];
@@ -71,8 +70,6 @@ class ScormAttendeeTrackingsController extends ScormAppController {
 			if ($existant) $data['id'] = $existant['ScormAttendeeTracking']['id'];
 			else $this->ScormAttendeeTracking->create();
 			$data['value'] = $value;
-			debug("Guardando");
-			debug($data);
 			$this->ScormAttendeeTracking->save($data);
 		}
 		die;
