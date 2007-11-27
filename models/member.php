@@ -2,7 +2,7 @@
 class Member extends AppModel {
 
 	var $name = 'Member';
-	var $validate = null; /* array(
+	var $validate = array(
 		'email' => array(
 		    'valid' => array(
 		        'rule' => 'email',
@@ -21,7 +21,7 @@ class Member extends AppModel {
 		'role_id' => VALID_NOT_EMPTY,
 		'username' => VALID_NOT_EMPTY,
 		'password' => VALID_NOT_EMPTY,
-	);*/
+	);
 	
 	var $belongsTo = array(
 			'Role' => array('className' => 'Role',

@@ -9,7 +9,6 @@ class DepartmentTestCase extends CakeTestCase {
 		$this->TestObject = new Department();
 		$this->TestObject->useDbConfig = 'test_suite';
 		$this->TestObject->tablePrefix = 'test_suite_';
-		//$this->TestObject->loadInfo(true);
 	}
 
 	function tearDown() {

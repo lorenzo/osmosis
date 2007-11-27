@@ -17,7 +17,11 @@ class AppController extends Controller {
 					$this->Session->write('Member.id', '1');
 					$this->Session->write('Member.name', 'Mr. Admin');
 				}
-				$this->set('user', $this->Session->read('Member'));
+				if (!$this->Session->check('Auth.Member.id')) {
+					$this->Session->write('Auth.Member.id', '1');
+					$this->Session->write('Auth.Member.name', 'Mr. Admin');
+				}
+				$this->set('user', $this->Session->read('Auth.Member'));
 			}
 		}
 	}

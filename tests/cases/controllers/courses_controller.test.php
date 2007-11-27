@@ -13,12 +13,8 @@ class CoursesControllerTestCase extends CakeTestCase {
 		unset($this->TestObject);
 	}
 
-	/*
-	function testMe() {
-		$result = $this->TestObject->index();
-		$expected = 1;
-		$this->assertEqual($result, $expected);
+	function testAdd() {
+		
 	}
-	*/
 }
 ?>

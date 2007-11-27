@@ -9,7 +9,6 @@ class CourseTestCase extends CakeTestCase {
 		$this->TestObject = new Course();
 		$this->TestObject->useDbConfig = 'test_suite';
 		$this->TestObject->tablePrefix = 'test_suite_';
-		//$this->TestObject->loadInfo(true);
 	}
 
 	function tearDown() {
@@ -43,8 +42,6 @@ class CourseTestCase extends CakeTestCase {
 		);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
-			'department_id' 	=> 'Error.numeric',
-			'owner_id' 			=> 'Error.numeric',
 			'code'				=> 'Error.maxlength'
 		);
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
@@ -70,6 +67,8 @@ class CourseTestCase extends CakeTestCase {
 		$this->TestObject->id = 2;
 		$this->TestObject->data = array(
 			'Course' => array(
+				'department_id'		=> 1,
+				'owner_id'			=> 1,
 				'code' 				=> '1abc',
 				'name' 				=> '<span>dasdas</span>',
 				'description' 		=> 'xdf'
