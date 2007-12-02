@@ -14,6 +14,9 @@ if (!defined('APP_DIR')) {
 if (!defined('CAKE_CORE_INCLUDE_PATH')) {
 	define('CAKE_CORE_INCLUDE_PATH', ROOT.DS.'cake1.2.x');
 }
+if (!defined('TEST_CAKE_CORE_INCLUDE_PATH')) {
+	define('TEST_CAKE_CORE_INCLUDE_PATH', ROOT.DS.'cake1.2.x');
+}
 if (!defined('WEBROOT_DIR')) {
 	define('WEBROOT_DIR', basename(dirname(__FILE__)));
 }
