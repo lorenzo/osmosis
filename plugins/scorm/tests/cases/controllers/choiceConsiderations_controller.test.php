@@ -1,6 +1,6 @@
 <?php 
 
-loadController('scorm.ChoiceConsiderations');
+App::import('Controller', 'scorm.ChoiceConsiderations');
 
 class ChoiceConsiderationsControllerTestCase extends CakeTestCase {
 	var $TestObject = null;

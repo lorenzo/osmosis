@@ -1,8 +1,8 @@
 <?php 
 
-loadModel('scorm.Rule');
-loadModel('scorm.Rollup');
-loadModel('scorm.Condition');
+App::import('Model','scorm.Rule');
+App::import('Model','scorm.Rollup');
+App::import('Model','scorm.Condition');
 
 class RuleTestCase extends CakeTestCase {
 	var $TestObject = null;

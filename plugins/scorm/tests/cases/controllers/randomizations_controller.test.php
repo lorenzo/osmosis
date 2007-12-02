@@ -1,6 +1,6 @@
 <?php 
 
-loadController('scorm.Randomizations');
+App::import('Controller','scorm.Randomizations');
 
 class RandomizationsControllerTestCase extends CakeTestCase {
 	var $TestObject = null;

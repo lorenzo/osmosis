@@ -1,6 +1,6 @@
 <?php 
 
-loadController('scorm.Conditions');
+App::import('Controller','scorm.Conditions');
 
 class ConditionsControllerTestCase extends CakeTestCase {
 	var $TestObject = null;

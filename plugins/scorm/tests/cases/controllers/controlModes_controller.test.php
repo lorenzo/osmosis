@@ -1,6 +1,6 @@
 <?php 
 
-loadController('scorm.ControlModes');
+App::import('Controller','scorm.ControlModes');
 
 class ControlModesControllerTestCase extends CakeTestCase {
 	var $TestObject = null;

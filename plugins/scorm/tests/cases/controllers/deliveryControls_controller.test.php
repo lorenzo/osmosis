@@ -1,6 +1,6 @@
 <?php 
 
-loadController('scorm.DeliveryControls');
+App::import('Controller','scorm.DeliveryControls');
 
 class DeliveryControlsControllerTestCase extends CakeTestCase {
 	var $TestObject = null;
