@@ -1,83 +1,56 @@
 <?php
 class InitAclController extends AppController {
 	var $name = 'InitAcl';
-	var $components = array('Acl','Auth');
-	var $uses = array('Member','Role');
-	
-	function createAro($model, $foreign, $parent, $alias) {
-		$this->Acl->Aro->create();
-		$this->Acl->Aro->save(array(
-      		       'model'=>$model,
-      		       'foreign_key'=>$foreign,
-      		       'parent_id'=>$parent,
-      		       'alias'=>$alias)
-                );
-		return $this->Acl->Aro->id;
-	}
-
-	function createAco($model, $foreign, $parent, $alias) {
-		$this->Acl->Aco->create();
-		$this->Acl->Aco->save(array(
-      		       'model'=>$model,
-      		       'foreign_key'=>$foreign,
-      		       'parent_id'=>$parent,
-      		       'alias'=>$alias)
-                );
-		return $this->Acl->Aco->id;
-	}
-  
-	function deleteDB() {
-		$this->Member->query("TRUNCATE acos");
-		$this->Member->query("TRUNCATE aros");
-		$this->Member->query("TRUNCATE aros_acos");
-		$this->Member->query("TRUNCATE members");
-		$this->Member->query("TRUNCATE roles");
-	}
-	
-	function initRole($role_name,$parent_id=null) {
-		$this->Role->create();
-		$this->Role->save(array('Role'=>array('role'=>$role_name,'parent_id'=>$parent_id)));
-		return $this->Role->getLastInsertId();
-	}
-	
-	function initMember($data) {
-		$this->Member->create();
-		$data = $this->Auth->hashPasswords($data);
-		$this->Member->save($data);
-		return $this->Member->getLastInsertId();
-	}
+	var $components = array('Acl','InitAcl');
+	var $uses = array();
+	var $controllers = array(
+		'Members' => array('index','view','add','edit','delete'),
+		'Courses' => array('index','view','add','edit','delete'),
+		'Departments' => array('index','view','add','edit','delete'),
+	);
 	
 	function init() {
-		$this->deleteDB();
-		
+		$this->InitAcl->deleteDB();
 		// AROS
-		$root_id = $this->createAro(null,null, null,'ROOT');
-		$role_id = $this->initRole('Admin');
-		$this->Acl->Aro->id = $this->Acl->Aro->field('id',array('foreign_key'=>$role_id));
-		$this->Acl->Aro->save(array('parent_id'=>$root_id,'alias'=>'Admin'));
-		$aro_id = $this->Acl->Aro->id;
+		$admin_id = $this->InitAcl->initRole('Admin');
+		$instructor_id = $this->InitAcl->initRole('Instructor');
+		$attendee_id = $this->InitAcl->initRole('Attendee');	
 		$member = array('Member' => 
 			array(
-			'institution_id' => '00-00000',
-    		'full_name'		=> 'Administrator',
-    		'email'			=> 'admin@root.com',
-    		'phone'			=> '000000000',
-    		'country'		=> 'Venezuela',
-    		'city'			=> 'Caracas',
-    		'sex'			=> 'M',
-    		'role_id'		=> $role_id,
-    		'username'		=> 'admin',
-    		'password'		=> 'admin'
-    		)
+				'institution_id'	=> '00-00000',
+		    		'full_name'		=> 'Administrator',
+		    		'email'		=> 'admin@root.com',
+		    		'phone'		=> '000000000',
+		    		'country'		=> 'Venezuela',
+		    		'city'		=> 'Caracas',
+		    		'sex'			=> 'M',
+		    		'role_id'		=> $admin_id,
+		    		'username'		=> 'admin',
+		    		'password'		=> 'admin'
+    			)
 		);
-		$member_id = $this->initMember($member);
+		$member_id = $this->InitAcl->initMember($member);
 		
 		//ACOS
-		$id = $this->createAco(null, null, null, "ROOT");
-		$id = $this->createAco(null, null, $id, "Controllers/");
-		$this->Acl->allow('Admin','ROOT', 'Controllers/');
-		
+		$id = $this->InitAcl->createAco(null, null, null, "ROOT");
+		$con_id = $this->InitAcl->createAco(null, null, $id, "Controllers/");
+		$con_id = $this->InitAcl->createAco(null, null, $con_id, "App/");
+		foreach ($this->controllers as $controller => $actions) {
+			$_id = $this->InitAcl->createAco(null, null, $con_id, $controller);
+			foreach ($actions as $action) {
+				$this->InitAcl->createAco(null, null, $_id, $action);
+			}
+		}
+		$this->Acl->allow('Admin','ROOT');
 		$this->autoRender = false;
 	}
+	
+	function isAuthorized() {
+		if(Configure::read('Auth.disabled')) {
+			return true;
+		}
+		return false;
+	}
+
 }
 ?>

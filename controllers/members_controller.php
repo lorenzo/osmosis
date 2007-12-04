@@ -120,6 +120,13 @@ class MembersController extends AppController {
 		$this->Session->destroy();
 		$this->redirect($action);
 	}
+	
+	function isAuthorized() {
+		if ($this->action == 'logout' || $this->action == 'login') {
+			return true;
+		}
+		return parent::isAuthorized();
+	}
 
 }
 ?>

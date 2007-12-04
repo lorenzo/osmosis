@@ -10,23 +10,17 @@ class AppController extends Controller {
 			$this->Auth->loginAction = '/members/login';
 			$this->Auth->loginRedirect = '/courses/';
 			$this->Auth->autoRedirect = true;
+			$this->set('user', $this->Session->read('Auth.Member'));
 			//TODO: Borrar lo siguiente cuando sea el momento
-			if(Configure::read('Auth.disabled')) {
+			if(Configure::read('Auth.disabled') && $this->name == 'InitAcl') {
 				$this->Auth->allow();
-				if (!$this->Session->check('Member.id')) {
-					$this->Session->write('Member.id', '1');
-					$this->Session->write('Member.name', 'Mr. Admin');
-				}
-				if (!$this->Session->check('Auth.Member.id')) {
-					$this->Session->write('Auth.Member.id', '1');
-					$this->Session->write('Auth.Member.name', 'Mr. Admin');
-				}
-				$this->set('user', $this->Session->read('Auth.Member'));
 			}
 		}
 	}
 
 	function isAuthorized() {
+		if(Configure::read('Auth.disabled') || $this->name == 'Pages')
+			return true;
 		if($this->Acl->check($this->Auth->user(),$this->name.'/'.$this->action)) {
 			return true;
 		}
