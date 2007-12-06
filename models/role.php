@@ -30,7 +30,7 @@ class Role extends AppModel {
 	
     var $actsAs = array('Acl');
 
-    function parentNode(){
+    function parentNode() {
         if (!$this->id) {
             return null;
         }
@@ -38,7 +38,7 @@ class Role extends AppModel {
         if (!$data[$this->name]['parent_id']){
             return null;
         } else {
-            return $data[$this->name]['parent_id'];
+            return array('model' => 'Role', 'foreign_key' => $data[$this->name]['parent_id']);
         }
     }
 

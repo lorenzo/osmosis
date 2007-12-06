@@ -12,9 +12,13 @@ class InitAclController extends AppController {
 	function init() {
 		$this->InitAcl->deleteDB();
 		// AROS
-		$admin_id = $this->InitAcl->initRole('Admin');
-		$instructor_id = $this->InitAcl->initRole('Instructor');
-		$attendee_id = $this->InitAcl->initRole('Attendee');	
+		$public_id = $this->InitAcl->initRole('Public');
+		$member_id = $this->InitAcl->initRole('Member',$public_id);
+		$attendee_id = $this->InitAcl->initRole('Attendee',$member_id);
+		$helper_id = $this->InitAcl->initRole('Helper',$attendee_id);
+		$instructor_id = $this->InitAcl->initRole('Instructor',$helper_id);
+		$creator_id = $this->InitAcl->initRole('Creator',$instructor_id);
+		$admin_id = $this->InitAcl->initRole('Admin');	
 		$member = array('Member' => 
 			array(
 				'institution_id'	=> '00-00000',
