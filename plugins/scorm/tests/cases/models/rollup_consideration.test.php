@@ -1,5 +1,5 @@
 <?php
-loadModel('scorm.RollupConsideration');
+App::import('Model', 'scorm.RollupConsideration');
 
 class RollupConsiderationTestCase extends CakeTestCase {
 	var $TestObject = null;

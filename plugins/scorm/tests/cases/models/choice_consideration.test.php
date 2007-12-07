@@ -1,6 +1,6 @@
 <?php 
 
-loadModel('scorm.ChoiceConsideration');
+App::import('Model', 'scorm.ChoiceConsideration');
 
 class ChoiceConsiderationTestCase extends CakeTestCase {
 	var $TestObject = null;

@@ -1,18 +1,18 @@
 <?php 
 
-loadModel('scorm.Scorm');
-loadModel('scorm.Sco');
-loadModel('scorm.Objective');
-loadModel('scorm.Randomization');
-loadModel('scorm.Rollup');
-loadModel('scorm.Rule');
-loadModel('scorm.Condition');
-loadModel('scorm.ChoiceConsideration');
-loadModel('scorm.RollupConsideration');
-loadModel('scorm.ScoPresentation');
-loadModel('scorm.ControlMode');
-loadModel('scorm.DeliveryControl');
-loadModel('scorm.MapInfo');
+App::import('Model', 'scorm.Scorm');
+App::import('Model', 'scorm.Sco');
+App::import('Model', 'scorm.Objective');
+App::import('Model', 'scorm.Randomization');
+App::import('Model', 'scorm.Rollup');
+App::import('Model', 'scorm.Rule');
+App::import('Model', 'scorm.Condition');
+App::import('Model', 'scorm.ChoiceConsideration');
+App::import('Model', 'scorm.RollupConsideration');
+App::import('Model', 'scorm.ScoPresentation');
+App::import('Model', 'scorm.ControlMode');
+App::import('Model', 'scorm.DeliveryControl');
+App::import('Model', 'scorm.MapInfo');
 class ScormTestCase extends CakeTestCase {
 	var $TestObject = null;
 	var $fixtures = array('scorm',

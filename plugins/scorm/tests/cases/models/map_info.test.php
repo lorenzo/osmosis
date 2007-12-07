@@ -1,6 +1,6 @@
 <?php 
 
-loadModel('scorm.MapInfo');
+App::import('Model', 'scorm.MapInfo');
 
 class MapInfoTestCase extends CakeTestCase {
 	var $TestObject = null;

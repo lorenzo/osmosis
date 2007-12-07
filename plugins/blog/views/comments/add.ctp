@@ -17,3 +17,4 @@
 		<li><?php echo $html->link(__('New Post', true), array('controller'=> 'posts', 'action'=>'add')); ?> </li>
 	</ul>
 </div>
+

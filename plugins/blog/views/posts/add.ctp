@@ -10,12 +10,5 @@
 	</fieldset>
 <?php echo $form->end('Submit');?>
 </div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('List Posts', true), array('action'=>'index'));?></li>
-		<li><?php echo $html->link(__('List Blogs', true), array('controller'=> 'blogs', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Blog', true), array('controller'=> 'blogs', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Comments', true), array('controller'=> 'comments', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Comment', true), array('controller'=> 'comments', 'action'=>'add')); ?> </li>
-	</ul>
-</div>
+<?php echo $javascript->link('tiny_mce/tiny_mce',null,null,false); ?>
+<?php echo $this->renderElement('ui/editor'); ?>

@@ -2,7 +2,18 @@
 class Blog extends BlogAppModel {
 
 	var $name = 'Blog';
-	var $useTable = 'blogs';
+	var $useTable = 'blog_blogs';
+	var $validate = array(
+		'title'=> array(
+			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		),
+		'description' => array(
+			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		),
+		'owner' => array(
+			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		)
+	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $hasMany = array(

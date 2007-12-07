@@ -1,5 +1,5 @@
 <?php
-loadModel('scorm.DeliveryControl');
+App::import('Model', 'scorm.DeliveryControl');
 
 class DeliveryControlTestCase extends CakeTestCase {
 	var $TestObject = null;

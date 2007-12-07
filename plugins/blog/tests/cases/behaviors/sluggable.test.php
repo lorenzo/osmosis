@@ -166,7 +166,7 @@ class SluggableTestCase extends CakeTestCase
 		$result = $Sluggable->__slug('H' . chr(196).chr(155) . 're C' . chr(195).chr(182) . 'mes ' . chr(196).chr(129) . ' mix ' . chr(197).chr(165).chr(196).chr(164) . 'under', array('separator' => '-', 'length' => 100, 'translation' => 'utf-8'));
 		$expected = 'here-comes-a-mix-thunder';
 		$this->assertEqual($result, $expected);
-
+		
 		$result = $Sluggable->__slug('H' . chr(196).chr(155) . 're C' . chr(195).chr(182) . 'mes ' . chr(196).chr(129) . ' mix ' . chr(197).chr(165).chr(196).chr(164) . 'under with ' . chr(208).chr(160) . 'u' . chr(209).chr(129) . 'sian flavor', array('separator' => '-', 'length' => 100, 'translation' => 'utf-8'));
 		$expected = 'here-comes-a-mix-thunder-with-russian-flavor';
 		$this->assertEqual($result, $expected);
@@ -384,13 +384,13 @@ class SluggableTestCase extends CakeTestCase
 		$expected = array('Post' => array('body' => 'Just Body'));
 		$this->assertEqual($result, $expected);
 
-		$Sluggable->setup($this->Post, array('label' => array('title', 'subtitle'), 'separator' => '-', 'length' => 100));
+		$Sluggable->setup($this->Post, array('label' => array('blog_id','title'), 'separator' => '-', 'length' => 100));
 
-		$this->Post->data = array('Post' => array('title' => 'My test title'));
+		$this->Post->data = array('Post' => array('title' => 'My test title','blog_id'=>1));
 		$result = $Sluggable->beforeSave($this->Post);
 		$this->assertTrue($result !== false);
 		$result = $this->Post->data;
-		$expected = array('Post' => array('title' => 'My test title', 'slug' => 'my-test-title'));
+		$expected = array('Post' => array('title' => 'My test title', 'slug' => '1-my-test-title','blog_id'=>1));
 		$this->assertEqual($result, $expected);
 
 		$this->Post->data = array('Post' => array('title' => 'My test title', 'body' => ''));
@@ -400,11 +400,11 @@ class SluggableTestCase extends CakeTestCase
 		$expected = array('Post' => array('title' => 'My test title', 'body' => '', 'slug' => 'my-test-title'));
 		$this->assertEqual($result, $expected);
 
-		$this->Post->data = array('Post' => array('title' => 'My test title', 'body' => 'Post Body'));
+		$this->Post->data = array('Post' => array('title' => 'My test title', 'blog_id' => '3'));
 		$result = $Sluggable->beforeSave($this->Post);
 		$this->assertTrue($result !== false);
 		$result = $this->Post->data;
-		$expected = array('Post' => array('title' => 'My test title', 'subtitle' => 'Post Body', 'slug' => 'my-test-title-my-subtitle'));
+		$expected = array('Post' => array('title' => 'My test title', 'blog_id' => '3', 'slug' => '3-my-test-title'));
 		$this->assertEqual($result, $expected);
 
 		$Sluggable->setup($this->Post, array('overwrite' => false));
