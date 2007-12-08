@@ -3,9 +3,26 @@ class Post extends BlogAppModel {
 
 	var $name = 'Post';
 	var $actsAs = array(
-		'Sluggable' => array('label' => 'title', 'slug' => 'slug', 'overwrite' => true)
+		'Sluggable' => array('label' => 'title', 'slug' => 'slug', 'overwrite' => false)
 	);
 	var $useTable = 'blog_posts';
+	var $validate = array(
+		'title'=> array(
+			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		),
+		'body' => array(
+			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		),
+		'created' => array(
+			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		),
+		'modified' => array(
+			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		),
+		'blog_id' => array(
+			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		),
+	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
@@ -15,14 +32,7 @@ class Post extends BlogAppModel {
 								'fields' => '',
 								'order' => '',
 								'counterCache' => ''),
-								
-			'Member' => array('className' => 'Member',
-								'foreignKey' => 'member_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
-	);
+								);
 
 	var $hasMany = array(
 			'Comment' => array('className' => 'Blog.Comment',

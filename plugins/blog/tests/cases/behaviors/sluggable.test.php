@@ -37,23 +37,8 @@ class SluggableTestModel extends CakeTestModel
 	var $actsAs = array('Sluggable');
 }
 
-/**
- * Model used in test case.
- *
- * @package	app.tests
- * @subpackage app.tests.cases.behaviors
- */
-class Post extends SluggableTestModel
-{
-	/**
-	 * Name for this model
-	 *
-	 * @var string
-	 * @access public
-	 */
-	var $name = 'Post';
-}
-
+App::import('Model','Blog.Post');
+App::import('Model','Blog.Blog');
 /**
  * Test case for Sluggable Behavior
  *
@@ -75,9 +60,12 @@ class SluggableTestCase extends CakeTestCase
 	 *
 	 * @access public
 	 */
-	function startTest()
-	{
-		$this->Post =& new Post();
+	function setUp() {
+		$this->Post = new Post();
+		$this->Post->useDbConfig = 'test_suite';
+		$this->Post->tablePrefix = 'test_suite_';
+		$this->Post->Blog->useDbConfig = 'test_suite';
+		$this->Post->Blog->tablePrefix = 'test_suite_';
 	}
 
 	/**
@@ -85,9 +73,9 @@ class SluggableTestCase extends CakeTestCase
 	 *
 	 * @access public
 	 */
-	function endTest()
+	function tearDown()
 	{
-		unset($this->Posts);
+		unset($this->Post);
 
 		ClassRegistry::flush();
 	}
@@ -362,6 +350,7 @@ class SluggableTestCase extends CakeTestCase
 		$result = $this->Post->data;
 		$expected = array('Post' => array('title' => 'My test title', 'slug' => 'my-test-title'));
 		$this->assertEqual($result, $expected);
+		//Primer First Article
 
 		$this->Post->data = array('Post' => array('title' => 'First Article'));
 		$result = $Sluggable->beforeSave($this->Post);
@@ -384,8 +373,9 @@ class SluggableTestCase extends CakeTestCase
 		$expected = array('Post' => array('body' => 'Just Body'));
 		$this->assertEqual($result, $expected);
 
+		// Pruebas con My test title con blog_id
 		$Sluggable->setup($this->Post, array('label' => array('blog_id','title'), 'separator' => '-', 'length' => 100));
-
+		
 		$this->Post->data = array('Post' => array('title' => 'My test title','blog_id'=>1));
 		$result = $Sluggable->beforeSave($this->Post);
 		$this->assertTrue($result !== false);
@@ -407,6 +397,7 @@ class SluggableTestCase extends CakeTestCase
 		$expected = array('Post' => array('title' => 'My test title', 'blog_id' => '3', 'slug' => '3-my-test-title'));
 		$this->assertEqual($result, $expected);
 
+		//Pruebas con New First Article
 		$Sluggable->setup($this->Post, array('overwrite' => false));
 
 		$this->Post->id = 1;
@@ -439,7 +430,7 @@ class SluggableTestCase extends CakeTestCase
 	 */
 	function testSave()
 	{
-		$data = array('Post' => array('title' => 'New Article', 'subtitle' => '', 'body' => 'New Body 1'));
+		$data = array('Post' => array('title' => 'New Article', 'body' => 'New Body 1','blog_id'=>1,'member_id'=>1));
 		$result = $this->Post->create();
 		$this->assertTrue($result !== false);
 		$result = $this->Post->save($data);
@@ -448,16 +439,16 @@ class SluggableTestCase extends CakeTestCase
 		$result = $this->Post->read(array('slug', 'title'), 4);
 		$expected = array('Post' => array('slug' => 'new-article', 'title' => 'New Article'));
 
-		$data = array('Post' => array('title' => 'New Article', 'subtitle' => 'Second Version', 'body' => 'New Body 2'));
+		$data = array('Post' => array('title' => 'New Article','blog_id'=>1,'member_id'=>1, 'body' => 'New Body 2'));
 		$result = $this->Post->create();
 		$this->assertTrue($result !== false);
 		$result = $this->Post->save($data);
 		$this->assertTrue($result !== false);
 
 		$result = $this->Post->read(array('slug', 'title'), 5);
-		$expected = array('Post' => array('slug' => 'new-article-1', 'title' => 'New Article'));
+		$expected = array('Post' => array('slug' => 'new-article-1', 'title' => 'New Article','blog_id'=>1,'member_id'=>1));
 
-		$data = array('Post' => array('title' => 'New Article', 'subtitle' => 'Third Version', 'body' => 'New Body 3'));
+		$data = array('Post' => array('title' => 'New Article','blog_id'=>1,'member_id'=>1, 'body' => 'New Body 3'));
 		$result = $this->Post->create();
 		$this->assertTrue($result !== false);
 		$result = $this->Post->save($data);
@@ -466,7 +457,7 @@ class SluggableTestCase extends CakeTestCase
 		$result = $this->Post->read(array('slug', 'title'), 6);
 		$expected = array('Post' => array('slug' => 'new-article-2', 'title' => 'New Article'));
 
-		$data = array('Post' => array('title' => 'Brand New Article', 'subtitle' => '', 'body' => 'Brand New Body'));
+		$data = array('Post' => array('title' => 'Brand New Article', 'body' => 'Brand New Body','blog_id'=>1,'member_id'=>1));
 		$result = $this->Post->create();
 		$this->assertTrue($result !== false);
 		$result = $this->Post->save($data);
@@ -475,7 +466,7 @@ class SluggableTestCase extends CakeTestCase
 		$result = $this->Post->read(array('slug', 'title'), 7);
 		$expected = array('Post' => array('slug' => 'brand-new-article', 'title' => 'Brand New Article'));
 
-		$data = array('Post' => array('id' => 2, 'title' => 'New Title for Second Article'));
+		$data = array('Post' => array('id' => 2, 'title' => 'New Title for Second Article','blog_id'=>1,'member_id'=>1));
 		$result = $this->Post->create();
 		$this->assertTrue($result !== false);
 		$result = $this->Post->save($data);
@@ -484,7 +475,7 @@ class SluggableTestCase extends CakeTestCase
 		$result = $this->Post->read(array('slug', 'title'), 2);
 		$expected = array('Post' => array('slug' => 'second-article', 'title' => 'New Title for Second Article'));
 
-		$data = array('Post' => array('title' => 'Article with whitelist', 'body' => 'Brand New Body'));
+		$data = array('Post' => array('title' => 'Article with whitelist', 'body' => 'Brand New Body','blog_id'=>1,'member_id'=>1));
 		$this->assertTrue($result !== false);
 		$result = $this->Post->create();
 		$this->assertTrue($result !== false);

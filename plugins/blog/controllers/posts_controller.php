@@ -17,15 +17,23 @@ class PostsController extends BlogAppController {
 		$this->set('post', $this->Post->read(null, $id));
 	}*/
 
-	function add() {
+	function add($blog_id = null) {
+		if (!$blog_id && empty($this->data)) {
+			$this->Session->setFlash('Invalid Blog');
+			$this->redirect(array('action'=>'index'), null, true);
+		}
 		if (!empty($this->data)) {
 			$this->Post->create();
+			$this->data['Post']['body'] = $this->HtmlPurifier->purify($this->data['Post']['body']);
 			if ($this->Post->save($this->data)) {
 				$this->Session->setFlash('The Post has been saved');
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
 				$this->Session->setFlash('The Post could not be saved. Please, try again.');
 			}
+		}
+		if(!isset($this->data['Post']['blog_id'])) {
+			$this->data['Post']['blog_id'] = $blog_id;
 		}
 		$blogs = $this->Post->Blog->generateList();
 		$this->set(compact('blogs'));

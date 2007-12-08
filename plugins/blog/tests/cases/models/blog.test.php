@@ -10,8 +10,6 @@ class BlogTestCase extends CakeTestCase {
 		$this->TestObject = new Blog();
 		$this->TestObject->useDbConfig = 'test_suite';
 		$this->TestObject->tablePrefix = 'test_suite_';
-		$this->TestObject->Revision->useDbConfig = 'test_suite';
-		$this->TestObject->Revision->tablePrefix = 'test_suite_';
 	}
 
 	function tearDown() {

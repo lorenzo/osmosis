@@ -5,7 +5,7 @@
 	<?php
 		echo $form->input('title');
 		echo $form->input('body');
-		echo $form->input('blog_id');
+		echo $form->hidden('blog_id');
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>
