@@ -3,6 +3,7 @@ class PostsController extends BlogAppController {
 
 	var $name = 'Posts';
 	var $helpers = array('Html', 'Form' );
+	var $components = array('HtmlPurifier');
 
 	function index() {
 		$this->Post->recursive = 0;
@@ -18,7 +19,7 @@ class PostsController extends BlogAppController {
 	}*/
 
 	function add($blog_id = null) {
-		if (!$blog_id && empty($this->data)) {
+		if (!$blog_id && empty($this->data)) {		
 			$this->Session->setFlash('Invalid Blog');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
@@ -71,9 +72,10 @@ class PostsController extends BlogAppController {
 	}
 	
 	function view($slug) {
-        $post = $this->Post->findBySlug($slug);
-        
-        $this->set('post', $post);
+		
+        //$post = $this->Post->findBySlug($slug);
+        $this->set('post', $this->Post->findBySlug($slug));
+        //$this->set('post', $post);
     } 
 
 }

@@ -51,8 +51,10 @@ foreach ($blogs as $blog):
 </div>
 <div class="actions">
 	<ul>
+<?php foreach ($blogs as $blog):?>
+		<li><?php echo $html->link(__('New Post', true), array('controller'=> 'posts', 'action'=>'add', $blog['Blog']['id'])); ?></li>
+<?php endforeach; ?>
 		<li><?php echo $html->link(__('New Blog', true), array('action'=>'add')); ?></li>
 		<li><?php echo $html->link(__('List Posts', true), array('controller'=> 'posts', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Post', true), array('controller'=> 'posts', 'action'=>'add')); ?> </li>
 	</ul>
 </div>

@@ -6,11 +6,13 @@
 		echo $form->input('id');
 		echo $form->input('title');
 		echo $form->input('body');
-		echo $form->input('blog_id');
+		echo $form->hidden('blog_id');
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>
 </div>
+<?php echo $javascript->link('tiny_mce/tiny_mce',null,null,false); ?>
+<?php echo $this->renderElement('ui/editor'); ?>
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('Delete', true), array('action'=>'delete', $form->value('Post.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Post.id'))); ?></li>

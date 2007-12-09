@@ -44,7 +44,7 @@ foreach ($posts as $post):
 			<?php echo $html->link($post['Blog']['title'], array('controller'=> 'blogs', 'action'=>'view', $post['Blog']['id'])); ?>
 		</td>
 		<td class="actions">
-			<?php echo $html->link(__('View', true), array('action'=>'view', $post['Post']['id'])); ?>
+			<?php echo $html->link(__('View', true), array('controller'=> 'posts', 'action'=>'view', $post['Post']['slug']));?>
 			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $post['Post']['id'])); ?>
 			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $post['Post']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $post['Post']['id'])); ?>
 		</td>
@@ -59,7 +59,9 @@ foreach ($posts as $post):
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('New Post', true), array('action'=>'add')); ?></li>
+	<?php foreach ($posts as $post):?>
+		<li><?php echo $html->link(__('New Post', true), array('controller'=> 'blogs', 'action'=>'add', $post['Blog']['id'])); ?></li>
+	<?php endforeach; ?>
 		<li><?php echo $html->link(__('List Blogs', true), array('controller'=> 'blogs', 'action'=>'index')); ?> </li>
 		<li><?php echo $html->link(__('New Blog', true), array('controller'=> 'blogs', 'action'=>'add')); ?> </li>
 		<li><?php echo $html->link(__('List Comments', true), array('controller'=> 'comments', 'action'=>'index')); ?> </li>

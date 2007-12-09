@@ -51,8 +51,9 @@ foreach ($comments as $comment):
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('New Comment', true), array('action'=>'add')); ?></li>
 		<li><?php echo $html->link(__('List Posts', true), array('controller'=> 'posts', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Post', true), array('controller'=> 'posts', 'action'=>'add')); ?> </li>
+		<?php foreach ($comments as $comment):?>
+		<li><?php echo $html->link(__('New Comment', true), array('controller'=> 'posts', 'action'=>'add', $comments['Post']['id'])); ?></li>
+<?php endforeach; ?>
 	</ul>
 </div>
