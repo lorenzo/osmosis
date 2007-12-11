@@ -1,4 +1,31 @@
 <?php
+/* SVN FILE: $Id: test.php 5777 2007-10-17 12:56:14Z phpnut $ */
+/**
+ * Short description for file.
+ *
+ * Long description for file
+ *
+ * PHP versions 4 and 5
+ *
+ * CakePHP(tm) Tests <https://trac.cakephp.org/wiki/Developement/TestSuite>
+ * Copyright 2005-2007, Cake Software Foundation, Inc.
+ *								1785 E. Sahara Avenue, Suite 490-204
+ *								Las Vegas, Nevada 89104
+ *
+ *  Licensed under The Open Group Test Suite License
+ *  Redistributions of files must retain the above copyright notice.
+ *
+ * @filesource
+ * @copyright		Copyright 2005-2007, Cake Software Foundation, Inc.
+ * @link				https://trac.cakephp.org/wiki/Developement/TestSuite CakePHP(tm) Tests
+ * @package			cake
+ * @subpackage		cake.cake.tests.libs
+ * @since			CakePHP(tm) v 1.2.0.4433
+ * @version			$Revision: 5777 $
+ * @modifiedby		$LastChangedBy: phpnut $
+ * @lastmodified	$Date: 2007-10-17 08:56:14 -0400 (Wed, 17 Oct 2007) $
+ * @license			http://www.opensource.org/licenses/opengroup.php The Open Group Test Suite License
+ */
 error_reporting(E_ALL);
 set_time_limit(0);
 ini_set('memory_limit','128M');
@@ -228,7 +255,7 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 			if (isset($_GET['app'])) {
 				TestManager::runGroupTest(ucfirst($_GET['group']), APP_TEST_GROUPS, CakeTestsGetReporter());
 			}elseif (isset($_GET['plugin'])) {
-				TestManager::runGroupTest(ucfirst($_GET['group']), APP. 'plugins' . DS . $_GET['plugin']. DS . 'tests'. DS . 'groups', CakeTestsGetReporter());
+				TestManager::runGroupTest(ucfirst($_GET['group']), APP . DS . 'plugins' . DS . $_GET['plugin'] . 'tests', CakeTestsGetReporter());
 			}
 			 else {
 				TestManager::runGroupTest(ucfirst($_GET['group']), CORE_TEST_GROUPS, CakeTestsGetReporter());

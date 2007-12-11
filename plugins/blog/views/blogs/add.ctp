@@ -5,7 +5,6 @@
 	<?php
 		echo $form->input('title');
 		echo $form->input('description');
-		echo $form->input('owner');
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>

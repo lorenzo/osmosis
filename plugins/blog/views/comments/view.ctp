@@ -6,11 +6,6 @@
 			<?php echo $comment['Comment']['id']; ?>
 			&nbsp;
 		</dd>
-		<dt><?php __('Title'); ?></dt>
-		<dd>
-			<?php echo $comment['Comment']['title']; ?>
-			&nbsp;
-		</dd>
 		<dt class="altrow"><?php __('Description'); ?></dt>
 		<dd class="altrow">
 			<?php echo $comment['Comment']['description']; ?>

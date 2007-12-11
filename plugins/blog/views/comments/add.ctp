@@ -1,11 +1,12 @@
+<?php ?>
 <div class="comments form">
 <?php echo $form->create('Comment');?>
 	<fieldset>
  		<legend><?php __('Add Comment');?></legend>
 	<?php
-		echo $form->input('title');
 		echo $form->input('description');
-		echo $form->input('post_id');
+		echo $form->hidden('post_id');
+		echo $form->input('member_id');
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>

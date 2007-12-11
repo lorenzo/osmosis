@@ -4,9 +4,8 @@
  		<legend><?php __('Edit Comment');?></legend>
 	<?php
 		echo $form->input('id');
-		echo $form->input('title');
 		echo $form->input('description');
-		echo $form->input('post_id');
+		echo $form->hidden('post_id');
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>

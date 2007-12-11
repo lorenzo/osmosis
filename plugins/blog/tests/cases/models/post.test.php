@@ -33,7 +33,22 @@ class PostTestCase extends CakeTestCase {
 		);
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
 	}
-
+	
+	/*function testValidation2() {
+		
+		$data = array();
+		$this->TestObject->data = $data;
+		$valid = $this->TestObject->validates();
+		$expectedErrors = array(	
+			'title' => 'Error.minlength',
+			'body' => 'Error.empty',
+			'created' => 'Error.empty',
+			'modified' => 'Error.empty',
+			'blog_id'=> 'Error.empty',		
+		);
+		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
+	}
+*/
 	function testSave(){
 		$data = array(
 			'title' => 'post title',

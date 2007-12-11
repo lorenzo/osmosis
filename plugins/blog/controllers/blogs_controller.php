@@ -20,6 +20,7 @@ class BlogsController extends BlogAppController {
 	function add() {
 		if (!empty($this->data)) {
 			$this->Blog->create();
+			$this->data['Blog']['member_id'] = $this->Auth->user('id');
 			if ($this->Blog->save($this->data)) {
 				$this->Session->setFlash('The Blog has been saved');
 				$this->redirect(array('action'=>'index'), null, true);

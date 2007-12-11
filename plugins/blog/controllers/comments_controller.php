@@ -17,12 +17,18 @@ class CommentsController extends BlogAppController {
 		$this->set('comment', $this->Comment->read(null, $id));
 	}
 
-	function add() {
+	function add($post_id = null) {
+		if (!$post_id && empty($this->data)) {		
+			$this->Session->setFlash('Invalid Post');
+			$this->redirect(array('action'=>'index'), null, true);
+		}
 		if (!empty($this->data)) {
 			$this->Comment->create();
+			$this->data['Comment']['member_id'] = $this->Auth->user('id');
 			if ($this->Comment->save($this->data)) {
 				$this->Session->setFlash('The Comment has been saved');
-				$this->redirect(array('action'=>'index'), null, true);
+				$slug = $this->Comment->Post->field('slug',array('id'=>$this->data['Comment']['post_id']));
+				$this->redirect(array('controller'=> 'posts','action'=>'view', $slug), null, true);
 			} else {
 				$this->Session->setFlash('The Comment could not be saved. Please, try again.');
 			}

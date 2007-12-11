@@ -4,10 +4,7 @@ class Comment extends BlogAppModel {
 	var $name = 'Comment';
 	var $useTable = 'blog_comments';
 	var $validate = array(
-		'title'=> array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
-		),
-		'description' => array(
+		'comment' => array(
 			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
 		),
 		'post_id' => array(

@@ -5,18 +5,10 @@ class PostsController extends BlogAppController {
 	var $helpers = array('Html', 'Form' );
 	var $components = array('HtmlPurifier');
 
-	function index() {
+	function index($blog_id) {
 		$this->Post->recursive = 0;
-		$this->set('posts', $this->paginate());
+		$this->set('posts', $this->paginate(array('blog_id'=>$blog_id)));
 	}
-
-	/*function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash('Invalid Post.');
-			$this->redirect(array('action'=>'index'), null, true);
-		}
-		$this->set('post', $this->Post->read(null, $id));
-	}*/
 
 	function add($blog_id = null) {
 		if (!$blog_id && empty($this->data)) {		
@@ -28,7 +20,7 @@ class PostsController extends BlogAppController {
 			$this->data['Post']['body'] = $this->HtmlPurifier->purify($this->data['Post']['body']);
 			if ($this->Post->save($this->data)) {
 				$this->Session->setFlash('The Post has been saved');
-				$this->redirect(array('action'=>'index'), null, true);
+				$this->redirect(array('action'=>'index', $this->data['Post']['blog_id']), null, true);
 			} else {
 				$this->Session->setFlash('The Post could not be saved. Please, try again.');
 			}
@@ -71,11 +63,8 @@ class PostsController extends BlogAppController {
 		}
 	}
 	
-	function view($slug) {
-		
-        //$post = $this->Post->findBySlug($slug);
+	function view($slug) {		
         $this->set('post', $this->Post->findBySlug($slug));
-        //$this->set('post', $post);
     } 
 
 }

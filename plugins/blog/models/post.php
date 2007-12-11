@@ -9,6 +9,14 @@ class Post extends BlogAppModel {
 	var $validate = array(
 		'title'=> array(
 			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+			'Error.maxlength' => array('rule' => array('maxLength',50),
+										'required' => true, 
+										'on'=> 'create', 
+										'message' => 'Error.maxLength'),
+			'Error.longitudMin' => array('rule' => array('minLength',3), 
+										  'required' => true, 
+										  'on'=> 'create',
+										  'message' => 'Error.minlength'),
 		),
 		'body' => array(
 			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),

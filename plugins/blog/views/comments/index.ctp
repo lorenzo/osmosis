@@ -9,7 +9,6 @@ echo $paginator->counter(array(
 <table cellpadding="0" cellspacing="0">
 <tr>
 	<th><?php echo $paginator->sort('id');?></th>
-	<th><?php echo $paginator->sort('title');?></th>
 	<th><?php echo $paginator->sort('description');?></th>
 	<th><?php echo $paginator->sort('post_id');?></th>
 	<th class="actions"><?php __('Actions');?></th>
@@ -25,9 +24,6 @@ foreach ($comments as $comment):
 	<tr<?php echo $class;?>>
 		<td>
 			<?php echo $comment['Comment']['id']; ?>
-		</td>
-		<td>
-			<?php echo $comment['Comment']['title']; ?>
 		</td>
 		<td>
 			<?php echo $comment['Comment']['description']; ?>
@@ -52,8 +48,6 @@ foreach ($comments as $comment):
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('List Posts', true), array('controller'=> 'posts', 'action'=>'index')); ?> </li>
-		<?php foreach ($comments as $comment):?>
-		<li><?php echo $html->link(__('New Comment', true), array('controller'=> 'posts', 'action'=>'add', $comments['Post']['id'])); ?></li>
-<?php endforeach; ?>
+		<li><?php echo $html->link(__('New Comment', true), array('controller'=> 'comments', 'action'=>'add')); ?></li>
 	</ul>
 </div>

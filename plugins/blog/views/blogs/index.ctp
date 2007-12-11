@@ -11,7 +11,7 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('title');?></th>
 	<th><?php echo $paginator->sort('description');?></th>
-	<th><?php echo $paginator->sort('owner');?></th>
+	<th><?php echo $paginator->sort('member_id');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
 <?php
@@ -33,7 +33,7 @@ foreach ($blogs as $blog):
 			<?php echo $blog['Blog']['description']; ?>
 		</td>
 		<td>
-			<?php echo $blog['Blog']['owner']; ?>
+			<?php echo $blog['Blog']['member_id']; ?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('View', true), array('action'=>'view', $blog['Blog']['id'])); ?>
@@ -51,10 +51,6 @@ foreach ($blogs as $blog):
 </div>
 <div class="actions">
 	<ul>
-<?php foreach ($blogs as $blog):?>
-		<li><?php echo $html->link(__('New Post', true), array('controller'=> 'posts', 'action'=>'add', $blog['Blog']['id'])); ?></li>
-<?php endforeach; ?>
 		<li><?php echo $html->link(__('New Blog', true), array('action'=>'add')); ?></li>
-		<li><?php echo $html->link(__('List Posts', true), array('controller'=> 'posts', 'action'=>'index')); ?> </li>
 	</ul>
 </div>
