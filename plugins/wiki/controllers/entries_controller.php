@@ -2,7 +2,7 @@
 class EntriesController extends WikiAppController {
 
 	var $name = 'Entries';
-	var $helpers = array('Html', 'Form', 'Javascript' );
+	var $helpers = array('Html', 'Form', 'Javascript','Wiki' );
 	var $components = array('HtmlPurifier','Diff');
 	
 	function index() {
@@ -74,9 +74,10 @@ class EntriesController extends WikiAppController {
 		if($this->Entry->restore($entry_id,$revision)) {
 			$this->Session->setFlash(__('Entry revision restored',true));
 		}else{
+			die;
 			$this->Session->setFlash(__('An error occured. The entry revision was not restored',true));
 		}
-		$this->redirect(array('action'=>'index'), null, true);
+		$this->redirect(array('action'=>'view',$entry_id), null, true);
 	}
 
 }

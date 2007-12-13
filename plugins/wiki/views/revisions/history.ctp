@@ -14,7 +14,7 @@ foreach ($revisions as $revision):
 		$time->format('H:i, d M Y',$revision['Revision']['created']),
 		array('action'=>'view',$revision['Revision']['id'])) ?> 
 		<?php echo $revision['Member']['username']?> 
-		(<?php echo $html->link(__('restore',true),array('controller'=>'entries','action'=>'restore',$entry['Entry']['id'],$revision['Revision']['id']))?>) 
+		(<?php echo $html->link(__('restore',true),array('controller'=>'entries','action'=>'restore',$entry['Entry']['id'],$revision['Revision']['revision']))?>) 
 		(<?php echo $html->link(__('current',true),array('action'=>'diff',$entry['Entry']['id'],$revision['Revision']['id']))?>)
 	</li>
 <?php endforeach; ?>

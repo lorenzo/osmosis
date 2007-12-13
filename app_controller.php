@@ -21,7 +21,7 @@ class AppController extends Controller {
 	function isAuthorized() {
 		if( $this->name == 'Pages')
 			return true;
-		if(Configure::read('Auth.disabled') || $this->Acl->check($this->Auth->user(),$this->name.'/'.$this->action)) {
+		if(@$this->Acl->check($this->Auth->user(),$this->name.'/'.$this->action) || Configure::read('Auth.disabled')) {
 			return true;
 		}
 		return false;

@@ -1,4 +1,3 @@
-<div class="scorm">
 <?php echo $form->create('Member',array('action'=>'login'));?>
 	<fieldset>
  		<legend><?php __('member.login.legend');?></legend>

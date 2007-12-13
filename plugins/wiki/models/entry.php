@@ -58,7 +58,7 @@ class Entry extends AppModel {
 			if (!empty($entry)) {
 				$update = true;
 				if($entry['Entry']['content'] == $data['Entry']['content']) {
-					return true;
+					return false;
 				}
 				$data['Entry']['revision'] = $entry['Entry']['revision'] + 1;
 				unset($data['Entry']['wiki_id']);

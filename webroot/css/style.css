@@ -1,0 +1,174 @@
+body, html {
+	margin:0;
+	padding:0;
+}
+
+body {
+	font-size:62.5%;
+	font-family:Helvetica, Arial, sans-serif;
+}
+
+#header {
+	background:url(../img/bluebar.jpg) repeat-x #1770E6;
+	font-size:1.2em;
+	float:left;
+	padding:5px 0px;
+	border-bottom:#000 1px solid;
+	width:100%;
+}
+
+#header a {
+	color:#fff;
+	letter-spacing:1px;
+	text-decoration:none;
+}
+#header a#home {
+	float:left;
+	margin-left:10px;
+}
+#header ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+	float:right;
+	margin-right:10px;
+}
+
+#header ul li {
+	display:inline;
+	padding:0 10px;
+
+}
+
+#header ul li a {
+	color:#fff;
+}
+
+#header ul li.exit {
+	font-weight:bold;
+	border-right:none;
+}
+
+#main-content {
+	clear:both;
+	background:url(../img/greybar.jpg) repeat-x;
+	height:300px
+}
+
+#wrap {
+
+	min-width:760px;
+	max-width:1024px;
+	_width:expression(document.body.clientWidth < 760 ? "761px" : "auto" );
+	margin:auto;
+}
+#leftbar {
+	float:left;
+	width:15%;
+	font-size:1.2em;
+	position:relative
+}
+
+#leftbar a#dashboard {
+	display:block;
+	background:url(../img/greybar.jpg) repeat-x;
+	color:#666;
+	text-align:right;
+	height:10px;
+	padding:7px 5px 7px 0;
+	text-decoration:none;
+	text-transform:uppercase;
+	font-weight:bold;
+	letter-spacing:1px
+}
+#leftbar ul {
+	margin:10px 0;
+	padding:0;
+	list-style:none;
+}
+#leftbar ul li {
+	border:#000 1px solid;
+	border-right:none;
+	margin-top:4px;
+	background:url(../img/button.jpg) repeat-x #6A6B6F;
+	letter-spacing:1px;
+	width:100%;
+}
+
+#leftbar ul li a {
+	display:block;
+	padding:5px 0 20px 10px;
+	color:#ccc;
+	text-decoration:none;
+	text-transform:uppercase;
+	font-weight:bold
+}
+
+#leftbar ul li a:hover {
+	color:#fff
+}
+#main {
+	width:70%;
+	float:left;
+	font-size:1.2em;
+	background:url(../img/leftbar_bg.jpg) repeat-y 0 0;
+	margin-left:-12px;
+	border-right:#000 1px solid;
+}
+
+#bar3{
+	background:url(../img/darkbar.jpg) repeat-x;
+	height:10px;
+	padding:7px 10px 7px 10px;
+	color:#fff;
+	margin-left:12px;
+	border-left:#000 1px solid;
+	font-weight:bold;
+	clear:both;
+}
+
+#footer {
+background:url(../img/footer.jpg) no-repeat left bottom;
+margin:0 -26px 0 -24px;
+
+}
+#footer .c {
+padding:7px 0 20px 25px;
+display:block;
+position:relative;
+background:url(../img/footer_corner.jpg) right bottom no-repeat;
+}
+
+#main .content  {
+	background:url(../img/rightbar_bg.jpg) repeat-y top right;
+	padding:10px 22px 0 22px;
+	margin-right:-12px;
+}
+
+#rightbar {
+	float:left;
+	width:15%;
+	padding-top:24px;
+}
+
+#rightbar h5 {
+	font-size:1.1em;
+	padding:1px 0 1px 10px;
+	margin:10px 0;
+	background:#8BBFDF
+}
+
+#rightbar .content {
+	padding-left:15px;
+}
+
+.cake-sql-log {
+	width:1024px;
+	margin:auto;
+	clear:both;
+	background: #f4f4f4;
+}
+.cake-sql-log td {
+	padding: 4px 8px;
+	text-align: left;
+}

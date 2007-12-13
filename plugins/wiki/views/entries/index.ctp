@@ -12,7 +12,6 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('wiki_id');?></th>
 	<th><?php echo $paginator->sort('member_id');?></th>
 	<th><?php echo $paginator->sort('title');?></th>
-	<th><?php echo $paginator->sort('content');?></th>
 	<th><?php echo $paginator->sort('revision');?></th>
 	<th><?php echo $paginator->sort('created');?></th>
 	<th class="actions"><?php __('Actions');?></th>
@@ -39,9 +38,6 @@ foreach ($entries as $entry):
 			<?php echo $entry['Entry']['title']; ?>
 		</td>
 		<td>
-			<?php echo $entry['Entry']['content']; ?>
-		</td>
-		<td>
 			<?php echo $entry['Entry']['revision']; ?>
 		</td>
 		<td>
@@ -60,15 +56,4 @@ foreach ($entries as $entry):
 	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
  | 	<?php echo $paginator->numbers();?>
 	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
-</div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('New Entry', true), array('action'=>'add')); ?></li>
-		<li><?php echo $html->link(__('List Wikis', true), array('controller'=> 'wikis', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Wiki', true), array('controller'=> 'wikis', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Members', true), array('controller'=> 'members', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Member', true), array('controller'=> 'members', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Revisions', true), array('controller'=> 'revisions', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Revision', true), array('controller'=> 'revisions', 'action'=>'add')); ?> </li>
-	</ul>
 </div>
