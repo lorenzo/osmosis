@@ -22,5 +22,6 @@
 
 	<div class="actions">
 	<!-- aquí van los links de actions -->
+	<li><?php echo $html->link(__('New Post', true), array('controller'=> 'posts', 'action'=>'add', $blog['Blog']['id'])); ?> </li>
 	</div>
 </div>

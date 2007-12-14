@@ -8,6 +8,7 @@ class PostsController extends BlogAppController {
 	function index($blog_id) {
 		$this->Post->recursive = 0;
 		$this->set('posts', $this->paginate(array('blog_id'=>$blog_id)));
+		$this->set('blog_id',$blog_id);
 	}
 
 	function add($blog_id = null) {
