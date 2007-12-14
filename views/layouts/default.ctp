@@ -5,10 +5,10 @@
 		Osmosis 2: e-learning innovation - 
 		<?php echo $title_for_layout;?>
 	</title>
-	<?php echo $html->charset();?>
-	<?php echo $html->css('style');?>
+	<?php echo $html->charset(); ?>
+	<?php echo $html->css('style'); ?>
 	<?php echo $javascript->codeBlock('var webroot = "' . $this->webroot .'"'); ?>
-	<?php echo $scripts_for_layout;?>
+	<?php echo $scripts_for_layout; ?>
 </head>
 <body>
 	<div id="header">

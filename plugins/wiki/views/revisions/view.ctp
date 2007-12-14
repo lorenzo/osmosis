@@ -11,7 +11,7 @@
 	<?php echo $html->link(__('current version',true),array('controller'=>'entries','action'=>'view',$revision['Revision']['entry_id']))?> 
 	<?php echo $html->link(__('restore',true),array('controller'=>'entries','action'=>'restore',$revision['Revision']['entry_id'],$revision['Revision']['revision']))?> 
 	</p>
-	<div class="content">
+	<div class="wiki-content">
 		<?php echo $wiki->format($revision['Revision']['content']); ?>
 	</div>
 </div>

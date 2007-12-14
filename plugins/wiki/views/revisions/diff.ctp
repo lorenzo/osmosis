@@ -30,7 +30,7 @@
 	$revision['Member']['username']
 ); 
 ?></h2>
-<div class="content">
+<div class="wiki-content">
 	<?php echo $wiki->format($revision['Revision']['content']); ?>
 </div>
 </div>
