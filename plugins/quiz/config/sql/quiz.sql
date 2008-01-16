@@ -19,7 +19,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `association_choices`
 -- 
 
-CREATE TABLE IF NOT EXISTS `association_choices` (
+CREATE TABLE IF NOT EXISTS `quiz_association_choices` (
   `id` char(36) collate utf8_unicode_ci NOT NULL,
   `association_question_id` char(36) collate utf8_unicode_ci NOT NULL COMMENT 'Related Choice Question',
   `text` text collate utf8_unicode_ci NOT NULL COMMENT 'Text for this choce',
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `association_choices` (
 -- Table structure for table `association_questions`
 -- 
 
-CREATE TABLE IF NOT EXISTS `association_questions` (
+CREATE TABLE IF NOT EXISTS `quiz_association_questions` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `body` text NOT NULL COMMENT 'The questions wording',
   `shuffle` tinyint(1) NOT NULL COMMENT 'Set the ordr of the choices randomly',
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `association_questions` (
 -- Table structure for table `association_questions_quizzes`
 -- 
 
-CREATE TABLE IF NOT EXISTS `association_questions_quizzes` (
+CREATE TABLE IF NOT EXISTS `quiz_association_questions_quizzes` (
   `id` int(11) NOT NULL auto_increment,
   `association_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `association_questions_quizzes` (
 -- Table structure for table `choice_choices`
 -- 
 
-CREATE TABLE IF NOT EXISTS `choice_choices` (
+CREATE TABLE IF NOT EXISTS `quiz_choice_choices` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `choice_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL COMMENT 'Related Choice Question',
   `text` text NOT NULL COMMENT 'Text for this choce',
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `choice_choices` (
 -- Table structure for table `choice_questions`
 -- 
 
-CREATE TABLE IF NOT EXISTS `choice_questions` (
+CREATE TABLE IF NOT EXISTS `quiz_choice_questions` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `body` text NOT NULL COMMENT 'The questions wording',
   `shuffle` tinyint(1) NOT NULL COMMENT 'Set the order of the choices randomly',
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `choice_questions` (
 -- Table structure for table `choice_questions_quizzes`
 -- 
 
-CREATE TABLE IF NOT EXISTS `choice_questions_quizzes` (
+CREATE TABLE IF NOT EXISTS `quiz_choice_questions_quizzes` (
   `id` char(36) NOT NULL,
   `choice_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `choice_questions_quizzes` (
 -- Table structure for table `cloze_questions`
 -- 
 
-CREATE TABLE IF NOT EXISTS `cloze_questions` (
+CREATE TABLE IF NOT EXISTS `quiz_cloze_questions` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `title` varchar(255) NOT NULL COMMENT 'The questions title',
   `body` text NOT NULL COMMENT 'The questions wording',
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `cloze_questions` (
 -- Table structure for table `cloze_questions_quizzes`
 -- 
 
-CREATE TABLE IF NOT EXISTS `cloze_questions_quizzes` (
+CREATE TABLE IF NOT EXISTS `quiz_cloze_questions_quizzes` (
   `id` char(36) NOT NULL,
   `cloze_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `cloze_questions_quizzes` (
 -- Table structure for table `matching_choices`
 -- 
 
-CREATE TABLE IF NOT EXISTS `matching_choices` (
+CREATE TABLE IF NOT EXISTS `quiz_matching_choices` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `matching_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL COMMENT 'Related Choice Question',
   `text` text NOT NULL COMMENT 'Text for this choce',
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `matching_choices` (
 -- Table structure for table `matching_questions`
 -- 
 
-CREATE TABLE IF NOT EXISTS `matching_questions` (
+CREATE TABLE IF NOT EXISTS `quiz_matching_questions` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `body` text NOT NULL COMMENT 'The questions wording',
   `shuffle` tinyint(1) NOT NULL COMMENT 'Set the ordr of the choices randomly',
@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `matching_questions` (
 -- Table structure for table `matching_questions_quizzes`
 -- 
 
-CREATE TABLE IF NOT EXISTS `matching_questions_quizzes` (
+CREATE TABLE IF NOT EXISTS `quiz_matching_questions_quizzes` (
   `id` char(36) NOT NULL,
   `matching_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `matching_questions_quizzes` (
 -- Table structure for table `ordering_choices`
 -- 
 
-CREATE TABLE IF NOT EXISTS `ordering_choices` (
+CREATE TABLE IF NOT EXISTS `quiz_ordering_choices` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `ordering_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL COMMENT 'Related Choice Question',
   `text` text NOT NULL COMMENT 'Text for this choce',
@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `ordering_choices` (
 -- Table structure for table `ordering_questions`
 -- 
 
-CREATE TABLE IF NOT EXISTS `ordering_questions` (
+CREATE TABLE IF NOT EXISTS `quiz_ordering_questions` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `body` text NOT NULL COMMENT 'The questions wording',
   `shuffle` tinyint(1) NOT NULL COMMENT 'Set the ordr of the choices randomly',
@@ -197,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `ordering_questions` (
 -- Table structure for table `ordering_questions_quizzes`
 -- 
 
-CREATE TABLE IF NOT EXISTS `ordering_questions_quizzes` (
+CREATE TABLE IF NOT EXISTS `quiz_ordering_questions_quizzes` (
   `id` char(36) NOT NULL,
   `ordering_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `ordering_questions_quizzes` (
 -- Table structure for table `quizzes`
 -- 
 
-CREATE TABLE IF NOT EXISTS `quizzes` (
+CREATE TABLE IF NOT EXISTS `quiz_quizzes` (
   `id` char(36) collate utf8_unicode_ci NOT NULL,
   `name` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'Title of the quiz',
   PRIMARY KEY  (`id`)
@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `quizzes` (
 -- Table structure for table `text_questions`
 -- 
 
-CREATE TABLE IF NOT EXISTS `text_questions` (
+CREATE TABLE IF NOT EXISTS `quiz_text_questions` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `title` varchar(255) NOT NULL COMMENT 'The questions title',
   `body` text NOT NULL COMMENT 'The questions wording',
@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `text_questions` (
 -- Table structure for table `text_questions_quizzes`
 -- 
 
-CREATE TABLE IF NOT EXISTS `text_questions_quizzes` (
+CREATE TABLE IF NOT EXISTS `quiz_text_questions_quizzes` (
   `id` char(36) NOT NULL,
   `text_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
