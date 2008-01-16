@@ -1,4 +1,4 @@
 <?php 
-class QuizAppController extends Controller {
+class QuizAppController extends AppController {
 }
 ?>
