@@ -16,7 +16,9 @@
 		<ul>
 			<li><a href="#">Ayuda</a></li>
 			<li><a href="#">Buscar</a></li>
-			<li class="exit"><a href="#">Salir</a></li>
+			<li class="exit">
+				<?php echo $html->link(__('Salir', true), '/members/logout'); ?>
+			</li>
 		</ul>
 	</div>
 	<div id="main-content">

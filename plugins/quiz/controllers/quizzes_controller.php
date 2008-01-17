@@ -28,12 +28,12 @@ class QuizzesController extends AppController {
 				$this->Session->setFlash('The Quiz could not be saved. Please, try again.');
 			}
 		}
-		$associationQuestions = $this->Quiz->AssociationQuestion->generateList();
-		$choiceQuestions = $this->Quiz->ChoiceQuestion->generateList();
-		$clozeQuestions = $this->Quiz->ClozeQuestion->generateList();
-		$matchingQuestions = $this->Quiz->MatchingQuestion->generateList();
-		$orderingQuestions = $this->Quiz->OrderingQuestion->generateList();
-		$textQuestions = $this->Quiz->TextQuestion->generateList();
+		$associationQuestions = $this->Quiz->AssociationQuestion->find('list');
+		$choiceQuestions = $this->Quiz->ChoiceQuestion->find('list');
+		$clozeQuestions = $this->Quiz->ClozeQuestion->find('list');
+		$matchingQuestions = $this->Quiz->MatchingQuestion->find('list');
+		$orderingQuestions = $this->Quiz->OrderingQuestion->find('list');
+		$textQuestions = $this->Quiz->TextQuestion->find('list');
 		$this->set(compact('associationQuestions', 'choiceQuestions', 'clozeQuestions', 'matchingQuestions', 'orderingQuestions', 'textQuestions'));
 	}
 
@@ -53,14 +53,14 @@ class QuizzesController extends AppController {
 		}
 		if (empty($this->data)) {
 			$this->data = $this->Quiz->read(null, $id);
-		}
-		$associationQuestions = $this->Quiz->AssociationQuestion->generateList();
-		$choiceQuestions = $this->Quiz->ChoiceQuestion->generateList();
-		$clozeQuestions = $this->Quiz->ClozeQuestion->generateList();
-		$matchingQuestions = $this->Quiz->MatchingQuestion->generateList();
-		$orderingQuestions = $this->Quiz->OrderingQuestion->generateList();
-		$textQuestions = $this->Quiz->TextQuestion->generateList();
-		$this->set(compact('associationQuestions','choiceQuestions','clozeQuestions','matchingQuestions','orderingQuestions','textQuestions'));
+		}/*
+		$associationQuestions = $this->Quiz->AssociationQuestion->find('list');
+		$choiceQuestions = $this->Quiz->ChoiceQuestion->find('list');
+		$clozeQuestions = $this->Quiz->ClozeQuestion->find('list');
+		$matchingQuestions = $this->Quiz->MatchingQuestion->find('list');
+		$orderingQuestions = $this->Quiz->OrderingQuestion->find('list');
+		$textQuestions = $this->Quiz->TextQuestion->find('list');
+		$this->set(compact('associationQuestions','choiceQuestions','clozeQuestions','matchingQuestions','orderingQuestions','textQuestions'));*/
 	}
 
 	function delete($id = null) {

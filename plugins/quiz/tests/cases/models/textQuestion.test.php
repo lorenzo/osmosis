@@ -1,6 +1,6 @@
 <?php 
 
-loadModel('TextQuestion');
+App::import('model', 'quiz.TextQuestion');
 
 class TextQuestionTestCase extends CakeTestCase {
 	var $TestObject = null;

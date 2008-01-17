@@ -1,6 +1,6 @@
 <?php 
 
-loadModel('ChoiceChoice');
+App::import('model', 'quiz.ChoiceChoice');
 
 class ChoiceChoiceTestCase extends CakeTestCase {
 	var $TestObject = null;
