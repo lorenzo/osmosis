@@ -4,12 +4,16 @@ App::import('Model', 'quiz.Quiz');
 
 class QuizTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('quiz');
+	var $fixtures = array('quiz', 'association_question');
 
 	function setUp() {
 		$this->TestObject = new Quiz();
 		$this->TestObject->useDbConfig = 'test_suite';
-		//$this->TestObject->tablePrefix = 'test_suite_';
+		$this->TestObject->tablePrefix = 'test_suite_';
+		$this->TestObject->Qas->useDbConfig = 'test_suite';
+		$this->TestObject->Qas->tablePrefix = 'test_suite_';
+		$this->TestObject->AssociationQuestion->useDbConfig = 'test_suite';
+		$this->TestObject->AssociationQuestion->tablePrefix = 'test_suite_';
 	}
 
 	function tearDown() {
@@ -41,11 +45,36 @@ class QuizTestCase extends CakeTestCase {
 	
 	function testInsertion() {
 		$data = array(
-			'name' => 'quiz1'
+			'Quiz' => array(
+				'name' => 'nuevo quiz'
+			)
 		);
 		
 		$this->TestObject->save($data);
-		debug($this->TestObject->find('all'));
+		
+		$this->TestObject->create();
+		$data = array(
+			'Quiz' => array(
+				'name' => 'otro quiz'
+			)
+		);
+		$this->TestObject->AssociationQuestion->save(
+			array(
+				'AssociationQuestion' => array(
+ 					'body' => 'cuerpito'
+				)
+			)
+		);
+		
+		$this->TestObject->save($data);
+		$this->TestObject->Qas->save(
+			array(
+				'quiz_id' => '1',
+				'association_question_id' => '1'
+			)
+		);
+		debug($this->TestObject->AssociationQuestion->find('all'));
+		
 	}
 }
 ?>

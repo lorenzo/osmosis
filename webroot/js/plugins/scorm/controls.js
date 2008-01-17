@@ -16,8 +16,7 @@ var ScormControl = new function(){
 		var sco_id = parseInt(id_data[2]);		
 
 		$('script#api').remove();
-		debug('<h1><img src="' + webroot + '
-		img/loading.gif" /> Cargando...</h1>');
+		debug('<h1><img src="' + webroot + 'img/loading.gif" /> Cargando...</h1>');
 		$.blockUI('<h1><img src="' + webroot + '/img/loading.gif" /> Cargando...</h1>'); 
 		$('head').createAppend(
 			'script',

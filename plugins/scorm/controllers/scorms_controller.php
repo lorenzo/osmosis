@@ -5,7 +5,7 @@ class ScormsController extends ScormAppController {
 	var $name = 'Scorms';
 	var $components = array('Zip');
 	var $helpers = array('Html', 'Form', 'Tree', 'Javascript');
-	var $uses = array('Scorm', 'ScormAttendeeTracking');
+	var $uses = array('Scorm.Scorm', 'Scorm.ScormAttendeeTracking');
 
 	function index() {
 		$this->Scorm->recursive = 0;
@@ -60,6 +60,7 @@ class ScormsController extends ScormAppController {
 			$this->cleanUpFields();
 			$this->Scorm->create();
 			$uploaded_file = $this->data['Scorm']['file_name'];
+			
 			$is_uploaded = is_uploaded_file($uploaded_file['tmp_name']); 
 			if ($is_uploaded) {
 				$this->data['Scorm']['file_name'] = $uploaded_file['name'];

@@ -9,7 +9,7 @@
 			$scos,
 			array(
 				'link' => array(
-					'url' => array('controller' => 'scos', 'action' => 'view', ':id', ':href'),
+					'url' => array('controller' => 'scos', 'action' => 'view', 'plugin' => $this->plugin, ':id', ':href'),
 					'ifPresent' => 'href'
 				)
 			),

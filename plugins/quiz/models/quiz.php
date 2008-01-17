@@ -12,6 +12,7 @@ class Quiz extends QuizAppModel {
 	);
 
 	var $useTable = 'quiz_quizzes';
+	
 	var $hasAndBelongsToMany = array(
 			'AssociationQuestion' => array(
 						'className' => 'quiz.AssociationQuestion',
@@ -26,7 +27,8 @@ class Quiz extends QuizAppModel {
 						'unique' => '',
 						'finderQuery' => '',
 						'deleteQuery' => '',
-						'insertQuery' => ''),
+						'insertQuery' => '',
+						'with' => 'Qas'),
 			'ChoiceQuestion' => array(
 						'className' => 'quiz.ChoiceQuestion',
 						'joinTable' => 'quiz_choice_questions_quizzes',

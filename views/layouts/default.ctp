@@ -7,7 +7,7 @@
 	</title>
 	<?php echo $html->charset(); ?>
 	<?php echo $html->css('style'); ?>
-	<?php echo $javascript->codeBlock('var webroot = "' . $this->webroot .'"'); ?>
+	<?php echo $javascript->codeBlock('var webroot = "' . $html->url('/') .'"'); ?>
 	<?php echo $scripts_for_layout; ?>
 </head>
 <body>

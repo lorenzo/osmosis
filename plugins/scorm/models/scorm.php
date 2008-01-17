@@ -36,7 +36,7 @@ class Scorm extends ScormAppModel {
 	 * @return boolean true if it was parsed false if manifest does not exist
 	 */
 	function parseManifest($path) {
-	    if(!$this->parsed) {
+		if(!$this->parsed) {
 	         if(!$this->manifestExists($path)) {
 	            return false;
     	    }
