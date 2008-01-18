@@ -1,5 +1,5 @@
 <?php
-class AssociationQuestion extends AppModel {
+class AssociationQuestion extends QuizAppModel {
 
 	var $name = 'AssociationQuestion';
 	var $validate = array(
@@ -25,19 +25,22 @@ class AssociationQuestion extends AppModel {
 	);
 
 	var $hasAndBelongsToMany = array(
-			'Quiz' => array('className' => 'quiz.Quiz',
-						'joinTable' => 'quiz_association_questions_quizzes',
-						'foreignKey' => 'association_question_id',
-						'associationForeignKey' => 'quiz_id',
-						'conditions' => '',
-						'fields' => '',
-						'order' => '',
-						'limit' => '',
-						'offset' => '',
-						'unique' => '',
-						'finderQuery' => '',
-						'deleteQuery' => '',
-						'insertQuery' => ''),
+			'Quiz' => array(
+				'className' => 'quiz.Quiz',
+				'joinTable' => 'quiz_association_questions_quizzes',
+				'foreignKey' => 'association_question_id',
+				'associationForeignKey' => 'quiz_id',
+				'conditions' => '',
+				'fields' => '',
+				'order' => '',
+				'limit' => '',
+				'offset' => '',
+				'unique' => '',
+				'finderQuery' => '',
+				'deleteQuery' => '',
+				'insertQuery' => '',
+				'with' => 'Qas'
+			)
 	);
 
 }

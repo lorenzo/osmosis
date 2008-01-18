@@ -1,5 +1,5 @@
 <?php
-class AssociationChoice extends AppModel {
+class AssociationChoice extends QuizAppModel {
 
 	var $name = 'AssociationChoice';
 	var $validate = array(
@@ -9,13 +9,14 @@ class AssociationChoice extends AppModel {
 
 	var $useTable = 'quiz_association_choices';
 	var $belongsTo = array(
-			'AssociationQuestion' => array(
-								'className' => 'quiz.AssociationQuestion',
-								'foreignKey' => 'association_question_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
+		'AssociationQuestion' => array(
+			'className' => 'quiz.AssociationQuestion',
+			'foreignKey' => 'association_question_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'counterCache' => ''
+		),
 	);
 
 }

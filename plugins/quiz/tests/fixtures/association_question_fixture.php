@@ -4,7 +4,7 @@ class AssociationQuestionFixture extends CakeTestFixture {
  	var $import = array('model' => 'AssociationQuestion'); 
     var $records = array(
     	array(
-    		'id'	=> 	'1',
+    		'id'	=> 	'aq_from_fixture1',
     		'body'	=> 'fisico'
 		)
     );

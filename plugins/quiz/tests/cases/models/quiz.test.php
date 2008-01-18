@@ -1,19 +1,16 @@
 <?php 
-
 App::import('Model', 'quiz.Quiz');
 
 class QuizTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('quiz', 'association_question');
+	var $fixtures = array('quiz', 'association_question','qas');
 
 	function setUp() {
 		$this->TestObject = new Quiz();
-		$this->TestObject->useDbConfig = 'test_suite';
-		$this->TestObject->tablePrefix = 'test_suite_';
-		$this->TestObject->Qas->useDbConfig = 'test_suite';
-		$this->TestObject->Qas->tablePrefix = 'test_suite_';
-		$this->TestObject->AssociationQuestion->useDbConfig = 'test_suite';
-		$this->TestObject->AssociationQuestion->tablePrefix = 'test_suite_';
+		$this->TestObject->useDbConfig = 'test';
+		$this->TestObject->Qas->useDbConfig = 'test';
+		$this->TestObject->AssociationQuestion->useDbConfig = 'test';
+		$this->TestObject->Quiz->useDbConfig = 'test';
 	}
 
 	function tearDown() {
@@ -28,9 +25,7 @@ class QuizTestCase extends CakeTestCase {
 			'name' => 'quiz.quiz.name.empty'
 		);
 		$this->assertEqual($expected_errors, $this->TestObject->validationErrors);
-	}
-	
-	function test2() {
+		$this->TestObject->create();
 		$data = array(
 			'name' => ''
 		);
@@ -49,32 +44,50 @@ class QuizTestCase extends CakeTestCase {
 				'name' => 'nuevo quiz'
 			)
 		);
-		
 		$this->TestObject->save($data);
-		
-		$this->TestObject->create();
-		$data = array(
-			'Quiz' => array(
-				'name' => 'otro quiz'
-			)
+		$last_id = $this->TestObject->getLastInsertId();
+		$data['Quiz']['id'] = $last_id;
+		$quiz = $this->TestObject->find(
+				'first',
+				array(
+					'conditions' => array('id' => $last_id),
+					'recursive' => -1
+				)
 		);
-		$this->TestObject->AssociationQuestion->save(
+		$this->assertEqual($data, $quiz);
+		
+		$this->TestObject->Qas->save(
 			array(
-				'AssociationQuestion' => array(
- 					'body' => 'cuerpito'
+				'Qas' => array(
+					'quiz_id' => $last_id,
+					'association_question_id' => 'aq_from_fixture1'
 				)
 			)
 		);
+		$quiz = $this->TestObject->find(
+				'first',
+				array(
+					'conditions' => array('id' => $last_id)
+				)
+		);
 		
-		$this->TestObject->save($data);
-		$this->TestObject->Qas->save(
-			array(
-				'quiz_id' => '1',
-				'association_question_id' => '1'
+		$quiz_aqs = $quiz['AssociationQuestion'];
+		unset($quiz_aqs[0]['Qas']['id']);
+		
+		$expected_aqs = array(
+		    array(
+		        'id' => 'aq_from_fixture1',
+	            'body' => 'fisico',
+	            'shuffle' => '0',
+	            'max_associations' => '0',
+	            'min_associations' => '',
+	            'Qas' => array(
+	                    'association_question_id' => 'aq_from_fixture1',
+	                    'quiz_id' => $last_id
+                )
 			)
 		);
-		debug($this->TestObject->AssociationQuestion->find('all'));
-		
+		$this->assertEqual($quiz_aqs, $expected_aqs);
 	}
 }
 ?>

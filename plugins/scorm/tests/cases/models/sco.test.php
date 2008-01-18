@@ -1,16 +1,6 @@
 <?php 
 
 App::import('Model', 'scorm.Sco');
-App::import('Model', 'scorm.Objective');
-App::import('Model', 'scorm.Randomization');
-App::import('Model', 'scorm.Rollup');
-App::import('Model', 'scorm.Rule');
-App::import('Model', 'scorm.Condition');
-App::import('Model', 'scorm.ChoiceConsideration');
-App::import('Model', 'scorm.RollupConsideration');
-App::import('Model', 'scorm.ScoPresentation');
-App::import('Model', 'scorm.ControlMode');
-App::import('Model', 'scorm.DeliveryControl');
 class ScoTestCase extends CakeTestCase {
 	var $TestObject = null;
 	var $fixtures = array(
