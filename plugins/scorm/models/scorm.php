@@ -554,6 +554,7 @@ class Scorm extends ScormAppModel {
 		$this->begin();
 		$saved = parent::save($data,$validate,$fields);
 		if($saved) {
+			$data['Organization'] = (isset($data['Organization'])) ? $data['Organization'] : array();
 			foreach($data['Organization'] as $org){
 			$scos = Set::extract($org,'Item');
 				foreach($scos as $sco) {

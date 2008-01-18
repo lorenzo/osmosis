@@ -1,5 +1,5 @@
 <?php
-/* SVN FILE: $Id: test.php 5777 2007-10-17 12:56:14Z phpnut $ */
+/* SVN FILE: $Id: test.php 6324 2008-01-05 19:23:17Z phpnut $ */
 /**
  * Short description for file.
  *
@@ -8,7 +8,7 @@
  * PHP versions 4 and 5
  *
  * CakePHP(tm) Tests <https://trac.cakephp.org/wiki/Developement/TestSuite>
- * Copyright 2005-2007, Cake Software Foundation, Inc.
+ * Copyright 2005-2008, Cake Software Foundation, Inc.
  *								1785 E. Sahara Avenue, Suite 490-204
  *								Las Vegas, Nevada 89104
  *
@@ -16,14 +16,14 @@
  *  Redistributions of files must retain the above copyright notice.
  *
  * @filesource
- * @copyright		Copyright 2005-2007, Cake Software Foundation, Inc.
+ * @copyright		Copyright 2005-2008, Cake Software Foundation, Inc.
  * @link				https://trac.cakephp.org/wiki/Developement/TestSuite CakePHP(tm) Tests
  * @package			cake
  * @subpackage		cake.cake.tests.libs
  * @since			CakePHP(tm) v 1.2.0.4433
- * @version			$Revision: 5777 $
+ * @version			$Revision: 6324 $
  * @modifiedby		$LastChangedBy: phpnut $
- * @lastmodified	$Date: 2007-10-17 08:56:14 -0400 (Wed, 17 Oct 2007) $
+ * @lastmodified	$Date: 2008-01-05 14:53:17 -0430 (Sat, 05 Jan 2008) $
  * @license			http://www.opensource.org/licenses/opengroup.php The Open Group Test Suite License
  */
 error_reporting(E_ALL);
@@ -41,9 +41,7 @@ if (!defined('APP_DIR')) {
 if (!defined('CAKE_CORE_INCLUDE_PATH')) {
 	define('CAKE_CORE_INCLUDE_PATH', ROOT.DS.'cake1.2.x');
 }
-if (!defined('TEST_CAKE_CORE_INCLUDE_PATH')) {
-	define('TEST_CAKE_CORE_INCLUDE_PATH', ROOT.DS.'cake1.2.x');
-}
+
 if (!defined('WEBROOT_DIR')) {
 	define('WEBROOT_DIR', basename(dirname(__FILE__)));
 }
@@ -64,6 +62,13 @@ if (!defined('CORE_PATH')) {
 ini_set('display_errors', 1);
 if (!include(CORE_PATH . 'cake' . DS . 'bootstrap.php')) {
 	trigger_error("Can't find CakePHP core.  Check the value of CAKE_CORE_INCLUDE_PATH in app/webroot/test.php.  It should point to the directory containing your " . DS . "cake core directory and your " . DS . "vendors root directory.", E_USER_ERROR);
+}
+
+$corePath = Configure::corePaths('cake');
+if (isset($corePath[0])) {
+	define('TEST_CAKE_CORE_INCLUDE_PATH', rtrim($corePath[0], DS) . DS);
+} else {
+	define('TEST_CAKE_CORE_INCLUDE_PATH', CAKE_CORE_INCLUDE_PATH);
 }
 require_once CAKE . 'tests' . DS . 'lib' . DS . 'test_manager.php';
 
@@ -130,7 +135,7 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 				}
 				if (isset($_GET['case'])) {
 					if (isset($_GET['app'])) {
-						$show = '??show=cases&amp;app=truee';
+						$show = '?show=cases&amp;app=true';
 					} else {
 						$show = '?show=cases';
 					}
@@ -145,10 +150,9 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 			case CAKE_TEST_OUTPUT_HTML:
 				if (isset($_GET['app'])) {
 					echo HtmlTestManager::getTestCaseList(APP_TEST_CASES);
-				}elseif (isset($_GET['plugin'])) {
+				} elseif (isset($_GET['plugin'])) {
 					echo HtmlTestManager::getTestCaseList(APP . 'plugins' . DS . $_GET['plugin'] . DS. 'tests' . DS . 'cases');
-				}
-				 else {
+				} else {
 					echo HtmlTestManager::getTestCaseList(CORE_TEST_CASES);
 				}
 			break;
@@ -156,10 +160,9 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 			default:
 				if (isset($_GET['app'])) {
 					echo TextTestManager::getTestCaseList(APP_TEST_CASES);
-				}elseif (isset($_GET['plugin'])) {
+				} elseif (isset($_GET['plugin'])) {
 					echo TextTestManager::getTestCaseList(APP . 'plugins' . DS . $_GET['plugin'] . DS. 'tests' . DS . 'cases');
-				}
-				 else {
+				} else {
 					echo TextTestManager::getTestCaseList(CORE_TEST_CASES);
 				}
 			break;
@@ -171,10 +174,9 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 			case CAKE_TEST_OUTPUT_HTML:
 				if (isset($_GET['app'])) {
 					echo HtmlTestManager::getGroupTestList(APP_TEST_GROUPS);
-				}elseif (isset($_GET['plugin'])) {
+				} elseif (isset($_GET['plugin'])) {
 					echo HtmlTestManager::getGroupTestList(APP . 'plugins' . DS . $_GET['plugin'] . DS .'tests' . DS . 'groups');
-				}
-				 else {
+				} else {
 					echo HtmlTestManager::getGroupTestList(CORE_TEST_GROUPS);
 				}
 			break;
@@ -182,10 +184,9 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 			default:
 				if (isset($_GET['app'])) {
 					echo TextTestManager::getGroupTestList(APP_TEST_GROUPS);
-				}elseif (isset($_GET['plugin'])) {
+				} elseif (isset($_GET['plugin'])) {
 					echo TextTestManager::getGroupTestList(APP . 'plugins' . DS . $_GET['plugin'] . DS. 'tests' . DS . 'groups');
-				}
-				 else {
+				} else {
 					echo TextTestManager::getGroupTestList(CORE_TEST_GROUPS);
 				}
 				break;
@@ -254,10 +255,9 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 		} else {
 			if (isset($_GET['app'])) {
 				TestManager::runGroupTest(ucfirst($_GET['group']), APP_TEST_GROUPS, CakeTestsGetReporter());
-			}elseif (isset($_GET['plugin'])) {
-				TestManager::runGroupTest(ucfirst($_GET['group']), APP . DS . 'plugins' . DS . $_GET['plugin'] . 'tests', CakeTestsGetReporter());
-			}
-			 else {
+			} elseif (isset($_GET['plugin'])) {
+				TestManager::runGroupTest(ucfirst($_GET['group']), APP . 'plugins' . DS . $_GET['plugin'] . DS . 'tests'. DS . 'groups', CakeTestsGetReporter());
+			}else {
 				TestManager::runGroupTest(ucfirst($_GET['group']), CORE_TEST_GROUPS, CakeTestsGetReporter());
 			}
 		}
@@ -280,3 +280,4 @@ if (!vendor('simpletest' . DS . 'reporter')) {
 	}
 	CakePHPTestSuiteFooter();
 ?>
+

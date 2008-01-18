@@ -4,12 +4,11 @@ App::import('Model', 'scorm.MapInfo');
 
 class MapInfoTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('objective','map_info');
+	var $fixtures = array('map_info');
 
 	function setUp() {
 		$this->TestObject = new MapInfo();
-		$this->TestObject->useDbConfig = 'test_suite';
-		$this->TestObject->tablePrefix = 'test_suite_';
+		$this->TestObject->useDbConfig = 'test';
 	}
 
 	function tearDown() {

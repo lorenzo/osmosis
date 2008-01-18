@@ -11,7 +11,6 @@ class ConditionTestCase extends CakeTestCase {
 	function setUp() {
 		$this->TestObject = new Condition();
 		$this->TestObject->useDbConfig = 'test';
-		$this->TestObject->tablePrefix = 'test_suite_';
 	}
 
 	function tearDown() {

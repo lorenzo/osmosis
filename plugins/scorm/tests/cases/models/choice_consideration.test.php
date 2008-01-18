@@ -8,8 +8,7 @@ class ChoiceConsiderationTestCase extends CakeTestCase {
 
 	function setUp() {
 		$this->TestObject = new ChoiceConsideration();
-		$this->TestObject->useDbConfig = 'test_suite';
-		$this->TestObject->tablePrefix = 'test_suite_';
+		$this->TestObject->useDbConfig = 'test';
 	}
 
 	function tearDown() {

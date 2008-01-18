@@ -79,7 +79,7 @@ class Rule extends ScormAppModel {
 			'exit' => '/exit/',
 			'rollup' => '/satisfied|notSatisfied|completed|incomplete/'
 		);
-		return preg_match($regexes[$type], $value);
+		return preg_match($regexes[$type], array_shift($value));
 	}
 	
 	function save($data=null,$validate=true,$fields=array()) {

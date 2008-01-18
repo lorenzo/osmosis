@@ -1,18 +1,5 @@
 <?php
 App::import('Model', 'scorm.Scorm');
-/*App::import('Model', 'scorm.Sco');
-App::import('Model', 'scorm.Objective');
-App::import('Model', 'scorm.Randomization');
-App::import('Model', 'scorm.Rollup');
-App::import('Model', 'scorm.Rule');
-App::import('Model', 'scorm.Condition');
-App::import('Model', 'scorm.ChoiceConsideration');
-App::import('Model', 'scorm.RollupConsideration');
-App::import('Model', 'scorm.ScoPresentation');
-App::import('Model', 'scorm.ControlMode');
-App::import('Model', 'scorm.DeliveryControl');
-App::import('Model', 'scorm.MapInfo');
-*/
 class ScormTestCase extends CakeTestCase {
 	var $TestObject = null;
 	var $fixtures = array('scorm',
@@ -21,7 +8,7 @@ class ScormTestCase extends CakeTestCase {
                         	'randomization',
                         	'rollup',
                         	'rule',
-							'condition',
+									'condition',
                         	'choice_consideration',
                         	'rollup_consideration',
                         	'sco_presentation',
@@ -29,32 +16,19 @@ class ScormTestCase extends CakeTestCase {
                         	'delivery_control');
 	function setUp() {
 		$this->TestObject = new Scorm();
-		$this->TestObject->useDbConfig = 'test_suite';
-		$this->TestObject->tablePrefix = 'test_suite_';
-		$this->TestObject->Sco->useDbConfig = 'test_suite';
-		$this->TestObject->Sco->tablePrefix = 'test_suite_';
-		$this->TestObject->Sco->SubItem->useDbConfig = 'test_suite';
-		$this->TestObject->Sco->SubItem->tablePrefix = 'test_suite_';
-		$this->TestObject->Sco->Objective->useDbConfig = 'test_suite';
-		$this->TestObject->Sco->Objective->tablePrefix = 'test_suite_';
-		$this->TestObject->Sco->PrimaryObjective->useDbConfig = 'test_suite';
-		$this->TestObject->Sco->PrimaryObjective->tablePrefix = 'test_suite_';
-		$this->TestObject->Sco->Randomization->useDbConfig = 'test_suite';
-		$this->TestObject->Sco->Randomization->tablePrefix = 'test_suite_';
-		$this->TestObject->Sco->Rollup->useDbConfig = 'test_suite';
-		$this->TestObject->Sco->Rollup->tablePrefix = 'test_suite_';
-		$this->TestObject->Sco->Rule->useDbConfig = 'test_suite';
-		$this->TestObject->Sco->Rule->tablePrefix = 'test_suite_';
-		$this->TestObject->Sco->Rule->Condition->useDbConfig = 'test_suite';
-		$this->TestObject->Sco->Rule->Condition->tablePrefix = 'test_suite_';
-		$this->TestObject->Sco->Choice->useDbConfig = 'test_suite';
-		$this->TestObject->Sco->Choice->tablePrefix = 'test_suite_';
-		$this->TestObject->Sco->Presentation->useDbConfig = 'test_suite';
-		$this->TestObject->Sco->Presentation->tablePrefix = 'test_suite_';
-		$this->TestObject->Sco->ControlMode->useDbConfig = 'test_suite';
-		$this->TestObject->Sco->ControlMode->tablePrefix = 'test_suite_';
-		$this->TestObject->Sco->DeliveryControl->useDbConfig = 'test_suite';
-		$this->TestObject->Sco->DeliveryControl->tablePrefix = 'test_suite_';
+		$this->TestObject->useDbConfig = 'test';
+		$this->TestObject->Sco->useDbConfig = 'test';
+		$this->TestObject->Sco->SubItem->useDbConfig = 'test';
+		$this->TestObject->Sco->Objective->useDbConfig = 'test';
+		$this->TestObject->Sco->PrimaryObjective->useDbConfig = 'test';
+		$this->TestObject->Sco->Randomization->useDbConfig = 'test';
+		$this->TestObject->Sco->Rollup->useDbConfig = 'test';
+		$this->TestObject->Sco->Rule->useDbConfig = 'test';
+		$this->TestObject->Sco->Rule->Condition->useDbConfig = 'test';;
+		$this->TestObject->Sco->Choice->useDbConfig = 'test';
+		$this->TestObject->Sco->Presentation->useDbConfig = 'test';
+		$this->TestObject->Sco->ControlMode->useDbConfig = 'test';
+		$this->TestObject->Sco->DeliveryControl->useDbConfig = 'test';
 	}
 
 	function tearDown() {
@@ -1194,7 +1168,7 @@ eof;
 			'course_id'		=> 1,
 			'name'		=> 'testScorm',
 			'file_name'		=> 'ScromTest.zip',
-			'description'	=> 'A scorm test_suite',
+			'description'	=> 'A scorm test',
 			'hash'		=> 'slsdaslkfwerew498fwlw',
 			'path'		=> 'a path'
 		);
@@ -1213,7 +1187,7 @@ eof;
 			'course_id'		=> 1,
 			'name'		=> 'testScorm',
 			'file_name'		=> 'ScromTest.zip',
-			'description'	=> 'A scorm test_suite',
+			'description'	=> 'A scorm test',
 			'created'		=> '2007-1-1',
 			'modified'		=> '2007-1-1',
 			'hash'		=> 'slsdaslkfwerew498fwlw'
@@ -1234,7 +1208,7 @@ eof;
 			'course_id'		=> 1,
 			'name'		=> 'testScorm',
 			'file_name'		=> 'ScromTest.zip',
-			'description'	=> 'A scorm test_suite',
+			'description'	=> 'A scorm test',
 			'created'		=> '2007-1-1',
 			'modified'		=> '2007-1-1',
 			'hash'		=> 'slsdaslkfwerew498fwlw'

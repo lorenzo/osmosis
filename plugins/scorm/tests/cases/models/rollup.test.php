@@ -10,12 +10,9 @@ class RollupTestCase extends CakeTestCase {
 
 	function setUp() {
 		$this->TestObject = new Rollup();
-		$this->TestObject->useDbConfig = 'test_suite';
-		$this->TestObject->tablePrefix = 'test_suite_';
-		$this->TestObject->Rule->useDbConfig = 'test_suite';
-		$this->TestObject->Rule->tablePrefix = 'test_suite_';
-		$this->TestObject->Rule->Condition->useDbConfig = 'test_suite';
-		$this->TestObject->Rule->Condition->tablePrefix = 'test_suite_';
+		$this->TestObject->useDbConfig = 'test';
+		$this->TestObject->Rule->useDbConfig = 'test';
+		$this->TestObject->Rule->Condition->useDbConfig = 'test';
 	
 	}
 

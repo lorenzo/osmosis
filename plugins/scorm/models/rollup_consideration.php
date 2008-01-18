@@ -43,7 +43,7 @@ class RollupConsideration extends ScormAppModel {
 	
 function ValidateToken($field){
 	$regex = ('/(always|ifAttempted|ifNotSkipped|ifNotSuspended)/');
-	return preg_match($regex,$field);
+	return preg_match($regex,array_shift($field));
 	}
 }
 ?>

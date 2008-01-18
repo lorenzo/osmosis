@@ -10,10 +10,8 @@ class RuleTestCase extends CakeTestCase {
 	
 	function setUp() {
 		$this->TestObject = new Rule();
-		$this->TestObject->useDbConfig = 'test_suite';
-		$this->TestObject->tablePrefix = 'test_suite_';
-		$this->TestObject->Condition->useDbConfig = 'test_suite';
-		$this->TestObject->Condition->tablePrefix = 'test_suite_';
+		$this->TestObject->useDbConfig = 'test';
+		$this->TestObject->Condition->useDbConfig = 'test';
 	}
 
 	function tearDown() {
@@ -219,7 +217,8 @@ class RuleTestCase extends CakeTestCase {
 				)
 			);
 		$this->TestObject->save($data);
-		$this->assertEqual($expected, $this->TestObject->findById($this->TestObject->getLastInsertID()));
+		$result = $this->TestObject->findById($this->TestObject->getLastInsertID());
+		$this->assertEqual($expected,$result);
 	}
 }
 ?>

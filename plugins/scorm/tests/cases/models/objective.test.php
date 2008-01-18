@@ -4,14 +4,12 @@ App::import('Model', 'scorm.Objective');
 
 class ObjectiveTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('sco','objective','map_info');
+	var $fixtures = array('objective','map_info');
 
 	function setUp() {
 		$this->TestObject = new Objective();
-		$this->TestObject->useDbConfig = 'test_suite';
-		$this->TestObject->tablePrefix = 'test_suite_';
-		$this->TestObject->MapInfo->useDbConfig = 'test_suite';
-		$this->TestObject->MapInfo->tablePrefix = 'test_suite_';
+		$this->TestObject->useDbConfig = 'test';
+		$this->TestObject->MapInfo->useDbConfig = 'test';
 	}
 
 	function tearDown() {

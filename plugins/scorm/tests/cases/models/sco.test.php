@@ -13,7 +13,7 @@ App::import('Model', 'scorm.ControlMode');
 App::import('Model', 'scorm.DeliveryControl');
 class ScoTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('scorm',
+	var $fixtures = array(
                     	'sco',
                     	'objective',
                     	'randomization',
@@ -29,31 +29,18 @@ class ScoTestCase extends CakeTestCase {
 	function setUp() {
 		$this->TestObject = new Sco();
 		$this->TestObject->useDbConfig = 'test';
-		$this->TestObject->tablePrefix = 'test_suite_';
 		$this->TestObject->SubItem->useDbConfig = 'test';
-		$this->TestObject->SubItem->tablePrefix = 'test_suite_';
 		$this->TestObject->Objective->useDbConfig = 'test';
-		$this->TestObject->Objective->tablePrefix = 'test_suite_';
 		$this->TestObject->PrimaryObjective->useDbConfig = 'test';
-		$this->TestObject->PrimaryObjective->tablePrefix = 'test_suite_';
 		$this->TestObject->Randomization->useDbConfig = 'test';
-		$this->TestObject->Randomization->tablePrefix = 'test_suite_';
 		$this->TestObject->Rollup->useDbConfig = 'test';
-		$this->TestObject->Rollup->tablePrefix = 'test_suite_';
 		$this->TestObject->Rule->useDbConfig = 'test';
-		$this->TestObject->Rule->tablePrefix = 'test_suite_';
 		$this->TestObject->Rule->Condition->useDbConfig = 'test';
-		$this->TestObject->Rule->Condition->tablePrefix = 'test_suite_';
 		$this->TestObject->Choice->useDbConfig = 'test';
-		$this->TestObject->Choice->tablePrefix = 'test_suite_';
 		$this->TestObject->Consideration->useDbConfig = 'test';
-		$this->TestObject->Consideration->tablePrefix = 'test_suite_';
 		$this->TestObject->Presentation->useDbConfig = 'test';
-		$this->TestObject->Presentation->tablePrefix = 'test_suite_';
 		$this->TestObject->ControlMode->useDbConfig = 'test';
-		$this->TestObject->ControlMode->tablePrefix = 'test_suite_';
 		$this->TestObject->DeliveryControl->useDbConfig = 'test';
-		$this->TestObject->DeliveryControl->tablePrefix = 'test_suite_';
 		
 	}
 

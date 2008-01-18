@@ -33,8 +33,8 @@ class Randomization extends ScormAppModel {
 				)
 		);
 	
-	function validTiming($check) {
-		return preg_match('/(never|once|onEachNewAttempt)/',$check);
+	function validTiming($check) { 
+		return preg_match('/(never|once|onEachNewAttempt)/',array_shift($check));
 	}
 }
 ?>

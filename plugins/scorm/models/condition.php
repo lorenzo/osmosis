@@ -56,7 +56,7 @@ class Condition extends ScormAppModel {
 	 */
 	function validateConditionToken($field) {
 		$regex = '/(satisfied|objectiveStatusKnown|objectiveMeasureKnown|objectiveMeasureGreaterThan|objectiveMeasureLessThan|completed|activityProgressKnown|attempted|attemptLimitExceeded|timeLimitExceeded|outsideAvailableTimeRange|always)/';
-		return preg_match($regex, $field);
+		return preg_match($regex, array_shift($field));
 	}
 	
 	// TODO
