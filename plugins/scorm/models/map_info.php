@@ -2,6 +2,7 @@
 class MapInfo extends ScormAppModel {
 
 	var $name = 'MapInfo';
+	var $useTable = 'scorm_scorm_map_infos';
 	var $validate = array(
 			'targetObjectiveID' => array(
 				'required' =>  array(

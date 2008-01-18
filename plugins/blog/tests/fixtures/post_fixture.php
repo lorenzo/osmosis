@@ -1,6 +1,6 @@
 <?php 
 class PostFixture extends CakeTestFixture{
-	var $name = 'Posts';
+	var $name = 'BlogPosts';
 	var $import = array('model'=> 'Post');
 	var $records = array(
 		array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'created' => '2007-03-18 10:39:23', 'modified' => '2007-03-18 10:41:31', 'blog_id'=>'1', 'slug' => 'first-article'),

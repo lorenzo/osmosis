@@ -1,7 +1,7 @@
 <?php
 class RuleFixture extends CakeTestFixture {
-	var $name = 'Rule';
-	var $import = array('model'=>'rule'); 
+	var $name = 'ScormRule';
+	var $import = array('model'=>'Rule'); 
 
 	var $records = array(
 		array(

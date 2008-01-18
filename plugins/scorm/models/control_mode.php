@@ -2,6 +2,7 @@
 class ControlMode extends ScormAppModel {
 
 	var $name = 'ControlMode';
+	var $useTable = 'scorm_control_modes';
 	var	$validate = array(
 			'choiceExit' => array(
 				'Boolean' =>  array(

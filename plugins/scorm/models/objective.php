@@ -2,8 +2,9 @@
 class Objective extends ScormAppModel {
 
 	var $name = 'Objective';
+	var $useTable = 'scorm_objectives';
 	var $hasOne = array(
-			'MapInfo' => array('className' => 'MapInfo',
+			'MapInfo' => array('className' => 'Scorm.MapInfo',
 								'foreignKey' => 'objective_id',
 								'dependent' => true)
 	);

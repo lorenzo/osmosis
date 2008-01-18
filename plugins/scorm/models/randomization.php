@@ -2,6 +2,7 @@
 class Randomization extends ScormAppModel {
 
 	var $name = 'Randomization';
+	var $useTable = 'scorm_randomizations';
 	var $validate = array(
 			'randomizationTiming' => array(
 				'required' =>  array(

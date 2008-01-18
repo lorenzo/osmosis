@@ -3,7 +3,7 @@ class ScosController extends ScormAppController {
 
 	var $name = 'Scos';
 	var $helpers = array('Html', 'Form', 'Cache' );
-	var $uses = array('Sco', 'Scorm', 'ScormAttendeeTracking');
+	var $uses = array('Scorm.Sco', 'Scorm.Scorm', 'Scorm.ScormAttendeeTracking');
 	var $cacheAction = array('view/' => '1 hour');
 	
 	function beforeFilter() {

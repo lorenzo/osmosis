@@ -2,8 +2,9 @@
 class Condition extends ScormAppModel {
 
 	var $name = 'Condition';
+	var $useTable = 'scorm_conditions';
 	var $belongsTo = array(
-		'Rule' => array('className' => 'Rule',
+		'Rule' => array('className' => 'Scorm.Rule',
 			'foreignKey' => 'rule_id',
 			'conditions' => '',
 			'fields' => '',

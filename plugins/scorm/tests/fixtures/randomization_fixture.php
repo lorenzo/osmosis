@@ -1,6 +1,6 @@
 <?php
 class RandomizationFixture extends CakeTestFixture {
-    var $name = 'Randomization';
+    var $name = 'ScormRandomization';
   	var $import = array('model' => 'Randomization'); 
     var $records = array(
     	array(

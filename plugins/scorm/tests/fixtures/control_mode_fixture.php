@@ -1,7 +1,7 @@
 <?php
 class ControlModeFixture extends CakeTestFixture {
-    var $name = 'ControlMode';
-  	var $import = array('model'=>'controlMode'); 
+    var $name = 'ScormControlMode';
+  	var $import = array('model'=>'ControlMode'); 
     var $records = array(
     	array(
     		'id'							=> 1,

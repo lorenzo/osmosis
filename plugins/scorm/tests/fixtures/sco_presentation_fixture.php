@@ -1,7 +1,7 @@
 <?php
 class ScoPresentationFixture extends CakeTestFixture {
-    var $name = 'ScoPresentation';
-  	var $import = array('model'=>'scoPresentation'); 
+    var $name = 'ScormScoPresentation';
+  	var $import = array('model'=>'ScoPresentation'); 
     var $records = array(
     	array(
     		'id'				=> 1,

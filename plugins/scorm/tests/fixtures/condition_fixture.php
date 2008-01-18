@@ -1,6 +1,6 @@
 <?php
 class ConditionFixture extends CakeTestFixture {
-	var $name = 'Condition';
+	var $name = 'ScormCondition';
 	var $import = array('model'=>'Condition'); 
 
 	var $records = array(

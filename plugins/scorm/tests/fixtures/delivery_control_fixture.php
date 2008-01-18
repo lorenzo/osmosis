@@ -1,7 +1,7 @@
 <?php
 class DeliveryControlFixture extends CakeTestFixture {
-    var $name = 'DeliveryControl';
-  	var $import = array('model'=>'deliveryControl'); 
+    var $name = 'ScormDeliveryControl';
+  	var $import = array('model'=>'DeliveryControl'); 
     var $records = array(
     	array(
     		'id'						=> 1,

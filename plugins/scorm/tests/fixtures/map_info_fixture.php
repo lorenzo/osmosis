@@ -1,6 +1,6 @@
 <?php
 class MapInfoFixture extends CakeTestFixture {
-    var $name = 'MapInfo';
+    var $name = 'ScormMapInfo';
   	var $import = array('model' => 'MapInfo'); 
     var $records = array(
     	array(

@@ -1,6 +1,6 @@
 <?php
 class ScormFixture extends CakeTestFixture {
-    var $name = 'Scorm';
+    var $name = 'ScormScorm';
   	var $import = array('model' => 'Scorm'); 
     var $records = array(
     	array(

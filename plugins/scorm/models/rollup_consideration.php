@@ -2,6 +2,7 @@
 class RollupConsideration extends ScormAppModel {
 
 	var $name = 'RollupConsideration';
+	var $useTable = 'scorm_rollup_considerations';
 	var $validate = array(
 			'requiredForSatisfied' => array(
 				'Token' =>  array(

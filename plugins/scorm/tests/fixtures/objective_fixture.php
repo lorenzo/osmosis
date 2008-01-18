@@ -1,7 +1,7 @@
 <?php
-loadModel('scorm.Objective');
+//loadModel('scorm.Objective');
 class ObjectiveFixture extends CakeTestFixture {
-    var $name = 'Objective';
+    var $name = 'ScormObjective';
   	var $import = array('model' => 'Objective'); 
     var $records = array(
     	array(

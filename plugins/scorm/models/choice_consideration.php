@@ -2,6 +2,7 @@
 class ChoiceConsideration extends ScormAppModel {
 
 	var $name = 'ChoiceConsideration';
+	var $useTable = 'scorm_choice_considerations';
 	var	$validate = array(
 			'preventActivation' => array(
 				'Boolean' =>  array(

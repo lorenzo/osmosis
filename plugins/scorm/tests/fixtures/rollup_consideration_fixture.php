@@ -1,7 +1,7 @@
 <?php
 class RollupConsiderationFixture extends CakeTestFixture {
-    var $name = 'RollupConsideration';
-  	var $import = array('model'=>'rollupConsideration'); 
+    var $name = 'ScormRollupConsideration';
+  	var $import = array('model'=>'RollupConsideration'); 
     var $records = array(
     	array(
     		'id'						=> 1,

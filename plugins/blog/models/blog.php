@@ -10,7 +10,7 @@ class Blog extends BlogAppModel {
 		'description' => array(
 			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
 		),
-		'owner' => array(
+		'member_id' => array(
 			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
 		)
 	);

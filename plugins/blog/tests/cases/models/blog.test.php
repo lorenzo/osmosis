@@ -24,7 +24,7 @@ class BlogTestCase extends CakeTestCase {
 		$expectedErrors = array(	
 			'title' => 'Error.empty',
 			'description' => 'Error.empty',
-			'owner' => 'Error.empty'
+			'member_id' => 'Error.empty'
 		);
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
 	}
@@ -33,7 +33,7 @@ class BlogTestCase extends CakeTestCase {
 		$data = array(
 			'title'		=> 'blog title',
 			'description'	=> 'A blog test_suite',
-			'owner'		=> 'Owner',
+			'member_id'		=> 'Owner',
 		);
 		$this->TestObject->save($data);
 		$id = $this->TestObject->getLastInsertId();

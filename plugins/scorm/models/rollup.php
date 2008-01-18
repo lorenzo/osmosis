@@ -1,10 +1,11 @@
 <?php
 class Rollup extends ScormAppModel {
 	var $name = 'Rollup';
+	var $useTable = 'scorm_rollups';
   var $actsAs = array('transaction');
 	var $hasMany = array(
 		'Rule' => array(
-			'className' => 'Rule',
+			'className' => 'Scorm.Rule',
 			'foreignKey' => 'rollup_id',
 			'conditions' => '',
 			'fields' => '',

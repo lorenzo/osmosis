@@ -2,6 +2,7 @@
 class DeliveryControl extends ScormAppModel {
 
 	var $name = 'DeliveryControl';
+	var $useTable = 'scorm_delivery_controls';
 	var	$validate = array(
 			'tracked' => array(
 				'Boolean' =>  array(

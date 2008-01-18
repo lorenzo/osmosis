@@ -2,6 +2,7 @@
 uses('xml');
 class Scorm extends ScormAppModel {
 	var $name = 'Scorm';
+	var $useTable = 'scorm_scorms';
 	var $validate = array(
 		'name'=> array(
 			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
@@ -15,7 +16,7 @@ class Scorm extends ScormAppModel {
 	);
 	var $actsAs = array('transaction');
 	var $parsed = false;
-	var $hasMany = array('Sco' => array('className' => 'Sco',
+	var $hasMany = array('Sco' => array('className' => 'Scorm.Sco',
 								'foreignKey' => 'scorm_id',
 								'dependent' => true));
 	/**

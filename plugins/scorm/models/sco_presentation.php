@@ -2,6 +2,7 @@
 class ScoPresentation extends ScormAppModel {
 
 	var $name = 'ScoPresentation';
+	var $useTable = 'scorm_sco_presentations';
 	var $primaryKey = 'id';
 	var $validate = array(
 			'hideKey' => array(

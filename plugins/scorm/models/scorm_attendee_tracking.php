@@ -2,6 +2,7 @@
 class ScormAttendeeTracking extends ScormAppModel {
 
 	var $name = 'ScormAttendeeTracking';
+	var $useTable = 'scorm_attendee_trackings';
 	var $validate = array(
 		'scorm_id' => VALID_NOT_EMPTY,
 		'sco_id' => VALID_NOT_EMPTY,

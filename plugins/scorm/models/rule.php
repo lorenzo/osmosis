@@ -2,6 +2,7 @@
 class Rule extends ScormAppModel {
 
 	var $name = 'Rule';
+	var $useTable = 'scorm_rules';
   var $actsAs = array('transaction');
 	var $validate = array(
 			'type' => array (
@@ -53,7 +54,7 @@ class Rule extends ScormAppModel {
 
 	var $hasMany = array(
 		'Condition' => array(
-			'className' => 'Condition',
+			'className' => 'Scorm.Condition',
 			'foreignKey' => 'rule_id',
 			'conditions' => '',
 			'fields' => '',
