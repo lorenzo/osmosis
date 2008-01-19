@@ -73,12 +73,11 @@ class HookableBehavior extends ModelBehavior {
 	}
 
 	function afterFind(&$model, $results, $primary) {
-		$return = true;
 		$hooks = $this->__getHookObjects($model,'afterFind');
 		foreach ($hooks as $hook){
-			$return = $hook->afterFind($model, $results, $primary) && $return;			
+			$results = $hook->afterFind($model, $results, $primary) && $return;			
 		}
-		return $return;
+		return $results;
 	}
 	
 	function afterDelete(&$model) {
