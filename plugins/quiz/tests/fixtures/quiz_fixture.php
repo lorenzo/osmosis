@@ -4,7 +4,7 @@ class QuizFixture extends CakeTestFixture {
  	var $import = array('model' => 'Quiz'); 
     var $records = array(
     	array(
-    		'id'	=> 	'q1',
+    		'id'	=> 	'quiz1_from_fixture',
     		'name'	=> 'quiz 1'
 		)
     );

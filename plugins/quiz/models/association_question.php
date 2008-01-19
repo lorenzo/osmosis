@@ -30,15 +30,6 @@ class AssociationQuestion extends QuizAppModel {
 				'joinTable' => 'quiz_association_questions_quizzes',
 				'foreignKey' => 'association_question_id',
 				'associationForeignKey' => 'quiz_id',
-				'conditions' => '',
-				'fields' => '',
-				'order' => '',
-				'limit' => '',
-				'offset' => '',
-				'unique' => '',
-				'finderQuery' => '',
-				'deleteQuery' => '',
-				'insertQuery' => '',
 				'with' => 'Qas'
 			)
 	);
