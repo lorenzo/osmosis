@@ -56,6 +56,7 @@ class InitAclComponent extends Object {
 	
 	function initMember($data) {
 		$this->Member->create();
+		$this->Auth->userModel = 'Member';
 		$data = $this->Auth->hashPasswords($data);
 		$this->Member->save($data);
 		return $this->Member->getLastInsertId();
