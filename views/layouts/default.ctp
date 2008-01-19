@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div id="header">
-		<a href="#" title="Osmosis2 - Inicio" id="home">Osmosis2</a>
+		<?php echo $html->link(__('Osmosis2', true), '/', array('title' => 'Osmosis2 - Inicio', 'id' => 'home'));?>
 		<ul>
 			<li><a href="#">Ayuda</a></li>
 			<li><a href="#">Buscar</a></li>
@@ -26,22 +26,24 @@
             <div id="leftbar">
                 <a href="#" id="dashboard" title="Ir al inicio">Inicio</a>
                 <ul>
+                    <li><?php echo $html->link(__('Quizzes', true), '/quiz/quizzes/');?></li>
                     <li><a href="#">Cursos</a></li>
                     <li><a href="#">Casillero</a></li>
                     <li><a href="#">Mensajería</a></li>
-                    <li><a href="#">Blog</a></li>
+                    <li><?php echo $html->link(__('Blog', true), '/blog/blogs/');?></li>
                     <li><a href="#">Perfil</a></li>
+
                 </ul>
             </div>
             <div id="main">
-                <div id="bar3">De Prueba, Estudiantres</div>
+                <div id="bar3"><?php echo $session->read('Auth.Member.full_name'); ?></div>
                 <div class="content">
                     	<?php
-												if ($session->check('Message.flash')):
-														$session->flash();
-												endif;
-											?>
-											<?php echo $content_for_layout;?>
+							if ($session->check('Message.flash')):
+									$session->flash();
+							endif;
+						?>
+						<?php echo $content_for_layout;?>
                     <div id="footer">
                         <div class="c">Fin</div>
                     </div>
