@@ -4,13 +4,12 @@ App::import('Model', 'wiki.Entry');
 
 class EntryTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('entry','revision');
+	var $fixtures = array('app.member','entry','revision');
 	function setUp() {
 		$this->TestObject = new Entry();
-		$this->TestObject->useDbConfig = 'test_suite';
-		$this->TestObject->tablePrefix = 'test_suite_';
-		$this->TestObject->Revision->useDbConfig = 'test_suite';
-		$this->TestObject->Revision->tablePrefix = 'test_suite_';
+		$this->TestObject->useDbConfig = 'test';
+		$this->TestObject->Revision->useDbConfig = 'test';
+		$this->TestObject->Member->useDbConfig = 'test';
 	}
 
 	function tearDown() {
@@ -44,7 +43,7 @@ class EntryTestCase extends CakeTestCase {
 		);
 		$this->TestObject->save($data);
 		$id = $this->TestObject->getLastInsertId();
-		$result = $this->TestObject->find(array('id'=>$id));
+		$result = $this->TestObject->find('first',array('Entry.id'=>$id));
 		$this->assertTrue(empty($result['Revision']));
 		$entry = $result['Entry'];
 		unset($entry['id']);
@@ -63,7 +62,7 @@ class EntryTestCase extends CakeTestCase {
 		);
 		$this->TestObject->save($new_data);
 		$this->TestObject->recursive = 1;
-		$new_result = $this->TestObject->find(array('id'=>$id));
+		$new_result = $this->TestObject->find('first',array('Entry.id'=>$id));
 		$edit = $new_result['Entry'];
 		unset($edit['created']);
 		$updated = $edit['updated'];
@@ -94,7 +93,7 @@ class EntryTestCase extends CakeTestCase {
 		);
 		$this->TestObject->save($data);
 		$this->TestObject->recursive = 1;
-		$result = $this->TestObject->find(array('id'=>$id));
+		$result = $this->TestObject->find('first',array('Entry.id'=>$id));
 		$this->assertEqual(2,count($result['Revision']));
 	}
 	
@@ -103,10 +102,10 @@ class EntryTestCase extends CakeTestCase {
 	 */
 	
 	function testSave2() {
-		$data = $this->TestObject->find(array('id'=>1));
+		$data = $this->TestObject->find('first',array('Entry.id'=>1));
 		$this->TestObject->save($data);
 		$this->TestObject->recursive = 1;
-		$result = $this->TestObject->find(array('id'=>1));
+		$result = $this->TestObject->find('first',array('Entry.id'=>1));
 		$this->assertEqual(0,count($result['Revision']));
 	}
 	
@@ -114,12 +113,12 @@ class EntryTestCase extends CakeTestCase {
 	 * Tests restore function
 	 */
 	function testRestore() {
-		$data = $this->TestObject->find(array('id'=>1));
+		$data = $this->TestObject->find('first',array('Entry.id'=>1));
 		$content = $data['Entry']['content'];
 		$data['Entry']['content'] = 'A very different content';
 		$this->TestObject->save($data);
 		$this->TestObject->restore(1);
-		$result = $this->TestObject->find(array('id'=>1));
+		$result = $this->TestObject->find('first',array('Entry.id'=>1));
 		$expected = $data['Entry'];
 		$expected['content'] = $content;
 		$expected['revision'] = 3;

@@ -1,6 +1,6 @@
 <?php
 class EntryFixture extends CakeTestFixture {
-    var $name = 'Entry';
+    var $name = 'WikiEntry';
   	var $import = array('model' => 'Entry');
 	var $records = array( 
 		array(

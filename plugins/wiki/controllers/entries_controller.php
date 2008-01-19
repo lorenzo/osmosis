@@ -12,7 +12,7 @@ class EntriesController extends WikiAppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Entry.');
+			$this->Session->setFlash(__('Invalid Entry.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('entry', $this->Entry->read(null, $id));
@@ -20,7 +20,7 @@ class EntriesController extends WikiAppController {
 
 	function add($wiki_id = null) {
 		if (!$wiki_id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Wiki');
+			$this->Session->setFlash(__('Invalid Wiki',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
@@ -28,10 +28,10 @@ class EntriesController extends WikiAppController {
 			$this->data['Entry']['member_id'] = $this->Auth->user('id');
 			$this->data['Entry']['content'] = $this->HtmlPurifier->purify($this->data['Entry']['content']);
 			if ($this->Entry->save($this->data)) {
-				$this->Session->setFlash('The Entry has been saved');
+				$this->Session->setFlash(__('The Entry has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Entry could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Entry could not be saved. Please, try again.',true));
 			}
 		}
 		if(!isset($this->data['Entry']['wiki_id'])) {
@@ -41,7 +41,7 @@ class EntriesController extends WikiAppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Entry');
+			$this->Session->setFlash(__('Invalid Entry',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
@@ -51,7 +51,7 @@ class EntriesController extends WikiAppController {
 				$this->Session->setFlash('The Entry has been saved');
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Entry could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Entry could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -61,11 +61,11 @@ class EntriesController extends WikiAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Entry');
+			$this->Session->setFlash(__('Invalid id for Entry',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Entry->del($id)) {
-			$this->Session->setFlash('Entry #'.$id.' deleted');
+			$this->Session->setFlash(__('Entry deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

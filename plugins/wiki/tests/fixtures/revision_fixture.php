@@ -1,6 +1,6 @@
 <?php
 class RevisionFixture extends CakeTestFixture {
-    var $name = 'Revision';
+    var $name = 'WikiRevision';
   	var $import = array('model' => 'Revision');
 } 
 ?>
