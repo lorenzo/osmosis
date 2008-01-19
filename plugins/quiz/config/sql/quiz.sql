@@ -15,9 +15,9 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `association_choices`
--- 
+--
+-- Table structure for table `quiz_association_choices`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_association_choices` (
   `id` char(36) collate utf8_unicode_ci NOT NULL,
@@ -28,9 +28,9 @@ CREATE TABLE IF NOT EXISTS `quiz_association_choices` (
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `association_questions`
--- 
+--
+-- Table structure for table `quiz_association_questions`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_association_questions` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -43,22 +43,22 @@ CREATE TABLE IF NOT EXISTS `quiz_association_questions` (
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `association_questions_quizzes`
--- 
+--
+-- Table structure for table `quiz_association_questions_quizzes`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_association_questions_quizzes` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(10) NOT NULL auto_increment,
   `association_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Relates a Association Question with a Quiz (many-to-many)' AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Relates a Association Question with a Quiz (many-to-many)' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `choice_choices`
--- 
+--
+-- Table structure for table `quiz_choice_choices`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_choice_choices` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -69,9 +69,9 @@ CREATE TABLE IF NOT EXISTS `quiz_choice_choices` (
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `choice_questions`
--- 
+--
+-- Table structure for table `quiz_choice_questions`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_choice_questions` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -84,9 +84,9 @@ CREATE TABLE IF NOT EXISTS `quiz_choice_questions` (
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `choice_questions_quizzes`
--- 
+--
+-- Table structure for table `quiz_choice_questions_quizzes`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_choice_questions_quizzes` (
   `id` char(36) NOT NULL,
@@ -97,9 +97,9 @@ CREATE TABLE IF NOT EXISTS `quiz_choice_questions_quizzes` (
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `cloze_questions`
--- 
+--
+-- Table structure for table `quiz_cloze_questions`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_cloze_questions` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -110,22 +110,22 @@ CREATE TABLE IF NOT EXISTS `quiz_cloze_questions` (
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `cloze_questions_quizzes`
--- 
+--
+-- Table structure for table `quiz_cloze_questions_quizzes`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_cloze_questions_quizzes` (
-  `id` char(36) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `cloze_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Relates a Cloze Question with a Quiz (many-to-many)';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Relates a Cloze Question with a Quiz (many-to-many)' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `matching_choices`
--- 
+--
+-- Table structure for table `quiz_matching_choices`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_matching_choices` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -137,9 +137,9 @@ CREATE TABLE IF NOT EXISTS `quiz_matching_choices` (
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `matching_questions`
--- 
+--
+-- Table structure for table `quiz_matching_questions`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_matching_questions` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -152,9 +152,9 @@ CREATE TABLE IF NOT EXISTS `quiz_matching_questions` (
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `matching_questions_quizzes`
--- 
+--
+-- Table structure for table `quiz_matching_questions_quizzes`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_matching_questions_quizzes` (
   `id` char(36) NOT NULL,
@@ -165,9 +165,9 @@ CREATE TABLE IF NOT EXISTS `quiz_matching_questions_quizzes` (
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `ordering_choices`
--- 
+--
+-- Table structure for table `quiz_ordering_choices`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_ordering_choices` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -178,9 +178,9 @@ CREATE TABLE IF NOT EXISTS `quiz_ordering_choices` (
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `ordering_questions`
--- 
+--
+-- Table structure for table `quiz_ordering_questions`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_ordering_questions` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -193,9 +193,9 @@ CREATE TABLE IF NOT EXISTS `quiz_ordering_questions` (
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `ordering_questions_quizzes`
--- 
+--
+-- Table structure for table `quiz_ordering_questions_quizzes`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_ordering_questions_quizzes` (
   `id` char(36) NOT NULL,
@@ -206,9 +206,9 @@ CREATE TABLE IF NOT EXISTS `quiz_ordering_questions_quizzes` (
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `quizzes`
--- 
+--
+-- Table structure for table `quiz_quizzes`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_quizzes` (
   `id` char(36) collate utf8_unicode_ci NOT NULL,
@@ -218,9 +218,9 @@ CREATE TABLE IF NOT EXISTS `quiz_quizzes` (
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `text_questions`
--- 
+--
+-- Table structure for table `quiz_text_questions`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_text_questions` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -232,9 +232,9 @@ CREATE TABLE IF NOT EXISTS `quiz_text_questions` (
 
 -- --------------------------------------------------------
 
--- 
--- Table structure for table `text_questions_quizzes`
--- 
+--
+-- Table structure for table `quiz_text_questions_quizzes`
+--
 
 CREATE TABLE IF NOT EXISTS `quiz_text_questions_quizzes` (
   `id` char(36) NOT NULL,
