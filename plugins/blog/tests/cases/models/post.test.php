@@ -9,10 +9,8 @@ class PostTestCase extends CakeTestCase {
 
 	function setUp() {
 		$this->TestObject = new Post();
-		$this->TestObject->useDbConfig = 'test_suite';
-		$this->TestObject->tablePrefix = 'test_suite_';
-		$this->TestObject->Blog->useDbConfig = 'test_suite';
-		$this->TestObject->Blog->tablePrefix = 'test_suite_';
+		$this->TestObject->useDbConfig = 'test';
+		$this->TestObject->Blog->useDbConfig = 'test';
 	}
 
 	function tearDown() {
@@ -21,7 +19,7 @@ class PostTestCase extends CakeTestCase {
 	
 	function testValidation1() {
 		
-		$data = array();
+		$data = array('Post'=>array('title'=>''));
 		$this->TestObject->data = $data;
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(	
@@ -34,13 +32,13 @@ class PostTestCase extends CakeTestCase {
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
 	}
 	
-	/*function testValidation2() {
+	function testValidation2() {
 		
-		$data = array();
+		$data = array('Post'=>array('title'=>'qwertyuiopasdfghjklzxcvbnqwertyuiopasdfghjklzxcvbnaqse'));
 		$this->TestObject->data = $data;
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(	
-			'title' => 'Error.minlength',
+			'title' => 'Error.maxLength',
 			'body' => 'Error.empty',
 			'created' => 'Error.empty',
 			'modified' => 'Error.empty',
@@ -48,7 +46,7 @@ class PostTestCase extends CakeTestCase {
 		);
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
 	}
-*/
+
 	function testSave(){
 		$data = array(
 			'title' => 'post title',

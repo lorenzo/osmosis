@@ -9,22 +9,10 @@ class Post extends BlogAppModel {
 	var $validate = array(
 		'title'=> array(
 			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
-			'Error.maxlength' => array('rule' => array('maxLength',50),
-										'required' => true, 
-										'on'=> 'create', 
-										'message' => 'Error.maxLength'),
-			'Error.longitudMin' => array('rule' => array('minLength',3), 
-										  'required' => true, 
-										  'on'=> 'create',
-										  'message' => 'Error.minlength'),
+			'Error.maxlength' => array('rule' => array('maxLength',50),  
+										'message' => 'Error.maxLength')
 		),
 		'body' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
-		),
-		'created' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
-		),
-		'modified' => array(
 			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
 		),
 		'blog_id' => array(

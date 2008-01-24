@@ -59,13 +59,9 @@ foreach ($posts as $post):
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('New Post', true), array('controller'=> 'posts', 'action'=>'add', $blog['id'])); ?></li>
+		<li><?php echo $html->link(__('New Post', true), array('controller'=> 'posts', 'action'=>'add', $post['Post']['blog_id'])); ?></li>
 		<li><?php echo $html->link(__('List Blogs', true), array('controller'=> 'blogs', 'action'=>'index')); ?> </li>
 		<li><?php echo $html->link(__('New Blog', true), array('controller'=> 'blogs', 'action'=>'add')); ?> </li>
-		<!--<li><?php echo $html->link(__('List Comments', true), array('controller'=> 'comments', 'action'=>'index')); ?> </li>
-		
-		
-		<li><?php echo $html->link(__('New Comment', true), array('controller'=> 'comments', 'action'=>'add', $post['Post']['id'])); ?></li>-->
 		
 	</ul>
 </div>

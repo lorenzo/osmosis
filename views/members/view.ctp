@@ -1,9 +1,11 @@
 <div class="member">
 <h2><?php  __('Member');?></h2>
+<dt>Member_id</dt>
+<?php echo $member['Member']['id']?>
 	<dl>
-		<dt class="altrow"><?php __('Id') ?></dt>
+		<dt class="altrow"><?php __('Full Name') ?></dt>
 		<dd class="altrow">
-			<?php echo $member['Member']['id'] ?>
+			<?php echo $member['Member']['full_name'] ?>
 			&nbsp;
 		</dd>
 		<dt><?php __('Institution Id') ?></dt>
@@ -11,11 +13,7 @@
 			<?php echo $member['Member']['institution_id'] ?>
 			&nbsp;
 		</dd>
-		<dt class="altrow"><?php __('Full Name') ?></dt>
-		<dd class="altrow">
-			<?php echo $member['Member']['full_name'] ?>
-			&nbsp;
-		</dd>
+		
 		<dt><?php __('Email') ?></dt>
 		<dd>
 			<?php echo $member['Member']['email'] ?>
@@ -24,6 +22,11 @@
 		<dt class="altrow"><?php __('Phone') ?></dt>
 		<dd class="altrow">
 			<?php echo $member['Member']['phone'] ?>
+			&nbsp;
+		</dd>
+		<dt><?php __('Role') ?></dt>
+		<dd>
+			<?php echo $html->link(__($member['Role']['id'], true), array('controller'=> 'roles', 'action'=>'view', $member['Role']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php __('Country') ?></dt>
@@ -44,21 +47,6 @@
 		<dt class="altrow"><?php __('Sex') ?></dt>
 		<dd class="altrow">
 			<?php echo $member['Member']['sex'] ?>
-			&nbsp;
-		</dd>
-		<dt><?php __('Role') ?></dt>
-		<dd>
-			<?php echo $html->link(__($member['Role']['id'], true), array('controller'=> 'roles', 'action'=>'view', $member['Role']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt class="altrow"><?php __('Username') ?></dt>
-		<dd class="altrow">
-			<?php echo $member['Member']['username'] ?>
-			&nbsp;
-		</dd>
-		<dt><?php __('Password') ?></dt>
-		<dd>
-			<?php echo $member['Member']['password'] ?>
 			&nbsp;
 		</dd>
 	</dl>

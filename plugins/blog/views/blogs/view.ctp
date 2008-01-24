@@ -3,6 +3,9 @@
 	<p><?php echo $blog['Blog']['description']; ?></p>
 </div>
 <div class="related">
+	<dt> Blog_id </dt>
+	<?php echo $blog['Blog']['id']?>
+	<dt> member_id </dt><?php echo $blog['Blog']['member_id']?>
 	<?php if (!empty($blog['Post'])):?>
 	<?php
 		$i = 0;

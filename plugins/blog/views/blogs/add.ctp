@@ -12,7 +12,5 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('List Blogs', true), array('action'=>'index'));?></li>
-		<li><?php echo $html->link(__('List Posts', true), array('controller'=> 'posts', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Post', true), array('controller'=> 'posts', 'action'=>'add')); ?> </li>
 	</ul>
 </div>

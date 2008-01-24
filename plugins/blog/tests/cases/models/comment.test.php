@@ -10,10 +10,8 @@ class CommentTestCase extends CakeTestCase {
 
 	function setUp() {
 		$this->TestObject = new Comment();
-		$this->TestObject->useDbConfig = 'test_suite';
-		$this->TestObject->tablePrefix = 'test_suite_';
-		$this->TestObject->Post->useDbConfig = 'test_suite';
-		$this->TestObject->Post->tablePrefix = 'test_suite_';
+		$this->TestObject->useDbConfig = 'test';
+		$this->TestObject->Post->useDbConfig = 'test';
 	}
 
 	function tearDown() {
@@ -26,8 +24,7 @@ class CommentTestCase extends CakeTestCase {
 		$this->TestObject->data = $data;
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(	
-			'title' => 'Error.empty',
-			'description' => 'Error.empty',
+			'comment' => 'Error.empty',
 			'post_id' => 'Error.empty',
 			'member_id' => 'Error.empty'
 		);
@@ -36,15 +33,14 @@ class CommentTestCase extends CakeTestCase {
 
 	function testSave(){
 		$data = array(
-			'title'		=> 'comment title',
-			'description'	=> 'A comment test_suite',
+			'comment'	=> 'A comment test_suite',
 			'post_id' 		=> 'post id',
 			'member_id' 	=> 'member id'
 		);
 		$this->TestObject->save($data);
 		$id = $this->TestObject->getLastInsertId();
 		$result = $this->TestObject->find(array('Comment.id'=>$id));
-		$this->assertEqual(4,$this->TestObject->findCount());
+		$this->assertEqual(3,$this->TestObject->findCount());
 		
 	}
 
