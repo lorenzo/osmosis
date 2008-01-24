@@ -50,8 +50,6 @@ class PostsController extends BlogAppController {
 		if (empty($this->data)) {
 			$this->data = $this->Post->read(null, $id);
 		}
-		$blogs = $this->Post->Blog->generateList();
-		$this->set(compact('blogs'));
 	}
 
 	function delete($id = null) {

@@ -6,7 +6,7 @@
 /* Containers */
 .defaultSkin table {background:#F0F0EE}
 .defaultSkin iframe {display:block; background:#FFF}
-.defaultSkin .mceToolbar {height:26px}
+.defaultSkin .mceToolbar {height:26px;width:auto;}
 .defaultSkin .left {text-align:left}
 .defaultSkin .right {text-align:right}
 
@@ -30,7 +30,7 @@
 .defaultSkin .icon {background:url(../../img/icons.gif) no-repeat 20px 20px}
 
 /* Button */
-.defaultSkin .mceButton {display:block; border:1px solid #F0F0EE; width:20px; height:20px; margin-right:1px;}
+.defaultSkin .mceButton {display:block; border:1px solid #F0F0EE; width:20px; height:20px; margin-right:2px;}
 .defaultSkin a.mceButtonEnabled:hover {border:1px solid #0A246A; background-color:#B2BBD0}
 .defaultSkin a.mceButtonActive {border:1px solid #0A246A; background-color:#C2CBE0}
 .defaultSkin .mceButtonDisabled span {opacity:0.3; filter:alpha(opacity=30)}

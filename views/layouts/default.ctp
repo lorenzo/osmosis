@@ -5,7 +5,8 @@
 		Osmosis 2: e-learning innovation - 
 		<?php echo $title_for_layout;?>
 	</title>
-	<?php echo $html->charset(); ?>
+	<?php echo $html->charset();?>
+	<?php if(Configure::read()>0) echo $html->css('debug');?>
 	<?php echo $html->css('style'); ?>
 	<?php echo $javascript->codeBlock('var webroot = "' . $html->url('/') .'"'); ?>
 	<?php echo $scripts_for_layout; ?>

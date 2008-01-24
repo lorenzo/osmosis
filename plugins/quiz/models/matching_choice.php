@@ -9,14 +9,24 @@ class MatchingChoice extends AppModel {
 	);
 
 	var $useTable = 'quiz_matching_choices';
-	var $belongsTo = array(
-			'MatchingQuestion' => array('className' => 'quiz.MatchingQuestion',
-								'foreignKey' => 'matching_question_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
+
+	var $hasAndBelongsToMany = array(
+		'SourceChoice' => array(
+			'className' => 'quiz.MatchingQuestion',
+			'joinTable' => 'quiz_matching_choices_matching_questions',
+			'foreignKey' => 'matching_question_id',
+			'associationForeignKey' => 'source',
+			'with' => 'MatchingQuestionChoices'
+		)/*,
+		'TargetChoice' => array(
+			'className' => 'quiz.MatchingQuestion',
+			'joinTable' => 'quiz_matching_choices_matching_questions',
+			'foreignKey' => 'matching_question_id',
+			'associationForeignKey' => 'target',
+			'with' => 'MatchingQuestionChoices'
+		)*/
 	);
+	
 
 }
 ?>

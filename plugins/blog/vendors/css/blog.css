@@ -1,0 +1,55 @@
+#blog-header {
+	border:#ccc 4px double;
+	padding:10px 10px;
+	text-align:center;
+}
+#blog-header h2 {
+	margin:0;
+}
+#blog-header .description {
+	margin:2px 0 0 0;
+	font-size:1.1em;
+	padding-left:10px;
+	color:#666;
+	font-style:italic;
+}
+#blog-header .author {
+	margin-bottom:0;
+	font-weight:bold;
+}
+
+.blog-posts h3 {
+	clear:both;
+	margin:0;
+	padding:15px 0 6px 0;
+}
+.blog-posts h3 a {
+	text-decoration:none;
+	border-bottom:#ccc 1px solid;
+	padding:0 2px;
+}
+
+.date {
+	width:40px;
+	margin-right:10px;
+	float:left;
+	border:#999 1px solid;
+}
+
+.date span {
+	display:block;
+	text-align:center;
+}
+
+.date .month {
+	background:#00053F;
+	color:#fff;
+	padding:2px 0;
+}
+
+.date .day {
+	padding:10px 0 5px 0;
+	font-weight:bold;
+	font-size:1.8em;
+	color:#666;
+}

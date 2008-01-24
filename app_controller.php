@@ -1,7 +1,7 @@
 <?php
 class AppController extends Controller {
 	var $components = array('Acl','Auth','RequestHandler');
-	var $helpers = array('Javascript', 'Html', 'Form', 'Dynamicjs');
+	var $helpers = array('Javascript', 'Html', 'Form', 'Dynamicjs', 'Time');
 
 	function beforeFilter() {
 		if (isset($this->Auth)) {

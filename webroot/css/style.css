@@ -162,17 +162,6 @@ background:url(../img/footer_corner.jpg) right bottom no-repeat;
 	padding-left:15px;
 }
 
-.cake-sql-log {
-	width:1024px;
-	margin:auto;
-	clear:both;
-	background: #f4f4f4;
-}
-.cake-sql-log td {
-	padding: 4px 8px;
-	text-align: left;
-}
-
 /* Tables */
 table {
 	background-color: #fff;
@@ -223,13 +212,6 @@ td.actions a {
 	display: inline;
 	margin: 0px 6px;
 }
-.cakeSqlLog table {
-	background: #f4f4f4;
-}
-.cakeSqlLog td {
-	padding: 4px 8px;
-	text-align: left;
-}
 
 /* Paging */
 div.paging {
@@ -247,17 +229,18 @@ form {
 	clear: both;
 	margin-right: 20px;
 	padding: 0;
-	width: 60%;
 }
 fieldset {
-	border: 1px solid #ccc;
+	border:none;
+	border-top: 4px double #ccc;
 	margin-top: 30px;
 	padding: 16px 20px;
 }
 fieldset legend {
-	color: #2C6877;
+	color:#333;
 	font-size: 160%;
 	font-weight: bold;
+	padding:0 5px;
 }
 form div {
 	clear: both;
@@ -315,4 +298,31 @@ input[type=submit] {
 	width: auto;
 	font-size: 110%;
 	vertical-align: bottom;
+}
+
+
+/** Headings */
+h1 {
+	
+}
+
+h2 {
+	font-size:2em;
+}
+
+h3 {
+	font-size:1.5em;
+}
+
+/** Links */
+a {
+	color:#3875D7;
+}
+
+/** Actions */
+
+div.actions ul {
+	padding:20px;
+	clear:both;
+	list-style:none;
 }

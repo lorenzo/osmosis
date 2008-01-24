@@ -25,7 +25,14 @@ class BlogsController extends BlogAppController {
 			$this->Session->setFlash('Invalid Blog.');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-		$this->set('blog', $this->Blog->read(null, $id));
+		$this->set('blog',
+			$this->Blog->find(
+				'first',
+				array(
+					'conditions' => array('Blog.id' => $id)
+				)
+			)
+		);
 	}
 
 	function add() {

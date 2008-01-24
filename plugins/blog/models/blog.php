@@ -21,7 +21,7 @@ class Blog extends BlogAppModel {
 								'foreignKey' => 'blog_id',
 								'conditions' => '',
 								'fields' => '',
-								'order' => '',
+								'order' => 'created DESC',
 								'limit' => '',
 								'offset' => '',
 								'dependent' => '',
@@ -29,6 +29,11 @@ class Blog extends BlogAppModel {
 								'finderQuery' => '',
 								'counterQuery' => ''),
 	);
-
+	
+	var $belongsTo = array(
+		'Member' => array(
+			'className' => 'Member'
+		)
+	);
 }
 ?>

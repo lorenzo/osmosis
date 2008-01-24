@@ -1,0 +1,27 @@
+pre {
+font-size:12px;
+}
+
+.cake-sql-log {
+	width:1024px;
+	margin:auto;
+	clear:both;
+	background: #f4f4f4;
+}
+.cake-sql-log td {
+	padding: 4px 8px;
+	text-align: left;
+}
+
+.cakeSqlLog table {
+	background: #f4f4f4;
+}
+.cakeSqlLog td {
+	padding: 4px 8px;
+	text-align: left;
+}
+
+.cake-debug {
+	background:#ccc;
+	padding:5px;
+}

@@ -14,13 +14,6 @@ class Quiz extends QuizAppModel {
 	var $useTable = 'quiz_quizzes';
 	
 	var $hasAndBelongsToMany = array(
-			'AssociationQuestion' => array(
-				'className' => 'quiz.AssociationQuestion',
-				'joinTable' => 'quiz_association_questions_quizzes',
-				'foreignKey' => 'quiz_id',
-				'associationForeignKey' => 'association_question_id',
-				'with' => 'QuizAssociation'
-			),
 			'ChoiceQuestion' => array(
 				'className' => 'quiz.ChoiceQuestion',
 				'joinTable' => 'quiz_choice_questions_quizzes',

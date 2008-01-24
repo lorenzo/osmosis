@@ -20,7 +20,7 @@ $row1 = array(
 	'justifycenter',
 	'justifyright',
 	'justifyfull','|',
-	'formatselect',
+	'formatselect'
 	);
 
 $row2 = array(
@@ -63,13 +63,16 @@ if($theme == 'advanced') {
 	$tiny .= 'theme_advanced_toolbar_align : "left",';
 	$tiny .= 'theme_advanced_statusbar_location : "bottom",';
 	$tiny .= 'theme_advanced_resizing : true,';
+	$tiny .= 'theme_advanced_resize_horizontal : false,';
 	$tiny .= 'theme_advanced_buttons1 : "'. implode(',',$row1) .'",';
 	$tiny .= 'theme_advanced_buttons2 : "'. implode(',',$row2) .'",';
-	$tiny .= 'theme_advanced_buttons3 : "'.implode(',',$row3) .'",';
+	$tiny .= 'theme_advanced_buttons3 : "'. implode(',',$row3) .'",';
 }
 $tiny .= 'button_tile_map : true,';
 $tiny .= 'entity_encoding : "raw",';
 $tiny .= 'verify_html : false,';
+$tiny .= 'auto_resize : false,';
+
 //$tiny .= 'content_css : "'.$html->webroot((COMPRESS_CSS ? 'c' : '') . CSS_URL . 'cake.generic.css').'",';
 
 $tiny .= '});';

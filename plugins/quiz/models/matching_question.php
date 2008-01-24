@@ -9,19 +9,6 @@ class MatchingQuestion extends AppModel {
 	);
 
 	var $useTable = 'quiz_matching_questions';
-	var $hasMany = array(
-			'MatchingChoice' => array('className' => 'quiz.MatchingChoice',
-								'foreignKey' => 'matching_question_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'limit' => '',
-								'offset' => '',
-								'dependent' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''),
-	);
 
 	var $hasAndBelongsToMany = array(
 			'Quiz' => array(
@@ -31,6 +18,20 @@ class MatchingQuestion extends AppModel {
 				'associationForeignKey' => 'quiz_id',
 				'with' => 'QuizMatching'
 			),
+			'SourceChoice' => array(
+				'className' => 'quiz.MatchingChoice',
+				'joinTable' => 'quiz_matching_choices_matching_questions',
+				'foreignKey' => 'matching_question_id',
+				'associationForeignKey' => 'source',
+				'with' => 'MatchingQuestionChoices'
+			),
+			'TargetChoice' => array(
+				'className' => 'quiz.MatchingChoice',
+				'joinTable' => 'quiz_matching_choices_matching_questions',
+				'foreignKey' => 'matching_question_id',
+				'associationForeignKey' => 'target',
+				'with' => 'MatchingQuestionChoices'
+			)
 	);
 
 }

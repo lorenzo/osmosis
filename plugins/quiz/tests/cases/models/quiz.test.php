@@ -5,7 +5,6 @@ class QuizTestCase extends CakeTestCase {
 	var $TestObject = null;
 	var $fixtures = array(
 		'quiz',
-		'association_question', 'quiz_association',
 		'choice_question', 'quiz_choice',
 		'cloze_question', 'quiz_cloze',
 		'matching_question', 'quiz_matching',
@@ -16,8 +15,6 @@ class QuizTestCase extends CakeTestCase {
 	function setUp() {
 		$this->TestObject = new Quiz();
 		$this->TestObject->useDbConfig = 'test';
-		$this->TestObject->AssociationQuestion->useDbConfig = 'test';
-		$this->TestObject->QuizAssociation->useDbConfig = 'test';
 		$this->TestObject->ChoiceQuestion->useDbConfig = 'test';
 		$this->TestObject->QuizChoice->useDbConfig = 'test';
 		$this->TestObject->ClozeQuestion->useDbConfig = 'test';
@@ -76,42 +73,6 @@ class QuizTestCase extends CakeTestCase {
 				)
 		);
 		$this->assertEqual($data, $quiz);
-	}
-	
-	function testAssociationQuestion() {
-		list($data, $last_id) = $this->_insertQuiz();
-		$this->TestObject->QuizAssociation->save(
-			array(
-				'QuizAssociation' => array(
-					'quiz_id' => $last_id,
-					'association_question_id' => 'aq_from_fixture1'
-				)
-			)
-		);
-		
-		$quiz = $this->TestObject->find(
-				'first',
-				array(
-					'conditions' => array('id' => $last_id)
-				)
-		);
-
-		$quiz_aqs = $quiz['AssociationQuestion'];
-		unset($quiz_aqs[0]['QuizAssociation']['id']);
-		$expected_aqs = array(
-		    array(
-		        'id' => 'aq_from_fixture1',
-	            'body' => 'fisico',
-	            'shuffle' => '0',
-	            'max_associations' => '0',
-	            'min_associations' => '',
-	            'QuizAssociation' => array(
-	                    'association_question_id' => 'aq_from_fixture1',
-	                    'quiz_id' => $last_id
-                )
-			)
-		);
-		$this->assertEqual($quiz_aqs, $expected_aqs);
 	}
 	
 	function testChoiceQuestion() {
@@ -197,6 +158,7 @@ class QuizTestCase extends CakeTestCase {
 					'conditions' => array('id' => $last_id)
 				)
 		);
+		
 		$quiz_matchings = $quiz['MatchingQuestion'];
 		unset($quiz_matchings[0]['QuizMatching']['id']);
 		
