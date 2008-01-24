@@ -1,3 +1,6 @@
+<?php
+	$html->css('/blog/css/blog.css', null, null, false);
+?>
 <div class="blogs view">
 	<h2><?php echo $blog['Blog']['title']; ?></h2>
 	<p><?php echo $blog['Blog']['description']; ?></p>

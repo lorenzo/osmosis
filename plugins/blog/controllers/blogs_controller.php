@@ -5,8 +5,19 @@ class BlogsController extends BlogAppController {
 	var $helpers = array('Html', 'Form' );
 
 	function index() {
-		$this->Blog->recursive = 0;
-		$this->set('blogs', $this->paginate());
+
+		$my_id = $this->Session->read('Auth.Member.id');
+		$myblog = $this->Blog->find(
+			'first',
+			array(
+				'conditions' => array('Blog.member_id' => $my_id)
+			)
+		);
+		if (!$myblog) {
+			$this->redirect(array('action' => 'add'));
+		} else {
+			$this->redirect(array('action' => 'view', $myblog['Blog']['id']));
+		}
 	}
 
 	function view($id = null) {
