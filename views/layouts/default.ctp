@@ -28,11 +28,12 @@
                 <a href="#" id="dashboard" title="Ir al inicio">Inicio</a>
                 <ul>
                     <li><?php echo $html->link(__('Quizzes', true), '/quiz/quizzes/');?></li>
-                    <li><a href="#">Cursos</a></li>
+					<li><?php echo $html->link(__('Wiki', true), '/wiki/wikis/');?></li>
+                    <!-- <li><a href="#">Cursos</a></li> 
                     <li><a href="#">Casillero</a></li>
-                    <li><a href="#">Mensajería</a></li>
+                    <li><a href="#">Mensajería</a></li>-->
                     <li><?php echo $html->link(__('Blog', true), '/blog/blogs/');?></li>
-                    <li><a href="#">Perfil</a></li>
+                    <li><?php echo $html->link(__('Profile', true), "/members/view/{$user['id']}");?></li>
 
                 </ul>
             </div>

@@ -8,7 +8,7 @@
 	<?php
 		echo $html->link(
 			$blog['Member']['full_name'],
-			'#',
+			'/members/view/' . $blog['Member']['id'],
 			array(
 				'title' => 'Ver el perfil de ' . $blog['Member']['full_name']
 			)

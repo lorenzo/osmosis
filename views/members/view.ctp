@@ -1,7 +1,5 @@
 <div class="member">
-<h2><?php  __('Member');?></h2>
-<dt>Member_id</dt>
-<?php echo $member['Member']['id']?>
+<h2><?php  __('Profile');?></h2>
 	<dl>
 		<dt class="altrow"><?php __('Full Name') ?></dt>
 		<dd class="altrow">
@@ -13,39 +11,39 @@
 			<?php echo $member['Member']['institution_id'] ?>
 			&nbsp;
 		</dd>
-		
-		<dt><?php __('Email') ?></dt>
-		<dd>
+		<dt class="altrow"><?php __('Email') ?></dt>
+		<dd class="altrow">
 			<?php echo $member['Member']['email'] ?>
 			&nbsp;
 		</dd>
-		<dt class="altrow"><?php __('Phone') ?></dt>
-		<dd class="altrow">
+		<dt><?php __('Phone') ?></dt>
+		<dd>
 			<?php echo $member['Member']['phone'] ?>
 			&nbsp;
 		</dd>
-		<dt><?php __('Role') ?></dt>
+<!--		<dt><?php __('Role') ?></dt>
 		<dd>
 			<?php echo $html->link(__($member['Role']['id'], true), array('controller'=> 'roles', 'action'=>'view', $member['Role']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php __('Country') ?></dt>
-		<dd>
+-->
+		<dt class="altrow"><?php __('Country') ?></dt>
+		<dd class="altrow">
 			<?php echo $member['Member']['country'] ?>
 			&nbsp;
 		</dd>
-		<dt class="altrow"><?php __('City') ?></dt>
-		<dd class="altrow">
+		<dt><?php __('City') ?></dt>
+		<dd>
 			<?php echo $member['Member']['city'] ?>
 			&nbsp;
 		</dd>
-		<dt><?php __('Age') ?></dt>
-		<dd>
+		<dt class="altrow"><?php __('Age') ?></dt>
+		<dd class="altrow">
 			<?php echo $member['Member']['age'] ?>
 			&nbsp;
 		</dd>
-		<dt class="altrow"><?php __('Sex') ?></dt>
-		<dd class="altrow">
+		<dt><?php __('Sex') ?></dt>
+		<dd>
 			<?php echo $member['Member']['sex'] ?>
 			&nbsp;
 		</dd>

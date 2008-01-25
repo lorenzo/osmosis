@@ -315,8 +315,17 @@ h3 {
 }
 
 /** Links */
-a {
+a:link {
 	color:#3875D7;
+}
+
+a:hover {
+	text-decoration:none;
+}
+
+a:visited {
+	color:#3875D7;
+	font-weight:normal;	
 }
 
 /** Actions */
@@ -325,4 +334,24 @@ div.actions ul {
 	padding:20px;
 	clear:both;
 	list-style:none;
+}
+
+/* Scaffold View */
+dl {
+	line-height: 2em;
+	margin: 0em 0em;
+	width: 50%;
+}
+dl .altrow {
+	background: #dfdfdf;
+}
+dt {
+	font-weight: bold;
+	padding-left: 4px;
+	vertical-align: top;
+}
+dd {
+	margin-left: 10em;
+	margin-top: -2em;
+	vertical-align: top;
 }
