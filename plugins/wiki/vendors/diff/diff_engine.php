@@ -887,23 +887,26 @@ define('NBSP', '&#160;');			// iso-8859-x non-breaking space.
  * @addtogroup DifferenceEngine
  */
 class _HWLDF_WordAccumulator {
-	function _HWLDF_WordAccumulator () {
+	function _HWLDF_WordAccumulator ($escape=true) {
 		$this->_lines = array();
 		$this->_line = '';
 		$this->_group = '';
 		$this->_tag = '';
+		$this->escape = $escape;
 	}
 
 	function _flushGroup ($new_tag) {
 		if ($this->_group !== '') {
-			if ($this->_tag == 'ins')
-				$this->_line .= '<ins class="diffchange">' .
-					htmlspecialchars ( $this->_group ) . '</ins>';
-			elseif ($this->_tag == 'del')
-				$this->_line .= '<del class="diffchange">' .
-					htmlspecialchars ( $this->_group ) . '</del>';
-			else
-				$this->_line .= htmlspecialchars ( $this->_group );
+			if ($this->_tag == 'ins') {
+					$l = 	($this->escape) ? htmlspecialchars ( $this->_group ) : $this->_group;
+					$this->_line .= '<ins class="diffchange">' . $l . '</ins>';
+			} elseif ($this->_tag == 'del') {
+				$l = 	($this->escape) ? htmlspecialchars ( $this->_group ) : $this->_group;
+				$this->_line .= '<del class="diffchange">' . $l .  '</del>';
+			} else {
+				$this->_line .= ($this->escape) ? htmlspecialchars ( $this->_group ) : $this->_group;
+			}
+				
 		}
 		$this->_group = '';
 		$this->_tag = $new_tag;
@@ -951,7 +954,8 @@ class WordLevelDiff extends MappedDiff
 {
 	const MAX_LINE_LENGTH = 10000;
 
-	function WordLevelDiff ($orig_lines, $closing_lines) {
+	function WordLevelDiff ($orig_lines, $closing_lines, $escape = true) {
+		$this->escape = $escape;
 
 		list ($orig_words, $orig_stripped) = $this->_split($orig_lines);
 		list ($closing_words, $closing_stripped) = $this->_split($closing_lines);
@@ -991,7 +995,7 @@ class WordLevelDiff extends MappedDiff
 	}
 
 	function orig () {
-		$orig = new _HWLDF_WordAccumulator;
+		$orig = new _HWLDF_WordAccumulator($this->escape);
 
 		foreach ($this->edits as $edit) {
 			if ($edit->type == 'copy')
@@ -1004,7 +1008,7 @@ class WordLevelDiff extends MappedDiff
 	}
 
 	function closing () {
-		$closing = new _HWLDF_WordAccumulator;
+		$closing = new _HWLDF_WordAccumulator($this->escape);
 
 		foreach ($this->edits as $edit) {
 			if ($edit->type == 'copy')
@@ -1115,4 +1119,66 @@ class TableDiffFormatter extends DiffFormatter
 		}
 	}
 }
+
+/**
+ *	Osmosis Html style diff formatter.
+ * @todo document
+ * @private
+ * @addtogroup DifferenceEngine
+ */
+class HtmlDiffFormatter extends DiffFormatter
+{
+	function HtmlDiffFormatter() {
+		$this->leading_context_lines = 10000000000;
+		$this->trailing_context_lines = 10000000000;
+	}
+
+	function _block_header( $xbeg, $xlen, $ybeg, $ylen ) {
+		return '';
+	}
+
+	function _start_block( $header ) {
+		echo $header;
+	}
+
+	function _end_block() {
+	}
+
+	function _lines( $lines, $prefix=' ', $color='white' ) {
+	}
+
+	function _added( $lines ) {
+		foreach ($lines as $line) {
+			echo '<ins class="diff-addedline">' . $line . "</ins>\n";
+		}
+	}
+
+	function _deleted($lines) {
+		foreach ($lines as $line) {
+			echo '<del class="diff-deletedline">' . $line . "</del>\n";
+		}
+	}
+
+	function _context( $lines ) {
+		foreach ($lines as $line) {
+			echo $line . "\n";
+		}
+	}
+
+	function _changed( $orig, $closing ) {
+
+		$diff = new WordLevelDiff( $orig, $closing,false);
+		$del = $diff->orig();
+		$add = $diff->closing();
+
+		while ( $line = array_shift( $del ) ) {
+			$aline = array_shift( $add );
+			echo '<del class="diff-deletedline">' . $line . "</del>\n" . '<ins class="diff-addedline">'. $aline .'</ins>';
+		}
+		foreach ($add as $line) {	# If any leftovers
+			echo '<del class="diff-deletedline">' . $line . "</del>";
+		}
+	}
+}
+
 ?>

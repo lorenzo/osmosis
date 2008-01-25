@@ -8,7 +8,7 @@ class DiffComponent extends Object {
 	
 	function __get($param) {
 		if($param == 'formater') {
-			$this->formater = new TableDiffFormatter();
+			$this->formater = new HtmlDiffFormatter();
 			return $this->formater;
 		}
 	}
@@ -22,6 +22,8 @@ class DiffComponent extends Object {
 	
 	
 	function diff($old,$new) {
+		//$old = strip_tags($old);
+		//$new = strip_tags($new);
 		$old = str_replace( "\r\n", "\n", $old );
 		$new = str_replace( "\r\n", "\n", $new );
 		$old = explode( "\n",$old);
@@ -30,7 +32,7 @@ class DiffComponent extends Object {
 	}
 	
 	function format($diff) {
-		$formatter = new TableDiffFormatter();
+		$formatter = new HtmlDiffFormatter();
 		return $this->formater->format( $diff );
 	}
 	

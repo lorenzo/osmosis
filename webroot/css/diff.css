@@ -72,3 +72,11 @@ table.diff td div {
 	   table: */
 	/* overflow: visible; */
 }
+
+.diff-addedline > * {
+	background: #cfc;
+}
+
+.diff-deletedline > *{
+	background: #ffaabb;
+}
