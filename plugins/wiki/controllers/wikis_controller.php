@@ -27,7 +27,7 @@ class WikisController extends WikiAppController {
 				$this->Session->setFlash('The Wiki could not be saved. Please, try again.');
 			}
 		}
-		$courses = $this->Wiki->Course->generateList();
+		$courses = @$this->Wiki->Course->generateList();
 		$this->set(compact('courses'));
 	}
 
@@ -47,7 +47,7 @@ class WikisController extends WikiAppController {
 		if (empty($this->data)) {
 			$this->data = $this->Wiki->read(null, $id);
 		}
-		$courses = $this->Wiki->Course->generateList();
+		$courses = @$this->Wiki->Course->generateList();
 		$this->set(compact('courses'));
 	}
 

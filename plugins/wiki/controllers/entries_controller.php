@@ -49,7 +49,7 @@ class EntriesController extends WikiAppController {
 			$this->data['Entry']['content'] = $this->HtmlPurifier->purify($this->data['Entry']['content']);
 			if ($this->Entry->save($this->data)) {
 				$this->Session->setFlash('The Entry has been saved');
-				$this->redirect(array('action'=>'index'), null, true);
+				$this->redirect(array('action'=>'view', $this->data['Entry']['id']));
 			} else {
 				$this->Session->setFlash(__('The Entry could not be saved. Please, try again.',true));
 			}

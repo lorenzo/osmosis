@@ -55,6 +55,9 @@ body {
 	height:300px
 }
 
+#main li {
+	margin-bottom:10px;
+}
 #wrap {
 
 	min-width:760px;
@@ -363,4 +366,12 @@ dd {
 	border:#3F0004 1px solid;
 	text-align:center;
 	background:#FFCFD1;
+}
+
+h1 .note, h3 .note {
+	font-size:0.7em;
+}
+.note {
+	color:#666;
+	font-weight:normal;
 }

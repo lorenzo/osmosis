@@ -1,58 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 2.10.3deb1
+-- version 2.11.4-rc1
 -- http://www.phpmyadmin.net
--- 
+--
 -- Host: localhost
--- Generation Time: Nov 25, 2007 at 07:10 PM
+-- Generation Time: Jan 25, 2008 at 12:10 PM
 -- Server version: 5.0.45
--- PHP Version: 5.2.3-1ubuntu6
+-- PHP Version: 5.2.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
--- 
--- Database: `quizzes`
--- 
-
--- --------------------------------------------------------
-
 --
--- Table structure for table `quiz_association_choices`
+-- Database: `osmosis`
 --
-
-CREATE TABLE IF NOT EXISTS `quiz_association_choices` (
-  `id` char(36) collate utf8_unicode_ci NOT NULL,
-  `association_question_id` char(36) collate utf8_unicode_ci NOT NULL COMMENT 'Related Choice Question',
-  `text` text collate utf8_unicode_ci NOT NULL COMMENT 'Text for this choce',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Association Questions'' choices';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `quiz_association_questions`
---
-
-CREATE TABLE IF NOT EXISTS `quiz_association_questions` (
-  `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
-  `body` text NOT NULL COMMENT 'The questions wording',
-  `shuffle` tinyint(1) NOT NULL COMMENT 'Set the ordr of the choices randomly',
-  `max_associations` int(11) NOT NULL COMMENT 'Maximum number of choices that the candidate is allowed to select. If maxChoices is 0 then there is no restriction. If maxChoices is greater than 1 (or 0) then the interaction must be bound to a response with multiple cardinality',
-  `min_associations` int(11) default NULL COMMENT 'Minimum number of choices that the candidate is required to select to form a valid response. If minChoices is 0 then the candidate is not required to select any choices. minChoices must be less than or equal to the limit imposed by maxChoices.',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='The candidate''s task is to select one or more of the choices';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `quiz_association_questions_quizzes`
---
-
-CREATE TABLE IF NOT EXISTS `quiz_association_questions_quizzes` (
-  `id` int(10) NOT NULL auto_increment,
-  `association_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
-  `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Relates a Association Question with a Quiz (many-to-many)' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -129,11 +88,23 @@ CREATE TABLE IF NOT EXISTS `quiz_cloze_questions_quizzes` (
 
 CREATE TABLE IF NOT EXISTS `quiz_matching_choices` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
-  `matching_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL COMMENT 'Related Choice Question',
   `text` text NOT NULL COMMENT 'Text for this choce',
-  `source` blob NOT NULL COMMENT 'Wether this choice belongs o the source set or the target set',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Matching Questions'' choices';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz_matching_choices_matching_questions`
+--
+
+CREATE TABLE IF NOT EXISTS `quiz_matching_choices_matching_questions` (
+  `id` char(36) NOT NULL,
+  `matching_question_id` char(36) NOT NULL,
+  `source` char(36) NOT NULL COMMENT 'Source Choice (from quiz_matching_choices)',
+  `target` char(36) NOT NULL COMMENT 'Target Choice (from quiz_matching_choices)',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 

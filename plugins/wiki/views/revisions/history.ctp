@@ -9,13 +9,17 @@ foreach ($revisions as $revision):
 		$class = ' class="altrow"';
 	}
 ?>
-	<li<?php echo $class ?>> 
-	<?php echo $html->link(
-		$time->format('H:i, d M Y',$revision['Revision']['created']),
-		array('action'=>'view',$revision['Revision']['id'])) ?> 
-		<?php echo $revision['Member']['username']?> 
-		(<?php echo $html->link(__('restore',true),array('controller'=>'entries','action'=>'restore',$entry['Entry']['id'],$revision['Revision']['revision']))?>) 
-		(<?php echo $html->link(__('current',true),array('action'=>'diff',$entry['Entry']['id'],$revision['Revision']['id']))?>)
+	<li<?php echo $class ?>>
+	<span class="note"><?php echo __('Revision', true) . ' ' . $revision['Revision']['revision']?> &mdash; </span>
+	<?php
+		echo $html->link(
+			$time->format('H:i, d M Y',$revision['Revision']['created']),
+			array('action'=>'view',$revision['Revision']['id'])
+		);
+	?> &mdash; 
+	<?php echo $revision['Member']['username']?> 
+	(<?php echo $html->link(__('restore',true),array('controller'=>'entries','action'=>'restore',$entry['Entry']['id'],$revision['Revision']['revision']))?>) 
+	(<?php echo $html->link(__('compare',true),array('action'=>'diff',$entry['Entry']['id'],$revision['Revision']['id']))?>)
 	</li>
 <?php endforeach; ?>
 </ul>

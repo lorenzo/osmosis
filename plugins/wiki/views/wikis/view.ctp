@@ -1,29 +1,6 @@
-<div class="wikis view">
-<h2><?php  __('Wiki');?></h2>
-	<dl>
-		<dt class="altrow"><?php __('Id'); ?></dt>
-		<dd class="altrow">
-			<?php echo $wiki['Wiki']['id']; ?>
-			&nbsp;
-		</dd>
-		<dt><?php __('Course'); ?></dt>
-		<dd>
-			<?php echo $html->link($wiki['Course']['name'], array('controller'=> 'courses', 'action'=>'view', $wiki['Course']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt class="altrow"><?php __('Name'); ?></dt>
-		<dd class="altrow">
-			<?php echo $wiki['Wiki']['name']; ?>
-			&nbsp;
-		</dd>
-		<dt><?php __('Description'); ?></dt>
-		<dd>
-			<?php echo $wiki['Wiki']['description']; ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="actions">
+<h2><?php echo $wiki['Wiki']['name']; ?></h2>
+<p><?php echo $wiki['Wiki']['description']; ?></p>
+<!--<div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('Edit Wiki', true), array('action'=>'edit', $wiki['Wiki']['id'])); ?> </li>
 		<li><?php echo $html->link(__('Delete Wiki', true), array('action'=>'delete', $wiki['Wiki']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $wiki['Wiki']['id'])); ?> </li>
@@ -34,21 +11,11 @@
 		<li><?php echo $html->link(__('List Entries', true), array('controller'=> 'entries', 'action'=>'index')); ?> </li>
 		<li><?php echo $html->link(__('New Entry', true), array('controller'=> 'entries', 'action'=>'add')); ?> </li>
 	</ul>
-</div>
+</div>-->
 <div class="related">
 	<h3><?php __('Related Entries');?></h3>
 	<?php if (!empty($wiki['Entry'])):?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php __('Id'); ?></th>
-		<th><?php __('Wiki Id'); ?></th>
-		<th><?php __('Member Id'); ?></th>
-		<th><?php __('Title'); ?></th>
-		<th><?php __('Content'); ?></th>
-		<th><?php __('Revision'); ?></th>
-		<th><?php __('Created'); ?></th>
-		<th class="actions"><?php __('Actions');?></th>
-	</tr>
+	<ul>
 	<?php
 		$i = 0;
 		foreach ($wiki['Entry'] as $entry):
@@ -57,27 +24,36 @@
 				$class = ' class="altrow"';
 			}
 		?>
-		<tr>
-			<td><?php echo $entry['id'];?></td>
-			<td><?php echo $entry['wiki_id'];?></td>
-			<td><?php echo $entry['member_id'];?></td>
-			<td><?php echo $entry['title'];?></td>
-			<td><?php echo $entry['content'];?></td>
-			<td><?php echo $entry['revision'];?></td>
-			<td><?php echo $entry['created'];?></td>
-			<td class="actions">
-				<?php echo $html->link(__('View', true), array('controller'=> 'entries', 'action'=>'view', $entry['id'])); ?>
+		<li>
+			<h3>
+				
+				<?php echo $html->link($entry['title'] , array('controller'=> 'entries', 'action'=>'view', $entry['id'])); ?>
+				<span class="note">
+					&mdash; <?php __('Revision')?> <?php echo $entry['revision'];?>
+						(<?php echo $html->link(__('history', true), array('controller' => 'revisions', 'action' => 'history', $entry['id'])); ?>)
+					&mdash; <?php echo $time->format('d/m/Y', $entry['created']);?></span>
+			</h3>
+			<p>
 				<?php echo $html->link(__('Edit', true), array('controller'=> 'entries', 'action'=>'edit', $entry['id'])); ?>
 				<?php echo $html->link(__('Delete', true), array('controller'=> 'entries', 'action'=>'delete', $entry['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $entry['id'])); ?>
-			</td>
-		</tr>
+			</p>
+		</li>
 	<?php endforeach; ?>
+	</ul>
+	<table cellpadding = "0" cellspacing = "0">
+	<tr>
+		<th><?php __('Title'); ?></th>
+		<th><?php __('Revision'); ?></th>
+		<th><?php __('Created'); ?></th>
+		<th class="actions"><?php __('Actions');?></th>
+	</tr>
+	
 	</table>
 <?php endif; ?>
 
 	<div class="actions">
 		<ul>
-			<li><?php echo $html->link(__('New Entry', true), array('controller'=> 'entries', 'action'=>'add'));?> </li>
+			<li><?php echo $html->link(__('New Entry', true), array('controller'=> 'entries', 'action'=>'add', $wiki['Wiki']['id']));?> </li>
 		</ul>
 	</div>
 </div>
