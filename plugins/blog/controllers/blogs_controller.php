@@ -5,25 +5,19 @@ class BlogsController extends BlogAppController {
 	var $helpers = array('Html', 'Form' );
 
 	function index() {
-
-		$my_id = $this->Session->read('Auth.Member.id');
-		$myblog = $this->Blog->find(
-			'first',
-			array(
-				'conditions' => array('Blog.member_id' => $my_id)
-			)
-		);
+		$myblog = $this->Session->read('Auth.Member.Blog.id');
 		if (!$myblog) {
 			$this->redirect(array('action' => 'add'));
 		} else {
-			$this->redirect(array('action' => 'view', $myblog['Blog']['id']));
+			$this->redirect(array('action' => 'view', $myblog));
 		}
 	}
 
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash('Invalid Blog.');
-			$this->redirect(array('action'=>'index'), null, true);
+			$my_blog = $this->Session->read('Auth.Member.Blog.id');
+			$this->redirect(array('action'=>'view', $my_blog));
 		}
 		$this->set('blog',
 			$this->Blog->find(
@@ -51,7 +45,7 @@ class BlogsController extends BlogAppController {
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash('Invalid Blog');
-			$this->redirect(array('action'=>'index'), null, true);
+			$this->redirect(array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Blog->save($this->data)) {
@@ -75,7 +69,19 @@ class BlogsController extends BlogAppController {
 			$this->Session->setFlash('Blog #'.$id.' deleted');
 			$this->redirect(array('action'=>'index'), null, true);
 		}
+		
 	}
-
+		
+		function beforeFilter(){
+			parent::beforeFilter();
+			$my_id = $this->Session->read('Auth.Member.id');
+			if(!$this->Session->check('Auth.Member.Blog.id')){
+				$myblog = $this->Blog->field(
+					'Blog.id',
+					array('Blog.member_id' => $my_id)
+				);
+			$this->Session->write('Auth.Member.Blog.id', $myblog);
+			} 
+		}
 }
 ?>

@@ -5,16 +5,10 @@ class PostsController extends BlogAppController {
 	var $helpers = array('Html', 'Form' );
 	var $components = array('HtmlPurifier');
 
-	function index($blog_id) {
-		$this->Post->recursive = 0;
-		$this->set('posts', $this->paginate(array('blog_id'=>$blog_id)));
-		$this->set('blog_id',$blog_id);
-	}
-
 	function add($blog_id = null) {
 		if (!$blog_id && empty($this->data)) {		
 			$this->Session->setFlash('Invalid Blog');
-			$this->redirect(array('action'=>'index'), null, true);
+			$this->redirect(array('action'=>'index', 'controller' => 'members', $this->Session->read('Member.id'), 'plugin'=> null));
 		}
 		if (!empty($this->data)) {
 			$this->Post->create();
@@ -37,12 +31,13 @@ class PostsController extends BlogAppController {
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash('Invalid Post');
-			$this->redirect(array('action'=>'index'), null, true);
+			//$this->redirect(array('action'=>'index'), null, true);
+			$this->redirect(array('action'=>'view', 'controller' => 'blogs', $this->data['Post']['blog_id']));
 		}
 		if (!empty($this->data)) {
 			if ($this->Post->save($this->data)) {
 				$this->Session->setFlash('The Post has been saved');
-				$this->redirect(array('action'=>'index'), null, true);
+				$this->redirect(array('action'=>'view', 'controller' => 'blogs', $this->data['Post']['blog_id']));
 			} else {
 				$this->Session->setFlash('The Post could not be saved. Please, try again.');
 			}
@@ -55,11 +50,11 @@ class PostsController extends BlogAppController {
 	function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash('Invalid id for Post');
-			$this->redirect(array('action'=>'index'), null, true);
+			$this->redirect(array('action'=>'view', 'controller' => 'blogs', $this->data['Post']['blog_id']), null, true);
 		}
 		if ($this->Post->del($id)) {
 			$this->Session->setFlash('Post #'.$id.' deleted');
-			$this->redirect(array('action'=>'index'), null, true);
+			$this->redirect(array('action'=>'view', 'controller' => 'blogs', $this->data['Post']['blog_id']), null, true);
 		}
 	}
 	
