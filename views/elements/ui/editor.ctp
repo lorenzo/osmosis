@@ -61,6 +61,7 @@ $tiny .= 'plugins : "'. implode(',',$plugins) .'",';
 if($theme == 'advanced') {
 	$tiny .= 'theme_advanced_toolbar_location : "top",';
 	$tiny .= 'theme_advanced_toolbar_align : "left",';
+	$tiny .= 'theme_advanced_source_editor_height : "200",';
 	$tiny .= 'theme_advanced_statusbar_location : "bottom",';
 	$tiny .= 'theme_advanced_resizing : true,';
 	$tiny .= 'theme_advanced_resize_horizontal : false,';

@@ -355,3 +355,12 @@ dd {
 	margin-top: -2em;
 	vertical-align: top;
 }
+
+#flashMessage {
+	color:#3F0004;
+	margin-bottom:10px;
+	padding:3px 0 0 0;
+	border:#3F0004 1px solid;
+	text-align:center;
+	background:#FFCFD1;
+}
