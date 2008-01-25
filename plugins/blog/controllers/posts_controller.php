@@ -59,8 +59,8 @@ class PostsController extends BlogAppController {
 	}
 	
 	function view($slug) {		
-        $this->set('post', $this->Post->findBySlug($slug));
-    } 
+		$this->set('post', $this->Post->findBySlug($slug));
+	} 
 
 }
 ?>

@@ -72,16 +72,17 @@ class BlogsController extends BlogAppController {
 		
 	}
 		
-		function beforeFilter(){
-			parent::beforeFilter();
-			$my_id = $this->Session->read('Auth.Member.id');
-			if(!$this->Session->check('Auth.Member.Blog.id')){
-				$myblog = $this->Blog->field(
-					'Blog.id',
-					array('Blog.member_id' => $my_id)
-				);
-			$this->Session->write('Auth.Member.Blog.id', $myblog);
-			} 
-		}
+	function beforeFilter(){
+		parent::beforeFilter();
+		$my_id = $this->Session->read('Auth.Member.id');
+		if (!$this->Session->check('Auth.Member.Blog.id')) {
+			$myblog = $this->Blog->field(
+				'Blog.id',
+				array('Blog.member_id' => $my_id)
+			);
+			if ($myblog!==false)
+				$this->Session->write('Auth.Member.Blog.id', $myblog);
+		} 
+	}
 }
 ?>

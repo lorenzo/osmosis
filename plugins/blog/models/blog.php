@@ -4,9 +4,6 @@ class Blog extends BlogAppModel {
 	var $name = 'Blog';
 	var $useTable = 'blog_blogs';
 	var $validate = array(
-		'id'=> array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
-		),
 		'title'=> array(
 			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
 		),
