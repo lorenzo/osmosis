@@ -1,6 +1,5 @@
 <IfModule mod_rewrite.c>
 	RewriteEngine on
-	RewriteRule ^$ /scorm/scorms/ [R=301,L]
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]

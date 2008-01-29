@@ -29,11 +29,16 @@ class HookableBehavior extends ModelBehavior {
 		$plugins = Configure::listObjects('plugin');
 		foreach ($plugins as $key => $plug) {
 			$className = $plug . $model->name . 'Hook';
-			if(App::import('Component',$plug . '.' . $className)) {
+			if(ClassRegistry::isKeySet($className.'Component') || App::import('Component',$plug . '.' . $className)) {
 				$className = $className. 'Component';
-				$hookClass =& new $className;
+				if(ClassRegistry::isKeySet($className)) {
+					$hookClass =& ClassRegistry::getObject($className);
+				}else {
+					$hookClass =& new $className;
+					ClassRegistry::addObject($className,&$hookClass);
+				}
 				if(method_exists($hookClass,$hookName)) {
-					$hooks[] = &$hookClass;
+					$hooks[] =& $hookClass;
 				}
 			}
 		}
