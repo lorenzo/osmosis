@@ -12,7 +12,6 @@ class QuizzesController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		$this->question_types = array(
-			__('Association Question', true),
 			__('Choice Question', true),
 			__('Cloze Question', true),
 			__('Matching Question', true),
