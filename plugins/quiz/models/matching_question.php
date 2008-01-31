@@ -1,5 +1,5 @@
 <?php
-class MatchingQuestion extends AppModel {
+class MatchingQuestion extends QuizAppModel {
 
 	var $name = 'MatchingQuestion';
 	var $validate = array(

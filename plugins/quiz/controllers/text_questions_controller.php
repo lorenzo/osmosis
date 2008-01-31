@@ -1,5 +1,5 @@
 <?php
-class TextQuestionsController extends AppController {
+class TextQuestionsController extends QuizAppController {
 
 	var $name = 'TextQuestions';
 	var $helpers = array('Html', 'Form' );
@@ -17,10 +17,13 @@ class TextQuestionsController extends AppController {
 		$this->set('textQuestion', $this->TextQuestion->read(null, $id));
 	}
 
-	function add() {
+	function add($quiz_id=null) {
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			$this->TextQuestion->create();
+			if($quiz_id) {
+				$this->data['Quiz']['id'] = $quiz_id;
+			}
 			if ($this->TextQuestion->save($this->data)) {
 				$this->Session->setFlash('The Text Question has been saved');
 				$this->redirect(array('action'=>'index'), null, true);
@@ -28,8 +31,12 @@ class TextQuestionsController extends AppController {
 				$this->Session->setFlash('The Text Question could not be saved. Please, try again.');
 			}
 		}
-		$quizzes = $this->TextQuestion->Quiz->generateList();
-		$this->set(compact('quizzes'));
+		$formats = array(
+			'plain' => __('No format',true),
+			'pre'	=> __('Preserve original format',true),
+			'html'	=> __('Enriched text',true)
+			);
+		$this->set(compact('formats','quiz_id'));
 	}
 
 	function edit($id = null) {

@@ -1,5 +1,5 @@
 <?php
-class TextQuestion extends AppModel {
+class TextQuestion extends QuizAppModel {
 
 	var $name = 'TextQuestion';
 	var $validate = array(
@@ -18,6 +18,5 @@ class TextQuestion extends AppModel {
 				'with' => 'QuizText'
 			),
 	);
-
 }
 ?>

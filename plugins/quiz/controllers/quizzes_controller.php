@@ -1,5 +1,5 @@
 <?php
-class QuizzesController extends AppController {
+class QuizzesController extends QuizAppController {
 
 	var $name = 'Quizzes';
 	var $helpers = array('Html', 'Form' );
@@ -111,6 +111,5 @@ class QuizzesController extends AppController {
 			$this->data = $this->Quiz->read(null, $id);
 		}
 	}
-
 }
 ?>
