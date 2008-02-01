@@ -1,23 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 2.10.3deb1
+-- version 2.11.4-rc1
 -- http://www.phpmyadmin.net
--- 
+--
 -- Host: localhost
--- Generation Time: Dec 11, 2007 at 05:37 PM
+-- Generation Time: Feb 01, 2008 at 03:39 PM
 -- Server version: 5.0.45
--- PHP Version: 5.2.3-1ubuntu6
+-- PHP Version: 5.2.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
--- 
+--
 -- Database: `osmosis`
--- 
+--
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `blog_blogs`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `blog_blogs` (
   `id` int(11) NOT NULL auto_increment,
@@ -25,13 +25,13 @@ CREATE TABLE IF NOT EXISTS `blog_blogs` (
   `description` text NOT NULL,
   `member_id` varchar(100) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `blog_comments`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `blog_comments` (
   `id` int(11) NOT NULL auto_increment,
@@ -39,13 +39,13 @@ CREATE TABLE IF NOT EXISTS `blog_comments` (
   `post_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `blog_posts`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `blog_posts` (
   `id` int(10) unsigned NOT NULL auto_increment,
@@ -57,4 +57,4 @@ CREATE TABLE IF NOT EXISTS `blog_posts` (
   `slug` text NOT NULL,
   `member_id` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;

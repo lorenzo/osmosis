@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 25, 2008 at 12:10 PM
+-- Generation Time: Feb 01, 2008 at 03:40 PM
 -- Server version: 5.0.45
 -- PHP Version: 5.2.4
 
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `quiz_cloze_questions_quizzes` (
   `cloze_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Relates a Cloze Question with a Quiz (many-to-many)' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Relates a Cloze Question with a Quiz (many-to-many)';
 
 -- --------------------------------------------------------
 

@@ -1,23 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 2.10.3deb1
+-- version 2.11.4-rc1
 -- http://www.phpmyadmin.net
--- 
+--
 -- Host: localhost
--- Generation Time: Nov 06, 2007 at 02:33 PM
+-- Generation Time: Feb 01, 2008 at 03:38 PM
 -- Server version: 5.0.45
--- PHP Version: 5.2.3-1ubuntu6
+-- PHP Version: 5.2.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
--- 
+--
 -- Database: `osmosis`
--- 
+--
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `acos`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `acos` (
   `id` int(11) NOT NULL auto_increment,
@@ -28,13 +28,13 @@ CREATE TABLE IF NOT EXISTS `acos` (
   `lft` int(11) default NULL,
   `rght` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `aros`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `aros` (
   `id` int(11) NOT NULL auto_increment,
@@ -45,13 +45,13 @@ CREATE TABLE IF NOT EXISTS `aros` (
   `lft` int(11) default NULL,
   `rght` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `aros_acos`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `aros_acos` (
   `id` int(11) NOT NULL auto_increment,
@@ -62,14 +62,13 @@ CREATE TABLE IF NOT EXISTS `aros_acos` (
   `_update` int(11) NOT NULL default '0',
   `_delete` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `courses`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `courses` (
   `id` int(11) unsigned NOT NULL auto_increment,
@@ -80,27 +79,26 @@ CREATE TABLE IF NOT EXISTS `courses` (
   `description` text collate utf8_unicode_ci NOT NULL,
   `created` date NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `departments`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `departments` (
   `id` int(4) unsigned NOT NULL auto_increment,
   `name` varchar(150) collate utf8_unicode_ci NOT NULL,
   `description` text collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `members`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int(11) unsigned NOT NULL auto_increment,
@@ -116,20 +114,30 @@ CREATE TABLE IF NOT EXISTS `members` (
   `username` varchar(15) collate utf8_unicode_ci NOT NULL,
   `password` varchar(50) collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a registered user' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a registered user';
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `plugins`
--- 
+--
 
 CREATE TABLE IF NOT EXISTS `plugins` (
   `id` smallint(4) unsigned NOT NULL auto_increment,
   `name` varchar(50) collate utf8_unicode_ci NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Holds installed plugin names and active status' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Holds installed plugin names and active status';
 
 -- --------------------------------------------------------
 
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `parent_id` int(11) default NULL,
+  `role` varchar(10) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents groups of users with permissions';
