@@ -11,7 +11,7 @@ class WikisController extends WikiAppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Wiki.');
+			$this->Session->setFlash(__('Invalid Wiki.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('wiki', $this->Wiki->read(null, $id));
@@ -24,7 +24,7 @@ class WikisController extends WikiAppController {
 				$this->Session->setFlash(__('The Wiki has been saved', true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Wiki could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Wiki could not be saved. Please, try again.',true));
 			}
 		}
 		$courses = @$this->Wiki->Course->generateList();
@@ -33,15 +33,15 @@ class WikisController extends WikiAppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Wiki');
+			$this->Session->setFlash(__('Invalid Wiki',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			if ($this->Wiki->save($this->data)) {
-				$this->Session->setFlash('The Wiki has been saved');
+				$this->Session->setFlash(__('The Wiki has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Wiki could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Wiki could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -53,11 +53,11 @@ class WikisController extends WikiAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Wiki');
+			$this->Session->setFlash(__('Invalid id for Wiki',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Wiki->del($id)) {
-			$this->Session->setFlash('Wiki #'.$id.' deleted');
+			$this->Session->setFlash(__('Wiki #'.$id.' deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}
