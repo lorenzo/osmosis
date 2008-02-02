@@ -11,7 +11,7 @@ class CommentsController extends BlogAppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Comment.');
+			$this->Session->setFlash(__('Invalid Comment.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('comment', $this->Comment->read(null, $id));
@@ -19,18 +19,18 @@ class CommentsController extends BlogAppController {
 
 	function add($post_id = null) {
 		if (!$post_id && empty($this->data)) {		
-			$this->Session->setFlash('Invalid Post');
+			$this->Session->setFlash(__('Invalid Post',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->Comment->create();
 			$this->data['Comment']['member_id'] = $this->Auth->user('id');
 			if ($this->Comment->save($this->data)) {
-				$this->Session->setFlash('The Comment has been saved');
+				$this->Session->setFlash(__('The Comment has been saved',true));
 				$slug = $this->Comment->Post->field('slug',array('id'=>$this->data['Comment']['post_id']));
 				$this->redirect(array('controller'=> 'posts','action'=>'view', $slug), null, true);
 			} else {
-				$this->Session->setFlash('The Comment could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Comment could not be saved. Please, try again.',true));
 			}
 		}
 		$posts = $this->Comment->Post->generateList();
@@ -39,15 +39,15 @@ class CommentsController extends BlogAppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Comment');
+			$this->Session->setFlash(__('Invalid Comment',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			if ($this->Comment->save($this->data)) {
-				$this->Session->setFlash('The Comment has been saved');
+				$this->Session->setFlash(__('The Comment has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Comment could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Comment could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -59,11 +59,11 @@ class CommentsController extends BlogAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Comment');
+			$this->Session->setFlash(__('Invalid id for Comment',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Comment->del($id)) {
-			$this->Session->setFlash('Comment #'.$id.' deleted');
+			$this->Session->setFlash(__('Comment #'.$id.' deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}
