@@ -22,3 +22,6 @@
 <?php endif; ?>
 </div>
 <?php echo $this->renderElement('comments/add_comment', array('post_id'=> $post['Post']['id']));?>
+<ul>
+		<li><?php echo $html->link(__('List Post', true), array('controller'=> 'blogs', 'action'=>'view', $post['Post']['blog_id'])); ?></li>
+		</ul>
