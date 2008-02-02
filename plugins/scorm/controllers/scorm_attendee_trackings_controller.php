@@ -10,7 +10,7 @@ class ScormAttendeeTrackingsController extends ScormAppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Scorm Attendee Tracking.');
+			$this->Session->setFlash(__('Invalid Scorm Attendee Tracking.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('scormAttendeeTracking', $this->ScormAttendeeTracking->read(null, $id));
@@ -21,26 +21,26 @@ class ScormAttendeeTrackingsController extends ScormAppController {
 			$this->cleanUpFields();
 			$this->ScormAttendeeTracking->create();
 			if ($this->ScormAttendeeTracking->save($this->data)) {
-				$this->Session->setFlash('The Scorm Attendee Tracking has been saved');
+				$this->Session->setFlash(__('The Scorm Attendee Tracking has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Scorm Attendee Tracking could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Scorm Attendee Tracking could not be saved. Please, try again.',true));
 			}
 		}
 	}
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Scorm Attendee Tracking');
+			$this->Session->setFlash(__('Invalid Scorm Attendee Tracking',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->ScormAttendeeTracking->save($this->data)) {
-				$this->Session->setFlash('The Scorm Attendee Tracking has been saved');
+				$this->Session->setFlash(__('The Scorm Attendee Tracking has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Scorm Attendee Tracking could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Scorm Attendee Tracking could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -50,11 +50,11 @@ class ScormAttendeeTrackingsController extends ScormAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Scorm Attendee Tracking');
+			$this->Session->setFlash(__('Invalid id for Scorm Attendee Tracking',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->ScormAttendeeTracking->del($id)) {
-			$this->Session->setFlash('Scorm Attendee Tracking #'.$id.' deleted');
+			$this->Session->setFlash(__('Scorm Attendee Tracking #'.$id.' deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

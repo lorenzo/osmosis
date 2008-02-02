@@ -57,26 +57,26 @@ class ScosController extends ScormAppController {
 			$this->cleanUpFields();
 			$this->Sco->create();
 			if ($this->Sco->save($this->data)) {
-				$this->Session->setFlash('The Sco has been saved');
+				$this->Session->setFlash(__('The Sco has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Sco could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Sco could not be saved. Please, try again.',true));
 			}
 		}
 	}
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Sco');
+			$this->Session->setFlash(__('Invalid Sco',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->Sco->save($this->data)) {
-				$this->Session->setFlash('The Sco saved');
+				$this->Session->setFlash(__('The Sco saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Sco could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Sco could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -86,11 +86,11 @@ class ScosController extends ScormAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Sco');
+			$this->Session->setFlash(__('Invalid id for Sco',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Sco->del($id)) {
-			$this->Session->setFlash('Sco #'.$id.' deleted');
+			$this->Session->setFlash(__('Sco #'.$id.' deleted'),true);
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}
