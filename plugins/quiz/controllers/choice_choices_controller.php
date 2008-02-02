@@ -11,7 +11,7 @@ class ChoiceChoicesController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Choice Choice.');
+			$this->Session->setFlash(__('Invalid Choice Choice.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('choiceChoice', $this->ChoiceChoice->read(null, $id));
@@ -22,10 +22,10 @@ class ChoiceChoicesController extends AppController {
 			$this->cleanUpFields();
 			$this->ChoiceChoice->create();
 			if ($this->ChoiceChoice->save($this->data)) {
-				$this->Session->setFlash('The Choice Choice has been saved');
+				$this->Session->setFlash(__('The Choice Choice has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Choice Choice could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Choice Choice could not be saved. Please, try again.',true));
 			}
 		}
 		$choiceQuestions = $this->ChoiceChoice->ChoiceQuestion->generateList();
@@ -34,16 +34,16 @@ class ChoiceChoicesController extends AppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Choice Choice');
+			$this->Session->setFlash(__('Invalid Choice Choice',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->ChoiceChoice->save($this->data)) {
-				$this->Session->setFlash('The Choice Choice has been saved');
+				$this->Session->setFlash(__('The Choice Choice has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Choice Choice could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Choice Choice could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -55,11 +55,11 @@ class ChoiceChoicesController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Choice Choice');
+			$this->Session->setFlash(__('Invalid id for Choice Choice',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->ChoiceChoice->del($id)) {
-			$this->Session->setFlash('Choice Choice #'.$id.' deleted');
+			$this->Session->setFlash(__('Choice Choice #'.$id.' deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

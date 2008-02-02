@@ -28,7 +28,7 @@ class QuizzesController extends QuizAppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Quiz.');
+			$this->Session->setFlash(__('Invalid Quiz.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('quiz', $this->Quiz->read(null, $id));
@@ -39,10 +39,10 @@ class QuizzesController extends QuizAppController {
 			$this->cleanUpFields();
 			$this->Quiz->create();
 			if ($this->Quiz->save($this->data)) {
-				$this->Session->setFlash('The Quiz has been saved');
+				$this->Session->setFlash(__('The Quiz has been saved',true));
 				$this->redirect(array('action'=>'edit', $this->Quiz->getLastInsertId()), null, true);
 			} else {
-				$this->Session->setFlash('The Quiz could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Quiz could not be saved. Please, try again.',true));
 			}
 		}
 /*		$associationQuestions = $this->Quiz->AssociationQuestion->find('list');
@@ -57,16 +57,16 @@ class QuizzesController extends QuizAppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Quiz');
+			$this->Session->setFlash(__('Invalid Quiz',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->Quiz->save($this->data)) {
-				$this->Session->setFlash('The Quiz has been saved');
+				$this->Session->setFlash(__('The Quiz has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Quiz could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Quiz could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -84,27 +84,27 @@ class QuizzesController extends QuizAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Quiz');
+			$this->Session->setFlash(__('Invalid id for Quiz',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Quiz->del($id)) {
-			$this->Session->setFlash('Quiz #'.$id.' deleted');
+			$this->Session->setFlash(__('Quiz #'.$id.' deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}
 	
 	function rename($id=null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Quiz');
+			$this->Session->setFlash(__('Invalid Quiz',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->Quiz->save($this->data)) {
-				$this->Session->setFlash('The Quiz has been saved');
+				$this->Session->setFlash(__('The Quiz has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Quiz could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Quiz could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {

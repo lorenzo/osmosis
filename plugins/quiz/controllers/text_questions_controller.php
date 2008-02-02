@@ -11,7 +11,7 @@ class TextQuestionsController extends QuizAppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Text Question.');
+			$this->Session->setFlash(__('Invalid Text Question.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('textQuestion', $this->TextQuestion->read(null, $id));
@@ -25,10 +25,10 @@ class TextQuestionsController extends QuizAppController {
 				$this->data['Quiz']['id'] = $quiz_id;
 			}
 			if ($this->TextQuestion->save($this->data)) {
-				$this->Session->setFlash('The Text Question has been saved');
+				$this->Session->setFlash(__('The Text Question has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Text Question could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Text Question could not be saved. Please, try again.',true));
 			}
 		}
 		$formats = array(
@@ -41,16 +41,16 @@ class TextQuestionsController extends QuizAppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Text Question');
+			$this->Session->setFlash(__('Invalid Text Question',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->TextQuestion->save($this->data)) {
-				$this->Session->setFlash('The Text Question has been saved');
+				$this->Session->setFlash(__('The Text Question has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Text Question could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Text Question could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -62,11 +62,11 @@ class TextQuestionsController extends QuizAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Text Question');
+			$this->Session->setFlash(__('Invalid id for Text Question',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->TextQuestion->del($id)) {
-			$this->Session->setFlash('Text Question #'.$id.' deleted');
+			$this->Session->setFlash(__('Text Question #'.$id.' deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

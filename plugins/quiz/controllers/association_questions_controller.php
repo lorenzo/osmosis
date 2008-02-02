@@ -11,7 +11,7 @@ class AssociationQuestionsController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Association Question.');
+			$this->Session->setFlash(__('Invalid Association Question.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('associationQuestion', $this->AssociationQuestion->read(null, $id));
@@ -29,10 +29,10 @@ class AssociationQuestionsController extends AppController {
 				$this->data['Quiz']['Quiz']
 		   	);*/
 			if ($this->AssociationQuestion->save($this->data)) {
-				$this->Session->setFlash('The Association Question has been saved');
+				$this->Session->setFlash(__('The Association Question has been saved',true));
 				//$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Association Question could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Association Question could not be saved. Please, try again.',true));
 			}
 		}
 		$quizzes = $this->AssociationQuestion->Quiz->generateList();
@@ -41,16 +41,16 @@ class AssociationQuestionsController extends AppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Association Question');
+			$this->Session->setFlash(__('Invalid Association Question',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->AssociationQuestion->save($this->data)) {
-				$this->Session->setFlash('The Association Question has been saved');
+				$this->Session->setFlash(__('The Association Question has been saved',true));
 				//$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Association Question could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Association Question could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -62,11 +62,11 @@ class AssociationQuestionsController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Association Question');
+			$this->Session->setFlash(__('Invalid id for Association Question',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->AssociationQuestion->del($id)) {
-			$this->Session->setFlash('Association Question #'.$id.' deleted');
+			$this->Session->setFlash(__('Association Question #'.$id.' deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

@@ -11,7 +11,7 @@ class OrderingChoicesController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Ordering Choice.');
+			$this->Session->setFlash(__('Invalid Ordering Choice.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('orderingChoice', $this->OrderingChoice->read(null, $id));
@@ -22,10 +22,10 @@ class OrderingChoicesController extends AppController {
 			$this->cleanUpFields();
 			$this->OrderingChoice->create();
 			if ($this->OrderingChoice->save($this->data)) {
-				$this->Session->setFlash('The Ordering Choice has been saved');
+				$this->Session->setFlash(__('The Ordering Choice has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Ordering Choice could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Ordering Choice could not be saved. Please, try again.',true));
 			}
 		}
 		$orderingQuestions = $this->OrderingChoice->OrderingQuestion->generateList();
@@ -34,16 +34,16 @@ class OrderingChoicesController extends AppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Ordering Choice');
+			$this->Session->setFlash(__('Invalid Ordering Choice',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->OrderingChoice->save($this->data)) {
-				$this->Session->setFlash('The Ordering Choice has been saved');
+				$this->Session->setFlash(__('The Ordering Choice has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Ordering Choice could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Ordering Choice could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -55,11 +55,11 @@ class OrderingChoicesController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Ordering Choice');
+			$this->Session->setFlash(__('Invalid id for Ordering Choice',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->OrderingChoice->del($id)) {
-			$this->Session->setFlash('Ordering Choice #'.$id.' deleted');
+			$this->Session->setFlash(__('Ordering Choice #'.$id.' deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

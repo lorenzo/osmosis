@@ -11,7 +11,7 @@ class MatchingQuestionsController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Matching Question.');
+			$this->Session->setFlash(__('Invalid Matching Question.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('matchingQuestion', $this->MatchingQuestion->read(null, $id));
@@ -22,10 +22,10 @@ class MatchingQuestionsController extends AppController {
 			$this->cleanUpFields();
 			$this->MatchingQuestion->create();
 			if ($this->MatchingQuestion->save($this->data)) {
-				$this->Session->setFlash('The Matching Question has been saved');
+				$this->Session->setFlash(__('The Matching Question has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Matching Question could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Matching Question could not be saved. Please, try again.',true));
 			}
 		}
 		$quizzes = $this->MatchingQuestion->Quiz->generateList();
@@ -34,16 +34,16 @@ class MatchingQuestionsController extends AppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Matching Question');
+			$this->Session->setFlash(__('Invalid Matching Question',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->MatchingQuestion->save($this->data)) {
-				$this->Session->setFlash('The Matching Question has been saved');
+				$this->Session->setFlash(__('The Matching Question has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Matching Question could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Matching Question could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -55,11 +55,11 @@ class MatchingQuestionsController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Matching Question');
+			$this->Session->setFlash(__('Invalid id for Matching Question',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->MatchingQuestion->del($id)) {
-			$this->Session->setFlash('Matching Question #'.$id.' deleted');
+			$this->Session->setFlash(__('Matching Question #'.$id.' deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

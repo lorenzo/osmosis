@@ -11,7 +11,7 @@ class OrderingQuestionsController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Ordering Question.');
+			$this->Session->setFlash(__('Invalid Ordering Question.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('orderingQuestion', $this->OrderingQuestion->read(null, $id));
@@ -22,10 +22,10 @@ class OrderingQuestionsController extends AppController {
 			$this->cleanUpFields();
 			$this->OrderingQuestion->create();
 			if ($this->OrderingQuestion->save($this->data)) {
-				$this->Session->setFlash('The Ordering Question has been saved');
+				$this->Session->setFlash(__('The Ordering Question has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Ordering Question could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Ordering Question could not be saved. Please, try again.',true));
 			}
 		}
 		$quizzes = $this->OrderingQuestion->Quiz->generateList();
@@ -34,16 +34,16 @@ class OrderingQuestionsController extends AppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Ordering Question');
+			$this->Session->setFlash(__('Invalid Ordering Question',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->OrderingQuestion->save($this->data)) {
-				$this->Session->setFlash('The Ordering Question has been saved');
+				$this->Session->setFlash(__('The Ordering Question has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Ordering Question could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Ordering Question could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -55,11 +55,11 @@ class OrderingQuestionsController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Ordering Question');
+			$this->Session->setFlash(__('Invalid id for Ordering Question',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->OrderingQuestion->del($id)) {
-			$this->Session->setFlash('Ordering Question #'.$id.' deleted');
+			$this->Session->setFlash(__('Ordering Question #'.$id.' deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

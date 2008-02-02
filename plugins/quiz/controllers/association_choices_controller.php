@@ -11,7 +11,7 @@ class AssociationChoicesController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Association Choice.');
+			$this->Session->setFlash(__('Invalid Association Choice.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('associationChoice', $this->AssociationChoice->read(null, $id));
@@ -22,10 +22,10 @@ class AssociationChoicesController extends AppController {
 			$this->cleanUpFields();
 			$this->AssociationChoice->create();
 			if ($this->AssociationChoice->save($this->data)) {
-				$this->Session->setFlash('The Association Choice has been saved');
+				$this->Session->setFlash(__('The Association Choice has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Association Choice could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Association Choice could not be saved. Please, try again.',true));
 			}
 		}
 		$associationQuestions = $this->AssociationChoice->AssociationQuestion->generateList();
@@ -34,16 +34,16 @@ class AssociationChoicesController extends AppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Association Choice');
+			$this->Session->setFlash(__('Invalid Association Choice',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->AssociationChoice->save($this->data)) {
-				$this->Session->setFlash('The Association Choice has been saved');
+				$this->Session->setFlash(__('The Association Choice has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Association Choice could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Association Choice could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -55,11 +55,11 @@ class AssociationChoicesController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Association Choice');
+			$this->Session->setFlash(__('Invalid id for Association Choice',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->AssociationChoice->del($id)) {
-			$this->Session->setFlash('Association Choice #'.$id.' deleted');
+			$this->Session->setFlash(__('Association Choice #'.$id.' deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

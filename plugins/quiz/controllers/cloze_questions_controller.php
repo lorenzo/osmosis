@@ -11,7 +11,7 @@ class ClozeQuestionsController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Cloze Question.');
+			$this->Session->setFlash(__('Invalid Cloze Question.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('clozeQuestion', $this->ClozeQuestion->read(null, $id));
@@ -22,10 +22,10 @@ class ClozeQuestionsController extends AppController {
 			$this->cleanUpFields();
 			$this->ClozeQuestion->create();
 			if ($this->ClozeQuestion->save($this->data)) {
-				$this->Session->setFlash('The Cloze Question has been saved');
+				$this->Session->setFlash(__('The Cloze Question has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Cloze Question could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Cloze Question could not be saved. Please, try again.',true));
 			}
 		}
 		$quizzes = $this->ClozeQuestion->Quiz->generateList();
@@ -34,16 +34,16 @@ class ClozeQuestionsController extends AppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Cloze Question');
+			$this->Session->setFlash(__('Invalid Cloze Question',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->ClozeQuestion->save($this->data)) {
-				$this->Session->setFlash('The Cloze Question has been saved');
+				$this->Session->setFlash(__('The Cloze Question has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Cloze Question could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Cloze Question could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -55,11 +55,11 @@ class ClozeQuestionsController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Cloze Question');
+			$this->Session->setFlash(__('Invalid id for Cloze Question',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->ClozeQuestion->del($id)) {
-			$this->Session->setFlash('Cloze Question #'.$id.' deleted');
+			$this->Session->setFlash(__('Cloze Question #'.$id.' deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

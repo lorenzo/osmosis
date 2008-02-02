@@ -11,7 +11,7 @@ class MatchingChoicesController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Matching Choice.');
+			$this->Session->setFlash(__('Invalid Matching Choice.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('matchingChoice', $this->MatchingChoice->read(null, $id));
@@ -22,10 +22,10 @@ class MatchingChoicesController extends AppController {
 			$this->cleanUpFields();
 			$this->MatchingChoice->create();
 			if ($this->MatchingChoice->save($this->data)) {
-				$this->Session->setFlash('The Matching Choice has been saved');
+				$this->Session->setFlash(__('The Matching Choice has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Matching Choice could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Matching Choice could not be saved. Please, try again.',true));
 			}
 		}
 		$matchingQuestions = $this->MatchingChoice->MatchingQuestion->generateList();
@@ -34,16 +34,16 @@ class MatchingChoicesController extends AppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Matching Choice');
+			$this->Session->setFlash(__('Invalid Matching Choice',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->MatchingChoice->save($this->data)) {
-				$this->Session->setFlash('The Matching Choice has been saved');
+				$this->Session->setFlash(__('The Matching Choice has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Matching Choice could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Matching Choice could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -55,11 +55,11 @@ class MatchingChoicesController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Matching Choice');
+			$this->Session->setFlash(__('Invalid id for Matching Choice',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->MatchingChoice->del($id)) {
-			$this->Session->setFlash('Matching Choice #'.$id.' deleted');
+			$this->Session->setFlash(__('Matching Choice #'.$id.' deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}
