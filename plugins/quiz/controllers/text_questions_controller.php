@@ -19,7 +19,6 @@ class TextQuestionsController extends QuizAppController {
 
 	function add($quiz_id=null) {
 		if (!empty($this->data)) {
-			$this->cleanUpFields();
 			$this->TextQuestion->create();
 			if($quiz_id) {
 				$this->data['Quiz']['id'] = $quiz_id;
