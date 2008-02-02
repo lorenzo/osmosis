@@ -26,7 +26,7 @@ class MembersController extends AppController {
 	
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid Member.');
+			$this->Session->setFlash(__('Invalid Member.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('member', $this->Member->read(null, $id));
@@ -44,10 +44,10 @@ class MembersController extends AppController {
 			$this->cleanUpFields();
 			$this->Member->create();
 			if ($this->Member->save($this->data)) {
-				$this->Session->setFlash('The Member has been saved');
+				$this->Session->setFlash(__('The Member has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Member could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Member could not be saved. Please, try again.',true));
 			}
 		}
 		$roles = $this->Member->Role->generateList();
@@ -64,16 +64,16 @@ class MembersController extends AppController {
 	
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash('Invalid Member');
+			$this->Session->setFlash(__('Invalid Member',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->Member->save($this->data)) {
-				$this->Session->setFlash('The Member has been saved');
+				$this->Session->setFlash(__('The Member has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash('The Member could not be saved. Please, try again.');
+				$this->Session->setFlash(__('The Member could not be saved. Please, try again.',true));
 			}
 		}
 		if (empty($this->data)) {
@@ -93,11 +93,11 @@ class MembersController extends AppController {
 	
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash('Invalid id for Member');
+			$this->Session->setFlash(__('Invalid id for Member',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Member->del($id)) {
-			$this->Session->setFlash('Member #'.$id.' deleted');
+			$this->Session->setFlash(__('Member #'.$id.' deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

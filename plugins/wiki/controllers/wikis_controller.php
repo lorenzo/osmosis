@@ -17,11 +17,11 @@ class WikisController extends WikiAppController {
 		$this->set('wiki', $this->Wiki->read(null, $id));
 	}
 
-	function add() {
+	function add() { 
 		if (!empty($this->data)) {
 			$this->Wiki->create();
 			if ($this->Wiki->save($this->data)) {
-				$this->Session->setFlash('The Wiki has been saved');
+				$this->Session->setFlash(__('The Wiki has been saved', true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
 				$this->Session->setFlash('The Wiki could not be saved. Please, try again.');

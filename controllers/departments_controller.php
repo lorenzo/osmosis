@@ -85,7 +85,7 @@ class DepartmentsController extends AppController {
 	
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Department'));
+			$this->Session->setFlash(__('Invalid Department',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Department->del($id)) {

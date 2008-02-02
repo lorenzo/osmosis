@@ -26,7 +26,7 @@ class CoursesController extends AppController {
 	
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Course'));
+			$this->Session->setFlash(__('Invalid Course',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('course', $this->Course->read(null, $id));
