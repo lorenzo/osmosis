@@ -8,7 +8,7 @@ echo $paginator->counter(array(
 ?></p>
 <table cellpadding="0" cellspacing="0">
 <tr>
-	<th><?php echo $paginator->sort('full_name');?></th>
+	<th><?php echo $paginator->sort('name');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
 <?php
@@ -21,7 +21,7 @@ foreach ($members as $member):
 ?>
 	<tr<?php echo $class;?>>
 		<td>
-			<?php echo $member['Member']['full_name'] ?>
+			<?php echo $member['Member']['name'] ?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('View', true), array('action'=>'view', $member['Member']['id'])); ?>

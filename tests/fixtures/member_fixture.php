@@ -6,7 +6,7 @@ class MemberFixture extends CakeTestFixture {
     	array(
     		'id' 	=> 1,
     		'institution_id' => '02-35389',
-    		'full_name'		=> 'Jose Rodriguez',
+    		'name'		=> 'Jose Rodriguez',
     		'email'			=> 'jose.zap@hotmail.com',
     		'phone'			=> '9614041',
     		'country'		=> 'Venezuela',
@@ -19,9 +19,9 @@ class MemberFixture extends CakeTestFixture {
 		array(
     		'id' 	=> 2,
     		'institution_id' => '02-32421',
-    		'full_name'		=> 'Wanna Gaby',
-    		'email'			=> 'jose.zip@hotmail.com',
-    		'phone'			=> '9614041',
+    		'name'		=> 'Wanna Gay',
+    		'email'			=> 'jose.zap@msn.com',
+    		'phone'			=> '9555555',
     		'country'		=> 'Venezuela',
     		'city'			=> 'Caracas',
     		'sex'			=> 'M',

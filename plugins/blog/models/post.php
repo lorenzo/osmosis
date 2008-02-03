@@ -7,16 +7,26 @@ class Post extends BlogAppModel {
 	);
 	var $useTable = 'blog_posts';
 	var $validate = array(
-		'title'=> array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
-			'Error.maxlength' => array('rule' => array('maxLength',50),  
-										'message' => 'Error.maxLength')
+		'title' => array(
+		    'Error.empty' => array(
+		        'rule' => array( 'custom','/.+/'),
+		        'required' => true,
+		        'on' => 'create',
+				),
 		),
 		'body' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		    'Error.empty' => array(
+		        'rule' => array( 'custom','/.+/'),
+		        'required' => true,
+		        'on' => 'create',
+				),
 		),
 		'blog_id' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		    'Error.empty' => array(
+		        'rule' => array( 'custom','/.+/'),
+		        'required' => true,
+		        'on' => 'create',
+				),
 		),
 	);
 
@@ -43,6 +53,13 @@ class Post extends BlogAppModel {
 								'finderQuery' => '',
 								'counterQuery' => ''),
 	);
+	
+	function __construct($id = false, $table = null, $ds = null) {
+			$this->validate['title']['Error.empty']['message'] = __('The title can not be empty',true);
+			$this->validate['body']['Error.empty']['message'] = __('The body can not be empty',true);
+			$this->validate['blog_id']['Error.empty']['message'] = __('The post must belong to a blog',true);
+			parent::__construct($id,$table,$ds);
+	}
 
 }
 ?>

@@ -39,7 +39,6 @@ class DepartmentsController extends AppController {
 	
 	function add() {
 		if (!empty($this->data)) {
-			$this->cleanUpFields();
 			$this->Department->create();
 			if ($this->Department->save($this->data)) {
 				$this->Session->setFlash(__('The Department has been saved',true));
@@ -63,7 +62,6 @@ class DepartmentsController extends AppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
-			$this->cleanUpFields();
 			if ($this->Department->save($this->data)) {
 				$this->Session->setFlash(__('The Department has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);

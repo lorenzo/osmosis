@@ -12,7 +12,7 @@ class PostsController extends BlogAppController {
 		}
 		if (!empty($this->data)) {
 			$this->Post->create();
-			$this->data['Post']['body'] = $this->HtmlPurifier->purify($this->data['Post']['body']);
+			$this->data['Post']['body'] = $this->HtmlPurifier->purify($this->data['Post']['body']);			
 			if ($this->Post->save($this->data)) {
 				$this->Session->setFlash(__('The Post has been saved',true));
 				$this->redirect(array('action'=>'view', 'controller' => 'blogs', $this->data['Post']['blog_id']));
@@ -26,6 +26,26 @@ class PostsController extends BlogAppController {
 		
 		$blogs = $this->Post->Blog->find('list');
 		$this->set(compact('blogs'));
+	}
+	
+	function add_comment($post_id = null) {
+		if (!$post_id && empty($this->data)) {		
+			$this->Session->setFlash('Invalid Post');
+			$this->redirect(array('action'=>'index'), null, true);
+		}
+		if (!empty($this->data)) {
+			$this->Post->Comment->create();
+			$this->data['Comment']['member_id'] = $this->Auth->user('id');
+			if ($this->Post->Comment->save($this->data)) {
+				$this->Session->setFlash('The Comment has been saved');
+			} else {
+				$this->Session->setFlash('The Comment could not be saved. Please, try again.');
+			}
+			$slug = $this->Post->field('slug',array('id'=>$this->data['Comment']['post_id']));
+			$this->redirect(array('controller'=> 'posts','action'=>'view', $slug), null, true);
+		}
+		$posts = $this->Post->generateList();
+		$this->set(compact('posts'));
 	}
 
 	function edit($id = null) {

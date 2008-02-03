@@ -1,7 +1,6 @@
 <?php 
 
-loadModel('Member');
-loadModel('Role');
+App::import('Model','Role');
 
 class RoleTestCase extends CakeTestCase {
 	var $TestObject = null;
@@ -9,10 +8,8 @@ class RoleTestCase extends CakeTestCase {
 
 	function setUp() {
 		$this->TestObject = new Role();
-		$this->TestObject->useDbConfig = 'test_suite';
-		$this->TestObject->tablePrefix = 'test_suite_';
-		$this->TestObject->Member->useDbConfig = 'test_suite';
-		$this->TestObject->Member->tablePrefix = 'test_suite_';
+		$this->TestObject->useDbConfig = 'test';
+		$this->TestObject->Member->useDbConfig = 'test';
 	}
 
 	function tearDown() {

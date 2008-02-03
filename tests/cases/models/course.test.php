@@ -1,6 +1,6 @@
 <?php 
 
-loadModel('Course');
+App::import('Model', 'Course');
 
 class CourseTestCase extends CakeTestCase {
 	var $TestObject = null;

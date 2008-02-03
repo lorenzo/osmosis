@@ -5,7 +5,7 @@
 	<?php
 		echo $form->input('id');
 		echo $form->input('institution_id');
-		echo $form->input('full_name');
+		echo $form->input('name');
 		echo $form->input('email');
 		echo $form->input('phone');
 		echo $form->input('country');

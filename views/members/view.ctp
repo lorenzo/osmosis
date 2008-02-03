@@ -3,7 +3,7 @@
 	<dl>
 		<dt class="altrow"><?php __('Full Name') ?></dt>
 		<dd class="altrow">
-			<?php echo $member['Member']['full_name'] ?>
+			<?php echo $member['Member']['name'] ?>
 			&nbsp;
 		</dd>
 		<dt><?php __('Institution Id') ?></dt>

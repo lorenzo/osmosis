@@ -2,6 +2,7 @@
 class Role extends AppModel {
 
 	var $name = 'Role';
+	var $displayField = 'role';
 	var $validate = null;/*array(
 		'parent_id' => VALID_NOT_EMPTY,
 		'role' => VALID_NOT_EMPTY,

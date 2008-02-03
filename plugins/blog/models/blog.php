@@ -4,15 +4,27 @@ class Blog extends BlogAppModel {
 	var $name = 'Blog';
 	var $useTable = 'blog_blogs';
 	var $validate = array(
-		'title'=> array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		'title' => array(
+		    'Error.empty' => array(
+		        'rule' => array( 'custom','/.+/'),
+		        'required' => true,
+		        'on' => 'create',
+				),
 		),
 		'description' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+		    'Error.empty' => array(
+		        'rule' => array( 'custom','/.+/'),
+		        'required' => true,
+		        'on' => 'create',
+				),
 		),
 		'member_id' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
-		)
+		    'Error.empty' => array(
+		        'rule' => array( 'custom','/.+/'),
+		        'required' => true,
+		        'on' => 'create',
+				),
+		),
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -35,5 +47,12 @@ class Blog extends BlogAppModel {
 			'className' => 'Member'
 		)
 	);
+	
+	function __construct($id = false, $table = null, $ds = null) {
+			$this->validate['title']['Error.empty']['message'] = __('The title can not be empty',true);
+			$this->validate['description']['Error.empty']['message'] = __('The description can not be empty',true);
+			$this->validate['member_id']['Error.empty']['message'] = __('The member can not be empty',true);
+			parent::__construct($id,$table,$ds);
+	}
 }
 ?>

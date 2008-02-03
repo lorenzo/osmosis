@@ -4,7 +4,7 @@
  		<legend><?php echo sprintf(__('Add %s', true), __('Member', true));?></legend>
 	<?php
 		echo $form->input('institution_id');
-		echo $form->input('full_name');
+		echo $form->input('name');
 		echo $form->input('email');
 		echo $form->input('phone');
 		echo $form->input('country');

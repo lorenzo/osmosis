@@ -50,7 +50,7 @@ class MembersController extends AppController {
 				$this->Session->setFlash(__('The Member could not be saved. Please, try again.',true));
 			}
 		}
-		$roles = $this->Member->Role->generateList();
+		$roles = $this->Member->Role->find('list');
 		$this->set(compact('roles'));
 	}
 

@@ -27,11 +27,11 @@ class CommentsController extends BlogAppController {
 			$this->data['Comment']['member_id'] = $this->Auth->user('id');
 			if ($this->Comment->save($this->data)) {
 				$this->Session->setFlash(__('The Comment has been saved',true));
-				$slug = $this->Comment->Post->field('slug',array('id'=>$this->data['Comment']['post_id']));
-				$this->redirect(array('controller'=> 'posts','action'=>'view', $slug), null, true);
 			} else {
 				$this->Session->setFlash(__('The Comment could not be saved. Please, try again.',true));
 			}
+			$slug = $this->Comment->Post->field('slug',array('id'=>$this->data['Comment']['post_id']));
+			$this->redirect(array('controller'=> 'posts','action'=>'view', $slug), null, true);
 		}
 		$posts = $this->Comment->Post->generateList();
 		$this->set(compact('posts'));

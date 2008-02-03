@@ -41,7 +41,6 @@ class CoursesController extends AppController {
 	
 	function add() {
 		if (!empty($this->data)) {
-			$this->cleanUpFields();
 			$this->Course->create();
 			$this->data['Course']['owner_id'] = $this->Auth->user('id');
 			if ($this->Course->save($this->data)) {
@@ -51,8 +50,8 @@ class CoursesController extends AppController {
 				$this->Session->setFlash(__('The Course could not be saved. Please, try again.',true));
 			}
 		}
-		$departments = $this->Course->Department->generateList();
-		$owners = $this->Course->Owner->generateList();
+		$departments = $this->Course->Department->find("list");
+		$owners = $this->Course->Owner->find("list");
 		$this->set(compact('departments', 'owners'));
 	}
 
