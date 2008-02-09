@@ -19,5 +19,6 @@
 		<li><?php echo $html->link(__('Delete Locker', true), array('action'=>'delete', $locker['Locker']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $locker['Locker']['id'])); ?> </li>
 		<li><?php echo $html->link(__('List Lockers', true), array('action'=>'index')); ?> </li>
 		<li><?php echo $html->link(__('New Locker', true), array('action'=>'add')); ?> </li>
+		<li><?php echo $html->link(__('New Document', true), array('action'=>'add', 'controller' => 'documents')); ?> </li>
 	</ul>
 </div>

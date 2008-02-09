@@ -1,10 +1,11 @@
 <div class="documents form">
-<?php echo $form->create('Document');?>
+<?php echo $form->create('Document', array ('type' => 'file'));?>
 	<fieldset>
  		<legend><?php __('Add Document');?></legend>
 	<?php
 		echo $form->input('description');
 		echo $form->input('locker_id');
+		echo $form->input('file_name', array('type' => 'file'));
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>

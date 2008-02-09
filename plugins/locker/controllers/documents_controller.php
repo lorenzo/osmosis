@@ -17,19 +17,29 @@ class DocumentsController extends LockerAppController {
 		$this->set('document', $this->Document->read(null, $id));
 	}
 
-	function add() {
-		if (!empty($this->data)) {
-			$this->Document->create();
-			if ($this->Document->save($this->data)) {
-				$this->Session->setFlash(__('The Document has been saved', true));
-				$this->redirect(array('action'=>'index'));
-			} else {
-				$this->Session->setFlash(__('The Document could not be saved. Please, try again.', true));
+	function add() {	
+	if (!empty($this->data)) {			
+			$uploaded_file = $this->data['Document']['file_name'];			
+			$is_uploaded = is_uploaded_file($uploaded_file['tmp_name']); 
+			if ($is_uploaded) {
+				$this->data['Document']['file_name'] = $uploaded_file['name'];
+				$files_location = TMP.'tests'.DS.'documents'.DS.'uploads'.DS.$uploaded_file['name'].DS;
+				
+				$this->Document->create();
+				if ($this->Document->save($this->data)){
+					$this->Session->setFlash(__('The Document has been saved', true));
+					$this->redirect(array('action'=>'index'));
+				} else {
+					$this->Session->setFlash(__('The Document could not be saved. Please, try again.', true));
+				}		
+			}else{
+				$this->Session->setFlash(__('Invalid Document. Please, try again.', true));
 			}
-		}
-		$lockers = $this->Document->Locker->find('list');
-		$this->set(compact('lockers'));
+	$lockers = $this->Document->Locker->find('list');
+	$this->set(compact('lockers'));
 	}
+
+}
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {

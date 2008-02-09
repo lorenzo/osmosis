@@ -8,9 +8,7 @@ echo $paginator->counter(array(
 ?></p>
 <table cellpadding="0" cellspacing="0">
 <tr>
-	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('description');?></th>
-	<th><?php echo $paginator->sort('locker_id');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
 <?php
@@ -23,13 +21,7 @@ foreach ($documents as $document):
 ?>
 	<tr<?php echo $class;?>>
 		<td>
-			<?php echo $document['Document']['id']; ?>
-		</td>
-		<td>
 			<?php echo $document['Document']['description']; ?>
-		</td>
-		<td>
-			<?php echo $html->link($document['Locker']['id'], array('controller'=> 'lockers', 'action'=>'view', $document['Locker']['id'])); ?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('View', true), array('action'=>'view', $document['Document']['id'])); ?>

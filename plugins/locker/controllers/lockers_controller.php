@@ -20,6 +20,7 @@ class LockersController extends LockerAppController {
 	function add() {
 		if (!empty($this->data)) {
 			$this->Locker->create();
+			$this->data['Locker']['member_id'] = $this->Auth->user('id');
 			if ($this->Locker->save($this->data)) {
 				$this->Session->setFlash(__('The Locker has been saved', true));
 				$this->redirect(array('action'=>'index'));
