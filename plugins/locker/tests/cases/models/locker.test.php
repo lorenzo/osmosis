@@ -1,15 +1,16 @@
 <?php 
 /* SVN FILE: $Id$ */
 /* Locker Test cases generated on: 2008-02-02 17:02:54 : 1201989054*/
-App::import('Model', 'Locker');
+App::import('Model', 'Locker.Locker');
 
 class TestLocker extends Locker {
 	var $cacheSources = false;
+	var $useDbConfig = 'test';
 }
 
 class LockerTestCase extends CakeTestCase {
 	var $Locker = null;
-	var $fixtures = array('app.locker', 'app.member', 'app.document');
+	var $fixtures = array('locker', 'app.member', 'document');
 
 	function start() {
 		parent::start();

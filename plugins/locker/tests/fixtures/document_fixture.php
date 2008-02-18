@@ -4,7 +4,7 @@
 
 class DocumentFixture extends CakeTestFixture {
 	var $name = 'Document';
-	var $table = 'documents';
+	var $table = 'locker_documents';
 	var $fields = array(
 			'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
 			'description' => array('type'=>'text', 'null' => false),

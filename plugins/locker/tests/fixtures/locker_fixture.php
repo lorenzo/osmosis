@@ -4,7 +4,7 @@
 
 class LockerFixture extends CakeTestFixture {
 	var $name = 'Locker';
-	var $table = 'lockers';
+	var $table = 'locker_lockers';
 	var $fields = array(
 			'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
 			'member_id' => array('type'=>'integer', 'null' => false),

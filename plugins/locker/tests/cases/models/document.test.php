@@ -1,15 +1,16 @@
 <?php 
 /* SVN FILE: $Id$ */
 /* Document Test cases generated on: 2008-02-02 17:02:10 : 1201989190*/
-App::import('Model', 'Document');
+App::import('Model', 'Locker.Document');
 
 class TestDocument extends Document {
 	var $cacheSources = false;
+	var $useDbConfig = 'test';
 }
 
 class DocumentTestCase extends CakeTestCase {
 	var $Document = null;
-	var $fixtures = array('app.document', 'app.locker');
+	var $fixtures = array('document', 'locker');
 
 	function start() {
 		parent::start();

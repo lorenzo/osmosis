@@ -2,7 +2,7 @@
 /**
  * Test order is important.
  */
-loadComponent('Zip');
+App::import('Component','Zip');
 
 class ZipComponentTestCase extends CakeTestCase {
 	var $TestObject = null;
