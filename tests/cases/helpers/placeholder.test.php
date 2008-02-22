@@ -1,13 +1,17 @@
 <?php
+App::import('Component','Placeholder');
 App::import('Helper','Placeholder');
 App::import('Helper','Html');
+
 $configs =& Configure::getInstance();
 $configs->pluginPaths[] = TESTS . 'fixtures' . DS .'plugins' . DS;
 
 class ContactTestController extends Controller {
 	var $name = 'ContactTest';
 	var $uses = null;
+	var $components = array('Placeholder');
 }
+
 
 class PlaceholderHelperTest extends CakeTestCase {
 	var $fixtures = array(null);
@@ -18,6 +22,8 @@ class PlaceholderHelperTest extends CakeTestCase {
 		$this->PlaceHolder =& new PlaceholderHelper();
 		$this->PlaceHolder->Html =& new HtmlHelper();
 		$this->Controller =& new ContactTestController();
+		$this->Controller->Placeholder = new PlaceHolderComponent();
+		$this->Controller->Placeholder->startup(&$this->Controller);
 		$this->View = new View($this->Controller);
 		ClassRegistry::addObject('view', $this->view);
 	}
@@ -41,6 +47,15 @@ class PlaceholderHelperTest extends CakeTestCase {
 		);
 		$this->assertEqual('var=value',$this->PlaceHolder->render('menu'));
 		$this->assertEqual('var=value2',$this->PlaceHolder->render('other'));
+	}
+	
+	function testRenderWithPull() {
+		$this->assertEqual('var=value',$this->PlaceHolder->render('menu'));
+		$this->assertEqual('var=value',$this->PlaceHolder->render('other'));
+	}
+	
+	function testRenderEmptyPlacheholder() {
+		$this->assertEqual('',$this->PlaceHolder->render('dummy'));
 	}
 
 }
