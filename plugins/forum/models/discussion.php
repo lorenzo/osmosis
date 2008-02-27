@@ -4,10 +4,16 @@ class Discussion extends ForumAppModel {
 	var $name = 'Discussion';
 	var $useTable = 'forum_discussions';
 	var $validate = array(
-		'title' => array(
-			'rule' => array('range',1,255)
-			),
-		'status' => array('alphaNumeric')
+		'tittle' => array(
+		    'rule' => array(
+		        'rule' => array( 'range',1,255),
+				),
+		),
+		'status' => array(
+		    'valid' => array(
+		        'rule' => array( 'alphaNumeric'),
+				),
+		),
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -40,6 +46,12 @@ class Discussion extends ForumAppModel {
 								'counterQuery' => ''
 			)
 	);
+	
+	function __construct($id = false, $table = null, $ds = null) {
+			$this->validate['tittle']['rule']['message'] = __('The title can not be empty',true);
+			$this->validate['status']['valid']['message'] = __('The status must be an alphanumeric value',true);
+			parent::__construct($id,$table,$ds);
+	}
 
 }
 ?>

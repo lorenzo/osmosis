@@ -31,6 +31,12 @@ class Comment extends BlogAppModel {
 								'order' => '',
 								'counterCache' => ''),
 	);
-
+	
+	function __construct($id = false, $table = null, $ds = null) {
+			$this->validate['comment']['Error.empty']['message'] = __('The comment can not be empty',true);
+			$this->validate['post_id']['Error.empty']['message'] = __('The post_id can not be empty',true);
+			$this->validate['member_id']['Error.empty']['message'] = __('The member_id can not be empty',true);
+			parent::__construct($id,$table,$ds);
+	}
 }
 ?>

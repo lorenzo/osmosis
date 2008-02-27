@@ -3,11 +3,12 @@ class Quiz extends QuizAppModel {
 
 	var $name = 'Quiz';
 	var $validate = array(
-		'name' =>  array(
-			'rule' => VALID_NOT_EMPTY,
-			'message' => 'quiz.quiz.name.empty',
-			'required' => true,
-			'allowEmpty' => false
+		'name' => array(
+		    'Error.empty' => array(
+		        'rule' => array( 'custom','/.+/'),
+		        'required' => true,
+		        'allowEmpty' => false,
+				),
 		),
 	);
 
@@ -50,6 +51,10 @@ class Quiz extends QuizAppModel {
 				'with' => 'QuizText',
 			),
 	);
+	function __construct($id = false, $table = null, $ds = null) {
+			$this->validate['name']['Error.empty']['message'] = __('The name can not be empty',true);
+			parent::__construct($id,$table,$ds);
+	}
 
 }
 ?>

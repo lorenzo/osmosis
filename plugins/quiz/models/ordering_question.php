@@ -3,9 +3,21 @@ class OrderingQuestion extends QuizAppModel {
 
 	var $name = 'OrderingQuestion';
 	var $validate = array(
-		'body' => VALID_NOT_EMPTY,
-		'shuffle' => VALID_NOT_EMPTY,
-		'max_choices' => VALID_NOT_EMPTY,
+		'body' => array(
+		    'Error.empty' => array(
+		        'rule' => array( 'custom','/.+/'),
+				),
+		),
+		'shuffle' => array(
+		    'Error.empty' => array(
+		        'rule' => array( 'custom','/.+/'),
+				),
+		),
+		'max_choices' => array(
+		    'Error.empty' => array(
+		        'rule' => array( 'custom','/.+/'),
+				),
+		),
 	);
 
 	var $useTable = 'quiz_ordering_questions';
@@ -38,6 +50,13 @@ class OrderingQuestion extends QuizAppModel {
 						'deleteQuery' => '',
 						'insertQuery' => ''),
 	);
+	
+	function __construct($id = false, $table = null, $ds = null) {
+			$this->validate['body']['Error.empty']['message'] = __('The body can not be empty',true);
+			$this->validate['shuffle']['Error.empty']['message'] = __('Suffle can not be empty',true);
+			$this->validate['max_choices']['Error.empty']['message'] = __('Max_choices can not be empty',true);
+			parent::__construct($id,$table,$ds);
+	}
 
 }
 ?>

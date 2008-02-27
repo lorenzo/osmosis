@@ -36,7 +36,6 @@ class QuizzesController extends QuizAppController {
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->cleanUpFields();
 			$this->Quiz->create();
 			if ($this->Quiz->save($this->data)) {
 				$this->Session->setFlash(__('The Quiz has been saved',true));
@@ -61,7 +60,6 @@ class QuizzesController extends QuizAppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
-			$this->cleanUpFields();
 			if ($this->Quiz->save($this->data)) {
 				$this->Session->setFlash(__('The Quiz has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
@@ -99,7 +97,6 @@ class QuizzesController extends QuizAppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
-			$this->cleanUpFields();
 			if ($this->Quiz->save($this->data)) {
 				$this->Session->setFlash(__('The Quiz has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);

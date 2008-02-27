@@ -39,6 +39,9 @@ class Subject extends ForumAppModel {
 								'counterQuery' => ''
 			)
 	);
-
+	function __construct($id = false, $table = null, $ds = null) {
+			$this->validate['title']['rule']['message'] = __('The title can not be empty',true);
+			parent::__construct($id,$table,$ds);
+	}
 }
 ?>
