@@ -22,17 +22,19 @@ class OrderingQuestion extends QuizAppModel {
 
 	var $useTable = 'quiz_ordering_questions';
 	var $hasMany = array(
-			'OrderingChoice' => array('className' => 'quiz.OrderingChoice',
-								'foreignKey' => 'ordering_question_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'limit' => '',
-								'offset' => '',
-								'dependent' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''),
+		'OrderingChoice' => array(
+			'className' => 'quiz.OrderingChoice',
+			'foreignKey' => 'ordering_question_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'dependent' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
 	);
 
 	var $hasAndBelongsToMany = array(

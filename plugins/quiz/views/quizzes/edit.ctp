@@ -1,27 +1,35 @@
-<div class="quiz">
-<?php echo $form->create('Quiz');?>
-	<fieldset>
- 		<legend><?php echo sprintf(__('Edit %s %s', true), __('Quiz', true), $form->value('name'));?></legend>
+<h1><?php echo sprintf(__('Edit %s %s', true), __('Quiz', true), $form->value('name'));?></h1>
+<?php __('Add a question to this quiz'); ?>
+<ul>
 	<?php
-		echo $form->input('id');
-		echo $form->input(
-				'question_types',
-				array(
-					'type' => 'select',
-					'label' => __('Add Question', true),
-					'options' => $question_types, 'empty' => true
-				)
-		);
-		/*echo $form->input('AssociationQuestion');
-		echo $form->input('ChoiceQuestion');
-		echo $form->input('ClozeQuestion');
-		echo $form->input('MatchingQuestion');
-		echo $form->input('OrderingQuestion');
-		echo $form->input('TextQuestion');*/
+		foreach ($question_types as $question_type_key => $question_type) {
 	?>
-	</fieldset>
-<?php echo $form->end(__('Add Question', true));?>
-</div>
+	<li>
+		<?php
+			echo $html->link(
+				__('Associate an existing ' . $question_type, true),
+				array(
+					'action' => 'add_question',
+					$question_type_key,
+					$form->value('Quiz.id')
+				)
+			);
+			echo ' ' . __('or', true) . ' ';
+			echo $html->link(
+				'create a new one',
+				array(
+					'controller' => Inflector::pluralize($question_type_key),
+					'action' => 'add',
+					'quiz_id' => $form->value('Quiz.id')
+				),
+				array('title' => __('Create a new ' . $question_type, true))
+			);
+		?> 
+	</li>
+	<?php			
+		}
+	?>
+</ul>
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('Delete', true), array('action'=>'delete', $form->value('Quiz.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Quiz.id'))); ?></li>

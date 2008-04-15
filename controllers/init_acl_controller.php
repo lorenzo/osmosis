@@ -6,7 +6,7 @@ class InitAclController extends AppController {
 	var $controllers = array(
 		'Members' => array('index','view','add','edit','delete'),
 		'Courses' => array('index','view','add','edit','delete'),
-		'Departments' => array('index','view','add','edit','delete'),
+		'Departments' => array('index','view','add','edit','delete')
 	);
 	
 	function init() {

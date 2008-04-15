@@ -187,9 +187,9 @@
 		</ul>
 	</div>
 </div>
+<?php if (!empty($quiz['OrderingQuestion'])):?>
 <div class="related">
 	<h3><?php echo sprintf(__('Related %s', true), __('Ordering Questions', true));?></h3>
-	<?php if (!empty($quiz['OrderingQuestion'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php __('Id') ?></th>
@@ -221,7 +221,6 @@
 		</tr>
 	<?php endforeach; ?>
 	</table>
-	<?php endif; ?>
 
 	<div class="actions">
 		<ul>
@@ -229,9 +228,11 @@
 		</ul>
 	</div>
 </div>
+<?php endif; ?>
+
+<?php if (!empty($quiz['TextQuestion'])):?>
 <div class="related">
-	<h3><?php echo sprintf(__('Related %s', true), __('Text Questions', true));?></h3>
-	<?php if (!empty($quiz['TextQuestion'])):?>
+	<h3><?php echo __('Text Questions', true);?></h3>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php __('Id') ?></th>
@@ -261,11 +262,10 @@
 		</tr>
 	<?php endforeach; ?>
 	</table>
-	<?php endif; ?>
-
 	<div class="actions">
 		<ul>
 			<li><?php echo $html->link(sprintf(__('New %s', true), __('Text Question', true)), array('controller'=> 'text_questions', 'action'=>'add'));?> </li>
 		</ul>
 	</div>
 </div>
+<?php endif; ?>

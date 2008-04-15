@@ -25,10 +25,13 @@ class TextQuestionsController extends QuizAppController {
 			}
 			if ($this->TextQuestion->save($this->data)) {
 				$this->Session->setFlash(__('The Text Question has been saved',true));
-				$this->redirect(array('action'=>'index'), null, true);
+				$this->redirect(array('action'=>'index'));
 			} else {
 				$this->Session->setFlash(__('The Text Question could not be saved. Please, try again.',true));
 			}
+		}
+		if (isset($this->params['named']['quiz_id'])) {
+			$this->data['Quiz']['id'] = $this->params['named']['quiz_id'];
 		}
 		$formats = array(
 			'plain' => __('No format',true),

@@ -12,11 +12,11 @@ class QuizzesController extends QuizAppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		$this->question_types = array(
-			__('Choice Question', true),
-			__('Cloze Question', true),
-			__('Matching Question', true),
-			__('Ordering Question', true),
-			__('Text Question', true)
+			'choice_question'	=> __('Choice Question', true),
+			'cloze_question'	=> __('Cloze Question', true),
+			'matching_question'	=> __('Matching Question', true),
+			'oredering_question'=> __('Ordering Question', true),
+			'text_question'		=> __('Text Question', true)
 		);
 		$this->set('question_types', $this->question_types);
 	}
@@ -108,5 +108,38 @@ class QuizzesController extends QuizAppController {
 			$this->data = $this->Quiz->read(null, $id);
 		}
 	}
+
+	function add_question($question_type=null, $quiz_id = null) {
+		if (empty($this->data) && !$question_type) {
+			$this->Session->setFlash(__('Invalid Question Type', true));
+			$this->redirect(array('action' => 'index'));
+		}
+		$questionType = Inflector::Camelize($question_type);
+		if (empty($this->data) && !$quiz_id) {
+			$this->Session->setFlash(__('Invalid Quiz', true));
+			$this->redirect(array('action' => 'index'));
+		}
+		if (!empty($this->data)) {
+			$this->Quiz->id = $this->data['Quiz']['id'];
+			
+			var_dump($this->Quiz->save($this->data));
+			debug($this->Quiz->validationErrors);
+			debug($this->data);
+			
+		} else {
+			$this->data['Quiz']['id'] = $quiz_id;
+		}
+		
+ 		$quiz_questions = $this->Quiz->find('first', array('conditions' => array('id' => $quiz_id)));
+	 	$quiz_questions = Set::extract($quiz_questions[$questionType], '{n}.id');
+ 		$available_questions = $this->paginate('Quiz.' . $questionType);
+
+		$this->set('question_type', $question_type);
+ 		$this->set('available_questions', $available_questions);
+ 		$this->set('questionType', $questionType);
+ 		$this->set('id', $quiz_id);
+ 		$this->set('quiz_questions', $quiz_questions);
+	}
+
 }
 ?>

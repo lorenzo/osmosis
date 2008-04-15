@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 01, 2008 at 03:40 PM
+-- Generation Time: Apr 15, 2008 at 03:24 PM
 -- Server version: 5.0.45
 -- PHP Version: 5.2.4
 
@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `quiz_choice_choices` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `choice_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL COMMENT 'Related Choice Question',
   `text` text NOT NULL COMMENT 'Text for this choce',
+  `position` tinyint(3) NOT NULL default '0' COMMENT 'The position of the choice as will appear in the question',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Choice Questions'' choices';
 
@@ -78,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `quiz_cloze_questions_quizzes` (
   `cloze_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Relates a Cloze Question with a Quiz (many-to-many)';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Relates a Cloze Question with a Quiz (many-to-many)' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -103,6 +104,7 @@ CREATE TABLE IF NOT EXISTS `quiz_matching_choices_matching_questions` (
   `matching_question_id` char(36) NOT NULL,
   `source` char(36) NOT NULL COMMENT 'Source Choice (from quiz_matching_choices)',
   `target` char(36) NOT NULL COMMENT 'Target Choice (from quiz_matching_choices)',
+  `position` tinyint(3) NOT NULL default '0' COMMENT 'The position of the choice as will appear in the question',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -144,6 +146,7 @@ CREATE TABLE IF NOT EXISTS `quiz_ordering_choices` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `ordering_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL COMMENT 'Related Choice Question',
   `text` text NOT NULL COMMENT 'Text for this choce',
+  `position` tinyint(3) NOT NULL default '0' COMMENT 'The position of the choice as will appear in the question',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Ordering Questions'' choices';
 
@@ -211,5 +214,6 @@ CREATE TABLE IF NOT EXISTS `quiz_text_questions_quizzes` (
   `id` char(36) NOT NULL,
   `text_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `text_question_id` (`text_question_id`,`quiz_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Relates a Text Question with a Quiz (many-to-many)';

@@ -274,9 +274,10 @@ input, textarea {
 	display: block;
 	font-size: 140%;
 	font-family: "frutiger linotype", "lucida grande", "verdana", sans-serif;
-	padding: 2px;
 	width: 100%;
 }
+
+
 select {
 	clear: both;
 	font-size: 120%;
@@ -294,6 +295,10 @@ input[type=checkbox] {
 	float: left;
 	margin: 0px 6px 7px 2px;
 	width: auto;
+}
+table input[type=checkbox] {
+float:none;	
+margin:auto;
 }
 input[type=submit] {
 	display: inline;
@@ -374,4 +379,18 @@ h1 .note, h3 .note {
 .note {
 	color:#666;
 	font-weight:normal;
+}
+
+a.add_question {
+	width:90px;
+	padding:10px 0 2px 0;
+	height:27px;
+	float:left;
+	text-align:center;
+	border:#ccc 1px solid;
+	margin:5px 10px
+}
+
+a.add_question:hover {
+	border:#999 1px solid;
 }
