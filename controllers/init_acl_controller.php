@@ -2,7 +2,7 @@
 class InitAclController extends AppController {
 	var $name = 'InitAcl';
 	var $components = array('Acl','InitAcl');
-	var $uses = array();
+	var $uses = array('Member','Role');
 	var $controllers = array(
 		'Members' => array('index','view','add','edit','delete'),
 		'Courses' => array('index','view','add','edit','delete'),

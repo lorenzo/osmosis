@@ -4,6 +4,7 @@
  */
 class InitAclComponent extends Object {
 	var $components = array('Acl','Auth');
+	
 	/**
 	 * Initializes the component
 	 */
@@ -11,8 +12,8 @@ class InitAclComponent extends Object {
 		$this->controller = $controller;
 		App::import('Model','Member');
 		App::import('Model','Role');
-		$this->Member =& new Member;
-		$this->Role =& new Role;
+		$this->Member = $controller->Member;
+		$this->Role = $controller->Role;
 		return true;
 	}
 	
