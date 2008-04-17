@@ -2,7 +2,7 @@
 /**
  * Component that rovides functions to purify, prevent xss attacks, and make standard-compliant html code
  */
-vendor('Wiki.diff/diff_engine');
+App::import('Vendor','Wiki.diff/diff_engine');
 class DiffComponent extends Object {
 	
 	

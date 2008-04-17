@@ -1,0 +1,198 @@
+/* General Layout styles */
+body, html {
+	margin:0;
+	padding:0;
+}
+
+body {
+	float:left;
+	font-size:62.5%;
+	font-family:"Trebuchet MS", Arial, sans-serif;
+	background: #fff url('../../img/default/osmosis_bg.jpg');
+}
+
+#logo {
+	position:absolute;
+	top:77px;
+	left:0;
+	width:75px;
+	background:#fff url('../../img/default/osmosis2_logo.jpg') no-repeat;
+	font-size:1.4em;
+	border-top:#888 1px dashed;
+}
+#logo p {
+	margin:0;
+	padding:0;
+	text-indent:-9000px;
+}
+#logo p.name {
+	float:left;
+}
+#logo p.tagline {
+	background:#A8A9AB;
+	border-top:#888 1px dashed;
+	border-bottom:#888 1px dashed;
+	margin-top:190px;
+	height:30px;
+}
+
+#content {
+	font-size:1.2em;
+	margin-left:75px;
+	border-left:#888 1px dashed;
+	margin-bottom:40px;
+	float:left;
+}
+
+/* Top area (tabs)*/
+#top {
+	padding-left:75px;
+	height:77px;
+	border-bottom:#888 1px dashed;
+	position:relative;
+}
+#top ul {
+	margin:0;
+	padding:0;
+	position:absolute;
+	bottom:0;
+	right:20px;
+	list-style:none;
+}
+#top ul li {
+	float:left;
+	margin-right:5px;
+	height:15px;
+}
+
+/* Middle Area: (contectivist navigation, course summary and more courses list)*/
+#summary {
+	position:relative;
+	height:190px;
+}
+#summary ul#conectivism {
+	border-top:#6EA6D5 30px solid;
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:1000;
+	width:141px;
+	height:160px;
+	padding:0;
+	background:#fff;
+	list-style:none;
+	margin:0;
+}
+#summary ul#conectivism li {
+	padding-left:45px;
+	padding-top:20px;
+}
+#summary ul#conectivism li.classes {
+	border-top:#888 1px dashed;
+}
+
+#summary #course-data {
+	width:80%;
+	float:left;
+	position:relative;
+}
+#summary ul.professors {
+	padding:0;
+	list-style:none;
+	margin:0;
+}
+#summary ul.professors li {
+	width:30%;
+	float:left;
+}
+#summary #course-data .course {
+	margin-top:30px;
+	border-top:#888 1px dashed;
+	background:#fff;
+	height:139px;
+	padding:10px;
+	display:block;
+	margin-left:141px;
+}
+#summary #more-courses {
+	float:left;
+	width:20%;
+	height:160px;
+	max-width:340px;
+	background:#fff;
+	border-top:#6EA6D5 30px solid;
+}
+#summary #more-courses .courses {
+	border-top:#888 1px dashed;
+	display:block;
+	padding:10px;
+}
+#summary #more-courses .courses ul {
+	height:120px;
+	overflow:auto;
+}
+
+/* Tool list */
+#tools {
+	letter-spacing:1px;
+	clear:both;
+	height:30px;
+	border-top:#888 1px dashed;
+	border-bottom:#888 1px dashed;
+	background:#fff;
+	text-transform:uppercase;
+}
+#tools ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+#tools ul li {
+	float:left;
+	padding-top:13px;
+	height:17px;
+	padding-left:10px;
+	margin:0 10px 0 20px;
+	background: url('../../img/default/arrow_g.gif') no-repeat 0 16px;
+	
+}
+
+/* Main Content*/
+#main-content {
+	clear:both;
+	width:100%;
+	background:#fff;
+	position:relative;
+	float:left;
+}
+
+#main-content #side-content.small {
+	width:141px;
+	position:absolute;
+	top:10px;
+	left:0;
+}
+
+#main-content #main {
+	padding:10px 0 0 160px;
+}
+#main-content #main .boxed {
+	width:30%;
+	float:left;
+	margin-right:2%;
+	margin-bottom:15px;
+}
+
+#main-content #footer {
+	clear:both;
+	width:100%;
+	padding-top:60px;
+}
+#main-content #footer p {
+	font-size:0.92em;
+	background:#666;
+	color:#ccc;
+	margin:0;
+	padding:5px 10px;
+	text-align:right;
+}

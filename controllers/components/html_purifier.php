@@ -6,7 +6,7 @@ class HtmlPurifierComponent extends Object {
 	
 	function __get($member) {
 		if($member == 'lib') {
-			vendor('html_purifier/HTMLPurifier.auto');
+			App::import('Vendor','htmlpurifier',array('file' =>'html_purifier/HTMLPurifier.auto.php'));
 			$config = HTMLPurifier_Config::createDefault();
 			$config->set('Cache','SerializerPath',CACHE);
 			$config->set('HTML', 'TidyLevel', 'heavy');

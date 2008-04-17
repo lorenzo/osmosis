@@ -65,7 +65,6 @@ class Entry extends AppModel {
 				unset($data['Entry']['title']);
 			}
 		}
-		$data = $this->__cleanInput($data);
 		$this->create();
 		if (($result = parent::save($data,$validate,$fields))) {
 			$saved = true;
@@ -112,15 +111,6 @@ class Entry extends AppModel {
 		$new_entry['Entry']['id'] = $id;
 		unset($new_entry['Entry']['created']);
 		return $this->save($new_entry);
-	}
-	
-	function __cleanInput($data) {
-		uses('Sanitize');
-		$cleaner = new Sanitize;
-		if(isset($data['Entry']['title'])) {
-			$data['Entry']['title'] = $cleaner->html($data['Entry']['title'],true);
-		}
-		return $data;
 	}
 
 }

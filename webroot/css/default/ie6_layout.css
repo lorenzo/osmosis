@@ -1,0 +1,11 @@
+#top ul li a {
+	display:inline;
+}
+
+#tools {
+	height:30px;
+}
+
+#tools ul li {
+	height:16px;
+}

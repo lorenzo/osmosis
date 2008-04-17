@@ -1,0 +1,13 @@
+body {
+	padding-bottom:40px;
+}
+
+#content {
+	float:none;
+	display:inline-block;
+}
+
+.boxed div.content {
+	display: inline-block;
+	padding:10px;
+}

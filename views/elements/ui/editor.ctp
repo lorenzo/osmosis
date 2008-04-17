@@ -1,3 +1,4 @@
+<?php echo $javascript->link('tiny_mce/tiny_mce',null,null,false); ?>
 <?php
 $mode = (isset($mode)) ? $mode : 'textareas';
 $theme = (isset($theme)) ? $theme : 'advanced';
