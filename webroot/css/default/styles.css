@@ -95,7 +95,7 @@ a:visited {
 	text-transform:uppercase;
 	color:#fff;
 	display:block;
-	background:#666;
+	background:#666 url('../../img/default/arrow_w_on_g.gif') no-repeat 5px 50%;
 }
 #summary #more-courses .courses ul {
 	padding:0;
@@ -132,7 +132,6 @@ a:visited {
 #main-content #footer p a:focus {
 	color:#fff;
 }
-
 
 /* Tool list */
 #tools strong {
@@ -173,4 +172,8 @@ a:visited {
 .boxed div.content {
 	font-size:0.92em;
 	padding:0 10px;
+}
+
+#login {
+	width:300px;
 }

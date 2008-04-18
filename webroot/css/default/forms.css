@@ -1,0 +1,21 @@
+fieldset {
+	padding:15px;
+	padding-bottom:0;
+	border:#ccc 1px dashed;
+	margin:10px;
+}
+
+label {
+	margin-right:5px;
+	width:80px;
+	float:left;
+}
+
+div.input {
+	clear:both;
+	margin-bottom:10px;
+}
+
+div.submit {
+	text-align:center;
+}

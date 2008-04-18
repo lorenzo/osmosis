@@ -1,24 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-	<head>
-		<?php echo $html->charset();?>
-		<?php echo $html->css('default/layout'); ?>
-		<?php echo $html->css('default/styles'); ?>
-		<!--[if lte IE 7]>
-			<?php echo $html->css('default/ie_layout'); ?>
-		<![endif]-->
-		<!--[if IE 6]>
-			<?php echo $html->css('default/ie6_layout'); ?>
-		<![endif]-->
-		<?php if(Configure::read()>0) echo $html->css('debug');?>
-		<?php echo $javascript->codeBlock('var webroot = "' . $html->url('/') .'"'); ?>
-		<?php echo $scripts_for_layout; ?>
-		<title>Ósmosis :: <?php echo $title_for_layout;?></title>
-	</head>
+<head>
+	<?php echo $html->charset();?>
+	<?php echo $html->css('default/layout'); ?> 
+	<?php echo $html->css('default/styles'); ?> 
+	<?php echo $html->css('default/forms'); ?> 
+	<!--[if lte IE 7]>
+		<?php echo $html->css('default/ie_layout'); ?> 
+	<![endif]-->
+	<!--[if IE 6]>
+		<?php echo $html->css('default/ie6_layout'); ?> 
+	<![endif]-->
+	<?php if(Configure::read()>0) echo $html->css('debug');?> 
+	<?php echo $javascript->codeBlock('var webroot = "' . $html->url('/') .'"'); ?> 
+	<?php echo $scripts_for_layout; ?> 
+	<title>Ósmosis :: <?php echo $title_for_layout;?></title> 
+</head>
 <body>
 	<div id="logo">
-		<p class="name">Ósmosis <span>2</span></p>
+		<p class="name">Ósmosis 2</p>
 		<p class="tagline">e-learning innovation</p>
 	</div>
 	<div id="content">
