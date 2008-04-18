@@ -64,7 +64,7 @@ class PlaceholderComponent extends Object {
 	
 	function beforeRender() {
 		
-		foreach ($holders as $holder) {
+		foreach ($this->holders as $holder) {
 			if (!$this->{$holder}->auto && !$this->{$holder}->_continue()) {
 				$this->{$holder}->process();
 			}
