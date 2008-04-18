@@ -3,12 +3,20 @@ font-size:12px;
 }
 
 .cake-sql-log {
+	font-size:12px;
+	line-height:18px;
 	width:100%;
 	margin:auto;
 	clear:both;
-	background: #f4f4f4;
+	background: #fff;
+}
+.cake-sql-log tr:hover td {
+	background:#6EA6D5;
+	color:#fff;
 }
 .cake-sql-log td {
+	color:#999;
+	font-family:monospace;
 	padding: 4px 8px;
 	text-align: left;
 }
