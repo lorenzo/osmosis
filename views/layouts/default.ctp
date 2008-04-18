@@ -22,81 +22,83 @@
 		<p class="tagline">e-learning innovation</p>
 	</div>
 	<div id="content">
-		<div id="top">
-			<ul>
-				<li><a href="#">Buscar</a></li>
-				<li><a href="#">Ayuda</a></li>
-				<li><a href="#">Salir</a></li>
-			</ul>
-		</div>
-		<div id="summary">
-			<div id="side-content" class="small">
-				<ul id="conectivism">
-					<li class="classes"><a href="#">Clases</a></li>
-					<li class="messages"><a href="#">Mensajes</a></li>
-					<li class="conections"><a href="#">Conexiones</a></li>
+		<div class="contentcolumn">
+			<div id="top">
+				<ul>
+					<li><a href="#">Buscar</a></li>
+					<li><a href="#">Ayuda</a></li>
+					<li><a href="#">Salir</a></li>
 				</ul>
 			</div>
-			<div id="course-data">
-				<div class="course">
-					<h1>Fundamentos de JLO</h1>
-					<p class="course-description">Conozca por qué...</p>
-					<ul class="professors">
-						<li>
-							<div id="hcard-José-Lorenzo-Rodríguez" class="vcard">
-								<a class="url fn n" href="http://joselorenzo.com.ve/">  <span class="given-name">José</span>
-									<span class="additional-name">Lorenzo</span>
-									<span class="family-name">Rodríguez</span>
-								</a><br />
-								<a class="email" href="mailto:jose.zap@gmail.com">jose.zap@gmail.com</a><br />
-								<div class="tel">555-555555</div>
-							</div>
-						</li>
-						<li>
-							<div id="hcard-María-Grabriela-Días" class="vcard">
-								<span class="fn n">
-									<span class="given-name">Ana</span>
-									<span class="additional-name">Gabriela</span>
-									<span class="family-name">Días</span>
-								</span><br />
-								<a class="email" href="mailto:mabriela@gamil.com">mabriela@gamil.com</a><br />
-								<span class="office">Mon-333<span>
-							</div>
-						</li>						
+			<div id="summary">
+				<div id="side-content" class="small">
+					<ul id="conectivism">
+						<li class="classes"><a href="#">Clases</a></li>
+						<li class="messages"><a href="#">Mensajes</a></li>
+						<li class="conections"><a href="#">Conexiones</a></li>
 					</ul>
 				</div>
-			</div>
-			<div id="more-courses">
-				<div class="courses">
-					<strong>Mis cursos</strong>
-					<ul>
-						<li><a href="#"><span class="code">[QK-1111]</span> Un curso</a></li>
-						<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-						<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-						<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-						<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-						<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-					</ul>
+				<div id="course-data">
+					<div class="course">
+						<h1>Fundamentos de JLO</h1>
+						<p class="course-description">Conozca por qué...</p>
+						<ul class="professors">
+							<li>
+								<div id="hcard-José-Lorenzo-Rodríguez" class="vcard">
+									<a class="url fn n" href="http://joselorenzo.com.ve/">  <span class="given-name">José</span>
+										<span class="additional-name">Lorenzo</span>
+										<span class="family-name">Rodríguez</span>
+									</a><br />
+									<a class="email" href="mailto:jose.zap@gmail.com">jose.zap@gmail.com</a><br />
+									<div class="tel">555-555555</div>
+								</div>
+							</li>
+							<li>
+								<div id="hcard-María-Grabriela-Días" class="vcard">
+									<span class="fn n">
+										<span class="given-name">Ana</span>
+										<span class="additional-name">Gabriela</span>
+										<span class="family-name">Días</span>
+									</span><br />
+									<a class="email" href="mailto:mabriela@gamil.com">mabriela@gamil.com</a><br />
+									<span class="office">Mon-333<span>
+								</div>
+							</li>						
+						</ul>
+					</div>
+				</div>
+				<div id="more-courses">
+					<div class="courses">
+						<strong>Mis cursos</strong>
+						<ul>
+							<li><a href="#"><span class="code">[QK-1111]</span> Un curso</a></li>
+							<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+							<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+							<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+							<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+							<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div id="tools">
-			<strong><?php echo (isset($layoutToolbarName)) ?  $layoutToolbarName : __('Tools',true) ?></strong>
-			<ul>
-				<li><a href="#">Wiki</a></li>
-				<li><a href="#">Evaluaciones</a></li>
-				<li><a href="#">Foro</a></li>
-			</ul>
-		</div>
-		<div id="main-content">
-			<div id="side-content" class="small">
-				<!--Insert here placehloders for side-content-->
+			<div id="tools">
+				<strong><?php echo (isset($layoutToolbarName)) ?  $layoutToolbarName : __('Tools',true) ?></strong>
+				<ul>
+					<li><a href="#">Wiki</a></li>
+					<li><a href="#">Evaluaciones</a></li>
+					<li><a href="#">Foro</a></li>
+				</ul>
 			</div>
-			<div id="main">
-				<?php echo $content_for_layout; ?>
-			</div>
-			<div id="footer">
-				<p>Ósmosis 2 is Open Source</p>
+			<div id="main-content">
+				<div id="side-content" class="small">
+					<!--Insert here placehloders for side-content-->
+				</div>
+				<div id="main">
+					<?php echo $content_for_layout; ?>
+				</div>
+				<div id="footer">
+					<p>Ósmosis 2 is Open Source</p>
+				</div>
 			</div>
 		</div>
 	</div>

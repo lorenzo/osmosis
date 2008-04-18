@@ -6,6 +6,7 @@ body, html {
 
 body {
 	float:left;
+	width:100%;
 	font-size:62.5%;
 	font-family:"Trebuchet MS", Arial, sans-serif;
 	background: #fff url('../../img/default/osmosis_bg.jpg');
@@ -38,12 +39,14 @@ body {
 
 #content {
 	font-size:1.2em;
+	width:100%;
+/*	border-left:#888 1px dashed;*/
+/*	margin-bottom:40px;*/
+}
+#content .contentcolumn {
 	margin-left:75px;
 	border-left:#888 1px dashed;
-	margin-bottom:40px;
-	float:left;
 }
-
 /* Top area (tabs)*/
 #top {
 	padding-left:75px;
@@ -163,7 +166,6 @@ body {
 	width:100%;
 	background:#fff;
 	position:relative;
-	float:left;
 }
 
 #main-content #side-content.small {
