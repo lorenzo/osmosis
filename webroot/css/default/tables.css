@@ -1,0 +1,38 @@
+table {
+	width:100%;
+}
+
+table th {
+	color:#fff;
+	background:#6EA6D5;
+	padding:2px 0;
+}
+table td {
+	padding:2px 10px;
+	border-bottom:#ccc 1px dashed;
+}
+table .altrow td {
+	background:#f5f5f5;
+}
+table th a {
+	color:#fff;
+	text-decoration:none;
+}
+
+table th a:visited {
+	color:#fff;
+}
+
+.paging {
+	margin-top:10px;
+	color:#333;
+	text-align:right;
+}
+
+.paging div {
+	display:inline;
+}
+
+.paging .disabled {
+	color:#ccc;
+}

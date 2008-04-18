@@ -6,6 +6,7 @@
 	<?php echo $html->css('default/layout'); ?> 
 	<?php echo $html->css('default/styles'); ?> 
 	<?php echo $html->css('default/forms'); ?> 
+	<?php echo $html->css('default/tables'); ?> 
 	<!--[if lte IE 7]>
 		<?php echo $html->css('default/ie_layout'); ?> 
 	<![endif]-->
