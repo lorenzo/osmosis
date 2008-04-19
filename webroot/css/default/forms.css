@@ -19,3 +19,9 @@ div.input {
 div.submit {
 	text-align:center;
 }
+
+.error-message {
+	margin:2px 0 0 85px;
+	color:#BF0000;
+	
+}

@@ -1,0 +1,11 @@
+#summary.growing #course-data {
+		background:#fff;
+}
+#summary.growing {
+	height:auto;
+}
+
+#summary.growing #course-data .course {
+	height:auto;
+	font-size:1.2em;
+}

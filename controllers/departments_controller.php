@@ -3,6 +3,11 @@ class DepartmentsController extends AppController {
 
 	var $name = 'Departments';
 	var $helpers = array('Html', 'Form' );
+
+	var $layouts = array(
+		'index' => 'admin'
+	);
+	
 	/**
 	 * Lists available departments
 	 *
@@ -10,6 +15,12 @@ class DepartmentsController extends AppController {
 	 */
 	
 	function index() {
+		$this->Department->recursive = 1;
+		$this->set('departments', $this->paginate());
+	}
+	
+
+	function admin_index() {
 		$this->Department->recursive = 1;
 		$this->set('departments', $this->paginate());
 	}
@@ -21,7 +32,7 @@ class DepartmentsController extends AppController {
 	 * @author José Lorenzo
 	 */
 	
-	function view($id = null) {
+	function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Department',true));
 			$this->redirect(array('action'=>'index'), null, true);
@@ -37,7 +48,7 @@ class DepartmentsController extends AppController {
 	 * @author José Lorenzo
 	 */
 	
-	function add() {
+	function admin_add() {
 		if (!empty($this->data)) {
 			$this->Department->create();
 			if ($this->Department->save($this->data)) {
@@ -56,7 +67,7 @@ class DepartmentsController extends AppController {
 	 * @author José Lorenzo
 	 */
 	
-	function edit($id = null) {
+	function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Department',true));
 			$this->redirect(array('action'=>'index'), null, true);
@@ -81,7 +92,7 @@ class DepartmentsController extends AppController {
 	 * @author José Lorenzo
 	 */
 	
-	function delete($id = null) {
+	function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Department',true));
 			$this->redirect(array('action'=>'index'), null, true);

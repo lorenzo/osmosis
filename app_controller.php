@@ -1,7 +1,7 @@
 <?php
 class AppController extends Controller {
-	var $components = array('Acl','Auth','RequestHandler');
-	var $helpers = array('Javascript', 'Html', 'Form', 'Dynamicjs', 'Time');
+	var $components = array('Acl','Auth','RequestHandler', 'Placeholder');
+	var $helpers = array('Javascript', 'Html', 'Form', 'Dynamicjs', 'Time', 'Placeholder');
 
 	function beforeFilter() {
 		if (isset($this->Auth)) {
@@ -16,8 +16,15 @@ class AppController extends Controller {
 				$this->Auth->allow();
 			}
 		}
+		$this->__selectLayout();
 	}
 
+	function __selectLayout() {
+		if (isset($this->params['admin']) && $this->params['admin']) {
+			$this->layout = 'admin';
+		}
+	}
+	
 	function isAuthorized() {
 		if( $this->name == 'Pages')
 			return true;
@@ -26,5 +33,22 @@ class AppController extends Controller {
 		}
 		return false;
 	}
+	
+	function admin_index() {
+		$this->index;
+	}
+	
+	function admin_view($id = null) {
+		$this->view($id);
+	}
+	
+	function admin_edit($id = null) {
+		$this->edit($id);
+	}
+	
+	function admin_delete($id = null) {
+		$this->delete($id);
+	}
+	
 }
 ?>

@@ -13,28 +13,27 @@ body {
 }
 
 #logo {
+	display:block;
 	position:absolute;
 	top:77px;
 	left:0;
 	width:75px;
-	background:#fff url('../../img/default/osmosis2_logo.jpg') no-repeat;
 	font-size:1.4em;
 	border-top:#888 1px dashed;
+	text-indent:-9000px;
+	border-bottom:#888 1px dashed;
 }
 #logo p {
+	border-bottom:#A8A9AB 30px solid;
+	height:190px;
 	margin:0;
-	padding:0;
-	text-indent:-9000px;
 }
-#logo p.name {
-	float:left;
-}
-#logo p.tagline {
-	background:#A8A9AB;
-	border-top:#888 1px dashed;
+
+#logo p a {
+	display:block;
+	background:#fff url('../../img/default/osmosis2_logo.gif') no-repeat;
+	height:100%;
 	border-bottom:#888 1px dashed;
-	margin-top:190px;
-	height:30px;
 }
 
 #content {
@@ -96,6 +95,7 @@ body {
 	width:80%;
 	float:left;
 	position:relative;
+	
 }
 #summary ul.professors {
 	padding:0;

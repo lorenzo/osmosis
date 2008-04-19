@@ -16,6 +16,15 @@ class MembersController extends AppController {
 		$this->set('members', $this->paginate());
 	}
 
+	function admin_index() {
+		$this->Member->recursive = 0;
+		$conditions = array();
+		if (isset($this->params['named']['role'])) {
+			$conditions['Role.id'] = $this->params['named']['role'];
+		}
+		$this->set('members', $this->paginate(null, $conditions));
+	}
+
 	/**
 	 * Display the details of a member
 	 *
@@ -39,9 +48,8 @@ class MembersController extends AppController {
 	 * @author José Lorenzo
 	 */
 	
-	function add() {
+	function admin_add() {
 		if (!empty($this->data)) {
-			$this->cleanUpFields();
 			$this->Member->create();
 			if ($this->Member->save($this->data)) {
 				$this->Session->setFlash(__('The Member has been saved',true));
@@ -68,7 +76,6 @@ class MembersController extends AppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
-			$this->cleanUpFields();
 			if ($this->Member->save($this->data)) {
 				$this->Session->setFlash(__('The Member has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
@@ -79,7 +86,7 @@ class MembersController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Member->read(null, $id);
 		}
-		$roles = $this->Member->Role->generateList();
+		$roles = $this->Member->Role->find('list');
 		$this->set(compact('roles'));
 	}
 

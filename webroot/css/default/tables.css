@@ -8,6 +8,7 @@ table th {
 	padding:2px 0;
 }
 table td {
+	text-align:center;
 	padding:2px 10px;
 	border-bottom:#ccc 1px dashed;
 }

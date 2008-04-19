@@ -13,9 +13,9 @@ class QuizzesController extends QuizAppController {
 		parent::beforeFilter();
 		$this->question_types = array(
 			'choice_question'	=> __('Choice Question', true),
-			'cloze_question'	=> __('Cloze Question', true),
+			// 'cloze_question'	=> __('Cloze Question', true),
 			'matching_question'	=> __('Matching Question', true),
-			'oredering_question'=> __('Ordering Question', true),
+			'ordering_question'=> __('Ordering Question', true),
 			'text_question'		=> __('Text Question', true)
 		);
 		$this->set('question_types', $this->question_types);
@@ -59,17 +59,35 @@ class QuizzesController extends QuizAppController {
 			$this->Session->setFlash(__('Invalid Quiz',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-		if (!empty($this->data)) {
-			if ($this->Quiz->save($this->data)) {
-				$this->Session->setFlash(__('The Quiz has been saved',true));
-				$this->redirect(array('action'=>'index'), null, true);
-			} else {
-				$this->Session->setFlash(__('The Quiz could not be saved. Please, try again.',true));
-			}
+		
+		$question_type = 'all';
+		if (isset($this->params['named']['question_type'])) {
+			$question_type = $this->params['named']['question_type'];
 		}
-		if (empty($this->data)) {
+		$this->set('question_type', $question_type);
+		$question_name = 'All';
+		if (isset($this->question_types[$question_type])) {
+			$question_name = $this->question_types[$question_type];
+		}
+		$this->set('question_name', $question_name);
+		if ($question_type != 'all') {
+			$questions = $this->Quiz->getQuestions($question_type);
+		} else {
+			$questions = $this->Quiz->getQuestions($this->question_types);
+		}
+		
+		if (!empty($this->data)) {
+			// debug($this->data);die;
+			// 			if ($this->Quiz->save($this->data)) {
+			// 				$this->Session->setFlash(__('The Quiz has been saved',true));
+			// 				$this->redirect(array('action'=>'index'), null, true);
+			// 			} else {
+			// 				$this->Session->setFlash(__('The Quiz could not be saved. Please, try again.',true));
+			// 			}
+		} else {
 			$this->data = $this->Quiz->read(null, $id);
 		}
+		$this->set('question_list', $questions);
 		/*
 		$associationQuestions = $this->Quiz->AssociationQuestion->find('list');
 		$choiceQuestions = $this->Quiz->ChoiceQuestion->find('list');
@@ -109,36 +127,25 @@ class QuizzesController extends QuizAppController {
 		}
 	}
 
-	function add_question($question_type=null, $quiz_id = null) {
-		if (empty($this->data) && !$question_type) {
-			$this->Session->setFlash(__('Invalid Question Type', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		$questionType = Inflector::Camelize($question_type);
-		if (empty($this->data) && !$quiz_id) {
+	function add_question($quiz_id = null) {
+		if (empty($this->data) || !$quiz_id) {
 			$this->Session->setFlash(__('Invalid Quiz', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			$this->Quiz->id = $this->data['Quiz']['id'];
-			
-			var_dump($this->Quiz->save($this->data));
-			debug($this->Quiz->validationErrors);
-			debug($this->data);
-			
-		} else {
-			$this->data['Quiz']['id'] = $quiz_id;
+			$this->Quiz->id = $quiz_id;
+			if ($this->Quiz->addQuestions($this->data)) {
+				$this->Session->setFlash(__('The questions where added to the quiz.', true));
+				$this->redirect(
+					array('controller' => 'quizzes', 'action' => 'edit', $quiz_id)
+				);
+			} else {
+				$this->Session->setFlash(__('The questions could not be added to the quiz.', true));
+				$this->redirect(
+					array('controller' => 'quizzes', 'action' => 'edit', $quiz_id)
+				);
+			}
 		}
-		
- 		$quiz_questions = $this->Quiz->find('first', array('conditions' => array('id' => $quiz_id)));
-	 	$quiz_questions = Set::extract($quiz_questions[$questionType], '{n}.id');
- 		$available_questions = $this->paginate('Quiz.' . $questionType);
-
-		$this->set('question_type', $question_type);
- 		$this->set('available_questions', $available_questions);
- 		$this->set('questionType', $questionType);
- 		$this->set('id', $quiz_id);
- 		$this->set('quiz_questions', $quiz_questions);
 	}
 
 }

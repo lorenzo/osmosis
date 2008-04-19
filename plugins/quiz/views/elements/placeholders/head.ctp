@@ -1,0 +1,1 @@
+<?php echo $html->css('/quiz/css/quiz.css')?>

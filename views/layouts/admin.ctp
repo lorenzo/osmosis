@@ -7,6 +7,7 @@
 	<?php echo $html->css('default/styles'); ?> 
 	<?php echo $html->css('default/forms'); ?> 
 	<?php echo $html->css('default/tables'); ?> 
+	<?php echo $html->css('default/admin'); ?> 
 	<!--[if lte IE 7]>
 		<?php echo $html->css('default/ie_layout'); ?> 
 	<![endif]-->
@@ -16,7 +17,6 @@
 	<?php if(Configure::read()>0) echo $html->css('debug');?> 
 	<?php echo $javascript->codeBlock('var webroot = "' . $html->url('/') .'"'); ?> 
 	<?php echo $scripts_for_layout; ?> 
-	<?php echo $placeholder->render('head'); ?>
 	<title>Ósmosis :: <?php echo $title_for_layout;?></title> 
 </head>
 <body>
@@ -32,46 +32,34 @@
 					<li><a href="#">Salir</a></li>
 				</ul>
 			</div>
-			<div id="summary">
+			<div id="summary" class="growing">
 				<div id="side-content" class="small">
 					<ul id="conectivism">
-						<li class="classes"><a href="#">Clases</a></li>
-						<li class="messages"><a href="#">Mensajes</a></li>
-						<li class="conections"><a href="#">Conexiones</a></li>
+						<li class="classes">
+							<?php
+								echo $html->link(__('Courses', true), array('controller' => 'courses', 'action' => 'index'));
+							?>
+						</li>
+						<li>
+							<?php
+								echo $html->link(__('Departments', true), array('controller' => 'departments', 'action' => 'index'));
+							?>
+						</li>
+						<li>
+							<?php
+								echo $html->link(__('Members', true), array('controller' => 'members', 'action' => 'index'));
+							?>
+						</li>
 					</ul>
 				</div>
 				<div id="course-data">
 					<div class="course">
-						<h1>Fundamentos de JLO</h1>
-						<p class="course-description">Conozca por qué...</p>
-						<ul class="professors">
-							<li>
-								<div id="hcard-José-Lorenzo-Rodríguez" class="vcard">
-									<a class="url fn n" href="http://joselorenzo.com.ve/">  <span class="given-name">José</span>
-										<span class="additional-name">Lorenzo</span>
-										<span class="family-name">Rodríguez</span>
-									</a><br />
-									<a class="email" href="mailto:jose.zap@gmail.com">jose.zap@gmail.com</a><br />
-									<div class="tel">555-555555</div>
-								</div>
-							</li>
-							<li>
-								<div id="hcard-María-Grabriela-Días" class="vcard">
-									<span class="fn n">
-										<span class="given-name">Ana</span>
-										<span class="additional-name">Gabriela</span>
-										<span class="family-name">Días</span>
-									</span><br />
-									<a class="email" href="mailto:mabriela@gamil.com">mabriela@gamil.com</a><br />
-									<span class="office">Mon-333<span>
-								</div>
-							</li>						
-						</ul>
+						<?php echo $content_for_layout; ?>
 					</div>
 				</div>
 				<div id="more-courses">
 					<div class="courses">
-						<strong>Mis cursos</strong>
+						<strong>???</strong>
 						<ul>
 							<li><a href="#"><span class="code">[QK-1111]</span> Un curso</a></li>
 							<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
@@ -83,21 +71,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="tools">
-				<strong><?php echo (isset($layoutToolbarName)) ?  $layoutToolbarName : __('Tools',true) ?></strong>
-				<ul>
-					<li><a href="#">Wiki</a></li>
-					<li><a href="#">Evaluaciones</a></li>
-					<li><a href="#">Foro</a></li>
-				</ul>
-			</div>
 			<div id="main-content">
-				<div id="side-content" class="small">
-					<!--Insert here placehloders for side-content-->
-				</div>
-				<div id="main">
-					<?php echo $content_for_layout; ?>
-				</div>
 				<div id="footer">
 					<p>Ósmosis 2 is Open Source</p>
 				</div>

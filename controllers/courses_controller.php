@@ -16,6 +16,11 @@ class CoursesController extends AppController {
 		$this->set('courses', $this->paginate());
 	}
 
+	function admin_index() {
+		$this->Coursese->recursive = 0;
+		$this->set('courses', $this->paginate());
+	}
+
 	/**
 	 * Displays course information
 	 *
@@ -39,7 +44,7 @@ class CoursesController extends AppController {
 	 * @author José Lorenzo
 	 */
 	
-	function add() {
+	function admin_add() {
 		if (!empty($this->data)) {
 			$this->Course->create();
 			$this->data['Course']['owner_id'] = $this->Auth->user('id');
@@ -63,7 +68,7 @@ class CoursesController extends AppController {
 	 * @author José Lorenzo
 	 */
 	
-	function edit($id = null) {
+	function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Course',true));
 			$this->redirect(array('action'=>'index'), null, true);
@@ -93,7 +98,7 @@ class CoursesController extends AppController {
 	 * @author José Lorenzo
 	 */
 	
-	function delete($id = null) {
+	function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Course'));
 			$this->redirect(array('action'=>'index'), null, true);

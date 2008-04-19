@@ -1,6 +1,8 @@
 <?php
 class Member extends AppModel {
 	var $name = 'Member';
+	var $displayField = 'full_name';
+
 	var $validate = array(
 			'name' => array(
 			    'valid' => array(

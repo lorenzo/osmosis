@@ -1,40 +1,40 @@
 <h1><?php echo sprintf(__('Edit %s %s', true), __('Quiz', true), $form->value('name'));?></h1>
-<?php __('Add a question to this quiz'); ?>
-<ul>
+<div class="question-list">
+	<?php echo __('Question type:', true); ?>
 	<?php
-		foreach ($question_types as $question_type_key => $question_type) {
+		echo $form->create('Quiz', array('action' => 'add_question'));
+		echo $this->renderElement('question_drop_list', array('quiz_id' => $this->data['Quiz']['id']));
 	?>
-	<li>
+	<div id="questions">
+		<div class="list">
+			<?php
+				foreach ($question_list as $type => $questions) {
+					if ($type != 'TextQuestion') continue;
+					echo $this->renderElement($type . '_selection_list', array('questions' => $questions));
+				}
+			?>
+		</div>
+	</div>
+	<?php
+		echo $form->submit(__('Associate', true));
+		echo $form->end();
+	?>
+</div>
+<div class="quiz-preview">
+	<div class="content">
+		<h2>&mdash; <?php echo $this->data['Quiz']['name'] ?> &mdash;</h2>
 		<?php
-			echo $html->link(
-				__('Associate an existing ' . $question_type, true),
-				array(
-					'action' => 'add_question',
-					$question_type_key,
-					$form->value('Quiz.id')
-				)
-			);
-			echo ' ' . __('or', true) . ' ';
-			echo $html->link(
-				'create a new one',
-				array(
-					'controller' => Inflector::pluralize($question_type_key),
-					'action' => 'add',
-					'quiz_id' => $form->value('Quiz.id')
-				),
-				array('title' => __('Create a new ' . $question_type, true))
-			);
-		?> 
-	</li>
-	<?php			
-		}
-	?>
-</ul>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('Delete', true), array('action'=>'delete', $form->value('Quiz.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Quiz.id'))); ?></li>
-		<li><?php echo $html->link(sprintf(__('List %s', true), __('Quizzes', true)), array('action'=>'index'));?></li>
-		<li><?php echo $html->link(sprintf(__('List %s', true), __('Association Questions', true)), array('controller'=> 'association_questions', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(sprintf(__('New %s', true), __('Association Question', true)), array('controller'=> 'association_questions', 'action'=>'add')); ?> </li>
-	</ul>
+			unset($this->data['Quiz']);
+			foreach ($this->data as $type => $question_list) {
+				if (empty($question_list)) continue;
+				echo '<h3>' . __($type, true) . '</h3>';
+				echo '<ol>';
+				foreach ($question_list as $i => $question) {
+					$question = array($type => $question);
+					echo '<li>' . $this->renderElement($type . '_view', array('question' => $question)) . '</li>';
+				}
+				echo '</ol>';
+			}
+		?>
+	</div>
 </div>
