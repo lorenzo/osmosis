@@ -65,6 +65,16 @@ class Course extends AppModel {
 								'counterCache' => ''),
 	);
 	
+	var $hasAndBelongsToMany = array(
+			'Tool' => array(
+				'className' => 'Plugin',
+				'joinTable' => 'course_tools',
+				'foreignKey' => 'course_id',
+				'associationForeignKey' => 'plugin_id',
+				'with' => 'CourseTool'
+			)
+	);
+	
 	function __construct($id = false, $table = null, $ds = null) {
 			$this->validate['department_id']['Error.empty']['message'] = __('The department can not be empty',true);
 			$this->validate['owner_id']['Error.empty']['message'] = __('The owner can not be empty',true);

@@ -29,8 +29,8 @@ class PlaceholderHelperTest extends CakeTestCase {
 	}
 
 	function tearDown() {
-		if (isset($this->PlaceHolder)) {
-			unset($this->PlaceHolder->Html, $this->PlaceHolder);
+		if (isset($this->Placeholder)) {
+			unset($this->Placeholder->Html, $this->Placeholder);
 		}
 		unset($this->Controller, $this->View);
 		ClassRegistry::removeObject('view');
@@ -45,17 +45,17 @@ class PlaceholderHelperTest extends CakeTestCase {
 					'Fake2Other' => array('cache'=>'+1 hour','data'=>array('var' => 'value2')))
 			)
 		);
-		$this->assertEqual('var=value',$this->PlaceHolder->render('menu'));
-		$this->assertEqual('var=value2',$this->PlaceHolder->render('other'));
+		$this->assertEqual('var=value',$this->Placeholder->render('menu'));
+		$this->assertEqual('var=value2',$this->Placeholder->render('other'));
 	}
 	
 	function testRenderWithPull() {
-		$this->assertEqual('var=value',$this->PlaceHolder->render('menu'));
-		$this->assertEqual('var=value',$this->PlaceHolder->render('other'));
+		$this->assertEqual('var=value',$this->Placeholder->render('menu'));
+		$this->assertEqual('var=value',$this->Placeholder->render('other'));
 	}
 	
 	function testRenderEmptyPlacheholder() {
-		$this->assertEqual('',$this->PlaceHolder->render('dummy'));
+		$this->assertEqual('',$this->Placeholder->render('dummy'));
 	}
 
 }

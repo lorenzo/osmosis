@@ -47,8 +47,11 @@ class Entry extends AppModel {
 								'counterQuery' => ''),
 	);
 	
-	var $actsAs = array('Transaction');
-	
+	var $actsAs = array(
+		'Transaction',
+		'Sluggable' => array('label' => 'title', 'slug' => 'slug', 'overwrite' => false, 'separator' => '_','translation' => 'utf-8')
+	);
+
 	function save($data,$validate = true,$fields = array()) {
 		$update = false;
 		$this->begin();

@@ -50,6 +50,11 @@
 								echo $html->link(__('Members', true), array('controller' => 'members', 'action' => 'index'));
 							?>
 						</li>
+						<li>
+							<?php
+								echo $html->link(__('Plugins', true), array('controller' => 'plugins', 'action' => 'index'));
+							?>
+						</li>
 					</ul>
 				</div>
 				<div id="course-data">

@@ -118,16 +118,35 @@ CREATE TABLE IF NOT EXISTS `members` (
 
 -- --------------------------------------------------------
 
---
+-- 
+-- Table structure for table `course_tools`
+-- 
+
+CREATE TABLE IF NOT EXISTS `course_tools` (
+  `id` int(10) NOT NULL auto_increment,
+  `course_id` int(11) NOT NULL,
+  `plugin_id` smallint(4) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `course_id` (`course_id`,`plugin_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Represents the tools that a course has installed' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
 -- Table structure for table `plugins`
---
+-- 
 
 CREATE TABLE IF NOT EXISTS `plugins` (
   `id` smallint(4) unsigned NOT NULL auto_increment,
-  `name` varchar(50) collate utf8_unicode_ci NOT NULL,
+  `title` varchar(50) collate utf8_unicode_ci default NULL,
   `active` tinyint(1) NOT NULL,
+  `name` varchar(100) collate utf8_unicode_ci NOT NULL,
+  `description` varchar(255) collate utf8_unicode_ci default NULL,
+  `author` varchar(100) collate utf8_unicode_ci default NULL,
+  `types` varchar(30) collate utf8_unicode_ci NOT NULL default 'tool',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Holds installed plugin names and active status';
+
 
 -- --------------------------------------------------------
 

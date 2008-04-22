@@ -10,12 +10,19 @@ class EntriesController extends WikiAppController {
 		$this->set('entries', $this->paginate());
 	}
 
-	function view($id = null) {
-		if (!$id) {
+	function view($slug = null) {
+		if (!$slug) {
 			$this->Session->setFlash(__('Invalid Entry.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-		$this->set('entry', $this->Entry->read(null, $id));
+		$conditions = array('conditions' => array('slug' => $slug));
+		if (isset($this->params['named']['wiki_id']))
+			$conditions['conditions']['wiki_id'] = $this->params['named']['wiki_id'];
+			
+		if (isset($this->params['named']['course_id']))
+			$conditions['conditions']['course_id'] = $this->params['named']['course_id'];
+			
+		$this->set('entry', $this->Entry->find('first',$conditions));
 	}
 
 	function add($wiki_id = null) {

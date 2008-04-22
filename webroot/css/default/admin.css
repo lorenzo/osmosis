@@ -9,3 +9,52 @@
 	height:auto;
 	font-size:1.2em;
 }
+
+div.course .boxed {
+	width:30%;
+	float:left;
+	margin-right:2%;
+	margin-bottom:15px;
+}
+
+div.plugins.index ul li{
+	list-style:none;
+	
+}
+
+
+div.plugins.index ul li div.actions a{
+	text-decoration:none;
+	color:#fff;
+	background:#6EA6D5;
+	padding:3px 0;
+	display:block;
+	width:20%;
+	font-size:90%;
+	text-align:center;
+	float:left;
+	margin-right:3px;
+}
+
+div.plugins.index ul li div.install a{
+	margin:0;
+	width:100%;
+}
+
+div.plugins.index ul li div.actions a:hover{
+	background:#ddd;
+}
+
+div.plugins.index ul li dl {
+	
+}
+div.plugins.index ul li dl dd{
+	padding: 0 10px;
+	margin-left:0;
+	height:150px;
+	overflow-y:auto;
+}
+strong.author {
+	display:block;
+	padding-top:5px;
+}

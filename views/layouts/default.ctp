@@ -96,6 +96,11 @@
 					<!--Insert here placehloders for side-content-->
 				</div>
 				<div id="main">
+					<?php
+						if ($session->check('Message.flash')) {
+							$session->flash();
+						}
+					?>
 					<?php echo $content_for_layout; ?>
 				</div>
 				<div id="footer">
