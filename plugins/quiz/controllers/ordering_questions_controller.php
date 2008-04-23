@@ -28,11 +28,21 @@ class OrderingQuestionsController extends AppController {
 		
 		
 		if (!empty($this->data)) {
-			$this->cleanUpFields();
+			foreach ($this->data['OrderingChoice'] as $i => $choice) {
+				$this->data['OrderingChoice'][$i]['total'] = count($this->data['OrderingChoice']);
+			}
 			$this->OrderingQuestion->create();
-			if ($this->OrderingQuestion->save($this->data)) {
-				$this->Session->setFlash(__('The Ordering Question has been saved',true));
-				$this->redirect(array('action'=>'index'), null, true);
+			if ($this->OrderingQuestion->saveAll($this->data)) {
+				$habtm_data = array(
+					'ordering_question_id' => $this->OrderingQuestion->getLastInsertID(),
+					'quiz_id' => $this->data['Quiz'][0]['id']
+				);
+				if ($this->OrderingQuestion->QuizOrdering->save($habtm_data)) {
+					$this->Session->setFlash(__('The Ordering Question has been saved',true));
+					$this->redirect(
+						array('controller' => 'quizzes', 'action'=>'edit', 	$this->data['Quiz'][0]['id'])
+					);
+				}
 			} else {
 				$totalChoices = count($this->data['OrderingChoice']);
 				$this->Session->setFlash(__('The Ordering Question could not be saved. Please, try again.',true));
@@ -50,7 +60,6 @@ class OrderingQuestionsController extends AppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
-			$this->cleanUpFields();
 			if ($this->OrderingQuestion->save($this->data)) {
 				$this->Session->setFlash(__('The Ordering Question has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);

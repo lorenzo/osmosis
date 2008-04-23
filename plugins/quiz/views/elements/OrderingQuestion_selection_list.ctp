@@ -2,7 +2,7 @@
 	<?php
 		$i = 0;
 		foreach ($questions as $type => $question) {
-			$question = $question['MatchingQuestion'];
+			$question = $question['OrderingQuestion'];
 	?>
 		<li>
 			<?php
@@ -18,7 +18,7 @@
 				echo $html->link(__('view', true), array('controller' => 'choice_questions', 'action' => 'view', $question['id']));
 				echo $this->renderElement(
 					'selection_list.add_question',
-					array('question_id' => $question['id'], 'i' => $i++, 'type'=>'MatchingQuestion')
+					array('question_id' => $question['id'], 'i' => $i++, 'type'=>'OrderingQuestion')
 				);
 			?>
 		</li>

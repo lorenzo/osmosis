@@ -1,5 +1,4 @@
 <?php
-class QuizAppModel extends AppModel {
-	
+class QuizAppModel extends AppModel {	
 }
 ?>

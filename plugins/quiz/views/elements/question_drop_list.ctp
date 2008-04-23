@@ -36,7 +36,7 @@
 <p class="add">
 	<?php
 		if ($question_type!='all') {
-			echo '&mdash; ' . $html->link(__('add', true), array('controller'=>Inflector::pluralize($question_type), 'action' => 'add', 'quiz' => $quiz_id));
+			echo '&mdash; ' . $html->link(__('create one', true), array('controller'=>Inflector::pluralize($question_type), 'action' => 'add', 'quiz' => $quiz_id));
 		}
 	?>
 	&nbsp;

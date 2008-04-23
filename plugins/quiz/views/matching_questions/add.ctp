@@ -28,7 +28,7 @@
 		<fieldset class="question-choices matching">
 			<legend><?php echo sprintf(__('Choices', true));?></legend>
 			<div class="choice question set">
-				<strong><?php __('Questions'); ?></strong>
+				<strong><?php __('Questions'); ?></strong>s
 				<ol>
 				<?php
 					for ($i=0;$i<$totalQuestions;$i++) :

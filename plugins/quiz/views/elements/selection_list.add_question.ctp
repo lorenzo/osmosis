@@ -1,6 +1,6 @@
 <?php
 echo $form->input(
-	'TextQuestion.' . $i,
+	$type . '.' . $i,
 	array(
 		'value' => $question_id,
 		'type' => 'checkbox',

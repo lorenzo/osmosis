@@ -8,7 +8,29 @@
 	<div id="questions">
 		<div class="list">
 			<?php
+				$once = false;
 				foreach ($question_list as $type => $questions) {
+					if (empty($questions)) {
+						$link = '';
+						$message = __('There are no questions of this type registered', true);
+						if ($question_type!='all') {
+							$link = '<br />' . $html->link(
+								__('create one', true),
+								array(
+									'controller'=>Inflector::pluralize($question_type),
+									'action' => 'add',
+									'quiz' => $this->data['Quiz']['id']
+								)
+							);
+						} else {
+							$message = __('There are no questions registered', true);
+						}
+						if (!$once) {
+							printf('<p class="empty">%s%s</p>', $message, $link);
+							$once = true;
+						}
+						continue;
+					}
 					echo $this->renderElement($type . '_selection_list', array('questions' => $questions));
 				}
 			?>
@@ -30,7 +52,7 @@
 				echo '<ol>';
 				foreach ($question_list as $i => $question) {
 					$question = array($type => $question);
-					echo '<li>' . $this->renderElement($type . '_view', array('question' => $question)) . '</li>';
+					echo '<li>' . $this->renderElement($type . '_view', array('question' => $question)) . '&nbsp;</li>';
 				}
 				echo '</ol>';
 			}

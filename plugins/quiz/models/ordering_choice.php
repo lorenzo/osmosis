@@ -3,8 +3,19 @@ class OrderingChoice extends QuizAppModel {
 
 	var $name = 'OrderingChoice';
 	var $validate = array(
-		'ordering_question_id' => VALID_NOT_EMPTY,
-		'text' => VALID_NOT_EMPTY,
+		'text' => array(
+			'required_with_position' => array(
+				'rule' => array('/.+/'),
+				'message' => 'Please write a text for this choice'
+			)
+		),
+		'position' => array(
+			'position_ok' => array(
+				'rule' => array('positionOk'),
+				'message' => 'The position must be between zero and the number of choices written',
+				'allowEmpty' => true
+			)
+		)
 	);
 
 	var $useTable = 'quiz_ordering_choices';
@@ -16,6 +27,9 @@ class OrderingChoice extends QuizAppModel {
 								'order' => '',
 								'counterCache' => ''),
 	);
-
+	
+	function positionOk() {
+		return ($this->data['OrderingChoice']['total']<$this->data['OrderingChoice']['position']);
+	}
 }
 ?>

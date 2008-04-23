@@ -85,6 +85,7 @@ class QuizzesController extends QuizAppController {
 			// 				$this->Session->setFlash(__('The Quiz could not be saved. Please, try again.',true));
 			// 			}
 		} else {
+			$this->Quiz->recursive = 2;
 			$this->data = $this->Quiz->read(null, $id);
 		}
 		$this->set('question_list', $questions);
