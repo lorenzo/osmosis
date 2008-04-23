@@ -107,7 +107,6 @@
 }
 
 #questions .list ul li {
-	height:50px;
 	padding:5px 10px;
 	border-bottom:#999 1px dashed;
 }
@@ -131,3 +130,112 @@
 	padding-left:10px;
 }
 
+.choices .information {
+	width:30%;
+	float:left;
+}
+
+.choices fieldset.question-choices {
+	width:60%;
+	float:right;
+}
+
+.choices fieldset.question-choices div.submit {
+	text-align:right;
+}
+
+fieldset.question-choices .choice {
+	float:left;
+	clear:both;
+	width:100%;
+	border-bottom:#ccc 1px dashed;
+	margin-bottom:10px;
+}
+
+fieldset.question-choices .choice .text {
+	width:60%;
+	float:left;
+}
+
+.information textarea,
+fieldset.question-choices .choice .text textarea,
+fieldset.question-choices .choice .position input {
+	width:90%;
+}
+fieldset.question-choices .choice .position {
+	width:40%;
+	float:left;
+}
+fieldset.question-choices .choice .position label {
+	display:inline;
+	width:auto;
+	float:left;
+}
+fieldset.question-choices .choice label {
+	float:left;
+	width:100%;
+	display:block;
+}
+
+form p.description {
+	font-size:0.92em;
+	color:#666;
+	margin-top:0;
+	padding:0 10px;
+}
+
+fieldset.question-choices .choice.set {
+	clear:none;
+	width:40%;
+	border:none;
+}
+fieldset.question-choices .choice.question.set {
+	width:55%;
+	float:left;
+}
+fieldset.question-choices .choice.question.set textarea{
+	float:left;
+	width:80%;
+}	
+fieldset.question-choices .choice.answer.set {
+	float:right;
+}
+
+fieldset.question-choices .set textarea {
+	width:100%;
+}
+
+.set ol {
+	padding:0;
+}
+
+fieldset.question-choices .choice.set ol label {
+	display:inline;
+	float:none;
+}
+.set ol li  {
+	list-style-position:inside;
+	border-bottom:#ccc 1px dashed;
+	padding-bottom:10px;
+	margin-bottom:10px;
+	clear:both;
+	float:left;
+}
+
+.set ol li span {
+	margin:0;
+}
+.set ol li span.correct {
+	display:block;
+	float:right;
+	width:15%;
+	text-align:center;
+	margin:-10px 0 0 0;
+}
+.matching .submit {
+	clear:both;
+}
+
+.set .help {
+	margin:0;
+}

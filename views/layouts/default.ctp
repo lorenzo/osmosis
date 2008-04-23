@@ -33,13 +33,9 @@
 				</ul>
 			</div>
 			<div id="summary">
-				<div id="side-content" class="small">
-					<ul id="conectivism">
-						<li class="classes"><a href="#">Clases</a></li>
-						<li class="messages"><a href="#">Mensajes</a></li>
-						<li class="conections"><a href="#">Conexiones</a></li>
-					</ul>
-				</div>
+				<?php
+					echo $this->renderElement('layout/conectivism');
+				?>
 				<div id="course-data">
 					<div class="course">
 						<h1>Fundamentos de JLO</h1>

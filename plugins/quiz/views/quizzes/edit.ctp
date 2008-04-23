@@ -9,7 +9,6 @@
 		<div class="list">
 			<?php
 				foreach ($question_list as $type => $questions) {
-					if ($type != 'TextQuestion') continue;
 					echo $this->renderElement($type . '_selection_list', array('questions' => $questions));
 				}
 			?>

@@ -3,9 +3,15 @@ class MatchingQuestion extends QuizAppModel {
 
 	var $name = 'MatchingQuestion';
 	var $validate = array(
-		'body' => VALID_NOT_EMPTY,
-		'shuffle' => VALID_NOT_EMPTY,
-		'max_associations' => VALID_NOT_EMPTY,
+		'body' => array(
+			'required' => array(
+				'rule' => array('/.+/'),
+				'required' => true,
+				'message' => 'This field is required',
+				'allowEmpty' => false
+			)
+		),
+		'shuffle' => VALID_NOT_EMPTY
 	);
 
 	var $useTable = 'quiz_matching_questions';
@@ -33,6 +39,19 @@ class MatchingQuestion extends QuizAppModel {
 				'with' => 'MatchingQuestionChoices'
 			)
 	);
-
+	
+	function beforeValidate() {
+		$invalidSourceChoices = array();
+		foreach ($this->data['SourceChoice'] as $i => $d) {
+			$this->SourceChoice->set($d);
+			$this->SourceChoice->validates();
+			if($this->SourceChoice->validationErrors) {
+				$invalidSourceChoices[$i] = $this->SourceChoice->validationErrors;
+			}
+		}
+		$this->SourceChoice->validationErrors = $invalidSourceChoices;
+		$this->validationErrors['SourceChoice'] = $invalidSourceChoices;
+		return parent::beforeValidate();
+	}
 }
 ?>

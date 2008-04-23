@@ -16,6 +16,6 @@ class ChoiceChoice extends QuizAppModel {
 								'order' => '',
 								'counterCache' => ''),
 	);
-
+	
 }
 ?>

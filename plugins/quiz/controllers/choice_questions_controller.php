@@ -29,14 +29,20 @@ class ChoiceQuestionsController extends AppController {
 		if (!empty($this->data)) {
 			$this->ChoiceQuestion->create();
 			if ($this->ChoiceQuestion->saveAll($this->data)) {
-				$this->Session->setFlash(__('The Choice Question has been saved',true));
-				$this->redirect(array('action'=>'index'));
+				$habtm_data = array('choice_question_id' => $this->ChoiceQuestion->getLastInsertID(), 'quiz_id' => $this->data['Quiz'][0]['id']);
+				if ($this->ChoiceQuestion->QuizChoice->save($habtm_data)) {
+					$this->Session->setFlash(__('The Choice Question has been saved',true));
+					$this->redirect(array('controller' => 'quizzes', 'action'=>'edit', $this->data['Quiz'][0]['id']));
+				}
 			} else {
 				$totalChoices = count($this->data['ChoiceChoice']);
 				$this->Session->setFlash(__('The Choice Question could not be saved. Please, try again.',true));
 			}
 		}
 		$this->set('totalChoices',$totalChoices);
+		if(isset($this->params['named']['quiz'])) {
+			$this->data['Quiz']['id'] = $this->params['named']['quiz'];
+		}
 	}
 
 	function edit($id = null) {

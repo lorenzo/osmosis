@@ -18,6 +18,15 @@ class OrderingQuestionsController extends AppController {
 	}
 
 	function add() {
+		$totalChoices = 2;
+		if(isset($this->data['UI']['addChoice']) && $this->data['UI']['addChoice'] ) {
+			$totalChoices = count($this->data['OrderingChoice']) + 1;
+			$this->set('totalChoices',$totalChoices);
+			unset($this->data['UI']['addChoice']);
+			return;
+		}
+		
+		
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			$this->OrderingQuestion->create();
@@ -25,11 +34,14 @@ class OrderingQuestionsController extends AppController {
 				$this->Session->setFlash(__('The Ordering Question has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
+				$totalChoices = count($this->data['OrderingChoice']);
 				$this->Session->setFlash(__('The Ordering Question could not be saved. Please, try again.',true));
 			}
 		}
-		$quizzes = $this->OrderingQuestion->Quiz->generateList();
-		$this->set(compact('quizzes'));
+		$this->set('totalChoices', $totalChoices);
+		if(isset($this->params['named']['quiz'])) {
+			$this->data['Quiz']['id'] = $this->params['named']['quiz'];
+		}
 	}
 
 	function edit($id = null) {

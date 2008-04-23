@@ -11,12 +11,20 @@ label {
 	float:left;
 }
 
+form .help {
+	display:block;
+	margin-left:85px;
+	color:#666;
+	font-size:0.92em;
+}
+
 div.input {
 	clear:both;
 	margin-bottom:10px;
 }
 
 div.submit {
+	margin:10px 0;
 	text-align:center;
 }
 
@@ -24,4 +32,20 @@ div.submit {
 	margin:2px 0 0 85px;
 	color:#BF0000;
 	
+}
+
+.checkbox input,
+input[type=checkbox] {
+	display:inline;
+	margin:-2px 10px 10px 0;
+	float:left;
+}
+
+.checkbox label {
+	display:inline;
+	width:auto;
+}
+
+legend {
+	font-size:1.6em;
 }

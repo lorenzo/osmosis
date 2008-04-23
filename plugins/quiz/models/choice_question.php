@@ -4,8 +4,7 @@ class ChoiceQuestion extends QuizAppModel {
 	var $name = 'ChoiceQuestion';
 	var $validate = array(
 		'body' => VALID_NOT_EMPTY,
-		'shuffle' => VALID_NOT_EMPTY,
-		'max_choices' => VALID_NOT_EMPTY,
+		'shuffle' => VALID_NOT_EMPTY
 	);
 
 	var $useTable = 'quiz_choice_questions';
@@ -36,7 +35,8 @@ class ChoiceQuestion extends QuizAppModel {
 						'unique' => '',
 						'finderQuery' => '',
 						'deleteQuery' => '',
-						'insertQuery' => ''),
+						'insertQuery' => '',
+						'with' => 'QuizChoice'),
 	);
 
 }
