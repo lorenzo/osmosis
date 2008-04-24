@@ -5,17 +5,17 @@ class OrderingChoice extends QuizAppModel {
 	var $validate = array(
 		'text' => array(
 			'required_with_position' => array(
-				'rule' => array('/.+/'),
+				'rule' => array('positionOk'),
 				'message' => 'Please write a text for this choice'
 			)
-		),
-		'position' => array(
-			'position_ok' => array(
-				'rule' => array('positionOk'),
-				'message' => 'The position must be between zero and the number of choices written',
-				'allowEmpty' => true
-			)
-		)
+		)// ,
+		// 		'position' => array(
+		// 			'position_ok' => array(
+		// 				'rule' => array('positionOk'),
+		// 				'message' => 'The position must be between zero and the number of choices written',
+		// 				'allowEmpty' => true
+		// 			)
+		// 		)
 	);
 
 	var $useTable = 'quiz_ordering_choices';
@@ -29,7 +29,14 @@ class OrderingChoice extends QuizAppModel {
 	);
 	
 	function positionOk() {
-		return ($this->data['OrderingChoice']['total']<$this->data['OrderingChoice']['position']);
+		if (empty($this->data['OrderingChoice']['text'])) {
+			return false;
+		}
+		if (empty($this->data['OrderingChoice']['position'])) {
+			return true;
+		}
+		
+		return (intval($this->data['OrderingChoice']['position'])<=intval($this->data['OrderingChoice']['total']));
 	}
 }
 ?>

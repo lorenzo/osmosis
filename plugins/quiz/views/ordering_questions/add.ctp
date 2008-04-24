@@ -1,4 +1,4 @@
-<?php debug($form);?><div class="orderingQuestion choices">
+<?php debug($form->validationErrors);?><div class="orderingQuestion choices">
 <?php echo $form->create('OrderingQuestion');?>
 	<fieldset>
  		<legend><?php echo sprintf(__('Create Ordering Question', true));?></legend>
@@ -29,7 +29,7 @@
 		<fieldset class="question-choices">
 			<legend><?php echo sprintf(__('Choices', true));?></legend>
 			<p class="description">
-				<?php __('Write the choices in the correct order.')?>
+				<?php __('Write the choices in the correct order. Leave both fields empty to ignore.')?>
 			</p>
 			<?php
 				for ($i=0;$i<$totalChoices;$i++) :

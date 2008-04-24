@@ -5,8 +5,8 @@ class OrderingQuestion extends QuizAppModel {
 	var $validate = array(
 		'body' => array(
 		    'Error.empty' => array(
-		        'rule' => array( 'custom','/.+/'),
-				),
+		        'rule' => array( 'custom','/.+/')
+			),
 		),
 		'shuffle' => array(
 		    'Error.empty' => array(
@@ -75,6 +75,9 @@ class OrderingQuestion extends QuizAppModel {
 	function afterFind($results, $primary=false) {
 		if ($primary) {
 			foreach ($results as $i => $result) {
+				if (!isset($result['OrderingChoice'])) {
+					break;
+				}
 				$shuffle = $result['OrderingQuestion']['shuffle'];
 				$choices = $result['OrderingChoice'];
 				if ($shuffle) {

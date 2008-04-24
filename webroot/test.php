@@ -1,5 +1,5 @@
 <?php
-/* SVN FILE: $Id: test.php 6324 2008-01-05 19:23:17Z phpnut $ */
+/* SVN FILE: $Id: test.php 6715 2008-04-23 18:25:03Z DarkAngelBGE $ */
 /**
  * Short description for file.
  *
@@ -21,9 +21,9 @@
  * @package			cake
  * @subpackage		cake.cake.tests.libs
  * @since			CakePHP(tm) v 1.2.0.4433
- * @version			$Revision: 6324 $
- * @modifiedby		$LastChangedBy: phpnut $
- * @lastmodified	$Date: 2008-01-05 14:53:17 -0430 (Sat, 05 Jan 2008) $
+ * @version			$Revision: 6715 $
+ * @modifiedby		$LastChangedBy: DarkAngelBGE $
+ * @lastmodified	$Date: 2008-04-23 13:55:03 -0430 (Wed, 23 Apr 2008) $
  * @license			http://www.opensource.org/licenses/opengroup.php The Open Group Test Suite License
  */
 error_reporting(E_ALL);
@@ -39,9 +39,8 @@ if (!defined('APP_DIR')) {
 	define('APP_DIR', basename(dirname(dirname(__FILE__))));
 }
 if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-	define('CAKE_CORE_INCLUDE_PATH', ROOT.DS.'cake1.2.x');
+	define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'cake1.2.x');
 }
-
 if (!defined('WEBROOT_DIR')) {
 	define('WEBROOT_DIR', basename(dirname(__FILE__)));
 }
@@ -70,7 +69,7 @@ if (isset($corePath[0])) {
 } else {
 	define('TEST_CAKE_CORE_INCLUDE_PATH', CAKE_CORE_INCLUDE_PATH);
 }
-require_once CAKE . 'tests' . DS . 'lib' . DS . 'test_manager.php';
+require_once CAKE_TESTS_LIB . 'test_manager.php';
 
 if (Configure::read('debug') < 1) {
 	die(__('Debug setting does not allow access to this url.', true));
@@ -82,202 +81,68 @@ if (!isset($_SERVER['SERVER_NAME'])) {
 if (empty( $_GET['output'])) {
 	$_GET['output'] = 'html';
 }
-
-$dispatch =& new Dispatcher();
-$dispatch->baseUrl();
-define('BASE', $dispatch->webroot);
-
 /**
  *
  * Used to determine output to display
  */
-define('CAKE_TEST_OUTPUT_HTML',1);
-define('CAKE_TEST_OUTPUT_TEXT',2);
+define('CAKE_TEST_OUTPUT_HTML', 1);
+define('CAKE_TEST_OUTPUT_TEXT', 2);
 
 if (isset($_GET['output']) && $_GET['output'] == 'html') {
 	define('CAKE_TEST_OUTPUT', CAKE_TEST_OUTPUT_HTML);
 } else {
+	Debugger::output('txt');
 	define('CAKE_TEST_OUTPUT', CAKE_TEST_OUTPUT_TEXT);
 }
 
-if (!vendor('simpletest' . DS . 'reporter')) {
+if (!App::import('Vendor', 'simpletest' . DS . 'reporter')) {
 	CakePHPTestHeader();
-	include CAKE . 'tests' . DS . 'lib' . DS . 'simpletest.php';
+	include CAKE_TESTS_LIB . 'simpletest.php';
 	CakePHPTestSuiteFooter();
 	exit();
 }
 
-	function &CakeTestsGetReporter() {
-		static $Reporter = NULL;
-		if (!$Reporter) {
-			switch (CAKE_TEST_OUTPUT) {
-				case CAKE_TEST_OUTPUT_HTML:
-					require_once LIB_TESTS . 'cake_reporter.php';
-					$Reporter = new CakeHtmlReporter();
-				break;
-				default:
-					$Reporter = new TextReporter();
-				break;
-			}
-		}
-		return $Reporter;
-	}
-
-	function CakePHPTestRunMore() {
-		switch (CAKE_TEST_OUTPUT) {
-			case CAKE_TEST_OUTPUT_HTML:
-				if (isset($_GET['group'])) {
-					if (isset($_GET['app'])) {
-						$show = '?show=groups&amp;app=true';
-					} else {
-						$show = '?show=groups';
-					}
-				}
-				if (isset($_GET['case'])) {
-					if (isset($_GET['app'])) {
-						$show = '?show=cases&amp;app=true';
-					} else {
-						$show = '?show=cases';
-					}
-				}
-				echo "<p><a href='" . RUN_TEST_LINK . $show . "'>Run more tests</a></p>\n";
-			break;
-		}
-	}
-
-	function CakePHPTestCaseList() {
-		switch (CAKE_TEST_OUTPUT) {
-			case CAKE_TEST_OUTPUT_HTML:
-				if (isset($_GET['app'])) {
-					echo HtmlTestManager::getTestCaseList(APP_TEST_CASES);
-				} elseif (isset($_GET['plugin'])) {
-					echo HtmlTestManager::getTestCaseList(APP . 'plugins' . DS . $_GET['plugin'] . DS. 'tests' . DS . 'cases');
-				} else {
-					echo HtmlTestManager::getTestCaseList(CORE_TEST_CASES);
-				}
-			break;
-			case CAKE_TEST_OUTPUT_TEXT:
-			default:
-				if (isset($_GET['app'])) {
-					echo TextTestManager::getTestCaseList(APP_TEST_CASES);
-				} elseif (isset($_GET['plugin'])) {
-					echo TextTestManager::getTestCaseList(APP . 'plugins' . DS . $_GET['plugin'] . DS. 'tests' . DS . 'cases');
-				} else {
-					echo TextTestManager::getTestCaseList(CORE_TEST_CASES);
-				}
-			break;
-		}
-	}
-
-	function CakePHPTestGroupTestList() {
-		switch (CAKE_TEST_OUTPUT) {
-			case CAKE_TEST_OUTPUT_HTML:
-				if (isset($_GET['app'])) {
-					echo HtmlTestManager::getGroupTestList(APP_TEST_GROUPS);
-				} elseif (isset($_GET['plugin'])) {
-					echo HtmlTestManager::getGroupTestList(APP . 'plugins' . DS . $_GET['plugin'] . DS .'tests' . DS . 'groups');
-				} else {
-					echo HtmlTestManager::getGroupTestList(CORE_TEST_GROUPS);
-				}
-			break;
-			case CAKE_TEST_OUTPUT_TEXT:
-			default:
-				if (isset($_GET['app'])) {
-					echo TextTestManager::getGroupTestList(APP_TEST_GROUPS);
-				} elseif (isset($_GET['plugin'])) {
-					echo TextTestManager::getGroupTestList(APP . 'plugins' . DS . $_GET['plugin'] . DS. 'tests' . DS . 'groups');
-				} else {
-					echo TextTestManager::getGroupTestList(CORE_TEST_GROUPS);
-				}
-				break;
-		}
-	}
-
-	function CakePHPTestHeader() {
-		switch (CAKE_TEST_OUTPUT) {
-			case CAKE_TEST_OUTPUT_HTML:
-				$baseUrl = BASE;
-				$characterSet = 'charset=utf-8';
-				include CAKE . 'tests' . DS . 'lib' . DS . 'header.php';
-			break;
-			case CAKE_TEST_OUTPUT_TEXT:
-			default:
-				header(' content-type: text/plain');
-			break;
-		}
-	}
-
-	function CakePHPTestSuiteHeader() {
-		switch (CAKE_TEST_OUTPUT) {
-			case CAKE_TEST_OUTPUT_HTML:
-				$groups = $_SERVER['PHP_SELF'].'?show=groups';
-				$cases = $_SERVER['PHP_SELF'].'?show=cases';
-				$plugins = CakePHPPlugins();
-				include CAKE . 'tests' . DS . 'lib' . DS . 'content.php';
-			break;
-		}
-	}
-
-	function CakePHPTestSuiteFooter() {
-		switch ( CAKE_TEST_OUTPUT) {
-			case CAKE_TEST_OUTPUT_HTML:
-				$baseUrl = BASE;
-				include CAKE . 'tests' . DS . 'lib' . DS . 'footer.php';
-			break;
-		}
-	}
-	
-	function CakePHPPlugins() {
-		$path = APP . 'plugins';
-		$folder = new Folder($path);
-		
-		$folders = $folder->ls();
-		
-		$folders = $folders[0];
-		
-		$plugins = array();
-		for ($i=0; $i<count($folders); $i++){
-			if (file_exists(APP . 'plugins' . DS . $folders[$i] . DS . 'tests')){
-				$plugins[$folders[$i]] = Inflector::humanize($folders[$i]);
-			}
-		}
-		
-		return $plugins;
-	}
-
-	CakePHPTestHeader();
-	CakePHPTestSuiteHeader();
-	define('RUN_TEST_LINK', $_SERVER['PHP_SELF']);
-
-	if (isset($_GET['group'])) {
-		if ('all' == $_GET['group']) {
-			TestManager::runAllTests(CakeTestsGetReporter());
-		} else {
-			if (isset($_GET['app'])) {
-				TestManager::runGroupTest(ucfirst($_GET['group']), APP_TEST_GROUPS, CakeTestsGetReporter());
-			} elseif (isset($_GET['plugin'])) {
-				TestManager::runGroupTest(ucfirst($_GET['group']), APP . 'plugins' . DS . $_GET['plugin'] . DS . 'tests'. DS . 'groups', CakeTestsGetReporter());
-			}else {
-				TestManager::runGroupTest(ucfirst($_GET['group']), CORE_TEST_GROUPS, CakeTestsGetReporter());
-			}
-		}
-		CakePHPTestRunMore();
+$analyzeCodeCoverage = false;
+if (isset($_GET['code_coverage'])) {
+	$analyzeCodeCoverage = true;
+	require_once CAKE_TESTS_LIB . 'code_coverage_manager.php';
+	if (!extension_loaded('xdebug')) {
+		CakePHPTestHeader();
+		include CAKE_TESTS_LIB . 'xdebug.php';
 		CakePHPTestSuiteFooter();
 		exit();
 	}
+}
 
-	if (isset($_GET['case'])) {
-		TestManager::runTestCase($_GET['case'], CakeTestsGetReporter());
-		CakePHPTestRunMore();
-		CakePHPTestSuiteFooter();
-		exit();
-	}
+CakePHPTestHeader();
+CakePHPTestSuiteHeader();
+define('RUN_TEST_LINK', $_SERVER['PHP_SELF']);
 
-	if (isset($_GET['show']) && $_GET['show'] == 'cases') {
-		CakePHPTestCaseList();
+if (isset($_GET['group'])) {
+	if ('all' == $_GET['group']) {
+		TestManager::runAllTests(CakeTestsGetReporter());
 	} else {
-		CakePHPTestGroupTestList();
+		TestManager::runGroupTest(ucfirst($_GET['group']), CakeTestsGetReporter());
 	}
-	CakePHPTestSuiteFooter();
-?>
+	CakePHPTestRunMore();
+} elseif (isset($_GET['case'])) {
+	
+	if ($analyzeCodeCoverage) {
+		CodeCoverageManager::start($_GET['case'], CakeTestsGetReporter());
+	}
 
+	TestManager::runTestCase($_GET['case'], CakeTestsGetReporter());
+
+	if ($analyzeCodeCoverage) {
+		CodeCoverageManager::report();
+	}
+
+	CakePHPTestRunMore();
+	CakePHPTestAnalyzeCodeCoverage();
+} elseif (isset($_GET['show']) && $_GET['show'] == 'cases') {
+	CakePHPTestCaseList();
+} else {
+	CakePHPTestGroupTestList();
+}
+CakePHPTestSuiteFooter();
+?>

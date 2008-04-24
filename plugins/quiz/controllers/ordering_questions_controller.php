@@ -32,7 +32,7 @@ class OrderingQuestionsController extends AppController {
 				$this->data['OrderingChoice'][$i]['total'] = count($this->data['OrderingChoice']);
 			}
 			$this->OrderingQuestion->create();
-			if ($this->OrderingQuestion->saveAll($this->data)) {
+			if ($this->OrderingQuestion->saveAll($this->data, array('validate' => 'first'))) {
 				$habtm_data = array(
 					'ordering_question_id' => $this->OrderingQuestion->getLastInsertID(),
 					'quiz_id' => $this->data['Quiz'][0]['id']
