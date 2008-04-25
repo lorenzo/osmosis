@@ -7,10 +7,10 @@
 	<p class="author"><?php __('By:'); ?> 
 	<?php
 		echo $html->link(
-			$blog['Member']['name'],
+			$blog['Member']['full_name'],
 			'/members/view/' . $blog['Member']['id'],
 			array(
-				'title' => 'Ver el perfil de ' . $blog['Member']['name']
+				'title' => 'Ver el perfil de ' . $blog['Member']['full_name']
 			)
 		);
 	?></p>

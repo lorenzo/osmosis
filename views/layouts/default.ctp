@@ -82,9 +82,15 @@
 			<div id="tools">
 				<strong><?php echo (isset($layoutToolbarName)) ?  $layoutToolbarName : __('Tools',true) ?></strong>
 				<ul>
-					<li><a href="#">Wiki</a></li>
-					<li><a href="#">Evaluaciones</a></li>
-					<li><a href="#">Foro</a></li>
+					<li>
+						<?php echo $html->link(__('Wiki', true), '/wiki/wikis/index') ?>
+					</li>
+					<li>
+						<?php echo $html->link(__('Quizzes', true), '/quiz/quizzes/index'); ?>
+					</li>
+					<li>
+						<?php echo $html->link(__('Forum', true), '/forum/forums/index'); ?>
+					</li>
 				</ul>
 			</div>
 			<div id="main-content">
