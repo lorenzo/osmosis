@@ -3,6 +3,15 @@ class AppController extends Controller {
 	var $components = array('Acl','Auth','RequestHandler', 'Placeholder');
 	var $helpers = array('Javascript', 'Html', 'Form', 'Dynamicjs', 'Time', 'Placeholder');
 
+	/**
+	 * Contains the id of the course the member is visiting. False if the member is viewing a page outside a course
+	 *
+	 * @var string
+	 */
+	
+	var $activeCouse = false;
+	
+	
 	function beforeFilter() {
 		if (isset($this->Auth)) {
 			$this->Auth->authorize = 'controller';
@@ -48,6 +57,11 @@ class AppController extends Controller {
 	
 	function admin_delete($id = null) {
 		$this->delete($id);
+	}
+	
+	function beforeRender() {
+		$this->activeCouse = 1;
+		$this->Placeholder->attachToolbar($this->activeCouse);
 	}
 	
 }

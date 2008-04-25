@@ -7,31 +7,29 @@ App::import('Component','Placeholder');
 $configs =& Configure::getInstance();
 $configs->pluginPaths[] = TESTS . 'fixtures' . DS .'plugins' . DS;
 
-class ContactTestController extends Controller {
-	var $name = 'ContactTest';
-	var $uses = null;
-}
 
 class PlaceHolderComponentTestCase extends CakeTestCase {
 	var $TestObject = null;
+	var $fixtures = array('app.plugin');
 	
 	function setUp() {
 		$this->TestObject = new PlaceholderComponent();
-		$this->TestObject->startup(new ContactTestController);
+		$this->TestObject->startup(new Controller);
+		$this->TestObject->Plugin->useDbConfig = 'test';
 	}
 	
 	function testAttach() {
-		$this->assertTrue(is_a($this->TestObject->controller,'ContactTestController'));
+		$this->assertTrue(is_a($this->TestObject->controller,'Controller'));
 		$this->TestObject->attach(array('menu','other'));
-		$this->assertEqual(array('FakeMenuHolder','Fake2OtherHolder'),$this->TestObject->controller->components);
-		$this->assertTrue(is_a($this->TestObject->controller->FakeMenuHolder,'FakeMenuHolderComponent'));
-		$this->assertTrue(is_a($this->TestObject->controller->Fake2OtherHolder,'Fake2OtherHolderComponent'));
+		$this->assertEqual(array('FakeHolder','Fake2Holder'),$this->TestObject->controller->components);
+		$this->assertTrue(is_a($this->TestObject->controller->FakeHolder,'FakeHolderComponent'));
+		$this->assertTrue(is_a($this->TestObject->controller->Fake2Holder,'Fake2HolderComponent'));
 		$expected = array(
 			'placeholders' => array(
 				'menu' => array(
-					'FakeMenu' => array('cache'=>'+1 hour','data'=>array('var' => 'value'))),
+					'FakeHolder' => array('cache'=>'+1 hour','data'=>array('var' => 'value'))),
 				'other' => array(
-					'Fake2Other' => array('cache'=>'+1 hour','data'=>array('var' => 'value')))
+					'Fake2Holder' => array('cache'=>'+1 hour','data'=>array('var' => 'value')))
 				)
 			);
 		$this->assertEqual($this->TestObject->controller->viewVars,$expected);

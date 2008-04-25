@@ -18,12 +18,8 @@ class PlaceholderHelper extends AppHelper {
 	function render($type) {
 		
 		$view = ClassRegistry::getObject('view');
-		$buffer = '';
-		if(!isset( $view->data['placeholders'][$type])) {
-			$this->_pullData($type);
-		}
-		$subscribers = $view->data['placeholders'][$type];
-		
+		$subscribers = $this->getSubscribers($type);
+
 		if (empty($subscribers))
 			return '';
 			
@@ -48,10 +44,9 @@ class PlaceholderHelper extends AppHelper {
 		$controller =& ClassRegistry::getObject('controller');
 		if (!isset($controller->Placeholder))
 			return;
-		$controller->Placeholder->attach($type);
-		$data = $controller->Placeholder->pullData($type);
+
+		$data = $controller->Placeholder->pullData($type); 
 		$view =& ClassRegistry::getObject('view');
-		
 		if (!isset($view->data['placeholders']) || !is_array($view->data['placeholders'])) {
 			$view->data['placeholders'] = array();
 		}
@@ -59,8 +54,30 @@ class PlaceholderHelper extends AppHelper {
 		if (!isset($view->data['placeholders'][$type]) || !is_array($view->data['placeholders'][$type])) {
 			$view->data['placeholders'][$type] = array();
 		}
-		
+
 		$view->data['placeholders'][$type] = am($view->data['placeholders'][$type],$data);
+	}
+	
+	function renderToolBar($type = 'course_toolbar') {
+		$subscribers = $this->getSubscribers($type);
+		ob_start();
+		echo '<ul>';
+		foreach ($subscribers as $subscriber => $data) {
+			$title = $data['data']['title'];
+			$url = $data['data']['url'];
+			echo '<li>'.$this->Html->link($title,$url).'</li>';
+		}
+		echo '</ul>';
+		return ob_get_clean();
+	}
+	
+	private function getSubscribers($type) {
+		$view = ClassRegistry::getObject('view');
+		if(!isset( $view->data['placeholders'][$type])) {
+			$this->_pullData($type);
+		}
+		$subscribers = $view->data['placeholders'][$type];
+		return $subscribers;
 	}
 }
 ?>

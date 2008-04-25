@@ -3,7 +3,7 @@
  * A Facade to attach various placeholders to a view
  *
  */
-
+App::import('Model','Plugin');
 class PlaceholderComponent extends Object {
 	
 	/**
@@ -15,6 +15,14 @@ class PlaceholderComponent extends Object {
 	private $holders = array();
 	
 	/**
+	 * Contains the name of the already attached placeholders
+	 *
+	 * @var string
+	 */
+	
+	private $attached = array();
+	
+	/**
 	 * Startup function. Sets the controller in the ClassRegistry for further use (Probably breaking some MVC rules)
 	 *
 	 * @param Controller $controller reference to the including controller
@@ -22,9 +30,8 @@ class PlaceholderComponent extends Object {
 	 */
 	
 	function startup(&$controller) {
-		
 		$this->controller =& $controller;
-		
+		$this->Plugin = new Plugin;
 		// Sets the controller in the class registry to be able to pull data from the view if needed
 		ClassRegistry::addObject('controller',&$controller);
 	}
@@ -36,23 +43,63 @@ class PlaceholderComponent extends Object {
 	 * @return void
 	 */
 	
-	function attach($types) {
-		
+	function attach($types) {		
 		if (is_string($types)) {
 			$types = array($types);
 		}
-		
 		$holders = array();
 		foreach ($types as $type) {
-			$holders = am($holders,$this->getPlaceholderObjects($type));
+			$holders[$type] = $this->getPlaceholderObjects($type);
 		}
+		$this->startupHolders($holders);
+	}
+	
+	/**
+	 * Adds a new toolbar placeholder to the view
+	 *
+	 * @param string $course_id the course id the toolbar belongs to
+	 * @param string $type the name of the toolbar placeholder
+	 * @return void
+	 */
+	
+	function attachToolbar($course_id,$type = 'course_toolbar') {
+		if ($type === 'course_toolbar') {
+			$plugins = $this->getCourseToolbarObjects($course_id);
+			$holders[$type] = array();
+			foreach ($plugins as $plug) {
+				if (!empty($plug['Holder'])) {
+					$plug['Holder']->setConfig($type,array('title' => $plug['Plugin']['title']));
+					$holders[$type][] = $plug['Holder'];
+				}
+			}	
+				$this->startupHolders($holders);
+		} else
+			$this->attach($type);
 		
-		foreach ($holders as $name) {
-			$this->controller->components[] = $name;
-			$this->controller->{$name} = $holderClass =& ClassRegistry::getObject($name);
-			$this->holders[] = $name;
-			$this->{$name} =& $this->controller->{$name};
-			$this->{$name}->startup($this->controller);
+	}
+	
+	/**
+	 * Initializes a list of PlaceholderData objects depending
+	 *
+	 * @param array $holders a list of references to objects indexed by type of placeholder
+	 * @return void
+	 */
+	
+	private function startupHolders($holders) {
+		foreach ($holders as $type => $objects) {
+			foreach ($objects as $object) {
+				$name = $object->name;
+				if (isset($this->controller->{$name})) {
+					$this->{$name}->startup($this->controller, $type);
+					continue;
+				}	
+				$this->controller->components[] = $name;
+				$this->controller->{$name} = $object;
+				$this->holders[$type][] = $name;
+				$this->{$name} =& $this->controller->{$name};
+				$this->{$name}->startup($this->controller, $type);
+			}
+			$this->attached[] = $type;
 		}
 	}
 	
@@ -63,10 +110,11 @@ class PlaceholderComponent extends Object {
 	 */
 	
 	function beforeRender() {
-		foreach ($this->holders as $holder) {
-
-			if (!$this->{$holder}->auto && !$this->{$holder}->_continue()) {
-				$this->{$holder}->process();
+		foreach ($this->holders as $type => $objects) {
+			foreach ($objects as $holder) {
+				if (!$this->{$holder}->auto && !$this->{$holder}->_continue($type)) {
+					$this->{$holder}->process($type);
+				}
 			}
 		}
 	}
@@ -79,25 +127,11 @@ class PlaceholderComponent extends Object {
 	 */
 	
 	private function getPlaceholderObjects($type){
-		
-		$holders = array();
-		$plugins = Configure::listObjects('plugin');
-		
-		foreach ($plugins as $key => $plug) {
-			
-			$className = $plug . Inflector::camelize($type) . 'Holder';
-			if (ClassRegistry::isKeySet($className.'Component') || App::import('Component',$plug . '.' . $className)) {
-				$class = $className. 'Component';
-				if (ClassRegistry::isKeySet($class)) {
-					$holderClass =& ClassRegistry::getObject($class);
-				} else {
-					$holderObject =& new $class;
-					ClassRegistry::addObject($className,&$holderObject);
-				}
-					$holders[] = $className;
-			}
-		}
-		return $holders;
+		return $this->Plugin->getHolders($type);
+	}
+	
+	private function getCourseToolbarObjects($course_id) {
+		return $this->Plugin->getCourseTools($course_id,true);
 	}
 	
 	/**
@@ -108,6 +142,10 @@ class PlaceholderComponent extends Object {
 	 */
 	
 	public function pullData($type) {
+		if (in_array($type,$this->attached)) {
+			return array();
+		}
+		$this->attach($type);
 		if (isset($this->controller->viewVars['placeholders'][$type]))
 			return $this->controller->viewVars['placeholders'][$type];
 		return array();

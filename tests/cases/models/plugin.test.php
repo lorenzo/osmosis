@@ -1,29 +1,41 @@
 <?php 
+/* SVN FILE: $Id$ */
+/* Plugin Test cases generated on: 2008-04-23 13:04:15 : 1208972775*/
+App::import('Model', 'Plugin');
 
-loadModel('Plugin');
+class TestPlugin extends Plugin {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test_suite';
+}
 
 class PluginTestCase extends CakeTestCase {
-	var $TestObject = null;
-	var $fixtures = array('plugin');
-	function setUp() {
-		$this->TestObject = new Plugin();
-		$this->TestObject->useDbConfig = 'test_suite';
-		$this->TestObject->tablePrefix = 'test_suite_';
-		$this->TestObject->loadInfo(true);
+	var $Plugin = null;
+	var $fixtures = array('app.plugin');
+
+	function start() {
+		parent::start();
+		$this->Plugin = new TestPlugin();
 	}
 
-	function tearDown() {
-		unset($this->TestObject);
+	function testPluginInstance() {
+		$this->assertTrue(is_a($this->Plugin, 'Plugin'));
 	}
 
-	function testActives() {
-		$result = $this->TestObject->actives();
-		$expect = array(
-			array('Plugin'=>array('id'=>1,'name'=>'plugin1','active'=>1)),
-			array('Plugin'=>array('id'=>3,'name'=>'plugin3','active'=>1)),
-		);
-		$this->assertEqual($result,$expect);
-	}
+	function testPluginFind() {
+		$results = $this->Plugin->recursive = -1;
+		$results = $this->Plugin->find('first');
+		$this->assertTrue(!empty($results));
 
+		$expected = array('Plugin' => array(
+			'id'  => 1,
+			'title'  => 'Lorem ipsum dolor sit amet',
+			'active'  => 1,
+			'name'  => 'Lorem ipsum dolor sit amet',
+			'description'  => 'Lorem ipsum dolor sit amet',
+			'author'  => 'Lorem ipsum dolor sit amet',
+			'types'  => 'Lorem ipsum dolor sit amet'
+			));
+		$this->assertEqual($results, $expected);
+	}
 }
 ?>

@@ -2,30 +2,25 @@
 App::import('Component','Placeholder');
 App::import('Helper','Placeholder');
 App::import('Helper','Html');
-
 $configs =& Configure::getInstance();
 $configs->pluginPaths[] = TESTS . 'fixtures' . DS .'plugins' . DS;
 
-class ContactTestController extends Controller {
-	var $name = 'ContactTest';
-	var $uses = null;
-	var $components = array('Placeholder');
-}
-
-
 class PlaceholderHelperTest extends CakeTestCase {
-	var $fixtures = array(null);
+	var $fixtures = array('app.plugin');
 	
 	function setUp() {
 		parent::setUp();
 		Router::reload();
-		$this->PlaceHolder =& new PlaceholderHelper();
-		$this->PlaceHolder->Html =& new HtmlHelper();
-		$this->Controller =& new ContactTestController();
-		$this->Controller->Placeholder = new PlaceHolderComponent();
+		$configs =& Configure::getInstance();
+		$configs->pluginPaths[] = TESTS . 'fixtures' . DS .'plugins' . DS;
+		$this->Placeholder =& new PlaceholderHelper();
+		$this->Placeholder->Html =& new HtmlHelper();
+		$this->Controller =& new Controller();
+		$this->Controller->Placeholder =& new PlaceholderComponent();
 		$this->Controller->Placeholder->startup(&$this->Controller);
+		$this->Controller->Placeholder->Plugin->useDbConfig = 'test';
 		$this->View = new View($this->Controller);
-		ClassRegistry::addObject('view', $this->view);
+		ClassRegistry::addObject('view', $this->view);	
 	}
 
 	function tearDown() {
@@ -40,11 +35,12 @@ class PlaceholderHelperTest extends CakeTestCase {
 		$this->View->data = array(
 			'placeholders' => array(
 				'menu' => array(
-					'FakeMenu' => array('cache'=>'+1 hour','data'=>array('var' => 'value'))),
+					'Fake' => array('cache'=>'+1 hour','data'=>array('var' => 'value'))),
 				'other' => array(
-					'Fake2Other' => array('cache'=>'+1 hour','data'=>array('var' => 'value2')))
+					'Fake2' => array('cache'=>'+1 hour','data'=>array('var' => 'value2')))
 			)
 		);
+		$this->assertTrue(is_a($this->Placeholder,'PlaceholderHelper'));
 		$this->assertEqual('var=value',$this->Placeholder->render('menu'));
 		$this->assertEqual('var=value2',$this->Placeholder->render('other'));
 	}

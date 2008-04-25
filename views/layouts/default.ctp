@@ -81,17 +81,7 @@
 			</div>
 			<div id="tools">
 				<strong><?php echo (isset($layoutToolbarName)) ?  $layoutToolbarName : __('Tools',true) ?></strong>
-				<ul>
-					<li>
-						<?php echo $html->link(__('Wiki', true), '/wiki/wikis/index') ?>
-					</li>
-					<li>
-						<?php echo $html->link(__('Quizzes', true), '/quiz/quizzes/index'); ?>
-					</li>
-					<li>
-						<?php echo $html->link(__('Forum', true), '/forum/forums/index'); ?>
-					</li>
-				</ul>
+					<?php echo $placeholder->renderToolBar(); ?>
 			</div>
 			<div id="main-content">
 				<div id="side-content" class="small">
