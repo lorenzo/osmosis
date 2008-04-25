@@ -32,7 +32,7 @@ class PlaceholderHelperTest extends CakeTestCase {
 	}
 	
 	function testRender() {
-		$this->View->data = array(
+		$this->View->viewVars = array(
 			'placeholders' => array(
 				'menu' => array(
 					'Fake' => array('cache'=>'+1 hour','data'=>array('var' => 'value'))),

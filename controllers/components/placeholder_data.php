@@ -141,14 +141,10 @@ abstract class PlaceholderDataComponent extends Object {
 			return $this->cacheKey;
 		}
 		
-		if ($this->controller->plugin) {
-			$path[]= $this->controller->plugin;
-		}
-		
-		$key[]= 'Placeholder';
-		$key[]= $this->name;
+		$key[] = 'Placeholder';
+		$key[] = $this->name;
+		$key[] = $type;
 		$cacheKey= implode($key, '.');
-		$this->cacheKey= $cacheKey;
 		
 		return $cacheKey;
 	}
@@ -165,7 +161,7 @@ abstract class PlaceholderDataComponent extends Object {
 				return false;
 			}
 			
-			if (!($cache = Cache::read($this->cacheKey))) {
+			if (!($cache = Cache::read($this->getCacheKey($type)))) {
 				return false;
 			}
 			return $cache;
@@ -195,8 +191,8 @@ abstract class PlaceholderDataComponent extends Object {
 				 $elementData['sequence'] = $data['sequence'];
 				unset($data['sequence']);
 			}
-		
-			$this->controller->viewVars['placeholders'][$type][$this->name]= $elementData;
+
+			$this->controller->viewVars['placeholders'][$type][$this->name] = $elementData;
 			}
 	}
 	

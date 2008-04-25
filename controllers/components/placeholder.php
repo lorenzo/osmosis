@@ -71,7 +71,7 @@ class PlaceholderComponent extends Object {
 					$plug['Holder']->setConfig($type,array('title' => $plug['Plugin']['title']));
 					$holders[$type][] = $plug['Holder'];
 				}
-			}	
+			}
 				$this->startupHolders($holders);
 		} else
 			$this->attach($type);

@@ -22,7 +22,7 @@ class PlaceholderHelper extends AppHelper {
 
 		if (empty($subscribers))
 			return '';
-			
+
 		ob_start();
 		foreach ($subscribers as $subscriber => $data) {
 			$parts = explode('_',Inflector::underscore($subscriber));
@@ -47,15 +47,15 @@ class PlaceholderHelper extends AppHelper {
 
 		$data = $controller->Placeholder->pullData($type); 
 		$view =& ClassRegistry::getObject('view');
-		if (!isset($view->data['placeholders']) || !is_array($view->data['placeholders'])) {
-			$view->data['placeholders'] = array();
+		if (!isset($view->viewVars['placeholders']) || !is_array($view->viewVars['placeholders'])) {
+			$view->viewVars['placeholders'] = array();
 		}
 		
-		if (!isset($view->data['placeholders'][$type]) || !is_array($view->data['placeholders'][$type])) {
-			$view->data['placeholders'][$type] = array();
+		if (!isset($view->viewVars['placeholders'][$type]) || !is_array($view->viewVars['placeholders'][$type])) {
+			$view->viewVars['placeholders'][$type] = array();
 		}
 
-		$view->data['placeholders'][$type] = am($view->data['placeholders'][$type],$data);
+		$view->viewVars['placeholders'][$type] = Set::merge($view->viewVars['placeholders'][$type],$data);
 	}
 	
 	function renderToolBar($type = 'course_toolbar') {
@@ -73,10 +73,10 @@ class PlaceholderHelper extends AppHelper {
 	
 	private function getSubscribers($type) {
 		$view = ClassRegistry::getObject('view');
-		if(!isset( $view->data['placeholders'][$type])) {
+		if(!isset( $view->viewVars['placeholders'][$type])) {
 			$this->_pullData($type);
 		}
-		$subscribers = $view->data['placeholders'][$type];
+		$subscribers = $view->viewVars['placeholders'][$type];
 		return $subscribers;
 	}
 }
