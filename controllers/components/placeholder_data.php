@@ -22,6 +22,9 @@ abstract class PlaceholderDataComponent extends Object {
 	
 	var $components = array('RequestHandler');
 	
+	
+	var $cache = true;
+	
 	/**
 	 * Default time to expire the cache data
 	 *
@@ -157,7 +160,7 @@ abstract class PlaceholderDataComponent extends Object {
 	
 	private function checkCache($type = null) {
 		
-			if (Configure::read('Cache.disbled')) {
+			if (Configure::read('Cache.disbled') || !$this->cache) {
 				return false;
 			}
 			

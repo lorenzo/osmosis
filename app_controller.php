@@ -9,7 +9,7 @@ class AppController extends Controller {
 	 * @var string
 	 */
 	
-	var $activeCouse = false;
+	var $activeCourse = false;
 	
 	
 	function beforeFilter() {
@@ -60,8 +60,9 @@ class AppController extends Controller {
 	}
 	
 	function beforeRender() {
-		$this->activeCouse = 1;
-		$this->Placeholder->attachToolbar($this->activeCouse);
+		$this->activeCourse = 1;
+		if (isset($this->Placeholder->started))
+			$this->Placeholder->attachToolbar($this->activeCourse);
 	}
 	
 }

@@ -31,7 +31,8 @@ class PlaceholderComponent extends Object {
 	
 	function startup(&$controller) {
 		$this->controller =& $controller;
-		$this->Plugin = new Plugin;
+		$this->Plugin =& new Plugin;
+		$this->started = true;
 		// Sets the controller in the class registry to be able to pull data from the view if needed
 		ClassRegistry::addObject('controller',&$controller);
 	}
