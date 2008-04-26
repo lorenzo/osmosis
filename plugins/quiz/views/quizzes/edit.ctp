@@ -12,7 +12,7 @@
 				foreach ($question_list as $type => $questions) {
 					if (empty($questions)) {
 						$link = '';
-						$message = __('There are no questions of this type registered', true);
+						$message = __('There are no questions of this type available', true);
 						if ($question_type!='all') {
 							$link = '<br />' . $html->link(
 								__('create one', true),
@@ -23,7 +23,7 @@
 								)
 							);
 						} else {
-							$message = __('There are no questions registered', true);
+							$message = __('There are no questions available', true);
 						}
 						if (!$once) {
 							printf('<p class="empty">%s%s</p>', $message, $link);

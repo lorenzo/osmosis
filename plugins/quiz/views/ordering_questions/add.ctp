@@ -1,4 +1,4 @@
-<?php debug($form->validationErrors);?><div class="orderingQuestion choices">
+<div class="orderingQuestion choices">
 <?php echo $form->create('OrderingQuestion');?>
 	<fieldset>
  		<legend><?php echo sprintf(__('Create Ordering Question', true));?></legend>
@@ -12,18 +12,18 @@
 	<?php
 		echo $form->input('body');
 		echo '<div class="checkbox">' . $form->input('shuffle', array('label' => __('Always shuffle the order of the choices.', true))). '</div>';
-		// echo $form->input(
-		// 		'max_choices',
-		// 		array(
-		// 			'after' => '<span class="help">Maximum number of choices that the student is allowed to select. Leave empty to have no restriction.</span>'
-		// 		)
-		// 	);
-		// 	echo $form->input(
-		// 		'min_choices',
-		// 		array(
-		// 			'after' => '<span class="help">Minimum number of choices that the student is required to select to form a . Leave empty to have no restriction.</span>'
-		// 		)
-		// 	);
+		echo $form->input(
+				'max_choices',
+				array(
+					'after' => '<span class="help">Maximum number of choices that the student is allowed to select to create an answer. Leave empty to have no restriction.</span>'
+				)
+			);
+			echo $form->input(
+				'min_choices',
+				array(
+					'after' => '<span class="help">Minimum number of choices that the student is required to select to create an answer. Leave empty to have no restriction.</span>'
+				)
+			);
 	?>
 		</div>
 		<fieldset class="question-choices">

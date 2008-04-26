@@ -60,22 +60,6 @@ class QuizzesController extends QuizAppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		
-		$question_type = 'all';
-		if (isset($this->params['named']['question_type'])) {
-			$question_type = $this->params['named']['question_type'];
-		}
-		$this->set('question_type', $question_type);
-		$question_name = 'All';
-		if (isset($this->question_types[$question_type])) {
-			$question_name = $this->question_types[$question_type];
-		}
-		$this->set('question_name', $question_name);
-		if ($question_type != 'all') {
-			$questions = $this->Quiz->getQuestions($question_type);
-		} else {
-			$questions = $this->Quiz->getQuestions($this->question_types);
-		}
-		
 		if (!empty($this->data)) {
 			// debug($this->data);die;
 			// 			if ($this->Quiz->save($this->data)) {
@@ -88,15 +72,24 @@ class QuizzesController extends QuizAppController {
 			$this->Quiz->recursive = 2;
 			$this->data = $this->Quiz->read(null, $id);
 		}
+		
+		$question_type = 'all';
+		if (isset($this->params['named']['question_type'])) {
+			$question_type = $this->params['named']['question_type'];
+		}
+		$this->set('question_type', $question_type);
+		$question_name = 'All';
+		if (isset($this->question_types[$question_type])) {
+			$question_name = $this->question_types[$question_type];
+		}
+		$this->set('question_name', $question_name);
+		if ($question_type != 'all') {
+			$questions = $this->Quiz->getQuestions($question_type, $this->data['Quiz']['id']);
+		} else {
+			$questions = $this->Quiz->getQuestions($this->question_types, $this->data['Quiz']['id']);
+		}
+		
 		$this->set('question_list', $questions);
-		/*
-		$associationQuestions = $this->Quiz->AssociationQuestion->find('list');
-		$choiceQuestions = $this->Quiz->ChoiceQuestion->find('list');
-		$clozeQuestions = $this->Quiz->ClozeQuestion->find('list');
-		$matchingQuestions = $this->Quiz->MatchingQuestion->find('list');
-		$orderingQuestions = $this->Quiz->OrderingQuestion->find('list');
-		$textQuestions = $this->Quiz->TextQuestion->find('list');
-		$this->set(compact('associationQuestions','choiceQuestions','clozeQuestions','matchingQuestions','orderingQuestions','textQuestions'));*/
 	}
 
 	function delete($id = null) {

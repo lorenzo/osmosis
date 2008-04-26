@@ -71,8 +71,19 @@ class Quiz extends QuizAppModel {
 		$questions = array();
 		foreach ($question_type as $type) {
 			$questionType = Inflector::Camelize($type);
-			// $this->{$questionType}->recursive = 0;
-			$questions[$questionType] = $this->{$questionType}->find('all');
+			$quiz_questions = array();
+			if ($quiz_id) {
+				$quiz_questions = $this->read(null, $quiz_id);
+				$quiz_questions = Set::extract($quiz_questions, $questionType . '.{n}.id');
+			}
+			$questions[$questionType] = $this->{$questionType}->find(
+				'all',
+				array(
+					'conditions' => array(
+						'NOT' => array('id' => $quiz_questions)
+					)
+				)
+			);
 		}
 		return $questions;
 	}

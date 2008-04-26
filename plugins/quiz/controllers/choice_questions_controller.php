@@ -27,7 +27,6 @@ class ChoiceQuestionsController extends AppController {
 		}
 		
 		if (!empty($this->data)) {
-			$this->ChoiceQuestion->create();
 			$num_correct = 0;
 			for ($i=0;$i<count($this->data['ChoiceChoice']);$i++) {
 				$choice = $this->data['ChoiceChoice'][$i];
@@ -38,8 +37,10 @@ class ChoiceQuestionsController extends AppController {
 				} else if ($choice['correct']) $num_correct++;
 			}
 			$this->data['ChoiceQuestion']['num_correct'] = $num_correct;
-			$result = $this->ChoiceQuestion->saveAll($this->data);
-			if ((is_array($result) && !in_array(false, $cosa)) || $result) {
+
+			$this->ChoiceQuestion->create();
+			$this->ChoiceQuestion->set($this->data);
+			if ($this->ChoiceQuestion->validates() && $this->ChoiceQuestion->saveAll($this->data, array('validate' => false))) {
 				$habtm_data = array(
 					'choice_question_id' => $this->ChoiceQuestion->getLastInsertID(),
 					'quiz_id' => $this->data['Quiz'][0]['id']

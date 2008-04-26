@@ -4,20 +4,25 @@ class OrderingQuestion extends QuizAppModel {
 	var $name = 'OrderingQuestion';
 	var $validate = array(
 		'body' => array(
-		    'Error.empty' => array(
-		        'rule' => array( 'custom','/.+/')
+		    'required' => array(
+		        'rule' => array('custom','/.+/')
 			),
 		),
-		'shuffle' => array(
-		    'Error.empty' => array(
-		        'rule' => array( 'custom','/.+/'),
-				),
-		),
 		'max_choices' => array(
-		    'Error.empty' => array(
-		        'rule' => array( 'custom','/.+/'),
-				),
+			'positive' => array(
+				'rule' => array('comparison', '>', 0),
+				'allowEmpty' => true
+			)
 		),
+		'min_choices' => array(
+			'min_less_than_max' => array(
+				'rule' => array('minLessThanMax'),
+				'allowEmpty' => true
+			),
+			'positive' => array(
+				'rule' => array('comparison', '>', 0)
+			)
+		)
 	);
 
 	var $useTable = 'quiz_ordering_questions';
@@ -57,10 +62,23 @@ class OrderingQuestion extends QuizAppModel {
 	);
 	
 	function __construct($id = false, $table = null, $ds = null) {
-			$this->validate['body']['Error.empty']['message'] = __('The body can not be empty',true);
-			$this->validate['shuffle']['Error.empty']['message'] = __('Suffle can not be empty',true);
-			$this->validate['max_choices']['Error.empty']['message'] = __('Max_choices can not be empty',true);
-			parent::__construct($id,$table,$ds);
+		$this->setErrorMessage(
+			'body.required',
+			__('This field is required',true)
+		);
+		$this->setErrorMessage(
+			'max_choices.positive',
+			__('Max Choices should be greater than zero',true)
+		);
+		$this->setErrorMessage(
+			'min_choices.min_less_than_max',
+			__('Min Choices should be less than Max Choices',true)
+		);
+		$this->setErrorMessage(
+			'min_choices.positive',
+			__('Min Choices should be greater than zero',true)
+		);
+		parent::__construct($id,$table,$ds);
 	}
 	
 	/**
@@ -106,6 +124,31 @@ class OrderingQuestion extends QuizAppModel {
 		return $results;
 	}
 	
+	function beforeValidate() {
+		parent::beforeValidate();
+		$positions = array_filter(Set::extract($this->data, 'OrderingChoice.{n}.position'));
+		$repeated = Set::diff($positions, array_unique($positions));
+		$done = $invalidOrderingChoices = array();
+		$total = count($this->data['OrderingChoice']);
+		foreach ($this->data['OrderingChoice'] as $i => $choice) {
+			$choice['total'] = $total;
+			$this->OrderingChoice->set(array('OrderingChoice' => $choice));
+			$this->OrderingChoice->validates();
+			$valErrors = $this->OrderingChoice->validationErrors;
+			if (in_array($choice['position'], $repeated) && !in_array($choice['position'], $done)) {
+				$invalidOrderingChoices[$i] = array('position' => __('This position is repeated', true));
+				$done[] = $choice['position'];
+				$invalidOrderingChoices[$i] = array_merge($invalidOrderingChoices[$i], $valErrors);
+			} else if(!empty($valErrors)) {
+				$invalidOrderingChoices[$i] = $valErrors;
+			}
+		}
+		if (!empty($invalidOrderingChoices)) {
+			$this->OrderingChoice->validationErrors = $invalidOrderingChoices;
+			$this->validationErrors['OrderingChoice'] = $invalidOrderingChoices;
+		}
+		return true;
+	}
 	/**
 	 * Shuffles a set of choices, taking in account the fixed position set on some of them.
 	 *
@@ -132,6 +175,11 @@ class OrderingQuestion extends QuizAppModel {
 		}
 		ksort($new);
 		return $new;
+	}
+	
+	function minLessThanMax() {
+		if (empty($this->data['OrderingQuestion']['max_choices'])) return true;
+		return intval($this->data['OrderingQuestion']['min_choices'])<=intval($this->data['OrderingQuestion']['max_choices']);
 	}
 }
 ?>

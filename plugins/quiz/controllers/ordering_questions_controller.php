@@ -28,11 +28,18 @@ class OrderingQuestionsController extends AppController {
 		
 		
 		if (!empty($this->data)) {
-			foreach ($this->data['OrderingChoice'] as $i => $choice) {
-				$this->data['OrderingChoice'][$i]['total'] = count($this->data['OrderingChoice']);
+			for ($i=0;$i<count($this->data['OrderingChoice']);$i++) {
+				$choice = $this->data['OrderingChoice'][$i];
+				if ($i>1 && empty($choice['text']) && empty($choice['position'])) {
+					unset($this->data['OrderingChoice'][$i]);
+					$this->data['OrderingChoice'] = array_values($this->data['OrderingChoice']);
+					$i--;
+				}
 			}
+			
 			$this->OrderingQuestion->create();
-			if ($this->OrderingQuestion->saveAll($this->data, array('validate' => 'first'))) {
+			$this->OrderingQuestion->set($this->data);
+			if ($this->OrderingQuestion->validates() && $this->OrderingQuestion->saveAll($this->data, array('validate' => false))) {
 				$habtm_data = array(
 					'ordering_question_id' => $this->OrderingQuestion->getLastInsertID(),
 					'quiz_id' => $this->data['Quiz'][0]['id']

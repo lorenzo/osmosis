@@ -8,6 +8,16 @@ class ChoiceChoice extends QuizAppModel {
 			'required' => array(
 				'rule' => array('custom', '/.+/')
 			)
+		),
+		'position' => array(
+			'positionLessThanTotal' => array(
+				'rule' => array('positionLessThanTotal'),
+				'allowEmpty' => true
+			)// ,
+			// 			'positionLessThanMin' => array(
+			// 				'rule' => array('positionLessThanMin'),
+			// 				'allowEmpty' => true
+			// 			),
 		)
 	);
 
@@ -18,7 +28,16 @@ class ChoiceChoice extends QuizAppModel {
 			'text.required',
 			__('Please write the text for this choice',true)
 		);
+		$this->setErrorMessage(
+			'position.positionLessThanTotal',
+			__('This position is higher the total number of choices available', true)
+		);
 		parent::__construct($id, $table, $ds);
 	}
+	
+	function positionLessThanTotal() {
+		return (intval($this->data['ChoiceChoice']['position']) <= intval($this->data['ChoiceChoice']['total']));
+	}
+	
 }
 ?>
