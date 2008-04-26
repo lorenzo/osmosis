@@ -1,4 +1,5 @@
 <?php
+	App::import('Model', 'Member');
 
 class OsmosisComponentsComponent extends Object{
 	
