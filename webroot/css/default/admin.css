@@ -1,6 +1,3 @@
-#summary.growing #course-data {
-		background:#fff;
-}
 #summary.growing {
 	height:auto;
 }
@@ -65,3 +62,13 @@ strong.author {
 	padding-top:5px;
 }
 
+#admin-main {
+	margin-top:30px;
+	background:#fff;
+	float:left;
+}
+
+#admin-main #course-data,
+#admin-main #more-courses {
+	margin-top:-30px;
+}
