@@ -24,8 +24,14 @@ class TextQuestionsController extends QuizAppController {
 				$this->data['Quiz']['id'] = $quiz_id;
 			}
 			if ($this->TextQuestion->save($this->data)) {
-				$this->Session->setFlash(__('The Text Question has been saved',true));
-				$this->redirect(array('action'=>'index'));
+				$habtm_data = array(
+					'text_question_id' => $this->TextQuestion->getLastInsertID(),
+					'quiz_id' => $this->data['Quiz'][0]['id']
+				);
+				if ($this->TextQuestion->QuizText->save($habtm_data)) {
+					$this->Session->setFlash(__('The Text Question has been saved',true));
+					$this->redirect(array('controller' => 'quizzes', 'action'=>'edit', $this->data['Quiz'][0]['id']));
+				}
 			} else {
 				$this->Session->setFlash(__('The Text Question could not be saved. Please, try again.',true));
 			}
@@ -39,6 +45,9 @@ class TextQuestionsController extends QuizAppController {
 			'html'	=> __('Enriched text',true)
 			);
 		$this->set(compact('formats','quiz_id'));
+		if(isset($this->params['named']['quiz'])) {
+			$this->data['Quiz']['id'] = $this->params['named']['quiz'];
+		}
 	}
 
 	function edit($id = null) {

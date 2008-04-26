@@ -1,4 +1,4 @@
-<h4><?php echo $question['TextQuestion']['title'] ?></h4>
+<strong><?php echo $question['TextQuestion']['title'] ?></strong>
 <span class="question-body">
 	<?php echo $question['TextQuestion']['body']; ?>
 </span>

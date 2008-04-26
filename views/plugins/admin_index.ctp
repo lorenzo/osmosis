@@ -10,10 +10,12 @@
 			<dl>
 				<dt>
 				<strong class="title">
-					<?php echo (isset($plugin['Plugin']['title'])) ? $plugin['Plugin']['title'] : Inflector::humanize($plugin['Plugin']['name']); ?>
+					<?php
+						echo (isset($plugin['Plugin']['title'])) ?
+							$plugin['Plugin']['title'] : Inflector::humanize($plugin['Plugin']['name']);
+					?>
 				</strong>
-				</dt>
-				
+				</dt>				
 				<?php if (!empty($plugin['Plugin']['description'])) :?>
 					<dd>
 						<?php echo $plugin['Plugin']['description'] ?>
@@ -25,9 +27,8 @@
 						
 					</dd>
 				<?php endif;?>
-				
 			</dl>
-			<div class="actions">
+			<div class="actions installed">
 			<?php echo $html->link(__('Uninstall',true),
 				array('controller' => 'plugins' ,'action' => 'uninstall', Inflector::underscore($plugin['Plugin']['id']))); 
 			?>
@@ -67,7 +68,7 @@
 			<?php endif;?>
 			
 		</dl>
-		<div class="actions install">
+		<div class="actions uninstalled">
 		<?php echo $html->link(__('Install',true),
 			array('controller' => 'plugins' ,'action' => 'install', Inflector::underscore($key))); ?>
 		</div>
