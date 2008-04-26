@@ -5,38 +5,50 @@ class MatchingChoice extends QuizAppModel {
 	var $validate = array(
 		'matching_question_id' => VALID_NOT_EMPTY,
 		'text' => array(
-			'algo' => array(
-				'rule' => array('esta'),
-				'message' => 'hola'
-			)
+			'required' => array(
+				'rule' => array('custom','/.+/'),
+				'allowEmpty' => false,
+				'required' => true,
+			),
+			'natural' => array(
+				'rule' => array('validCorrectAnswer'),
+			)	
 		)
 	);
 	
-function esta() {
-	$data = $this->data['SourceChoice'];
-	if (!empty($data['text']) && empty($data['correct'])) return false;
-	return true;
-}
-
 	var $useTable = 'quiz_matching_choices';
-
-	var $hasAndBelongsToMany = array(
-		/*'SourceChoice' => array(
-			'className' => 'quiz.MatchingQuestion',
-			'joinTable' => 'quiz_matching_choices_matching_questions',
-			'foreignKey' => 'matching_question_id',
-			'associationForeignKey' => 'source',
-			'with' => 'MatchingQuestionChoices'
-		),
-		'TargetChoice' => array(
-			'className' => 'quiz.MatchingQuestion',
-			'joinTable' => 'quiz_matching_choices_matching_questions',
-			'foreignKey' => 'matching_question_id',
-			'associationForeignKey' => 'target',
-			'with' => 'MatchingQuestionChoices'
-		)*/
-	);
 	
+	var $belongsTo = array(
+			'MatchingQuestion' => array('className' => 'quiz.MatchingQuestion',
+								'foreignKey' => 'matching_question_id',
+								'conditions' => '',
+								'fields' => '',
+								'order' => '',
+								'counterCache' => ''),
+			'TargetChoice' =>	array('className' => 'quiz.MatchingChoice',
+								'foreignKey' => 'target_id',
+								'conditions' => '',
+								'fields' => '',
+								'order' => '',
+								'counterCache' => ''),
+	);
+
+	function validCorrectAnswer() {
+		if($this->alias == 'TargetChoice')
+			return true;
+		return isset($this->data[$this->alias]['correct']) && preg_match('/[0-9]+/',$this->data[$this->alias]['correct']);
+	}
+	
+	function save($data, $validate = true, $fields = array()) {
+		if (isset($data['TargetChoice'])) {
+			$newData['TargetChoice'] = $data['TargetChoice']; 
+			$newData['TargetChoice']['matching_question_id'] = $data['matching_question_id'];
+			unset($data['TargetChoice']);
+			$newData[$this->alias] = $data;
+			return $this->saveAll($newData,array('validate' => $validate, 'atomic' => false));
+		}
+		return parent::save($data,$validate,$fields);
+	}
 
 }
 ?>

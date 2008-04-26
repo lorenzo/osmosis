@@ -228,6 +228,7 @@ fieldset.question-choices .choice.set ol label {
 	margin-bottom:10px;
 	clear:both;
 	float:left;
+	position:relative;
 }
 
 .set ol li span {
@@ -235,7 +236,9 @@ fieldset.question-choices .choice.set ol label {
 }
 .set ol li span.correct {
 	display:block;
-	float:right;
+	position:absolute;
+	right:0;
+	top:13px;
 	width:15%;
 	text-align:center;
 	margin:-10px 0 0 0;
@@ -251,4 +254,11 @@ fieldset.question-choices .choice.set ol label {
 .orderingQuestion ol,
 .choiceQuestion ol {
 	list-style:lower-alpha;
+}
+
+
+.set ol li div.error-message {
+	clear:both;
+	bottom:0;
+	margin-left:5px;
 }

@@ -18,7 +18,38 @@ class MatchingQuestionsController extends AppController {
 	}
 
 	function add() {
+		if ($this->_updateChoiceCount()) {
+			return;
+		}
+		
+		if (!empty($this->data)) {
+			$this->MatchingQuestion->create();
+			$this->MatchingQuestion->set($this->data);
+			if ($this->MatchingQuestion->validates()) {
+				$newData = array();
+				$newData['MatchingQuestion'] = $this->data['MatchingQuestion'];
+				foreach ($this->data['SourceChoice'] as  $i => $d) {
+					$newData['SourceChoice'][$i] = $d;
+					$newData['SourceChoice'][$i]['TargetChoice'] = $this->data['TargetChoice'][$d['correct'] - 1];
+				}
+				
+			} else return;
+			
+			if ($this->MatchingQuestion->saveAll($newData,array('validate' => false))) {
+				$this->Session->setFlash(__('The Matching Question has been saved',true));
+				$this->redirect(array('action'=>'index'), null, true);
+			} else {
+				$this->Session->setFlash(__('The Matching Question could not be saved. Please, try again.',true));
+			}
+		}
+		if(isset($this->params['named']['quiz'])) {
+			$this->data['Quiz']['id'] = $this->params['named']['quiz'];
+		}
+	}
+	
+	private function _updateChoiceCount() {
 		$totalQuestions = 2;
+		$added = false;
 		if (isset($this->data['SourceChoice'])) {
 			$totalQuestions = count($this->data['SourceChoice']);
 		}
@@ -26,37 +57,21 @@ class MatchingQuestionsController extends AppController {
 		if (isset($this->data['TargetChoice'])) {
 			$totalAnswers = count($this->data['TargetChoice']);
 		}
-		$this->set('totalQuestions',$totalQuestions);
-		$this->set('totalAnswers',$totalAnswers);
 		
 		if (isset($this->data['UI']['addQuestion']) && $this->data['UI']['addQuestion']) {
 			$totalQuestions += 1;
-			$this->set('totalQuestions',$totalQuestions);
 			unset($this->data['UI']['addQuestion']);
-			return;
+			$added = true;
 		}
 		if (isset($this->data['UI']['addAnswer']) && $this->data['UI']['addAnswer']) {
 			$totalAnswers += 1;
-			$this->set('totalAnswers',$totalAnswers);
 			unset($this->data['UI']['addAnswer']);
-			return;
+			$added = true;
 		}
 		
-		
-		if (!empty($this->data)) {
-			$this->MatchingQuestion->create();
-			if ($this->MatchingQuestion->save($this->data)) {
-				$this->Session->setFlash(__('The Matching Question has been saved',true));
-				$this->redirect(array('action'=>'index'), null, true);
-			} else {
-				$this->set('totalAnswers',$totalAnswers);
-				$this->set('totalQuestions',$totalQuestions);
-				$this->Session->setFlash(__('The Matching Question could not be saved. Please, try again.',true));
-			}
-		}
-		if(isset($this->params['named']['quiz'])) {
-			$this->data['Quiz']['id'] = $this->params['named']['quiz'];
-		}
+		$this->set('totalQuestions',$totalQuestions);
+		$this->set('totalAnswers',$totalAnswers);
+		return false;
 	}
 
 	function edit($id = null) {

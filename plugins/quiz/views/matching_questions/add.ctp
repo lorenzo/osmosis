@@ -28,7 +28,7 @@
 		<fieldset class="question-choices matching">
 			<legend><?php echo sprintf(__('Choices', true));?></legend>
 			<div class="choice question set">
-				<strong><?php __('Questions'); ?></strong>s
+				<strong><?php __('Questions'); ?></strong>
 				<ol>
 				<?php
 					for ($i=0;$i<$totalQuestions;$i++) :
@@ -72,11 +72,4 @@
 		</fieldset>
 	</fieldset>
 <?php echo $form->end('Submit');?>
-</div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(sprintf(__('List %s', true), __('MatchingQuestions', true)), array('action'=>'index'));?></li>
-		<li><?php echo $html->link(sprintf(__('List %s', true), __('Matching Choices', true)), array('controller'=> 'matching_choices', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(sprintf(__('New %s', true), __('Matching Choice', true)), array('controller'=> 'matching_choices', 'action'=>'add')); ?> </li>
-	</ul>
 </div>
