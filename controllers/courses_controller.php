@@ -108,6 +108,21 @@ class CoursesController extends AppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}
+	
+	function enroll($course_id) {
+		$this->Course->id = $course_id;
+		if (!$this->Course->exists()) {
+			$this->Session->setFlash(__('Invalid Course',true));
+			$this->redirect('/');
+		}
+		if ($this->Course->enroll($this->Auth->user('id'))) {
+			$this->Session->setFlash(__('You have been enrolled',true));
+			$this->redirect(array('action' => 'view', $course_id));
+		}
+		
+		$this->Session->setFlash(__('Enrollment failed',true));
+		$this->redirect(array('action' => 'index'));
+	}
 
 }
 ?>

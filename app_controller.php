@@ -1,6 +1,6 @@
 <?php
 class AppController extends Controller {
-	var $components = array('Acl','Auth','RequestHandler', 'Placeholder');
+	var $components = array('Acl','Auth','RequestHandler','OsmosisComponents','Placeholder');
 	var $helpers = array('Javascript', 'Html', 'Form', 'Dynamicjs', 'Time', 'Placeholder');
 
 	/**

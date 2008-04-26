@@ -160,3 +160,20 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `role` varchar(10) collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents groups of users with permissions';
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `courses_members`
+--
+
+CREATE TABLE IF NOT EXISTS `courses_members` (
+  `id` char(36) collate utf8_unicode_ci NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `role` varchar(10) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `member_id` (`member_id`,`course_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+

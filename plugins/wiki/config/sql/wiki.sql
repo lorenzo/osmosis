@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `wiki_entries` (
   `revision` int(6) NOT NULL default '1',
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
+  `slug` text NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 

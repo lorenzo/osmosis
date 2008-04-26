@@ -60,6 +60,17 @@ class Member extends AppModel {
 								'counterCache' => ''),
 	);
 	
+	var $hasAndBelongsToMany = array(
+			'Course' => array(
+				'className' => 'Course',
+				'joinTable' => 'courses_members',
+				'foreignKey' => 'member_id',
+				'associationForeignKey' => 'course_id',
+				'with' => 'Enrollment',
+				'unique' => true
+			)
+		);
+	
     var $actsAs = array('Acl');
     
     function __construct($id = false, $table = null, $ds = null) {
@@ -76,7 +87,7 @@ class Member extends AppModel {
     }
     
 
-    function parentNode(){
+    function parentNode() {
         if (!$this->id) {
             return null;
         }
