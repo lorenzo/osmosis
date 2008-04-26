@@ -7,3 +7,8 @@
 	<?php endforeach;?>
 	</ul>
 </div>
+
+<!-- <div class= "course-info">
+	<?php //debug($course); ?>
+	
+</div> -->

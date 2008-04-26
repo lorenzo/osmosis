@@ -25,13 +25,9 @@
 	?>
 	<div id="content">
 		<div class="contentcolumn">
-			<div id="top">
-				<ul>
-					<li><a href="#">Buscar</a></li>
-					<li><a href="#">Ayuda</a></li>
-					<li><?php echo $html->link(__('Logout', true), array('controller' => 'members', 'action' => 'logout')); ?></li>
-				</ul>
-			</div>
+			<?php
+				echo $this->renderElement('layout/top_nav');
+			?>
 			<div id="summary">
 				<?php
 					echo $this->renderElement('layout/conectivism');

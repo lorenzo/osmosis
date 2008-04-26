@@ -25,13 +25,9 @@
 	?>
 	<div id="content">
 		<div class="contentcolumn">
-			<div id="top">
-				<ul>
-					<li><a href="#">Buscar</a></li>
-					<li><a href="#">Ayuda</a></li>
-					<li><a href="#">Salir</a></li>
-				</ul>
-			</div>
+			<?php
+				echo $this->renderElement('layout/top_nav');
+			?>
 			<div id="summary" class="growing">
 				<div id="side-content" class="small">
 					<ul id="conectivism">

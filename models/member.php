@@ -51,14 +51,14 @@ class Member extends AppModel {
 			),
 		);
 		
-	var $belongsTo = array(
-			'Role' => array('className' => 'Role',
-								'foreignKey' => 'role_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
-	);
+	// var $belongsTo = array(
+	// 			'Role' => array('className' => 'Role',
+	// 								'foreignKey' => 'role_id',
+	// 								'conditions' => '',
+	// 								'fields' => '',
+	// 								'order' => '',
+	// 								'counterCache' => ''),
+	// 	);
 	
 	var $hasAndBelongsToMany = array(
 			'Course' => array(

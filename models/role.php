@@ -13,6 +13,13 @@ class Role extends AppModel {
 			'Parent' => array('className' => 'Role',
 								'foreignKey' => 'parent_id'
 								),
+
+			'Role' => array('className' => 'Role',
+								'foreignKey' => 'role_id',
+								'conditions' => '',
+								'fields' => '',
+								'order' => '',
+								'counterCache' => ''),
 	);
 
 	var $hasMany = array(

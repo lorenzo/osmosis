@@ -12,6 +12,7 @@ class OsmosisComponentsComponent extends Object{
 		$courses = $this->Member->courses($this->controller->Auth->user('id'));
 		$this->controller->viewVars['Osmosis']['courseList'] = $courses;
 	}
+	
 }
 
 ?>

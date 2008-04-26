@@ -110,7 +110,6 @@ CREATE TABLE IF NOT EXISTS `members` (
   `city` varchar(50) collate utf8_unicode_ci NOT NULL,
   `age` int(2) NOT NULL,
   `sex` varchar(1) collate utf8_unicode_ci NOT NULL default 'M',
-  `role_id` int(11) unsigned NOT NULL,
   `username` varchar(15) collate utf8_unicode_ci NOT NULL,
   `password` varchar(50) collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
