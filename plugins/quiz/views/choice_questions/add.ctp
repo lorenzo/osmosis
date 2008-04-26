@@ -28,6 +28,7 @@
 		<fieldset class="question-choices">
 			<legend><?php echo sprintf(__('Choices', true));?></legend>
 			<?php
+				echo $form->error('num_correct');
 				for ($i=0;$i<$totalChoices;$i++) :
 					$class = '';
 					if ($i%2==0) {

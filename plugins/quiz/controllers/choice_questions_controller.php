@@ -28,8 +28,22 @@ class ChoiceQuestionsController extends AppController {
 		
 		if (!empty($this->data)) {
 			$this->ChoiceQuestion->create();
-			if ($this->ChoiceQuestion->saveAll($this->data)) {
-				$habtm_data = array('choice_question_id' => $this->ChoiceQuestion->getLastInsertID(), 'quiz_id' => $this->data['Quiz'][0]['id']);
+			$num_correct = 0;
+			for ($i=0;$i<count($this->data['ChoiceChoice']);$i++) {
+				$choice = $this->data['ChoiceChoice'][$i];
+				if ($i>1 && empty($choice['text']) && empty($choice['position']) && !$choice['correct']) {
+					unset($this->data['ChoiceChoice'][$i]);
+					$this->data['ChoiceChoice'] = array_values($this->data['ChoiceChoice']);
+					$i--;
+				} else if ($choice['correct']) $num_correct++;
+			}
+			$this->data['ChoiceQuestion']['num_correct'] = $num_correct;
+			$result = $this->ChoiceQuestion->saveAll($this->data);
+			if ((is_array($result) && !in_array(false, $cosa)) || $result) {
+				$habtm_data = array(
+					'choice_question_id' => $this->ChoiceQuestion->getLastInsertID(),
+					'quiz_id' => $this->data['Quiz'][0]['id']
+				);
 				if ($this->ChoiceQuestion->QuizChoice->save($habtm_data)) {
 					$this->Session->setFlash(__('The Choice Question has been saved',true));
 					$this->redirect(array('controller' => 'quizzes', 'action'=>'edit', $this->data['Quiz'][0]['id']));

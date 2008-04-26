@@ -87,6 +87,7 @@ class OrderingQuestion extends QuizAppModel {
 		} else {
 			foreach ($results as $i => $result) {
 				if (isset($result['OrderingQuestion'])) {
+					if (empty($result['OrderingQuestion'])) return $result;
 					$shuffle = $result['OrderingQuestion'][0]['shuffle'];
 					$choices = $result['OrderingQuestion'][0]['OrderingChoice'];
 				} else {

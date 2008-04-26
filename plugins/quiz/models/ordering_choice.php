@@ -5,10 +5,10 @@ class OrderingChoice extends QuizAppModel {
 	var $validate = array(
 		'text' => array(
 			'required_with_position' => array(
-				'rule' => array('positionOk'),
-				'message' => 'Please write a text for this choice'
+				'rule' => array('positionOk')
 			)
-		)// ,
+		)
+		// ,
 		// 		'position' => array(
 		// 			'position_ok' => array(
 		// 				'rule' => array('positionOk'),

@@ -39,5 +39,8 @@
  * @subpackage	cake.app
  */
 class AppModel extends Model{
+	protected function setErrorMessage($path, $message) {
+		Set::insert(&$this->validate, $path . '.message', $message);
+	}
 }
 ?>
