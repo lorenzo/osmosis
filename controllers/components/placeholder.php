@@ -76,7 +76,6 @@ class PlaceholderComponent extends Object {
 				$this->startupHolders($holders);
 		} else
 			$this->attach($type);
-		
 	}
 	
 	/**

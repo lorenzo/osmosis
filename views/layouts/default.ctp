@@ -29,7 +29,7 @@
 				<ul>
 					<li><a href="#">Buscar</a></li>
 					<li><a href="#">Ayuda</a></li>
-					<li><a href="#">Salir</a></li>
+					<li><?php echo $html->link(__('Logout', true), array('controller' => 'members', 'action' => 'logout')); ?></li>
 				</ul>
 			</div>
 			<div id="summary">
@@ -59,24 +59,14 @@
 										<span class="family-name">Días</span>
 									</span><br />
 									<a class="email" href="mailto:mabriela@gamil.com">mabriela@gamil.com</a><br />
-									<span class="office">Mon-333<span>
+									<span class="office">Mon-333</span>
 								</div>
 							</li>						
 						</ul>
 					</div>
 				</div>
 				<div id="more-courses">
-					<div class="courses">
-						<strong>Mis cursos</strong>
-						<ul>
-							<li><a href="#"><span class="code">[QK-1111]</span> Un curso</a></li>
-							<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-							<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-							<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-							<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-							<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-						</ul>
-					</div>
+					<?php echo $this->element('layout/user_courses',array('courses' => $Osmosis['courseList'])) ?>
 				</div>
 			</div>
 			<div id="tools">

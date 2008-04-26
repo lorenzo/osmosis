@@ -8,14 +8,8 @@ class OsmosisComponentsComponent extends Object{
 	}
 	
 	function getUserCourses(){
-		$ids = $this->Member->Enrollment->find('all',array(
-			'conditions' => array(
-					'member_id' => $this->controller->Auth->user('id')),
-			'fields' => 'course_id'
-			)
-		);
-		var_dump($ids);
-		debug($ids);
+		$courses = $this->Member->courses($this->controller->Auth->user('id'));
+		$this->controller->viewVars['Osmosis']['courseList'] = $courses;
 	}
 }
 

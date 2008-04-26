@@ -99,5 +99,23 @@ class Member extends AppModel {
         }
     }
 
+	function courses($id) {
+		$ids = $this->Enrollment->find('all',array(
+			'conditions' => array(
+					'member_id' => $id),
+			'fields' => 'course_id'
+			)
+		);
+		$ids = Set::extract($ids,'{n}.Enrollment.course_id');
+		$courses = $this->Course->find('all', array(
+			'conditions' => array(
+					'Course.id' => $ids),
+			'fields' => array('id','code', 'name'),
+			'recursive' => -1
+			)
+		);
+		return $courses;
+	}
+	
 }
 ?>
