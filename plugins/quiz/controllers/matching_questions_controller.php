@@ -23,21 +23,24 @@ class MatchingQuestionsController extends AppController {
 		}
 		
 		if (!empty($this->data)) {
+			$this->_cleanupEmpty();
 			$this->MatchingQuestion->create();
 			$this->MatchingQuestion->set($this->data);
 			if ($this->MatchingQuestion->validates()) {
 				$newData = array();
 				$newData['MatchingQuestion'] = $this->data['MatchingQuestion'];
-				foreach ($this->data['SourceChoice'] as  $i => $d) {
-					$newData['SourceChoice'][$i] = $d;
-					$newData['SourceChoice'][$i]['TargetChoice'] = $this->data['TargetChoice'][$d['correct'] - 1];
+				foreach ($this->data['TargetChoice'] as  $i => $d) {
+					$newData['TargetChoice'][$i] = $d;
+					$correct = $i +1;
+					$newData['TargetChoice'][$i]['SourceChoice'] = Set::extract("/SourceChoice[correct=$correct]",$this->data);
 				}
-				
 			} else return;
 			
 			if ($this->MatchingQuestion->saveAll($newData,array('validate' => false))) {
 				$this->Session->setFlash(__('The Matching Question has been saved',true));
-				$this->redirect(array('action'=>'index'), null, true);
+				$this->redirect(
+					array('controller' => 'quizzes', 'action'=>'edit', 	$this->data['Quiz'][0]['id'])
+				);
 			} else {
 				$this->Session->setFlash(__('The Matching Question could not be saved. Please, try again.',true));
 			}
@@ -72,6 +75,25 @@ class MatchingQuestionsController extends AppController {
 		$this->set('totalQuestions',$totalQuestions);
 		$this->set('totalAnswers',$totalAnswers);
 		return false;
+	}
+	
+	private function _cleanupEmpty() {
+		for ($i=0;$i<count($this->data['SourceChoice']);$i++) {
+			$choice = $this->data['SourceChoice'][$i];
+			if ($i>1 && empty($choice['text']) && empty($choice['correct'])) {
+				unset($this->data['SourceChoice'][$i]);
+				$this->data['SourceChoice'] = array_values($this->data['SourceChoice']);
+				$i--;
+			}
+		}
+		for ($i=0;$i<count($this->data['TargetChoice']);$i++) {
+			$choice = $this->data['TargetChoice'][$i];
+			if ($i>1 && empty($choice['text'])) {
+				unset($this->data['TargetChoice'][$i]);
+				$this->data['TargetChoice'] = array_values($this->data['TargetChoice']);
+				$i--;
+			}
+		}
 	}
 
 	function edit($id = null) {

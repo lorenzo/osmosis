@@ -256,6 +256,14 @@ fieldset.question-choices .choice.set ol label {
 	list-style:lower-alpha;
 }
 
+.matchingQuestion.view div.question {
+	float:left;
+}
+
+.matchingQuestion.view div.answer {
+	float:left;
+	padding-left:50px;
+}
 
 .set ol li div.error-message {
 	clear:both;

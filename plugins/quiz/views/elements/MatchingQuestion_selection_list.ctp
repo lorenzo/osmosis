@@ -2,14 +2,14 @@
 	<?php
 		$i = 0;
 		foreach ($questions as $type => $question) {
+			$num_choices = sizeof($question['SourceChoice']);
 			$question = $question['MatchingQuestion'];
 	?>
 		<li>
 			<?php
-				$num_choices = sizeof($question);
-				$num = __('%s Choices', true);
+				$num = __('%s Match items', true);
 				if ($num_choices==1) {
-					$num = __('%s Choice', true);
+					$num = __('%s Match item', true);
 				}
 			?>
 			<strong><?php echo $text->truncate($question['body'], 200) ?></strong><br />

@@ -18,26 +18,11 @@ class ChoiceQuestionsController extends AppController {
 	}
 
 	function add() {
-		$totalChoices = 2;
-		if(isset($this->data['UI']['addChoice']) && $this->data['UI']['addChoice'] ) {
-			$totalChoices = count($this->data['ChoiceChoice']) + 1;
-			$this->set('totalChoices',$totalChoices);
-			unset($this->data['UI']['addChoice']);
+		if ($this->_updateChoiceCount()) {
 			return;
 		}
-		
 		if (!empty($this->data)) {
-			$num_correct = 0;
-			for ($i=0;$i<count($this->data['ChoiceChoice']);$i++) {
-				$choice = $this->data['ChoiceChoice'][$i];
-				if ($i>1 && empty($choice['text']) && empty($choice['position']) && !$choice['correct']) {
-					unset($this->data['ChoiceChoice'][$i]);
-					$this->data['ChoiceChoice'] = array_values($this->data['ChoiceChoice']);
-					$i--;
-				} else if ($choice['correct']) $num_correct++;
-			}
-			$this->data['ChoiceQuestion']['num_correct'] = $num_correct;
-
+			$this->_cleanupEmpty();
 			$this->ChoiceQuestion->create();
 			$this->ChoiceQuestion->set($this->data);
 			if ($this->ChoiceQuestion->validates() && $this->ChoiceQuestion->saveAll($this->data, array('validate' => false))) {
@@ -58,6 +43,31 @@ class ChoiceQuestionsController extends AppController {
 		if(isset($this->params['named']['quiz'])) {
 			$this->data['Quiz']['id'] = $this->params['named']['quiz'];
 		}
+	}
+	
+	private function _updateChoiceCount() {
+		$totalChoices = 2;
+		$added = false;
+		if(isset($this->data['UI']['addChoice']) && $this->data['UI']['addChoice'] ) {
+			$totalChoices = count($this->data['ChoiceChoice']) + 1;
+			unset($this->data['UI']['addChoice']);
+			$added = true;
+		}
+		$this->set('totalChoices',$totalChoices);
+		return $added;
+	}
+	
+	private function _cleanupEmpty() {
+		$num_correct = 0;
+		for ($i=0;$i<count($this->data['ChoiceChoice']);$i++) {
+			$choice = $this->data['ChoiceChoice'][$i];
+			if ($i>1 && empty($choice['text']) && empty($choice['position']) && !$choice['correct']) {
+				unset($this->data['ChoiceChoice'][$i]);
+				$this->data['ChoiceChoice'] = array_values($this->data['ChoiceChoice']);
+				$i--;
+			} else if ($choice['correct']) $num_correct++;
+		}
+		$this->data['ChoiceQuestion']['num_correct'] = $num_correct;
 	}
 
 	function edit($id = null) {

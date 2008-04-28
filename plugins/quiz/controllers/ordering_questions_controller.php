@@ -18,25 +18,11 @@ class OrderingQuestionsController extends AppController {
 	}
 
 	function add() {
-		$totalChoices = 2;
-		if(isset($this->data['UI']['addChoice']) && $this->data['UI']['addChoice'] ) {
-			$totalChoices = count($this->data['OrderingChoice']) + 1;
-			$this->set('totalChoices',$totalChoices);
-			unset($this->data['UI']['addChoice']);
+		if ($this->_updateChoiceCount()) {
 			return;
 		}
-		
-		
 		if (!empty($this->data)) {
-			for ($i=0;$i<count($this->data['OrderingChoice']);$i++) {
-				$choice = $this->data['OrderingChoice'][$i];
-				if ($i>1 && empty($choice['text']) && empty($choice['position'])) {
-					unset($this->data['OrderingChoice'][$i]);
-					$this->data['OrderingChoice'] = array_values($this->data['OrderingChoice']);
-					$i--;
-				}
-			}
-			
+			$this->_cleanupEmpty();			
 			$this->OrderingQuestion->create();
 			$this->OrderingQuestion->set($this->data);
 			if ($this->OrderingQuestion->validates() && $this->OrderingQuestion->saveAll($this->data, array('validate' => false))) {
@@ -55,9 +41,32 @@ class OrderingQuestionsController extends AppController {
 				$this->Session->setFlash(__('The Ordering Question could not be saved. Please, try again.',true));
 			}
 		}
-		$this->set('totalChoices', $totalChoices);
+
 		if(isset($this->params['named']['quiz'])) {
 			$this->data['Quiz']['id'] = $this->params['named']['quiz'];
+		}
+	}
+	
+	private function _updateChoiceCount() {
+			$totalChoices = 2;
+			$added = false;
+			if(isset($this->data['UI']['addChoice']) && $this->data['UI']['addChoice'] ) {
+				$totalChoices = count($this->data['OrderingChoice']) + 1;
+				unset($this->data['UI']['addChoice']);
+				$added = true;
+			}
+			$this->set('totalChoices',$totalChoices);
+			return $added;
+	}
+	
+	private function _cleanupEmpty() {
+		for ($i=0;$i<count($this->data['OrderingChoice']);$i++) {
+			$choice = $this->data['OrderingChoice'][$i];
+			if ($i>1 && empty($choice['text']) && empty($choice['position'])) {
+				unset($this->data['OrderingChoice'][$i]);
+				$this->data['OrderingChoice'] = array_values($this->data['OrderingChoice']);
+				$i--;
+			}
 		}
 	}
 

@@ -7,7 +7,6 @@ class MatchingQuestion extends QuizAppModel {
 			'required' => array(
 				'rule' => array('/.+/'),
 				'required' => true,
-				'message' => 'This field is required',
 				'allowEmpty' => false
 			)
 		),
@@ -15,7 +14,6 @@ class MatchingQuestion extends QuizAppModel {
 			'natural' => array(
 				'rule' => array('custom','/[0-9]+/'),
 				'required' => false,
-				'message' => 'Must be numeric',
 				'allowEmpty' => true
 			),
 			'nonzero' => array(
@@ -26,7 +24,6 @@ class MatchingQuestion extends QuizAppModel {
 			'natural' => array(
 				'rule' => array('custom','/[0-9]+/'),
 				'required' => false,
-				'message' => 'Must be numeric',
 				'allowEmpty' => true
 			),
 			'minimum' => array(
@@ -78,8 +75,36 @@ class MatchingQuestion extends QuizAppModel {
 			)
 	);
 	
+	function __construct($id = false, $table = null, $ds = null) {
+		$this->setErrorMessage(
+			'body.required',
+			__('This field is required',true)
+		);
+		$this->setErrorMessage(
+			'max_associations.nonzero',
+			__('Max Associations should be greater than zero',true)
+		);
+		$this->setErrorMessage(
+			'max_associations.natural',
+			__('Max Associations should be a number',true)
+		);
+		$this->setErrorMessage(
+			'min_associations.natural',
+			__('Min Associations should be a number',true)
+		);
+		$this->setErrorMessage(
+			'min_associations.minimum',
+			__('Min Associations should be less than Max Associations',true)
+		);
+		$this->setErrorMessage(
+			'min_associations.bound',
+			__('The number of correct answers is not enough compared to Min Associations',true)
+		);
+		parent::__construct($id, $table, $ds);
+	}
+	
 	function validMinAssocs() {
-		return $this->data[$this->alias]['min_associations'] <= $this->data[$this->alias]['max_associations'] ;
+		return intval($this->data[$this->alias]['min_associations']) <= intval($this->data[$this->alias]['max_associations']);
 	}
 	
 	function validBoundMinAssocs() {
@@ -112,7 +137,7 @@ class MatchingQuestion extends QuizAppModel {
 			$this->TargetChoice->set($d);
 			$this->TargetChoice->validates();
 			if($this->TargetChoice->validationErrors) {
-				$invalidTagetChoices[$i] = $this->TargetChoice->validationErrors;
+				$invalidTargetChoices[$i] = $this->TargetChoice->validationErrors;
 			}			
 		}
 		
@@ -120,10 +145,10 @@ class MatchingQuestion extends QuizAppModel {
 			$this->SourceChoice->validationErrors = $invalidSourceChoices;
 			$this->validationErrors['SourceChoice'] = $invalidSourceChoices;
 		}
-		
+
 		if (!empty($invalidTargetChoices)) {
 			$this->TargetChoice->validationErrors = $invalidTargetChoices;
-			$this->validationErrors['TargetChoice'] = $invalidTagetChoices;
+			$this->validationErrors['TargetChoice'] = $invalidTargetChoices;
 		}
 		
 		return true;

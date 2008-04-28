@@ -9,9 +9,10 @@ class MatchingChoice extends QuizAppModel {
 				'rule' => array('custom','/.+/'),
 				'allowEmpty' => false,
 				'required' => true,
+				'last' => true
 			),
 			'natural' => array(
-				'rule' => array('validCorrectAnswer'),
+				'rule' => array('validCorrectAnswer')
 			)	
 		)
 	);
@@ -24,26 +25,52 @@ class MatchingChoice extends QuizAppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => '',
-								'counterCache' => ''),
-			'TargetChoice' =>	array('className' => 'quiz.MatchingChoice',
-								'foreignKey' => 'target_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
+								'counterCache' => '')
 	);
+	
+	
+	var $hasMany = array(
+		'SourceChoice' => array(
+			'className' => 'quiz.MatchingChoice',
+			'foreignKey' => 'target_id',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'dependent' => true,
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
+	
+	function __construct($id = false, $table = null, $ds = null) {
+		$this->setErrorMessage(
+			'text.required',
+			__('Please write the text for this choice',true)
+		);
+		$this->setErrorMessage(
+			'text.natural',
+			__('The correct answer should be a number', true)
+		);
+		parent::__construct($id, $table, $ds);
+	}
 
 	function validCorrectAnswer() {
 		if($this->alias == 'TargetChoice')
 			return true;
-		return isset($this->data[$this->alias]['correct']) && preg_match('/[0-9]+/',$this->data[$this->alias]['correct']);
+		
+		return isset($this->data[$this->alias]['correct']) && preg_match('/[0-9]+/',$this->data[$this->alias]['correct']) ;
 	}
 	
 	function save($data, $validate = true, $fields = array()) {
-		if (isset($data['TargetChoice'])) {
-			$newData['TargetChoice'] = $data['TargetChoice']; 
-			$newData['TargetChoice']['matching_question_id'] = $data['matching_question_id'];
-			unset($data['TargetChoice']);
+		if (isset($data['SourceChoice'])) {
+			$newData['SourceChoice'] = Set::extract($data['SourceChoice'],'{n}.SourceChoice');
+			foreach ($newData['SourceChoice'] as $i => $d) {
+				$newData['SourceChoice'][$i]['matching_question_id'] = $data['matching_question_id'];
+			}
+			
+			unset($data['SourceChoice']);
 			$newData[$this->alias] = $data;
 			return $this->saveAll($newData,array('validate' => $validate, 'atomic' => false));
 		}
