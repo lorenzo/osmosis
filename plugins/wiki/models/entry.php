@@ -115,6 +115,37 @@ class Entry extends AppModel {
 		unset($new_entry['Entry']['created']);
 		return $this->save($new_entry);
 	}
+	
+	/**
+	 * Returns an slugged string based on the Sluggable behavior settings
+	 *
+	 * @param string $string 
+	 * @return string
+	 */
+	
+	function generateSlug($string) {
+		return $this->slug($string,$this->alias);
+	}
+	
+	
+	/**
+	 * Returns true if an entry has been created with a slug that matches $slug an $locators conditions
+	 *
+	 * @param string $slug the slug to be searched for
+	 * @param array $locators an array containing the key wiki_id or course_id
+	 * @return boolean
+	 */
+	
+	function created($slug,$locators = array()) {
+		$conditions = array('slug' => $slug);
+		if (isset($locators['wiki_id']))
+			$conditions['wiki_id'] = $locators['wiki_id'];
+			
+		if (isset($locators['course_id']))
+			$conditions['course_id'] = $locators['course_id'];
+		$count = $this->find('count',array('conditions' => $conditions));
+		return $count === 1;
+	}
 
 }
 ?>

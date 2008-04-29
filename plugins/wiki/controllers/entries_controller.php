@@ -21,11 +21,23 @@ class EntriesController extends WikiAppController {
 			
 		if (isset($this->params['named']['course_id']))
 			$conditions['conditions']['course_id'] = $this->params['named']['course_id'];
-			
-		$this->set('entry', $this->Entry->find('first',$conditions));
+		
+		$entry = $this->Entry->find('first',$conditions);
+		$this->pageTitle = $entry['Entry']['title'];
+		$this->set('entry', $entry);
 	}
 
-	function add($wiki_id = null) {
+	function add() {
+		$wiki_id = null;
+		if (isset($this->params['named']['wiki_id']))
+			$wiki_id = $this->params['named']['wiki_id'];
+		elseif (isset($this->params['named']['course_id'])) {
+			$wiki_id = $this->Entry->Wiki->field('id',array(
+				'conditions' => array('course_id' =>$this->params['named']['course_id']))
+			);
+		}
+
+			
 		if (!$wiki_id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Wiki',true));
 			$this->redirect(array('action'=>'index'), null, true);
@@ -34,13 +46,17 @@ class EntriesController extends WikiAppController {
 			$this->Entry->create();
 			$this->data['Entry']['member_id'] = $this->Auth->user('id');
 			$this->data['Entry']['content'] = $this->HtmlPurifier->purify($this->data['Entry']['content']);
-			if ($this->Entry->save($this->data)) {
+			if ($data = $this->Entry->save($this->data)) {
 				$this->Session->setFlash(__('The Entry has been saved',true));
-				$this->redirect(array('action'=>'index'), null, true);
+				$this->redirect(array(
+					'action'=>'view',
+					 $data['Entry']['slug'],
+					'wiki_id' => $data['Entry']['wiki_id']));
 			} else {
 				$this->Session->setFlash(__('The Entry could not be saved. Please, try again.',true));
 			}
 		}
+		
 		if(!isset($this->data['Entry']['wiki_id'])) {
 			$this->data['Entry']['wiki_id'] = $wiki_id;
 		}
@@ -54,9 +70,13 @@ class EntriesController extends WikiAppController {
 		if (!empty($this->data)) {
 			$this->data['Entry']['member_id'] = $this->Auth->user('id');
 			$this->data['Entry']['content'] = $this->HtmlPurifier->purify($this->data['Entry']['content']);
-			if ($this->Entry->save($this->data)) {
+			if ($data = $this->Entry->save($this->data)) {
+				$this->Entry->read();
 				$this->Session->setFlash(__('The Entry has been saved',true));
-				$this->redirect(array('action'=>'view', $this->data['Entry']['id']));
+				$this->redirect(array(
+					'action'=>'view',
+					 $this->Entry->data['Entry']['slug'],
+					'wiki_id' => $this->Entry->data['Entry']['wiki_id']));
 			} else {
 				$this->Session->setFlash(__('The Entry could not be saved. Please, try again.',true));
 			}
@@ -64,6 +84,7 @@ class EntriesController extends WikiAppController {
 		if (empty($this->data)) {
 			$this->data = $this->Entry->read(null, $id);
 		}
+		$this->pageTitle = sprintf(__('Editing Entry %s',true),$this->data['Entry']['title']);
 	}
 
 	function delete($id = null) {
@@ -84,7 +105,11 @@ class EntriesController extends WikiAppController {
 			die;
 			$this->Session->setFlash(__('An error occured. The entry revision was not restored',true));
 		}
-		$this->redirect(array('action'=>'view',$entry_id), null, true);
+		$this->Entry->read(null,$entry_id);
+		$this->redirect(array(
+			'action'=>'view',
+			 $this->Entry->data['Entry']['slug'],
+			'wiki_id' => $this->Entry->data['Entry']['wiki_id']));
 	}
 
 }

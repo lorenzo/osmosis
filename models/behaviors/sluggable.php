@@ -346,5 +346,17 @@ class SluggableBehavior extends ModelBehavior
 
 		return $string;
 	}
+	
+	/**
+	 * Returns a slug for a string based on setting of $model
+	 *
+	 * @param string $model reference to caller model
+	 * @param string $string string to be slugged
+	 * @return string
+	 */
+	
+	function slug(&$model,$string) {
+		return $this->__slug($string,$this->__settings[$model->alias]);
+	}
 }
 ?>
