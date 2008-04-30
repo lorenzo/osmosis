@@ -62,7 +62,11 @@
 					</div>
 				</div>
 				<div id="more-courses">
-					<?php echo $this->element('layout/user_courses',array('courses' => $Osmosis['courseList'])) ?>
+					<?php
+						if (isset($Osmosis['courseList']) && !empty($Osmosis['courseList'])) {
+							echo $this->element('layout/user_courses',array('courses' => $Osmosis['courseList']));
+						}
+					?>
 				</div>
 			</div>
 			<div id="tools">

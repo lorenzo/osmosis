@@ -64,7 +64,7 @@ class AppController extends Controller {
 		if (isset($this->Placeholder->started))
 			$this->Placeholder->attachToolbar($this->activeCourse);
 		
-		$courses = $this->OsmosisComponents->getUserCourses();
+		
 	}
 		
 }

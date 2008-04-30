@@ -4,4 +4,6 @@
 	Router::connect('/algo', array('controller'=> 'wikis', 'action' => 'index', 'plugin' => 'wiki'));
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	Router::connect('/tests', array('controller' => 'tests', 'action' => 'index'));
+	
+	Router::connect('/admin', array('controller' => 'dashboards', 'action' => 'dashboard', 'admin' => true));
 ?>

@@ -3,8 +3,8 @@
 	<fieldset>
  		<legend><?php __('Add Response');?></legend>
 	<?php
-		echo $form->input('discussion_id');
-		echo $form->input('member_id');
+		echo $form->input('discussion_id', array('type' => 'hidden'));
+		echo $form->input('member_id', array('type' => 'hidden'));
 		echo $form->input('content');
 	?>
 	</fieldset>

@@ -4,7 +4,7 @@ class Quiz extends QuizAppModel {
 	var $name = 'Quiz';
 	var $validate = array(
 		'name' => array(
-		    'Error.empty' => array(
+		    'required' => array(
 		        'rule' => array( 'custom','/.+/'),
 		        'required' => true,
 		        'allowEmpty' => false,
@@ -54,7 +54,9 @@ class Quiz extends QuizAppModel {
 			),
 	);
 	function __construct($id = false, $table = null, $ds = null) {
-			$this->validate['name']['Error.empty']['message'] = __('The name can not be empty',true);
+			$this->setErrorMessage(
+				'name.required', __('The name can not be empty',true)
+			);
 			parent::__construct($id,$table,$ds);
 	}
 

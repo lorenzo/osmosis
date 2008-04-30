@@ -9,7 +9,7 @@ class TestDiscussion extends Discussion {
 
 class DiscussionTestCase extends CakeTestCase {
 	var $Discussion = null;
-	var $fixtures = array('app.discussion', 'app.subject', 'app.member', 'app.response');
+	var $fixtures = array('app.discussion', 'app.topic', 'app.member', 'app.response');
 
 	function start() {
 		parent::start();
@@ -27,7 +27,7 @@ class DiscussionTestCase extends CakeTestCase {
 
 		$expected = array('Discussion' => array(
 			'id'  => 'Lorem ipsum dolor sit amet',
-			'subject_id'  => 1,
+			'topic_id'  => 1,
 			'member_id'  => 1,
 			'title'  => 'Lorem ipsum dolor sit amet',
 			'content'  => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida,

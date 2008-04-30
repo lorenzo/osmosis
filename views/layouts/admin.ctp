@@ -60,17 +60,17 @@
 						</div>
 					</div>
 					<div id="more-courses">
-						<div class="courses">
-							<strong>???</strong>
-							<ul>
-								<li><a href="#"><span class="code">[QK-1111]</span> Un curso</a></li>
-								<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-								<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-								<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-								<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-								<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-							</ul>
-						</div>
+						<!-- <div class="courses">
+													<strong>???</strong>
+													<ul>
+														<li><a href="#"><span class="code">[QK-1111]</span> Un curso</a></li>
+														<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+														<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+														<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+														<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+														<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+													</ul>
+												</div> -->
 					</div>
 				</div>
 			</div>

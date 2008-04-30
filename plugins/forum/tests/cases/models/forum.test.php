@@ -10,7 +10,7 @@ class TestForum extends Forum {
 
 class ForumTestCase extends CakeTestCase {
 	var $Forum = null;
-	var $fixtures = array('forum', 'app.course', 'subject');
+	var $fixtures = array('forum', 'app.course', 'topic');
 
 	function start() {
 		parent::start();

@@ -1,31 +1,31 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* Subject Test cases generated on: 2008-02-02 14:02:10 : 1201975390*/
-App::import('Model', 'Subject');
+/* Topic Test cases generated on: 2008-02-02 14:02:10 : 1201975390*/
+App::import('Model', 'Topic');
 
-class TestSubject extends Subject {
+class TestTopic extends Topic {
 	var $cacheSources = false;
 }
 
-class SubjectTestCase extends CakeTestCase {
-	var $Subject = null;
-	var $fixtures = array('app.subject', 'app.forum', 'app.member', 'app.discussion');
+class TopicTestCase extends CakeTestCase {
+	var $Topic = null;
+	var $fixtures = array('app.topic', 'app.forum', 'app.member', 'app.discussion');
 
 	function start() {
 		parent::start();
-		$this->Subject = new TestSubject();
+		$this->Topic = new TestTopic();
 	}
 
-	function testSubjectInstance() {
-		$this->assertTrue(is_a($this->Subject, 'Subject'));
+	function testTopicInstance() {
+		$this->assertTrue(is_a($this->Topic, 'Topic'));
 	}
 
-	function testSubjectFind() {
-		$results = $this->Subject->recursive = -1;
-		$results = $this->Subject->find('first');
+	function testTopicFind() {
+		$results = $this->Topic->recursive = -1;
+		$results = $this->Topic->find('first');
 		$this->assertTrue(!empty($results));
 
-		$expected = array('Subject' => array(
+		$expected = array('Topic' => array(
 			'id'  => 1,
 			'title'  => 'Lorem ipsum dolor sit amet',
 			'forum_id'  => 1,

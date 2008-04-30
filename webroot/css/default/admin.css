@@ -66,9 +66,42 @@ strong.author {
 	margin-top:30px;
 	background:#fff;
 	float:left;
+	width:100%;
 }
 
 #admin-main #course-data,
 #admin-main #more-courses {
 	margin-top:-30px;
+}
+
+.dashboard-element {
+	margin-top:10px;
+}
+
+.dashboard-element dl {
+	line-height: 2em;
+	margin:5px 0;
+}
+.dashboard-element dl.altrow {
+	background: #f4f4f4;
+}
+.dashboard-element dt {
+	text-indent:10px;
+	font-weight: bold;
+	padding-left: 4px;
+	vertical-align: top;
+}
+.dashboard-element dd {
+	margin-left: 10em;
+	margin-top: -2em;
+	vertical-align: top;
+}
+
+#profile.dashboard-element p {
+	padding:3px 10px;
+	margin:0;
+	text-align:right;
+}
+#profile.dashboard-element p a {
+	text-decoration:none;
 }

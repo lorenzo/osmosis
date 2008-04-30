@@ -7,12 +7,12 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS `forum_discussions` (
   `id` char(36) collate utf8_unicode_ci NOT NULL,
-  `subject_id` int(11) NOT NULL,
+  `topic_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
   `title` varchar(255) collate utf8_unicode_ci NOT NULL,
   `content` text collate utf8_unicode_ci NOT NULL,
   `locked` tinyint(1) NOT NULL,
-  `status` varchar(20) collate utf8_unicode_ci NOT NULL COMMENT 'Describes activity inside subject',
+  `status` varchar(20) collate utf8_unicode_ci NOT NULL COMMENT 'Describes activity inside topic',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -46,17 +46,17 @@ CREATE TABLE IF NOT EXISTS `forum_responses` (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `forum_subjects`
+-- Table structure for table `forum_topics`
 -- 
 
-CREATE TABLE IF NOT EXISTS `forum_subjects` (
+CREATE TABLE IF NOT EXISTS `forum_topics` (
   `id` int(11) NOT NULL auto_increment,
   `title` varchar(255) character set utf8 collate utf8_unicode_ci NOT NULL,
   `forum_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
   `created` datetime NOT NULL,
   `locked` tinyint(1) NOT NULL,
-  `status` varchar(20) character set utf8 collate utf8_unicode_ci default NULL COMMENT 'Describes activity inside subject',
+  `status` varchar(20) character set utf8 collate utf8_unicode_ci default NULL COMMENT 'Describes activity inside topic',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 

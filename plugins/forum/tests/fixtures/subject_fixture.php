@@ -1,10 +1,10 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* Subject Fixure generated on: 2008-02-02 14:02:10 : 1201975390*/
+/* Topic Fixure generated on: 2008-02-02 14:02:10 : 1201975390*/
 
-class SubjectFixture extends CakeTestFixture {
-	var $name = 'Subject';
-	var $table = 'subjects';
+class TopicFixture extends CakeTestFixture {
+	var $name = 'Topic';
+	var $table = 'topics';
 	var $fields = array(
 			'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
 			'title' => array('type'=>'string', 'null' => false),

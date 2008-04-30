@@ -7,7 +7,7 @@ class DiscussionFixture extends CakeTestFixture {
 	var $table = 'discussions';
 	var $fields = array(
 			'id' => array('type'=>'string', 'null' => false, 'length' => 36, 'key' => 'primary'),
-			'subject_id' => array('type'=>'integer', 'null' => false),
+			'topic_id' => array('type'=>'integer', 'null' => false),
 			'member_id' => array('type'=>'integer', 'null' => false),
 			'title' => array('type'=>'string', 'null' => false),
 			'content' => array('type'=>'text', 'null' => false),
@@ -17,7 +17,7 @@ class DiscussionFixture extends CakeTestFixture {
 			);
 	var $records = array(array(
 			'id'  => 'Lorem ipsum dolor sit amet',
-			'subject_id'  => 1,
+			'topic_id'  => 1,
 			'member_id'  => 1,
 			'title'  => 'Lorem ipsum dolor sit amet',
 			'content'  => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida,
