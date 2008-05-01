@@ -7,20 +7,20 @@ class OsmosisComponentsComponent extends Object {
 	
 	function startup(&$controller) {
 		$this->controller =& $controller;
-		$this->Member =& new Member;
 	}
 	
-	function getUserCourses(){
-		if (!isset($this->controller->Auth)) {
-			return;
-		}
-		$courses = $this->Member->courses($this->controller->Auth->user('id'));
+	function getUserCourses() {
+		if (!isset($this->controller->Auth))
+			return array();
+		$member = new Member;
+		$courses = $member->courses($this->controller->Auth->user('id'));
 		$this->controller->viewVars['Osmosis']['courseList'] = $courses;
 	}
 	
 	function beforeRender() {
 		$this->getUserCourses();
 	}
+
 }
 
 ?>

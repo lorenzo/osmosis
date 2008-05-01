@@ -71,8 +71,6 @@ class AppController extends Controller {
 		$this->activeCourse = 1;
 		if (isset($this->Placeholder->started))
 			$this->Placeholder->attachToolbar($this->activeCourse);
-		
-		
 	}
 		
 }

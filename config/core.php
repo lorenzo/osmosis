@@ -184,4 +184,5 @@
 	
 	//Used to disable authentication while in development
 	Configure::write('Auth.disabled',true);
+	Configure::write('Osmosis.uploads',APP.'uploads');
 ?>

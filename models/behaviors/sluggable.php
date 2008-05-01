@@ -54,7 +54,7 @@ class SluggableBehavior extends ModelBehavior
 	 */
 	function setup(&$Model, $settings = array())
 	{
-		$default = array('label' => array('title'), 'slug' => 'slug', 'separator' => '-', 'length' => 100, 'overwrite' => false, 'translation' => null);
+		$default = array('label' => array('title'), 'slug' => 'slug', 'separator' => '-', 'length' => 100, 'overwrite' => false, 'translation' => null, 'unique' => true);
 
 		if (!isset($this->__settings[$Model->alias]))
 		{
@@ -115,42 +115,45 @@ class SluggableBehavior extends ModelBehavior
 				// Get the slug
 
 				$slug = $this->__slug($label, $this->__settings[$Model->alias]);
-
-				// Look for slugs that start with the same slug we've just generated
-
-				$conditions = array($Model->alias . '.' . $this->__settings[$Model->alias]['slug'] => 'LIKE ' . $slug . '%');
-
-				if (!empty($Model->id))
+				
+				if($this->__settings[$Model->alias]['unique'])
 				{
-					$conditions[$Model->alias . '.' . $Model->primaryKey] = '!= ' . $Model->id;
-				}
+					// Look for slugs that start with the same slug we've just generated
 
-				$result = $Model->find('all', array('conditions' => $conditions, 'fields' => array($Model->primaryKey, $this->__settings[$Model->alias]['slug']), 'recursive' => -1));
-				$sameUrls = null;
-
-				if (!empty($result))
-				{
-					$sameUrls = Set::extract($result, '{n}.' . $Model->alias . '.' . $this->__settings[$Model->alias]['slug']);
-				}
-
-				// If we have collissions
-
-				if (!empty($sameUrls))
-				{
-					$begginingSlug = $slug;
-					$index = 1;
-
-					// Attach an ending incremental number until we find a free slug
-
-					while($index > 0)
+					$conditions = array($Model->alias . '.' . $this->__settings[$Model->alias]['slug'] => 'LIKE ' . $slug . '%');
+				
+					if (!empty($Model->id))
 					{
-						if (!in_array($begginingSlug . $this->__settings[$Model->alias]['separator'] . $index, $sameUrls))
-						{
-							$slug = $begginingSlug . $this->__settings[$Model->alias]['separator'] . $index;
-							$index = -1;
-						}
+						$conditions[$Model->alias . '.' . $Model->primaryKey] = '!= ' . $Model->id;
+					}
 
-						$index++;
+					$result = $Model->find('all', array('conditions' => $conditions, 'fields' => array($Model->primaryKey, $this->__settings[$Model->alias]['slug']), 'recursive' => -1));
+					$sameUrls = null;
+
+					if (!empty($result))
+					{
+						$sameUrls = Set::extract($result, '{n}.' . $Model->alias . '.' . $this->__settings[$Model->alias]['slug']);
+					}
+
+					// If we have collissions
+
+					if (!empty($sameUrls))
+					{
+						$begginingSlug = $slug;
+						$index = 1;
+
+						// Attach an ending incremental number until we find a free slug
+
+						while($index > 0)
+						{
+							if (!in_array($begginingSlug . $this->__settings[$Model->alias]['separator'] . $index, $sameUrls))
+							{
+								$slug = $begginingSlug . $this->__settings[$Model->alias]['separator'] . $index;
+								$index = -1;
+							}
+
+							$index++;
+						}
 					}
 				}
 
