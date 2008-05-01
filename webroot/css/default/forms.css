@@ -33,7 +33,9 @@ div.submit {
 	color:#BF0000;
 	
 }
-
+.checkbox {
+	padding-left:80px;
+}
 .checkbox input,
 input[type=checkbox] {
 	display:inline;

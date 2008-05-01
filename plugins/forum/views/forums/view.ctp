@@ -1,8 +1,23 @@
-<div class="forums view">
+<div class="forum forums view">
 <h2>
-	<?php  __('Forum');?> &mdash;
-	<?php echo $html->link(__('Add Topic', true), array('controller' => 'topics', 'action' => 'add', 'forum' => $forum['Forum']['id'])); ?>
+	<?php  __('Forum');?>
 </h2>
+<p class="small-description">
+	<?php
+		printf(
+			__('You are currently in the <em>%s</em> course forum.', true),
+			$html->link(
+				$forum['Course']['name'],
+				array('controller' => 'topics', 'action' => 'view', $forum['Course']['id'])
+			)
+		);
+		echo ' ';
+		echo $html->link(
+			__('Create a new Topic', true),
+			array('controller' => 'topics', 'action' => 'add', 'forum' => $forum['Forum']['id'])
+		);
+	?>
+</p>
 <?php if (!empty($forum['Topic'])):?>
 <table cellpadding="0" cellspacing="0" class="forum-list">
 	<tr>

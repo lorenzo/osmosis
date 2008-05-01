@@ -18,7 +18,7 @@ class Topic extends AppModel {
 		),
 		'forum_id' => array('numeric')
 	);
-	var $actsAs = array('Bindable' => array('notices' => true));
+	var $actsAs = array('Bindable');
 	
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
@@ -55,7 +55,7 @@ class Topic extends AppModel {
 	}
 	
 	function getListSummary($id) {
-		$this->restrict(array('Discussion' => array('Member', 'Response' => array('Member' => array('id', 'full_name'))), 'Forum'));
+		$this->restrict(array('Discussion' => array('Member', 'Response' => array('Member' => array('id', 'full_name'))), 'Forum' => array('Course')));
 		$this->Discussion->hasMany['Response']['limit'] = 1;
 		$this->Discussion->hasMany['Response']['order'] = 'created desc';
 		return $this->read(null, $id);

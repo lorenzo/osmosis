@@ -5,6 +5,9 @@ class ResponsesController extends ForumAppController {
 	var $helpers = array('Html', 'Form');
 	var $components = array('HtmlPurifier');
 	
+	// function blackHoledAction() {
+	// }
+	
 	function index() {
 		$this->Response->recursive = 0;
 		$this->set('responses', $this->paginate());

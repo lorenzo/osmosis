@@ -1,6 +1,7 @@
 <?php
+App::import('Core', 'Sanitize');
 class AppController extends Controller {
-	var $components = array('Acl','Auth','RequestHandler','OsmosisComponents','Placeholder');
+	var $components = array('Acl','Auth','RequestHandler','OsmosisComponents','Placeholder', 'Security');
 	var $helpers = array('Javascript', 'Html', 'Form', 'Dynamicjs', 'Time', 'Placeholder');
 
 	/**
@@ -10,7 +11,6 @@ class AppController extends Controller {
 	 */
 	
 	var $activeCourse = false;
-	
 	
 	function beforeFilter() {
 		if (isset($this->Auth)) {
@@ -25,7 +25,15 @@ class AppController extends Controller {
 				$this->Auth->allow();
 			}
 		}
+		if (isset($this->Security)) {
+			$this->Security->blackHoleCallback = 'blackHoledAction';
+		}
 		$this->__selectLayout();
+	}
+	
+	function blackHoledAction() {
+		$this->Session->setFlash(__('Invalid access', true));
+		$this->redirect(array('controller' => 'members', 'action' => 'login', 'plugin' => ''));
 	}
 
 	function __selectLayout() {

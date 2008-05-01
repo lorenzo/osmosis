@@ -3,7 +3,7 @@
 	<fieldset>
  		<legend><?php __('Reply');?></legend>
 	<?php
-		echo $form->input('discussion_id', array('type' => 'hidden'));
+		echo $form->input('discussion_id', array('type' => 'hidden', 'value' => $discussion_id));
 		echo $form->input('content', array('label' => __('Message', true)));
 	?>
 	</fieldset>

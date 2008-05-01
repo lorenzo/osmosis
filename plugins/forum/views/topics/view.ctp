@@ -1,16 +1,30 @@
-<div class="topics view">
+<div class="forum topics view">
 <h2>
 	<?php
-		__('Topic');
-		echo ': ';
 	 	__($topic['Topic']['name'])
-	?> &mdash;
-	<?php
-		echo $html->link(
-			__('Go back to the forum', true), array('controller'=> 'forums', 'action'=>'view', $topic['Forum']['id'])
-		);
 	?>
 </h2>
+<p class="small-description">
+	<?php
+	// debug($topic);
+		printf(
+			__('You are currently in a topic inside the <em>%s</em> course forum.', true),
+			$html->link(
+				$topic['Forum']['Course']['name'],
+				array('controller' => 'forums', 'action' => 'view', $topic['Forum']['id'])
+			)
+		);
+		echo ' ';
+		echo  $html->link(
+			__('Start a discussion', true),
+			array(
+				'controller'=> 'discussions',
+				'action'=>'add',
+				'topic' => $topic['Topic']['id']
+			)
+		);
+	?>
+</p>
 <?php
 	if (!empty($topic['Discussion'])):
 ?>
@@ -42,13 +56,13 @@
 							'action'=>'view',
 							$discussion['id']
 						),
-						array('title' => $discussion['content'])
+						array('title' => $text->truncate(strip_tags($discussion['content'])))
 					);
 				?> <br />
 				<?php echo $discussion['Member']['full_name']; ?> &mdash; 
 				<span class="date"><?php echo $time->nice($discussion['created']); ?></span>
 			</td>
-			<td class="last-response">
+			<td class="last-response date">
 				<?php
 					$last_response = $discussion['Response'];
 					if (!empty($last_response)) {

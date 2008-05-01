@@ -63,7 +63,7 @@
 				</div>
 				<div id="more-courses">
 					<?php
-						if (isset($Osmosis['courseList']) && !empty($Osmosis['courseList'])) {
+						if (isset($Osmosis['courseList'])) {
 							echo $this->element('layout/user_courses',array('courses' => $Osmosis['courseList']));
 						}
 					?>

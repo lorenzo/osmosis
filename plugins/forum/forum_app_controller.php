@@ -1,15 +1,8 @@
 <?php
 class ForumAppController extends AppController {
-	var $helpers = array('Time');
+	var $helpers = array('Time', 'Text');
+	var $components = array('Security');
 	var $statuses = null;
 	
-	function beforeRender() {
-		parent::beforeRender();
-		$this->statuses = array(
-			'open' => __('Open', true),
-			'closed' => __('Closed', true)
-		);
-		$this->set('statuses', $this->statuses);
-	}
 }
 ?>

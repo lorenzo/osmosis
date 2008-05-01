@@ -14,9 +14,15 @@ class DiscussionsController extends ForumAppController {
 			$this->Session->setFlash(__('Invalid Discussion.', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		$discussion = $this->Discussion->find('first', array('conditions' => array('Discussion.id' => $id), 'count_view' => true));
-		$this->data['Response']['discussion_id'] = $discussion['Discussion']['id'];
-		$this->set(compact('discussion'));
+		$discussion = $this->Discussion->getDiscussion($id);
+		$this->Discussion->Response->restrict(
+			array(
+				'Response' => array('Member'),
+				'Discussion' => array('id')
+			)
+		);
+		$responses = $this->paginate('Response', array('Discussion.id' => $id));
+		$this->set(compact('discussion', 'responses'));
 	}
 
 	function add() {
@@ -44,13 +50,17 @@ class DiscussionsController extends ForumAppController {
 			$this->data['Discussion']['member_id'] = $this->Auth->user('id');
 			if ($this->Discussion->save($this->data)) {
 				$this->Session->setFlash(__('The Discussion has been saved', true));
-				$this->redirect(array('action'=>'index'));
+				$this->redirect(array('controller' => 'discussions', 'action'=>'view', $id));
 			} else {
 				$this->Session->setFlash(__('The Discussion could not be saved. Please, try again.', true));
 			}
 		}
 		if (empty($this->data)) {
 			$this->data = $this->Discussion->read(null, $id);
+			if ($this->data['Discussion']['status']=='locked') {
+				$this->Session->setFlash(__('This discussion is closed, you cannot edit it anymore.', true));
+				$this->redirect(array('controller' => 'discussions', 'action'=>'view', $id));
+			}
 		}
 	}
 
@@ -126,6 +136,11 @@ class DiscussionsController extends ForumAppController {
 			$this->Session->setFlash(__('Discussion deleted', true));
 			$this->redirect(array('action'=>'index'));
 		}
+	}
+	
+	function beforeFilter() {
+		parent::beforeFilter();
+		$this->Security->requireAuth('edit');
 	}
 
 }
