@@ -35,7 +35,7 @@ class Topic extends AppModel {
 		'Discussion' => array(
 			'className' => 'Forum.Discussion',
 			'foreignKey' => 'topic_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => 'sticky desc, created desc',
@@ -52,6 +52,29 @@ class Topic extends AppModel {
 			'name.required', __('The name can not be empty',true)
 		);
 		parent::__construct($id,$table,$ds);
+	}
+	
+	function beforeValidate() {
+		parent::beforeValidate();
+		if (isset($this->data['Topic']['close'])) {
+		 	if ($this->data['Topic']['close']) {
+				$this->data['Topic']['status'] = 'locked';
+			} else {
+				$this->data['Topic']['status'] = 'unlocked';
+			}
+			unset($this->data['Topic']['close']);
+		}
+		return true;
+	}
+	
+	function afterFind($results, $primary=false) {
+		if ($primary) {
+			foreach ($results as $i => $topic) {
+				if (!isset($topic['Topic']['status'])) continue;
+				$results[$i]['Topic']['close'] = ($topic['Topic']['status'] == 'locked');
+			}
+		}
+		return $results;
 	}
 	
 	function getListSummary($id) {

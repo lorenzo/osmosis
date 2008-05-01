@@ -4,11 +4,6 @@ class TopicsController extends ForumAppController {
 	var $name = 'Topics';
 	var $helpers = array('Html', 'Form');
 
-	function index() {
-		$this->Topic->recursive = 0;
-		$this->set('topics', $this->paginate());
-	}
-
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Topic.', true));
@@ -24,7 +19,6 @@ class TopicsController extends ForumAppController {
 				$this->Session->setFlash(__('The Topic has been saved', true));
 				$this->redirect(array('controller' => 'forums', 'action'=>'view', $this->data['Topic']['forum_id']));
 			} else {
-				debug($this->Topic->validationErrors);
 				$this->Session->setFlash(__('The Topic could not be saved. Please, try again.', true));
 			}
 		}
@@ -41,24 +35,36 @@ class TopicsController extends ForumAppController {
 		if (!empty($this->data)) {
 			if ($this->Topic->save($this->data)) {
 				$this->Session->setFlash(__('The Topic has been saved', true));
-				$this->redirect(array('action'=>'index'));
+				$this->redirect(
+					array(
+						'controller' => 'forums',
+						'action'=>'view',
+						$this->Topic->field('forum_id')
+					)
+				);
 			} else {
 				$this->Session->setFlash(__('The Topic could not be saved. Please, try again.', true));
 			}
 		}
 		if (empty($this->data)) {
 			$this->data = $this->Topic->read(null, $id);
+			if ($this->data['Topic']['status']=='locked') {
+				$this->Session->setFlash(__('This topic is locked, you cannot edit it anymore.', true));
+				$this->redirect(array('controller' => 'forums', 'action'=>'view', $this->data['Topic']['forum_id']));
+			}
+			
 		}
 	}
-
+	
 	function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for Topic', true));
 			$this->redirect(array('action'=>'index'));
 		}
+		$forum_id = $this->Topic->field('forum_id', $id);
 		if ($this->Topic->del($id)) {
 			$this->Session->setFlash(__('Topic deleted', true));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('controller' => 'forums', 'action'=>'view', $forum_id));
 		}
 	}
 }

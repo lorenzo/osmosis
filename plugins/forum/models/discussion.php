@@ -45,7 +45,7 @@ class Discussion extends AppModel {
 		'Response' => array(
 			'className' => 'Forum.Response',
 			'foreignKey' => 'discussion_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -72,10 +72,9 @@ class Discussion extends AppModel {
 	
 	function afterFind($results, $primary=false) {
 		if ($primary) {
-			if ($results[0]['Discussion']['status'] == 'locked') {
-				$results[0]['Discussion']['close'] = 1;
-			} else {
-				$results[0]['Discussion']['close'] = 0;
+			foreach ($results as $i => $discussion) {
+				if (!isset($discussion['Discussion']['status'])) continue;
+				$results[$i]['Discussion']['close'] = ($discussion['Discussion']['status'] == 'locked');
 			}
 		}
 		return $results;

@@ -58,7 +58,7 @@ class DiscussionsController extends ForumAppController {
 		if (empty($this->data)) {
 			$this->data = $this->Discussion->read(null, $id);
 			if ($this->data['Discussion']['status']=='locked') {
-				$this->Session->setFlash(__('This discussion is closed, you cannot edit it anymore.', true));
+				$this->Session->setFlash(__('This discussion is locked, you cannot edit it anymore.', true));
 				$this->redirect(array('controller' => 'discussions', 'action'=>'view', $id));
 			}
 		}

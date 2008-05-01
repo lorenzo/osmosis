@@ -3,26 +3,7 @@ class ResponsesController extends ForumAppController {
 
 	var $name = 'Responses';
 	var $helpers = array('Html', 'Form');
-	var $components = array('HtmlPurifier');
-	
-	function index() {
-		$this->Response->recursive = 0;
-		$this->set('responses', $this->paginate());
-	}
-	
-	function discussion_responses($discussion_id=null) {
-		$this->Response->recursive = 0;
-		$this->set('responses', $this->paginate(array('conditions' => array('discussion_id' => $discussion_id))));
-	}
-
-	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid Response.', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->set('response', $this->Response->read(null, $id));
-	}
-
+		
 	function add($discussion_id=null) {
 		if (!empty($this->data)) {
 			$this->Response->create();
@@ -53,12 +34,19 @@ class ResponsesController extends ForumAppController {
 		if (!empty($this->data)) {
 			if ($this->Response->save($this->data)) {
 				$this->Session->setFlash(__('The Response has been saved', true));
-				// $this->redirect(array('action'=>'index'));
+				$this->redirect(
+					array(
+						'controller' => 'discussions',
+						'action'=>'view',
+						$this->Response->field('discussion_id', array('id' => $this->data['Response']['id']))
+					)
+				);
 			} else {
 				$this->Session->setFlash(__('The Response could not be saved. Please, try again.', true));
 			}
 		}
 		if (empty($this->data)) {
+			$this->Response->recursive = -1;
 			$this->data = $this->Response->read(null, $id);
 		}
 		$discussions = $this->Response->Discussion->find('list');

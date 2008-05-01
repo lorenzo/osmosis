@@ -5,7 +5,7 @@
 <p class="small-description">
 	<?php
 		printf(
-			__('You are currently in the <em>%s</em> course forum.', true),
+			__('You are currently viewing the topics in the <em>%s</em> course forum.', true),
 			$html->link(
 				$forum['Course']['name'],
 				array('controller' => 'topics', 'action' => 'view', $forum['Course']['id'])
@@ -24,7 +24,6 @@
 		<th><?php __('Status'); ?></th>
 		<th><?php __('Topic'); ?></th>
 		<th class="plain date"><?php __('Created'); ?></th>
-		<!-- <th class="actions"><?php __('Actions');?></th> -->
 	</tr>
 	<?php
 		$i = 0;
@@ -41,19 +40,26 @@
 					echo $html->link(
 						$topic['name'],
 						array('controller'=> 'topics', 'action'=>'view', $topic['id'])
-					);?> <br /> <?php echo $topic['description']; ?>
+					);
+				?> <br /> <?php echo $topic['description']; ?> &mdash;
+				<?php
+					if ($topic['status']!='locked') :
+						echo $html->link(__('edit', true), array('controller' => 'topics', 'action' => 'edit', $topic['id']));
+				?> &mdash;
+				<?php
+					endif;
+					echo $html->link(
+						__('delete', true),
+						array('controller' => 'topics', 'action' => 'delete', $topic['id']),
+						array('confirm' => __('This will also delete all discussions on this topic', true))
+					);
+				?>
 			</td>
 			<td class="date"><?php echo $time->nice($topic['created']);?></td>
-			<!-- <td class="actions">
-				<?php echo $html->link(__('View', true), array('controller'=> 'topics', 'action'=>'view', $topic['id'])); ?>
-				<?php echo $html->link(__('Edit', true), array('controller'=> 'topics', 'action'=>'edit', $topic['id'])); ?>
-				<?php echo $html->link(__('Delete', true), array('controller'=> 'topics', 'action'=>'delete', $topic['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $topic['id'])); ?>
-			</td> -->
 		</tr>
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
-
 	<div class="actions">
 		<ul>
 			<li><?php echo $html->link(__('New Topic', true), array('controller'=> 'topics', 'action'=>'add'));?> </li>

@@ -1,14 +1,16 @@
 <div class="forum topics view">
 <h2>
 	<?php
-	 	__($topic['Topic']['name'])
+		__('Topic:');
+	 	echo ' ' . $topic['Topic']['name'];
 	?>
 </h2>
 <p class="small-description">
 	<?php
 	// debug($topic);
 		printf(
-			__('You are currently in a topic inside the <em>%s</em> course forum.', true),
+			__('You are currently viewing the discussions started around this topic <strong>"%s"</strong> inside the <em>%s</em> course forum.', true),
+			$topic['Topic']['name'],
 			$html->link(
 				$topic['Forum']['Course']['name'],
 				array('controller' => 'forums', 'action' => 'view', $topic['Forum']['id'])

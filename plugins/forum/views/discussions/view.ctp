@@ -1,5 +1,10 @@
 <div class="forum discussions view">
-	<h2><?php echo $discussion['Discussion']['title']; ?></h2>
+	<h2>
+		<?php
+			__('Discussion:');
+			echo ' ' . $discussion['Discussion']['title'];
+		?>
+	</h2>
 	<p class="small-description">
 		<?php
 			printf(

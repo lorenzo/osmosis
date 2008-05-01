@@ -1,17 +1,27 @@
 <p class="author">
-	<?php printf(__('By %s', true), $author['full_name']); ?> <br />
+	<?php
+		printf(
+			__('By %s', true),
+			$html->link(
+				$author['full_name'],
+				array('controller' => 'members', 'action' => 'view', $author['id'], 'plugin' => '')
+			)
+		);
+	?><br />
 </p>
 <div class="message">
 	<div class="content">
 		<?php
 			$date = $message['created'];
-			$date_label = __('Posted: %s', true);
-			if ($message['created']!=$message['modified']) {
-				$date = $message['modified'];
-				$date_label = __('Modified: %s', true);
-			}
 		?>
-		<span class="last date"><?php printf($date_label, $time->nice($date)); ?></span>
+		<span class="last date">
+			<?php
+				printf(__('Posted: %s', true), $message['created']);
+				if ($message['created']!=$message['modified']) {
+					printf(' // ' . __('Modified: %s', true), $message['modified']);
+				}
+			?>
+		</span>
 		<?php
 			echo $message['content'];
 		?>
