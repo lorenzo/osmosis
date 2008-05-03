@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 03, 2008 at 10:58 AM
+-- Generation Time: May 03, 2008 at 01:04 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.5
 
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `quiz_cloze_questions_quizzes` (
   `cloze_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Relates a Cloze Question with a Quiz (many-to-many)' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Relates a Cloze Question with a Quiz (many-to-many)';
 
 -- --------------------------------------------------------
 
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `quiz_matching_choices` (
   `id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `text` text NOT NULL COMMENT 'Text for this choce',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Matching Questions'' choices';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Matching Questions'' choices';
 
 -- --------------------------------------------------------
 
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `quiz_matching_choices_matching_questions` (
   `target` char(36) NOT NULL COMMENT 'Target Choice (from quiz_matching_choices)',
   `position` tinyint(3) NOT NULL default '0' COMMENT 'The position of the choice as will appear in the question',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `quiz_matching_questions` (
   `max_associations` int(11) NOT NULL COMMENT 'Maximum number of choices that the candidate is allowed to select. If maxChoices is 0 then there is no restriction. If maxChoices is greater than 1 (or 0) then the interaction must be bound to a response with multiple cardinality',
   `min_associations` int(11) default NULL COMMENT 'Minimum number of choices that the candidate is required to select to form a valid response. If minChoices is 0 then the candidate is not required to select any choices. minChoices must be less than or equal to the limit imposed by maxChoices.',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Matching: Associate pairs of choices from two sets';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Matching: Associate pairs of choices from two sets';
 
 -- --------------------------------------------------------
 
@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `quiz_matching_questions_quizzes` (
   `matching_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Relates a Matching Question with a Quiz (many-to-many)';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Relates a Matching Question with a Quiz (many-to-many)';
 
 -- --------------------------------------------------------
 
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `quiz_ordering_choices` (
   `text` text NOT NULL COMMENT 'Text for this choce',
   `position` tinyint(3) NOT NULL default '0' COMMENT 'The position of the choice as will appear in the question',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Ordering Questions'' choices';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Ordering Questions'' choices';
 
 -- --------------------------------------------------------
 
@@ -163,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `quiz_ordering_questions` (
   `max_choices` int(11) NOT NULL COMMENT 'Maximum number of choices that the candidate is allowed to select. If maxChoices is 0 then there is no restriction. If maxChoices is greater than 1 (or 0) then the interaction must be bound to a response with multiple cardinality',
   `min_choices` int(11) default NULL COMMENT 'Minimum number of choices that the candidate is required to select to form a valid response. If minChoices is 0 then the candidate is not required to select any choices. minChoices must be less than or equal to the limit imposed by maxChoices.',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='The candidate''s task is to select one or more of the choices';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='The candidate''s task is to select one or more of the choices';
 
 -- --------------------------------------------------------
 
@@ -176,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `quiz_ordering_questions_quizzes` (
   `ordering_question_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   `quiz_id` char(36) character set utf8 collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Relates a Choice Question with a Quiz (many-to-many)';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Relates a Choice Question with a Quiz (many-to-many)';
 
 -- --------------------------------------------------------
 
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `quiz_quizzes` (
   `id` char(36) collate utf8_unicode_ci NOT NULL,
   `name` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'Title of the quiz',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Registered Quizzes';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Registered Quizzes';
 
 -- --------------------------------------------------------
 
@@ -202,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `quiz_text_questions` (
   `body` text NOT NULL COMMENT 'The questions wording',
   `format` varchar(5) NOT NULL COMMENT 'plain, pre or xhtml',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
