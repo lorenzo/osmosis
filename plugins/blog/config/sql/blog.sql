@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `blog_blogs` (
   `description` text NOT NULL,
   `member_id` varchar(100) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `blog_comments` (
   `post_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -57,4 +57,4 @@ CREATE TABLE IF NOT EXISTS `blog_posts` (
   `slug` text NOT NULL,
   `member_id` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
