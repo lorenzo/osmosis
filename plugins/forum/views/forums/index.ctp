@@ -47,6 +47,6 @@ foreach ($forums as $forum):
 		<li><?php echo $html->link(__('List Courses', true), array('controller'=> 'courses', 'action'=>'index')); ?> </li>
 		<li><?php echo $html->link(__('New Course', true), array('controller'=> 'courses', 'action'=>'add')); ?> </li>
 		<li><?php echo $html->link(__('List Topics', true), array('controller'=> 'topics', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Topic', true), array('controller'=> 'topics', 'action'=>'add')); ?> </li>
+		<li><?php echo $html->link(__('New Topic', true), array('controller' => 'topics', 'action' => 'add', 'forum' => $forum['Forum']['id'])); ?> </li>
 	</ul>
 </div>

@@ -62,7 +62,7 @@
 <?php endif; ?>
 	<div class="actions">
 		<ul>
-			<li><?php echo $html->link(__('New Topic', true), array('controller'=> 'topics', 'action'=>'add'));?> </li>
+			<li><?php echo $html->link(__('New Topic', true), array('controller' => 'topics', 'action' => 'add', 'forum' => $forum['Forum']['id']));?> </li>
 		</ul>
 	</div>
 </div>
