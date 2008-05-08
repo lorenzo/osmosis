@@ -17,7 +17,7 @@ class Response extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
-			'counterCache' => array('skipUpdates' => true)
+			'counterCache' => array('skipUpdates' => false)
 		),
 		'Member' => array(
 			'className' => 'Member',

@@ -26,6 +26,8 @@ class VisitableBehavior extends ModelBehavior {
 		$m = new $Model->name;
 		$m->id = $id;
 		$visit_count = $m->field($this->field);
+		debug($m->field($this->field));
+		debug($visit_count);
 		$m->save(array($this->field => $visit_count + 1));
 		unset($this->settings[$Model->name][$id]);
 		return true;
