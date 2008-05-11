@@ -1,7 +1,7 @@
 <?php
 App::import('Core', 'Sanitize');
 class AppController extends Controller {
-	var $components = array('Acl','Auth','RequestHandler','OsmosisComponents','Placeholder', 'Security');
+	var $components = array('Acl','Auth','RequestHandler','OsmosisComponents','Placeholder');
 	var $helpers = array('Javascript', 'Html', 'Form', 'Dynamicjs', 'Time', 'Placeholder');
 
 	/**
@@ -10,7 +10,7 @@ class AppController extends Controller {
 	 * @var string
 	 */
 	
-	var $activeCourse = false;
+	private $activeCourse = false;
 	
 	function beforeFilter() {
 		if (isset($this->Auth)) {
@@ -26,12 +26,15 @@ class AppController extends Controller {
 			}
 		}
 		if (isset($this->Security)) {
-			$this->Security->blackHoleCallback = 'blackHoledAction';
+			$this->Security->blackHoleCallback = '_blackHoledAction';
 		}
+		if (isset($this->Auth) && $this->Session->valid() && $this->Auth->user())
+			$this->__updateOnlineUser();
+		
 		$this->__selectLayout();
 	}
 	
-	function blackHoledAction() {
+	function _blackHoledAction() {
 		$this->Session->setFlash(__('Invalid access', true));
 		$this->redirect(array('controller' => 'members', 'action' => 'login', 'plugin' => ''));
 	}
@@ -40,6 +43,13 @@ class AppController extends Controller {
 		if (isset($this->params['admin']) && $this->params['admin']) {
 			$this->layout = 'admin';
 		}
+	}
+	
+	protected function __updateOnlineUser() {
+		App::import('Model','OnlineUser');
+		$data = array('member_id' => $this->Auth->user('id'), 'viewing' => $this->here);
+		$online = new OnlineUser;
+		$online->save($data,false,array('member_id','viewing'));
 	}
 	
 	function isAuthorized() {
@@ -70,7 +80,11 @@ class AppController extends Controller {
 	function beforeRender() {
 		$this->activeCourse = 1;
 		if (isset($this->Placeholder->started))
-			$this->Placeholder->attachToolbar($this->activeCourse);
+			$this->Placeholder->attachToolbar($this->_getActiveCourse());
+	}
+	
+	function _getActiveCourse() {
+		return $this->activeCourse;
 	}
 		
 }

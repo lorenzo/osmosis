@@ -3,7 +3,7 @@ class MembersController extends AppController {
 
 	var $name = 'Members';
 	var $helpers = array('Html', 'Form' );
-
+	var $uses = array('Member','OnlineUser');
 	/**
 	 * Lists available members
 	 *
@@ -123,6 +123,8 @@ class MembersController extends AppController {
 	 * @return void
 	 */
 	function logout() {
+		if ($this->Auth->user('id'))
+			$this->OnlineUser->del($this->Auth->user('id'));
 		$action = $this->Auth->logout();
 		$this->Session->destroy();
 		$this->redirect($action);

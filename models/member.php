@@ -51,14 +51,14 @@ class Member extends AppModel {
 			),
 		);
 		
-	// var $belongsTo = array(
-	// 			'Role' => array('className' => 'Role',
-	// 								'foreignKey' => 'role_id',
-	// 								'conditions' => '',
-	// 								'fields' => '',
-	// 								'order' => '',
-	// 								'counterCache' => ''),
-	// 	);
+	var $belongsTo = array(
+				'Role' => array('className' => 'Role',
+									'foreignKey' => 'role_id',
+									'conditions' => '',
+									'fields' => '',
+									'order' => '',
+									'counterCache' => ''),
+		);
 	
 	var $hasAndBelongsToMany = array(
 			'Course' => array(
@@ -107,9 +107,10 @@ class Member extends AppModel {
 			)
 		);
 		$ids = Set::extract($ids,'{n}.Enrollment.course_id');
+		if (empty($ids))
+			return array();
 		$courses = $this->Course->find('all', array(
-			'conditions' => array(
-					'Course.id' => $ids),
+			'conditions' => array('id' => $ids),
 			'fields' => array('id','code', 'name'),
 			'recursive' => -1
 			)

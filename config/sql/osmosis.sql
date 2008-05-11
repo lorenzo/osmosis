@@ -176,3 +176,16 @@ CREATE TABLE IF NOT EXISTS `courses_members` (
   UNIQUE KEY `member_id` (`member_id`,`course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `online_users`
+--
+
+CREATE TABLE `online_users` (
+  `member_id` int(11) NOT NULL,
+  `modified` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `viewing` varchar(255) NOT NULL,
+  PRIMARY KEY  (`member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Represent the online users and what are they doing on the sy';
+

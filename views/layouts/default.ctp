@@ -75,7 +75,7 @@
 			</div>
 			<div id="main-content">
 				<div id="side-content" class="small">
-					<!--Insert here placehloders for side-content-->
+					<?php echo $placeholder->render('course_sidebar'); ?>
 				</div>
 				<div id="main">
 					<?php

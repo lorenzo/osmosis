@@ -82,7 +82,7 @@
 /**
  * The name of CakePHP's session cookie.
  */
-	Configure::write('Session.cookie', 'CAKEPHP');
+	Configure::write('Session.cookie', 'OSMOSIS');
 /**
  * Session time out time (in seconds).
  * Actual value depends on 'Security.level' setting.
