@@ -10,9 +10,9 @@ class ForumHolderComponent extends PlaceholderDataComponent {
 	function getData($type = null) {
 		if ($type == 'course_toolbar')
 			return array('url' => array('plugin' => 'Forum', 'controller' => 'forums', 'action' => 'index'));
-		elseif ($type == 'head')
-			return true;
-		
+		elseif ($type == 'head') {
+			return $this->controller->plugin == 'forum';
+		}
 		return false;
 	}
 }

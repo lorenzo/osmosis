@@ -1,13 +1,4 @@
-#summary.growing {
-	height:auto;
-}
-
-#summary.growing #course-data .course {
-	height:auto;
-	font-size:1.2em;
-}
-
-div.course .boxed {
+.boxed.dashboard-element {
 	width:30%;
 	float:left;
 	margin-right:2%;
@@ -16,7 +7,7 @@ div.course .boxed {
 
 div.plugins.index ul li{
 	list-style:none;
-	
+
 }
 div.plugins.index ul li div.actions {
 	background:#6EA6D5;
@@ -57,43 +48,52 @@ div.plugins.index ul li dl dd{
 	height:150px;
 	overflow-y:auto;
 }
-strong.author {
-	display:block;
+p.author {
+	text-align:right;
 	padding-top:5px;
+	font-style:italic;
+	border-top:#ccc 1px solid;
+	padding:0 0 5px 0;
+	margin:10px 3px;
 }
 
-#admin-main {
-	margin-top:30px;
-	background:#fff;
-	float:left;
-	width:100%;
-}
-
-#admin-main #course-data,
-#admin-main #more-courses {
-	margin-top:-30px;
+p.author strong {
+	color:#666;
 }
 
 .dashboard-element {
 	margin-top:10px;
 }
 
-.dashboard-element dl {
+#profile.dashboard-element dl {
 	line-height: 2em;
-	margin:5px 0;
+	padding:5px 0;
+	margin:0;
+	width: 100%;
 }
+#profile.dashboard-element dt {
+	font-weight: bold;
+	padding-left: 4px;
+	vertical-align: top;
+}
+#profile.dashboard-element dd {
+	margin-left: 10em;
+	margin-top: -2em;
+	vertical-align: top;
+}
+
+
 .dashboard-element dl.altrow {
 	background: #f4f4f4;
 }
 .dashboard-element dt {
 	text-indent:10px;
 	font-weight: bold;
-	padding-left: 4px;
 	vertical-align: top;
 }
 .dashboard-element dd {
+		line-height:1.8em;
 	margin-left: 10em;
-	margin-top: -2em;
 	vertical-align: top;
 }
 

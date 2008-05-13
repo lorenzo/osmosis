@@ -33,22 +33,23 @@ a:visited {
 }
 
 /* Styles conectivist navigation */
-#summary #conectivism li a {
+#upper-content #conectivism li a {
 	color:#666;
 	text-decoration:none;
 	font-size:1.17em;
 	font-weight:bold;
 }
-#summary #conectivism li a:hover,
-#summary #conectivism li a:focus {
+#upper-content #conectivism li a:hover,
+#upper-content #conectivism li a:focus {
 	color:#333;
 }
 
 /* Styles for middle area */
-#summary #course-data {
+#upper-content.summary #main {
 	font-size:0.83em;
 }
-#summary #course-data h1 {
+
+#upper-content #main h1 {
 	margin:0 auto;
 	padding:5px 0;
 	text-align:left;
@@ -59,42 +60,45 @@ a:visited {
 	border-right:none;
 	border-left:none;
 }
-#summary #course-data h2 {
+#upper-content #main h2 {
 	padding:5px 0 0 0;
 	text-align:left;
 	font-family:Verdana, Arial, sans-serif;
 	font-weight:normal;
 	border-bottom:#ccc 1px dashed;
 }
-#summary #course-data p.course-description {
+#upper-content #main p.course-description {
 	font-size:1.1em;
 	margin:5px 5px 15px;
 	color:#A8A9AB;
 }
-#summary #course-data ul.professors {
+#upper-content #main ul.professors {
 	font-weight:bold;
 	font-size:1.1em;
 	line-height:1.3em;
 }
-#summary #course-data ul.professors a.email,
-#summary #course-data ul.professors .tel,
-#summary #course-data ul.professors .office {
+#upper-content #main ul.professors a.email,
+#upper-content #main ul.professors .tel,
+#upper-content #main ul.professors .office {
 	font-weight:normal;
 	padding-left:10px;
 	color:#A8A9AB;
 }
-#summary #course-data ul.professors a.url {
+#upper-content #main ul.professors a.url {
 	padding:0;
 	text-decoration:none;
 	font-weight:bold;
 }
-#summary #course-data ul.professors a.url span {
+#upper-content #main ul.professors a.url span {
 	color:#000;
 	padding:0;
 }
 
 /* Styles "My Courses" list */
-#summary #more-courses .courses strong {
+#upper-content #more-courses .courses {
+	padding:10px;
+}
+#upper-content #more-courses .courses strong {
 	text-indent:20px;
 	font-weight:normal;
 	font-size:0.92em;
@@ -104,33 +108,33 @@ a:visited {
 	display:block;
 	background:#666 url('../../img/default/arrow_w_on_g.gif') no-repeat 5px 50%;
 }
-#summary #more-courses .courses ul,
-#summary #more-courses .courses p {
+#upper-content #more-courses .courses ul,
+#upper-content #more-courses .courses p {
 	padding:0;
 	margin:0;
 	border-left:#666 1px solid;
 	list-style:none;
 }
-#summary #more-courses .courses p {
+#upper-content #more-courses .courses p {
 	padding:10px;
 }
-#summary #more-courses .courses ul li {
+#upper-content #more-courses .courses ul li {
 	margin:0 10px;
 	padding:5px 0;
 	border-bottom:#666 1px dashed;
 	text-indent:5px;
 }
-#summary #more-courses .courses ul li .code {
+#upper-content #more-courses .courses ul li .code {
 	color:#666;
 	font-family:monospace;
 	font-size:1.25em;
 }
-#summary #more-courses .courses ul li a {
+#upper-content #more-courses .courses ul li a {
 	color:#000;
 	text-decoration:none;
 }
-#summary #more-courses .courses ul li a:hover .code,
-#summary #more-courses .courses ul li a:focus .code {
+#upper-content #more-courses .courses ul li a:hover .code,
+#upper-content #more-courses .courses ul li a:focus .code {
 	color:#000;
 }
 
@@ -189,3 +193,20 @@ a:visited {
 	width:300px;
 }
 
+#enroll {
+	margin:10px;
+	float:right;
+}
+#enroll a {
+	background:#FF8A00;
+	padding:10px;
+	font-size:1.2em;
+	color:#fff;
+	text-decoration:none;
+	border:#DF7800 1px solid;
+}
+
+#enroll a:hover {
+	color:#FFCB8F;
+	background:#FF7200;
+}

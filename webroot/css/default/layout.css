@@ -66,11 +66,19 @@ body {
 }
 
 /* Middle Area: (contectivist navigation, course summary and more courses list)*/
-#summary {
+#wrap {
+	margin-top:30px;
+	background:#fff;
+	float:left;
+	width:100%
+}
+#upper-content {
 	position:relative;
+}
+#upper-content.summary {
 	height:190px;
 }
-#summary ul#conectivism {
+#upper-content ul#conectivism {
 	border-top:#6EA6D5 30px solid;
 	position:absolute;
 	left:0;
@@ -83,52 +91,56 @@ body {
 	list-style:none;
 	margin:0;
 }
-#summary ul#conectivism li {
+#upper-content ul#conectivism li {
 	padding-left:45px;
 	padding-top:20px;
 }
-#summary ul#conectivism li.classes {
+#upper-content ul#conectivism li.classes {
 	border-top:#888 1px dashed;
 }
 
-#summary #course-data {
+#upper-content #main {
 	width:80%;
 	float:left;
 	position:relative;
-	
+	margin-top:-30px;
 }
-#summary ul.professors {
+#upper-content.summary ul.professors {
 	padding:0;
 	list-style:none;
 	margin:0;
 }
-#summary ul.professors li {
+#upper-content.summary ul.professors li {
 	width:30%;
 	float:left;
 }
-#summary #course-data .course {
+#upper-content .content {
 	margin-top:30px;
 	border-top:#888 1px dashed;
 	background:#fff;
-	height:139px;
 	padding:10px;
 	display:block;
-	margin-left:141px;
+	padding-left:151px;
 }
-#summary #more-courses {
+#upper-content.summary {
+	height:139px;
+}
+#upper-content #more-courses {
 	float:left;
 	width:20%;
 	height:160px;
 	max-width:340px;
 	background:#fff;
 	border-top:#6EA6D5 30px solid;
+	margin-top:-30px;
 }
-#summary #more-courses .courses {
+#upper-content #more-courses .content {
 	border-top:#888 1px dashed;
 	display:block;
 	padding:10px;
+	background:#fff;
 }
-#summary #more-courses .courses ul {
+#upper-content #more-courses .content ul {
 	height:120px;
 	overflow:auto;
 }

@@ -9,10 +9,9 @@ class QuizHolderComponent extends PlaceholderDataComponent {
 	
 	function getData($type = null) {
 		if ($type == 'course_toolbar')
-			return array('url' => array('plugin' => 'quiz', 'controller' => 'quizzes', 'action' => 'index'));
+			return array('url' => array('plugin' => 'Quiz', 'controller' => 'quizzes', 'action' => 'index'));
 		elseif ($type == 'head')
-			return true;
-		
+			return $this->controller->plugin == 'quiz';
 		return false;
 	}
 }

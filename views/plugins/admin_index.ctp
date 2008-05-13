@@ -6,7 +6,7 @@
 <ul>
 	<?php foreach($plugins as $plugin) :?>
 	<li>
-		<li class="boxed">
+		<li class="boxed dashboard-element">
 			<dl>
 				<dt>
 				<strong class="title">
@@ -18,11 +18,13 @@
 				</dt>				
 				<?php if (!empty($plugin['Plugin']['description'])) :?>
 					<dd>
-						<?php echo $plugin['Plugin']['description'] ?>
+						<p><?php echo $plugin['Plugin']['description'] ?></p>
 						
 						<?php if (isset($plugin['Plugin']['author'])) :?>
-						<strong class="author"><?php echo __('Author')?> </strong>
-						<span><?php echo $plugin['Plugin']['author'] ?></span>
+							<p class="author">
+								<strong><?php echo __('Author')?> </strong>
+								<span><?php echo $plugin['Plugin']['author'] ?></span>
+							</p>
 						<?php endif;?>
 						
 					</dd>
@@ -52,7 +54,7 @@
 <h2 style="clear:both"><?php __('Not Installed');?></h2>
 <ul>
 	<?php foreach ($inServer as $key => $plugin) :?>
-	<li class="boxed">
+	<li class="boxed dashboard-element">
 		<dl>
 			<dt><strong class="title"><?php echo (isset($plugin['title'])) ? $plugin['title'] : Inflector::humanize($key); ?></strong></dt>
 			

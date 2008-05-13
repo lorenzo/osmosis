@@ -3,7 +3,6 @@ App::import('Model', 'Member');
 class OsmosisComponentsComponent extends Object {
 	
 	var $controller;
-	var $Member = null;
 	
 	function startup(&$controller) {
 		$this->controller =& $controller;

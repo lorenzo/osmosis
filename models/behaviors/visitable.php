@@ -1,19 +1,19 @@
 <?php
 class VisitableBehavior extends ModelBehavior {
 	var $field;
-	var $settings;
+	var $__settings;
 	
 	function setup(&$Model, $settings = array()) {
-		$this->field = Inflector::underscore($Model->name) . '_visit_count';
+		$this->__settings[$Model->alias]['field'] = Inflector::underscore($Model->alias) . '_visit_count';
 		if (isset($settings['field'])) {
-			$this->field = $settings['field'];
+			$this->__settings[$Model->alias]['field'] = $settings['field'];
 		}
 	}
 	
 	function beforeFind(&$Model, $query) {
 		if (!isset($query['count_view'])) return true;
 		$id = $query['conditions'][$Model->alias . '.' . $Model->primaryKey];
-		$this->settings[$Model->name][$id] = true;
+		$this->__settings[$Model->alias][$id] = true;
 		return true;
 	}
 	
@@ -22,14 +22,12 @@ class VisitableBehavior extends ModelBehavior {
 		$data = $data[0];
 		if (!isset($data[$Model->alias][$Model->primaryKey])) return true;
 		$id = $data[$Model->alias][$Model->primaryKey];
-		if (!isset($this->settings[$Model->name][$id])) return true;
-		$m = new $Model->name;
-		$m->id = $id;
-		$visit_count = $m->field($this->field);
-		debug($m->field($this->field));
-		debug($visit_count);
-		$m->save(array($this->field => $visit_count + 1));
-		unset($this->settings[$Model->name][$id]);
+		if (!isset($this->__settings[$Model->alias][$id])) return true;
+		$theModel = new $Model->name;
+		$theModel->id = $id;
+		$visit_count = $theModel->field($this->__settings[$Model->alias]['field']);
+		$theModel->saveField($this->__settings[$Model->alias]['field'], $visit_count + 1);
+		unset($this->__settings[$Model->alias][$id]);
 		return true;
 	}
 }

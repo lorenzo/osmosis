@@ -10,7 +10,6 @@ echo $paginator->counter(array(
 <tr>
 	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('department_id');?></th>
-	<th><?php echo $paginator->sort('owner_id');?></th>
 	<th><?php echo $paginator->sort('code');?></th>
 	<th><?php echo $paginator->sort('name');?></th>
 	<th><?php echo $paginator->sort('description');?></th>
@@ -31,9 +30,6 @@ foreach ($courses as $course):
 		</td>
 		<td>
 			<?php echo $html->link(__($course['Department']['name'], true), array('controller'=> 'departments', 'action'=>'view', $course['Department']['id'])); ?>
-		</td>
-		<td>
-			<?php echo $html->link(__($course['Owner']['id'], true), array('controller'=> 'members', 'action'=>'view', $course['Owner']['id'])); ?>
 		</td>
 		<td>
 			<?php echo $course['Course']['code'] ?>
@@ -60,13 +56,4 @@ foreach ($courses as $course):
 	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
  | 	<?php echo $paginator->numbers();?>
 	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
-</div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(sprintf(__('New %s', true), __('Course', true)), array('action'=>'add')); ?></li>
-		<li><?php echo $html->link(sprintf(__('List %s', true), __('Departments', true)), array('controller'=> 'departments', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(sprintf(__('New %s',  true), __('Department', true)), array('controller'=> 'departments', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(sprintf(__('List %s', true), __('Members', true)), array('controller'=> 'members', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(sprintf(__('New %s',  true), __('Member', true)), array('controller'=> 'members', 'action'=>'add')); ?> </li>
-	</ul>
 </div>

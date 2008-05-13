@@ -73,7 +73,6 @@ CREATE TABLE IF NOT EXISTS `aros_acos` (
 CREATE TABLE IF NOT EXISTS `courses` (
   `id` int(11) unsigned NOT NULL auto_increment,
   `department_id` int(4) unsigned NOT NULL,
-  `owner_id` int(11) NOT NULL,
   `code` varchar(10) collate utf8_unicode_ci NOT NULL,
   `name` varchar(100) collate utf8_unicode_ci NOT NULL,
   `description` text collate utf8_unicode_ci NOT NULL,

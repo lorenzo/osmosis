@@ -28,49 +28,49 @@
 			<?php
 				echo $this->renderElement('layout/top_nav');
 			?>
-			<div id="summary" class="growing">
-				<div id="side-content" class="small">
-					<ul id="conectivism">
-						<li class="classes">
-							<?php
-								echo $html->link(__('Courses', true), array('controller' => 'courses', 'action' => 'index'));
-							?>
-						</li>
-						<li>
-							<?php
-								echo $html->link(__('Departments', true), array('controller' => 'departments', 'action' => 'index'));
-							?>
-						</li>
-						<li>
-							<?php
-								echo $html->link(__('Members', true), array('controller' => 'members', 'action' => 'index'));
-							?>
-						</li>
-						<li>
-							<?php
-								echo $html->link(__('Plugins', true), array('controller' => 'plugins', 'action' => 'index'));
-							?>
-						</li>
-					</ul>
-				</div>
-				<div id="admin-main">
-					<div id="course-data">
-						<div class="course">
+			<div id="upper-content">
+				<div id="wrap">
+					<div id="side-content" class="small">
+						<ul id="conectivism">
+							<li class="classes">
+								<?php
+									echo $html->link(__('Courses', true), array('controller' => 'courses', 'action' => 'index'));
+								?>
+							</li>
+							<li>
+								<?php
+									echo $html->link(__('Departments', true), array('controller' => 'departments', 'action' => 'index'));
+								?>
+							</li>
+							<li>
+								<?php
+									echo $html->link(__('Members', true), array('controller' => 'members', 'action' => 'index'));
+								?>
+							</li>
+							<li>
+								<?php
+									echo $html->link(__('Plugins', true), array('controller' => 'plugins', 'action' => 'index'));
+								?>
+							</li>
+						</ul>
+					</div>
+					<div id="main">
+						<div class="content">
 							<?php echo $content_for_layout; ?>
 						</div>
 					</div>
 					<div id="more-courses">
 						<!-- <div class="courses">
-													<strong>???</strong>
-													<ul>
-														<li><a href="#"><span class="code">[QK-1111]</span> Un curso</a></li>
-														<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-														<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-														<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-														<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-														<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
-													</ul>
-												</div> -->
+							<strong>???</strong>
+							<ul>
+								<li><a href="#"><span class="code">[QK-1111]</span> Un curso</a></li>
+								<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+								<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+								<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+								<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+								<li><a href="#"><span class="code">[CI-1111]</span> Otro...</a></li>
+							</ul>
+						</div> -->
 					</div>
 				</div>
 			</div>

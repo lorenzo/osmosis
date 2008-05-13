@@ -16,7 +16,12 @@ class Topic extends AppModel {
 				'allowEmpty' => false
 			)
 		),
-		'forum_id' => array('numeric')
+		'forum_id' => array(
+				'required' => array(
+					'rule' => array('custom', '/.+/'),
+					'allowEmpty' => false
+				)
+			),
 	);
 	var $actsAs = array('Bindable');
 	

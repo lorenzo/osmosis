@@ -10,13 +10,13 @@ class Course extends AppModel {
 		        'on' => 'create',
 	        )
 		),
-		'owner_id' => array(
-		    'Error.empty' => array(
-		        'rule' => array('custom','/.+/'),
-		        'required' => true,
-		        'on' => 'create',
-			)
-		),
+		// 'owner_id' => array(
+		//     'Error.empty' => array(
+		//         'rule' => array('custom','/.+/'),
+		//         'required' => true,
+		//         'on' => 'create',
+		// 	)
+		// ),
 		'code' => array(
 			'Error.maxlength' => array(
 		        'rule' => array('maxlength',10)
@@ -54,12 +54,12 @@ class Course extends AppModel {
 								'fields' => '',
 								'order' => '',
 								'counterCache' => ''),
-			'Owner' => array('className' => 'Member',
-								'foreignKey' => 'owner_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
+			// 'Owner' => array('className' => 'Member',
+			// 					'foreignKey' => 'owner_id',
+			// 					'conditions' => '',
+			// 					'fields' => '',
+			// 					'order' => '',
+			// 					'counterCache' => ''),
 	);
 	
 	var $hasAndBelongsToMany = array(

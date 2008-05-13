@@ -14,6 +14,7 @@ class CoursesController extends AppController {
 	function index() {
 		$this->Course->recursive = 0;
 		$this->set('courses', $this->paginate());
+		$this->layout = 'no_course';
 	}
 
 	function admin_index() {

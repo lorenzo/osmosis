@@ -28,45 +28,47 @@
 			<?php
 				echo $this->renderElement('layout/top_nav');
 			?>
-			<div id="summary">
-				<?php
-					echo $this->renderElement('layout/conectivism');
-				?>
-				<div id="course-data">
-					<div class="course">
-						<h1>Fundamentos de JLO</h1>
-						<p class="course-description">Conozca por qué...</p>
-						<ul class="professors">
-							<li>
-								<div id="hcard-José-Lorenzo-Rodríguez" class="vcard">
-									<a class="url fn n" href="http://joselorenzo.com.ve/">  <span class="given-name">José</span>
-										<span class="additional-name">Lorenzo</span>
-										<span class="family-name">Rodríguez</span>
-									</a><br />
-									<a class="email" href="mailto:jose.zap@gmail.com">jose.zap@gmail.com</a><br />
-									<div class="tel">555-555555</div>
-								</div>
-							</li>
-							<li>
-								<div id="hcard-María-Grabriela-Días" class="vcard">
-									<span class="fn n">
-										<span class="given-name">Ana</span>
-										<span class="additional-name">Gabriela</span>
-										<span class="family-name">Días</span>
-									</span><br />
-									<a class="email" href="mailto:mabriela@gamil.com">mabriela@gamil.com</a><br />
-									<span class="office">Mon-333</span>
-								</div>
-							</li>						
-						</ul>
+			<div id="upper-content" class="summary">
+				<div id="wrap">
+					<?php
+						echo $this->renderElement('layout/conectivism');
+					?>
+					<div id="main">
+						<div class="content">
+							<h1>Fundamentos de JLO</h1>
+							<p class="course-description">Conozca por qué...</p>
+							<ul class="professors">
+								<li>
+									<div id="hcard-José-Lorenzo-Rodríguez" class="vcard">
+										<a class="url fn n" href="http://joselorenzo.com.ve/">  <span class="given-name">José</span>
+											<span class="additional-name">Lorenzo</span>
+											<span class="family-name">Rodríguez</span>
+										</a><br />
+										<a class="email" href="mailto:jose.zap@gmail.com">jose.zap@gmail.com</a><br />
+										<div class="tel">555-555555</div>
+									</div>
+								</li>
+								<li>
+									<div id="hcard-María-Grabriela-Días" class="vcard">
+										<span class="fn n">
+											<span class="given-name">Ana</span>
+											<span class="additional-name">Gabriela</span>
+											<span class="family-name">Días</span>
+										</span><br />
+										<a class="email" href="mailto:mabriela@gamil.com">mabriela@gamil.com</a><br />
+										<span class="office">Mon-333</span>
+									</div>
+								</li>						
+							</ul>
+						</div>
 					</div>
-				</div>
-				<div id="more-courses">
+					<div id="more-courses">
 					<?php
 						if (isset($Osmosis['courseList'])) {
 							echo $this->element('layout/user_courses',array('courses' => $Osmosis['courseList']));
 						}
 					?>
+				</div>
 				</div>
 			</div>
 			<div id="tools">
