@@ -3,7 +3,7 @@ class ChatsController extends ChatAppController {
 
 	var $name = 'Chats';
 	var $helpers = array('Xml');
-	var $uses = array();
+	var $uses = array('Member','OnlineUser');
 	
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -11,21 +11,23 @@ class ChatsController extends ChatAppController {
 	}
 	
 	function connect() {
+		$time = ($this->Session->check('Chat.lastPoll')) ? $this->Session->read('Chat.lastPoll') : time();
 		$this->set('status',1);
-		$this->set('timestamp',time());
+		$this->set('timestamp',$time);
 	}
 	
 	function contact_list($chat_id = null) {
-		App::import('Model','OnlineUser');
-		$online = new OnlineUser;
-		$users = $online->find('all');
-		$members = Set::extract('/Member',$users);
+		$enrollments = $this->Member->Enrollment->find('all',
+		array(
+			'conditions' => array('member_id' => $this->Auth->user('id')),
+			'restrict'	=> 'Enrollment'
+			)
+		);
+		
 	}
 	
 	function user($id) {
-		App::import('Model','OnlineUser');
-		$online = new OnlineUser;
-		$user = $online->find('first',array('conditions' => array('member_id' => $id)));
+		$user = $this->OnlineUser->find('first',array('conditions' => array('member_id' => $id)));
 		$this->set('user',$user);
 		$this->set('status',empty($user) ? 2 :1);
 	}

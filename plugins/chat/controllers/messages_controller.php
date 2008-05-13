@@ -14,17 +14,22 @@ class MessagesController extends ChatAppController {
 		$this->set(compact('error'));
 	}
 	
-	function receive($since) {
+	function receive($since = 0) {
+		if (!$since) {
+			$since = ($this->Session->check('Chat.lastPoll')) ? $this->Session->read('Chat.lastPoll') : time();
+		}
 		//$tries = 500;
 		//while($tries-- > 0) {
 			$messages = $this->Message->receive($this->Auth->user('id'),$since);
 		//	if (count($messages) > 0) {break;}
 		//	$this->_sleeper(200);
 		//}
-		
-		$time = (empty($messages)) ? $since : time();
+		if (!empty($messages)) {
+			$since = time();
+			$this->Session->write('Chat.lastPoll',$since);
+		}
 		$this->set('messages',$messages);
-		$this->set('timestamp',$time);
+		$this->set('timestamp',$since);
 	}
 	
 /*	function _sleeper($mSec) {

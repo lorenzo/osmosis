@@ -1,6 +1,4 @@
 <?php
-/* SVN FILE: $Id: bindable.php 19 2007-11-23 18:42:23Z mgiglesias $ */
-
 /**
  * Bindable Behavior class file.
  *
@@ -20,8 +18,6 @@
 /**
  * Model behavior to support unbinding of models.
  *
- * @package app
- * @subpackage app.models.behaviors
  */
 class BindableBehavior extends ModelBehavior
 {

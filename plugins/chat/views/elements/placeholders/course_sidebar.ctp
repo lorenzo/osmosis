@@ -29,9 +29,7 @@ OsmosisChat = {
 		var container = $('#chat_container');
 		var win =  $('#chat_window_'+user,container);
 		if (win.length == 1) {
-			if (win[0].style.display == 'none')
-				win.toggle();
-			$('.chat_sendbox textarea',win).focus();
+			win.show('fast').find('.chat_canvas').slideDown("fast").find('.chat_sendbox textarea').focus();
 			return;
 		} else {
 			container.createAppend(
@@ -50,30 +48,49 @@ OsmosisChat = {
 			win =  $('#chat_window_'+user,container);
 		}
 		OsmosisChat.setPeerDisplayName(user);
-		$('.chat_close',win).click(function(){$(this).parents('.chat_window').toggle(); return false;});
-		$('.chat_minimize',win).click(function(e){
-			$(this).toggleClass('chat_restore').parents('.chat_window')
-			.find('.chat_canvas')
-			.toggle()
-			.find('.chat_sendbox textarea')
-			.focus();
-			return false;
-			});
-		$('#chat_window_'+user+' .chat_sendbox textarea',container).keyup(function(event){
-			switch(event.keyCode) { 
-				case 13 : //ENTER
-					var box = event.target;
-					if (event.shiftKey || box.value.match(/^[\n]+$/)) return;
-					OsmosisChat.sendMessage(user,box.value);
-					box.value = '';
-					break;
-			}
-		}).focus(OsmosisChat.onBoxFocus).blur(OsmosisChat.onBoxFocus);
+
+		$('.chat_head',win).click(OsmosisChat.onBoxRestore)
+		.find('.chat_close').click(OsmosisChat.onBoxClose)
+		.parent()
+		.find('.chat_minimize').click(OsmosisChat.onBoxMinimize)
+		.parents('.chat_window')
+		.find('.chat_sendbox textarea').bind('keyup',{user: user},OsmosisChat.onBoxKeyPress).scroll(function(){alert('hola')})
+		.focus(OsmosisChat.onBoxFocus).blur(OsmosisChat.onBoxFocus);
 		if (forceFocus) $('#chat_window_'+user+' .chat_sendbox textarea',container).focus();
+	},
+	
+	onBoxRestore: function() {
+		$(this).parents('.chat_window').find('a.chat_minimize').removeClass('chat_restore').parents('.chat_window')
+		.find('.chat_canvas')
+		.slideDown('fast')
+	},
+	
+	onBoxMinimize: function() {
+		$(this).toggleClass('chat_restore').parents('.chat_window')
+		.find('.chat_canvas')
+		.slideToggle("fast")
+		.find('.chat_sendbox textarea')
+		.focus();
+		return false;
+	},
+	
+	onBoxClose : function(){
+		$(this).parents('.chat_window').hide("fast"); return false;
 	},
 	
 	onBoxFocus: function() {
 		$(this).toggleClass('focused').parents('.chat_window').find('.chat_head').removeClass('chat_new_message');
+	},
+	
+	onBoxKeyPress: function(event){
+		switch(event.keyCode) { 
+			case 13 : //ENTER
+				var box = event.target;
+				if (event.shiftKey || box.value.match(/^[\n]+$/)) return;
+				OsmosisChat.sendMessage(event.data.user,box.value);
+				box.value = '';
+				break;
+		}
 	},
 	
 	sendMessage: function(user,message) {
