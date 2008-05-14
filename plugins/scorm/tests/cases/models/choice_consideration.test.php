@@ -1,18 +1,23 @@
 <?php 
 
-App::import('Model', 'scorm.ChoiceConsideration');
+App::import('Model', 'Scorm.ChoiceConsideration');
+
+class TestChoiceConsideration extends ChoiceConsideration {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test_suite';
+}
 
 class ChoiceConsiderationTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('choice_consideration');
+	var $fixtures = array('plugin.scorm.choice_consideration');
 
-	function setUp() {
-		$this->TestObject = new ChoiceConsideration();
-		$this->TestObject->useDbConfig = 'test';
+	function start() {
+		parent::start();
+		$this->TestObject = new TestChoiceConsideration();
 	}
-
-	function tearDown() {
-		unset($this->TestObject);
+	
+	function testInstance() {
+		$this->assertTrue(is_a($this->TestObject,'ChoiceConsideration'));
 	}
 
 	function testValidation1() {
@@ -30,7 +35,7 @@ class ChoiceConsiderationTestCase extends CakeTestCase {
 				'constrainChoice'		=> 'nope'
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
 			'preventActivation'		=> 'scormplugin.choiseconsideration.preventactivation.boolean',
@@ -46,7 +51,7 @@ class ChoiceConsiderationTestCase extends CakeTestCase {
 				'constrainChoice'		=> 'true'
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
