@@ -4,63 +4,56 @@
  *
  */
 class TaggableBehavior extends ModelBehavior {
-	/**
-	 * Contain settings indexed by model name.
-	 *
-	 * @var array
-	 * @access private
-	 */
-	private $__settings = array();
 
 
 	/**
 	 * Initiate behavior for the model using specified settings. Available settings:
 	 * @param object $model  Model using the behavior
-	 * @param array $settings Settings to override for model.
+	 * @param array $settings settings to override for model.
 	 * @access public
 	 */
 	function setup(&$model, $settings = array()) {
 		$default = array(
 			'joinTable' => $model->useTable.'_tags',
-			'foreignKey' => 'tag_id',
-			'associationForeignKey' => Inflector::variable($model->name).'_id',
+			'foreignKey' => Inflector::variable($model->name).'_id',
+			'associationForeignKey' => 'tag_id',
 			'conditions' => '',
 			'fields'	=> '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
-			'unique' => true,
+			'unique' => false,
 			'finderQuery' => '',
 			'deleteQuery' => '',
 			'insertQuery' => '',
 			'with' => 'Tagged'.$model->alias,
-			'useDbConfig' => $model->useDbConfig	
+			'useDbConfig' => $model->useDbConfig
 			);
 
-		if (!isset($this->__settings[$model->alias])) {
-			$this->__settings[$model->alias] = $default;
+		if (!isset($this->settings[$model->alias])) {
+			$this->settings[$model->alias] = $default;
 		}
 
-		$this->__settings[$model->alias] = Set::merge($this->__settings[$model->alias], ife(is_array($settings), $settings, array()));
+		$this->settings[$model->alias] = Set::merge($this->settings[$model->alias], ife(is_array($settings), $settings, array()));
 		$assoc = array('Tag' => array(
 			'className' => 'Tag',
-			'joinTable' => $this->__settings[$model->alias]['joinTable'],
-			'foreignKey' => $this->__settings[$model->alias]['foreignKey'],
-			'associationForeignKey' => $this->__settings[$model->alias]['associationForeignKey'],
-			'conditions' => $this->__settings[$model->alias]['conditions'],
-			'fields'	=> $this->__settings[$model->alias]['fields'],
-			'order'	=> $this->__settings[$model->alias]['order'],
-			'limit' => $this->__settings[$model->alias]['limit'],
-			'offset' => $this->__settings[$model->alias]['offset'],
-			'unique' => $this->__settings[$model->alias]['unique'],
-			'finderQuery' => $this->__settings[$model->alias]['finderQuery'],
-			'deleteQuery' => $this->__settings[$model->alias]['deleteQuery'],
-			'insertQuery' => $this->__settings[$model->alias]['insertQuery'],
-			'with' => $this->__settings[$model->alias]['with']
+			'joinTable' => $this->settings[$model->alias]['joinTable'],
+			'foreignKey' => $this->settings[$model->alias]['foreignKey'],
+			'associationForeignKey' => $this->settings[$model->alias]['associationForeignKey'],
+			'conditions' => $this->settings[$model->alias]['conditions'],
+			'fields'	=> $this->settings[$model->alias]['fields'],
+			'order'	=> $this->settings[$model->alias]['order'],
+			'limit' => $this->settings[$model->alias]['limit'],
+			'offset' => $this->settings[$model->alias]['offset'],
+			'unique' => $this->settings[$model->alias]['unique'],
+			'finderQuery' => $this->settings[$model->alias]['finderQuery'],
+			'deleteQuery' => $this->settings[$model->alias]['deleteQuery'],
+			'insertQuery' => $this->settings[$model->alias]['insertQuery'],
+			'with' => $this->settings[$model->alias]['with']
 			)
 		);
-		$model->bindModel(array('hasAndBelongsToMany' => $assoc));
-		$model->Tag->useDbConfig = $this->__settings[$model->alias]['useDbConfig'];
+		$model->bindModel(array('hasAndBelongsToMany' => $assoc),false);
+		$model->Tag->useDbConfig = $this->settings[$model->alias]['useDbConfig'];
 	}
 	
 	/**
@@ -70,19 +63,32 @@ class TaggableBehavior extends ModelBehavior {
 	 * @param object $model  Model using the behavior
 	 * @access public
 	 */
-	function beforeSave(&$model) {
+	function afterSave(&$model) {
 		if (!isset($model->data[$model->alias]['tags']{0}))
 			return true;
 		
 		$tags = array_unique(String::tokenize($model->data[$model->alias]['tags']));
-		$stored = $model->Tag->find('all',array(
+		$existing = $model->Tag->find('all',array(
 			'conditions' => array('Tag.name' => $tags),
 			'recursive'	=> -1
 			)
 		);
-		$storedTagNames = Set::extract('/Tag/name',$stored);
-		$missing = array_diff($tags,$storedTagNames);
-		$tag_ids = Set::extract('/Tag/id',$stored);
+		$existingTagNames = Set::extract('/Tag/name',$existing);
+		$missing = array_diff($tags,$existingTagNames);
+
+		$alreadyAssigned = array();
+		
+		if (!empty($model->id)) {
+			$alreadyAssigned = $model->{$this->settings[$model->alias]['with']}->find('all',
+			array('conditions' => array(
+					$this->settings[$model->alias]['foreignKey'] => $model->id
+					)
+				)
+			);
+		}
+		
+		$tag_ids = array_diff(Set::extract('/Tag/id',$existing),Set::extract('/Tag/id',$alreadyAssigned));
+		
 		if (!empty($missing)) {
 			foreach ($missing as $tag) {
 				$model->Tag->create();
@@ -90,7 +96,21 @@ class TaggableBehavior extends ModelBehavior {
 				 $tag_ids[] = $model->Tag->id;
 			}
 		}
-		$model->data['Tag']['Tag'] = $tag_ids;
+
+		foreach ($tag_ids as $tag) {
+			$data = array(
+				$this->settings[$model->alias]['foreignKey'] => $model->id,
+				$this->settings[$model->alias]['associationForeignKey'] => $tag
+			);
+			if (isset($model->data[$model->alias]['tagging_user']) && !empty($model->data[$model->alias]['tagging_user'])
+				&& $model->{$this->settings[$model->alias]['with']}->hasField('member_id')
+			) {
+				$data['member_id'] = $model->data[$model->alias]['tagging_user'];
+			}
+				
+			$model->{$this->settings[$model->alias]['with']}->create();
+			$model->{$this->settings[$model->alias]['with']}->save($data);
+		}
 		return true;
 	}
 

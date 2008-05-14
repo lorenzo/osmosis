@@ -50,7 +50,11 @@ class PlaceholderComponent extends Object {
 		}
 		$holders = array();
 		foreach ($types as $type) {
-			$holders[$type] = $this->getPlaceholderObjects($type);
+			if (!$holders[$type] = Cache::read('PlaceholderComponent.Holders.'.$type)) {
+				$holders[$type] = $this->getPlaceholderObjects($type);
+				Cache::write('PlaceholderComponent.Holders.'.$type,$holders[$type]);
+			}
+			
 		}
 		$this->startupHolders($holders);
 	}

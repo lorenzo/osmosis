@@ -14,10 +14,6 @@ class Image extends TaggableTestModel{
 	var $name = 'Image';
 }
 
-class Article extends CakeTestModel {
-	var $name = 'Article';
-}
-
 /**
  * Test case for Taggable Behavior
  *
@@ -25,14 +21,13 @@ class Article extends CakeTestModel {
  * @subpackage app.tests.cases.models
  */
 class TaggableTestCase extends CakeTestCase {
-	var $autoFixtures = false;
 	/**
 	 * Fixtures associated with this test case
 	 *
 	 * @var array
 	 * @access public
 	 */
-	var $fixtures = array('core.image','core.article','tag','images_tag');
+	var $fixtures = array('core.image','tag','images_tag');
 
 	/**
 	 * Method executed before each test
@@ -55,7 +50,6 @@ class TaggableTestCase extends CakeTestCase {
 	}
 	
 	function testSetup() {
-		$this->loadFixtures('Image','Tag', 'ImagesTag');
 		$image = new Image();
 		$this->assertTrue(is_a($image->TaggedImage,'Model'));
 	}
@@ -74,20 +68,30 @@ class TaggableTestCase extends CakeTestCase {
 			'Tag' => array(
 			            array(
 		                    'id' => 1,
-		                    'name' => 'Lorem'
-			                ),
+		                    'name' => 'Lorem',
+							'TaggedImage' => array(
+	                            'id' => 1,
+	                            'image_id' => 1,
+	                            'tag_id' => 1,
+								'member_id' => 1
+	                        )	
+			            ),
 						array(
-			                   'id' => 2,
-		                    'name' => 'Impsum'
-			                )
-
+			                'id' => 2,
+		                    'name' => 'Impsum',
+							'TaggedImage' => array(
+	                            'id' => 2,
+	                            'image_id' => 1,
+	                            'tag_id' => 2,
+								'member_id' => 1
+	                        )
+			            )
 			        )
 			);
 		$this->assertEqual($result,$expected);
 	}
 	
 	function testSave() {
-		$this->loadFixtures('Image','Tag', 'ImagesTag');
 		$Taggable = new TaggableBehavior;
 		$image = new Image();
 		$Taggable->setup($image);
@@ -95,24 +99,93 @@ class TaggableTestCase extends CakeTestCase {
 		$image->save($data);
 		$result = $image->read();
 		$expected = array(
-			'Image' => array('id' =>6,'name'=>'another one'),
+			'Image' => array('id' => 6,'name'=>'another one'),
 			'Tag' => array(
 		            array(
 	                    'id' => 1,
 	                    'name' => 'Lorem',
-		                ),
+						'TaggedImage' => array(
+                            'id' => 5,
+                            'image_id' => 6,
+                            'tag_id' => 1,
+							'member_id' => 0
+                        )
+		            ),
 					array(
 		                'id' => 2,
 	                    'name' => 'Impsum',
-		                ),
+						'TaggedImage' => array(
+                            'id' => 6,
+                            'image_id' => 6,
+                            'tag_id' => 2,
+							'member_id' => 0
+                        )
+		            ),
 					array(
 			         	'id' => 6,
 						'name' => 'Elit',
-						)
+						'TaggedImage' => array(
+                            'id' => 7,
+                            'image_id' => 6,
+                            'tag_id' => 6,
+							'member_id' => 0
+                        )
+					)
 
 		        )
 		);
 		$this->assertEqual($result,$expected);
+		$result = $image->read();
+		$this->assertEqual($result,$expected);
+	}
+	
+	function testEdit() {
+		$Taggable = new TaggableBehavior;
+		$image = new Image();
+		$Taggable->setup(&$image);
+		$cosa = $image->read(null,1);
+		$image->save(array('Image' => array('tags' => 'Elit','tagging_user' => 2)));
+		$expected = array(
+			'Image' => array(
+			            'id' => 1,
+			            'name' => 'Image 1'
+			        ),
+			'Tag' => array(
+			            array(
+		                    'id' => 1,
+		                    'name' => 'Lorem',
+							'TaggedImage' => array(
+	                            'id' => 1,
+	                            'image_id' => 1,
+	                            'tag_id' => 1,
+								'member_id' => 1
+	                        )
+			            ),
+						array(
+			                'id' => 2,
+		                    'name' => 'Impsum',
+							'TaggedImage' => array(
+	                            'id' => 2,
+	                            'image_id' => 1,
+	                            'tag_id' => 2,
+								'member_id' => 1
+	                        )
+			            ),
+						array(
+				         	'id' => 6,
+							'name' => 'Elit',
+							'TaggedImage' => array(
+	                            'id' => 5,
+	                            'image_id' => 1,
+	                            'tag_id' => 6,
+								'member_id' => 2
+	                        )
+						)
+			        )
+			);
+		$result = $image->read();
+		$this->assertEqual($result,$expected);
+		
 	}
 	
 	

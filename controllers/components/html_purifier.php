@@ -1,6 +1,6 @@
 <?php
 /**
- * Component that rovides functions to purify, prevent xss attacks, and make standard-compliant html code
+ * Component that provides functions to purify, prevent xss attacks, and make standard-compliant html code
  */
 class HtmlPurifierComponent extends Object {
 	
