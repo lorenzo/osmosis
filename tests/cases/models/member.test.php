@@ -1,44 +1,46 @@
 <?php 
-
+/* SVN FILE: $Id$ */
+/* Member Test cases generated on: 2008-05-14 12:05:28 : 1210782628*/
 App::import('Model', 'Member');
 
+class TestMember extends Member {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test_suite';
+}
+
 class MemberTestCase extends CakeTestCase {
-	var $TestObject = null;
-	var $fixtures = array('member');
+	var $Member = null;
+	var $fixtures = array('app.member', 'app.institution', 'app.role', 'app.forum_discussion', 'app.forum_response', 'app.locker_document', 'app.locker_folder', 'app.online_user', 'app.wiki_entry', 'app.wiki_revision', 'app.forum_discussion', 'app.forum_response', 'app.locker_document', 'app.locker_folder', 'app.online_user', 'app.wiki_entry', 'app.wiki_revision');
 
-	function setUp() {
-		$this->TestObject = new Member();
-		$this->TestObject->useDbConfig = 'test';
-		//$this->TestObject->Role->useDbConfig = 'test';
+	function start() {
+		parent::start();
+		$this->Member = new TestMember();
 	}
 
-	function tearDown() {
-		unset($this->TestObject);
+	function testMemberInstance() {
+		$this->assertTrue(is_a($this->Member, 'Member'));
 	}
 
-	
-	function testParentNode() {
-		$this->TestObject->id = 1;
-		$result = $this->TestObject->parentNode();
-		$expected = array('model'=>'Role','foreign_key'=>1);
-		$this->assertEqual($result, $expected);
-	}
-	
-	function testValidation1() {
-		$data = array();
-		$this->TestObject->data = $data;
-		debug($this->TestObject->validate);
-		$valid = $this->TestObject->validates();
-		$this->assertFalse($valid);
-		$expectedErrors = array(
-			'department_id'		=> 'Error.empty',
-			'owner_id'			=> 'Error.empty',
-			'code' 				=> 'Error.empty',
-			'name'				=> 'Error.empty',
-			'description'		=> 'Error.empty'
-		);
-		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
-	}
+	function testMemberFind() {
+		$results = $this->Member->recursive = -1;
+		$results = $this->Member->find('first');
+		$this->assertTrue(!empty($results));
 
+		$expected = array('Member' => array(
+			'id'  => 1,
+			'institution_id'  => 'Lorem ipsum dolor ',
+			'full_name'  => 'Lorem ipsum dolor sit amet',
+			'email'  => 'Lorem ipsum dolor sit amet',
+			'phone'  => 'Lorem ipsum dolor ',
+			'country'  => 'Lorem ipsum dolor ',
+			'city'  => 'Lorem ipsum dolor sit amet',
+			'age'  => 1,
+			'sex'  => 'Lorem ipsum dolor sit ame',
+			'role_id'  => 1,
+			'username'  => 'Lorem ipsum d',
+			'password'  => 'Lorem ipsum dolor sit amet'
+			));
+		$this->assertEqual($results, $expected);
+	}
 }
 ?>

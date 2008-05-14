@@ -1,36 +1,37 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* WikiWiki Test cases generated on: 2008-05-14 12:05:14 : 1210783754*/
-App::import('Model', 'Wiki.Wiki');
+/* WikiRevision Test cases generated on: 2008-05-14 12:05:15 : 1210782075*/
+App::import('Model', 'Wiki.Revision');
 
-class TestWikiWiki extends Wiki {
+class TestWikiRevision extends Revision {
 	var $cacheSources = false;
 	var $useDbConfig  = 'test_suite';
 }
 
-class WikiTestCase extends CakeTestCase {
-	var $WikiWiki = null;
-	var $fixtures = array('plugin.wiki.wiki');
+class WikiRevisionTestCase extends CakeTestCase {
+	var $WikiRevision = null;
+	var $fixtures = array('plugin.wiki.revision', 'plugin.wiki.entry', 'member');
 
 	function start() {
 		parent::start();
-		$this->WikiWiki = new TestWikiWiki();
+		$this->WikiRevision = new TestWikiRevision();
 	}
 
-	function testWikiWikiInstance() {
-		$this->assertTrue(is_a($this->WikiWiki, 'Wiki'));
+	function testWikiRevisionInstance() {
+		$this->assertTrue(is_a($this->WikiRevision, 'Revision'));
 	}
 
-	function testWikiWikiFind() {
-		$results = $this->WikiWiki->recursive = -1;
-		$results = $this->WikiWiki->find('first');
+	function testWikiRevisionFind() {
+		$results = $this->WikiRevision->recursive = -1;
+		$results = $this->WikiRevision->find('first');
 		$this->assertTrue(!empty($results));
 
-		$expected = array('Wiki' => array(
+		$expected = array('Revision' => array(
 			'id'  => 1,
-			'course_id'  => 1,
-			'name'  => 'Lorem ipsum dolor sit amet',
-			'description'  => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida,
+			'entry_id'  => 1,
+			'member_id'  => 1,
+			'title'  => 'Lorem ipsum dolor sit amet',
+			'content'  => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida,
 									phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam,
 									vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit,
 									feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.
@@ -41,7 +42,9 @@ class WikiTestCase extends CakeTestCase {
 									ligula cras suscipit nunc eget, et tellus in varius urna odio est. Fuga urna dis metus euismod laoreet orci,
 									litora luctus suspendisse sed id luctus ut. Pede volutpat quam vitae, ut ornare wisi. Velit dis tincidunt,
 									pede vel eleifend nec curabitur dui pellentesque, volutpat taciti aliquet vivamus viverra, eget tellus ut
-									feugiat lacinia mauris sed, lacinia et felis.'
+									feugiat lacinia mauris sed, lacinia et felis.',
+			'revision'  => 1,
+			'created'  => '2008-05-14 12:21:15'
 			));
 		$this->assertEqual($results, $expected);
 	}

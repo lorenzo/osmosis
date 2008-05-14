@@ -1,32 +1,18 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* WikiWiki Test cases generated on: 2008-05-14 12:05:14 : 1210783754*/
-App::import('Model', 'Wiki.Wiki');
+/* WikiWiki Fixure generated on: 2008-05-14 12:05:14 : 1210783754*/
 
-class TestWikiWiki extends Wiki {
-	var $cacheSources = false;
-	var $useDbConfig  = 'test_suite';
-}
-
-class WikiTestCase extends CakeTestCase {
-	var $WikiWiki = null;
-	var $fixtures = array('plugin.wiki.wiki');
-
-	function start() {
-		parent::start();
-		$this->WikiWiki = new TestWikiWiki();
-	}
-
-	function testWikiWikiInstance() {
-		$this->assertTrue(is_a($this->WikiWiki, 'Wiki'));
-	}
-
-	function testWikiWikiFind() {
-		$results = $this->WikiWiki->recursive = -1;
-		$results = $this->WikiWiki->find('first');
-		$this->assertTrue(!empty($results));
-
-		$expected = array('Wiki' => array(
+class WikiFixture extends CakeTestFixture {
+	var $name = 'Wiki';
+	var $table = 'wiki_wikis';
+	var $fields = array(
+			'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary'),
+			'course_id' => array('type'=>'integer', 'null' => false),
+			'name' => array('type'=>'string', 'null' => false),
+			'description' => array('type'=>'text', 'null' => false),
+			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
+			);
+	var $records = array(array(
 			'id'  => 1,
 			'course_id'  => 1,
 			'name'  => 'Lorem ipsum dolor sit amet',
@@ -43,7 +29,5 @@ class WikiTestCase extends CakeTestCase {
 									pede vel eleifend nec curabitur dui pellentesque, volutpat taciti aliquet vivamus viverra, eget tellus ut
 									feugiat lacinia mauris sed, lacinia et felis.'
 			));
-		$this->assertEqual($results, $expected);
-	}
 }
 ?>
