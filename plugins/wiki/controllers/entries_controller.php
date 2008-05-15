@@ -5,6 +5,13 @@ class EntriesController extends WikiAppController {
 	var $helpers = array('Html', 'Form', 'Javascript','Wiki' );
 	var $components = array('HtmlPurifier','Diff');
 	
+	function _setActiveCourse() {
+		if (!isset($this->params['named']['course_id']) && isset($this->params['named']['wiki_id'])) {
+			$this->activeCourse = $this->Entry->Wiki->field('course_id',array('id' => $this->params['named']['wiki_id']));
+		} else
+			parent::_setActiveCourse();
+	}
+	
 	function index() {
 		$this->Entry->recursive = 0;
 		$this->set('entries', $this->paginate());

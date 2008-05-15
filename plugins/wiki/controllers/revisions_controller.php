@@ -4,6 +4,13 @@ class RevisionsController extends WikiAppController {
 	var $helpers = array('Html','Time','Wiki');
 	var $components = array('Diff');
 	
+	function _setActiveCourse() {
+		if (!isset($this->params['named']['course_id']) && isset($this->params['named']['wiki_id'])) {
+			$this->activeCourse = $this->Revision->Entry->Wiki->field('course_id',array('id' => $this->params['named']['wiki_id']));
+		} else
+			parent::_setActiveCourse();
+	}
+	
 	function history($entry_id) {
 		$this->Revision->recursive = 0;
 		$this->Revision->Entry->recursive = 0;

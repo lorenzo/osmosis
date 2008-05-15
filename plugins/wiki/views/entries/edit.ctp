@@ -1,6 +1,6 @@
 <div class="entries form">
 	<h1><?php echo $this->data['Entry']['title']?></h1>
-<?php echo $form->create('Entry');?>
+<?php echo $form->create('Entry',array('url' => array('wiki_id' => $this->params['named']['wiki_id'])));?>
 	<fieldset>
  		<legend><?php __('Edit Entry');?></legend>
 	<?php

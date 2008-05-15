@@ -10,7 +10,7 @@ class AppController extends Controller {
 	 * @var string
 	 */
 	
-	private $activeCourse = false;
+	protected $activeCourse = false;
 	
 	function beforeFilter() {
 		if (isset($this->Auth)) {
@@ -31,6 +31,7 @@ class AppController extends Controller {
 		if (isset($this->Auth) && $this->Session->valid() && $this->Auth->user())
 			$this->__updateOnlineUser();
 		
+		$this->_setActiveCourse();
 		$this->__selectLayout();
 	}
 	
@@ -42,7 +43,8 @@ class AppController extends Controller {
 	function __selectLayout() {
 		if (isset($this->params['admin']) && $this->params['admin']) {
 			$this->layout = 'admin';
-		}
+		} elseif (empty($this->activeCourse))
+			$this->layout = 'no_course';
 	}
 	
 	protected function __updateOnlineUser() {
@@ -78,13 +80,14 @@ class AppController extends Controller {
 	}
 	
 	function beforeRender() {
-		$this->activeCourse = 1;
-		if (isset($this->Placeholder->started))
-			$this->Placeholder->attachToolbar($this->_getActiveCourse());
+		if (isset($this->Placeholder->started) && $this->activeCourse);
+			$this->Placeholder->attachToolbar($this->activeCourse);
 	}
 	
-	function _getActiveCourse() {
-		return $this->activeCourse;
+	function _setActiveCourse() {
+		if (isset($this->params['named']['course_id'])) {
+			$this->activeCourse = $this->params['named']['course_id'];
+		}
 	}
 		
 }
