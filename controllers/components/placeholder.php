@@ -22,6 +22,8 @@ class PlaceholderComponent extends Object {
 	
 	private $attached = array();
 	
+	
+	
 	/**
 	 * Startup function. Sets the this component instance in the ClassRegistry for further use (Probably breaking some MVC rules)
 	 *
@@ -30,8 +32,7 @@ class PlaceholderComponent extends Object {
 	 */
 	
 	function startup(&$controller) {
-		$this->controller =& $controller;
-		$this->Plugin =& new Plugin;
+		$this->controller =& $controller;		
 		$this->started = true;
 		// Sets this component instance in the class registry to be able to pull data from the view if needed
 		ClassRegistry::addObject('Placeholder',&$this);
@@ -127,10 +128,14 @@ class PlaceholderComponent extends Object {
 	 */
 	
 	private function getPlaceholderObjects($type){
+		if (!isset($this->Plugin))
+			$this->Plugin = new Plugin;
 		return $this->Plugin->getHolders($type);
 	}
 	
 	private function getCourseToolbarObjects($course_id) {
+		if (!isset($this->Plugin))
+			$this->Plugin = new Plugin;
 		return $this->Plugin->getCourseTools($course_id,true);
 	}
 	
