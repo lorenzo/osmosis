@@ -123,7 +123,7 @@ class Plugin extends AppModel {
 					$holderObject =& new $class;
 					ClassRegistry::addObject($className,&$holderObject);
 				}
-					if (in_array($type,$holderObject->types))
+					if (in_array($type,$holderObject->types) || method_exists($holderObject,Inflector::variable($type)))
 						$holders[] = $holderObject;
 			}
 		}
