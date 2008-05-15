@@ -1,22 +1,28 @@
 <?php
 App::import('Model', 'scorm.Scorm');
+
+class TestScorm extends Scorm {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test';
+}
+
 class ScormTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('scorm',
-                        	'sco',
-                        	'objective',
-                        	'randomization',
-                        	'rollup',
-                        	'rule',
-									'condition',
-                        	'choice_consideration',
-                        	'rollup_consideration',
-                        	'sco_presentation',
-                        	'control_mode',
-                        	'delivery_control');
-	function setUp() {
-		$this->TestObject = new Scorm();
-		$this->TestObject->useDbConfig = 'test';
+	var $fixtures = array('plugin.scorm.scorm',
+                        	'plugin.scorm.sco',
+                        	'plugin.scorm.objective',
+                        	'plugin.scorm.randomization',
+                        	'plugin.scorm.rollup',
+                        	'plugin.scorm.rule',
+							'plugin.scorm.condition',
+                        	'plugin.scorm.choice_consideration',
+                        	'plugin.scorm.rollup_consideration',
+                        	'plugin.scorm.sco_presentation',
+                        	'plugin.scorm.control_mode',
+                        	'plugin.scorm.delivery_control');
+	function start() {
+		parent::start();
+		$this->TestObject = new TestScorm();
 		$this->TestObject->Sco->useDbConfig = 'test';
 		$this->TestObject->Sco->SubItem->useDbConfig = 'test';
 		$this->TestObject->Sco->Objective->useDbConfig = 'test';
@@ -31,14 +37,11 @@ class ScormTestCase extends CakeTestCase {
 		$this->TestObject->Sco->DeliveryControl->useDbConfig = 'test';
 	}
 
-	function tearDown() {
-		unset($this->TestObject);
-	}
 
 /**Test function Validation. */
 	function testValidation1() {
 		$data = array();
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
 			'name'				=> 'Error.empty',
@@ -50,7 +53,6 @@ class ScormTestCase extends CakeTestCase {
 
 /**Test function manifestExists.*/
 	function testManifestExists() {
-		uses('File');
 		$file = new File(TMP.'tests/imsmanifests/imsmanifest.xml',true);
 		$this->assertTrue($this->TestObject->manifestExists(TMP.'tests'.DS.'imsmanifests'));
 		$this->assertFalse($this->TestObject->manifestExists(TMP.'fake'));
@@ -65,13 +67,14 @@ class ScormTestCase extends CakeTestCase {
 	
 /**Test function getSchemaVersion.*/
 	function testGetSchemaVersion() {
-		$manifest = new XMLNode('manifest');
-		$metadata = new XMLNode('metadata');
-		$schema = new XMLNode('schema', null, 'ADL SCORM');
-		$schemaversion = new XMLNode('schemaversion', null, '2004 3rd Edition');
-		$metadata->append($schemaversion);
-		$metadata->append($schema);
-		$manifest->append($metadata);
+		$xml = <<<eof
+			<metadata>
+			    <schema>ADL SCORM</schema>
+			    <schemaversion>2004 3rd Edition</schemaversion>
+			  </metadata>
+eof;
+	$manifest = $this->TestObject->__getXMLParser();
+	$manifest->load($xml);
 		$this->assertEqual(
 			$this->TestObject->getSchemaVersion($manifest),
 			'2004 3rd Edition'
@@ -80,38 +83,18 @@ class ScormTestCase extends CakeTestCase {
 	
 /**Test function extractResources. */
 	function testExtractResources() {
-		$resources = new XMLNode('resources');
-		$resource1 = new XMLNode('resource', array(
-				'identifier' => 'RESOURCE1',
-				'adlcp:scormType' => 'sco',
-				'type' => 'webcontent',
-				'href' => 'localitem1.html'
-			)
-		);
-		$resources->append($resource1);
-		$resource2 = new XMLNode('resource', array(
-				'identifier' => 'RESOURCE2',
-				'adlcp:scormType' => 'sco',
-				'type' => 'webcontent',
-				'href' => 'localitem2.html'
-			)
-		);
-		$resources->append($resource2);
-		$resource3 = new XMLNode('resource', array(
-				'identifier' => 'RESOURCE3',
-				'adlcp:scormType' => 'sco',
-				'type' => 'webcontent',
-				'href' => 'localitem3.html'
-			)
-		);
-		$file = new XMLNode('file', array('href' => 'localitem3.html')); //Ignored
-		$resource3->append($file);
-		$resources->append($resource3);
-		
-		$manifest = new XMLNode('manifest');
-		$manifest->append($resources);
-		
-		
+		$xml = <<<eof
+			<resources>
+			    <resource identifier="RESOURCE1" type="webcontent" href="localitem1.html" adlcp:scormType="sco" />
+			    <resource identifier="RESOURCE2" type="webcontent" href="localitem2.html" adlcp:scormType="sco" />
+				<resource identifier="RESOURCE3" type="webcontent" href="localitem3.html" adlcp:scormType="sco" >
+			      <file href="'localitem3.html'" />
+			    </resource>
+			</resources>
+eof;
+
+		$manifest = $this->TestObject->__getXMLParser();
+		$manifest->load($xml);
 		$this->assertEqual(
 			$this->TestObject->extractResources($manifest),
 			array (
@@ -1182,6 +1165,7 @@ eof;
 	}
 	
 	function testSave2() {
+		$this->TestObject = new TestScorm;
 		$data['Scorm'] = array(
 			'id' => 101,
 			'course_id'		=> 1,
@@ -1192,11 +1176,11 @@ eof;
 			'modified'		=> '2007-1-1',
 			'hash'		=> 'slsdaslkfwerew498fwlw'
 		);
+		$this->TestObject->create();
 		$this->assertTrue($this->TestObject->parseManifest(TMP.'tests'.DS.'imsmanifests'.DS.'1'));
 		$this->TestObject->save($data);
 		$this->assertEqual(1,$this->TestObject->findCount(array('id'=>101)));
 		$this->assertEqual(11,$this->TestObject->Sco->findCount(array('scorm_id'=>101)));
-		$results = $this->TestObject->Sco->findAll(array('scorm_id'=>101));
 		//TODO: Test rollup rules
 		$this->assertEqual(1,1);
 		

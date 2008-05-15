@@ -1,5 +1,6 @@
 <?php
-uses('xml');
+App::import('Core','Xml');
+App::import('Core','File');
 class Scorm extends ScormAppModel {
 	var $name = 'Scorm';
 	var $useTable = 'scorm_scorms';
@@ -25,7 +26,6 @@ class Scorm extends ScormAppModel {
 	 * @return true if imsmanifest.xml file exist in $path, false otherwise
 	 */
 	function manifestExists($path) {
-		uses('File');
 		$manifest = new File($path.DS.'imsmanifest.xml');
 		return $manifest->exists();
 	}
@@ -60,26 +60,22 @@ class Scorm extends ScormAppModel {
 	 * @return XML parser object.
 	 */
 	function __getXMLParser() {
-		$xml_obj = new XML();
-		$xml_obj->__parser = xml_parser_create();
-		xml_set_object($xml_obj->__parser, $xml_obj);
-		xml_parser_set_option($xml_obj->__parser, XML_OPTION_CASE_FOLDING, 0);
-		xml_parser_set_option($xml_obj->__parser, XML_OPTION_SKIP_WHITE, 1);
+		$xml_obj = new Xml();
 		return $xml_obj;
 	}
 	
 	/**
 	 * Returns the identifier attribute of a node
-	 * @param $node XMLNode with identifier attribute.
+	 * @param $node XmlNode with identifier attribute.
 	 * @return string identifier attribute of $node
 	 */
-	function getNodeIdentifier(XMLNode $node) {
+	function getNodeIdentifier(XmlNode $node) {
 		return $node->attributes['identifier'];
 	}
 	
 	/**
 	 * Returns the value of the schemaversion tag inside metadata
-	 * @param $node XMLNode manifest node with metadata child.
+	 * @param $node XmlNode manifest node with metadata child.
 	 * @return string value of schemaversion node
 	 * 
 	 * usage: given the xml
@@ -96,14 +92,15 @@ class Scorm extends ScormAppModel {
 		if(count($metadata)) {
 			$metadata = $metadata[0];
 			$version = $metadata->children('schemaversion');
-			return $version[0]->value;
+			$value = $version[0]->children('#text');
+			return $value[0]->value;
 		}
 		return null;
 	}
 	
 	/**
 	 * Returns array with a representation of the resources of a manifest.
-	 * @param $manifest XMLNode manifest node
+	 * @param $manifest XmlNode manifest node
 	 * @return array representation of the resources of a manifest
 	 * 
 	 * usage: given the xml
@@ -128,7 +125,8 @@ class Scorm extends ScormAppModel {
 		$nodes = $manifest->children('resources');
 		$resources = array();
 		foreach($nodes as $node) {
-			foreach ($node->children('resource') as $resource) {
+			$res = $node->children('resource');
+			foreach ($res as $resource) {
 				$resources[$resource->attributes['identifier']] = $resource->attributes;
 			}
 		}
@@ -137,7 +135,7 @@ class Scorm extends ScormAppModel {
 	
 	/**
 	 * Returns array with a representation of the organizations of a manifest.
-	 * @param $manifest XMLNode manifest node
+	 * @param $manifest XmlNode manifest node
 	 * @return array representation of the organizations of a manifest
 	 * @see extractSequencing 
 	 * @see getLocationFromMetadata
@@ -169,13 +167,12 @@ class Scorm extends ScormAppModel {
 			if($node->hasChildren()) {
 				$organization[$i]['default'] = $node->attributes['default'];
 			}
-			foreach ($node->children('organization') as $organization) {
+			$orgs = $node->children('organization');
+			foreach ($orgs as $organization) {
 				$identifier = $organization->attributes['identifier'];
 				$organizations[$identifier] = $organization->attributes;
 				$organizations[$identifier]['metadata'] = $this->getLocationFromMetadata($organization);
-				if($title = $organization->children('title')) {
-					$organizations[$identifier]['title'] = $title[0]->value;
-				}
+				$organizations[$identifier]['title'] = $this->getChildrenValue($organization,'title');
 				$organizations[$identifier]['Sequencing'] = $this->extractSequencing($organization);
 				$organizations[$identifier]['Item'] = $this->extractItems($organization);
 				
@@ -188,7 +185,7 @@ class Scorm extends ScormAppModel {
 	/**
 	 * Returns array with a representation of the <imsss:sequencing> element.
 	 * Note: this function deliberately ignores the <auxiliaryResources> element.
-	 * @param $node XMLNode a node with a imsss:sequencing children node
+	 * @param $node XmlNode a node with a imsss:sequencing children node
 	 * @return array representation of the <imsss:sequencing> node and its element and attributes.
 	 * 
 	 * usage: given the xml 
@@ -218,42 +215,42 @@ class Scorm extends ScormAppModel {
 	 * 	'Consideration' => array ( ... ),
 	 * )
 	 */
-	function extractSequencing(XMLNode $parent) {
+	function extractSequencing(XmlNode $parent) {
 		$data = array();
-		$seq = $parent->children('imsss:sequencing');
+		$seq = $parent->children('sequencing');
 		if(!empty($seq)) {
 			$seq = $seq[0];
-			$control = $seq->children('imsss:controlMode');
+			$control = $seq->children('controlMode');
 			if(!empty($control)) {
 				$data['Control'] = $control[0]->attributes;
 			}
 			$data['SequencingRule'] = $this->extractSeqRules($seq);
-			$limit = $seq->children('imsss:limitConditions');
+			$limit = $seq->children('limitConditions');
 			if(!empty($limit)) {
 				$data['LimitCondition'] = $limit[0]->attributes;
 			}
 			//$aux = $seq->children('auxiliaryResources'); ADL discourages it's use
-			$rollup = $seq->children('imsss:rollupRules');
+			$rollup = $seq->children('rollupRules');
 			if(!empty($rollup)) {
 				$data['RollupRule'] = $this->extractRulesData($rollup,'rollup');
 			}
-			$objectives = $seq->children('imsss:objectives');
+			$objectives = $seq->children('objectives');
 			if(!empty($objectives)) {
 				$data['Objective'] = $this->extractObjectives($objectives[0]);
 			}
-			$randomization = $seq->children('imsss:randomizationControls');
+			$randomization = $seq->children('randomizationControls');
 			if(!empty($randomization)) {
 				$data['Randomization'] = $randomization[0]->attributes;
 			}
-			$delivery = $seq->children('imsss:deliveryControls');
+			$delivery = $seq->children('deliveryControls');
 			if(!empty($delivery)) {
 				$data['DeliveryControl'] = $delivery[0]->attributes;
 			}
-			$choice = $seq->children('adlseq:constrainedChoiceConsiderations');
+			$choice = $seq->children('constrainedChoiceConsiderations');
 			if(!empty($choice)) {
 				$data['Choice'] = $choice[0]->attributes;
 			}
-			$considerations = $seq->children('adlseq:rollupConsiderations');
+			$considerations = $seq->children('rollupConsiderations');
 			if(!empty($considerations)) {
 				$data['Consideration'] = $considerations[0]->attributes;
 			}
@@ -263,7 +260,7 @@ class Scorm extends ScormAppModel {
 	
 	/**
 	 * Returns array with a representation of the rules inside a <imsss:sequencingRules> element.
-	 * @param $seq XMLNode node parent of the <imsss:sequencingRules> element.
+	 * @param $seq XmlNode node parent of the <imsss:sequencingRules> element.
 	 * @return array representation of the <imsss:sequencingRules> node and its element and attributes.
 	 * 
 	 * usage: given the xml.
@@ -288,20 +285,20 @@ class Scorm extends ScormAppModel {
 	 * 	)
 	 * );
 	 */
-	function extractSeqRules(XMLNode $seq) {
+	function extractSeqRules(XmlNode $seq) {
 		$rules = array();
-		$seqRules = $seq->children('imsss:sequencingRules');
+		$seqRules = $seq->children('sequencingRules');
 		if(!empty($seqRules)) {
 			$seqRules = $seqRules[0];
-			$pre = $seqRules->children('imsss:preConditionRule');
+			$pre = $seqRules->children('preConditionRule');
 			if(!empty($pre)) {
 				$rules['Pre'] = $this->extractRulesData($pre);
 			}
-			$post = $seqRules->children('imsss:postConditionRule');
+			$post = $seqRules->children('postConditionRule');
 			if(!empty($post)) {
 				$rules['Post'] = $this->extractRulesData($post);
 			}
-			$exit = $seqRules->children('imsss:exitConditionRule');
+			$exit = $seqRules->children('exitConditionRule');
 			if(!empty($exit)) {
 				$rules['Exit'] = $this->extractRulesData($exit);
 			}
@@ -312,7 +309,7 @@ class Scorm extends ScormAppModel {
 	/**
 	 * Extracts the data of the rules inside <imsss:sequencingRules> elements (pre, post and exit) or 
 	 * inside <imsss:rollupRules> element (rollupRule element).
-	 * @param $node XMLNode node any of the following elements:
+	 * @param $node XmlNode node any of the following elements:
 	 * 	<imsss:preConditionRule>
 	 * 	<imsss:postConditionRule>
 	 * 	<imsss:exitConditionRule> or
@@ -336,11 +333,11 @@ class Scorm extends ScormAppModel {
 		foreach($nodes as $key => $node) {
     		if ($name == 'rollup') {
     			$data[$key] = $node->attributes;
-    			$node = $node->children("imsss:{$name}Rule");
+    			$node = $node->children("{$name}Rule");
     			if ($node==null) return $data;
     			$node = $node[0];
     		}
-    		$conditions = $node->children("imsss:{$name}Conditions");
+    		$conditions = $node->children("{$name}Conditions");
     		$conditions = $conditions[0];
     		$data[$key]['Condition'] = $conditions->attributes;
     		$i = 0;
@@ -348,7 +345,7 @@ class Scorm extends ScormAppModel {
     			$data[$key]['Condition'][$i] = $condition->attributes;
     			$i++; 
     		}
-    		$action = $node->children("imsss:{$name}Action");
+    		$action = $node->children("{$name}Action");
     		$data[$key]['Action'] = $action[0]->attributes;
 		}
 		return $data;
@@ -356,7 +353,7 @@ class Scorm extends ScormAppModel {
 	
 	/**
 	 * Returns array with a representation of the contents of the <imsss:objectives> element (primary and objective) 
-	 * @param $node XMLNode nore <imsss:objectives>
+	 * @param $node XmlNode nore <imsss:objectives>
 	 * @return array representation of the <imsss:objectives> node's elements and attributes.
 	 * 
 	 * usage: given the xml
@@ -383,11 +380,11 @@ class Scorm extends ScormAppModel {
 	 * 	)
 	 * );
 	 */
-	function extractObjectives(XMLNode $node) {
+	function extractObjectives(XmlNode $node) {
 		$objectives = array();
-		$primary = $node->children('imsss:primaryObjective');
+		$primary = $node->children('primaryObjective');
 		$objectives['Primary'] = $this->extractObjectiveData($primary[0]);
-		foreach($node->children('imsss:objective') as $objective) {
+		foreach($node->children('objective') as $objective) {
 			$objectives['Objective'][] =  $this->extractObjectiveData($objective);
 		}
 		return $objectives;
@@ -395,7 +392,7 @@ class Scorm extends ScormAppModel {
 	
 	/**
 	 * Returns array with a representation of an <objective> element (primary or objective)
-	 * @param $node XMLNode with either a <imsss:primaryObjective> or <imsss:objective>
+	 * @param $node XmlNode with either a <imsss:primaryObjective> or <imsss:objective>
 	 * @return array representation of a node's elements.
 	 * 
 	 * usage: given the xml.
@@ -406,13 +403,13 @@ class Scorm extends ScormAppModel {
 	 * Return an array containing the representation of the contents of <objective> element.
 	 * See ScormModel::extractObjectives
 	 */
-	function extractObjectiveData(XMLNode $node) {
+	function extractObjectiveData(XmlNode $node) {
 		$data = $node->attributes;
-		$measure = $node->children('imsss:minNormalizedMeasure');
-		if(!empty($measure)) {
-			$data['minNormalizedMeasure'] = $measure[0]->value;
-		}
-		foreach($node->children('imsss:mapInfo') as $map) {
+		$minNormalizedMeasure = $this->getChildrenValue($node,'minNormalizedMeasure');
+		if($minNormalizedMeasure != null) 
+			$data['minNormalizedMeasure'] = $minNormalizedMeasure;
+		$mapInfos = $node->children('mapInfo');
+		foreach($mapInfos as $map) {
 			$data['mapInfo'][] = $map->attributes;
 		}
 		return $data;
@@ -420,7 +417,7 @@ class Scorm extends ScormAppModel {
 	
 	/**
 	 * Returns array with a representation of the items of a node
-	 * @param $parent XMLNode parent node with <item> child nodes
+	 * @param $parent XmlNode parent node with <item> child nodes
 	 * @return array representation of node's items.
 	 * 
 	 * usage: given the xml.
@@ -464,21 +461,21 @@ class Scorm extends ScormAppModel {
 			if(isset($item->attributes['identifierref'])) {
 				$resource = $this->data['Resource'][$item->attributes['identifierref']];
 				unset($resource['identifier']);
-				if((isset($this->data['Scorm']['xml:base']) || isset($this->data['Scorm']['xml:base']))  || isset($resource['xml:base']) && isset($resource['href'])) {
+				if((isset($this->data['Scorm']['base']) || isset($this->data['Scorm']['base']))  || isset($resource['base']) && isset($resource['href'])) {
 					@$resource['href'] =
-						$this->data['Scorm']['xml:base'] .
-						$this->data['Resource']['xml:base'] .
-						$resource['xml:base'] .
+						$this->data['Scorm']['base'] .
+						$this->data['Resource']['base'] .
+						$resource['base'] .
 						$resource['href'];
 				}
 				$items[$identifier] = am($items[$identifier],$resource);
-				$items[$identifier]['scormType'] = (!isset($items[$identifier]['adlcp:scormType'])) ? 'sco' : $items[$identifier]['adlcp:scormType'] ;
+				$items[$identifier]['scormType'] = (!isset($items[$identifier]['scormType'])) ? 'sco' : $items[$identifier]['scormType'] ;
 			}
-			$items[$identifier]['title'] =  $title[0]->value;
+			$items[$identifier]['title'] =  $title[0]->first()->value;
 			$items[$identifier]['metadata'] = $this->getLocationFromMetadata($item);
-			$items[$identifier]['timeLimitAction'] = $this->getChildrenValue($item,'adlcp:timeLimitAction');
-			$items[$identifier]['dataFromLMS'] = $this->getChildrenValue($item,'adlcp:dataFromLMS');
-			$items[$identifier]['completionThreshold'] = $this->getChildrenValue($item,'adlcp:completionThreshold');
+			$items[$identifier]['timeLimitAction'] = $this->getChildrenValue($item,'timeLimitAction');
+			$items[$identifier]['dataFromLMS'] = $this->getChildrenValue($item,'dataFromLMS');
+			$items[$identifier]['completionThreshold'] = $this->getChildrenValue($item,'completionThreshold');
 			$items[$identifier]['Sequencing'] = $this->extractSequencing($item);
 			$items[$identifier]['Presentation'] = $this->extractPresentation($item);
 			$items[$identifier]['SubItem'] = $this->extractItems($item);
@@ -488,15 +485,17 @@ class Scorm extends ScormAppModel {
 
 	/**
 	 * Returns value of the $node's $tagname children
-	 * @param $parent XMLNode parent node with $tagname child node
+	 * @param $parent XmlNode parent node with $tagname child node
 	 * @return string value of $tagName.
 	 */
 	function getChildrenValue($node,$tagName) {
-		if($node == null){
+		if ($node == null){
 			return null;
 		}
 		$data = $node->children($tagName);
-		if(count($data)) {
+		if (count($data)) {
+			if ($data[0]->hasChildren() && is_a($node = $data[0]->first(),'XmlTextNode'))
+				return $node->value;
 			return $data[0]->value;
 		}
 		return null;
@@ -504,7 +503,7 @@ class Scorm extends ScormAppModel {
 	
 	/**
 	 * Returns array with a representation of the <adlnav:presentation> element and its elements and attributes.
-	 * @param $node XMLNode node with a <adlnav:presentation> children.
+	 * @param $node XmlNode node with a <adlnav:presentation> children.
 	 * @return array representation of the <adlnav:presentation> node's elements and attributes.
 	 * 
 	 * usage: given the xml.
@@ -520,14 +519,14 @@ class Scorm extends ScormAppModel {
 	 * 	'previous'
 	 * );
 	 */
-	function extractPresentation(XMLNode $node) {
-		$presentation = $node->children('adlnav:presentation');
+	function extractPresentation(XmlNode $node) {
+		$presentation = $node->children('presentation');
 		$data = array();
 		if(!empty($presentation)) {
-			$navigation = $presentation[0]->children('adlnav:navigationInterface');
+			$navigation = $presentation[0]->children('navigationInterface');
 			if(!empty($navigation)) {
 				foreach($navigation[0]->children as $hideLMS) {
-					$data[] = $hideLMS->value;
+					$data[] = $hideLMS->first()->value;
 				}
 			}
 		}
@@ -541,7 +540,7 @@ class Scorm extends ScormAppModel {
 		$metadata = $parent->children('metadata');
 		if ($metadata != null){
 			$metadata = $metadata[0];
-			return $this->getChildrenValue($metadata,'adlcp:location');
+			return $this->getChildrenValue($metadata,'location');
 		}
 		return null;
 	}

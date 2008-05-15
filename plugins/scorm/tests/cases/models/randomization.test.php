@@ -2,19 +2,24 @@
 
 App::import('Model', 'scorm.Randomization');
 
+class TestRandomization extends Randomization {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test_suite';
+}
+
 class RandomizationTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('randomization');
+	var $fixtures = array('plugin.scorm.randomization');
 
-	function setUp() {
-		$this->TestObject = new Randomization();
-		$this->TestObject->useDbConfig = 'test';
+	function start() {
+		parent::start();
+		$this->TestObject = new TestRandomization();
 	}
-
-	function tearDown() {
-		unset($this->TestObject);
+	
+	function testInstance() {
+		$this->assertTrue(is_a($this->TestObject,'Randomization'));
 	}
-
+	
 	function testValidation1() {
 		$data = array();
 		$this->TestObject->data = $data;
@@ -30,7 +35,7 @@ class RandomizationTestCase extends CakeTestCase {
     		'reorderChildren'		=> 'true',
     		'selectionTiming'		=> 'onEachNewAttempt'
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
@@ -43,7 +48,7 @@ class RandomizationTestCase extends CakeTestCase {
     		'reorderChildren'		=> 'no',
     		'selectionTiming'		=> 'a few times'
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
     		'randomizationTiming'	=> 'scormplugin.randomization.randomizationtiming.token',

@@ -1,17 +1,22 @@
 <?php
 App::import('Model', 'scorm.ControlMode');
 
+class TestControlMode extends ControlMode {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test_suite';
+}
+
 class ControlModeTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('control_mode');
+	var $fixtures = array('plugin.scorm.control_mode');
 
-	function setUp() {
-		$this->TestObject = new ControlMode();
-		$this->TestObject->useDbConfig = 'test';
+	function start() {
+		parent::start();
+		$this->TestObject = new TestControlMode();
 	}
-
-	function tearDown() {
-		unset($this->TestObject);
+	
+	function testInstance() {
+		$this->assertTrue(is_a($this->TestObject,'ControlMode'));
 	}
 
 	function testValidation1() {
@@ -33,7 +38,7 @@ class ControlModeTestCase extends CakeTestCase {
 				'useCurrentAttemptProgressInfo'		=> 'nope'
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
 			'choiceExit'						=> 'scormplugin.controlmode.choiceexit.boolean',
@@ -57,7 +62,7 @@ class ControlModeTestCase extends CakeTestCase {
 				'useCurrentAttemptProgressInfo'		=> 'true'
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
@@ -74,7 +79,7 @@ class ControlModeTestCase extends CakeTestCase {
 				'useCurrentAttemptProgressInfo'		=> 'false'
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);

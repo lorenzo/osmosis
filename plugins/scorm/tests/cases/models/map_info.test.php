@@ -2,22 +2,27 @@
 
 App::import('Model', 'scorm.MapInfo');
 
+class TestMapInfo extends MapInfo {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test_suite';
+}
+
 class MapInfoTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('map_info');
+	var $fixtures = array('plugin.scorm.map_info');
 
-	function setUp() {
-		$this->TestObject = new MapInfo();
-		$this->TestObject->useDbConfig = 'test';
+	function start() {
+		parent::start();
+		$this->TestObject = new TestMapInfo();
 	}
-
-	function tearDown() {
-		unset($this->TestObject);
+	
+	function testInstance() {
+		$this->assertTrue(is_a($this->TestObject,'MapInfo'));
 	}
 
 	function testValidation1() {
 		$data = array();
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
     		'targetObjectiveID'		=> 'scormplugin.mapinfo.targetobjectiveid.empty'
@@ -33,7 +38,7 @@ class MapInfoTestCase extends CakeTestCase {
     		'writeSatisfiedStatus'	=> 'true',
     		'writeNormalizedMeasure'=> 'false'
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
@@ -47,7 +52,7 @@ class MapInfoTestCase extends CakeTestCase {
     		'writeSatisfiedStatus'	=> 'ok',
     		'writeNormalizedMeasure'=> 'maybe'
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
     		'targetObjectiveID'		=> 'scormplugin.mapinfo.targetobjectiveid.empty',

@@ -1,22 +1,28 @@
 <?php
 App::import('Model', 'scorm.ScoPresentation');
 
+class TestScoPresentation extends ScoPresentation {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test_suite';
+}
+
+
 class ScoPresentationTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('sco_presentation');
+	var $fixtures = array('plugin.scorm.sco_presentation');
 
-	function setUp() {
-		$this->TestObject = new ScoPresentation();
-		$this->TestObject->useDbConfig = 'test';
+	function start() {
+		parent::start();
+		$this->TestObject = new TestScoPresentation();
 	}
-
-	function tearDown() {
-		unset($this->TestObject);
+	
+	function testInstance() {
+		$this->assertTrue(is_a($this->TestObject,'ScoPresentation'));
 	}
 
 	function testValidation1() {
 		$data = array();
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
@@ -28,7 +34,7 @@ class ScoPresentationTestCase extends CakeTestCase {
 				'hideKey'	=> 'yes',
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
 			'hideKey'			=> 'scormplugin.scopresentation.hidekey.token',
@@ -45,7 +51,7 @@ class ScoPresentationTestCase extends CakeTestCase {
 				'hideKey' => $value,
 			)
 		);
-			$this->TestObject->data = $data;
+			$this->TestObject->set($data);
 			$valid = $this->TestObject->validates();
 			$expectedErrors = array();
 			$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);

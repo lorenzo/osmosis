@@ -2,23 +2,28 @@
 
 App::import('Model', 'scorm.Objective');
 
+class TestObjective extends Objective {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test_suite';
+}
+
 class ObjectiveTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('objective','map_info');
+	var $fixtures = array('plugin.scorm.objective','plugin.scorm.map_info');
 
-	function setUp() {
-		$this->TestObject = new Objective();
-		$this->TestObject->useDbConfig = 'test';
+	function start() {
+		parent::start();
+		$this->TestObject = new TestObjective();
 		$this->TestObject->MapInfo->useDbConfig = 'test';
 	}
-
-	function tearDown() {
-		unset($this->TestObject);
+	
+	function testInstance() {
+		$this->assertTrue(is_a($this->TestObject,'Objective'));
 	}
 
 	function testValidation1() {
 		$data = array();
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
     		'objectiveID'		=> 'scormplugin.objective.objectiveid.empty'
@@ -32,7 +37,7 @@ class ObjectiveTestCase extends CakeTestCase {
     		'satisfiedByMeasure'	=> 'nope',
     		'minNormalizedMeasure'	=> 'true'
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
     		'objectiveID'			=> 'scormplugin.objective.objectiveid.empty',
@@ -48,7 +53,7 @@ class ObjectiveTestCase extends CakeTestCase {
     		'satisfiedByMeasure'	=> 'true',
     		'minNormalizedMeasure'	=> 8.10
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
     		'minNormalizedMeasure'	=> 'scormplugin.objective.minnormalizedmeasure.between'
@@ -62,7 +67,7 @@ class ObjectiveTestCase extends CakeTestCase {
     		'satisfiedByMeasure'	=> 'true',
     		'minNormalizedMeasure'	=> -1.5
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
     		'minNormalizedMeasure'	=> 'scormplugin.objective.minnormalizedmeasure.between'

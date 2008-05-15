@@ -1,26 +1,30 @@
 <?php 
 
 App::import('Model','scorm.Rule');
-App::import('Model','scorm.Rollup');
-App::import('Model','scorm.Condition');
+
+class TestRule extends Rule {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test_suite';
+}
 
 class RuleTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('rule','condition');
+	var $fixtures = array('plugin.scorm.rule','plugin.scorm.condition');
 	
-	function setUp() {
-		$this->TestObject = new Rule();
-		$this->TestObject->useDbConfig = 'test';
-		$this->TestObject->Condition->useDbConfig = 'test';
+	function start() {
+		parent::start();
+		$this->TestObject = new TestRule();
+		$this->TestObject->Rollup->useDbConfig = 'test_suite';
+		$this->TestObject->Condition->useDbConfig = 'test_suite';
 	}
-
-	function tearDown() {
-		unset($this->TestObject);
+	
+	function testInstance() {
+		$this->assertTrue(is_a($this->TestObject,'Rule'));
 	}
 
 	function testValidation1() {
 		$data = array();
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array (
 			'type' => 'scorm.rule.type.allowedvalues',
@@ -35,7 +39,7 @@ class RuleTestCase extends CakeTestCase {
 				'conditionCombination' => 'all',
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array (
 			'type' => 'scorm.rule.type.allowedvalues',
@@ -61,9 +65,9 @@ class RuleTestCase extends CakeTestCase {
 					)
 				);
 				$this->TestObject->create();
-				$this->TestObject->data = $data;
+				$this->TestObject->set($data);
 				$valid = $this->TestObject->validates();
-				$expectedErrors = array ();
+				$expectedErrors = array();
 				$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
 			}
 		}
@@ -78,7 +82,7 @@ class RuleTestCase extends CakeTestCase {
 				'minimumCount' => 'four'
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array (
 			'minimumPercent' => 'scorm.rule.minimumpercent.decimal',
@@ -96,7 +100,7 @@ class RuleTestCase extends CakeTestCase {
 				'minimumCount' => '-0.0000001'
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array (
 			'minimumPercent' => 'scorm.rule.minimumpercent.range',
@@ -114,7 +118,7 @@ class RuleTestCase extends CakeTestCase {
 				'minimumCount' => '1'
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array (
 			'minimumPercent' => 'scorm.rule.minimumpercent.range'
@@ -130,7 +134,7 @@ class RuleTestCase extends CakeTestCase {
 				'minimumPercent' => '0.11109',
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array ();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
@@ -141,7 +145,7 @@ class RuleTestCase extends CakeTestCase {
 				'type' => 'exit',
 				'action' => 'exit',
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array ();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
@@ -201,7 +205,7 @@ class RuleTestCase extends CakeTestCase {
 				'action'	=> 'exit',
 				'sco_id'	=> 255,
 				'conditionCombination' => 'all',
-				'minimumCount' => '',
+				'minimumCount' => 0,
 				'minimumPercent' => 0.0000,
 				'rollup_id' => ''
 				),
@@ -211,14 +215,15 @@ class RuleTestCase extends CakeTestCase {
 					'referencedObjective' => '',
 	                'measureThreshold' => '',
 	                'operator' => 'noOp',
-	                'ruleCondition '=> 'completed',
+	                'ruleCondition'	=> 'completed',
 	                'rule_id' => 2
 					)
 				)
 			);
+		$this->TestObject->create();
 		$this->TestObject->save($data);
 		$result = $this->TestObject->findById($this->TestObject->getLastInsertID());
-		$this->assertEqual($expected,$result);
+		$this->assertEqual($result,$expected);
 	}
 }
 ?>

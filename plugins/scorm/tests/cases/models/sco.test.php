@@ -1,24 +1,30 @@
 <?php 
 
 App::import('Model', 'scorm.Sco');
+
+class TestSco extends Sco {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test';
+}
+
 class ScoTestCase extends CakeTestCase {
 	var $TestObject = null;
 	var $fixtures = array(
-                    	'sco',
-                    	'objective',
-                    	'randomization',
-                    	'rollup',
-                    	'rule',
-                    	'choice_consideration',
-                    	'rollup_consideration',
-                    	'sco_presentation',
-                    	'control_mode',
-                    	'delivery_control',
-                    	'condition');
+                    	'plugin.scorm.sco',
+                    	'plugin.scorm.objective',
+                    	'plugin.scorm.randomization',
+                    	'plugin.scorm.rollup',
+                    	'plugin.scorm.rule',
+                    	'plugin.scorm.choice_consideration',
+                    	'plugin.scorm.rollup_consideration',
+                    	'plugin.scorm.sco_presentation',
+                    	'plugin.scorm.control_mode',
+                    	'plugin.scorm.delivery_control',
+                    	'plugin.scorm.condition');
 
-	function setUp() {
-		$this->TestObject = new Sco();
-		$this->TestObject->useDbConfig = 'test';
+	function start() {
+		parent::start();
+		$this->TestObject = new TestSco();
 		$this->TestObject->SubItem->useDbConfig = 'test';
 		$this->TestObject->Objective->useDbConfig = 'test';
 		$this->TestObject->PrimaryObjective->useDbConfig = 'test';
@@ -33,11 +39,11 @@ class ScoTestCase extends CakeTestCase {
 		$this->TestObject->DeliveryControl->useDbConfig = 'test';
 		
 	}
-
-	function tearDown() {
-		unset($this->TestObject);
+	
+	function testInstance() {
+		$this->assertTrue(is_a($this->TestObject,'Sco'));
 	}
-
+	
 	function testValidation1() {
 		$data = array();
 		$this->TestObject->data = $data;
@@ -66,7 +72,7 @@ class ScoTestCase extends CakeTestCase {
 		'attemptLimit'		=> 'few attempts',
 		'scormType'			=> 'nifty type'
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
 		'completionThreshold'			=> 'scormplugin.sco.completionthreshold.decimal',
@@ -94,140 +100,11 @@ class ScoTestCase extends CakeTestCase {
 		'attemptLimit'		=> '12545',
 		'scormType'			=> 'sco'
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
 	}
-	/*
-	function testSave() {
-		$data = array(
-		'manifest'			=> 'ASDGSDS-SDFSADAS',
-		'scorm_id'            => 1,
-		'organization'		=> 'DMCQ',
-		'identifier'		=> 'CDADASA-GSDGDEG-HRETSAS-SDSDSD',
-		'href'				=> 'index.html',
-		'title'				=> 'First sco',
-		'completionThreshold' => '1.5',
-		'parameters'		=> 'pa=13&f=5',
-		'isvisible'			=> 'true',
-		'attemptAbsoluteDurationLimit' => '123',
-		'dataFromLMS'		=> 'fdfhrertertert',
-		'attemptLimit'		=> '12545',
-		'scormType'			=> 'sco'
-		);
-		$this->TestObject->save($data);
-		$this->assertEqual(2,$this->TestObject->findCount());
-	}
-	
-	function testSave2() {
-		$data = array();
-		$data['Sco'] = array(
-		'manifest'			=> 'ASDGSDS-SDFSADAS',
-		'organization'		=> 'DMCQ',
-		'scorm_id'            => 1,
-		'identifier'		=> 'CDADASA-GSDGDEG-HRETSAS-SDSDSD',
-		'title'				=> 'First sco',
-		'completionThreshold' => '1.5',
-		'isvisible'			=> 'true',
-		'attemptAbsoluteDurationLimit' => '123',
-		'dataFromLMS'		=> 'fdfhrertertert',
-		'attemptLimit'		=> '12545',
-		'scormType'			=> 'asset'
-		);
-		$data['SubItem'][] = array(
-		'identifier'		=> 'CDADASA-GSDGDEG-WEER-SDSDSD',
-		'href'				=> 'index.html',
-		'title'				=> 'Second sco',
-		'parameters'		=> 'pa=13&f=5',
-		'scormType'			=> 'sco'
-		);
-		$data['Objective'][] = array(
-		'objectiveID'			=> 'FAADAS-GDFGDFGF',
-		'satisfiedByMeasure'	=> 'true',
-		'minNormalizedMeasure'	=> '0.6'
-		);
-		$data['Objective'][] = array(
-		'objectiveID'			=> 'FAADAS-DDWWAAFF',
-		'satisfiedByMeasure'	=> 'true',
-		'minNormalizedMeasure'	=> '0.9'
-		);
-		$data['PrimaryObjective']= array(
-		'objectiveID'			=> 'FOFIFA-DDWWAAFF',
-		'satisfiedByMeasure'	=> 'false'
-		);
-		$data['Randomization'] = array(
-		'randomizationTiming'	=> 'once',
-		'selectCount'			=> '15',
-		'reorderChildren'		=> 'true',
-		'selectionTiming'		=> 'onEachNewAttempt'
-		);
-		$data['Rollup'][] = array(
-			'rollupObjectiveSatisfied'	=> 'true',
-			'rollupProgressCompletion'	=> 'false',
-			'objectiveMeasureWeight'	=> '0.5000'
-		);
-		$data['Rule']['Pre'] = array( 
-			array(
-			'conditionCombination'	=> 'any',
-			'action'				=> 'disabled',
-			'minimumPercent'		=> '0.0000',
-			'minimumCount'			=> '1'
-			)
-		);
-		$data['Rule']['Post'] = array(
-			array(
-			'conditionCombination'	=> 'any',
-			'action'				=> 'retry',
-			'minimumPercent'		=> '0.0000',
-			'minimumCount'			=> '1'
-			)
-		);
-		$data['Choice'] = array(
-		'preventActivation'	=> 'true',
-		'constrainChoice'	=> 'false'
-		);
-		$data['Consideration'] = array(
-			'requiredForSatisfied'		=> 'always',
-			'requiredForNotSatisfied'	=> 'ifAttempted',
-			'requiredForComplete'		=> 'ifNotSkipped',
-			'requiredForIncomplete'		=> 'ifNotSuspended',
-			'measureSatisfactionIfActive'=> 'true',
-		);
-		$data['Presentation'][] = array(
-		'hideKey'	=> 'previous'
-		);
-		$data['Presentation'][] = array(
-		'hideKey'	=> 'continue'
-		);
-		$data['Control'] = array(
-		'choiceExit'					=> 'false',
-			'choice'						=> 'true',
-			'flow'							=> 'false',
-			'forwardOnly'					=> 'false',
-			'useCurrentAttemptObjectiveInfo'=> 'true',
-			'useCurrentAttemptProgressInfo'	=> 'true'
-		);
-		$data['DeliveryControl'] = array(
-		'tracked'					=> 'true',
-			'completionSetByContent'	=> 'false',
-			'objectiveSetByContent'		=> 'true'
-		);
-		$this->TestObject->save($data);
-		$this->assertEqual(3,$this->TestObject->findCount());
-		$results = $this->TestObject->findById($this->TestObject->getLastInsertId());
-		$this->assertEqual(1,count($results['SubItem']));
-		$this->assertEqual(2,count($results['Objective']));
-		$this->assertFalse(empty($results['PrimaryObjective']));
-		$this->assertFalse(empty($results['Randomization']));
-		$this->assertEqual(2,count($results['Rule']));
-		$this->assertFalse(empty($results['Choice']));
-		$this->assertFalse(empty($results['Consideration']));
-		$this->assertEqual(2,count($results['Presentation']));
-		$this->assertFalse(empty($results['Control']));
-		$this->assertFalse(empty($results['DeliveryControl']));
-	}
-	*/
 	
 	function testSaveWithSubitems() {
 		$data = array();

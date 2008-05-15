@@ -1,25 +1,29 @@
 <?php 
 
 App::import('Model', 'scorm.Condition');
-App::import('Model', 'scorm.Rule');
-App::import('Model', 'scorm.Rollup');
+
+class TestCondition extends Condition {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test_suite';
+}
 
 class ConditionTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('condition');
+	var $fixtures = array('plugin.scorm.condition');
 
-	function setUp() {
-		$this->TestObject = new Condition();
-		$this->TestObject->useDbConfig = 'test';
+	function start() {
+		parent::start();
+		$this->TestObject = new TestCondition();
+		$this->TestObject->Rule->useDbConfig = 'test';
 	}
-
-	function tearDown() {
-		unset($this->TestObject);
+	
+	function testInstance() {
+		$this->assertTrue(is_a($this->TestObject,'Condition'));
 	}
 
 	function testValidation1() {
 		$data = array();
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
@@ -31,7 +35,7 @@ class ConditionTestCase extends CakeTestCase {
 			'operator' => 'bubby',
 			'ruleCondition' => 'greatWork'
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
 			'measureThreshold' => 'scorm.condition.measurethreshold.range',
@@ -46,9 +50,10 @@ class ConditionTestCase extends CakeTestCase {
 			'measureThreshold' => '1.01',
 			'operator' => 'noOp'
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
+			'ruleCondition'	=> 'scorm.condition.condition.token',
 			'measureThreshold' => 'scorm.condition.measurethreshold.range',
 		);
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
@@ -76,7 +81,7 @@ class ConditionTestCase extends CakeTestCase {
 				'ruleCondition' => $allowedCondition
 			);
 			$this->TestObject->create();
-			$this->TestObject->data = $data;
+			$this->TestObject->set($data);
 			$valid = $this->TestObject->validates();
 			$expectedErrors = array();
 			$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);

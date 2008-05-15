@@ -1,22 +1,27 @@
 <?php
 App::import('Model', 'scorm.DeliveryControl');
 
+class TestDeliveryControl extends DeliveryControl {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test_suite';
+}
+
 class DeliveryControlTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('delivery_control');
+	var $fixtures = array('plugin.scorm.delivery_control');
 
-	function setUp() {
-		$this->TestObject = new DeliveryControl();
-		$this->TestObject->useDbConfig = 'test';
+	function start() {
+		parent::start();
+		$this->TestObject = new TestDeliveryControl();
 	}
-
-	function tearDown() {
-		unset($this->TestObject);
+	
+	function testInstance() {
+		$this->assertTrue(is_a($this->TestObject,'DeliveryControl'));
 	}
-
+	
 	function testValidation1() {
 		$data = array();
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
@@ -30,7 +35,7 @@ class DeliveryControlTestCase extends CakeTestCase {
 				'objectiveSetByContent'		=> 'yes'
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
 			'tracked'					=> 'scormplugin.deliverycontrol.tracked.boolean',
@@ -48,7 +53,7 @@ class DeliveryControlTestCase extends CakeTestCase {
 				'objectiveSetByContent'		=> 'true'
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
@@ -62,7 +67,7 @@ class DeliveryControlTestCase extends CakeTestCase {
 				'objectiveSetByContent'		=> 'false'
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);

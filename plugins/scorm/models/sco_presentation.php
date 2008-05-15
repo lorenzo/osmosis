@@ -15,8 +15,8 @@ class ScoPresentation extends ScormAppModel {
 		);
 	
 	function ValidateHidekeyToken($field){
-	$regex = ('/(previous|continue|exit|exitAll|abandon|abandonAll|suspendAll)/');
-	return preg_match($regex,array_shift($field));
+		$regex = ('/(previous|continue|exit|exitAll|abandon|abandonAll|suspendAll)/');
+		return preg_match($regex,array_shift($field));
 	}
 }
 ?>

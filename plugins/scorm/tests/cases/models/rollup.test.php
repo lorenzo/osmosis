@@ -1,28 +1,31 @@
 <?php 
 
 App::import('Model', 'scorm.Rollup');
-App::import('Model', 'scorm.Rule');
-App::import('Model', 'scorm.Condition');
+
+class TestRollup extends Rollup {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test_suite';
+}
 
 class RollupTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('rollup','rule','condition');
+	var $fixtures = array('plugin.scorm.rollup','plugin.scorm.rule','plugin.scorm.condition');
 
-	function setUp() {
-		$this->TestObject = new Rollup();
-		$this->TestObject->useDbConfig = 'test';
-		$this->TestObject->Rule->useDbConfig = 'test';
-		$this->TestObject->Rule->Condition->useDbConfig = 'test';
+	function start() {
+		parent::start();
+		$this->TestObject = new TestRollup();
+		$this->TestObject->Rule->useDbConfig = 'test_suite';
+		$this->TestObject->Rule->Condition->useDbConfig = 'test_suite';
 	
 	}
-
-	function tearDown() {
-		unset($this->TestObject);
+	
+	function testInstance() {
+		$this->assertTrue(is_a($this->TestObject,'Rollup'));
 	}
 
 	function testValidation1() {
 		$data = array();
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array ();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
@@ -34,7 +37,7 @@ class RollupTestCase extends CakeTestCase {
 			'rollupProgressCompletion' => 'niet',
 			'objectiveMeasureWeight' => '1'
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array (
 			'rollupObjectiveSatisfied' => 'scorm.rollup.rollupobjectivesatisfied.boolean',
@@ -50,7 +53,7 @@ class RollupTestCase extends CakeTestCase {
 			'rollupProgressCompletion' => 'true',
 			'objectiveMeasureWeight' => '-0.00001'
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array (
 			'objectiveMeasureWeight' => 'scorm.rule.minimumpercent.range'
@@ -64,7 +67,7 @@ class RollupTestCase extends CakeTestCase {
 			'rollupProgressCompletion' => 'false',
 			'objectiveMeasureWeight' => '1.00001'
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array (
 			'objectiveMeasureWeight' => 'scorm.rule.minimumpercent.range'
@@ -76,7 +79,7 @@ class RollupTestCase extends CakeTestCase {
 		$data = array(
 			'objectiveMeasureWeight' => '0.00001'
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array ();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);

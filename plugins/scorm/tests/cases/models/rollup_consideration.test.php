@@ -1,22 +1,27 @@
 <?php
 App::import('Model', 'scorm.RollupConsideration');
 
+class TestRollupConsideration extends RollupConsideration {
+	var $cacheSources = false;
+	var $useDbConfig  = 'test_suite';
+}
+
 class RollupConsiderationTestCase extends CakeTestCase {
 	var $TestObject = null;
-	var $fixtures = array('rollup_consideration');
+	var $fixtures = array('plugin.scorm.rollup_consideration');
 
-	function setUp() {
-		$this->TestObject = new RollupConsideration();
-		$this->TestObject->useDbConfig = 'test';
+	function start() {
+		parent::start();
+		$this->TestObject = new TestRollupConsideration();
 	}
-
-	function tearDown() {
-		unset($this->TestObject);
+	
+	function testInstance() {
+		$this->assertTrue(is_a($this->TestObject,'RollupConsideration'));
 	}
 
 	function testValidation1() {
 		$data = array();
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array();
 		$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
@@ -32,7 +37,7 @@ class RollupConsiderationTestCase extends CakeTestCase {
 				'measureSatisfactionIfActive'	=> 'yes',
 			)
 		);
-		$this->TestObject->data = $data;
+		$this->TestObject->set($data);
 		$valid = $this->TestObject->validates();
 		$expectedErrors = array(
 			'requiredForSatisfied'			=> 'scormplugin.rollupconsideration.requiredforsatisfied.token',
@@ -57,7 +62,7 @@ class RollupConsiderationTestCase extends CakeTestCase {
 				'measureSatisfactionIfActive'	=> 'true',
 			)
 		);
-			$this->TestObject->data = $data;
+			$this->TestObject->set($data);
 			$valid = $this->TestObject->validates();
 			$expectedErrors = array();
 			$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
@@ -77,7 +82,7 @@ class RollupConsiderationTestCase extends CakeTestCase {
 					'measureSatisfactionIfActive'	=> 'false',
 				)
 			);
-				$this->TestObject->data = $data;
+				$this->TestObject->set($data);
 				$valid = $this->TestObject->validates();
 				$expectedErrors = array();
 				$this->assertEqual($this->TestObject->validationErrors, $expectedErrors);
