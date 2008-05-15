@@ -25,7 +25,7 @@ class LockerFolder extends LockerAppModel {
 								'fields' => array('id','username'),
 								'order' => ''
 			),
-			'Parent' => array('className' => 'Locker.LockerFolder',
+			'ParentFolder' => array('className' => 'Locker.LockerFolder',
 								'foreignKey' => 'parent_id',
 								'conditions' => '',
 								'fields' => '',
@@ -94,7 +94,7 @@ class LockerFolder extends LockerAppModel {
 	
 	private function _createDirectory($id) {
 		$this->restrict(array(
-				'Parent' => array('id','folder_name'),
+				'ParentFolder' => array('id','folder_name'),
 				'Member'
 			)
 		);
@@ -119,7 +119,7 @@ class LockerFolder extends LockerAppModel {
 	private function &getFolder($id, $username) {
 		if (empty($id))
 			return $this->getBaseFolder($username);
-		$this->restrict(array('LockerFolder' => array('Parent' => array('id','folder_name'))));
+		$this->restrict(array('LockerFolder' => array('ParentFolder' => array('id','folder_name'))));
 		$info = $this->findById($id);
 
 		$folder =& $this->getFolder($info[$this->alias]['parent_id'],$username);
