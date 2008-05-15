@@ -41,11 +41,11 @@ class PlaceholderHelper extends AppHelper {
 	
 	private function _pullData($type) {
 		
-		$controller =& ClassRegistry::getObject('controller');
-		if (!isset($controller->Placeholder))
+		$component =& ClassRegistry::getObject('Placeholder');
+		if (!$component)
 			return;
 
-		$data = $controller->Placeholder->pullData($type); 
+		$data = $component->pullData($type); 
 		$view =& ClassRegistry::getObject('view');
 		if (!isset($view->viewVars['placeholders']) || !is_array($view->viewVars['placeholders'])) {
 			$view->viewVars['placeholders'] = array();

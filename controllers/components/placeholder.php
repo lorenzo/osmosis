@@ -23,7 +23,7 @@ class PlaceholderComponent extends Object {
 	private $attached = array();
 	
 	/**
-	 * Startup function. Sets the controller in the ClassRegistry for further use (Probably breaking some MVC rules)
+	 * Startup function. Sets the this component instance in the ClassRegistry for further use (Probably breaking some MVC rules)
 	 *
 	 * @param Controller $controller reference to the including controller
 	 * @return void
@@ -33,8 +33,8 @@ class PlaceholderComponent extends Object {
 		$this->controller =& $controller;
 		$this->Plugin =& new Plugin;
 		$this->started = true;
-		// Sets the controller in the class registry to be able to pull data from the view if needed
-		ClassRegistry::addObject('controller',&$controller);
+		// Sets this component instance in the class registry to be able to pull data from the view if needed
+		ClassRegistry::addObject('Placeholder',&$this);
 	}
 	
 	/**
