@@ -119,7 +119,7 @@ class LockerFolder extends LockerAppModel {
 	private function &getFolder($id, $username) {
 		if (empty($id))
 			return $this->getBaseFolder($username);
-		$this->restrict(array('LockerFolder' => array('ParentFolder' => array('id','folder_name'))));
+		$this->restrict(array('LockerFolder'));
 		$info = $this->findById($id);
 
 		$folder =& $this->getFolder($info[$this->alias]['parent_id'],$username);

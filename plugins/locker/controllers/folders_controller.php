@@ -29,7 +29,7 @@ class FoldersController extends LockerAppController {
 				$this->Session->setFlash(__('The LockerFolder could not be saved. Please, try again.', true));
 			}
 		}
-		$parents = $this->LockerFolder->Parent->find('list');
+		$parents = $this->LockerFolder->ParentFolder->find('list');
 		$this->set(compact('parents'));
 	}
 
@@ -49,7 +49,7 @@ class FoldersController extends LockerAppController {
 		if (empty($this->data)) {
 			$this->data = $this->LockerFolder->read(null, $id);
 		}
-		$parents = $this->LockerFolder->Parent->find('list');
+		$parents = $this->LockerFolder->ParentFolder->find('list');
 		$this->set(compact('parents'));
 	}
 
