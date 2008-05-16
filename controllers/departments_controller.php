@@ -32,7 +32,7 @@ class DepartmentsController extends AppController {
 	 * @author José Lorenzo
 	 */
 	
-	function admin_view($id = null) {
+	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Department',true));
 			$this->redirect(array('action'=>'index'), null, true);

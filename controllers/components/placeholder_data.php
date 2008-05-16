@@ -77,10 +77,6 @@ abstract class PlaceholderDataComponent extends Object {
 		if (!isset($this->RequestHandler) && isset($this->controller->RequestHandler)) {
 			$this->RequestHandler =& $this->controller->RequestHandler;
 		}
-		
-		if (!$type)
-			$type = $this->types[0];
-		
 		if (!$this->auto || !$this->_continue($type)) {
 			return true;
 		}
@@ -111,20 +107,15 @@ abstract class PlaceholderDataComponent extends Object {
 	 * @param string $type the name of the placeholder for which the data will be sent.
 	 * @return void
 	 */
-	
 	function process($type = null) {
-		
 		$data = $this->checkCache($type);
-		
-		if (!$data) {
-			$data = $this->getData($type);
-			if($data !== false) {
-				$this->saveToCache($data, $type);
-			} else {
-				return;
-			}
+		$method = Inflector::variable($type);
+		if (!$data && method_exists($this, $method)) {
+			$data = $this->{$method}();
 		}
-		
+		if ($data == false)
+			return;
+		$this->saveToCache($data, $type);
 		$this->setData($data, $type);
 	}
 	
@@ -221,22 +212,8 @@ abstract class PlaceholderDataComponent extends Object {
 	 */
 	
 	protected function _continue($type = null) {
-		
-		if (isset ($this->controller->params['requested']) ||
-			(isset($this->RequestHandler) && $this->RequestHandler->isAjax())
-			) {
-                 	return false;
-		}
-		return true;
+		return !isset ($this->controller->params['requested']) &&
+				!$this->RequestHandler->isAjax();
 	}
-	
-	/**
-	 * Returns the data that will be sent to the view. It must be implemented in subclasses
-	 * @param string $type the type of placeholder where the data is going to be used.
-	 * @param string $type the name of the placeholder for which the data will be sent
-	 * @return mixed
-	 */
-	
-	protected abstract function getData($type = null);
 }
 ?>

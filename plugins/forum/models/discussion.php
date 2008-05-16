@@ -20,7 +20,7 @@ class Discussion extends AppModel {
 			)
 		)
 	);
-	var $actsAs = array('Visitable', 'Bindable');
+	var $actsAs = array('Visitable', 'Bindable', 'Loggable');
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(

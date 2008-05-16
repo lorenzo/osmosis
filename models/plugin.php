@@ -107,11 +107,11 @@ class Plugin extends AppModel {
 	
 	function getHolders($type, $plugin = null) {
 		
-		if ($plugin)
+		if ($plugin) {
 			$plugins = array(array('Plugin' => array('name' => $plugin)));
-		else
+		} else {
 			$plugins = $this->actives(array('name'));
-			
+		}
 		$holders = array();
 		foreach ($plugins as $plugin) {
 			$className = $plugin['Plugin']['name'] . 'Holder';

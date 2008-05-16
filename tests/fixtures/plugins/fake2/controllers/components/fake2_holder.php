@@ -6,7 +6,7 @@ class Fake2HolderComponent extends PlaceHolderDataComponent {
 	var $auto = true;
 	var $types = array('other');
 	
-	function getData($type = null) {
+	function other() {
 		return array('var' => 'value');
 	}
 }

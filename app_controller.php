@@ -2,7 +2,7 @@
 App::import('Core', 'Sanitize');
 class AppController extends Controller {
 	var $components = array('Acl','Auth','RequestHandler','OsmosisComponents','Placeholder');
-	var $helpers = array('Javascript', 'Html', 'Form', 'Dynamicjs', 'Time', 'Placeholder');
+	var $helpers = array('Javascript', 'Html', 'Form', 'Dynamicjs', 'Time', 'Placeholder', 'Text');
 
 	/**
 	 * Contains the id of the course the member is visiting. False if the member is viewing a page outside a course
@@ -15,15 +15,16 @@ class AppController extends Controller {
 	function beforeFilter() {
 		if (isset($this->Auth)) {
 			$this->Auth->authorize = 'controller';
-			$this->Auth->userModel = 'Member'; 
+			$this->Auth->userModel = 'Member';
 			$this->Auth->loginAction = '/members/login';
-			$this->Auth->loginRedirect = '/courses/';
+			$this->Auth->loginRedirect = '/courses';
 			$this->Auth->autoRedirect = true;
 			$this->set('user', $this->Session->read('Auth.Member'));
 			//TODO: Borrar lo siguiente cuando sea el momento
 			if(Configure::read('Auth.disabled') && $this->name == 'InitAcl') {
 				$this->Auth->allow();
 			}
+			Configure::write('ActiveUser', $this->Auth->user());
 		}
 		if (isset($this->Security)) {
 			$this->Security->blackHoleCallback = '_blackHoledAction';
@@ -32,9 +33,17 @@ class AppController extends Controller {
 			$this->__updateOnlineUser();
 		
 		$this->_setActiveCourse();
+		Configure::write('ActiveCourse.id', $this->activeCourse);
 		$this->__selectLayout();
+		$this->__instatiateLogger();
 	}
 	
+	function __instatiateLogger() {
+		if (!ClassRegistry::isKeySet('ModelLog')) {
+			App::import('Model', 'ModelLog');
+			ClassRegistry::addObject('ModelLog', new ModelLog);
+		}
+	}
 	function _blackHoledAction() {
 		$this->Session->setFlash(__('Invalid access', true));
 		$this->redirect(array('controller' => 'members', 'action' => 'login', 'plugin' => ''));
@@ -48,10 +57,13 @@ class AppController extends Controller {
 	}
 	
 	protected function __updateOnlineUser() {
-		App::import('Model','OnlineUser');
-		$data = array('member_id' => $this->Auth->user('id'), 'viewing' => $this->here);
-		$online = new OnlineUser;
-		$online->save($data,false,array('member_id','viewing'));
+		if (!$member = ClassRegistry::getObject('Member')) {
+			App::import('Model', 'Member');
+			$member = new Member;
+			ClassRegistry::addObject('Member', $member);
+		}
+		$member->id = $this->Auth->user('id');
+		$member->saveField('last_seen', time());
 	}
 	
 	function isAuthorized() {

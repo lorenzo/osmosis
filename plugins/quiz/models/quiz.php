@@ -13,7 +13,6 @@ class Quiz extends QuizAppModel {
 	);
 
 	var $useTable = 'quiz_quizzes';
-	
 	var $hasAndBelongsToMany = array(
 			'ChoiceQuestion' => array(
 				'className' => 'quiz.ChoiceQuestion',

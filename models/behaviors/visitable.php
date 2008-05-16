@@ -24,9 +24,11 @@ class VisitableBehavior extends ModelBehavior {
 		$id = $data[$Model->alias][$Model->primaryKey];
 		if (!isset($this->__settings[$Model->alias][$id])) return true;
 		$theModel = new $Model->name;
-		$theModel->id = $id;
-		$visit_count = $theModel->field($this->__settings[$Model->alias]['field']);
-		$theModel->saveField($this->__settings[$Model->alias]['field'], $visit_count + 1);
+		$theModel->restrict($Model->alias);
+		$theModel->updateAll(
+			array($this->__settings[$Model->alias]['field'] => $this->__settings[$Model->alias]['field'] . ' + 1'),
+			array($Model->alias . '.' . $Model->primaryKey => $id)
+		);
 		unset($this->__settings[$Model->alias][$id]);
 		return true;
 	}

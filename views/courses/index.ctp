@@ -1,21 +1,4 @@
 <div class="courses">
-<h2><?php __('Courses');?></h2>
-<p>
-<?php
-echo $paginator->counter(array(
-'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-));
-?></p>
-<table cellpadding="0" cellspacing="0">
-<tr>
-	<th><?php echo $paginator->sort('id');?></th>
-	<th><?php echo $paginator->sort('department_id');?></th>
-	<th><?php echo $paginator->sort('code');?></th>
-	<th><?php echo $paginator->sort('name');?></th>
-	<th><?php echo $paginator->sort('description');?></th>
-	<th><?php echo $paginator->sort('created');?></th>
-	<th class="actions"><?php __('Actions');?></th>
-</tr>
 <?php
 $i = 0;
 foreach ($courses as $course):
@@ -24,6 +7,24 @@ foreach ($courses as $course):
 		$class = ' class="altrow"';
 	}
 ?>
+<div class="course">
+	<h1><?php echo $course['Course']['name']?></h1>
+	<div class="updates">
+		<div class="abstract">
+			<strong class="title"><?php __('Updates'); ?></strong>
+			<div id="plugin-updates">
+				<?php
+					echo $placeholder->render('plugin_updates');
+				?>
+			</div>
+		</div>
+	</div>
+	<div class="professors">
+		<div class="abstract">
+			<strong class="title"><?php __('Professors'); ?></strong>
+		</div>
+	</div>
+</div>
 	<tr<?php echo $class;?>>
 		<td>
 			<?php echo $course['Course']['id'] ?>
@@ -50,10 +51,4 @@ foreach ($courses as $course):
 		</td>
 	</tr>
 <?php endforeach; ?>
-</table>
-</div>
-<div class="paging">
-	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
- | 	<?php echo $paginator->numbers();?>
-	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
 </div>

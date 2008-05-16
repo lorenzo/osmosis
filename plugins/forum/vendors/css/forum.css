@@ -71,9 +71,11 @@ table tr .number {
 .forum-message .message {
 	margin-left:190px
 }
-
-.forum-message .message .content {
+#upper-content .forum-message .message .content {
+	border:none;
 	border-left:#ccc 1px dashed;
+	background:transparent;
+	margin:0;
 	padding:15px 10px;
 }
 .forum-message .message .last.date {
@@ -166,4 +168,17 @@ table tr .number {
 
 .paging .disabled {
 	color:#4D98CF;
+}
+
+#plugin-updates ul#forum li {
+	list-style:url('../../forum/css/img/edit.png');
+}
+
+#plugin-updates ul#forum li li {
+	list-style:square outside;
+}
+
+#forum-updates strong.title {
+	background:#f5f5f5 url('../../forum/css/img/forum.png') no-repeat 10px 0;
+	padding-left:30px;
 }

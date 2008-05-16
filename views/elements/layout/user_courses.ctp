@@ -1,12 +1,22 @@
-<div class="courses">
-	<strong><?php __('My Courses'); ?></strong>
+<div class="courses abstract">
+	<strong class="title"><?php __('My Courses'); ?></strong>
 <?php
  if (!empty($courses)) :
 ?>
 	<ul>
 	<?php foreach ($courses as $course) : ?>
-		<?php $title = '<span class="code">['.$course['Course']['code'].']</span> '.$course['Course']['name']?>
-		<li><?php echo $html->link($title, array('plugin' =>'','controller' => 'courses', 'action' => 'view', 'id' => $course['Course']['id']),null,null,false)?><li>
+		<li>
+			<?php
+				echo $html->link(
+					$title = '<span class="code">['.$course['Course']['code'].']</span> '.$course['Course']['name'],
+					array(
+						'controller' => 'courses',
+						'action' => 'view',
+						'id' => $course['Course']['id']
+					),null,null,false
+				)
+			?>
+		</li>
 	<?php endforeach;?>
 	</ul>
 <!-- <div class= "course-info">

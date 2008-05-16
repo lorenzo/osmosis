@@ -3,7 +3,7 @@ class ChatsController extends ChatAppController {
 
 	var $name = 'Chats';
 	var $helpers = array('Xml');
-	var $uses = array('Member','OnlineUser');
+	var $uses = array('Member');
 	
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -27,8 +27,8 @@ class ChatsController extends ChatAppController {
 	}
 	
 	function user($id) {
-		$user = $this->OnlineUser->find('first',array('conditions' => array('member_id' => $id)));
-		$this->set('user',$user);
+		$user = $this->Member->isOnline($id);
+		$this->set('user', $user);
 		$this->set('status',empty($user) ? 2 :1);
 	}
 	

@@ -118,5 +118,10 @@ class Member extends AppModel {
 		return $courses;
 	}
 	
+	function isOnline($id) {
+		$timeout = time() - (Security::inactiveMins() * Configure::read('Session.timeout'));
+		return $this->find('first', array('conditions' => array('id' => $id, 'last_seen' => '< ' . $timeout )));
+	}
+	
 }
 ?>

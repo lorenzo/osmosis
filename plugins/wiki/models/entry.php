@@ -49,7 +49,8 @@ class Entry extends AppModel {
 	
 	var $actsAs = array(
 		'Transaction',
-		'Sluggable' => array('label' => 'title', 'slug' => 'slug', 'overwrite' => false, 'separator' => '_','translation' => 'utf-8')
+		'Sluggable' => array('label' => 'title', 'slug' => 'slug', 'overwrite' => false, 'separator' => '_','translation' => 'utf-8'),
+		'Loggable'
 	);
 
 	function save($data,$validate = true,$fields = array()) {

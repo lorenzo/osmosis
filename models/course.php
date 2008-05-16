@@ -93,14 +93,11 @@ class Course extends AppModel {
 		return $this->Member->Enrollment->save(array('course_id' => $course_id,'member_id' => $member_id, 'role' => $role));
 	}	
 		
-	function alreadyEnrolled($id, $new_course_id){
+	function alreadyEnrolled($id, $new_course_id) {
+		$this->bindModel(array('hasAndBelongsToMany' => array('Member')));
 		$courses = $this->Member->courses($id);
-		foreach ($courses as $course){
-			if($course['Course']['id'] === $new_course_id){
-				return true;
-			}
-		}
-		return false;		
+		$courses = Set::extract('/Course/id', $courses);
+		return in_array($new_course_id, $courses);
 	}
 }
 ?>

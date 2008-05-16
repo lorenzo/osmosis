@@ -15,6 +15,7 @@ class CoursesController extends AppController {
 		$this->Course->recursive = 0;
 		$this->set('courses', $this->paginate());
 		$this->layout = 'no_course';
+		$this->Placeholder->attach('plugin_updates');
 	}
 
 	function admin_index() {
@@ -116,17 +117,13 @@ class CoursesController extends AppController {
 			$this->Session->setFlash(__('Invalid Course',true));
 			$this->redirect('/');
 		}
-		if ($this->Course->enroll($this->Auth->user('id'))) {
-	
-	   		$enrolled = $this->Course->alreadyEnrolled($this->Auth->user('id'), $course_id);
-			if($enrolled === true){
-				$this->Session->setFlash(__('You have been already enrolled in this course',true));
-				$this->redirect(array('action' => 'index', $course_id));
-				}
+		if($this->Course->alreadyEnrolled($this->Auth->user('id'), $course_id)===true) {
+			$this->Session->setFlash(__('You have been already enrolled in this course',true));
+			$this->redirect(array('action' => 'index'));
+		} else if ($this->Course->enroll($this->Auth->user('id'))) {
 			$this->Session->setFlash(__('You have been enrolled',true));
 			$this->redirect(array('action' => 'view', $course_id));
 		}
-		
 		$this->Session->setFlash(__('Enrollment failed',true));
 		$this->redirect(array('action' => 'index'));
 	}

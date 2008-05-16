@@ -16,7 +16,7 @@ class HookableBehavior extends ModelBehavior {
      }
 
 	/**
-	 * Find plugin's comoponent classes that containes a $hookname method
+	 * Find plugin's comoponent classes that contains a $hookname method
 	 *
 	 * @param object $model the model that executes the callback
 	 * @param string $hookName name of the callback function to find

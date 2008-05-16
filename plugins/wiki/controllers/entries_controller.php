@@ -80,10 +80,13 @@ class EntriesController extends WikiAppController {
 			if ($data = $this->Entry->save($this->data)) {
 				$this->Entry->read();
 				$this->Session->setFlash(__('The Entry has been saved',true));
-				$this->redirect(array(
-					'action'=>'view',
-					 $this->Entry->data['Entry']['slug'],
-					'wiki_id' => $this->Entry->data['Entry']['wiki_id']));
+				$this->redirect(
+					array(
+						'action'=>'view',
+						 $this->Entry->data['Entry']['slug'],
+						'wiki_id' => $this->Entry->data['Entry']['wiki_id']
+					)
+				);
 			} else {
 				$this->Session->setFlash(__('The Entry could not be saved. Please, try again.',true));
 			}
