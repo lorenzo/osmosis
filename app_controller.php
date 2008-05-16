@@ -7,17 +7,18 @@ class AppController extends Controller {
 	/**
 	 * Contains the id of the course the member is visiting. False if the member is viewing a page outside a course
 	 *
-	 * @var string
+	 * @var mixed
 	 */
 	
 	protected $activeCourse = false;
 	
 	function beforeFilter() {
 		if (isset($this->Auth)) {
+			$this->Auth->Acl =& $this->Acl;
 			$this->Auth->authorize = 'controller';
 			$this->Auth->userModel = 'Member';
-			$this->Auth->loginAction = '/members/login';
-			$this->Auth->loginRedirect = '/courses';
+			$this->Auth->loginAction = array('controller' => 'members', 'action' => 'login');
+			$this->Auth->loginRedirect = array('controller' => 'courses');
 			$this->Auth->autoRedirect = true;
 			$this->set('user', $this->Session->read('Auth.Member'));
 			//TODO: Borrar lo siguiente cuando sea el momento
@@ -69,7 +70,8 @@ class AppController extends Controller {
 	function isAuthorized() {
 		if( $this->name == 'Pages')
 			return true;
-		if(@$this->Acl->check($this->Auth->user(),$this->name.'/'.$this->action) || Configure::read('Auth.disabled')) {
+		$valid = $this->Auth->isAuthorized('crud');
+		if($valid || Configure::read('Auth.disabled')) {
 			return true;
 		}
 		return false;
