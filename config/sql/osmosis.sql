@@ -109,10 +109,29 @@ CREATE TABLE IF NOT EXISTS `members` (
   `city` varchar(50) collate utf8_unicode_ci NOT NULL,
   `age` int(2) NOT NULL,
   `sex` varchar(1) collate utf8_unicode_ci NOT NULL default 'M',
+  `role_id` int(11) unsigned NOT NULL,
   `username` varchar(15) collate utf8_unicode_ci NOT NULL,
   `password` varchar(50) collate utf8_unicode_ci NOT NULL,
+  `last_seen` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a registered user';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `model_logs`
+--
+
+CREATE TABLE IF NOT EXISTS `model_logs` (
+  `id` int(11) NOT NULL auto_increment,
+  `course_id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `model` varchar(50) character set latin1 NOT NULL,
+  `entity_id` varchar(36) character set latin1 NOT NULL,
+  `created` tinyint(1) NOT NULL,
+  `time` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
