@@ -11,7 +11,7 @@
 				__('You are currently viewing a discussion inside the <em>%s</em> topic.', true),
 				$html->link(
 					$discussion['Topic']['name'],
-					array('controller' => 'topics', 'action' => 'view', $discussion['Topic']['id'])
+					array('controller' => 'topics', 'action' => 'view', 'topic_id' => $discussion['Topic']['id'])
 				)
 			);
 		?>

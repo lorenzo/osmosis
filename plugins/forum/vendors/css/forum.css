@@ -48,6 +48,7 @@ table tr td span.date,
 .forum-message .date {
 	color:#666;
 	font-size:0.92em;
+	margin-right:100px;
 }
 
 table tr .number {
@@ -71,7 +72,7 @@ table tr .number {
 .forum-message .message {
 	margin-left:190px
 }
-#upper-content .forum-message .message .content {
+.forum-message .message .content {
 	border:none;
 	border-left:#ccc 1px dashed;
 	background:transparent;

@@ -4,8 +4,8 @@
  		<legend><?php __('Edit Topic');?></legend>
 	<?php
 		echo $form->input('id');
-		echo $form->input('name');
-		echo $form->input('description');
+		echo $form->input('name', array('size' => '30'));
+		echo $form->input('description', array('size' => '60'));
 	?>
 	<div class="checkbox">
 	<?php

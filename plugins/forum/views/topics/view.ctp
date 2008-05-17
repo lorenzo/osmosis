@@ -12,8 +12,8 @@
 			__('You are currently viewing the discussions started around this topic <strong>"%s"</strong> inside the <em>%s</em> course forum.', true),
 			$topic['Topic']['name'],
 			$html->link(
-				$topic['Forum']['Course']['name'],
-				array('controller' => 'forums', 'action' => 'view', $topic['Forum']['id'])
+				$topic['Course']['name'],
+				array('controller' => 'topics', 'action' => 'index', 'course_id' => $topic['Course']['id'])
 			)
 		);
 		echo ' ';
@@ -22,7 +22,7 @@
 			array(
 				'controller'=> 'discussions',
 				'action'=>'add',
-				'topic' => $topic['Topic']['id']
+				'topic_id' => $topic['Topic']['id']
 			)
 		);
 	?>
@@ -56,7 +56,7 @@
 						array(
 							'controller'=> 'discussions',
 							'action'=>'view',
-							$discussion['id']
+							'discussion_id' => $discussion['id']
 						),
 						array('title' => $text->truncate(strip_tags($discussion['content'])))
 					);
@@ -102,7 +102,18 @@
 
 	<div class="actions">
 		<ul>
-			<li><?php echo $html->link(__('New Discussion', true), array('controller'=> 'discussions', 'action'=>'add', 'topic' => $topic['Topic']['id']));?> </li>
+			<li>
+				<?php
+					echo  $html->link(
+						__('Start a discussion', true),
+						array(
+							'controller'=> 'discussions',
+							'action'=>'add',
+							'topic_id' => $topic['Topic']['id']
+						)
+					);
+				?>
+			</li>
 		</ul>
 	</div>
 </div>

@@ -10,6 +10,7 @@
 				echo $html->link(
 					$title = '<span class="code">['.$course['Course']['code'].']</span> '.$course['Course']['name'],
 					array(
+						'plugin' => '',
 						'controller' => 'courses',
 						'action' => 'view',
 						'id' => $course['Course']['id']
@@ -19,15 +20,12 @@
 		</li>
 	<?php endforeach;?>
 	</ul>
-<!-- <div class= "course-info">
-	<?php //debug($course); ?>
-	
-</div> -->
 <?php
 else :
 ?>
 	<p><?php __('You aren\'t enrolled in any course.'); ?></p>
 <?php
 endif;
+	echo $html->link(__('Find a Course to enroll', true), array('controller' => 'departments', 'action' => 'index'));
 ?>
 </div>

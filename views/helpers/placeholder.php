@@ -15,19 +15,20 @@ class PlaceholderHelper extends AppHelper {
 	 * @return string the rendered placeholder
 	 */
 	
-	function render($type) {
-		
+	function render($type, $path = '') {
 		$view = ClassRegistry::getObject('view');
 		$subscribers = $this->getSubscribers($type);
 
 		if (empty($subscribers))
 			return '';
-
+			
 		ob_start();
 		foreach ($subscribers as $subscriber => $data) {
-			$parts = explode('_',Inflector::underscore($subscriber));
-			$plugin = $parts[0];
-			echo $view->renderElement('placeholders/'.$type, array('plugin'=>$plugin,'cache'=>$data['cache'],'data' =>$data['data']));
+			list($plugin, ) = explode('_',Inflector::underscore($subscriber));
+			echo $view->renderElement(
+				'placeholders/' . $type,
+				array('plugin' => $plugin, 'cache' => $data['cache'], 'data' => $data['data'][$path])
+			);
 		}
 		return ob_get_clean();
 	}

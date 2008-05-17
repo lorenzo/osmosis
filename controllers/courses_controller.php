@@ -36,7 +36,9 @@ class CoursesController extends AppController {
 			$this->Session->setFlash(__('Invalid Course',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
+		$this->activeCourse = $id;
 		$this->set('course', $this->Course->read(null, $id));
+		$this->set('professors', $this->Course->professors($id));
 	}
 
 	/**

@@ -29,7 +29,16 @@
 		if ($author['id'] == $session->read('Auth.Member.id')):
 		?>
 		<p class="actions">
-			<?php echo $html->link(__('Edit', true), array('controller' => $controller, 'action' => 'edit', $message['id'])); ?>
+			<?php
+				echo $html->link(
+					__('Edit', true),
+					array(
+						'controller' => $controller,
+						'action' => 'edit',
+						Inflector::singularize($controller) . '_id' =>  $message['id']
+					)
+				);
+			?>
 		</p>
 		<?php
 		endif;

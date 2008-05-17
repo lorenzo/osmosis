@@ -3,34 +3,38 @@ class ResponsesController extends ForumAppController {
 
 	var $name = 'Responses';
 	var $helpers = array('Html', 'Form');
-		
-	function add($discussion_id=null) {
+	
+	function _setActiveCourse() {
+		if (parent::_setActiveCourse()) return;
+		if (isset($this->params['named']['response_id'])) {
+			$discussion_id = $this->Response->field('discussion_id', array('id' => $this->params['named']['response_id']));
+			$topic_id = $this->Response->Discussion->field('topic_id', array('id' => $discussion_id));
+			$this->activeCourse = $this->Response->Discussion->Topic->field('course_id', array('id' => $topic_id));
+		}
+	}
+	
+	function add() {
 		if (!empty($this->data)) {
 			$this->Response->create();
 			$this->data['Response']['member_id'] = $this->Auth->user('id');
 			$this->data['Response']['content'] = $this->HtmlPurifier->purify($this->data['Response']['content']);
 			if ($this->Response->save($this->data)) {
 				$this->Session->setFlash(__('The Response has been saved', true));
-				$this->redirect(array('controller' => 'discussions', 'action'=>'view', $this->data['Response']['discussion_id']));
 			} else {
-				$this->Session->setFlash(__('The Response could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('Please write a response', true));
 			}
-		} else {
-			$this->data['Response']['discussion_id'] = $discussion_id;
+			$this->redirect(
+				array(
+					'controller'	=> 'discussions',
+					'action'		=>'view',
+					'discussion_id' => $this->data['Response']['discussion_id']
+				)
+			);
 		}
-		if ($user_id = $this->Auth->user('id')) {
-			$this->data['Response']['member_id'] = $user_id;
-		}
-		$discussions = $this->Response->Discussion->find('list');
-		$members = $this->Response->Member->find('list');
-		$this->set(compact('discussions', 'members'));
+		$this->_redirectIf(true);
 	}
 
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Response', true));
-			$this->redirect(array('action'=>'index'));
-		}
+	function edit() {
 		if (!empty($this->data)) {
 			if ($this->Response->save($this->data)) {
 				$this->Session->setFlash(__('The Response has been saved', true));
@@ -38,31 +42,18 @@ class ResponsesController extends ForumAppController {
 					array(
 						'controller' => 'discussions',
 						'action'=>'view',
-						$this->Response->field('discussion_id', array('id' => $this->data['Response']['id']))
+						'discussion_id' => $this->Response->field('discussion_id')
 					)
 				);
 			} else {
 				$this->Session->setFlash(__('The Response could not be saved. Please, try again.', true));
 			}
-		}
-		if (empty($this->data)) {
+		} else {
+			$this->_redirectIf(!isset($this->params['named']['response_id']));
 			$this->Response->recursive = -1;
-			$this->data = $this->Response->read(null, $id);
+			$this->data = $this->Response->read(null, $this->params['named']['response_id']);
 		}
-		$discussions = $this->Response->Discussion->find('list');
-		$members = $this->Response->Member->find('list');
-		$this->set(compact('discussions','members'));
 	}
 
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Response', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->Response->del($id)) {
-			$this->Session->setFlash(__('Response deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-	}
 }
 ?>

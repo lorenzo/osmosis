@@ -100,18 +100,18 @@ class Member extends AppModel {
     }
 
 	function courses($id) {
-		$ids = $this->Enrollment->find('all',array(
-			'conditions' => array(
-					'member_id' => $id),
-			'fields' => 'course_id'
+		$ids = $this->Enrollment->find('all',
+			array(
+				'conditions'=> array('member_id' => $id),
+				'fields'	=> array('course_id')
 			)
 		);
 		$ids = Set::extract($ids,'{n}.Enrollment.course_id');
 		if (empty($ids))
 			return array();
 		$courses = $this->Course->find('all', array(
-			'conditions' => array('id' => $ids),
-			'fields' => array('id','code', 'name'),
+			'conditions'=> array('id' => $ids),
+			'fields'	=> array('id','code', 'name'),
 			'recursive' => -1
 			)
 		);

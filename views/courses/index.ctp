@@ -14,7 +14,7 @@ foreach ($courses as $course):
 			<strong class="title"><?php __('Updates'); ?></strong>
 			<div id="plugin-updates">
 				<?php
-					echo $placeholder->render('plugin_updates');
+					echo $placeholder->render('plugin_updates', $course['Course']['id']);
 				?>
 			</div>
 		</div>

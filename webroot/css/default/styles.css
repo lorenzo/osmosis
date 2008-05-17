@@ -50,6 +50,7 @@ a:visited {
 }
 
 #upper-content #main h1 {
+	clear:both;
 	margin:0 auto;
 	padding:5px 0;
 	text-align:left;
@@ -141,7 +142,7 @@ a:visited {
 
 .updates {
 	float:left;
-	width:60%;
+	width:70%;
 }
 
 .updates .abstract {
@@ -150,7 +151,7 @@ a:visited {
 
 .professors {
 	float:left;
-	width:40%;
+	width:30%;
 }
 
 #main-content #footer p a {
@@ -233,22 +234,4 @@ a:visited {
 
 #login {
 	width:300px;
-}
-
-#enroll {
-	margin:10px;
-	float:right;
-}
-#enroll a {
-	background:#FF8A00;
-	padding:10px;
-	font-size:1.2em;
-	color:#fff;
-	text-decoration:none;
-	border:#DF7800 1px solid;
-}
-
-#enroll a:hover {
-	color:#FFCB8F;
-	background:#FF7200;
 }

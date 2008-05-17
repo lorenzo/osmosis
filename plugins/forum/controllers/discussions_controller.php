@@ -4,16 +4,26 @@ class DiscussionsController extends ForumAppController {
 	var $name = 'Discussions';
 	var $helpers = array('Html', 'Form');
 
+	function _setActiveCourse() {
+		if (parent::_setActiveCourse()) return;
+		if (isset($this->params['named']['topic_id'])) {
+			$topic_id = $this->params['named']['topic_id'];
+			$this->activeCourse = $this->Discussion->Topic->field('course_id', array('id' => $topic_id));
+		} else if (isset($this->params['named']['discussion_id'])) {
+			$discussion_id = $this->params['named']['discussion_id'];
+			$topic_id = $this->Discussion->field('topic_id', array('id' => $discussion_id));
+			$this->activeCourse = $this->Discussion->Topic->field('course_id', array('id' => $topic_id));
+		}
+	}
+
 	function index() {
 		$this->Discussion->recursive = 2;
 		$this->set('discussions', $this->paginate());
 	}
 
-	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid Discussion.', true));
-			$this->redirect(array('action'=>'index'));
-		}
+	function view() {
+		$this->_redirectIf(!isset($this->params['named']['discussion_id']));
+		$id = $this->params['named']['discussion_id'];
 		$discussion = $this->Discussion->getDiscussion($id);
 		$this->Discussion->Response->restrict(
 			array(
@@ -31,47 +41,33 @@ class DiscussionsController extends ForumAppController {
 			$this->data['Discussion']['member_id'] = $this->Auth->user('id');
 			if ($this->Discussion->save($this->data)) {
 				$this->Session->setFlash(__('The Discussion has been saved', true));
-				$this->redirect(array('controller' => 'topics', 'action'=>'view', $this->data['Discussion']['topic_id']));
+				$this->redirect(array('controller' => 'topics', 'action'=>'view', 'topic_id' => $this->data['Discussion']['topic_id']));
 			} else {
 				$this->Session->setFlash(__('The Discussion could not be saved. Please, try again.', true));
 			}
-		}
-		if (isset($this->params['named']['topic'])) {
-			$this->data['Discussion']['topic_id'] = $this->params['named']['topic'];
+		} else {
+			$this->_redirectIf(!isset($this->params['named']['topic_id']));
+			$this->data['Discussion']['topic_id'] = $this->params['named']['topic_id'];
 		}
 	}
 
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Discussion', true));
-			$this->redirect(array('action'=>'index'));
-		}
+	function edit() {
 		if (!empty($this->data)) {
 			$this->data['Discussion']['member_id'] = $this->Auth->user('id');
 			if ($this->Discussion->save($this->data)) {
 				$this->Session->setFlash(__('The Discussion has been saved', true));
-				$this->redirect(array('controller' => 'discussions', 'action'=>'view', $id));
+				$this->redirect(array('controller' => 'discussions', 'action'=>'view', 'discussion_id' => $this->Discussion->field('id')));
 			} else {
 				$this->Session->setFlash(__('The Discussion could not be saved. Please, try again.', true));
 			}
-		}
-		if (empty($this->data)) {
+		} else {
+			$this->_redirectIf(!isset($this->params['named']['discussion_id']));
+			$id = $this->params['named']['discussion_id'];
 			$this->data = $this->Discussion->read(null, $id);
 			if ($this->data['Discussion']['status']=='locked') {
 				$this->Session->setFlash(__('This discussion is locked, you cannot edit it anymore.', true));
 				$this->redirect(array('controller' => 'discussions', 'action'=>'view', $id));
 			}
-		}
-	}
-
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Discussion', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->Discussion->del($id)) {
-			$this->Session->setFlash(__('Discussion deleted', true));
-			$this->redirect(array('action'=>'index'));
 		}
 	}
 	

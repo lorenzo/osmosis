@@ -3,9 +3,9 @@
 	<fieldset>
  		<legend><?php __('Create Topic');?></legend>
 	<?php
-		echo $form->input('name');
-		echo $form->input('description', array('type' => 'textarea'));
-		echo $form->input('forum_id', array('type' => 'hidden'));
+		echo $form->input('name', array('size' => '30'));
+		echo $form->input('description', array('size' => '60'));
+		echo $form->input('course_id', array('type' => 'hidden'));
 	?>
 	</fieldset>
 <?php echo $form->end(__('Create Topic', true));?>

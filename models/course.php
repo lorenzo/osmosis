@@ -99,5 +99,17 @@ class Course extends AppModel {
 		$courses = Set::extract('/Course/id', $courses);
 		return in_array($new_course_id, $courses);
 	}
+	
+	function professors($id) {
+		$this->bindModel(array('hasAndBelongsToMany' => array('Member')));
+		return $this->Member->Enrollment->find(
+			'all',
+			array(
+				'conditions' => array(
+					'course_id' => $id, 'role' => 'professor'
+				)
+			)
+		);
+	}
 }
 ?>

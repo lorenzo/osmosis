@@ -35,8 +35,23 @@ class AppController extends Controller {
 		
 		$this->_setActiveCourse();
 		Configure::write('ActiveCourse.id', $this->activeCourse);
-		$this->__selectLayout();
+		$this->__setActiveCourseData();
 		$this->__instatiateLogger();
+	}
+	
+	function _getActiveCourse() {
+		return $this->activeCourse;
+	}
+	
+	function __setActiveCourseData() {
+		if ($this->activeCourse) {
+			if (!$course = ClassRegistry::getObject('Course')) {
+				App::import('Model', 'Course');
+				$course = new Course;
+				ClassRegistry::addObject('Course', $course);
+			}
+			$this->set('course', $course->read(null, $this->activeCourse));
+		}
 	}
 	
 	function __instatiateLogger() {
@@ -70,7 +85,7 @@ class AppController extends Controller {
 	function isAuthorized() {
 		if( $this->name == 'Pages')
 			return true;
-		$valid = $this->Auth->isAuthorized('crud');
+		$valid = true;//$this->Auth->isAuthorized('crud');
 		if($valid || Configure::read('Auth.disabled')) {
 			return true;
 		}
@@ -96,11 +111,21 @@ class AppController extends Controller {
 	function beforeRender() {
 		if (isset($this->Placeholder->started) && $this->activeCourse);
 			$this->Placeholder->attachToolbar($this->activeCourse);
+		if ($this->activeCourse) 
+			$this->Placeholder->attach('course_data');
+		$this->__selectLayout();
 	}
 	
 	function _setActiveCourse() {
 		if (isset($this->params['named']['course_id'])) {
 			$this->activeCourse = $this->params['named']['course_id'];
+		}
+	}
+	
+	function _redirectIf($condition) {
+		if ($condition) {
+			$this->Session->setFlash(__('Invalid Access', true));
+			$this->redirect('/');
 		}
 	}
 		

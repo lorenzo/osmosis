@@ -16,7 +16,7 @@ class Topic extends AppModel {
 				'allowEmpty' => false
 			)
 		),
-		'forum_id' => array(
+		'course_id' => array(
 				'required' => array(
 					'rule' => array('custom', '/.+/'),
 					'allowEmpty' => false
@@ -27,11 +27,10 @@ class Topic extends AppModel {
 	
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
-		'Forum' => array(
-			'className' => 'Forum.Forum',
-			'foreignKey' => 'forum_id',
+		'Course' => array(
+			'className' => 'Course',
+			'foreignKey' => 'course_id',
 			'conditions' => '',
-			'fields' => array('id', 'course_id'),
 			'order' => ''
 		)
 	);
@@ -82,11 +81,19 @@ class Topic extends AppModel {
 		return $results;
 	}
 	
-	function getListSummary($id) {
-		$this->restrict(array('Discussion' => array('Member', 'Response' => array('Member' => array('id', 'full_name'))), 'Forum' => array('Course')));
+	function getListSummary($course_id) {
+		$this->restrict(
+			array(
+				'Discussion' => array(
+					'Member',
+					'Response' => array('Member' => array('id', 'full_name'))
+				),
+				'Course'
+			)
+		);
 		$this->Discussion->hasMany['Response']['limit'] = 1;
 		$this->Discussion->hasMany['Response']['order'] = 'created desc';
-		return $this->read(null, $id);
+		return $this->find('first', array('course_id' => $course_id));
 	}
 }
 ?>
