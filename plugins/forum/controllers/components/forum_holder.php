@@ -66,7 +66,7 @@ class ForumHolderComponent extends PlaceholderDataComponent {
 			$modelLog = $log['ModelLog'];
 			$modelName = $modelLog['model'];
 			$entity_id = $modelLog['entity_id'];
-			$log['ModelLog']['data'] = $this->__getModelData(
+			$data = $this->__getModelData(
 				$modelName,
 				${$modelName},
 				'Forum',
@@ -74,6 +74,8 @@ class ForumHolderComponent extends PlaceholderDataComponent {
 				$this->useful_fields[$modelName]['restrict'],
 				$this->useful_fields[$modelName]['fields']
 			);
+			if (!$data) continue;
+			$log['ModelLog']['data'] = $data;
 			if (isset($this->useful_fields[$modelName]['order_by'])){
 				$entity_id = Set::extract($this->useful_fields[$modelName]['order_by'] . '[:first]', $log['ModelLog']['data'] );
 				$entity_id = $entity_id[0];

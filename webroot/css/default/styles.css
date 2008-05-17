@@ -13,23 +13,27 @@ a:visited {
 }
 /* Styles for upper tabs */
 #top ul li {
-	padding:5px 0 0 13px;
-	background:transparent url('../../img/default/tab.gif') no-repeat top left;
+	padding:7px 13px 0 0;
+	background:transparent url('../../img/default/tab.gif') no-repeat bottom right;
+	float:left;
+	margin-right:3px;
+	height:13px;
+	font-size:0.92em;
 }
 #top ul li a {
 	text-transform:uppercase;
 	color:#666;
 	text-decoration:none;
-	padding:5px 10px 0 0;
-	margin-top:-5px;
+	padding:2px 0 3px 12px;
+	margin-top:-7px;
 	height:15px;
-	background:transparent url('../../img/default/tab.gif') no-repeat top right;
+	background:transparent url('../../img/default/tab.gif') no-repeat bottom left;
 	display:block;
 }
 #top ul li a:hover,
 #top ul li a:focus {
 	color:#333;
-	background:transparent url('../../img/default/tab_hover.gif') no-repeat top right;
+	background:transparent url('../../img/default/tab_hover.gif') no-repeat bottom left;
 }
 
 /* Styles conectivist navigation */

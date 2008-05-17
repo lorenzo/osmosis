@@ -55,14 +55,9 @@ body {
 	margin:0;
 	padding:0;
 	position:absolute;
-	bottom:0;
-	right:20px;
+	top:0;
+	right:13px;
 	list-style:none;
-}
-#top ul li {
-	float:left;
-	margin-right:5px;
-	height:15px;
 }
 
 /* Middle Area: (contectivist navigation, course summary and more courses list)*/
