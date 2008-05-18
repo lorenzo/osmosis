@@ -4,7 +4,7 @@
  		<legend><?php __('Add Course');?></legend>
 	<?php
 		echo $form->input('department_id');
-		echo $form->input('owner_id');
+		echo $form->input('owner_id', array('multiple' => 'multiple'));
 		echo $form->input('code');
 		echo $form->input('name');
 		echo $form->input('description');

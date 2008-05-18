@@ -1,10 +1,10 @@
 <div class="courses abstract">
 	<strong class="title"><?php __('My Courses'); ?></strong>
 <?php
- if (!empty($courses)) :
+ if (isset($Osmosis['courseList'])) :
 ?>
 	<ul>
-	<?php foreach ($courses as $course) : ?>
+	<?php foreach ($Osmosis['courseList'] as $course) : ?>
 		<li>
 			<?php
 				echo $html->link(

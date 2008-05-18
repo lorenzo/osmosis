@@ -22,33 +22,36 @@ foreach ($courses as $course):
 	<div class="professors">
 		<div class="abstract">
 			<strong class="title"><?php __('Professors'); ?></strong>
+			<ul>
+				<li></li>
+			</ul>
 		</div>
 	</div>
 </div>
-	<tr<?php echo $class;?>>
-		<td>
-			<?php echo $course['Course']['id'] ?>
-		</td>
-		<td>
-			<?php echo $html->link(__($course['Department']['name'], true), array('controller'=> 'departments', 'action'=>'view', $course['Department']['id'])); ?>
-		</td>
-		<td>
-			<?php echo $course['Course']['code'] ?>
-		</td>
-		<td>
-			<?php echo $course['Course']['name'] ?>
-		</td>
-		<td>
-			<?php echo $course['Course']['description'] ?>
-		</td>
-		<td>
-			<?php echo $course['Course']['created'] ?>
-		</td>
-		<td class="actions">
-			<?php echo $html->link(__('View', true), array('action'=>'view', $course['Course']['id'])); ?>
-			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $course['Course']['id'])); ?>
-			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $course['Course']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $course['Course']['id'])); ?>
-		</td>
-	</tr>
+	<!-- <tr<?php echo $class;?>>
+			<td>
+				<?php echo $course['Course']['id'] ?>
+			</td>
+			<td>
+				<?php echo $html->link(__($course['Department']['name'], true), array('controller'=> 'departments', 'action'=>'view', $course['Department']['id'])); ?>
+			</td>
+			<td>
+				<?php echo $course['Course']['code'] ?>
+			</td>
+			<td>
+				<?php echo $course['Course']['name'] ?>
+			</td>
+			<td>
+				<?php echo $course['Course']['description'] ?>
+			</td>
+			<td>
+				<?php echo $course['Course']['created'] ?>
+			</td>
+			<td class="actions">
+				<?php echo $html->link(__('View', true), array('action'=>'view', $course['Course']['id'])); ?>
+				<?php echo $html->link(__('Edit', true), array('action'=>'edit', $course['Course']['id'])); ?>
+				<?php echo $html->link(__('Delete', true), array('action'=>'delete', $course['Course']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $course['Course']['id'])); ?>
+			</td>
+		</tr> -->
 <?php endforeach; ?>
 </div>

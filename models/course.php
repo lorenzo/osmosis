@@ -54,12 +54,12 @@ class Course extends AppModel {
 								'fields' => '',
 								'order' => '',
 								'counterCache' => ''),
-			// 'Owner' => array('className' => 'Member',
-			// 					'foreignKey' => 'owner_id',
-			// 					'conditions' => '',
-			// 					'fields' => '',
-			// 					'order' => '',
-			// 					'counterCache' => ''),
+			'Owner' => array('className' => 'Member',
+								'foreignKey' => 'owner_id',
+								'conditions' => '',
+								'fields' => '',
+								'order' => '',
+								'counterCache' => ''),
 	);
 	
 	var $hasAndBelongsToMany = array(

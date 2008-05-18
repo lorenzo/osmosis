@@ -1,0 +1,92 @@
+.selector-wrapper {
+	float:left;
+	padding-bottom:10px;
+}
+ul.selections {
+	margin:0;
+	padding:0;
+	border:#ccc 1px solid;
+	cursor:text;
+	list-style:none;
+	list-style-position:inside;
+	float:left;
+	width:100%;
+	position:relative;
+}
+
+ul.selections input {
+	border:none;
+	float:left;
+}
+
+ul.selections li,
+ul.selections input {
+	padding:0 0 2px 1px;
+	margin:3px 3px 3px 3px;
+}
+ul.selections input {
+	margin-top:5px;
+}
+
+ul.selections li {
+	float:left;
+	border:1px solid #CAD8F3;
+	padding-right:0px;
+	background:#DEE7F8;
+	border-radius:6px;
+	-moz-border-radius:6px;
+	font:11px "Lucida Grande","Verdana";
+}
+
+ul.selections li span,
+ul.selections li a {
+	margin-left:3px;
+	float:left;
+}
+
+ul.selections li a {
+	background:transparent url('../img/default/js/delete.gif') no-repeat  0 0;
+	margin:4px 0 0 4px;
+	width:7px;
+	height:7px;
+}
+
+ul.selections li.selected a {
+	background:transparent url('../img/default/js/delete.gif') no-repeat  0 -14px;
+}
+ul.selections li.selected a:hover {
+	background:transparent url('../img/default/js/delete.gif') no-repeat  0 -7px;
+}
+ul.selections li a:hover,
+ul.selections li a:focus {
+	background:transparent url('../img/default/js/delete.gif') no-repeat  0 -7px;
+}
+
+ul.selections li.selected {
+	background:#8BB9DF;
+	color:#f5f5f5;
+	border-color:#6EA6D5;
+}
+
+.ac_results {
+	width:100%!important;
+	z-index:10000!important;
+	top:0!important;
+	left:0!important;
+	margin:0!important;
+	padding:0!important;
+}
+
+.ac_results ul {
+	list-style:none;
+	padding:0;
+	margin:0;
+	background:#f5f5f5;
+	border:#ccc 1px solid;
+	border-top:none;
+	width:100%;
+}
+
+.ac_results ul li.ac_over {
+	background:#ccc;
+}

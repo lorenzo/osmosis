@@ -2,22 +2,12 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<?php echo $html->charset();?>
-	<?php echo $html->css('default/layout'); ?> 
-	<?php echo $html->css('default/styles'); ?> 
-	<?php echo $html->css('default/forms'); ?> 
-	<?php echo $html->css('default/tables'); ?> 
-	<!--[if lte IE 7]>
-		<?php echo $html->css('default/ie_layout'); ?> 
-	<![endif]-->
-	<!--[if IE 6]>
-		<?php echo $html->css('default/ie6_layout'); ?> 
-	<![endif]-->
-	<?php if(Configure::read()>0) echo $html->css('debug');?> 
-	<?php echo $javascript->codeBlock('var webroot = "' . $html->url('/') .'"'); ?> 
+	<?php
+		echo $this->element('layout/common_header');
+	?>
+	<?php echo $placeholder->render('head'); ?> 
 	<?php echo $scripts_for_layout; ?> 
-	<?php echo $placeholder->render('head'); ?>
-	<title>Ósmosis :: <?php echo $title_for_layout;?></title>
+	<title>Ósmosis - NoCourse :: <?php echo $title_for_layout;?></title> 
 </head>
 <body>
 	<?php
