@@ -1,45 +1,48 @@
 <?php
+/**
+ * Model Class that represents a Course.
+ */
 class Course extends AppModel {
 
 	var $name = 'Course';
 	var $validate = array(
 		'department_id' => array(
-		    'Error.empty' => array(
+		    'empty' => array(
 		        'rule' => array('custom','/.+/'),
 		        'required' => true,
-		        'on' => 'create',
+		        'on' => 'create'
 	        )
 		),
-		// 'owner_id' => array(
-		//     'Error.empty' => array(
-		//         'rule' => array('custom','/.+/'),
-		//         'required' => true,
-		//         'on' => 'create',
-		// 	)
-		// ),
-		'code' => array(
-			'Error.maxlength' => array(
-		        'rule' => array('maxlength',10)
-			),
-			'Error.empty' => array(
+		'owner_id' => array(
+		    'empty' => array(
 		        'rule' => array('custom','/.+/'),
 		        'required' => true,
-		        'on' => 'create',
-			),
+		        'on' => 'create'
+			)
+		),
+		'code' => array(
+			'empty' => array(
+		        'rule' => array('custom','/.+/'),
+		        'required' => true
+	        ),
+			'maxlength' => array(
+		        'rule'		=> array('maxlength',10),
+				'required'	=> true,
+				'allowEmpty'=> false
+			)
 		),
 		'name' => array(
-		    'Error.empty' => array(
+		    'empty' => array(
 		        'rule' => array('custom','/.+/'),
 		        'required' => true,
 		        'on' => 'create',
 			),
-			'Error.maxlength' => array(
-					'rule' => array( 'maxlength',150),
-			),
-			//TODO: No HTML
+			'maxlength' => array(
+				'rule' => array( 'maxlength',150),
+			)
 		),
 		'description' => array(
-		    'Error.empty' => array(
+		    'empty' => array(
 		        'rule' => array('custom','/.+/'),
 		        'required' => true,
 		        'on' => 'create',
@@ -47,59 +50,115 @@ class Course extends AppModel {
 		)
 	);
 	
+	/**
+	 * BelongsTo (1-N) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $belongsTo = array(
-			'Department' => array('className' => 'Department',
-								'foreignKey' => 'department_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
-			'Owner' => array('className' => 'Member',
-								'foreignKey' => 'owner_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
+		// Course BelongsTo Department
+		'Department' => array(
+			'className' => 'Department',
+			'foreignKey' => 'department_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'counterCache' => ''
+		),
+		// Course BelongsTo Member (Owner)
+		'Owner' => array(
+			'className' => 'Member',
+			'foreignKey' => 'owner_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'counterCache' => ''
+		)
 	);
 	
+	/**
+	 * HasAndBelongsToMany (N-N) relation descriptors
+	 */
 	var $hasAndBelongsToMany = array(
-			'Tool' => array(
-				'className' => 'Plugin',
-				'joinTable' => 'course_tools',
-				'foreignKey' => 'course_id',
-				'associationForeignKey' => 'plugin_id',
-				'with' => 'CourseTool'
-			)
+		// Course HABTM Plugin (Active Tools for the course)
+		'Tool' => array(
+			'className' => 'Plugin',
+			'joinTable' => 'course_tools',
+			'foreignKey' => 'course_id',
+			'associationForeignKey' => 'plugin_id',
+			'with' => 'CourseTool'
+		)
 	);
 	
+	/**
+	 * Constructor of the class. Startups avlidation error messages with i18n.
+	 */
 	function __construct($id = false, $table = null, $ds = null) {
-			$this->validate['department_id']['Error.empty']['message'] = __('The department can not be empty',true);
-			$this->validate['owner_id']['Error.empty']['message'] = __('The owner can not be empty',true);
-			$this->validate['code']['Error.empty']['message'] = __('The code can not be empty',true);
-			$this->validate['code']['Error.empty']['message'] = __('This field ',true);
-			$this->validate['name']['Error.empty']['message'] = __('The name can not be empty',true);
-			$this->validate['name']['Error.maxlength']['message'] = __('The name must be ubder 150 characters',true);
-			$this->validate['description']['Error.empty']['message'] = __('The description can no be empty',true);
-			parent::__construct($id,$table,$ds);
+		$this->setErrorMessage(
+			'department_id.empty',
+			__('Please select a departement',true)
+		);
+		$this->setErrorMessage(
+			'owner_id.empty',
+			__('Please set the course owner',true)
+		);
+		$this->setErrorMessage(
+			'code.maxlength',
+			__('The length of this field should be less than 10',true)
+		);
+		$this->setErrorMessage(
+			'name.empty',
+			__('Please write the Course name',true)
+		);
+		$this->setErrorMessage(
+			'name.maxlength',
+			__('The lenght of the name should be lees than 150',true)
+		);
+		$this->setErrorMessage(
+			'description.empty',
+			__('Please write the course description',true)
+		);
+		parent::__construct($id,$table,$ds);
 	}
 
+	/**
+	 * Manages member enrollment into the course.
+	 * 
+	 * @param int $member_id ID of the member to enroll.
+	 * @param String $role Role that the member will be assigned in the course.
+	 * @param int $course_id ID of the course to enroll the member.
+	 * @return mixed On success data saved if its not empty or true, false on failure.
+	 * @access public
+	 */
 	function enroll($member_id,$role = 'attendee',$course_id = null) {
-		if (!empty($this->id))
-			$course_id = $this->id;
-		else
+		if (empty($this->id)) {
 			return false;
-			
+		}
+		$course_id = $this->id;
 		$this->bindModel(array('hasAndBelongsToMany' => array('Member')));
 		return $this->Member->Enrollment->save(array('course_id' => $course_id,'member_id' => $member_id, 'role' => $role));
 	}	
-		
-	function alreadyEnrolled($id, $new_course_id) {
+	
+	/**
+	 * Determines wether a member is enrolled in a course.
+	 * 
+	 * @param int $member_id ID of the member.
+	 * @param int $id ID of the course.
+	 * @return boolean true if the member is enrolled in the course. 
+	 */
+	function alreadyEnrolled($member_id, $id) {
 		$this->bindModel(array('hasAndBelongsToMany' => array('Member')));
-		$courses = $this->Member->courses($id);
+		$courses = $this->Member->courses($member_id);
 		$courses = Set::extract('/Course/id', $courses);
-		return in_array($new_course_id, $courses);
+		return in_array($id, $courses);
 	}
 	
+	/**
+	 * Gets the professors of the course.
+	 * 
+	 * @param int $id ID of the course.
+	 * @return Array professors of the course.
+	 */
 	function professors($id) {
 		$this->bindModel(array('hasAndBelongsToMany' => array('Member')));
 		return $this->Member->Enrollment->find(
