@@ -11,16 +11,33 @@ class PluginsController extends AppController {
 		$this->set('inServer',$this->Plugin->inServer());
 	}
 	
+	/**
+	 * Marks a plugin as installed in the database. If the plugin has it own instaler controller it is called up
+	 *
+	 * @param string $plugin 
+	 * @return void
+	 */
+	
 	function admin_install($plugin) {
 		$inServer = $this->Plugin->inServer();
 		if (!$plugin || !array_key_exists(Inflector::camelize($plugin),$inServer)) {
 			$this->Session->setFlash(__('Invalid Plugin.', true));
 		}
-		//TODO: Check if the plugin has it's own installation method
-		if(	$this->Plugin->install(Inflector::camelize($plugin))) {
+		
+		if ($this->Plugin->find('count',array('conditions' => array('name' => $plugin)))) {
+			$this->Session->setFlash(__('Plugin already Installed.', true));
+			$this->redirect(array('action'=>'index'));
+		}
+		
+		// Check if the plugin has it's own installation method
+		if (App::import('Controller',$plugin.'.'.'Installer')) {
+			$this->redirect(array('controller' => 'installer', 'action' => 'install', 'plugin' => $plugin,'admin' => true));
+		}
+
+		if ($this->Plugin->install(Inflector::camelize($plugin))) {
 			$this->Session->setFlash(__('Plugin Instaled.', true));
-		}else {
-			$this->Session->setFlash(__('An error ocurred while intalling the plugin. Try again', true));
+		} else {
+			$this->Session->setFlash(__('An error ocurred while installing the plugin. Try again', true));
 		}
 		$this->redirect(array('action'=>'index'));
 	}

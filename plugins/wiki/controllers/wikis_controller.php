@@ -10,11 +10,14 @@ class WikisController extends WikiAppController {
 	}
 
 	function view($id = null) {
-		if (!$id) {
+		if (!$id && !isset($this->params['named']['course_id'])) {
 			$this->Session->setFlash(__('Invalid Wiki.',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-		$this->set('wiki', $this->Wiki->read(null, $id));
+		if (!$id)
+			$this->set('wiki', $this->Wiki->findByCourseId($this->params['named']['course_id']));
+		else
+			$this->set('wiki', $this->Wiki->read(null, $id));
 	}
 
 	function add() { 

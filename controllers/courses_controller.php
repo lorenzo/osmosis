@@ -78,7 +78,6 @@ class CoursesController extends AppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
-			$this->cleanUpFields();
 			if ($this->Course->save($this->data)) {
 				$this->Session->setFlash(__('The Course has been saved',true));
 				$this->redirect(array('action'=>'index'), null, true);
@@ -90,8 +89,6 @@ class CoursesController extends AppController {
 			$this->data = $this->Course->read(null, $id);
 		}
 		$departments = $this->Course->Department->generateList();
-		$owners = $this->Course->Owner->generateList();
-		$this->set(compact('departments','owners'));
 	}
 
 	/**
@@ -112,6 +109,14 @@ class CoursesController extends AppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}
+
+	/**
+	 * Enrolls the logged member in the course with id $course_id
+	 *
+	 * @param string $course_id the course identifier
+	 * @return void
+	 * @author José Lorenzo
+	 */
 	
 	function enroll($course_id) {
 		$this->Course->id = $course_id;
@@ -128,6 +133,34 @@ class CoursesController extends AppController {
 		}
 		$this->Session->setFlash(__('Enrollment failed',true));
 		$this->redirect(array('action' => 'index'));
+	}
+	
+	/**
+	 * Add or removes a tool from a course
+	 *
+	 * @param string $id course identifier
+	 * @author José Lorenzo
+	 */
+	
+	function tools($id) {
+		if (!empty($this->data)) {
+			if (isset($this->data['CourseTool']['add'])) {
+				
+				if ($this->Course->Tool->CourseTool->save($this->data))
+					$this->Session->setFlash(__('The Tool has been added',true));
+				else
+					$this->Session->setFlash(__('The could not be added',true));
+			} elseif (isset($this->data['CourseTool']['remove'])) {
+				
+				unset($this->data['CourseTool']['remove']);
+				if ($this->Course->Tool->CourseTool->deleteAll($this->data['CourseTool']))
+					$this->Session->setFlash(__('The Tool has been removed',true));
+				else 
+					$this->Session->setFlash(__('The Tool could not be removed',true));
+			}
+		}
+		$tools = $this->Course->Tool->actives();
+		$this->set(compact('tools','id'));
 	}
 
 }
