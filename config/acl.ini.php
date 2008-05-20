@@ -1,3 +1,4 @@
+;<?php die() ?>
 <?php
 /* SVN FILE: $Id$ */
 /**
@@ -29,7 +30,6 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-	die();
 ?>
 ; acl.ini.php - Cake ACL Configuration
 ; ---------------------------------------------------------------------
