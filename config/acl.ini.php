@@ -1,31 +1,36 @@
-;<?php die() ?>
-; SVN FILE: $Id: acl.ini.php 5118 2007-05-18 17:19:53Z phpnut $
-;/**
-; * Short description for file.
-; *
-; *
-; * PHP versions 4 and 5
-; *
-; * CakePHP(tm) :  Rapid Development Framework <http://www.cakephp.org/>
-; * Copyright 2005-2007, Cake Software Foundation, Inc.
-; *							1785 E. Sahara Avenue, Suite 490-204
-; *							Las Vegas, Nevada 89104
-; *
-; *  Licensed under The MIT License
-; *  Redistributions of files must retain the above copyright notice.
-; *
-; * @filesource
-; * @copyright		Copyright 2005-2007, Cake Software Foundation, Inc.
-; * @link			http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
-; * @package		cake
-; * @subpackage	cake.app.config
-; * @since			CakePHP(tm) v 0.10.0.1076
-; * @version		$Revision: 5118 $
-; * @modifiedby	$LastChangedBy: phpnut $
-; * @lastmodified	$Date: 2007-05-18 13:19:53 -0400 (Fri, 18 May 2007) $
-; * @license		http://www.opensource.org/licenses/mit-license.php The MIT License
-; */
-
+<?php
+/* SVN FILE: $Id$ */
+/**
+ * Ósmosis LMS: <http://www.osmosislms.org/>
+ * Copyright 2008, Ósmosis LMS
+ *
+ * This file is part of Ósmosis LMS.
+ * Ósmosis LMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Ósmosis LMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Ósmosis LMS.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @filesource
+ * @copyright		Copyright 2008, Ósmosis LMS
+ * @link			http://www.osmosislms.org/
+ * @package			org.osmosislms
+ * @subpackage		org.osmosislms.app
+ * @since			Version 2.0 
+ * @version			$Revision$
+ * @modifiedby		$LastChangedBy$
+ * @lastmodified	$Date$
+ * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
+ */
+	die();
+?>
 ; acl.ini.php - Cake ACL Configuration
 ; ---------------------------------------------------------------------
 ; Use this file to specify user permissions.

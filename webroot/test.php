@@ -1,30 +1,33 @@
 <?php
-/* SVN FILE: $Id: test.php 6715 2008-04-23 18:25:03Z DarkAngelBGE $ */
+/* SVN FILE: $Id$ */
 /**
- * Short description for file.
+ * Ósmosis LMS: <http://www.osmosislms.org/>
+ * Copyright 2008, Ósmosis LMS
  *
- * Long description for file
+ * This file is part of Ósmosis LMS.
+ * Ósmosis LMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * PHP versions 4 and 5
+ * Ósmosis LMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- * CakePHP(tm) Tests <https://trac.cakephp.org/wiki/Developement/TestSuite>
- * Copyright 2005-2008, Cake Software Foundation, Inc.
- *								1785 E. Sahara Avenue, Suite 490-204
- *								Las Vegas, Nevada 89104
- *
- *  Licensed under The Open Group Test Suite License
- *  Redistributions of files must retain the above copyright notice.
+ * You should have received a copy of the GNU General Public License
+ * along with Ósmosis LMS.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @filesource
- * @copyright		Copyright 2005-2008, Cake Software Foundation, Inc.
- * @link				https://trac.cakephp.org/wiki/Developement/TestSuite CakePHP(tm) Tests
- * @package			cake
- * @subpackage		cake.cake.tests.libs
- * @since			CakePHP(tm) v 1.2.0.4433
- * @version			$Revision: 6715 $
- * @modifiedby		$LastChangedBy: DarkAngelBGE $
- * @lastmodified	$Date: 2008-04-23 13:55:03 -0430 (Wed, 23 Apr 2008) $
- * @license			http://www.opensource.org/licenses/opengroup.php The Open Group Test Suite License
+ * @copyright		Copyright 2008, Ósmosis LMS
+ * @link			http://www.osmosislms.org/
+ * @package			org.osmosislms
+ * @subpackage		org.osmosislms.app
+ * @since			Version 2.0 
+ * @version			$Revision$
+ * @modifiedby		$LastChangedBy$
+ * @lastmodified	$Date$
+ * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 error_reporting(E_ALL);
 set_time_limit(0);
