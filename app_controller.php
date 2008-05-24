@@ -43,6 +43,49 @@ class AppController extends Controller {
 	protected $activeCourse = false;
 	
 	function beforeFilter() {
+		
+		$this->_initializeAuth();
+		
+		if (isset($this->Security)) {
+			$this->Security->blackHoleCallback = '_blackHoledAction';
+		}
+		if (isset($this->Auth) && $this->Session->valid() && $this->Auth->user())
+			$this->__updateOnlineUser();
+		
+		$this->_setActiveCourse();
+		Configure::write('ActiveCourse.id', $this->activeCourse);
+		
+		$this->__instatiateLogger();
+		
+		$this->_redirectIf(!$this->__authorizedPlugin());
+	}
+	
+	/**
+	 * Returns true if the plugin that the user is trying to access is installed and
+	 * associated to the active course if there's any. Otherwise returns false
+	 *
+	 * @return boolean
+	 */
+	
+	function __authorizedPlugin() {
+		if (isset($this->plugin) && !empty($this->plugin)) {
+			if (!$plugin = ClassRegistry::getObject('Plugin')) {
+				App::import('Model', 'Plugin');
+				$plugin = new Plugin;
+				ClassRegistry::addObject('Plugin', $plugin);
+			}
+			$plugID = $plugin->findByName($this->plugin);
+			if (empty($plugID))
+				return false;
+			
+			if (!empty($this->activeCourse)) {
+				return $plugin->isTool($plugID['Plugin']['id'],$this->activeCourse);
+			}
+		}
+		return true;
+	}
+	
+	function _initializeAuth() {
 		if (isset($this->Auth)) {
 			$this->Auth->Acl =& $this->Acl;
 			$this->Auth->authorize = 'controller';
@@ -57,16 +100,6 @@ class AppController extends Controller {
 			}
 			Configure::write('ActiveUser', $this->Auth->user());
 		}
-		if (isset($this->Security)) {
-			$this->Security->blackHoleCallback = '_blackHoledAction';
-		}
-		if (isset($this->Auth) && $this->Session->valid() && $this->Auth->user())
-			$this->__updateOnlineUser();
-		
-		$this->_setActiveCourse();
-		Configure::write('ActiveCourse.id', $this->activeCourse);
-		$this->__setActiveCourseData();
-		$this->__instatiateLogger();
 	}
 	
 	function _getActiveCourse() {
@@ -129,8 +162,10 @@ class AppController extends Controller {
 	function beforeRender() {
 		if (isset($this->Placeholder->started) && $this->activeCourse);
 			$this->Placeholder->attachToolbar($this->activeCourse);
-		if ($this->activeCourse) 
+		if ($this->activeCourse) {
 			$this->Placeholder->attach('course_data');
+			$this->__setActiveCourseData();
+		}
 		$this->__selectLayout();
 	}
 	

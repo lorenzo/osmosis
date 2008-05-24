@@ -200,6 +200,42 @@ class Plugin extends AppModel {
 	}
 	
 	/**
+	 * Find a plugin depending on it's name
+	 *
+	 * @param string $name name to look for
+	 * @param string $fields fields to be returned
+	 * @param string $active active status of the plugin
+	 * @return mixed
+	 */
+	
+	function findByName($name,$fields = array(),$active = true) {
+		return $this->find('first',array(
+			'conditions'=>array(
+				'name' => Inflector::camelize($name),
+				'active' => $active
+				),
+			'fields' => $fields,'recursive' => -1));
+	}
+	
+	/**
+	 * Returns true if a plugin is intalled as a course tool
+	 *
+	 * @param string $id plugin id
+	 * @param string $course_id course id
+	 * @return boolean
+	 */
+	
+	function isTool($id,$course_id) {
+		return  $this->CourseTool->find('count',array(
+			'conditions' => array(
+				'plugin_id' => $id,
+				'course_id'	=> $course_id
+				),
+			'recursive' => -1
+			));
+	}
+	
+	/**
 	 * Deconstruct the array of types an converts it to a comma separated string
 	 *
 	 * @see Model::deconstruct 
