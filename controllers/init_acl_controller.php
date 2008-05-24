@@ -60,6 +60,7 @@ class InitAclController extends AppController {
 				'sex'		=> 'M',
 				'username'	=> 'admin',
 				'password'	=> 'admin',
+				'password_confirm'	=> 'admin',
 				'admin'		=> 1
     		)
 		);

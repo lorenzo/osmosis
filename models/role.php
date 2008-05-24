@@ -44,20 +44,6 @@ class Role extends AppModel {
 								'foreignKey' => 'parent_id'
 								),
 	);
-
-	var $hasMany = array(
-			'Member' => array('className' => 'Member',
-								'foreignKey' => 'role_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'limit' => '',
-								'offset' => '',
-								'dependent' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''),
-	);
 	
     var $actsAs = array('Acl' => array('type' => 'requester'));
 

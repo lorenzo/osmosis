@@ -39,9 +39,6 @@ div.plugins.index ul li div.actions a:hover{
 	color:#000;
 }
 
-div.plugins.index ul li dl {
-	
-}
 div.plugins.index ul li dl dd{
 	padding: 0 10px;
 	margin-left:0;
@@ -104,4 +101,18 @@ p.author strong {
 }
 #profile.dashboard-element p a {
 	text-decoration:none;
+}
+
+ul.course-details {
+	padding:5px 10px;
+	list-style:none;
+	background:#f5f5f5;
+}
+
+ul.course-details li {
+	display:inline;
+	padding:0 10px;
+	margin-right:2px;
+	border-right:#333 1px solid;
+	border-left:#333 1px solid;
 }
