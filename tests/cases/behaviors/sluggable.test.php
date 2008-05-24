@@ -1,34 +1,5 @@
 <?php
-/* SVN FILE: $Id$ */
-/**
- * Ósmosis LMS: <http://www.osmosislms.org/>
- * Copyright 2008, Ósmosis LMS
- *
- * This file is part of Ósmosis LMS.
- * Ósmosis LMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Ósmosis LMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Ósmosis LMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @filesource
- * @copyright		Copyright 2008, Ósmosis LMS
- * @link			http://www.osmosislms.org/
- * @package			org.osmosislms
- * @subpackage		org.osmosislms.app
- * @since			Version 2.0 
- * @version			$Revision$
- * @modifiedby		$LastChangedBy$
- * @lastmodified	$Date$
- * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
- */
+/* SVN FILE: $Id: sluggable.test.php 36 2007-11-26 15:10:14Z mgiglesias $ */
 
 /**
  * Test cases for Sluggable Behavior, which are basically testing methods to test several
@@ -41,13 +12,13 @@
  * @filesource
  * @author Mariano Iglesias
  * @link http://cake-syrup.sourceforge.net/ingredients/sluggable-behavior/
- * @version	$Revision$
+ * @version	$Revision: 36 $
  * @license	http://www.opensource.org/licenses/mit-license.php The MIT License
  * @package app.tests
  * @subpackage app.tests.cases.behaviors
  */
 
-App::import('Behavior', 'Blog.sluggable');
+App::import('Behavior', 'sluggable');
 
 /**
  * Base model that to load Sluggable behavior on every test model.
@@ -66,8 +37,23 @@ class SluggableTestModel extends CakeTestModel
 	var $actsAs = array('Sluggable');
 }
 
-App::import('Model','Blog.Post');
-App::import('Model','Blog.Blog');
+/**
+ * Model used in test case.
+ *
+ * @package	app.tests
+ * @subpackage app.tests.cases.behaviors
+ */
+class SlugArticle extends SluggableTestModel
+{
+	/**
+	 * Name for this model
+	 *
+	 * @var string
+	 * @access public
+	 */
+	var $name = 'SlugArticle';
+}
+
 /**
  * Test case for Sluggable Behavior
  *
@@ -82,19 +68,16 @@ class SluggableTestCase extends CakeTestCase
 	 * @var array
 	 * @access public
 	 */
-	var $fixtures = array('blog','post');
+	var $fixtures = array('app.slug_article');
 
 	/**
 	 * Method executed before each test
 	 *
 	 * @access public
 	 */
-	function setUp() {
-		$this->Post = new Post();
-		$this->Post->useDbConfig = 'test_suite';
-		$this->Post->tablePrefix = 'test_suite_';
-		$this->Post->Blog->useDbConfig = 'test_suite';
-		$this->Post->Blog->tablePrefix = 'test_suite_';
+	function startTest()
+	{
+		$this->SlugArticle =& new SlugArticle();
 	}
 
 	/**
@@ -102,9 +85,9 @@ class SluggableTestCase extends CakeTestCase
 	 *
 	 * @access public
 	 */
-	function tearDown()
+	function endTest()
 	{
-		unset($this->Post);
+		unset($this->SlugArticle);
 
 		ClassRegistry::flush();
 	}
@@ -182,10 +165,6 @@ class SluggableTestCase extends CakeTestCase
 
 		$result = $Sluggable->__slug('H' . chr(196).chr(155) . 're C' . chr(195).chr(182) . 'mes ' . chr(196).chr(129) . ' mix ' . chr(197).chr(165).chr(196).chr(164) . 'under', array('separator' => '-', 'length' => 100, 'translation' => 'utf-8'));
 		$expected = 'here-comes-a-mix-thunder';
-		$this->assertEqual($result, $expected);
-		
-		$result = $Sluggable->__slug('H' . chr(196).chr(155) . 're C' . chr(195).chr(182) . 'mes ' . chr(196).chr(129) . ' mix ' . chr(197).chr(165).chr(196).chr(164) . 'under with ' . chr(208).chr(160) . 'u' . chr(209).chr(129) . 'sian flavor', array('separator' => '-', 'length' => 100, 'translation' => 'utf-8'));
-		$expected = 'here-comes-a-mix-thunder-with-russian-flavor';
 		$this->assertEqual($result, $expected);
 
 		// Predefined: ISO-8859-1
@@ -371,83 +350,80 @@ class SluggableTestCase extends CakeTestCase
 	{
 		$Sluggable =& new SluggableBehavior();
 
-		$Sluggable->setup($this->Post, array('separator' => '-', 'length' => 100));
+		$Sluggable->setup($this->SlugArticle, array('separator' => '-', 'length' => 100));
 
-		$this->Post->data = array('Post' => array('title' => 'My test title'));
-		$result = $Sluggable->beforeSave($this->Post);
+		$this->SlugArticle->data = array('SlugArticle' => array('title' => 'My test title'));
+		$result = $Sluggable->beforeSave($this->SlugArticle);
 		$this->assertTrue($result !== false);
-		$result = $this->Post->data;
-		$expected = array('Post' => array('title' => 'My test title', 'slug' => 'my-test-title'));
-		$this->assertEqual($result, $expected);
-		//Primer First Article
-
-		$this->Post->data = array('Post' => array('title' => 'First Article'));
-		$result = $Sluggable->beforeSave($this->Post);
-		$this->assertTrue($result !== false);
-		$result = $this->Post->data;
-		$expected = array('Post' => array('title' => 'First Article', 'slug' => 'first-article-1'));
+		$result = $this->SlugArticle->data;
+		$expected = array('SlugArticle' => array('title' => 'My test title', 'slug' => 'my-test-title'));
 		$this->assertEqual($result, $expected);
 
-		$this->Post->data = array('Post' => array('title' => 'First Article Unique'));
-		$result = $Sluggable->beforeSave($this->Post);
+		$this->SlugArticle->data = array('SlugArticle' => array('title' => 'First Article'));
+		$result = $Sluggable->beforeSave($this->SlugArticle);
 		$this->assertTrue($result !== false);
-		$result = $this->Post->data;
-		$expected = array('Post' => array('title' => 'First Article Unique', 'slug' => 'first-article-unique'));
+		$result = $this->SlugArticle->data;
+		$expected = array('SlugArticle' => array('title' => 'First Article', 'slug' => 'first-article-1'));
 		$this->assertEqual($result, $expected);
 
-		$this->Post->data = array('Post' => array('body' => 'Just Body'));
-		$result = $Sluggable->beforeSave($this->Post);
+		$this->SlugArticle->data = array('SlugArticle' => array('title' => 'First Article Unique'));
+		$result = $Sluggable->beforeSave($this->SlugArticle);
 		$this->assertTrue($result !== false);
-		$result = $this->Post->data;
-		$expected = array('Post' => array('body' => 'Just Body'));
+		$result = $this->SlugArticle->data;
+		$expected = array('SlugArticle' => array('title' => 'First Article Unique', 'slug' => 'first-article-unique'));
 		$this->assertEqual($result, $expected);
 
-		// Pruebas con My test title con blog_id
-		$Sluggable->setup($this->Post, array('label' => array('blog_id','title'), 'separator' => '-', 'length' => 100));
-		
-		$this->Post->data = array('Post' => array('title' => 'My test title','blog_id'=>1));
-		$result = $Sluggable->beforeSave($this->Post);
+		$this->SlugArticle->data = array('SlugArticle' => array('body' => 'Just Body'));
+		$result = $Sluggable->beforeSave($this->SlugArticle);
 		$this->assertTrue($result !== false);
-		$result = $this->Post->data;
-		$expected = array('Post' => array('title' => 'My test title', 'slug' => '1-my-test-title','blog_id'=>1));
+		$result = $this->SlugArticle->data;
+		$expected = array('SlugArticle' => array('body' => 'Just Body'));
 		$this->assertEqual($result, $expected);
 
-		$this->Post->data = array('Post' => array('title' => 'My test title', 'body' => ''));
-		$result = $Sluggable->beforeSave($this->Post);
+		$Sluggable->setup($this->SlugArticle, array('label' => array('title', 'subtitle'), 'separator' => '-', 'length' => 100));
+
+		$this->SlugArticle->data = array('SlugArticle' => array('title' => 'My test title'));
+		$result = $Sluggable->beforeSave($this->SlugArticle);
 		$this->assertTrue($result !== false);
-		$result = $this->Post->data;
-		$expected = array('Post' => array('title' => 'My test title', 'body' => '', 'slug' => 'my-test-title'));
+		$result = $this->SlugArticle->data;
+		$expected = array('SlugArticle' => array('title' => 'My test title', 'slug' => 'my-test-title'));
 		$this->assertEqual($result, $expected);
 
-		$this->Post->data = array('Post' => array('title' => 'My test title', 'blog_id' => '3'));
-		$result = $Sluggable->beforeSave($this->Post);
+		$this->SlugArticle->data = array('SlugArticle' => array('title' => 'My test title', 'subtitle' => ''));
+		$result = $Sluggable->beforeSave($this->SlugArticle);
 		$this->assertTrue($result !== false);
-		$result = $this->Post->data;
-		$expected = array('Post' => array('title' => 'My test title', 'blog_id' => '3', 'slug' => '3-my-test-title'));
+		$result = $this->SlugArticle->data;
+		$expected = array('SlugArticle' => array('title' => 'My test title', 'subtitle' => '', 'slug' => 'my-test-title'));
 		$this->assertEqual($result, $expected);
 
-		//Pruebas con New First Article
-		$Sluggable->setup($this->Post, array('overwrite' => false));
-
-		$this->Post->id = 1;
-		$this->Post->data = array('Post' => array('title' => 'New First Article'));
-		$result = $Sluggable->beforeSave($this->Post);
+		$this->SlugArticle->data = array('SlugArticle' => array('title' => 'My test title', 'subtitle' => 'My subtitle'));
+		$result = $Sluggable->beforeSave($this->SlugArticle);
 		$this->assertTrue($result !== false);
-		$result = $this->Post->data;
-		$expected = array('Post' => array('title' => 'New First Article'));
+		$result = $this->SlugArticle->data;
+		$expected = array('SlugArticle' => array('title' => 'My test title', 'subtitle' => 'My subtitle', 'slug' => 'my-test-title-my-subtitle'));
 		$this->assertEqual($result, $expected);
-		$this->Post->id = null;
 
-		$Sluggable->setup($this->Post, array('overwrite' => true));
+		$Sluggable->setup($this->SlugArticle, array('overwrite' => false));
 
-		$this->Post->id = 1;
-		$this->Post->data = array('Post' => array('title' => 'New First Article'));
-		$result = $Sluggable->beforeSave($this->Post);
+		$this->SlugArticle->id = 1;
+		$this->SlugArticle->data = array('SlugArticle' => array('title' => 'New First Article'));
+		$result = $Sluggable->beforeSave($this->SlugArticle);
 		$this->assertTrue($result !== false);
-		$result = $this->Post->data;
-		$expected = array('Post' => array('title' => 'New First Article', 'slug' => 'new-first-article'));
+		$result = $this->SlugArticle->data;
+		$expected = array('SlugArticle' => array('title' => 'New First Article'));
 		$this->assertEqual($result, $expected);
-		$this->Post->id = null;
+		$this->SlugArticle->id = null;
+
+		$Sluggable->setup($this->SlugArticle, array('overwrite' => true));
+
+		$this->SlugArticle->id = 1;
+		$this->SlugArticle->data = array('SlugArticle' => array('title' => 'New First Article'));
+		$result = $Sluggable->beforeSave($this->SlugArticle);
+		$this->assertTrue($result !== false);
+		$result = $this->SlugArticle->data;
+		$expected = array('SlugArticle' => array('title' => 'New First Article', 'slug' => 'new-first-article'));
+		$this->assertEqual($result, $expected);
+		$this->SlugArticle->id = null;
 
 		unset($Sluggable);
 	}
@@ -459,60 +435,60 @@ class SluggableTestCase extends CakeTestCase
 	 */
 	function testSave()
 	{
-		$data = array('Post' => array('title' => 'New Article', 'body' => 'New Body 1','blog_id'=>1,'member_id'=>1));
-		$result = $this->Post->create();
+		$data = array('SlugArticle' => array('title' => 'New Article', 'subtitle' => '', 'body' => 'New Body 1'));
+		$result = $this->SlugArticle->create();
 		$this->assertTrue($result !== false);
-		$result = $this->Post->save($data);
-		$this->assertTrue($result !== false);
-
-		$result = $this->Post->read(array('slug', 'title'), 4);
-		$expected = array('Post' => array('slug' => 'new-article', 'title' => 'New Article'));
-
-		$data = array('Post' => array('title' => 'New Article','blog_id'=>1,'member_id'=>1, 'body' => 'New Body 2'));
-		$result = $this->Post->create();
-		$this->assertTrue($result !== false);
-		$result = $this->Post->save($data);
+		$result = $this->SlugArticle->save($data);
 		$this->assertTrue($result !== false);
 
-		$result = $this->Post->read(array('slug', 'title'), 5);
-		$expected = array('Post' => array('slug' => 'new-article-1', 'title' => 'New Article','blog_id'=>1,'member_id'=>1));
+		$result = $this->SlugArticle->read(array('slug', 'title'), 4);
+		$expected = array('SlugArticle' => array('slug' => 'new-article', 'title' => 'New Article'));
 
-		$data = array('Post' => array('title' => 'New Article','blog_id'=>1,'member_id'=>1, 'body' => 'New Body 3'));
-		$result = $this->Post->create();
+		$data = array('SlugArticle' => array('title' => 'New Article', 'subtitle' => 'Second Version', 'body' => 'New Body 2'));
+		$result = $this->SlugArticle->create();
 		$this->assertTrue($result !== false);
-		$result = $this->Post->save($data);
-		$this->assertTrue($result !== false);
-
-		$result = $this->Post->read(array('slug', 'title'), 6);
-		$expected = array('Post' => array('slug' => 'new-article-2', 'title' => 'New Article'));
-
-		$data = array('Post' => array('title' => 'Brand New Article', 'body' => 'Brand New Body','blog_id'=>1,'member_id'=>1));
-		$result = $this->Post->create();
-		$this->assertTrue($result !== false);
-		$result = $this->Post->save($data);
+		$result = $this->SlugArticle->save($data);
 		$this->assertTrue($result !== false);
 
-		$result = $this->Post->read(array('slug', 'title'), 7);
-		$expected = array('Post' => array('slug' => 'brand-new-article', 'title' => 'Brand New Article'));
+		$result = $this->SlugArticle->read(array('slug', 'title'), 5);
+		$expected = array('SlugArticle' => array('slug' => 'new-article-1', 'title' => 'New Article'));
 
-		$data = array('Post' => array('id' => 2, 'title' => 'New Title for Second Article','blog_id'=>1,'member_id'=>1));
-		$result = $this->Post->create();
+		$data = array('SlugArticle' => array('title' => 'New Article', 'subtitle' => 'Third Version', 'body' => 'New Body 3'));
+		$result = $this->SlugArticle->create();
 		$this->assertTrue($result !== false);
-		$result = $this->Post->save($data);
-		$this->assertTrue($result !== false);
-
-		$result = $this->Post->read(array('slug', 'title'), 2);
-		$expected = array('Post' => array('slug' => 'second-article', 'title' => 'New Title for Second Article'));
-
-		$data = array('Post' => array('title' => 'Article with whitelist', 'body' => 'Brand New Body','blog_id'=>1,'member_id'=>1));
-		$this->assertTrue($result !== false);
-		$result = $this->Post->create();
-		$this->assertTrue($result !== false);
-		$result = $this->Post->save($data, true, array('title', 'body'));
+		$result = $this->SlugArticle->save($data);
 		$this->assertTrue($result !== false);
 
-		$result = $this->Post->read(array('slug', 'title'), 8);
-		$expected = array('Post' => array('slug' => 'article-with-whitelist', 'title' => 'Article with whitelist'));
+		$result = $this->SlugArticle->read(array('slug', 'title'), 6);
+		$expected = array('SlugArticle' => array('slug' => 'new-article-2', 'title' => 'New Article'));
+
+		$data = array('SlugArticle' => array('title' => 'Brand New Article', 'subtitle' => '', 'body' => 'Brand New Body'));
+		$result = $this->SlugArticle->create();
+		$this->assertTrue($result !== false);
+		$result = $this->SlugArticle->save($data);
+		$this->assertTrue($result !== false);
+
+		$result = $this->SlugArticle->read(array('slug', 'title'), 7);
+		$expected = array('SlugArticle' => array('slug' => 'brand-new-article', 'title' => 'Brand New Article'));
+
+		$data = array('SlugArticle' => array('id' => 2, 'title' => 'New Title for Second Article'));
+		$result = $this->SlugArticle->create();
+		$this->assertTrue($result !== false);
+		$result = $this->SlugArticle->save($data);
+		$this->assertTrue($result !== false);
+
+		$result = $this->SlugArticle->read(array('slug', 'title'), 2);
+		$expected = array('SlugArticle' => array('slug' => 'second-article', 'title' => 'New Title for Second Article'));
+
+		$data = array('SlugArticle' => array('title' => 'Article with whitelist', 'body' => 'Brand New Body'));
+		$this->assertTrue($result !== false);
+		$result = $this->SlugArticle->create();
+		$this->assertTrue($result !== false);
+		$result = $this->SlugArticle->save($data, true, array('title', 'body'));
+		$this->assertTrue($result !== false);
+
+		$result = $this->SlugArticle->read(array('slug', 'title'), 8);
+		$expected = array('SlugArticle' => array('slug' => 'article-with-whitelist', 'title' => 'Article with whitelist'));
 	}
 
 	/**
@@ -523,25 +499,25 @@ class SluggableTestCase extends CakeTestCase
 	function testSaveField()
 	{
 		$expected = 'New body for first article';
-		$this->Post->id = 1;
-		$result = $this->Post->saveField('body', $expected);
+		$this->SlugArticle->id = 1;
+		$result = $this->SlugArticle->saveField('body', $expected);
 		$this->assertTrue($result);
-		$result = $this->Post->field('body');
+		$result = $this->SlugArticle->field('body');
 		$this->assertEqual($result, $expected);
-		$result = $this->Post->field('title');
+		$result = $this->SlugArticle->field('title');
 		$expected = 'First Article';
 		$this->assertEqual($result, $expected);
-		$result = $this->Post->field('slug');
+		$result = $this->SlugArticle->field('slug');
 		$expected = 'first-article';
 		$this->assertEqual($result, $expected);
 
 		$expected = 'New title for first article';
-		$this->Post->id = 1;
-		$result = $this->Post->saveField('title', $expected);
+		$this->SlugArticle->id = 1;
+		$result = $this->SlugArticle->saveField('title', $expected);
 		$this->assertTrue($result);
-		$result = $this->Post->field('title');
+		$result = $this->SlugArticle->field('title');
 		$this->assertEqual($result, $expected);
-		$result = $this->Post->field('slug');
+		$result = $this->SlugArticle->field('slug');
 		$expected = 'first-article';
 		$this->assertEqual($result, $expected);
 	}

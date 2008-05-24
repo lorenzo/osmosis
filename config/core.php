@@ -204,6 +204,6 @@
 	Cache::config('default', array('engine' => 'File'));
 	
 	//Used to disable authentication while in development
-	Configure::write('Auth.disabled',true);
+	Configure::write('Auth.disabled',false);
 	Configure::write('Osmosis.uploads',APP.'uploads');
 ?>

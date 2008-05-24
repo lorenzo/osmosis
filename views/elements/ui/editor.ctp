@@ -4,16 +4,16 @@ $mode = (isset($mode)) ? $mode : 'textareas';
 $theme = (isset($theme)) ? $theme : 'advanced';
 $plugins = array(
 	'safari',
+	'save',
 	'table',
 	'preview',
 	'paste',
 	'xhtmlxtras',
-	'youtube',
-	'media',
 	'inlinepopups'
 	);
 
 $row1 = array(
+	'save',
 	'bold',
 	'italic',
 	'underline','|',
@@ -52,7 +52,6 @@ $row3 = array(
 	'sub',
 	'sup','|',
 	'charmap',
-	'youtube',
 	'media');
 	
 $tiny = 'tinyMCE.init({';
@@ -65,7 +64,7 @@ if($theme == 'advanced') {
 	$tiny .= 'theme_advanced_source_editor_height : "200",';
 	$tiny .= 'theme_advanced_statusbar_location : "bottom",';
 	$tiny .= 'theme_advanced_resizing : true,';
-	$tiny .= 'theme_advanced_resize_horizontal : false,';
+	$tiny .= 'theme_advanced_resize_horizontal : true,';
 	$tiny .= 'theme_advanced_buttons1 : "'. implode(',',$row1) .'",';
 	$tiny .= 'theme_advanced_buttons2 : "'. implode(',',$row2) .'",';
 	$tiny .= 'theme_advanced_buttons3 : "'. implode(',',$row3) .'",';
