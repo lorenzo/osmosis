@@ -126,22 +126,6 @@ class AppController extends Controller {
 		return false;
 	}
 	
-	function admin_index() {
-		$this->index;
-	}
-	
-	function admin_view($id = null) {
-		$this->view($id);
-	}
-	
-	function admin_edit($id = null) {
-		$this->edit($id);
-	}
-	
-	function admin_delete($id = null) {
-		$this->delete($id);
-	}
-	
 	function beforeRender() {
 		if (isset($this->Placeholder->started) && $this->activeCourse);
 			$this->Placeholder->attachToolbar($this->activeCourse);
