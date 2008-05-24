@@ -43,25 +43,25 @@ class InitAclController extends AppController {
 		$this->InitAcl->deleteDB();
 		// AROS
 		$public_id = $this->InitAcl->initRole('Public');
-		$member_id = $this->InitAcl->initRole('Member',$public_id);
-		$attendee_id = $this->InitAcl->initRole('Attendee',$member_id);
-		$helper_id = $this->InitAcl->initRole('Helper',$attendee_id);
-		$instructor_id = $this->InitAcl->initRole('Instructor',$helper_id);
-		$creator_id = $this->InitAcl->initRole('Creator',$instructor_id);
-		$admin_id = $this->InitAcl->initRole('Admin');	
+		$member_id = $this->InitAcl->initRole('Member', $public_id);
+		$attendee_id = $this->InitAcl->initRole('Attendee', $member_id);
+		$helper_id = $this->InitAcl->initRole('Assistant', $attendee_id);
+		$professor_id = $this->InitAcl->initRole('Professor', $helper_id);
+		$creator_id = $this->InitAcl->initRole('Owner', $professor_id);
+		$admin_id = $this->InitAcl->initRole('Admin');
 		$member = array('Member' => 
 			array(
-				'institution_id'	=> '00-00000',
-		    		'full_name'		=> 'Administrator',
-		    		'email'		=> 'admin@root.com',
-		    		'phone'		=> '000000000',
-		    		'country'		=> 'Venezuela',
-		    		'city'		=> 'Caracas',
-		    		'sex'			=> 'M',
-		    		'role_id'		=> $admin_id,
-		    		'username'		=> 'admin',
-		    		'password'		=> 'admin'
-    			)
+				'institution_id'=> '00-00000',
+				'full_name'	=> 'Administrator',
+				'email'		=> 'admin@root.com',
+				'phone'		=> '000000000',
+				'country'	=> 'Venezuela',
+				'city'		=> 'Caracas',
+				'sex'		=> 'M',
+				'username'	=> 'admin',
+				'password'	=> 'admin',
+				'admin'		=> 1
+    		)
 		);
 		$member_id = $this->InitAcl->initMember($member);
 		
