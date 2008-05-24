@@ -11,12 +11,12 @@
 </head>
 <body>
 	<?php
-		echo $this->renderElement('layout/logo');
+		echo $this->element('layout/logo');
 	?>
 	<div id="content">
 		<div class="contentcolumn">
 			<?php
-				echo $this->renderElement('layout/top_nav');
+				echo $this->element('layout/top_nav');
 			?>
 			<div id="upper-content">
 				<div id="wrap">

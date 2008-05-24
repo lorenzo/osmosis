@@ -32,9 +32,18 @@
 class AppModel extends Model{
 	var $actsAs = array('Containable', 'Hookable');
 	
+	/**
+	 * Validation rule to check if a field is unique.cnl
+	 *
+	 * @param array $data 
+	 * @param string $name 
+	 * @return void
+	 * @author Joaquín Windmüller
+	 */
+	
 	function validateUnique($data, $name) {
 		if (!empty($this->id)) {
-			$conditions = array($this->primaryKey => '!= ' . $this->id, $name => $data[$name]);
+			$conditions = array('NOT' => array($this->primaryKey => $this->id, $name => $data[$name]));
 		} else {
 			$conditions = array($name => $data[$name]);
 		}

@@ -34,68 +34,43 @@ class Member extends AppModel {
 	var $displayField = 'full_name';
 
 	var $validate = array(
-			// 'name' => array(
-			//     'valid' => array(
-			//         'rule' => '/.+/',
-			//         )
-			// ),
-			// 'email' => array(
-			//     'valid' => array(
-			//         'rule' => 'email',
-			//         )
-			// ),
-			// 'country' => array(
-			//     'valid' => array(
-			//         'rule' => '/.+/',
-			//         )
-			// ),
-			// 'city' => array(
-			//     'valid' => array(
-			//         'rule' => '/.+/',
-			//         )
-			// ),
-			// 'age' => array(
-			//     'number' => array(
-			//         'rule' => 'numeric',
-			//         )
-			// ),
-			// 'sex' =>  array(
-			//     'valid' => array(
-			//         'rule' => '/.+/',
-			//         )
-			// ),
-			// 'role_id' => array(
-			//     'valid' => array(
-			//         'rule' => '/.+/',
-			//         )
-			// ),
-			'username' =>  array(
-			    // 'valid' => array(
-			    //     'rule' => '/.+/',
-			    // 		        ),
-				'isunique' => array(
-					'rule' => array('validateUnique', 'username'),
-					'required' => true
-				)
+		'full_name' => array(
+			'required' => array(
+				'rule' => array('custom', '/.+/')
+			)
+		),
+		'email' => array(
+			'required' => array(
+				'rule' => array('custom', '/.+/'),
+				'last' => true
 			),
-			// 'password' =>  array(
-			//     'valid' => array(
-			//         'rule' => '/.+/',
-			//         )
-			// ),
-		);
-		
-	var $belongsTo = array(
-		'Role' => array(
-			'className' => 'Role',
-			'foreignKey' => 'role_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'counterCache' => ''
+			'valid' => array(
+				'rule' => 'email'
+			)
+		),
+		'username' =>  array(
+			'required' => array(
+				'rule' => array('custom', '/.+/'),
+				'last' => true
+			),
+			'unique' => array(
+				'rule' => array('validateUnique', 'username'),
+				'required' => true
+			)
+		),
+		'password' =>  array(
+			'confirmation' => array(
+				'rule' => array('confirmPassword')
+			)
+		),
+		'password_confirm' => array(
+			'required' => array(
+				'rule' => 'alphanumeric',
+				'required' => true
+			)
 		)
 	);
-	
+
 	var $hasAndBelongsToMany = array(
 		'Course' => array(
 			'className' => 'Course',
@@ -108,35 +83,40 @@ class Member extends AppModel {
 	);
 	
     var $actsAs = array('Acl');
-    
+
     function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
-			'username.isunique',
+			'full_name.required',
+			__('Please write your full name',true)
+		);
+		$this->setErrorMessage(
+			'email.valid',
+			__('Please write a valid email address',true)
+		);
+		$this->setErrorMessage(
+			'email.required',
+			__('Please write your email address',true)
+		);
+		$this->setErrorMessage(
+			'username.required',
+			__('Please write your username',true)
+		);
+		$this->setErrorMessage(
+			'username.unique',
 			__('This username is taken',true)
 		);
-    	// $this->validate['email']['valid']['message'] = __('The email address provided is not correct',true);
-    	// $this->validate['country']['valid']['message'] = __('The country name can not be empty',true);
-    	// $this->validate['city']['valid']['message'] = __('The city name can not be empty',true);
-    	// $this->validate['age']['number']['message'] = __('The age must be a number',true);
-    	// $this->validate['sex']['valid']['message'] = __('The sex can not be empty',true);
-    	// $this->validate['rol_id']['valid']['message'] = __('The rol_id can not be empty',true);
-    	// $this->validate['username']['valid']['message'] = __('The username can not be empty',true);
-    	// $this->validate['password']['valid']['message'] = __('The password can not be empty',true);
-    	// $this->validate['name']['valid']['message'] = __('The name can not be empty',true);	
-		parent::__construct($id,$table,$ds);
+		$this->setErrorMessage(
+			'password.confirmation',
+			__('The password and its confirmation do not match',true)
+		);
+		$this->setErrorMessage(
+			'password_confirm.required',
+			__('Please confirm the password',true)
+		);
+		parent::__construct($id, $table, $ds);
     }
     
-
     function parentNode() {
-        if (!$this->id) {
-            return null;
-        }
-        $data = $this->read();
-        if (!$data[$this->name]['role_id']){
-            return null;
-        } else {
-            return array('model' => 'Role', 'foreign_key' => $data[$this->name]['role_id']);
-        }
     }
 
 	function courses($id) {
@@ -147,8 +127,9 @@ class Member extends AppModel {
 			)
 		);
 		$ids = Set::extract($ids,'{n}.Enrollment.course_id');
-		if (empty($ids))
+		if (empty($ids)) {
 			return array();
+		}
 		$courses = $this->Course->find('all', array(
 			'conditions'=> array('id' => $ids),
 			'fields'	=> array('id','code', 'name'),
@@ -162,6 +143,22 @@ class Member extends AppModel {
 		$timeout = time() - (Security::inactiveMins() * Configure::read('Session.timeout'));
 		return $this->find('first', array('conditions' => array('id' => $id, 'last_seen' => '< ' . $timeout )));
 	}
+	
+	/**
+	 * Validation function to check if the password and its confirmation are the same.
+	 *
+	 * @param array $data data sent
+	 * @return boolean true if the passwords are the same
+	 * @author Joaquín Windmüller
+	 */
+	function confirmPassword($data) {
+		$valid = false; 
+		if ($data['password'] == Security::hash(Configure::read('Security.salt') . $this->data['Member']['password_confirm'])) {
+		   $valid = true;
+		}
+		return $valid;
+	}
+	
 	
 }
 ?>

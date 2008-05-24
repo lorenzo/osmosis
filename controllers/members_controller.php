@@ -87,8 +87,9 @@ class MembersController extends AppController {
 			} else {
 				$this->Session->setFlash(__('The Member could not be saved. Please, try again.',true));
 			}
+			unset($this->data['Member']['password']);
+			unset($this->data['Member']['password_confirm']);
 		}
-		$roles = $this->Member->Role->find('list');
 		$this->set(compact('roles'));
 	}
 

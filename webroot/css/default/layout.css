@@ -203,3 +203,13 @@ body {
 	padding:5px 10px;
 	text-align:right;
 }
+
+.twocol .col {
+	width:40%;
+	margin-right:10px;
+	float:left;
+}
+
+.twocol .full {
+	clear:both;
+}

@@ -1,8 +1,8 @@
 <div class="members form">
 <?php echo $form->create('Member');?>
-	<fieldset>
+	<fieldset class="twocol">
  		<legend><?php __('Add Member');?></legend>
-		<fieldset>
+		<fieldset class="col">
 			<legend><?php __('Personal Data')?></legend>
 			<?php
 				echo $form->input('full_name');
@@ -12,7 +12,7 @@
 				echo $form->input('sex');
 			?>
 		</fieldset>
-		<fieldset>
+		<fieldset class="col">
 			<legend><?php __('Location'); ?></legend>
 			<?php
 				echo $form->input('institution_id');
@@ -21,21 +21,15 @@
 			
 			?>
 		</fieldset>
-		<fieldset>
-			<legend><?php __('User')?></legend>
+		<fieldset class="full">
+			<legend><?php __('Access Information')?></legend>
 			<?php
-				echo $form->input('role_id');
 				echo $form->input('username');
-				echo $form->input('password');			
+				echo $form->input('password');
+				echo $form->input('password_confirm', array('type' => 'password'));
+				echo $form->input('admin', array('label' => __('Give this user administrative access', true)));
 			?>
 		</fieldset>
 	</fieldset>
 <?php echo $form->end('Submit');?>
-</div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('List Members', true), array('action'=>'index'));?></li>
-		<li><?php echo $html->link(__('List Roles', true), array('controller'=> 'roles', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Role', true), array('controller'=> 'roles', 'action'=>'add')); ?> </li>
-	</ul>
 </div>
