@@ -17,7 +17,6 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('city');?></th>
 	<th><?php echo $paginator->sort('age');?></th>
 	<th><?php echo $paginator->sort('sex');?></th>
-	<th><?php echo $paginator->sort('role_id');?></th>
 	<th><?php echo $paginator->sort('username');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
@@ -56,14 +55,6 @@ foreach ($members as $member):
 		</td>
 		<td>
 			<?php echo $member['Member']['sex']; ?>
-		</td>
-		<td>
-			<?php
-				echo $html->link(
-					$member['Role']['role'],
-					array('controller'=> 'members', 'action'=>'index', 'role' =>  $member['Role']['id'])
-				);
-			?>
 		</td>
 		<td>
 			<?php echo $member['Member']['username']; ?>
