@@ -47,7 +47,7 @@ class AppController extends Controller {
 			$this->Auth->Acl =& $this->Acl;
 			$this->Auth->authorize = 'controller';
 			$this->Auth->userModel = 'Member';
-			$this->Auth->loginAction = array('controller' => 'members', 'action' => 'login');
+			$this->Auth->loginAction = array('controller' => 'members', 'action' => 'login', 'plugin' => '');
 			$this->Auth->loginRedirect = array('controller' => 'courses');
 			$this->Auth->autoRedirect = true;
 			$this->set('user', $this->Session->read('Auth.Member'));
@@ -115,7 +115,11 @@ class AppController extends Controller {
 	function isAuthorized() {
 		if( $this->name == 'Pages')
 			return true;
-		$valid = true;//$this->Auth->isAuthorized('crud');
+			
+		if ($this->Auth->user('role_id') == 7) // Admin User
+			return true;
+
+		$valid = @$this->Auth->isAuthorized('actions');
 		if($valid || Configure::read('Auth.disabled')) {
 			return true;
 		}
