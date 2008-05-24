@@ -85,7 +85,6 @@ class InstallerComponent extends Object {
 				$schema->after(array('create' => $table, 'errors'=> $this->errors));
 			}
 		}
-			
 		return empty($this->errors);
 	}
 

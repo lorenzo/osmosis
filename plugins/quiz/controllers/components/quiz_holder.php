@@ -42,7 +42,7 @@ class QuizHolderComponent extends PlaceholderDataComponent {
 	}
 	
 	function courseToolbar() {
-		return array('url' => array('plugin' => 'Quiz', 'controller' => 'quizzes', 'action' => 'index'));
+		return array('url' => array('plugin' => 'quiz', 'controller' => 'quizzes', 'action' => 'index'));
 	}
 	
 }

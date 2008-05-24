@@ -69,6 +69,10 @@ class AppController extends Controller {
 	
 	function __authorizedPlugin() {
 		if (isset($this->plugin) && !empty($this->plugin)) {
+			
+			if ($this->name == 'Installer' && $this->Auth->user('admin')) // Verify that only admin can access this controller
+				return true;
+				
 			if (!$plugin = ClassRegistry::getObject('Plugin')) {
 				App::import('Model', 'Plugin');
 				$plugin = new Plugin;
@@ -148,8 +152,8 @@ class AppController extends Controller {
 	function isAuthorized() {
 		if( $this->name == 'Pages')
 			return true;
-			
-		if ($this->Auth->user('role_id') == 7) // Admin User
+
+		if ($this->Auth->user('admin')) // Admin User
 			return true;
 
 		$valid = @$this->Auth->isAuthorized('actions');
@@ -160,7 +164,7 @@ class AppController extends Controller {
 	}
 	
 	function beforeRender() {
-		if (isset($this->Placeholder->started) && $this->activeCourse);
+		if (isset($this->Placeholder->started) && $this->activeCourse)
 			$this->Placeholder->attachToolbar($this->activeCourse);
 		if ($this->activeCourse) {
 			$this->Placeholder->attach('course_data');
