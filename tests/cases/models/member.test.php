@@ -39,7 +39,7 @@ class TestMember extends Member {
 
 class MemberTestCase extends CakeTestCase {
 	var $Member = null;
-	var $fixtures = array('app.member', 'app.institution', 'app.role', 'app.forum_discussion', 'app.forum_response', 'app.locker_document', 'app.locker_folder', 'app.online_user', 'app.wiki_entry', 'app.wiki_revision', 'app.forum_discussion', 'app.forum_response', 'app.locker_document', 'app.locker_folder', 'app.online_user', 'app.wiki_entry', 'app.wiki_revision');
+	var $fixtures = array('app.member', 'app.institution', 'app.role', 'app.forum_discussion', 'app.forum_response', 'app.locker_document', 'app.locker_folder', 'app.wiki_entry', 'app.wiki_revision', 'app.forum_discussion', 'app.forum_response', 'app.locker_document', 'app.locker_folder', 'app.online_user', 'app.wiki_entry', 'app.wiki_revision');
 
 	function start() {
 		parent::start();

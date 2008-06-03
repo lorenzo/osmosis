@@ -33,7 +33,7 @@ class MembersController extends AppController {
 
 	var $name = 'Members';
 	var $helpers = array('Html', 'Form' );
-	var $uses = array('Member','OnlineUser');
+	var $uses = array('Member');
 	/**
 	 * Lists available members
 	 *
@@ -164,6 +164,17 @@ class MembersController extends AppController {
 			return true;
 		}
 		return parent::isAuthorized();
+	}
+	
+	/**
+	 * Manage manual enrollments
+	 *
+	 * @return void
+	 * @author Joaquín Windmüller
+	 **/
+	function admin_enroll() {
+		$this->Member->recursive = 0;
+		$this->set('members', $this->paginate());
 	}
 
 }
