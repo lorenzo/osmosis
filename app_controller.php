@@ -43,8 +43,9 @@ class AppController extends Controller {
 	protected $activeCourse = false;
 	
 	function beforeFilter() {
-		
-		$this->_initializeAuth();
+		if (isset($this->Auth)) {
+			$this->_initializeAuth();
+		}
 		
 		if (isset($this->Security)) {
 			$this->Security->blackHoleCallback = '_blackHoledAction';
@@ -89,21 +90,19 @@ class AppController extends Controller {
 		return true;
 	}
 	
-	function _initializeAuth() {
-		if (isset($this->Auth)) {
-			$this->Auth->Acl =& $this->Acl;
-			$this->Auth->authorize = 'controller';
-			$this->Auth->userModel = 'Member';
-			$this->Auth->loginAction = array('controller' => 'members', 'action' => 'login', 'plugin' => '');
-			$this->Auth->loginRedirect = array('controller' => 'courses');
-			$this->Auth->autoRedirect = true;
-			$this->set('user', $this->Session->read('Auth.Member'));
-			//TODO: Borrar lo siguiente cuando sea el momento
-			if(Configure::read('Auth.disabled') && $this->name == 'InitAcl') {
-				$this->Auth->allow();
-			}
-			Configure::write('ActiveUser', $this->Auth->user());
+	function _initializeAuth() {		
+		$this->Auth->Acl =& $this->Acl;
+		$this->Auth->authorize = 'controller';
+		$this->Auth->userModel = 'Member';
+		$this->Auth->loginAction = array('controller' => 'members', 'action' => 'login', 'plugin' => '', 'admin' => false);			
+		$this->Auth->loginRedirect = array('controller' => 'courses');
+		$this->Auth->autoRedirect = true;
+		$this->set('user', $this->Session->read('Auth.Member'));
+		//TODO: Borrar lo siguiente cuando sea el momento
+		if(Configure::read('Auth.disabled') && $this->name == 'InitAcl') {
+			$this->Auth->allow();
 		}
+		Configure::write('ActiveUser', $this->Auth->user());
 	}
 	
 	function _getActiveCourse() {

@@ -176,6 +176,18 @@ class MembersController extends AppController {
 		$this->Member->recursive = 0;
 		$this->set('members', $this->paginate());
 	}
-
+	
+	/**
+	 * Special treatment for login action when the member loging in is an admin
+	 *
+	 * @return void
+	 * @author Joaquín Windmüller
+	 */
+	function _initializeAuth() {
+		parent::_initializeAuth();
+		if ($this->action =='login' && !empty($this->data) && $this->Member->isAdmin($this->data['Member']['username'])) {
+			$this->Auth->loginRedirect = array('controller' => 'dashboards', 'action' => 'dashboard', 'admin' => true);
+		}
+	}
 }
 ?>
