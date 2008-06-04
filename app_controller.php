@@ -47,13 +47,14 @@ class AppController extends Controller {
 			$this->_initializeAuth();
 		}
 		
+		$this->_setActiveCourse();
+		
 		if (isset($this->Security)) {
 			$this->Security->blackHoleCallback = '_blackHoledAction';
 		}
 		if (isset($this->Auth) && $this->Session->valid() && $this->Auth->user())
 			$this->__updateOnlineUser();
 		
-		$this->_setActiveCourse();
 		Configure::write('ActiveCourse.id', $this->activeCourse);
 		
 		$this->__instatiateLogger();
@@ -74,7 +75,7 @@ class AppController extends Controller {
 			if ($this->name == 'Installer' && $this->Auth->user('admin')) // Verify that only admin can access this controller
 				return true;
 				
-			if (!$plugin = ClassRegistry::getObject('Plugin')) {
+			if (!$plugin = ClassRegistry::init('Plugin','Model')) {
 				App::import('Model', 'Plugin');
 				$plugin = new Plugin;
 				ClassRegistry::addObject('Plugin', $plugin);
@@ -90,6 +91,7 @@ class AppController extends Controller {
 		return true;
 	}
 	
+
 	function _initializeAuth() {		
 		$this->Auth->Acl =& $this->Acl;
 		$this->Auth->authorize = 'controller';
@@ -111,20 +113,13 @@ class AppController extends Controller {
 	
 	function __setActiveCourseData() {
 		if ($this->activeCourse) {
-			if (!$course = ClassRegistry::getObject('Course')) {
-				App::import('Model', 'Course');
-				$course = new Course;
-				ClassRegistry::addObject('Course', $course);
-			}
+			$course = ClassRegistry::init('Course');
 			$this->set('course', $course->read(null, $this->activeCourse));
 		}
 	}
 	
 	function __instatiateLogger() {
-		if (!ClassRegistry::isKeySet('ModelLog')) {
-			App::import('Model', 'ModelLog');
-			ClassRegistry::addObject('ModelLog', new ModelLog);
-		}
+		ClassRegistry::init('ModelLog');
 	}
 	function _blackHoledAction() {
 		$this->Session->setFlash(__('Invalid access', true));
@@ -139,11 +134,7 @@ class AppController extends Controller {
 	}
 	
 	protected function __updateOnlineUser() {
-		if (!$member = ClassRegistry::getObject('Member')) {
-			App::import('Model', 'Member');
-			$member = new Member;
-			ClassRegistry::addObject('Member', $member);
-		}
+		$member = ClassRegistry::init('Member');
 		$member->id = $this->Auth->user('id');
 		$member->saveField('last_seen', time());
 	}
@@ -151,20 +142,38 @@ class AppController extends Controller {
 	function isAuthorized() {
 		if( $this->name == 'Pages')
 			return true;
-
+			
 		if ($this->Auth->user('admin')) // Admin User
 			return true;
 
-		$valid = @$this->Auth->isAuthorized('actions');
-		if($valid || Configure::read('Auth.disabled')) {
+		$valid = $this->Auth->Acl->check($this->_currentRole(),$this->Auth->action()) && $this->_ownerAuthorization();
+		
+		if($valid || Configure::read('Auth.disabled'))
 			return true;
-		}
+
 		return false;
 	}
 	
+	function _currentRole() {
+		if (!$this->Auth->user())
+			return 'Public';
+
+		if (empty($this->activeCourse))
+			return 'Member';
+				
+		$member = ClassRegistry::init('Member');
+		return $member->role($this->Auth->user('id'),$this->activeCourse);
+	}
+	
+	function _ownerAuthorization() {
+		return true;
+	}
+	
 	function beforeRender() {
-		if (isset($this->Placeholder->started) && $this->activeCourse)
+		if (isset($this->Placeholder->started) && $this->activeCourse) {
 			$this->Placeholder->attachToolbar($this->activeCourse);
+		}
+			
 		if ($this->activeCourse) {
 			$this->Placeholder->attach('course_data');
 			$this->__setActiveCourseData();

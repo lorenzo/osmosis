@@ -117,6 +117,7 @@ class Member extends AppModel {
     }
     
     function parentNode() {
+		return 2;
     }
 
 	function courses($id) {
@@ -157,6 +158,20 @@ class Member extends AppModel {
 		   $valid = true;
 		}
 		return $valid;
+	}
+	
+	function isAdmin($username) {
+		return $this->find('count',array('conditions' => array('username' => $username, 'admin' => true))) == 1;
+	}
+	
+	function role($id,$course) {
+		$this->Enrollment->bind('Role');
+		$enrollment = $this->Enrollment->find('first', array('conditions' => array('course_id' => $course, 'member_id' => $id)));
+		
+		if (!empty($enrollment))
+			return $enrollment['Role']['role'];
+			
+		return 'Member';
 	}
 	
 	

@@ -33,11 +33,6 @@ class InitAclController extends AppController {
 	var $name = 'InitAcl';
 	var $components = array('Acl','InitAcl');
 	var $uses = array('Member','Role');
-	var $controllers = array(
-		'Members' => array('index','view','add','edit','delete'),
-		'Courses' => array('index','view','add','edit','delete'),
-		'Departments' => array('index','view','add','edit','delete')
-	);
 	
 	function init() {
 		$this->InitAcl->deleteDB();
@@ -48,7 +43,6 @@ class InitAclController extends AppController {
 		$helper_id = $this->InitAcl->initRole('Assistant', $attendee_id);
 		$professor_id = $this->InitAcl->initRole('Professor', $helper_id);
 		$creator_id = $this->InitAcl->initRole('Owner', $professor_id);
-		$admin_id = $this->InitAcl->initRole('Admin');
 		$member = array('Member' => 
 			array(
 				'institution_id'=> '00-00000',
@@ -70,18 +64,23 @@ class InitAclController extends AppController {
 		$id = $this->InitAcl->createAco(null, null, null, "ROOT");
 		$con_id = $this->InitAcl->createAco(null, null, $id, "Controllers/");
 		$con_id = $this->InitAcl->createAco(null, null, $con_id, "App/");
-		foreach ($this->controllers as $controller => $actions) {
+		
+		App::import('File','permissions',true,CONFIGS);
+		$permissions = new OsmosisPermissions;
+		foreach ($permissions as $controller => $actions) {
+			if ($controller{0} == '_') continue;
 			$_id = $this->InitAcl->createAco(null, null, $con_id, $controller);
-			foreach ($actions as $action) {
+			foreach ($actions as $action => $leastRole) {
 				$this->InitAcl->createAco(null, null, $_id, $action);
+				$this->Acl->Aro->Permission->create();
+				$this->Acl->allow($leastRole,$controller.'/'.$action);
 			}
 		}
-		$this->Acl->allow('Admin','ROOT');
 		$this->autoRender = false;
 	}
 	
 	function isAuthorized() {
-		if(Configure::read('Auth.disabled')) {
+		if (Configure::read('Auth.disabled')) {
 			return true;
 		}
 		return false;

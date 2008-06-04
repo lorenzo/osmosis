@@ -32,7 +32,14 @@
 class CoursesController extends AppController {
 
 	var $name = 'Courses';
-	var $helpers = array('Html', 'Form' );
+	var $helpers = array('Html', 'Form','Rating','Javascript');
+	
+	function _setActiveCourse() {
+		if ($this->action == 'view') 
+			$this->activeCourse = $this->params['pass'][0];
+		else
+			parent::_setActiveCourse();
+	}
 
 	/**
 	 * Lists available courses
@@ -66,7 +73,6 @@ class CoursesController extends AppController {
 			$this->Session->setFlash(__('Invalid Course',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-		$this->activeCourse = $id;
 		$this->set('course', $this->Course->read(null, $id));
 		$this->set('professors', $this->Course->professors($id));
 	}
@@ -118,7 +124,9 @@ class CoursesController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Course->read(null, $id);
 		}
-		$departments = $this->Course->Department->generateList();
+		$departments = $this->Course->Department->find("list");
+		$owners = $this->Course->Owner->find("list");
+		$this->set(compact('departments', 'owners'));
 	}
 
 	/**

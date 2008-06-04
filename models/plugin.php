@@ -171,7 +171,7 @@ class Plugin extends AppModel {
 	 */
 	
 	function getCourseTools($course_id, $fetchHolders = false) {
-		$plugins = $this->actives(array('name', 'title','id'),array('types' => 'LIKE %tool%'));
+		$plugins = $this->actives(array('name', 'title','id'));
 		if ($fetchHolders) {
 			if (is_array($fetchHolders) && isset($fetchHolders['type'])) {
 				$type = $fetchHolders['type'];

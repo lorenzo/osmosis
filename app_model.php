@@ -74,5 +74,26 @@ class AppModel extends Model{
 			trigger_error(__('Please use "contain" instead of "restrict"', true), E_USER_WARNING);
 		}
 	}
+	
+	function isOwner($member,$id) {
+		
+		if (isset($this->belongsTo) && !empty($this->belongsTo)) {
+			$foreign = false;
+			foreach($this->belongsTo as $alias => $assoc) {
+				if ($alias == 'Member' || $assoc['className'] == 'Member')
+					$foreign = $alias;
+			}
+			
+			if (!$foreign)
+				return false;
+				return $this->find('count',array(
+					'conditions' => array(
+						$this->alias.'.id' => $id,
+						$this->belongsTo[$foreign]['foreignKey'] => $member 
+						)
+					)) > 0;
+		}
+		return false;
+	}
 }
 ?>

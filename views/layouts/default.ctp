@@ -6,6 +6,7 @@
 		echo $this->element('layout/common_header');
 	?>
 	<?php echo $placeholder->render('head'); ?> 
+	<?php echo $scripts_for_layout ?>
 	<title>Ósmosis - Default :: <?php echo $title_for_layout;?></title> 
 </head>
 <body>

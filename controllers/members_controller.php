@@ -34,17 +34,6 @@ class MembersController extends AppController {
 	var $name = 'Members';
 	var $helpers = array('Html', 'Form' );
 	var $uses = array('Member');
-	/**
-	 * Lists available members
-	 *
-	 * @return void
-	 * @author José Lorenzo
-	 */
-	
-	function index() {
-		$this->Member->recursive = 0;
-		$this->set('members', $this->paginate());
-	}
 
 	function admin_index() {
 		$this->Member->recursive = 0;
@@ -117,8 +106,6 @@ class MembersController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Member->read(null, $id);
 		}
-		$roles = $this->Member->Role->find('list');
-		$this->set(compact('roles'));
 	}
 
 	/**
@@ -129,7 +116,7 @@ class MembersController extends AppController {
 	 * @author José Lorenzo
 	 */
 	
-	function delete($id = null) {
+	function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for Member',true));
 			$this->redirect(array('action'=>'index'), null, true);

@@ -89,7 +89,7 @@ class InitAclComponent extends Object {
 		$this->Member->create();
 		$this->Auth->userModel = 'Member';
 		$data = $this->Auth->hashPasswords($data);
-		$this->Member->save($data);
+		$this->Member->save($data,false);
 		return $this->Member->getLastInsertId();
 	}
 	

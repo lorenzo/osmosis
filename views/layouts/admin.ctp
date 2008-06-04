@@ -7,6 +7,7 @@
 	?> 
 	<?php echo $placeholder->render('head'); ?> 
 	<?php echo $html->css('default/admin'); ?> 
+	<?php echo $scripts_for_layout; ?> 
 	<title>Ósmosis - Admin :: <?php echo $title_for_layout;?></title> 
 </head>
 <body>
