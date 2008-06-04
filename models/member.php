@@ -160,8 +160,22 @@ class Member extends AppModel {
 		return $valid;
 	}
 	
+	/**
+	 * Determines wether this user is administrator
+	 *
+	 * @return boolean
+	 * @author Joaquín Windmüller
+	 **/
 	function isAdmin($username) {
-		return $this->find('count',array('conditions' => array('username' => $username, 'admin' => true))) == 1;
+		return $this->field('admin', compact('username'));
+	}
+	
+	function members($course_id) {
+		$members = $this->Enrollment->find('all', array(
+			'conditions'=> array('course_id' => $course_id),
+			'fields'	=> array('member_id')
+		));
+		return Set::extract('/Enrollment/member_id', $members);
 	}
 	
 	function role($id,$course) {
@@ -173,7 +187,6 @@ class Member extends AppModel {
 			
 		return 'Member';
 	}
-	
-	
+		
 }
 ?>

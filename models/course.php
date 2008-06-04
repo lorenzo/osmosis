@@ -160,13 +160,18 @@ class Course extends AppModel {
 	 * @return mixed On success data saved if its not empty or true, false on failure.
 	 * @access public
 	 */
-	function enroll($member_id,$role = 'attendee',$course_id = null) {
+	function enroll($member_id, $role = 'attendee', $course_id = null) {
 		if (empty($this->id)) {
 			return false;
 		}
 		$course_id = $this->id;
 		$this->bindModel(array('hasAndBelongsToMany' => array('Member')));
-		return $this->Member->Enrollment->save(array('course_id' => $course_id,'member_id' => $member_id, 'role' => $role));
+		$data = array(
+			'course_id' => $course_id,
+			'member_id' => $member_id,
+			'role_id'	=> array_pop($this->Member->Enrollment->roles($role, true))
+		);
+		return $this->Member->Enrollment->save($data);
 	}	
 	
 	/**
@@ -185,20 +190,57 @@ class Course extends AppModel {
 	
 	/**
 	 * Gets the professors of the course.
-	 * 
+	 *
 	 * @param int $id ID of the course.
 	 * @return Array professors of the course.
+	 * @author Joaquín Windmüller
 	 */
 	function professors($id) {
+		return $this->enrolled($id, 'professor');
+	}
+	
+	/**
+	 * Returns the members enrolled in the course, grouped by role.
+	 *
+	 * @param int $id ID of the course
+	 * @param mixed $role specific role (or roles) of the enrolled members. Null to get all entrolled members.
+	 * @return Array members enrolled in the course
+	 * @author Joaquín Windmüller
+	 */	
+	function enrolled($id, $role = null, $just_ids = false) {
+		$fields = array('member_id', 'Enrollment.role_id');
+		$order = array('role_id ASC');
+		$conditions = array('course_id' => $id);
+		
 		$this->bindModel(array('hasAndBelongsToMany' => array('Member')));
-		return $this->Member->Enrollment->find(
-			'all',
-			array(
-				'conditions' => array(
-					'course_id' => $id, 'role' => 'professor'
-				)
-			)
-		);
+		$roles = $this->Member->Enrollment->roles($role);
+		if ($roles) {
+			$conditions['Enrollment.role_id'] = Set::extract('/Role/id', $roles);
+			$roles = Set::combine($roles, '/Role/id', '/Role/role');
+		}
+		
+		$enrolled = $this->Member->Enrollment->find('all', compact('conditions', 'fields', 'order'));
+		$members_by_role = array();		
+		foreach ($enrolled as $i => $member) {
+			$member = $member['Enrollment'];
+			$role_name = $roles[$member['role_id']];
+			$members_by_role[$role_name][] = $member['member_id'];
+		}
+
+		if ($just_ids) {
+			return $members_by_role;
+		}
+		
+		$members = array();
+		$this->Member->recursive = -1;
+		foreach ($members_by_role as $role => $ids) {
+			$members[$role] = $this->Member->find('all', array(
+				'conditions' => array('Member.id' => $ids),
+				'fields' => array('id', 'full_name')
+			));
+		}
+		
+		return $members;
 	}
 }
 ?>
