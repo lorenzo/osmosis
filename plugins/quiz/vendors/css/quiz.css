@@ -12,11 +12,13 @@
 .quiz-preview .content {
 	margin-left:10px;
 	border-left:#ccc 1px dashed;
-	padding:0 0 10px 10px;
+	padding:0 0 10px 10px!important;
+	border-top:none!important;
 }
 .quiz-preview h2 {
+	border:none!important;	
 	text-transform:uppercase;
-	text-align:center;
+	text-align:center!important;
 }
 
 .quiz-preview h3 {
@@ -27,11 +29,12 @@
 
 .droplist {
 	position:relative;
-	width:200px;
+	width:160px;
 }
 
 .question-list .add {
-	padding:3px 0 0 210px;
+	padding:3px 0pt 0pt 170px;
+	font-size:0.9em;
 }
 .droplist ul{
 	margin:0;
@@ -57,7 +60,7 @@
 .droplist ul:hover li a,
 .droplist ul:hover li span {
 	display:block;
-	width:180px;
+	width:100%;
 	padding:3px 10px;
 }
 .droplist ul:hover li a:hover {
@@ -68,7 +71,7 @@
 .droplist ul:hover li {
 	visibility:visible;
 	display:block;
-	width:200px;
+	width:100%;
 }
 
 .droplist ul:hover li {

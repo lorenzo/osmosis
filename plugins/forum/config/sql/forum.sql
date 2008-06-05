@@ -40,17 +40,6 @@ CREATE TABLE IF NOT EXISTS `forum_discussions` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `forum_forums`
---
-
-CREATE TABLE IF NOT EXISTS `forum_forums` (
-  `id` int(11) NOT NULL auto_increment,
-  `course_id` int(11) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -76,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `forum_responses` (
 
 CREATE TABLE IF NOT EXISTS `forum_topics` (
   `id` int(11) NOT NULL auto_increment,
+  `course_id` int(11) NOT NULL,
   `name` varchar(120) character set utf8 collate utf8_unicode_ci NOT NULL COMMENT 'Name of the subject',
   `description` varchar(255) NOT NULL COMMENT 'Description of the forum''s subject',
   `forum_id` int(11) NOT NULL,

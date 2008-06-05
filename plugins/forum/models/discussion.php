@@ -109,9 +109,9 @@ class Discussion extends AppModel {
 		return $results;
 	}
 	function getDiscussion($id) {
-		$this->restrict(
+		$this->contain(
 			array(
-				'Discussion', 'Member',
+				'Member',
 				'Topic' => array('id', 'name')
 			)
 		);

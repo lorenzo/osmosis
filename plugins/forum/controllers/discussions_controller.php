@@ -57,7 +57,7 @@ class DiscussionsController extends ForumAppController {
 		$discussion = $this->Discussion->getDiscussion($id);
 		$this->Discussion->Response->restrict(
 			array(
-				'Response' => array('Member'),
+				'Member',
 				'Discussion' => array('id')
 			)
 		);

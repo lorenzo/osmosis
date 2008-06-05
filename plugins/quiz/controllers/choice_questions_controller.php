@@ -51,6 +51,7 @@ class ChoiceQuestionsController extends AppController {
 		if ($this->_updateChoiceCount()) {
 			return;
 		}
+		$totalChoices = 2;
 		if (!empty($this->data)) {
 			$this->_cleanupEmpty();
 			$this->ChoiceQuestion->create();
