@@ -49,7 +49,6 @@ class MembersController extends AppController {
 	 *
 	 * @param string $id 
 	 * @return void
-	 * @author José Lorenzo
 	 */
 	
 	function view($id = null) {
@@ -64,7 +63,6 @@ class MembersController extends AppController {
 	 * Creates a new member
 	 *
 	 * @return void
-	 * @author José Lorenzo
 	 */
 	
 	function admin_add() {
@@ -87,7 +85,6 @@ class MembersController extends AppController {
 	 *
 	 * @param string $id 
 	 * @return void
-	 * @author José Lorenzo
 	 */
 	
 	function edit($id = null) {
@@ -113,7 +110,6 @@ class MembersController extends AppController {
 	 *
 	 * @param string $id 
 	 * @return void
-	 * @author José Lorenzo
 	 */
 	
 	function admin_delete($id = null) {
@@ -157,7 +153,6 @@ class MembersController extends AppController {
 	 * Manage manual enrollments
 	 *
 	 * @return void
-	 * @author Joaquín Windmüller
 	 **/
 	function admin_enroll() {
 		$this->Member->recursive = 0;
@@ -168,7 +163,6 @@ class MembersController extends AppController {
 	 * Special treatment for login action when the member loging in is an admin
 	 *
 	 * @return void
-	 * @author Joaquín Windmüller
 	 */
 	function _initializeAuth() {
 		parent::_initializeAuth();

@@ -56,15 +56,9 @@ class InstallerComponent extends Object {
 			$plugin = $this->controller->plugin;
 		else 
 			return false;
-		$configure = Configure::getInstance();
-		$pluginPaths = $configure->pluginPaths;
-		$path = '';
-		foreach ($pluginPaths as $pp) {
-			if (is_dir($pp.Inflector::underscore($plugin))) {
-				$path = $pp.Inflector::underscore($plugin);
-				break;
-			}	
-		}
+		
+		$instance = ClassRegistry::init('Plugin');
+		$path = $instance->getPath($plugin);
 		if (empty($path) || !($schema = new CakeSchema(array('name' => $plugin,'path' => $path.DS.'config'.DS.'sql'))))
 			return false;
 		

@@ -36,7 +36,6 @@ class InitAclController extends AppController {
 	
 	function init() {
 		$this->InitAcl->deleteDB();
-		// AROS
 		$public_id = $this->InitAcl->initRole('Public');
 		$member_id = $this->InitAcl->initRole('Member', $public_id);
 		$attendee_id = $this->InitAcl->initRole('Attendee', $member_id);
@@ -58,24 +57,8 @@ class InitAclController extends AppController {
 				'admin'		=> 1
     		)
 		);
-		$member_id = $this->InitAcl->initMember($member);
-		
-		//ACOS
-		$id = $this->InitAcl->createAco(null, null, null, "ROOT");
-		$con_id = $this->InitAcl->createAco(null, null, $id, "Controllers/");
-		$con_id = $this->InitAcl->createAco(null, null, $con_id, "App/");
-		
-		App::import('File','permissions',true,CONFIGS);
-		$permissions = new OsmosisPermissions;
-		foreach ($permissions as $controller => $actions) {
-			if ($controller{0} == '_') continue;
-			$_id = $this->InitAcl->createAco(null, null, $con_id, $controller);
-			foreach ($actions as $action => $leastRole) {
-				$this->InitAcl->createAco(null, null, $_id, $action);
-				$this->Acl->Aro->Permission->create();
-				$this->Acl->allow($leastRole,$controller.'/'.$action);
-			}
-		}
+		//$member_id = $this->InitAcl->initMember($member);
+		$this->InitAcl->loadPermissions();
 		$this->autoRender = false;
 	}
 	

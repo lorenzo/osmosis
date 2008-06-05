@@ -40,10 +40,8 @@ class InitAclComponent extends Object {
 	 */
 	function startup(&$controller) {
 		$this->controller = $controller;
-		App::import('Model','Member');
-		App::import('Model','Role');
-		$this->Member = $controller->Member;
-		$this->Role = $controller->Role;
+		$this->Member = ClassRegistry::init('Member');
+		$this->Role = ClassRegistry::init('Role');
 		return true;
 	}
 	
@@ -73,7 +71,7 @@ class InitAclComponent extends Object {
 		$this->Acl->Aco->query('TRUNCATE '.$this->Acl->Aco->table);
 		$this->Acl->Aro->query('TRUNCATE '.$this->Acl->Aro->table);
 		$this->Acl->Aro->query('TRUNCATE '.$this->Acl->Aco->hasAndBelongsToMany['Aro']['joinTable']);
-		$this->Member->query('TRUNCATE '.$this->Member->table);
+		//$this->Member->query('TRUNCATE '.$this->Member->table);
 		$this->Role->query('TRUNCATE '.$this->Role->table);
 	}
 	
@@ -91,6 +89,51 @@ class InitAclComponent extends Object {
 		$data = $this->Auth->hashPasswords($data);
 		$this->Member->save($data,false);
 		return $this->Member->getLastInsertId();
+	}
+	
+	function loadPermissions($plugin = null) {
+		if (!$plugin && isset($this->controller->plugin) && !empty($this->controller->plugin))
+			$plugin = $this->controller->plugin;
+		
+		$permissions = $path = false;
+		
+		if ($plugin) {
+			$plugin = Inflector::camelize($plugin);
+			$instance = ClassRegistry::init('Plugin');
+			$path = $instance->getPath($plugin);
+			if (!$path)
+				return false;
+			
+			App::import('File','permissions',array('search' => $path.DS.'config'));
+			$class = $plugin.'Permissions';
+			$permissions = new $class;
+			$parentAco = $this->Acl->Aco->field('id',array('alias' => 'Controllers'));
+			$parentAco = $this->createAco(null, null, $parentAco, $plugin);
+			
+			if (!$parentAco)
+				return false;
+		}
+
+		if (!$path && empty($plugin)) {
+			App::import('File','permissions',true,CONFIGS);
+			$permissions = new OsmosisPermissions;
+			$parentAco = $this->createAco(null, null, null, "ROOT");
+			$parentAco = $this->createAco(null, null, $parentAco, "Controllers");
+			$parentAco = $this->createAco(null, null, $parentAco, "App");
+		}
+		
+		foreach ($permissions as $controller => $actions) {
+			if ($controller{0} == '_') continue;
+			
+			$_id = $this->createAco(null, null, $parentAco, $controller);
+			foreach ($actions as $action => $leastRole) {
+				$this->createAco(null, null, $_id, $action);
+				$this->Acl->Aro->Permission->create();
+				$this->Acl->allow($leastRole,$controller.'/'.$action);
+			}
+		}
+		
+		return true;
 	}
 	
 	

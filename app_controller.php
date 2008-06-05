@@ -75,11 +75,7 @@ class AppController extends Controller {
 			if ($this->name == 'Installer' && $this->Auth->user('admin')) // Verify that only admin can access this controller
 				return true;
 				
-			if (!$plugin = ClassRegistry::init('Plugin','Model')) {
-				App::import('Model', 'Plugin');
-				$plugin = new Plugin;
-				ClassRegistry::addObject('Plugin', $plugin);
-			}
+			$plugin = ClassRegistry::init('Plugin','Model');
 			$plugID = $plugin->findByName($this->plugin);
 			if (empty($plugID))
 				return false;
@@ -146,8 +142,11 @@ class AppController extends Controller {
 		if ($this->Auth->user('admin')) // Admin User
 			return true;
 
-		$valid = $this->Auth->Acl->check($this->_currentRole(),$this->Auth->action()) && $this->_ownerAuthorization();
-		
+		$aclPrefix = 'App/';
+		if (isset($this->plugin) && !empty($this->plugin))
+			$aclPrefix = Inflector::camelize($this->plugin).'/';
+		debug($this->_currentRole());
+		$valid = $this->Auth->Acl->check($this->_currentRole(),$aclPrefix.$this->Auth->action()) && $this->_ownerAuthorization();
 		if($valid || Configure::read('Auth.disabled'))
 			return true;
 

@@ -150,7 +150,6 @@ class Member extends AppModel {
 	 *
 	 * @param array $data data sent
 	 * @return boolean true if the passwords are the same
-	 * @author Joaquín Windmüller
 	 */
 	function confirmPassword($data) {
 		$valid = false; 
@@ -164,7 +163,6 @@ class Member extends AppModel {
 	 * Determines wether this user is administrator
 	 *
 	 * @return boolean
-	 * @author Joaquín Windmüller
 	 **/
 	function isAdmin($username) {
 		return $this->field('admin', compact('username'));

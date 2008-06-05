@@ -90,7 +90,6 @@ class Plugin extends AppModel {
 	 * Auxiliar function to retreive plugin folders in disk
 	 *
 	 * @return array
-	 * @author José Lorenzo
 	 */
 	
 	private function getpluginPackages() {
@@ -110,7 +109,6 @@ class Plugin extends AppModel {
 	 *
 	 * @param string $plugin Folder name of the plugin
 	 * @return boolean
-	 * @author José Lorenzo
 	 */
 	
 	function install($plugin) {
@@ -132,7 +130,6 @@ class Plugin extends AppModel {
 	 *
 	 * @param string $type type of placeholder the objects participate
 	 * @return array with reference to objects
-	 * @author José Lorenzo
 	 */
 	
 	function getHolders($type, $plugin = null) {
@@ -243,6 +240,19 @@ class Plugin extends AppModel {
 	
 	function deconstruct($field, $value) {
 		return implode(',',$value);
+	}
+	
+	function getPath($name) {
+		$configure = Configure::getInstance();
+		$pluginPaths = $configure->pluginPaths;
+		$path = null;
+		foreach ($pluginPaths as $pp) {
+			if (is_dir($pp.Inflector::underscore($name))) {
+				$path = $pp.Inflector::underscore($name);
+				break;
+			}	
+		}
+		return $path;
 	}
 	
 	
