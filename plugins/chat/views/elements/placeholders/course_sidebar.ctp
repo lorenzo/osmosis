@@ -153,7 +153,7 @@ OsmosisChat = {
 $(document).ready(function(){
 	OsmosisChat.connect();
 	OsmosisChat.drawChatContainer();
-   //setTimeout('OsmosisChat.updateMessages()', 2500);
+   setTimeout('OsmosisChat.updateMessages()', 2500);
    });
 </script>
 <div id="chat" class="boxed">

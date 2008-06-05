@@ -37,10 +37,12 @@ class ChatHolderComponent extends PlaceholderDataComponent {
 	var $cache = false;
 	var $types = array('head','course_sidebar');
 	
-	function getData($type = null) {
-		if ($type == 'course_sidebar' || $type == 'head')
-			return true;
-		return false;
+	function head() {
+		return true;
+	}
+	
+	function courseSidebar() {
+		return true;
 	}
 }
 ?>
