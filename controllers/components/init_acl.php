@@ -71,7 +71,7 @@ class InitAclComponent extends Object {
 		$this->Acl->Aco->query('TRUNCATE '.$this->Acl->Aco->table);
 		$this->Acl->Aro->query('TRUNCATE '.$this->Acl->Aro->table);
 		$this->Acl->Aro->query('TRUNCATE '.$this->Acl->Aco->hasAndBelongsToMany['Aro']['joinTable']);
-		//$this->Member->query('TRUNCATE '.$this->Member->table);
+		$this->Member->query('TRUNCATE '.$this->Member->table);
 		$this->Role->query('TRUNCATE '.$this->Role->table);
 	}
 	

@@ -74,14 +74,6 @@ class QuizzesController extends QuizAppController {
 				$this->Session->setFlash(__('The Quiz could not be saved. Please, try again.',true));
 			}
 		}
-/*		$associationQuestions = $this->Quiz->AssociationQuestion->find('list');
-		$choiceQuestions = $this->Quiz->ChoiceQuestion->find('list');
-		$clozeQuestions = $this->Quiz->ClozeQuestion->find('list');
-		$matchingQuestions = $this->Quiz->MatchingQuestion->find('list');
-		$orderingQuestions = $this->Quiz->OrderingQuestion->find('list');
-		$textQuestions = $this->Quiz->TextQuestion->find('list');
-		$this->set(compact('associationQuestions', 'choiceQuestions', 'clozeQuestions', 'matchingQuestions', 'orderingQuestions', 'textQuestions'));
-		*/
 	}
 
 	function edit($id = null) {
@@ -90,15 +82,7 @@ class QuizzesController extends QuizAppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		
-		if (!empty($this->data)) {
-			// debug($this->data);die;
-			// 			if ($this->Quiz->save($this->data)) {
-			// 				$this->Session->setFlash(__('The Quiz has been saved',true));
-			// 				$this->redirect(array('action'=>'index'), null, true);
-			// 			} else {
-			// 				$this->Session->setFlash(__('The Quiz could not be saved. Please, try again.',true));
-			// 			}
-		} else {
+		if (empty($this->data)) {
 			$this->Quiz->recursive = 2;
 			$this->data = $this->Quiz->read(null, $id);
 		}

@@ -60,9 +60,9 @@
 .droplist ul:hover li a,
 .droplist ul:hover li span {
 	display:block;
-	width:100%;
 	padding:3px 10px;
 }
+
 .droplist ul:hover li a:hover {
 	background:#f5f5f5;
 } 

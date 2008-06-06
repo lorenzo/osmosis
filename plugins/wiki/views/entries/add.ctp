@@ -1,5 +1,5 @@
 <div class="entries form">
-<?php echo $form->create('Entry');?>
+<?php echo $form->create('Entry',array('url' => array('wiki_id' => $this->data['Entry']['wiki_id'])));?>
 	<fieldset>
  		<legend><?php __('Add Entry');?></legend>
 	<?php

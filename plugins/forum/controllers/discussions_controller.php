@@ -46,11 +46,6 @@ class DiscussionsController extends ForumAppController {
 		}
 	}
 
-	function index() {
-		$this->Discussion->recursive = 2;
-		$this->set('discussions', $this->paginate());
-	}
-
 	function view() {
 		$this->_redirectIf(!isset($this->params['named']['discussion_id']));
 		$id = $this->params['named']['discussion_id'];

@@ -57,7 +57,7 @@ class InitAclController extends AppController {
 				'admin'		=> 1
     		)
 		);
-		//$member_id = $this->InitAcl->initMember($member);
+		$member_id = $this->InitAcl->initMember($member);
 		$this->InitAcl->loadPermissions();
 		$this->autoRender = false;
 	}

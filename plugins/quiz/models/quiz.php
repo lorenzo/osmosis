@@ -105,14 +105,18 @@ class Quiz extends QuizAppModel {
 			$quiz_questions = array();
 			if ($quiz_id) {
 				$quiz_questions = $this->read(null, $quiz_id);
-				$quiz_questions = Set::extract($quiz_questions, $questionType . '.{n}.id');
+				$quiz_questions = Set::extract('/'.$questionType.'/id',$quiz_questions);
 			}
+			
+			if (empty($quiz_questions)) {
+				$questions[$questionType] = array();
+				continue;
+			}
+				
 			$questions[$questionType] = $this->{$questionType}->find(
 				'all',
 				array(
-					'conditions' => array(
-						'NOT' => array('id' => $quiz_questions)
-					)
+					'conditions' =>array('id <>' => $quiz_questions)
 				)
 			);
 		}

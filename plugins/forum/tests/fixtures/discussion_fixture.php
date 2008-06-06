@@ -28,20 +28,25 @@
  * @modifiedby		$LastChangedBy$
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
+*/
 
 /* Discussion Fixure generated on: 2008-02-02 14:02:13 : 1201975693*/
 
 class DiscussionFixture extends CakeTestFixture {
 	var $name = 'Discussion';
-	var $table = 'discussions';
+	var $table = 'forum_discussions';
 	var $fields = array(
 			'id' => array('type'=>'string', 'null' => false, 'length' => 36, 'key' => 'primary'),
 			'topic_id' => array('type'=>'integer', 'null' => false),
 			'member_id' => array('type'=>'integer', 'null' => false),
 			'title' => array('type'=>'string', 'null' => false),
 			'content' => array('type'=>'text', 'null' => false),
-			'locked' => array('type'=>'boolean', 'null' => false),
-			'status' => array('type'=>'string', 'null' => false, 'length' => 20),
+			'sticky' => array('type'=>'boolean', 'null' => false),
+			'status' => array('type'=>'string', 'null' => false, 'default' => 'unlocked', 'length' => 20),
+			'response_count' => array('type'=>'integer', 'null' => false),
+			'discussion_visit_count' => array('type'=>'integer', 'null' => false),
+			'created' => array('type'=>'datetime', 'null' => false),
+			'modified' => array('type'=>'datetime', 'null' => false),
 			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
 			);
 	var $records = array(array(
@@ -61,8 +66,12 @@ class DiscussionFixture extends CakeTestFixture {
 									litora luctus suspendisse sed id luctus ut. Pede volutpat quam vitae, ut ornare wisi. Velit dis tincidunt,
 									pede vel eleifend nec curabitur dui pellentesque, volutpat taciti aliquet vivamus viverra, eget tellus ut
 									feugiat lacinia mauris sed, lacinia et felis.',
-			'locked'  => 1,
-			'status'  => 'Lorem ipsum dolor '
+			'sticky'  => 1,
+			'status'  => 'Lorem ipsum dolor ',
+			'response_count'  => 1,
+			'discussion_visit_count'  => 1,
+			'created'  => '2008-06-06 14:59:20',
+			'modified'  => '2008-06-06 14:59:20'
 			));
 }
 ?>

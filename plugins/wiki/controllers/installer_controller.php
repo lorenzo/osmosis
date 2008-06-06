@@ -44,7 +44,7 @@ class InstallerController extends AppController {
 	
 	function admin_install() {
 		if (!$this->InitAcl->loadPermissions()) {
-			
+			$this->Session->setFlash(__('An error occurred while setting plugin permissions',true));
 		} elseif (!$this->Installer->createSchema('Wiki')) {
 			$this->Session->setFlash(__('An error occurred while installing the plugin',true));
 		} elseif ($this->Plugin->install('Wiki'))

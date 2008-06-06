@@ -145,7 +145,7 @@ class AppController extends Controller {
 		$aclPrefix = 'App/';
 		if (isset($this->plugin) && !empty($this->plugin))
 			$aclPrefix = Inflector::camelize($this->plugin).'/';
-		debug($this->_currentRole());
+			
 		$valid = $this->Auth->Acl->check($this->_currentRole(),$aclPrefix.$this->Auth->action()) && $this->_ownerAuthorization();
 		if($valid || Configure::read('Auth.disabled'))
 			return true;

@@ -33,13 +33,14 @@
 
 class ResponseFixture extends CakeTestFixture {
 	var $name = 'Response';
-	var $table = 'responses';
+	var $table = 'forum_responses';
 	var $fields = array(
 			'id' => array('type'=>'string', 'null' => false, 'length' => 36, 'key' => 'primary'),
 			'discussion_id' => array('type'=>'string', 'null' => false, 'length' => 36),
 			'member_id' => array('type'=>'integer', 'null' => false),
 			'content' => array('type'=>'text', 'null' => false),
 			'created' => array('type'=>'datetime', 'null' => false),
+			'modified' => array('type'=>'datetime', 'null' => false),
 			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
 			);
 	var $records = array(array(
@@ -58,7 +59,8 @@ class ResponseFixture extends CakeTestFixture {
 									litora luctus suspendisse sed id luctus ut. Pede volutpat quam vitae, ut ornare wisi. Velit dis tincidunt,
 									pede vel eleifend nec curabitur dui pellentesque, volutpat taciti aliquet vivamus viverra, eget tellus ut
 									feugiat lacinia mauris sed, lacinia et felis.',
-			'created'  => '2008-02-02 14:10:37'
+			'created'  => '2008-06-06 14:59:34',
+			'modified'  => '2008-06-06 14:59:34'
 			));
 }
 ?>
