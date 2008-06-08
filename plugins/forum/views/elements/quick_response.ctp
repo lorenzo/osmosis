@@ -1,5 +1,5 @@
 <div class="responses form">
-<?php echo $form->create('Response');?>
+<?php echo $form->create('Response',array('url' => array('discussion_id' => $discussion_id)));?>
 	<fieldset>
  		<legend><?php __('Reply');?></legend>
 	<?php

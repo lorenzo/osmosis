@@ -174,7 +174,7 @@ class CoursesController extends AppController {
 	}
 	
 	/**
-	 * Add or removes a tool from a course
+	 * Adds or removes a tool from a course
 	 *
 	 * @param string $id course identifier
 	 * @author José Lorenzo

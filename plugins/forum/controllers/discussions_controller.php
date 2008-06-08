@@ -39,7 +39,7 @@ class DiscussionsController extends ForumAppController {
 		if (isset($this->params['named']['topic_id'])) {
 			$topic_id = $this->params['named']['topic_id'];
 			$this->activeCourse = $this->Discussion->Topic->field('course_id', array('id' => $topic_id));
-		} else if (isset($this->params['named']['discussion_id'])) {
+		} elseif (isset($this->params['named']['discussion_id'])) {
 			$discussion_id = $this->params['named']['discussion_id'];
 			$topic_id = $this->Discussion->field('topic_id', array('id' => $discussion_id));
 			$this->activeCourse = $this->Discussion->Topic->field('course_id', array('id' => $topic_id));

@@ -36,8 +36,8 @@ class ResponsesController extends ForumAppController {
 	
 	function _setActiveCourse() {
 		if (parent::_setActiveCourse()) return;
-		if (isset($this->params['named']['response_id'])) {
-			$discussion_id = $this->Response->field('discussion_id', array('id' => $this->params['named']['response_id']));
+		if (isset($this->params['named']['response_id']) || isset($this->params['named']['discussion_id'])) {
+			$discussion_id = (isset($this->params['named']['discussion_id'])) ? $this->params['named']['discussion_id'] :  $this->Response->field('discussion_id', array('id' => $this->params['named']['response_id']));
 			$topic_id = $this->Response->Discussion->field('topic_id', array('id' => $discussion_id));
 			$this->activeCourse = $this->Response->Discussion->Topic->field('course_id', array('id' => $topic_id));
 		}

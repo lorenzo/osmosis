@@ -1,0 +1,475 @@
+/* Reset */
+.osmosisSkin table, .osmosisSkin tbody, .osmosisSkin a, .osmosisSkin img, .osmosisSkin tr, .osmosisSkin div, .osmosisSkin td, .osmosisSkin iframe, .osmosisSkin span, .osmosisSkin *, .osmosisSkin .mceText {
+border:0; margin:0; padding:0; white-space:nowrap; text-decoration:none; font-weight:normal; cursor:default; vertical-align:baseline; width:auto; border-collapse:separate;
+}
+.osmosisSkin a:hover, .osmosisSkin a:link, .osmosisSkin a:visited, .osmosisSkin a:active {text-decoration:none; font-weight:normal; cursor:default;}
+.osmosisSkin table td {vertical-align:middle}
+
+/* Containers */
+.osmosisSkin table {}
+.osmosisSkin iframe {display:block;}
+.osmosisSkin .mceToolbar {padding: 2px;}
+
+/* External */
+.osmosisSkin .mceExternalToolbar {position:absolute; border-bottom:0; display:none}
+.osmosisSkin .mceExternalToolbar td.mceToolbar {padding-right:13px;}
+.osmosisSkin .mceExternalClose {position:absolute; top:3px; right:3px; width:7px; height:7px; background:url(../../img/icons.gif) -820px 0}
+
+/* Layout */
+.osmosisSkin table.mceToolbar, .osmosisSkin tr.mceFirst .mceToolbar tr td, .osmosisSkin tr.mceLast .mceToolbar tr td {border:0; margin:0; padding:0}
+.osmosisSkin table.mceLayout {border:1px dashed #ccc;}
+.osmosisSkin .mceIframeContainer {}
+.osmosisSkin .mceStatusbar {display:block; font-family:'MS Sans Serif',sans-serif,Verdana,Arial; font-size:9pt; line-height:16px; overflow:visible;height:20px;}
+.osmosisSkin .mceStatusbar div {float:left; padding:2px;}
+.osmosisSkin .mceStatusbar a.mceResize {display:block; float:right; background:url(../../img/icons.gif) -800px 0; width:20px; height:20px; cursor:se-resize}
+.osmosisSkin .mceStatusbar a:hover {text-decoration:underline}
+.osmosisSkin table.mceToolbar {margin: 0 2px 2px;}
+.osmosisSkin #content_toolbar1 {margin-top: 2px;}
+.osmosisSkin .mceToolbar .mceToolbarEndListBox span {display:none}
+.osmosisSkin span.mceIcon, .osmosisSkin img.mceIcon {display:block; width:20px; height:20px}
+.osmosisSkin .mceIcon {background:url(../../img/icons.gif) no-repeat 20px 20px}
+
+/* Button */
+.osmosisSkin .mceButton {
+	display:block; 
+	width: 20px; 
+	height: 20px; 
+	cursor: default; 
+	padding: 1px 2px; 
+	margin: 1px; 
+	background-image: url(img/butt2.png);
+	background-position: 2px 1px;
+	background-repeat: no-repeat;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	border-radius: 3px;
+}
+.osmosisSkin a.mceButton span, .osmosisSkin a.mceButton img {}
+.osmosisSkin .mceOldBoxModel a.mceButton span, .osmosisSkin .mceOldBoxModel a.mceButton img {margin:0 0 0 1px}
+.osmosisSkin a.mceButtonEnabled:hover {
+	background-position:0 -20px;
+}
+.osmosisSkin a.mceButtonActive, .osmosisSkin a.mceButtonSelected {
+	background-position:0 -20px;
+}
+.osmosisSkin .mceButtonDisabled .mceIcon {opacity:0.3; filter:alpha(opacity=30);}
+.osmosisSkin .mceButtonDisabled {}
+
+/* Separator */
+.osmosisSkin .mceSeparator { 
+	height: 24px; 
+	width: 1px;
+	display: block;
+	background: transparent;
+	overflow: hidden; 
+	margin: 0 2px; 
+}
+
+/* ListBox */
+.osmosisSkin .mceListBox, .osmosisSkin .mceListBox a {display:block}
+.osmosisSkin .mceListBox .mceText {
+	padding: 1px 2px 1px 5px;
+	text-align:left; 
+	text-decoration: none !important;
+	width:70px;  
+	background-image: url(img/butt2.png);
+	background-position: 1px 1px;
+	background-repeat: repeat-x;
+	font-family: Tahoma,Verdana,Arial,Helvetica; 
+	font-size: 11px; 
+	height: 20px; 
+	line-height: 20px; 
+	overflow: hidden;
+}
+.osmosisSkin .mceListBox {
+	margin: 1px;
+	direction: ltr;
+}
+.osmosisSkin .mceListBox .mceOpen {
+	width: 14px;
+	height: 20px; 
+	border-collapse: separate;
+	background-image: url(img/butt2.png);
+	background-position: 1px 1px;
+	background-repeat: repeat-x;
+	padding: 1px;
+	border-left: 0 none !important;
+}
+.osmosisSkin .mceListBox .mceOpen span {
+	display: block;
+	width:14px;
+	height:20px;
+	background-image: url(img/down_arrow.gif);
+	background-position: 2px 1px;
+	background-repeat: no-repeat;
+}
+.osmosisSkin table.mceListBoxEnabled:hover .mceText, 
+.osmosisSkin .mceListBoxHover .mceText, 
+.osmosisSkin .mceListBoxSelected .mceText,
+.osmosisSkin table.mceListBoxEnabled:hover .mceOpen, 
+.osmosisSkin .mceListBoxHover .mceOpen, 
+.osmosisSkin .mceListBoxSelected .mceOpen {
+	background-image: none;
+}
+.osmosisSkin .mceListBoxDisabled .mceText {color:gray}
+.osmosisSkin .mceListBoxMenu {overflow:auto; overflow-x:hidden}
+.osmosisSkin .mceOldBoxModel .mceListBox .mceText {height:22px}
+.osmosisSkin select.mceListBox {font-family:Tahoma,Verdana,Arial,Helvetica; font-size:12px;}
+
+/* SplitButton */
+.osmosisSkin .mceSplitButton a, .osmosisSkin .mceSplitButton span {display:block; height:20px}
+.osmosisSkin .mceSplitButton { 
+	display:block;
+	margin: 1px;
+	direction: ltr;
+}
+.osmosisSkin table.mceSplitButton td {
+	padding: 2px;
+}
+.osmosisSkin .mceSplitButton a.mceAction {
+	height:20px;
+	width:20px;
+	background-image: url(img/butt2.png);
+	background-position: 1px 1px;
+	background-repeat: repeat-x;
+	padding: 1px 2px;
+}
+.osmosisSkin .mceSplitButton span.mceAction {
+	background: url(../../img/icons.gif) 20px 20px;
+	width:20px; 
+}
+.osmosisSkin .mceSplitButton a.mceOpen {
+	width:10px;
+	height:20px;
+	border-collapse:separate;
+	background-image: url(img/butt2.png);
+	background-position: 1px 1px;
+	background-repeat: repeat-x;
+	padding: 1px;
+	border-left: 0 none !important;
+}
+.osmosisSkin .mceSplitButton span.mceOpen {
+	width:10px; 
+	background-image: url(img/down_arrow.gif);
+	background-position: 0px 1px;
+	background-repeat: no-repeat;
+	border-collapse:separate;
+	border-left: 0 none !important;
+}
+.osmosisSkin .mceSplitButton a.mceOpen:hover,
+.osmosisSkin .mceSplitButtonSelected a.mceOpen,
+.osmosisSkin table.mceSplitButtonEnabled:hover a.mceAction,
+.osmosisSkin .mceSplitButton a.mceAction:hover {
+	background-image: none;
+}
+.osmosisSkin table.mceSplitButtonEnabled:hover span.mceOpen, 
+.osmosisSkin .mceSplitButtonHover span.mceOpen, 
+.osmosisSkin .mceSplitButtonSelected span.mceOpen {
+}
+.osmosisSkin .mceSplitButtonDisabled .mceAction {
+	opacity:0.3; filter:alpha(opacity=30);
+}
+.osmosisSkin .mceListBox a.mceText, .osmosisSkin .mceSplitButton a.mceAction {
+	-moz-border-radius-bottomleft: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+	-khtml-border-bottom-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-webkit-border-top-left-radius: 3px;
+	-khtml-border-top-left-radius: 3px;
+	border-top-left-radius: 3px;
+}
+.osmosisSkin .mceSplitButton a.mceOpen, .osmosisSkin .mceListBox a.mceOpen {
+	-moz-border-radius-bottomright: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+	-khtml-border-bottom-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	-moz-border-radius-topright: 3px;
+	-webkit-border-top-right-radius: 3px;
+	-khtml-border-top-right-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+/* ColorSplitButton */
+.osmosisSkin div.mceColorSplitMenu table {}
+.osmosisSkin .mceColorSplitMenu td {padding:2px}
+.osmosisSkin .mceColorSplitMenu a {display:block; width:9px; height:9px; overflow:hidden;}
+.osmosisSkin .mceColorSplitMenu td.mceMoreColors {padding:1px 3px 1px 1px}
+.osmosisSkin .mceColorSplitMenu a.mceMoreColors {width:100%; height:auto; text-align:center; font-family:Tahoma,Verdana,Arial,Helvetica; font-size:11px; line-height:20px;}
+.osmosisSkin .mceColorSplitMenu a.mceMoreColors:hover {}
+.osmosisSkin a.mceMoreColors:hover {}
+.osmosisSkin .mceColorPreview {position:absolute; top:15px; left:2px; width:16px; height:4px; overflow:hidden}
+
+/* Menu */
+.osmosisSkin .mceMenu {position:absolute; left:0; top:0; z-index:1000;}
+.osmosisSkin .mceNoIcons span.mceIcon {width:0;}
+.osmosisSkin .mceNoIcons a .mceText {padding-left:10px}
+.osmosisSkin .mceMenu table {background:#FFF}
+.osmosisSkin .mceMenu a, .osmosisSkin .mceMenu span, .osmosisSkin .mceMenu {display:block}
+.osmosisSkin .mceMenu td {height:20px;overflow:hidden;}
+.osmosisSkin .mceMenu a {
+	position:relative;
+	padding:3px 0 4px 0;
+	text-decoration: none !important;
+}
+.osmosisSkin .mceMenu .mceText {
+	position:relative; 
+	display:block; 
+	font-family:Tahoma,Verdana,Arial,Helvetica; 
+	cursor:default; 
+	margin:0; 
+	padding:0 25px;
+}
+.osmosisSkin .mceMenu span.mceText, .osmosisSkin .mceMenu .mcePreview {font-size:11px}
+.osmosisSkin .mceMenu pre.mceText {font-family:Monospace}
+.osmosisSkin .mceMenu .mceIcon {position:absolute; top:0; left:0; width:22px;}
+.osmosisSkin .mceMenu .mceMenuItemEnabled a:hover, 
+.osmosisSkin .mceMenu .mceMenuItemActive {}
+.osmosisSkin td.mceMenuItemSeparator {height:1px}
+.osmosisSkin .mceMenuItemTitle a {
+	border-top: 0;
+	border-right: 0;
+	border-left: 0;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	text-decoration: none !important;
+}
+.osmosisSkin .mceMenuItemTitle span.mceText {font-weight:bold; padding-left:4px}
+.osmosisSkin .mceMenuItemDisabled .mceText {}
+.osmosisSkin .mceMenuItemSelected .mceIcon {background:url(../default/img/menu_check.gif)}
+.osmosisSkin .mceNoIcons .mceMenuItemSelected a {background:url(../default/img/menu_arrow.gif) no-repeat -6px center}
+.osmosisSkin .mceMenu span.mceMenuLine {display:none}
+.osmosisSkin .mceMenuItemSub a {background:url(../default/img/menu_arrow.gif) no-repeat top right;}
+
+/* Progress,Resize */
+.osmosisSkin .mceBlocker {position:absolute; left:0; top:0; z-index:1000; opacity:0.5; filter:alpha(opacity=50); background:#FFF}
+.osmosisSkin .mceProgress {position:absolute; left:0; top:0; z-index:1001; background:url(../default/img/progress.gif) no-repeat; width:32px; height:32px; margin:-16px 0 0 -16px}
+.osmosisSkin .mcePlaceHolder {border:1px dotted gray}
+
+/* Formats */
+.osmosisSkin .mce_formatPreview a {font-size:10px}
+.osmosisSkin .mce_p span.mceText {}
+.osmosisSkin .mce_address span.mceText {font-style:italic}
+.osmosisSkin .mce_pre span.mceText {font-family:monospace}
+.osmosisSkin .mce_h1 span.mceText {font-weight:bolder; font-size: 2em}
+.osmosisSkin .mce_h2 span.mceText {font-weight:bolder; font-size: 1.5em}
+.osmosisSkin .mce_h3 span.mceText {font-weight:bolder; font-size: 1.17em}
+.osmosisSkin .mce_h4 span.mceText {font-weight:bolder; font-size: 1em}
+.osmosisSkin .mce_h5 span.mceText {font-weight:bolder; font-size: .83em}
+.osmosisSkin .mce_h6 span.mceText {font-weight:bolder; font-size: .75em}
+
+/* Theme */
+.osmosisSkin span.mce_bold {background-position:0 0}
+.osmosisSkin span.mce_italic {background-position:-60px 0}
+.osmosisSkin span.mce_underline {background-position:-140px 0}
+.osmosisSkin span.mce_strikethrough {background-position:-120px 0}
+.osmosisSkin span.mce_undo {background-position:-160px 0}
+.osmosisSkin span.mce_redo {background-position:-100px 0}
+.osmosisSkin span.mce_cleanup {background-position:-40px 0}
+.osmosisSkin span.mce_bullist {background-position:-20px 0}
+.osmosisSkin span.mce_numlist {background-position:-80px 0}
+.osmosisSkin span.mce_justifyleft {background-position:-460px 0}
+.osmosisSkin span.mce_justifyright {background-position:-480px 0}
+.osmosisSkin span.mce_justifycenter {background-position:-420px 0}
+.osmosisSkin span.mce_justifyfull {background-position:-440px 0}
+.osmosisSkin span.mce_anchor {background-position:-200px 0}
+.osmosisSkin span.mce_indent {background-position:-400px 0}
+.osmosisSkin span.mce_outdent {background-position:-540px 0}
+.osmosisSkin span.mce_link {background-position:-500px 0}
+.osmosisSkin span.mce_unlink {background-position:-640px 0}
+.osmosisSkin span.mce_sub {background-position:-600px 0}
+.osmosisSkin span.mce_sup {background-position:-620px 0}
+.osmosisSkin span.mce_removeformat {background-position:-580px 0}
+.osmosisSkin span.mce_newdocument {background-position:-520px 0}
+.osmosisSkin span.mce_image {background-position:-380px 0}
+.osmosisSkin span.mce_help {background-position:-340px 0}
+.osmosisSkin span.mce_code {background-position:-260px 0}
+.osmosisSkin span.mce_hr {background-position:-360px 0}
+.osmosisSkin span.mce_visualaid {background-position:-660px 0}
+.osmosisSkin span.mce_charmap {background-position:-240px 0}
+.osmosisSkin span.mce_paste {background-position:-560px 0}
+.osmosisSkin span.mce_copy {background-position:-700px 0}
+.osmosisSkin span.mce_cut {background-position:-680px 0}
+.osmosisSkin span.mce_blockquote {background-position:-220px 0}
+.osmosisSkin .mce_forecolor span.mceAction {background-position:-720px 0}
+.osmosisSkin .mce_backcolor span.mceAction {background-position:-760px 0}
+.osmosisSkin .mce_forecolorpicker {background-position:-720px 0}
+.osmosisSkin .mce_backcolorpicker {background-position:-760px 0}
+
+/* Plugins */
+.osmosisSkin span.mce_advhr {background-position:-0px -20px}
+.osmosisSkin span.mce_ltr {background-position:-20px -20px}
+.osmosisSkin span.mce_rtl {background-position:-40px -20px}
+.osmosisSkin span.mce_emotions {background-position:-60px -20px}
+.osmosisSkin span.mce_fullpage {background-position:-80px -20px}
+.osmosisSkin span.mce_fullscreen {background-position:-100px -20px}
+.osmosisSkin span.mce_iespell {background-position:-120px -20px}
+.osmosisSkin span.mce_insertdate {background-position:-140px -20px}
+.osmosisSkin span.mce_inserttime {background-position:-160px -20px}
+.osmosisSkin span.mce_absolute {background-position:-180px -20px}
+.osmosisSkin span.mce_backward {background-position:-200px -20px}
+.osmosisSkin span.mce_forward {background-position:-220px -20px}
+.osmosisSkin span.mce_insert_layer {background-position:-240px -20px}
+.osmosisSkin span.mce_insertlayer {background-position:-260px -20px}
+.osmosisSkin span.mce_movebackward {background-position:-280px -20px}
+.osmosisSkin span.mce_moveforward {background-position:-300px -20px}
+.osmosisSkin span.mce_media {background-position:-320px -20px}
+.osmosisSkin span.mce_nonbreaking {background-position:-340px -20px}
+.osmosisSkin span.mce_pastetext {background-position:-360px -20px}
+.osmosisSkin span.mce_pasteword {background-position:-380px -20px}
+.osmosisSkin span.mce_selectall {background-position:-400px -20px}
+.osmosisSkin span.mce_preview {background-position:-420px -20px}
+.osmosisSkin span.mce_print {background-position:-440px -20px}
+.osmosisSkin span.mce_cancel {background-position:-460px -20px}
+.osmosisSkin span.mce_save {background-position:-480px -20px}
+.osmosisSkin span.mce_replace {background-position:-500px -20px}
+.osmosisSkin span.mce_search {background-position:-520px -20px}
+.osmosisSkin span.mce_styleprops {background-position:-560px -20px}
+.osmosisSkin span.mce_table {background-position:-580px -20px}
+.osmosisSkin span.mce_cell_props {background-position:-600px -20px}
+.osmosisSkin span.mce_delete_table {background-position:-620px -20px}
+.osmosisSkin span.mce_delete_col {background-position:-640px -20px}
+.osmosisSkin span.mce_delete_row {background-position:-660px -20px}
+.osmosisSkin span.mce_col_after {background-position:-680px -20px}
+.osmosisSkin span.mce_col_before {background-position:-700px -20px}
+.osmosisSkin span.mce_row_after {background-position:-720px -20px}
+.osmosisSkin span.mce_row_before {background-position:-740px -20px}
+.osmosisSkin span.mce_merge_cells {background-position:-760px -20px}
+.osmosisSkin span.mce_table_props {background-position:-980px -20px}
+.osmosisSkin span.mce_row_props {background-position:-780px -20px}
+.osmosisSkin span.mce_split_cells {background-position:-800px -20px}
+.osmosisSkin span.mce_template {background-position:-820px -20px}
+.osmosisSkin span.mce_visualchars {background-position:-840px -20px}
+.osmosisSkin span.mce_abbr {background-position:-860px -20px}
+.osmosisSkin span.mce_acronym {background-position:-880px -20px}
+.osmosisSkin span.mce_attribs {background-position:-900px -20px}
+.osmosisSkin span.mce_cite {background-position:-920px -20px}
+.osmosisSkin span.mce_del {background-position:-940px -20px}
+.osmosisSkin span.mce_ins {background-position:-960px -20px}
+.osmosisSkin span.mce_pagebreak {background-position:0 -40px}
+.osmosisSkin .mce_spellchecker span.mceAction {background-position:-540px -20px}
+
+/* border */
+.osmosisSkin .mceExternalToolbar, 
+.osmosisSkin .mceButton, 
+.osmosisSkin a.mceButtonEnabled:hover, 
+.osmosisSkin a.mceButtonActive, 
+.osmosisSkin a.mceButtonSelected, 
+.osmosisSkin .mceListBox .mceText, 
+.osmosisSkin .mceListBox .mceOpen, 
+.osmosisSkin table.mceListBoxEnabled:hover .mceText, 
+.osmosisSkin .mceListBoxHover .mceText, 
+.osmosisSkin .mceListBoxSelected .mceText, 
+.osmosisSkin table.mceListBoxEnabled:hover .mceOpen, 
+.osmosisSkin .mceListBoxHover .mceOpen, 
+.osmosisSkin .mceListBoxSelected .mceOpen, 
+.osmosisSkin select.mceListBox, 
+.osmosisSkin .mceSplitButton a.mceAction, 
+.osmosisSkin .mceSplitButton a.mceOpen,
+.osmosisSkin .mceSplitButton a.mceOpen:hover, 
+.osmosisSkin .mceSplitButtonSelected a.mceOpen, 
+.osmosisSkin table.mceSplitButtonEnabled:hover a.mceAction, 
+.osmosisSkin .mceSplitButton a.mceAction:hover, 
+.osmosisSkin div.mceColorSplitMenu table, 
+.osmosisSkin .mceColorSplitMenu a, 
+.osmosisSkin .mceColorSplitMenu a.mceMoreColors, 
+.osmosisSkin .mceColorSplitMenu a.mceMoreColors:hover, 
+.osmosisSkin a.mceMoreColors:hover, 
+.osmosisSkin .mceMenu {
+	border-style: solid; 
+	border-width: 1px;
+}
+
+.osmosisSkin *, .osmosisSkin a:hover, .osmosisSkin a:link, .osmosisSkin a:visited, .osmosisSkin a:active {
+color:#000000;
+}
+.osmosisSkin table {
+background:#EAF3FA none repeat scroll 0% 0%;
+}
+.osmosisSkin iframe {
+background:#FFFFFF none repeat scroll 0% 0%;
+}
+.osmosisSkin .mceStatusbar {
+background-color:#EAF3FA;
+color:#000000;
+}
+.osmosisSkin .mceButton {
+background-color:#E9E8E8;
+border-color:#ABC0FB;
+}
+.osmosisSkin a.mceButtonEnabled:hover, .osmosisSkin a.mceButtonActive, .osmosisSkin a.mceButtonSelected {
+background-color:#D6D8DA;
+border-color:#7789BA !important;
+}
+.osmosisSkin .mceButtonDisabled {
+border-color:#BBDDDD !important;
+}
+.osmosisSkin .mceListBox .mceText, .osmosisSkin .mceListBox .mceOpen {
+background-color:#E9E8E8;
+border-color:#ABC0FB;
+}
+.osmosisSkin table.mceListBoxEnabled:hover .mceOpen, .osmosisSkin .mceListBoxHover .mceOpen, .osmosisSkin .mceListBoxSelected .mceOpen, .osmosisSkin .mceListBoxSelected .mceText {
+background-color:#D6D8DA;
+border-color:#7789BA !important;
+}
+.osmosisSkin table.mceListBoxEnabled:hover .mceText, .osmosisSkin .mceListBoxHover .mceText {
+border-color:#7789BA !important;
+}
+.osmosisSkin select.mceListBox {
+background-color:#FFFFFF;
+border-color:#B3C7E1;
+}
+.osmosisSkin .mceSplitButton a.mceAction, .osmosisSkin .mceSplitButton a.mceOpen {
+background-color:#E9E8E8;
+border-color:#ABC0FB;
+}
+.osmosisSkin .mceSplitButton a.mceOpen:hover, .osmosisSkin .mceSplitButtonSelected a.mceOpen, .osmosisSkin table.mceSplitButtonEnabled:hover a.mceAction, .osmosisSkin .mceSplitButton a.mceAction:hover {
+background-color:#D6D8DA;
+border-color:#7789BA !important;
+}
+.osmosisSkin .mceSplitButtonActive {
+background-color:#D6D8DA;
+}
+.osmosisSkin div.mceColorSplitMenu table {
+background-color:#EBEAEB;
+border-color:#808080;
+}
+.osmosisSkin .mceColorSplitMenu a {
+border-color:#808080;
+}
+.osmosisSkin .mceColorSplitMenu a.mceMoreColors {
+border-color:#FFFFFF;
+}
+.osmosisSkin .mceColorSplitMenu a.mceMoreColors:hover {
+background-color:#B6BDD2;
+border-color:#0A246A;
+}
+.osmosisSkin a.mceMoreColors:hover {
+border-color:#0A246A;
+}
+.osmosisSkin .mceMenu {
+border-color:#DDDDDD;
+}
+.osmosisSkin .mceMenu table {
+background-color:#EBEAEB;
+}
+.osmosisSkin .mceMenu .mceText {
+color:#000000;
+}
+.osmosisSkin .mceMenu .mceMenuItemEnabled a:hover, .osmosisSkin .mceMenu .mceMenuItemActive {
+background-color:#CEE1EF;
+}
+.osmosisSkin td.mceMenuItemSeparator {
+background-color:#AAAAAA;
+}
+.osmosisSkin .mceMenuItemTitle a {
+background-color:#CCCCCC;
+border-bottom-color:#AAAAAA;
+}
+.osmosisSkin .mceMenuItemTitle span.mceText {
+color:#000000;
+}
+.osmosisSkin .mceMenuItemDisabled .mceText {
+color:#888888;
+}

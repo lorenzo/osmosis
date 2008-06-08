@@ -3,5 +3,6 @@
 	tinyMCE.init({
 		mode : "textareas",
 		theme : "advanced",
+		skin : "osmosis"
 	});
 </script>
