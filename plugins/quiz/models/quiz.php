@@ -109,7 +109,7 @@ class Quiz extends QuizAppModel {
 			}
 			
 			$conditions = 	array('NOT' => array('id' => $quiz_questions));
-			$contain = array();
+			$this->{$questionType}->unbindModel(array('hasAndBelongsToMany' => array('Quiz')));
 			$questions[$questionType]  = $this->{$questionType}->find('all',compact('conditions','contain'));
 		}
 		return $questions;
