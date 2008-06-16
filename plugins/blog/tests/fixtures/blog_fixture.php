@@ -30,13 +30,32 @@
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 class BlogFixture extends CakeTestFixture{
-	var $name = 'BlogBlogs';
-	var $import = array('model'=> 'Blog');
-	var $records = array(
-		array ('id' => 1, 'title' => 'First Blog', 'description' => 'First Blog Description', 'member_id' => 'AnaGaby'),
-		array ('id' => 2, 'title' => 'Second Blog', 'description' => 'Second Blog Description', 'member_id' => 'Joaquín'),
-		array ('id' => 3, 'title' => 'Third Blog', 'description' => 'Third Blog Description', 'member_id' => 'JoséL')
-	);
+	var $name = 'Blog';
+	var $table = 'blog_blogs';
+	var $fields = array(
+			'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
+			'title' => array('type'=>'string', 'null' => false, 'length' => 200),
+			'description' => array('type'=>'text', 'null' => false),
+			'member_id' => array('type'=>'string', 'null' => false, 'length' => 100),
+			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
+			);
+	var $records = array(array(
+			'id'  => 1,
+			'title'  => 'Lorem ipsum dolor sit amet',
+			'description'  => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida,
+									phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam,
+									vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit,
+									feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.
+									Orci aliquet, in lorem et velit maecenas luctus, wisi nulla at, mauris nam ut a, lorem et et elit eu.
+									Sed dui facilisi, adipiscing mollis lacus congue integer, faucibus consectetuer eros amet sit sit,
+									magna dolor posuere. Placeat et, ac occaecat rutrum ante ut fusce. Sit velit sit porttitor non enim purus,
+									id semper consectetuer justo enim, nulla etiam quis justo condimentum vel, malesuada ligula arcu. Nisl neque,
+									ligula cras suscipit nunc eget, et tellus in varius urna odio est. Fuga urna dis metus euismod laoreet orci,
+									litora luctus suspendisse sed id luctus ut. Pede volutpat quam vitae, ut ornare wisi. Velit dis tincidunt,
+									pede vel eleifend nec curabitur dui pellentesque, volutpat taciti aliquet vivamus viverra, eget tellus ut
+									feugiat lacinia mauris sed, lacinia et felis.',
+			'member_id'  => 'Lorem ipsum dolor sit amet'
+			));
 }
 
 ?>

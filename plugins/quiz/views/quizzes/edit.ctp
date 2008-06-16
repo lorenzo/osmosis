@@ -1,14 +1,13 @@
 <h1><?php echo sprintf(__('Edit %s %s', true), __('Quiz', true), $form->value('name'));?></h1>
 <div class="question-list">
-	<?php echo __('Question type:', true); ?>
 	<?php
 		echo $form->create('Quiz', array('action' => 'add_question'));
-		echo $this->renderElement('question_drop_list', array('quiz_id' => $this->data['Quiz']['id']));
+		echo $this->element('question_drop_list', array('quiz_id' => $this->data['Quiz']['id']));
 	?>
 	<div id="questions">
 		<div class="list">
 			<?php
-				$once = false;
+				$haveQuestions = false;
 				foreach ($question_list as $type => $questions) {
 					if (empty($questions)) {
 						$link = '';
@@ -25,14 +24,14 @@
 						} else {
 							$message = __('There are no questions available', true);
 						}
-						if (!$once) {
-							printf('<p class="empty">%s%s</p>', $message, $link);
-							$once = true;
-						}
 						continue;
 					}
-					echo $this->renderElement($type . '_selection_list', array('questions' => $questions));
+					$haveQuestions = true;
+					echo $this->element($type . '_selection_list', array('questions' => $questions));
 				}
+				
+				if (!$haveQuestions)
+					printf('<p class="empty">%s%s</p>', $message, $link);
 			?>
 		</div>
 	</div>

@@ -75,7 +75,7 @@ class MessagesController extends ChatAppController {
 */
 	
 	function isAuthorized() {
-		return true;
+		return $this->Auth->user();
 	}
 }
 ?>

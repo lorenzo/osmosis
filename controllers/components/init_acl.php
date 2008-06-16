@@ -101,10 +101,10 @@ class InitAclComponent extends Object {
 			$plugin = Inflector::camelize($plugin);
 			$instance = ClassRegistry::init('Plugin');
 			$path = $instance->getPath($plugin);
-			if (!$path)
+			
+			if (!$path || !App::import('File','permissions',array('search' => $path.DS.'config')))
 				return false;
 			
-			App::import('File','permissions',array('search' => $path.DS.'config'));
 			$class = $plugin.'Permissions';
 			$permissions = new $class;
 			$parentAco = $this->Acl->Aco->field('id',array('alias' => 'Controllers'));
@@ -115,7 +115,8 @@ class InitAclComponent extends Object {
 		}
 
 		if (!$path && empty($plugin)) {
-			App::import('File','permissions',true,CONFIGS);
+			if (!App::import('File','permissions',true,CONFIGS))
+				return false;
 			$permissions = new OsmosisPermissions;
 			$parentAco = $this->createAco(null, null, null, "ROOT");
 			$parentAco = $this->createAco(null, null, $parentAco, "Controllers");

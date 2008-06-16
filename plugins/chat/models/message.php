@@ -62,7 +62,7 @@ class Message extends ChatAppModel {
 	}
 	
 	function receive($receiver_id,$since) {
-		$conditions = array('receiver_id' => $receiver_id, 'created' => "> $since");
+		$conditions = array('receiver_id' => $receiver_id, 'created >' => "$since");
 		return $this->find('all',array(
 			'conditions' => $conditions,
 			'order' => 'created ASC',

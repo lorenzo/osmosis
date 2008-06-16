@@ -146,6 +146,18 @@
 	float:left;
 }
 
+.choices div.input.checkbox {
+	padding-left:0px;
+}
+
+.choices div.input.checkbox label {
+	float:none;
+}
+
+.choices div.input .help {
+	margin-left:0;
+}
+
 .choices fieldset.question-choices {
 	width:60%;
 	float:right;

@@ -82,8 +82,6 @@ class Member extends AppModel {
 		)
 	);
 	
-    var $actsAs = array('Acl');
-
     function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
 			'full_name.required',
@@ -116,9 +114,6 @@ class Member extends AppModel {
 		parent::__construct($id, $table, $ds);
     }
     
-    function parentNode() {
-		return 2;
-    }
 
 	function courses($id) {
 		$ids = $this->Enrollment->find('all',

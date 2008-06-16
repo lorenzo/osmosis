@@ -10,7 +10,7 @@
 			</p>
 			<?php
 				echo $form->input('body');
-				echo '<div class="checkbox">' . $form->input('shuffle', array('label' => __('Always shuffle the order of the choices.', true))). '</div>';
+				echo $form->input('shuffle', array('label' => __('Always shuffle the order of the choices.', true)));
 				echo $form->input(
 					'max_choices',
 					array(

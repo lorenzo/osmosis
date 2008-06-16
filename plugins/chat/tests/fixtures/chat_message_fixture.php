@@ -28,18 +28,16 @@
  * @modifiedby		$LastChangedBy$
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
-
-/* ChatMessage Fixure generated on: 2008-05-03 12:05:52 : 1209831172*/
-
+*/
 class ChatMessageFixture extends CakeTestFixture {
-	var $name = 'ChatMessage';
+	var $name = 'Message';
 	var $table = 'chat_messages';
 	var $fields = array(
 			'id' => array('type'=>'string', 'null' => false, 'length' => 36, 'key' => 'primary'),
 			'sender_id' => array('type'=>'integer', 'null' => false, 'length' => 10),
 			'receiver_id' => array('type'=>'integer', 'null' => true, 'default' => NULL, 'length' => 10),
 			'room_id' => array('type'=>'string', 'null' => false, 'length' => 36),
-			'created' => array('type'=>'datetime', 'null' => false),
+			'created' => array('type'=>'integer', 'null' => false),
 			'text' => array('type'=>'string', 'null' => false),
 			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
 			);
@@ -48,7 +46,7 @@ class ChatMessageFixture extends CakeTestFixture {
 			'sender_id'  => 1,
 			'receiver_id'  => 1,
 			'room_id'  => 'Lorem ipsum dolor sit amet',
-			'created'  => '2008-05-03 12:12:52',
+			'created'  => 1,
 			'text'  => 'Lorem ipsum dolor sit amet'
 			));
 }

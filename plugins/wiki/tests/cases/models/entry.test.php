@@ -28,8 +28,7 @@
  * @modifiedby		$LastChangedBy$
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
-
-/* WikiEntry Test cases generated on: 2008-05-14 12:05:57 : 1210781877*/
+*/
 App::import('Model', 'Wiki.Entry');
 
 class TestWikiEntry extends Entry {
@@ -39,7 +38,7 @@ class TestWikiEntry extends Entry {
 
 class WikiEntryTestCase extends CakeTestCase {
 	var $WikiEntry = null;
-	var $fixtures = array('plugin.wiki.entry', 'plugin.wiki.wiki', 'member','plugin.wiki.revision');
+	var $fixtures = array('app.course','app.department','plugin.wiki.entry', 'plugin.wiki.wiki', 'member','plugin.wiki.revision');
 
 	function start() {
 		parent::start();

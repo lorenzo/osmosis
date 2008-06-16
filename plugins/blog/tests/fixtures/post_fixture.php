@@ -30,13 +30,40 @@
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 class PostFixture extends CakeTestFixture{
-	var $name = 'BlogPosts';
-	var $import = array('model'=> 'Post');
-	var $records = array(
-		array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'created' => '2007-03-18 10:39:23', 'modified' => '2007-03-18 10:41:31', 'blog_id'=>'1', 'slug' => 'first-article'),
-		array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'created' => '2007-03-18 10:41:23', 'modified' => '2007-03-18 10:43:31', 'blog_id'=>'2','slug' => 'second-article'),
-		array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'created' => '2007-03-18 10:43:23', 'modified' => '2007-03-18 10:45:31','blog_id'=>'2','slug' => 'third-article')
-	);
+	var $name = 'Post';
+	var $table = 'blog_posts';
+	var $fields = array(
+			'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary'),
+			'title' => array('type'=>'string', 'null' => true, 'default' => NULL, 'length' => 50),
+			'body' => array('type'=>'text', 'null' => true, 'default' => NULL),
+			'created' => array('type'=>'datetime', 'null' => true, 'default' => NULL),
+			'modified' => array('type'=>'datetime', 'null' => true, 'default' => NULL),
+			'blog_id' => array('type'=>'integer', 'null' => false),
+			'slug' => array('type'=>'text', 'null' => false),
+			'member_id' => array('type'=>'integer', 'null' => false),
+			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
+			);
+	var $records = array(array(
+			'id'  => 1,
+			'title'  => 'Lorem ipsum dolor sit amet',
+			'body'  => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida,
+									phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam,
+									vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit,
+									feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.
+									Orci aliquet, in lorem et velit maecenas luctus, wisi nulla at, mauris nam ut a, lorem et et elit eu.
+									Sed dui facilisi, adipiscing mollis lacus congue integer, faucibus consectetuer eros amet sit sit,
+									magna dolor posuere. Placeat et, ac occaecat rutrum ante ut fusce. Sit velit sit porttitor non enim purus,
+									id semper consectetuer justo enim, nulla etiam quis justo condimentum vel, malesuada ligula arcu. Nisl neque,
+									ligula cras suscipit nunc eget, et tellus in varius urna odio est. Fuga urna dis metus euismod laoreet orci,
+									litora luctus suspendisse sed id luctus ut. Pede volutpat quam vitae, ut ornare wisi. Velit dis tincidunt,
+									pede vel eleifend nec curabitur dui pellentesque, volutpat taciti aliquet vivamus viverra, eget tellus ut
+									feugiat lacinia mauris sed, lacinia et felis.',
+			'created'  => '2008-06-08 14:38:21',
+			'modified'  => '2008-06-08 14:38:21',
+			'blog_id'  => 1,
+			'slug'  => 'Lorem-ipsum-dolor-sit-amet',
+			'member_id'  => 1
+			));
 }
 
 ?>
