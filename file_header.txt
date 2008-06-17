@@ -1,4 +1,3 @@
-<?php
 /* SVN FILE: $Id$ */
 /**
  * Ósmosis LMS: <http://www.osmosislms.org/>
