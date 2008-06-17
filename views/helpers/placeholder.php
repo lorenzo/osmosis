@@ -55,9 +55,16 @@ class PlaceholderHelper extends AppHelper {
 		ob_start();
 		foreach ($subscribers as $subscriber => $data) {
 			list($plugin, ) = explode('_',Inflector::underscore($subscriber));
+			$placeholder_data = $data['data'];
+			if (!empty($path)) {
+				if(!isset($placeholder_data[$path])) {
+					continue;
+				}
+				$placeholder_data = $placeholder_data[$path];
+			}
 			echo $view->element(
 				'placeholders/' . $type,
-				array('plugin' => $plugin, 'cache' => $data['cache'], 'data' => $data['data'][$path])
+				array('plugin' => $plugin, 'cache' => $data['cache'], 'data' => $placeholder_data)
 			);
 		}
 		return ob_get_clean();
