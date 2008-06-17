@@ -28,7 +28,7 @@
 #chat a {
 	display:block;
 	text-indent:20px;
-	background:transparent url('img/chat_icons.gif') no-repeat;
+	background:transparent url('../img/chat_icons.gif') no-repeat;
 }
 #chat a.online {
 	background-position:5px -16px;
@@ -85,34 +85,34 @@ div.chat_head a {
 }
 
 div.chat_head a.chat_close {
-	background-image:url('img/close.png');
+	background-image:url('../img/close.png');
 	right:8px;
 }
 
 div.chat_head a.chat_close:hover,
 div.chat_head a.chat_close:focus {
-background-image:url('img/close_up.png');
+background-image:url('../img/close_up.png');
 }
 
 div.chat_head a.chat_minimize {
-	background-image:url('img/minimize.png');
+	background-image:url('../img/minimize.png');
 	right:26px;
 }
 
 div.chat_head a.chat_minimize:hover,
 div.chat_head a.chat_minimize:focus {
-background-image:url('img/minimize_up.png');
+background-image:url('../img/minimize_up.png');
 }
 
 div.chat_head a.chat_restore {
-	background-image:url('img/restore.png');
+	background-image:url('../img/restore.png');
 	right:26px;
 	display:none;
 }
 
 div.chat_head a.chat_restore:hover,
 div.chat_head a.chat_restore:focus {
-background-image:url('img/restore.png');
+background-image:url('../img/restore.png');
 }
 
 div.chat_window div.chat_messages {

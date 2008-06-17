@@ -86,7 +86,7 @@
 
 .droplist ul li.first,
 .droplist ul:hover li.first a:hover {
-	background:transparent url('img/arrow_down.gif') no-repeat 95% 50%;
+	background:transparent url('../img/arrow_down.gif') no-repeat 95% 50%;
 }
 
 .question-list form {

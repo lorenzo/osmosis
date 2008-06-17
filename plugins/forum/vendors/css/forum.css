@@ -29,10 +29,10 @@ table tr td.discussion-status {
 	background-position: 50% 50%;
 }
 .discussion-status.unlocked {
-	background-image:url('img/unlocked.png');
+	background-image:url('../img/unlocked.png');
 }
 .discussion-status.locked {
-	background-image:url('img/locked.png');
+	background-image:url('../img/locked.png');
 }
 
 table tr .date {
