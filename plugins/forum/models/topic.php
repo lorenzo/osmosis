@@ -69,32 +69,32 @@ class Topic extends AppModel {
 	var $belongsTo = array(
 		// Topic BelongsTo Course (topic of the course's forum)
 		'Course' => array(
-			'className' => 'Course',
-			'foreignKey' => 'course_id',
-			'conditions' => '',
-			'order' => ''
+			'className'		=> 'Course',
+			'foreignKey'	=> 'course_id',
+			'conditions'	=> '',
+			'order'			=> ''
 		)
 	);
 
 	/**
-	 * BelongsTo (N-1) relation descriptors
+	 * HasMany (N-1) relation descriptors
 	 *
 	 * @var array
 	 **/
 	var $hasMany = array(
 		// Topic HasMany Discussions
 		'Discussion' => array(
-			'className' => 'Forum.Discussion',
-			'foreignKey' => 'topic_id',
-			'dependent' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => 'sticky desc, created desc',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
+			'className'		=> 'Forum.Discussion',
+			'foreignKey'	=> 'topic_id',
+			'dependent'		=> true,
+			'conditions'	=> '',
+			'fields'		=> '',
+			'order'			=> 'sticky desc, created desc',
+			'limit'			=> '',
+			'offset'		=> '',
+			'exclusive'		=> '',
+			'finderQuery'	=> '',
+			'counterQuery'	=> ''
 		)
 	);
 	

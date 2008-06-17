@@ -33,6 +33,12 @@ class Discussion extends AppModel {
 
 	var $name = 'Discussion';
 	var $useTable = 'forum_discussions';
+	
+	/**
+	 * Validation Rules for Fields
+	 *
+	 * @var array
+	 **/
 	var $validate = array(
 		'topic_id' => array('numeric'),
 		'member_id' => array('numeric'),
@@ -50,42 +56,80 @@ class Discussion extends AppModel {
 			)
 		)
 	);
+	
+	/**
+	 * Attached behaviors
+	 *
+	 * @var array
+	 **/
 	var $actsAs = array('Visitable', 'Bindable', 'Loggable');
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+	/**
+	 * BelongsTo (1-N) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $belongsTo = array(
+		// Discussion BelongsTo Topic
 		'Topic' => array(
-			'className' => 'Forum.Topic',
-			'foreignKey' => 'topic_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
+			'className'		=> 'Forum.Topic',
+			'foreignKey'	=> 'topic_id',
+			'conditions'	=> '',
+			'fields'		=> '',
+			'order'			=> ''
 		),
+		// Discussion BelongsTo Member (Creator of the discussion)
 		'Member' => array(
-			'className' => 'Member',
-			'foreignKey' => 'member_id',
-			'conditions' => '',
-			'fields' => array('id', 'full_name', 'username'),
-			'order' => ''
+			'className'		=> 'Member',
+			'foreignKey'	=> 'member_id',
+			'conditions'	=> '',
+			'fields'		=> array('id', 'full_name', 'username'),
+			'order'			=> ''
 		)
 	);
 
-	var $hasMany = array(
+	/**
+	 * HasMany (N-1) relation descriptors
+	 *
+	 * @var array
+	 **/
+	var $hasMany = array
+		// Discussion HasMany Responses
 		'Response' => array(
-			'className' => 'Forum.Response',
-			'foreignKey' => 'discussion_id',
-			'dependent' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
+			'className'		=> 'Forum.Response',
+			'foreignKey'	=> 'discussion_id',
+			'dependent'		=> true,
+			'conditions'	=> '',
+			'fields'		=> '',
+			'order'			=> '',
+			'limit'			=> '',
+			'offset'		=> '',
+			'exclusive'		=> '',
+			'finderQuery'	=> '',
+			'counterQuery'	=> ''
 		)
 	);
-	
+
+	/**
+	 * Model contructor. Initializes the validation error messages with i18n
+	 *
+	 * @see Model::__construct
+	 */
+	function __construct($id = false, $table = null, $ds = null) {
+		$this->setErrorMessage(
+			'title.required', __('Please set a title',true)
+		);
+		$this->setErrorMessage(
+			'status.valid', __('Incorrect status',true)
+		);
+		parent::__construct($id,$table,$ds);
+	}
+
+	/**
+	 * Before validate callback
+	 *
+	 * @see Model::beforeValidate
+	 */
 	function beforeValidate() {
 		parent::beforeValidate();
 		if (isset($this->data['Discussion']['close'])) {
@@ -98,7 +142,12 @@ class Discussion extends AppModel {
 		}
 		return true;
 	}
-	
+
+	/**
+	 * Adds a field (closed) before returning a search result
+	 *
+	 * @see Model::afterFind
+	 */
 	function afterFind($results, $primary=false) {
 		if ($primary) {
 			foreach ($results as $i => $discussion) {
@@ -108,6 +157,13 @@ class Discussion extends AppModel {
 		}
 		return $results;
 	}
+
+	/**
+	 * Returns a Discussion data
+	 *
+	 * @param string $id ID of the discussion
+	 * @return mixed Array with data if found of false
+	 */
 	function getDiscussion($id) {
 		$this->contain(
 			array(
@@ -119,21 +175,10 @@ class Discussion extends AppModel {
 		return $discussion;
 	}
 	
-	function __construct($id = false, $table = null, $ds = null) {
-		$this->setErrorMessage(
-			'title.required', __('The title can not be empty',true)
-		);
-		$this->setErrorMessage(
-			'closed.valid', __('??',true)
-		);
-		parent::__construct($id,$table,$ds);
-	}
-	
 	/**
 	 * Returns the parent course of the current entity 
 	 *
 	 * @return mixed Parent Course id or false if not found
-	 * @author Joaquín Windmüller
 	 **/
 	function getParentCourse() {
 		$this->Topic->read(null, $this->data['Discussion']['topic_id']);
