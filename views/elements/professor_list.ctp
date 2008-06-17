@@ -19,7 +19,13 @@
 						array('class' => 'email')
 					);
 				?>
+				<?php
+					if (!empty($professor['phone'])):
+				?>
 				<div class="tel"><?php echo $professor['phone']; ?></div>
+				<?php
+					endif;
+				?>
 			</div>
 		</li>
 	<?php

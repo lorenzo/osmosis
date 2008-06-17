@@ -145,6 +145,7 @@ body {
 	margin:10px 0;
 }
 .professors .abstract {
+	margin-left:10px;
 	margin-right:0;
 }
 #upper-content #more-courses .abstract {
