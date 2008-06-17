@@ -1,4 +1,5 @@
 <div class="courses abstract">
+	<div class="content">
 	<strong class="title"><?php __('My Courses'); ?></strong>
 <?php
  if (isset($Osmosis['courseList'])) :
@@ -26,6 +27,11 @@ else :
 	<p><?php __('You aren\'t enrolled in any course.'); ?></p>
 <?php
 endif;
-	echo $html->link(__('Find a Course to enroll', true), array('controller' => 'departments', 'action' => 'index'));
+	echo $html->link(
+		__('Find a Course to enroll', true),
+		array('controller' => 'departments', 'action' => 'index'),
+		array('class' => 'enroll')
+	);
 ?>
+	</div>
 </div>

@@ -132,12 +132,24 @@ body {
 #upper-content #more-courses .content {
 	border-top:#888 1px dashed;
 	display:block;
-	padding:10px;
 	background:#fff;
+	margin:0;
+	padding:10px;
+	padding-bottom:0;
 }
 #upper-content #more-courses .content ul {
-	height:120px;
+	height:100px;
 	overflow:auto;
+}
+.abstract {
+	margin:10px 0;
+}
+.professors .abstract {
+	margin-right:0;
+}
+#upper-content #more-courses .abstract {
+	height:100%;
+	margin:0;
 }
 
 /* Tool list */

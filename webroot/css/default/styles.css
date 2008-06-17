@@ -122,11 +122,8 @@ a:visited {
 #upper-content #main ul li.users {
 	list-style:url('../../forum/css/img/users.png');
 }
-/* Styles "Abstract" list */
-.abstract {
-	padding:10px;
-}
 
+/* Styles "Abstract" list */
 .abstract strong.title {
 	text-indent:20px;
 	font-weight:normal;
@@ -150,6 +147,15 @@ a:visited {
 	border-bottom:#666 1px dashed;
 	text-indent:5px;
 }
+.abstract .enroll {
+	background:#666;
+	color:#FFDE9F;
+	display:block;
+	padding:2px;
+	text-decoration:none;
+	text-align:center;
+	margin-top:-1px;
+}
 #upper-content #more-courses .courses ul li .code {
 	color:#666;
 	font-family:monospace;
@@ -167,10 +173,6 @@ a:visited {
 .updates {
 	float:left;
 	width:70%;
-}
-
-.updates .abstract {
-	padding:10px 0;
 }
 
 .professors {

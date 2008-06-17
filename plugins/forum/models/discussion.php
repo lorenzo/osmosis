@@ -93,7 +93,7 @@ class Discussion extends AppModel {
 	 *
 	 * @var array
 	 **/
-	var $hasMany = array
+	var $hasMany = array(
 		// Discussion HasMany Responses
 		'Response' => array(
 			'className'		=> 'Forum.Response',
