@@ -42,6 +42,14 @@ class AppController extends Controller {
 	
 	protected $activeCourse = false;
 	
+	/**
+	 * Things to be done before calling to the requested action.
+	 *
+	 * @see Controller::beforeFilter
+	 * @return void
+	 * @author José Lorenzo
+	 */
+	
 	function beforeFilter() {
 		if (isset($this->Auth)) {
 			$this->_initializeAuth();
@@ -86,6 +94,12 @@ class AppController extends Controller {
 		return true;
 	}
 	
+	/**
+	 * Initializes the AuthComponent for doing authorization and athenticantion.
+	 *
+	 * @return void
+	 */
+	
 	function _initializeAuth() {
 		if (isset($this->Auth)) {
 			$this->Auth->Acl =& $this->Acl;
@@ -106,9 +120,21 @@ class AppController extends Controller {
 		}
 	}
 	
+	/**
+	 * Returns the id of the active course (The course the user is requesting)
+	 *
+	 * @return mixed
+	 */
+	
 	function _getActiveCourse() {
 		return $this->activeCourse;
 	}
+
+	/**
+	 * Sends data to the view correspondig to the active course.
+	 *
+	 * @return void
+	 */
 	
 	function __setActiveCourseData() {
 		if ($this->activeCourse) {
@@ -117,14 +143,33 @@ class AppController extends Controller {
 		}
 	}
 	
+	/**
+	 * Instatiates the ModelLog for futher use inside the application
+	 *
+	 * @return void
+	 */
+	
 	function __instatiateLogger() {
 		ClassRegistry::init('ModelLog');
 	}
+	
+	/**
+	 * Redirects the user to a safe location if detected a forgery
+	 *
+	 * @return void
+	 */
+	
 	function _blackHoledAction() {
 		$this->Session->setFlash(__('Invalid access', true));
 		$this->redirect(array('controller' => 'members', 'action' => 'login', 'plugin' => ''));
 	}
-
+	
+	/**
+	 * Picks a layout based on the requested location
+	 *
+	 * @return void
+	 */
+	
 	function __selectLayout() {
 		if (isset($this->params['admin']) && $this->params['admin']) {
 			$this->layout = 'admin';
@@ -141,11 +186,23 @@ class AppController extends Controller {
 		}
 	}
 	
+	/**
+	 * Logs the member last seen time
+	 *
+	 * @return void
+	 */
+	
 	protected function __updateOnlineUser() {
 		$member = ClassRegistry::init('Member');
 		$member->id = $this->Auth->user('id');
 		$member->saveField('last_seen', time());
 	}
+	
+	/**
+	 * Indicates if the active user has access to the requested location
+	 *
+	 * @return boolean
+	 */
 	
 	function isAuthorized() {
 		if( $this->name == 'Pages')
@@ -165,6 +222,12 @@ class AppController extends Controller {
 		return false;
 	}
 	
+	/**
+	 * Returns the current role of the active user based on the active course, or the location the user is requesting
+	 *
+	 * @return string
+	 */
+	
 	function _currentRole() {
 		if (!$this->Auth->user())
 			return 'Public';
@@ -176,9 +239,22 @@ class AppController extends Controller {
 		return $member->role($this->Auth->user('id'),$this->activeCourse);
 	}
 	
+	/**
+	 * Returns true if the active user has access to the requested record. TO be overriden in subclasses
+	 *
+	 * @return boolean
+	 */
+	
 	function _ownerAuthorization() {
 		return true;
 	}
+	
+	/**
+	 * Sends data to the view needed to render some placeholders 
+	 * @see Controller::beforeRender
+	 *
+	 * @return void
+	 */
 	
 	function beforeRender() {
 		if (isset($this->Placeholder->started) && $this->activeCourse) {
@@ -192,11 +268,25 @@ class AppController extends Controller {
 		$this->__selectLayout();
 	}
 	
+	/**
+	 * Populates $this->activeCourse from information in the url, session, or other sources 
+	 *
+	 * @return void
+	 */
+	
 	function _setActiveCourse() {
 		if (isset($this->params['named']['course_id'])) {
 			$this->activeCourse = $this->params['named']['course_id'];
 		}
 	}
+	
+	/**
+	 * Redirects to the specified url if $condition evaluates to true
+	 * and ends the excetution of the current script
+	 *
+	 * @param boolean $condition 
+	 * @param mixel $url 
+	 */
 	
 	function _redirectIf($condition, $url = '/') {
 		if ($condition) {
