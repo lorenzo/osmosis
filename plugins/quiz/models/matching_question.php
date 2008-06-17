@@ -133,14 +133,32 @@ class MatchingQuestion extends QuizAppModel {
 		parent::__construct($id, $table, $ds);
 	}
 	
+	/**
+	 * Validates that the minimum associations requested to be made are less or equal than the number of target choices
+	 *
+	 * @return boolean
+	 * @author José Lorenzo
+	 */
+	
 	function validMinAssocs() {
 		return intval($this->data[$this->alias]['min_associations']) <= intval($this->data[$this->alias]['max_associations']);
 	}
+	
+	/**
+	 * Validates that the minimum associations requested to be made are less or equal than the number of source choices
+	 *
+	 * @return boolean
+	 */
 	
 	function validBoundMinAssocs() {
 		return $this->data[$this->alias]['min_associations'] <= count($this->data['SourceChoice']);
 	}
 
+	/**
+	 * Validates the matching choices before saving the question
+	 *
+	 * @return boolean
+	 */
 	
 	function beforeValidate() {
 		parent::beforeValidate();
@@ -182,6 +200,39 @@ class MatchingQuestion extends QuizAppModel {
 		}
 		
 		return true;
+	}
+	
+	/**
+	 * Shuffles the choices if necesseary
+	 *
+	 * @param aray $results 
+	 * @param boolean $primary 
+	 * @return results with shuffled choices if necessary
+	 */
+	
+	function afterFind($results,$primary = false) {
+		array_walk($results,array(&$this,'shuffleChoices'));	
+		return $results;
+	}
+	
+	/**
+	 * Auxiliary function for shuffling Source and Taget choices
+	 *
+	 * @param array $question 
+	 * @return array question with shuffled choices
+	 */
+	
+	function shuffleChoices(&$question) {
+		if (!isset($question['shuffle']) || !$question['shuffle'])
+			return;
+			
+		if (isset($question['SourceChoice'])) {
+			shuffle($question['SourceChoice']);
+		}
+		
+		if (isset($question['TargetChoice'])) {
+			shuffle($question['TargetChoice']);
+		}
 	}
 
 }

@@ -3,15 +3,15 @@
 		$i = 0;
 		foreach ($questions as $type => $question) {
 			$choices = $question['ChoiceChoice'];
-			$question = $question['ChoiceQuestion'];
 	?>
 		<li>
 			<?php
-				$num_choices = sizeof($question);
+				$num_choices = count($question['ChoiceChoice']);
 				$num = __('%s Choices', true);
 				if ($num_choices==1) {
 					$num = __('%s Choice', true);
 				}
+				$question = $question['ChoiceQuestion'];
 			?>
 			<strong><?php echo $text->truncate($question['body'], 200) ?></strong><br />
 			<?php

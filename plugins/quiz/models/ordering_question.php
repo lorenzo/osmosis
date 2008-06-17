@@ -115,9 +115,8 @@ class OrderingQuestion extends QuizAppModel {
 	 * Prepares each Question's choices shuffling.
 	 *
 	 * @param array $results
-	 * @param string $primary 
+	 * @param boolean $primary 
 	 * @return questions with choices shuffled.
-	 * @author Joaquín Windmüller
 	 */
 	
 	function afterFind($results, $primary=false) {
@@ -154,6 +153,12 @@ class OrderingQuestion extends QuizAppModel {
 		return $results;
 	}
 	
+	/**
+	 * Validates ordering options before saving the question
+	 *
+	 * @return boolean true if all ordering options are valid
+	 */
+	
 	function beforeValidate() {
 		parent::beforeValidate();
 		$positions = array_filter(Set::extract($this->data, 'OrderingChoice.{n}.position'));
@@ -179,6 +184,7 @@ class OrderingQuestion extends QuizAppModel {
 		}
 		return true;
 	}
+	
 	/**
 	 * Shuffles a set of choices, taking in account the fixed position set on some of them.
 	 *
@@ -206,6 +212,12 @@ class OrderingQuestion extends QuizAppModel {
 		ksort($new);
 		return $new;
 	}
+	
+	/**
+	 * Validates that max_choices is greater that min_choices
+	 *
+	 * @return boolean
+	 */
 	
 	function minLessThanMax() {
 		if (empty($this->data['OrderingQuestion']['max_choices'])) return true;

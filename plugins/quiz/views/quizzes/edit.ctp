@@ -1,4 +1,4 @@
-<h1><?php echo sprintf(__('Edit %s %s', true), __('Quiz', true), $form->value('name'));?></h1>
+<h1><?php echo sprintf(__('Edit %s %s', true), __('Quiz', true), $this->data['Quiz']['name']);?></h1>
 <div class="question-list">
 	<?php
 		echo $form->create('Quiz', array('action' => 'add_question'));
@@ -47,7 +47,7 @@
 			unset($this->data['Quiz']);
 			foreach ($this->data as $type => $question_list) {
 				if (empty($question_list)) continue;
-				echo '<h3>' . __($type, true) . '</h3>';
+				echo '<h3>' . __(Inflector::humanize(Inflector::underscore($type)), true) . '</h3>';
 				echo '<ol>';
 				foreach ($question_list as $i => $question) {
 					$question = array($type => $question);

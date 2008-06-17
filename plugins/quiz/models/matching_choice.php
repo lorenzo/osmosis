@@ -86,6 +86,12 @@ class MatchingChoice extends QuizAppModel {
 		parent::__construct($id, $table, $ds);
 	}
 
+	/**
+	 * Validates that echa choice have a correct answer represented by a number
+	 *
+	 * @return boolean
+	 */
+	
 	function validCorrectAnswer() {
 		if($this->alias == 'TargetChoice')
 			return true;

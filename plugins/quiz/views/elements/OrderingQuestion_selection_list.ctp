@@ -2,15 +2,15 @@
 	<?php
 		$i = 0;
 		foreach ($questions as $type => $question) {
-			$question = $question['OrderingQuestion'];
 	?>
 		<li>
 			<?php
-				$num_choices = sizeof($question);
+				$num_choices = sizeof($question['OrderingChoice']);
 				$num = __('%s Choices', true);
 				if ($num_choices==1) {
 					$num = __('%s Choice', true);
 				}
+				$question = $question['OrderingQuestion'];
 			?>
 			<strong><?php echo $text->truncate($question['body'], 200) ?></strong><br />
 			<?php

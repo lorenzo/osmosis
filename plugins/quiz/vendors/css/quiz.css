@@ -159,6 +159,10 @@
 	margin-left:0;
 }
 
+.choices div.input .error-message {
+	margin-left:0;
+}
+
 .choices fieldset.question-choices {
 	width:60%;
 	float:right;

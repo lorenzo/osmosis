@@ -89,7 +89,7 @@ class Quiz extends QuizAppModel {
 			parent::__construct($id,$table,$ds);
 	}
 
-	function getQuestions($question_type=null, $quiz_id = null) {
+	function getQuestions($question_type=null, $id = null) {
 		if ($question_type==null) {
 			return null;
 		}
@@ -99,20 +99,24 @@ class Quiz extends QuizAppModel {
 		} else {
 			$question_type = array_keys($question_type);
 		}
-		$questions = array();
+		
+		
+		$questions = $quiz = array();
+		
+		if ($id) {
+			$conditions = array('Quiz.id' =>$id);
+			$recursive = 2;
+			$quiz = $this->find('first', compact('conditions','recursive'));
+		}
+		
 		foreach ($question_type as $type) {
 			$questionType = Inflector::camelize($type);
-			$quiz_questions = array();
-			if ($quiz_id) {
-				$quiz_questions = $this->read(null, $quiz_id);
-				$quiz_questions = Set::extract('/'.$questionType.'/id',$quiz_questions);
-			}
-			
-			$conditions = 	array('NOT' => array('id' => $quiz_questions));
+			$exclude = Set::extract('/'.$questionType.'/id',$quiz);
+			$conditions = 	array('NOT' => array('id' => $exclude));
 			$this->{$questionType}->unbindModel(array('hasAndBelongsToMany' => array('Quiz')));
 			$questions[$questionType]  = $this->{$questionType}->find('all',compact('conditions','contain'));
 		}
-		return $questions;
+		return array($questions,$quiz);
 	}
 
 	function addQuestions($question_list = array()) {

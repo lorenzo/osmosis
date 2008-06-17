@@ -82,11 +82,6 @@ class QuizzesController extends QuizAppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		
-		if (empty($this->data)) {
-			$this->Quiz->recursive = 2;
-			$this->data = $this->Quiz->read(null, $id);
-		}
-		
 		$question_type = 'all';
 		if (isset($this->params['named']['question_type'])) {
 			$question_type = $this->params['named']['question_type'];
@@ -97,12 +92,15 @@ class QuizzesController extends QuizAppController {
 			$question_name = $this->question_types[$question_type];
 		}
 		$this->set('question_name', $question_name);
+
 		if ($question_type != 'all') {
-			$questions = $this->Quiz->getQuestions($question_type, $this->data['Quiz']['id']);
+			list($questions,$quiz) = $this->Quiz->getQuestions($question_type, $id);
 		} else {
-			$questions = $this->Quiz->getQuestions($this->question_types, $this->data['Quiz']['id']);
+			list($questions,$quiz) = $this->Quiz->getQuestions($this->question_types, $id);
 		}
 		
+		if (empty($this->data))
+			$this->data = $quiz;
 		$this->set('question_list', $questions);
 	}
 

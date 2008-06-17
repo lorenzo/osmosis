@@ -119,7 +119,13 @@ class ChoiceQuestion extends QuizAppModel {
 		);
 		parent::__construct($id, $table, $ds);
 	}
-
+	
+	/**
+	 * Validates the choices array before saving the question
+	 *
+	 * @return boolean
+	 */
+	
 	function beforeValidate() {
 		parent::beforeValidate();
 		$positions = array_filter(Set::extract($this->data, 'ChoiceChoice.{n}.position'));
@@ -147,14 +153,73 @@ class ChoiceQuestion extends QuizAppModel {
 		return true;
 	}
 	
+	/**
+	 * Validates taht the max_choices are greater or equal than min_choices
+	 *
+	 * @return void
+	 * @author José Lorenzo
+	 */
+	
 	function minLessThanMax() {
 		if (empty($this->data['ChoiceQuestion']['max_choices'])) return true;
 		return intval($this->data['ChoiceQuestion']['min_choices'])<=intval($this->data['ChoiceQuestion']['max_choices']);
 	}
 	
+	/**
+	 * Validates that the number of correct choices are greater or equal than the minimum coices required to be answered
+	 *
+	 * @return boolean
+	 */
+	
 	function numCorrectChoicesAvailable() {
 		if (empty($this->data['ChoiceQuestion']['min_choices'])) return true;
 		return (intval($this->data['ChoiceQuestion']['num_correct']) >= intval($this->data['ChoiceQuestion']['min_choices']));
+	}
+	
+	/**
+	 * Shuffles the choices if necesseary
+	 *
+	 * @param aray $results 
+	 * @param boolean $primary 
+	 * @return results with shuffled choices if necessary
+	 */
+	
+	function afterFind($results,$primary = false) {
+		array_walk($results,array(&$this,'shuffleChoices'));	
+		return $results;
+	}
+	
+	/**
+	 * Auxiliary function for shuffling Source and Taget choices
+	 *
+	 * @param array $question 
+	 * @return array question with shuffled choices
+	 */
+	
+	function shuffleChoices(&$question) {
+		if (!isset($question['shuffle']) || !$question['shuffle'])
+			return;
+
+		if (isset($question['ChoiceChoice'])) {
+			$new = array();
+			$fixed = Set::extract($question['ChoiceChoice'], '{n}.position');
+			$open = array_keys($fixed);
+			foreach ($fixed as $i => $index) {
+				if ($index<=0) {
+					continue;
+				}
+				$index -= 1;
+				$new[$index] = $question['ChoiceChoice'][$i];
+				unset($open[$index]);
+				unset($question['ChoiceChoice'][$i]);
+			}
+			shuffle($open);
+			foreach ($open as $i => $index) {
+				$new[$index] = array_pop($question['ChoiceChoice']);
+			}
+			ksort($new);
+			$question['ChoiceChoice'] = $new;
+		}
 	}
 }
 ?>
