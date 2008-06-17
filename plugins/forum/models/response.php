@@ -33,6 +33,12 @@ class Response extends AppModel {
 
 	var $name = 'Response';
 	var $useTable = 'forum_responses';
+	
+	/**
+	 * Validation Rules for Fields
+	 *
+	 * @var array
+	 **/
 	var $validate = array(
 		'content' => array(
 			'required' => array(
@@ -41,30 +47,45 @@ class Response extends AppModel {
 				'allowEmpty' => false
 			)
 		)
-		//'discussion_id' => array('alphanumeric'),
-		// 'member_id' => array('numeric')
 	);
+
+	/**
+	 * Attached behaviors
+	 *
+	 * @var array
+	 **/
 	var $actsAs = array('Bindable', 'Loggable');
-	
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+	/**
+	 * BelongsTo (1-N) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $belongsTo = array(
+		// Response BelongsTo Discussion
 		'Discussion' => array(
-			'className' => 'Forum.Discussion',
-			'foreignKey' => 'discussion_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'counterCache' => array('skipUpdates' => false)
+			'className'		=> 'Forum.Discussion',
+			'foreignKey'	=> 'discussion_id',
+			'conditions'	=> '',
+			'fields'		=> '',
+			'order'			=> '',
+			'counterCache'	=> array('skipUpdates' => false)
 		),
+		// Response BelongsTo Member (author of the response)
 		'Member' => array(
-			'className' => 'Member',
-			'foreignKey' => 'member_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
+			'className'		=> 'Member',
+			'foreignKey'	=> 'member_id',
+			'conditions'	=> '',
+			'fields'		=> '',
+			'order'			=> ''
 		)
 	);
-	
+
+	/**
+	 * Model contructor. Initializes the validation error messages with i18n
+	 *
+	 * @see Model::__construct
+	 */
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
 			'content.required',

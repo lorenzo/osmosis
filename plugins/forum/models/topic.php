@@ -59,6 +59,12 @@ class Topic extends AppModel {
 				)
 			),
 	);
+
+	/**
+	 * Attached behaviors
+	 *
+	 * @var array
+	 **/
 	var $actsAs = array('Bindable', 'Loggable');
 
 	/**
