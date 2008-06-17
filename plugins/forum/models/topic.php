@@ -33,6 +33,12 @@ class Topic extends AppModel {
 
 	var $name = 'Topic';
 	var $useTable = 'forum_topics';
+	
+	/**
+	 * Validation Rules for Fields
+	 *
+	 * @var array
+	 **/
 	var $validate = array(
 		'name' => array(
 			'required' => array(
@@ -54,9 +60,14 @@ class Topic extends AppModel {
 			),
 	);
 	var $actsAs = array('Bindable', 'Loggable');
-	
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+	/**
+	 * BelongsTo (1-N) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $belongsTo = array(
+		// Topic BelongsTo Course (topic of the course's forum)
 		'Course' => array(
 			'className' => 'Course',
 			'foreignKey' => 'course_id',
@@ -65,7 +76,13 @@ class Topic extends AppModel {
 		)
 	);
 
+	/**
+	 * BelongsTo (N-1) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $hasMany = array(
+		// Topic HasMany Discussions
 		'Discussion' => array(
 			'className' => 'Forum.Discussion',
 			'foreignKey' => 'topic_id',
@@ -80,7 +97,12 @@ class Topic extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-
+	
+	/**
+	 * Model contructor. Initializes the validation error messages with i18n
+	 *
+	 * @see Model::__construct
+	 */
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
 			'name.required', __('The name can not be empty',true)
@@ -88,6 +110,11 @@ class Topic extends AppModel {
 		parent::__construct($id,$table,$ds);
 	}
 	
+	/**
+	 * Before validate callback
+	 *
+	 * @see Model::beforeValidate
+	 */
 	function beforeValidate() {
 		parent::beforeValidate();
 		if (isset($this->data['Topic']['close'])) {
@@ -101,6 +128,11 @@ class Topic extends AppModel {
 		return true;
 	}
 	
+	/**
+	 * Adds a field (closed) before returning a search result
+	 *
+	 * @see Model::afterFind
+	 */	
 	function afterFind($results, $primary=false) {
 		if ($primary) {
 			foreach ($results as $i => $topic) {
@@ -111,19 +143,25 @@ class Topic extends AppModel {
 		return $results;
 	}
 	
-	function getListSummary($course_id) {
-		$this->restrict(
+	/**
+	 * Returns a list of discussions (each one with the latest response) inside a topic.
+	 *
+	 * @param string $id Id of a topic
+	 * @return mixed Array of data if topic is found or false if not
+	 */
+	function getListSummary($id) {
+		$this->contain(
 			array(
+				'Course',
 				'Discussion' => array(
 					'Member',
 					'Response' => array('Member' => array('id', 'full_name'))
-				),
-				'Course'
+				)
 			)
 		);
 		$this->Discussion->hasMany['Response']['limit'] = 1;
 		$this->Discussion->hasMany['Response']['order'] = 'created desc';
-		return $this->find('first', array('course_id' => $course_id));
+		return $this->read(null, $id);
 	}
 	
 	/**

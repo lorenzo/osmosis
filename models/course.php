@@ -121,7 +121,7 @@ class Course extends AppModel {
 	);
 	
 	/**
-	 * Constructor of the class. Startups avlidation error messages with i18n.
+	 * Constructor of the class. Startups validation error messages with i18n.
 	 */
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
