@@ -49,10 +49,22 @@ a:visited {
 }
 
 /* Styles for middle area */
-#upper-content.summary #main {
-	font-size:0.83em;
+#upper-content.summary .course-data ul.professors-list {
+	list-style:none;
+}
+#upper-content.summary .course-data ul.professors-list li {
+	width:auto;
+	float:left;
+	margin-right:20px;
+}
+#upper-content.summary .course-data ul.professors-list li br {
+	display:none;
 }
 
+#upper-content.summary .course-data ul.professors-list li a {
+	display:block;
+	margin:0;
+}
 #upper-content #main h1 {
 	clear:both;
 	margin:0 0 2px 0;

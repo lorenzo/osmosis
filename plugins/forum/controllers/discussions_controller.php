@@ -50,7 +50,7 @@ class DiscussionsController extends ForumAppController {
 		$this->_redirectIf(!isset($this->params['named']['discussion_id']));
 		$id = $this->params['named']['discussion_id'];
 		$discussion = $this->Discussion->getDiscussion($id);
-		$this->Discussion->Response->restrict(
+		$this->Discussion->Response->contain(
 			array(
 				'Member',
 				'Discussion' => array('id')

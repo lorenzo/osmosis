@@ -54,7 +54,7 @@ class VisitableBehavior extends ModelBehavior {
 		$id = $data[$Model->alias][$Model->primaryKey];
 		if (!isset($this->__settings[$Model->alias][$id])) return true;
 		$theModel = new $Model->name;
-		$theModel->restrict($Model->alias);
+		$theModel->recursive = -1;
 		$theModel->updateAll(
 			array($this->__settings[$Model->alias]['field'] => $this->__settings[$Model->alias]['field'] . ' + 1'),
 			array($Model->alias . '.' . $Model->primaryKey => $id)
