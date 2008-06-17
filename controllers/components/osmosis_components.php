@@ -33,21 +33,37 @@ App::import('Model', 'Member');
 class OsmosisComponentsComponent extends Object {
 	
 	var $controller;
+	var $Member;
 	
 	function startup(&$controller) {
 		$this->controller =& $controller;
+		$this->Member = ClassRegistry::init('Member');
 	}
 	
 	function getUserCourses() {
 		if (!isset($this->controller->Auth))
 			return array();
-		$member = new Member;
-		$courses = $member->courses($this->controller->Auth->user('id'));
+		$courses = $this->Member->courses($this->controller->Auth->user('id'));
 		$this->controller->viewVars['Osmosis']['courseList'] = $courses;
+	}
+	
+	/**
+	 * Sets to the view the professors of the active course
+	 *
+	 * @return void
+	 * @author Joaquín Windmüller
+	 **/
+	function _setActiveCourseProfessors() {
+		$active_course = $this->controller->_getActiveCourse();
+		if ($active_course) {
+			$professors = $this->Member->Course->professors($active_course);
+			$this->controller->viewVars['Osmosis']['active_course']['professors'] = array_pop($professors);
+		}
 	}
 	
 	function beforeRender() {
 		$this->getUserCourses();
+		$this->_setActiveCourseProfessors();
 	}
 
 }

@@ -12,9 +12,10 @@
 <?php if(Configure::read()>0) echo $html->css('debug');?> 
 <?php echo $javascript->codeBlock('var webroot = "' . $html->url('/') .'"'); ?> 
 <?php echo $javascript->link('jquery/jquery'); ?> 
-<?php echo $html->css('jquery.osmosis-selector'); ?> 
-<?php echo $javascript->link('jquery/plugins/jquery.osmosis-selector'); ?> 
+
 <?php echo $javascript->link('jquery/plugins/jquery.flydom'); ?> 
+<?php echo $html->css('jquery.osmosis-selector'); ?> 
+<?php echo $javascript->link('jquery/plugins/jquery.osmosis-selector'); ?>
 <?php echo $javascript->link('jquery/plugins/jquery.bgiframe.min'); ?> 
 <?php echo $javascript->link('jquery/plugins/jquery.autocomplete'); ?> 
 <?php echo $javascript->link('jquery/plugins/jquery.fieldselection'); ?> 

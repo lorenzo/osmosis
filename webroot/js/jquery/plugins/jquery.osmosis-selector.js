@@ -112,7 +112,6 @@ jQuery.fn.osmosisSelector = function(settings) {
 					item += '<input type="hidden" name="' + params.name + '" value="' + data.value + '" />';
 					item +='</li>';
 					$(self.mainInput).before(item).val('');
-					console.debug($('li a.close', selectionsUl));
 					$('li a.close', selectionsUl).click(function() {
 						$(this).parent().remove();
 					}).focus(function() {
@@ -258,7 +257,6 @@ jQuery.fn.osmosisSelector = function(settings) {
 		}
 
 		function blur() {
-			console.debug(self.selected);
 			if (self.selected==null) return;
 			if (self.selected.get(0).className=='selected') {
 				self.selected.removeClass('selected');
@@ -284,7 +282,26 @@ jQuery.fn.osmosisSelector = function(settings) {
 		}
 	}
 	
+	function OsmosisAutoComplete(input, settings) {
+		configure(input, settings);
+
+		function configure(input, settings) {
+			input
+				.autocomplete(settings.urlLookup, settings.acOptions)
+				.result(function(event, data, formatted) {
+					settings.success(event, data, formatted);
+				});
+		}
+		
+	}
+	
 	return this.each(function() {
-		new OsmosisMultiselect($(this), settings);
+		if (this.nodeName == "DIV") {
+			time = new Date().getTime();
+			$(this).createAppend('input', {type : 'text', name : time, id : time}, '');
+			new OsmosisAutoComplete($('#' + time ), settings);
+		}
+		// if (this.node)
+		// new OsmosisMultiselect($(this), settings);
 	}) 
 }

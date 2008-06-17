@@ -128,5 +128,16 @@ class Discussion extends AppModel {
 		);
 		parent::__construct($id,$table,$ds);
 	}
+	
+	/**
+	 * Returns the parent course of the current entity 
+	 *
+	 * @return mixed Parent Course id or false if not found
+	 * @author Joaquín Windmüller
+	 **/
+	function getParentCourse() {
+		$this->Topic->read(null, $this->data['Discussion']['topic_id']);
+		return $this->Topic->getParentCourse();
+	}
 }
 ?>

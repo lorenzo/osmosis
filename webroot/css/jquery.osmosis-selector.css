@@ -90,3 +90,26 @@ ul.selections li.selected {
 .ac_results ul li.ac_over {
 	background:#ccc;
 }
+
+.addPanel {
+	background:#ccc;
+	padding:0;
+	border-bottom:1px solid #E3E3E3;
+}
+
+.addPanel input {
+	width:100%;
+	border:0;
+	padding:2px 0;
+	background:#fff url('../img/default/arrow_g_down.gif') no-repeat 95% 50%;
+	
+}
+.addPanel .selector-wrapper {
+	width:90%;
+	margin:auto;
+	padding:0;
+}
+
+.attach {
+	position:relative;
+}

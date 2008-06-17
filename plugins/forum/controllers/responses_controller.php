@@ -84,6 +84,5 @@ class ResponsesController extends ForumAppController {
 			$this->data = $this->Response->read(null, $this->params['named']['response_id']);
 		}
 	}
-
 }
 ?>

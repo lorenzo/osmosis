@@ -6,7 +6,7 @@ foreach ($data as $modelName => $entity) :
 <ul id="forum">
 	<?php
 		foreach ($entity as $i => $events) :
-			echo $this->renderElement($modelName . '.updates', array('events' => $events, 'plugin' => 'forum'));
+			echo $this->element($modelName . '.updates', array('events' => $events, 'plugin' => 'forum'));
 		endforeach;
 	?>
 </ul>

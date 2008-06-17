@@ -125,5 +125,15 @@ class Topic extends AppModel {
 		$this->Discussion->hasMany['Response']['order'] = 'created desc';
 		return $this->find('first', array('course_id' => $course_id));
 	}
+	
+	/**
+	 * Returns the parent course of the current entity 
+	 *
+	 * @return mixed Parent Course id or false if not found
+	 * @author Joaquín Windmüller
+	 **/
+	function getParentCourse() {
+		return $this->data['Topic']['course_id'];
+	}
 }
 ?>

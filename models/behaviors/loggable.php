@@ -33,19 +33,28 @@ class LoggableBehavior extends ModelBehavior {
 	
 	function afterSave(&$model, $created) {
 		$course_id = Configure::read('ActiveCourse.id');
+		if (!$course_id) {
+			$course_id = $model->getParentCourse();
+		}
 		$member_id = Configure::read('ActiveUser.Member.id');
+		$data = array(
+			'member_id'	=> $member_id,
+			'model'		=> $model->alias,
+			'entity_id' => $model->id,
+			'course_id' => $course_id,
+			'created'	=> $created,
+			'time'		=> time()
+		);
+		if (!$course_id) {
+			$error = "Could not log a model Modification (Parent Course not found).\n";
+			$error.= "Please implement $model->alias::getParentCourse or correctly set ActiveCourse.id configuration on POST.\n";
+			$error.= "Data received:\n" . var_export($data, true);
+			$this->log($error);
+			return;
+		}
 		$modelLog = ClassRegistry::getObject('ModelLog');
 		$modelLog->create();
-		$modelLog->save(
-			array(
-				'member_id'	=> $member_id,
-				'model'		=> $model->alias,
-				'entity_id' => $model->id,
-				'course_id' => $course_id,
-				'created'	=> $created,
-				'time'		=> time()
-			)
-		);
+		$modelLog->save($data);
 	}
 }
 ?>

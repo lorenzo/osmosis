@@ -196,7 +196,7 @@ class Course extends AppModel {
 	 * @author Joaquín Windmüller
 	 */
 	function professors($id) {
-		return $this->enrolled($id, 'professor');
+		return $this->enrolled($id, 'professor', true);
 	}
 	
 	/**
@@ -207,9 +207,9 @@ class Course extends AppModel {
 	 * @return Array members enrolled in the course
 	 * @author Joaquín Windmüller
 	 */	
-	function enrolled($id, $role = null, $just_ids = false) {
-		$fields = array('member_id', 'Enrollment.role_id');
-		$order = array('role_id ASC');
+	function enrolled($id, $role = null, $groupedByCourse = false) {
+		$fields = array('Enrollment.member_id', 'Enrollment.role_id');
+		$order = array('course_id, role_id ASC');
 		$conditions = array('course_id' => $id);
 		
 		$this->bindModel(array('hasAndBelongsToMany' => array('Member')));
@@ -219,28 +219,26 @@ class Course extends AppModel {
 			$roles = Set::combine($roles, '/Role/id', '/Role/role');
 		}
 		
+		if ($groupedByCourse) {
+			$fields[] = 'course_id';
+		}
+		$this->Member->Enrollment->contain('Member(id,full_name,email,phone)');
 		$enrolled = $this->Member->Enrollment->find('all', compact('conditions', 'fields', 'order'));
-		$members_by_role = array();		
+		
+		$members_by_role = array();	
+		$members_by_course = array();
 		foreach ($enrolled as $i => $member) {
-			$member = $member['Enrollment'];
-			$role_name = $roles[$member['role_id']];
-			$members_by_role[$role_name][] = $member['member_id'];
+			$enrollment = $member['Enrollment'];
+			$member = $member['Member'];
+			$role_name = $roles[$enrollment['role_id']];
+			$members_by_role[$role_name][] = $members_by_course[$enrollment['course_id']][] = $member;
 		}
-
-		if ($just_ids) {
+		
+		if (!$groupedByCourse) {
 			return $members_by_role;
+		} else {
+			return $members_by_course;
 		}
-		
-		$members = array();
-		$this->Member->recursive = -1;
-		foreach ($members_by_role as $role => $ids) {
-			$members[$role] = $this->Member->find('all', array(
-				'conditions' => array('Member.id' => $ids),
-				'fields' => array('id', 'full_name')
-			));
-		}
-		
-		return $members;
 	}
 }
 ?>

@@ -55,3 +55,4 @@ $paginator->options(array('url'=>$this->params['pass']));
 			<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
 		</div>
 	<?php endif; ?>
+</div>

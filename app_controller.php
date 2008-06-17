@@ -48,14 +48,13 @@ class AppController extends Controller {
 		}
 		
 		$this->_setActiveCourse();
+		Configure::write('ActiveCourse.id', $this->activeCourse);
 		
 		if (isset($this->Security)) {
 			$this->Security->blackHoleCallback = '_blackHoledAction';
 		}
 		if (isset($this->Auth) && $this->Session->valid() && $this->Auth->user())
 			$this->__updateOnlineUser();
-		
-		Configure::write('ActiveCourse.id', $this->activeCourse);
 		
 		$this->__instatiateLogger();
 		
@@ -129,8 +128,17 @@ class AppController extends Controller {
 	function __selectLayout() {
 		if (isset($this->params['admin']) && $this->params['admin']) {
 			$this->layout = 'admin';
-		} elseif (empty($this->activeCourse))
+		} elseif (empty($this->activeCourse)) {
 			$this->layout = 'no_course';
+		}
+		if ($this->RequestHandler->isAjax()) {
+			if ($this->RequestHandler->prefers()=='json') {
+				$this->layout = 'default';
+			} else {
+				$this->layout = 'ajax';
+			}
+			Configure::write('debug', 0);
+		}
 	}
 	
 	protected function __updateOnlineUser() {
@@ -190,10 +198,10 @@ class AppController extends Controller {
 		}
 	}
 	
-	function _redirectIf($condition) {
+	function _redirectIf($condition, $url = '/') {
 		if ($condition) {
 			$this->Session->setFlash(__('Invalid Access', true));
-			$this->redirect('/');
+			$this->redirect($url);
 		}
 	}
 		

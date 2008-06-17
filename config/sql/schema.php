@@ -1,6 +1,6 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* Osmosis schema generated on: 2008-05-24 11:05:14 : 1211645174*/
+/* Osmosis schema generated on: 2008-05-30 22:05:02 : 1212201722*/
 class OsmosisSchema extends CakeSchema {
 	var $name = 'Osmosis';
 
@@ -14,9 +14,9 @@ class OsmosisSchema extends CakeSchema {
 	var $acos = array(
 			'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
 			'parent_id' => array('type'=>'integer', 'null' => true, 'default' => NULL),
-			'model' => array('type'=>'string', 'null' => true),
+			'model' => array('type'=>'string', 'null' => true, 'default' => NULL),
 			'foreign_key' => array('type'=>'integer', 'null' => true, 'default' => NULL),
-			'alias' => array('type'=>'string', 'null' => true),
+			'alias' => array('type'=>'string', 'null' => true, 'default' => NULL),
 			'lft' => array('type'=>'integer', 'null' => true, 'default' => NULL),
 			'rght' => array('type'=>'integer', 'null' => true, 'default' => NULL),
 			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
@@ -24,9 +24,9 @@ class OsmosisSchema extends CakeSchema {
 	var $aros = array(
 			'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
 			'parent_id' => array('type'=>'integer', 'null' => true, 'default' => NULL),
-			'model' => array('type'=>'string', 'null' => true),
+			'model' => array('type'=>'string', 'null' => true, 'default' => NULL),
 			'foreign_key' => array('type'=>'integer', 'null' => true, 'default' => NULL),
-			'alias' => array('type'=>'string', 'null' => true),
+			'alias' => array('type'=>'string', 'null' => true, 'default' => NULL),
 			'lft' => array('type'=>'integer', 'null' => true, 'default' => NULL),
 			'rght' => array('type'=>'integer', 'null' => true, 'default' => NULL),
 			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
@@ -113,7 +113,7 @@ class OsmosisSchema extends CakeSchema {
 			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
 		);
 	var $tags = array(
-			'id' => array('type'=>'integer', 'null' => false, 'key' => 'primary'),
+			'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
 			'name' => array('type'=>'string', 'null' => false, 'length' => 30, 'key' => 'unique'),
 			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1), 'name' => array('column' => 'name', 'unique' => 1))
 		);

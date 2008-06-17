@@ -47,7 +47,7 @@ class ForumHolderComponent extends PlaceholderDataComponent {
 		),
 		'Response' => array(
 			'fields' => array(),
-			 'restrict' => array('Response', 'Discussion'),
+			 'restrict' => array('Discussion'),
 			'order_by' => '/Discussion/id'
 		)
 	);
@@ -71,22 +71,18 @@ class ForumHolderComponent extends PlaceholderDataComponent {
 	 * Returns this plugin updates so that the plugin_updates element can show them.
 	 *
 	 * @return mixed log of changes related to this plugin.
-	 * @author Joaquín Windmüller
 	 **/
 	function pluginUpdates() {
 		$modelLog = ClassRegistry::getObject('ModelLog');
-		// $last_seen = $modelLog->Member->field('last_seen', array('id' => $this->controller->Auth->user('id')));
-		$user_courses = $modelLog->Member->Enrollment->find('all', 
-			array(
-				'conditions' => array('member_id' => $this->controller->Auth->user('id')),
-				'fields' => 'course_id'
-			)
-		);
-		$user_courses = Set::extract('/Enrollment/course_id', $user_courses);
+		$user_courses = $modelLog->Member->courses($this->controller->Auth->user('id'));
+		$user_courses = Set::extract('/Course/id', $user_courses);
 		$logs = $modelLog->find('all',
 			array(
-				'conditions' => array('time' => '> ' . strtotime('-1 week'), 'model' => array_keys($this->useful_fields), 'course_id' => $user_courses),
-				// 'order' => 'course_id ASC',
+				'conditions' => array(
+					'time >' => strtotime("-1 weeks"),
+					'model' => array_keys($this->useful_fields),
+					'course_id' => $user_courses
+				),
 				'limit' => 50
 			)
 		);
@@ -120,10 +116,9 @@ class ForumHolderComponent extends PlaceholderDataComponent {
 			App::import('Model', $plugin . '.' . $modelName);
 			$Model = new $modelName;
 		}
-		if (!$restrict) {
-			$restrict = array($modelName);
+		if ($restrict) {
+			$Model->contain($restrict);
 		}
-		$Model->restrict($restrict);
 		$result = $Model->find('first', array('conditions' => array($modelName . '.id' => $id), 'fields' => $fields));
 		return $result;
 	}

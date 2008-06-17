@@ -55,15 +55,23 @@ a:visited {
 
 #upper-content #main h1 {
 	clear:both;
-	margin:0 auto;
-	padding:5px 0;
+	margin:0 0 2px 0;
+	padding:0;
 	text-align:left;
 	text-indent:20px;
 	font: 1.4em/1.5em Verdana, Arial, sans-serif;
-	background:#F5F5F5;
 	border:#C8C8C8 1px solid;
 	border-right:none;
 	border-left:none;
+	background:#F5F5F5 url('../../img/default/arrow_g.gif') no-repeat 10px 50%;
+}
+#upper-content #main h1.selected {
+	background:#F5F5F5 url('../../img/default/arrow_g_down.gif') no-repeat 7px 50%;
+}
+#upper-content #main h1 a.title {
+	display:block;
+	color:#000;
+	text-decoration:none;
 }
 #upper-content #main h2 {
 	padding:5px 0 0 0;
@@ -241,4 +249,13 @@ a:visited {
 
 #login {
 	width:300px;
+}
+
+ul.professors-list .vcard .email,
+ul.professors-list .vcard .tel {
+	margin-left:10px;
+	color:#666;
+	font-size:0.8em;
+	text-decoration:none;
+	display:inline;
 }

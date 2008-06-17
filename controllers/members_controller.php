@@ -38,6 +38,12 @@ class MembersController extends AppController {
 	function admin_index() {
 		$this->Member->recursive = 0;
 		$conditions = array();
+		if (isset($this->params['url']['q'])) {
+			$conditions['full_name like'] = $this->params['url']['q'] . '%';
+		}
+		if (isset($this->params['named']['course_id'])) {
+			$conditions['not'] = array('id' => $this->Member->members($this->params['named']['course_id']));
+		}
 		if (isset($this->params['named']['role'])) {
 			$conditions['Role.id'] = $this->params['named']['role'];
 		}
@@ -167,6 +173,7 @@ class MembersController extends AppController {
 	function _initializeAuth() {
 		parent::_initializeAuth();
 		if ($this->action =='login' && !empty($this->data) && $this->Member->isAdmin($this->data['Member']['username'])) {
+			// die('jo');
 			$this->Auth->loginRedirect = array('controller' => 'dashboards', 'action' => 'dashboard', 'admin' => true);
 		}
 	}

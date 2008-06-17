@@ -1,12 +1,19 @@
 <li class="discussion_responses">
 <?php
 $discussion_id = Set::extract('/ModelLog/data/Discussion/id[:first]', $events);
-$count = count($events);
 $member_links = array();
 foreach ($events as $i => $event) {
 	$member = $event['Member'];
 	$link = $html->link($member['full_name'], array('controller' => 'members', 'action' => 'view', $member['id']));
-	$respond_link = $html->link(__('response', true), array('plugin' => 'forum', 'controller' => 'discussions', 'action' => 'view', $discussion_id[0]));
+	$respond_link = $html->link(
+		__('response', true),
+		array(
+			'plugin' => 'forum',
+			'controller' => 'discussions',
+			'action' => 'view',
+			'discussion_id' => $discussion_id[0]
+		)
+	);
 	$read_response = String::insert(
 		__('read :pronoun :response', true),
 		array(
@@ -30,11 +37,11 @@ echo String::insert(
 		'discussion_name' => $html->link(
 			$discussion['title'],
 			array(
-				'plugin' => 'forum',
-				'controller' => 'discussions',
-				'action' => 'view',
-				$discussion['id'],
-				'course_id' => $events[0]['ModelLog']['course_id']
+				'plugin'		=> 'forum',
+				'controller'	=> 'discussions',
+				'action'		=> 'view',
+				'discussion_id'	=> $discussion['id'],
+				'course_id'		=> $events[0]['ModelLog']['course_id']
 			)
 		)
 	)

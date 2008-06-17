@@ -48,10 +48,10 @@ class PlaceholderHelper extends AppHelper {
 	function render($type, $path = '') {
 		$view = ClassRegistry::getObject('view');
 		$subscribers = $this->getSubscribers($type);
-
+		
 		if (empty($subscribers))
 			return '';
-			
+
 		ob_start();
 		foreach ($subscribers as $subscriber => $data) {
 			list($plugin, ) = explode('_',Inflector::underscore($subscriber));

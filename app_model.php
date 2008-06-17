@@ -95,5 +95,14 @@ class AppModel extends Model{
 		}
 		return false;
 	}
+	
+	/**
+	 * Returns the parent course related to this model (assumes $this->id is set)
+	 *
+	 * @return mixed Parent Course id or false if not found
+	 **/
+	function getParentCourse() {
+		return false;
+	}
 }
 ?>

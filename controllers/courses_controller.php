@@ -49,10 +49,12 @@ class CoursesController extends AppController {
 	 */
 	
 	function index() {
-		$this->Course->recursive = 0;
-		$this->set('courses', $this->paginate());
+		$user_courses = $this->Course->Owner->courses($this->Auth->user('id'));
+		$this->set('courses', $user_courses);
+		$professors = $this->Course->professors(Set::extract('/Course/id', $user_courses));
 		$this->layout = 'no_course';
 		$this->Placeholder->attach('plugin_updates');
+		$this->set(compact('professors'));
 	}
 
 	function admin_index() {
@@ -67,14 +69,31 @@ class CoursesController extends AppController {
 	 * @return void
 	 * @author José Lorenzo
 	 */
-	
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Course',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('course', $this->Course->read(null, $id));
-		$this->set('professors', $this->Course->professors($id));
+	}
+
+
+	/**
+	 * Displays course information
+	 *
+	 * @param string $id course id
+	 * @return void
+	 * @author José Lorenzo
+	 */
+	function admin_view($id = null) {
+		if (!$id) {
+			$this->Session->setFlash(__('Invalid Course',true));
+			$this->redirect(array('action'=>'index'), null, true);
+		}
+		$this->set('course', $this->Course->read(null, $id));
+		$this->Course->bindModel(array('hasAndBelongsToMany' => array('Member')));
+		$this->set('roles', $this->Course->Member->Enrollment->enrollableRoles());
+		$this->set('enrolled', $this->Course->enrolled($id, array('attendee', 'assistant', 'professor')));
 	}
 
 	/**
@@ -149,30 +168,67 @@ class CoursesController extends AppController {
 	}
 
 	/**
-	 * Enrolls the logged member in the course with id $course_id
+	 * Enrolls the logged member in the course with id $id
 	 *
-	 * @param string $course_id the course identifier
+	 * @param string $id the course identifier
 	 * @return void
 	 * @author José Lorenzo
 	 */
-	
-	function enroll($course_id) {
-		$this->Course->id = $course_id;
-		if (!$this->Course->exists()) {
-			$this->Session->setFlash(__('Invalid Course',true));
-			$this->redirect('/');
-		}
-		if($this->Course->alreadyEnrolled($this->Auth->user('id'), $course_id)===true) {
-			$this->Session->setFlash(__('You have been already enrolled in this course',true));
-			$this->redirect(array('action' => 'index'));
-		} else if ($this->Course->enroll($this->Auth->user('id'))) {
-			$this->Session->setFlash(__('You have been enrolled',true));
-			$this->redirect(array('action' => 'view', $course_id));
-		}
-		$this->Session->setFlash(__('Enrollment failed',true));
-		$this->redirect(array('action' => 'index'));
+	function enroll($id) {
+		$this->__enroll($id, $this->Auth->user('id'));
 	}
 	
+	/**
+	 * Allows Admins to manually enroll users to courses
+	 *
+	 * @return void 
+	 * @param int $id the course identifier 
+	 * @param int $member_id the member id to enroll
+	 * @author Joaquín Windmüller
+	 **/
+	function admin_enroll($id) {
+		Configure::write('debug', 2);
+		$success = false;
+		$member = null;
+		$role = 'attendee';
+		if (isset($this->params['named']['role'])) {
+			$role = $this->params['named']['role'];
+		}
+		if (!empty($this->data)) {
+			$member_id = $this->data['Member']['id'];
+			$success = $this->__enroll($id, $member_id, $role, false);
+			$this->Course->Owner->recursive = -1;
+			$member = $this->Course->Owner->read(array('id', 'full_name'), $member_id);
+			$member = $member['Owner'];
+		}
+		$this->set(compact('success', 'member'));
+	}
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author Joaquín Windmüller
+	 **/
+	function __enroll($id, $member_id, $role = 'attendee', $redirect = true) {
+		$this->Course->id = $id;
+		if (!$this->Course->exists()) {
+			$this->Session->setFlash(__('Invalid Course',true));
+			$this->_redirectIf($redirect);
+		}
+		if($this->Course->alreadyEnrolled($member_id, $id)===true) {
+			$this->Session->setFlash(__('You have been already enrolled in this course',true));
+			$this->redirect(array('action' => 'index'));
+		} else if ($this->Course->enroll($member_id, $role, $id)) {
+			$this->Session->setFlash(__('You have been enrolled',true));
+			$this->_redirectIf($redirect, array('action' => 'view', $id));
+			return true;
+		}
+		$this->Session->setFlash(__('Enrollment failed',true));
+		$this->_redirectIf($redirect, array('action' => 'index'));
+		return false;
+	}
+
 	/**
 	 * Adds or removes a tool from a course
 	 *

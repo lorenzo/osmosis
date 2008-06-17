@@ -29,7 +29,7 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-	Router::parseExtensions('js','xml');
+	Router::parseExtensions('js','xml', 'json');
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 	Router::connect('/algo', array('controller'=> 'wikis', 'action' => 'index', 'plugin' => 'wiki'));
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
