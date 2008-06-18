@@ -11,21 +11,21 @@
 </head>
 <body>
 	<?php
-		echo $this->renderElement('layout/logo');
+		echo $this->element('layout/logo');
 	?>
 	<div id="content">
 		<div class="contentcolumn">
 			<?php
-				echo $this->renderElement('layout/top_nav');
+				echo $this->element('layout/top_nav');
 			?>
 			<div id="upper-content" class="summary">
 				<div id="wrap">
 					<?php
-						echo $this->renderElement('layout/conectivism');
+						echo $this->element('layout/conectivism');
 					?>
 					<div id="main">
 						<?php
-							echo $this->renderElement('course_description');
+							echo $this->element('course_description');
 						?>
 					</div>
 					<div id="more-courses">

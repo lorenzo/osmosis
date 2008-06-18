@@ -55,7 +55,7 @@ class DocumentsController extends LockerAppController {
 			$this->data['LockerDocument']['member_username'] = $this->Auth->user('username');
 			if ($this->LockerDocument->save($this->data)) {
 				$this->Session->setFlash(__('The LockerDocument has been saved', true));
-				$this->redirect(array('action'=>'index'));
+				$this->redirect(array('controller' => 'folders', 'action'=>'view', $this->data['LockerDocument']['folder_id']));
 			} else {
 				$this->Session->setFlash(__('The LockerDocument could not be saved. Please, try again.', true));
 			}

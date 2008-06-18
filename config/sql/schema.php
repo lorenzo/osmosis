@@ -1,6 +1,6 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* Osmosis schema generated on: 2008-05-30 22:05:02 : 1212201722*/
+/* Osmosis schema generated on: 2008-06-18 12:06:42 : 1213809342*/
 class OsmosisSchema extends CakeSchema {
 	var $name = 'Osmosis';
 

@@ -1,0 +1,213 @@
+#locker {
+	position:relative;
+}
+#locker-actions form {
+	padding:1px 10px;
+}
+#locker-actions div.input,
+#locker-actions div.submit,
+#locker-actions label {
+	border:none;
+	display:inline;
+	width:auto;
+	float:none;
+}
+#locker-actions .create-folder {
+	border-right:#ccc 1px solid;
+}
+#locker-actions .upload-file {
+	border-left:#fff 1px solid;
+}
+#locker-actions .submit input {
+	margin-left:5px;
+}
+#locker-actions .action {
+	float:left;
+}
+#locker-actions label {
+	margin-right:5px;
+	font-weight:bold;
+}
+#locker-actions,
+#locker-contents {
+	clear:both;
+	float:left;
+	width:100%;
+}
+#locker-contents {
+	min-height:200px;
+}
+#locker-contents .empty {
+	text-align:center;
+	color:#aaa;
+	font-size:1.1em;
+	padding:2px 7px;
+	border-left:none;
+	border-right:none;
+	padding-top:70px;
+}
+#locker-contents ul {
+	list-style:none;
+	padding:0;
+	margin:15px 0 0 0;
+}
+#locker-contents ul li {
+	padding:10px;
+	float:left;
+}
+#locker-contents ul li a.item {
+	display:block;
+	background:#f5f5f5 url('../img/text_plain.png') no-repeat center 5px;
+	width:82px;
+	height:21px;
+	padding:51px 0 10px 0;
+	text-align:center;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	text-decoration:none;
+	color:#000;
+	border:#f5f5f5 1px solid;
+}
+
+#locker-contents ul li a.item:hover {
+	border:#aaa 1px solid;
+}
+
+#locker-contents ul li a.item.folder {
+	background-image:url('../img/folder.png');
+}
+#locker-contents ul li a.item.application_x_gzip {
+	background-image:url('../img/application_x_compressed_tar.png');
+}
+#locker-contents ul li a.item.application_x_javascript {
+	background-image:url('../img/application_x_javascript.png');
+}
+#locker-contents ul li a.item.pl {
+	background-image:url('../img/source_pl.png');
+}
+#locker-contents ul li a.item.text_xml {
+	background-image:url('../img/application_xml.png');
+}
+#locker-contents ul li a.item.java {
+	background-image:url('../img/source_java.png');
+}
+#locker-contents ul li a.item.jar {
+	background-image:url('../img/jar.png');
+}
+#locker-contents ul li a.item.application_x_tex {
+	background-image:url('../img/tex.png');
+}
+#locker-contents ul li a.item.application_pdf {
+	background-image:url('../img/pdf.png');
+}
+#locker-contents ul li a.item.image_jpeg,
+#locker-contents ul li a.item.image_png,
+#locker-contents ul li a.item.image_gif,
+#locker-contents ul li a.item.image_tiff,
+#locker-contents ul li a.item.psd {
+	background-image:url('../img/image.png');
+}
+#locker-contents ul li a.item.application_postscript {
+	background-image:url('../img/postscript.png');
+}
+#locker-contents ul li a.item.image_svg_xml {
+	background-image:url('../img/image_svg_xml.png');
+}
+#locker-contents ul li a.item.odt,
+#locker-contents ul li a.item.application_rtf {
+	background-image:url('../img/wordprocessing.png');
+}
+#locker-contents ul li a.item.ods {
+	background-image:url('../img/spreadsheet.png');
+}
+#locker-contents ul li a.item.odp {
+	background-image:url('../img/presentation.png');
+}
+#locker-contents ul li a.item.application_msword {
+	background-image:url('../img/application_vnd.ms_word.png');
+}
+#locker-contents ul li a.item.application_vnd_ms_excel {
+	background-image:url('../img/application_vnd.ms_excel.png');
+}
+#locker-contents ul li a.item.application_vnd_ms_powerpoint {
+	background-image:url('../img/application_vnd.ms_powerpoint.png');
+}
+#locker-contents ul li a.item.application_zip,
+#locker-contents ul li a.item.rar,
+#locker-contents ul li a.item.bz2 {
+	background-image:url('../img/compressed.png');
+}
+#locker-contents ul li a.item.cpp {
+	background-image:url('../img/source_cpp.png');
+}
+#locker-contents ul li a.item.text_css {
+	background-image:url('../img/stylesheets.png');
+}
+#locker-contents ul li a.item.h {
+	background-image:url('../img/source_h.png');
+}
+#locker-contents ul li a.item.text_html {
+	background-image:url('../img/text_html.png');
+}
+#locker-contents ul li a.item.application_x_shockwave_flash,
+#locker-contents ul li a.item.fla {
+	background-image:url('../img/flv.png');
+}
+#locker-contents ul li a.item.video_quicktime,
+#locker-contents ul li a.item.video_mpeg {
+	background-image:url('../img/video.png');
+}
+#locker-contents ul li a.item.text_x_php {
+	background-image:url('../img/php.png');
+}
+#locker-contents ul li a.item.audio_mpg {
+	background-image:url('../img/audio.png');
+}
+ul#path,
+#locker-actions {
+	padding:0;
+	list-style:none;
+	background:#f5f5f5;
+	border:#aaa 1px solid;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	float:left;
+	width:100%;
+	padding:3px 0;
+	margin:3px 0;
+}
+ul#path li {
+	float:left;
+	background:transparent url('../img/forward.png') no-repeat center left;
+	padding-left:13px;
+	margin-right:2px;
+}
+ul#path li a {
+	text-decoration:none;
+	color:#000;
+	font-weight:bold;
+}
+ul#path li a:hover {
+	color:#666;
+}
+ul#path li.home {
+	background:transparent;
+	padding:0 8px 0 0;
+}
+ul#path li.home a {
+	background:transparent url('../img/gohome.png') no-repeat 0 0;
+	display:block;
+	width:16px;
+	height:16px;
+	text-indent:-120px;
+	margin-left:10px;
+}
+h1 {
+	border:none!important;
+	background:none!important;
+	font-size:1.2em!important;
+	color:#aaa;
+	position:absolute;
+	right:0;
+	top:30px;
+}

@@ -54,6 +54,7 @@ class OsmosisComponentsComponent extends Object {
 	 * @author Joaquín Windmüller
 	 **/
 	function _setActiveCourseProfessors() {
+		if (!$this->controller) return;
 		$active_course = $this->controller->_getActiveCourse();
 		if ($active_course) {
 			$professors = $this->Member->Course->professors($active_course);

@@ -287,3 +287,9 @@ ul.professors-list .vcard .tel {
 	margin-top:2px!important;
 	margin-left:4px!important;
 }
+.boxed.dashboard-element {
+	width:30%;
+	float:left;
+	margin-right:2%;
+	margin-bottom:15px;
+}

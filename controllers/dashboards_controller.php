@@ -33,12 +33,13 @@ class DashboardsController extends AppController {
 
 	var $name = 'Dashboards';
 	var $helpers = array('Html', 'Form');
-	var $components = array('OsmosisComponents');
+	var $components = array('OsmosisComponents', 'Placeholder');
 	var $uses = array('Role');
 	
 	function admin_dashboard() {
 	}
-
-
+	
+	function connections() {
+	}
 }
 ?>
