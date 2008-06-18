@@ -58,3 +58,7 @@ form p.description {
 	margin-top:0;
 	padding:0 10px;
 }
+
+form label.hidden {
+	display:none;
+}

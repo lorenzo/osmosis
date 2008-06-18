@@ -112,44 +112,15 @@ class OrderingQuestion extends QuizAppModel {
 	}
 	
 	/**
-	 * Prepares each Question's choices shuffling.
+	 * Shuffles the choices if necesseary
 	 *
-	 * @param array $results
+	 * @param aray $results 
 	 * @param boolean $primary 
-	 * @return questions with choices shuffled.
+	 * @return results with shuffled choices if necessary
 	 */
 	
-	function afterFind($results, $primary=false) {
-		if ($primary) {
-			foreach ($results as $i => $result) {
-				if (!isset($result['OrderingChoice'])) {
-					break;
-				}
-				$shuffle = $result['OrderingQuestion']['shuffle'];
-				$choices = $result['OrderingChoice'];
-				if ($shuffle) {
-					$results[$i]['OrderingChoice'] = $this->_shuffleChoices($choices);
-				}
-			}
-		} else {
-			foreach ($results as $i => $result) {
-				if (isset($result['OrderingQuestion'])) {
-					if (empty($result['OrderingQuestion'])) return $result;
-					$shuffle = $result['OrderingQuestion'][0]['shuffle'];
-					$choices = $result['OrderingQuestion'][0]['OrderingChoice'];
-				} else {
-					$shuffle = $result['shuffle'];
-					$choices = $result['OrderingChoice'];
-				}
-				if ($shuffle) {
-					if (isset($result['OrderingQuestion'])) {
-						$results[$i]['OrderingQuestion'][0]['OrderingChoice'] = $this->_shuffleChoices($choices);
-					} else {
-						$results[$i]['OrderingChoice'] = $this->_shuffleChoices($choices);
-					}
-				}
-			}
-		}
+	function afterFind($results,$primary = false) {
+		array_walk($results,array(&$this,'shuffleChoices'));	
 		return $results;
 	}
 	
@@ -192,25 +163,30 @@ class OrderingQuestion extends QuizAppModel {
 	 * @return array shuffled choices 
 	 * @author Joaquín Windmüller
 	 */
-	function _shuffleChoices($choices) {
-		$new = array();
-		$fixed = Set::extract($choices, '{n}.position');
-		$open = array_keys($fixed);
-		foreach ($fixed as $i => $index) {
-			if ($index<=0) {
-				continue;
+	function shuffleChoices(&$question) {
+		if (!isset($question['shuffle']) || !$question['shuffle'])
+			return;
+
+		if (isset($question['OrderingChoice'])) {
+			$new = array();
+			$fixed = Set::extract($question['OrderingChoice'], '{n}.position');
+			$open = array_keys($fixed);
+			foreach ($fixed as $i => $index) {
+				if ($index<=0) {
+					continue;
+				}
+				$index -= 1;
+				$new[$index] = $question['OrderingChoice'][$i];
+				unset($open[$index]);
+				unset($question['OrderingChoice'][$i]);
 			}
-			$index -= 1;
-			$new[$index] = $choices[$i];
-			unset($open[$index]);
-			unset($choices[$i]);
+			shuffle($open);
+			foreach ($open as $i => $index) {
+				$new[$index] = array_pop($question['OrderingChoice']);
+			}
+			ksort($new);
+			$question['OrderingChoice'] = $new;
 		}
-		shuffle($open);
-		foreach ($open as $i => $index) {
-			$new[$index] = array_pop($choices);
-		}
-		ksort($new);
-		return $new;
 	}
 	
 	/**

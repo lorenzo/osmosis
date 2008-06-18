@@ -36,10 +36,11 @@ class HtmlPurifierComponent extends Object {
 	
 	function __get($member) {
 		if($member == 'lib') {
-			App::import('Vendor','htmlpurifier',array('file' =>'html_purifier/HTMLPurifier.auto.php'));
+			App::import('Vendor','htmlpurifier',array('file' =>'htmlpurifier/HTMLPurifier.auto.php'));
 			$config = HTMLPurifier_Config::createDefault();
 			$config->set('Cache','SerializerPath',CACHE);
 			$config->set('HTML', 'TidyLevel', 'heavy');
+			$config->set('Filter', 'YouTube', true);
 			$this->lib = new HTMLPurifier($config);
 			return $this->lib;
 		}

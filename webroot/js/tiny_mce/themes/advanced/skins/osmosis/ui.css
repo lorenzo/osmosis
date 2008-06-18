@@ -63,7 +63,8 @@ border:0; margin:0; padding:0; white-space:nowrap; text-decoration:none; font-we
 	display: block;
 	background: transparent;
 	overflow: hidden; 
-	margin: 0 2px; 
+	margin: 0 2px;
+	border-right:1px #6ee6e9 dashed;
 }
 
 /* ListBox */

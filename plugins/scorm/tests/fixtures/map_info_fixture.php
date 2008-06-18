@@ -30,7 +30,7 @@
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 class MapInfoFixture extends CakeTestFixture {
-    var $name = 'ScormMapInfo';
+    var $name = 'MapInfo';
   	var $table = 'scorm_map_infos';
 	var $fields = array(
 			'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),

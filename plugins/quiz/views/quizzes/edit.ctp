@@ -51,7 +51,7 @@
 				echo '<ol>';
 				foreach ($question_list as $i => $question) {
 					$question = array($type => $question);
-					echo '<li>' . $this->renderElement($type . '_view', array('question' => $question)) . '&nbsp;</li>';
+					echo '<li>' . $this->element($type . '_view', array('question' => $question)) . '&nbsp;</li>';
 				}
 				echo '</ol>';
 			}

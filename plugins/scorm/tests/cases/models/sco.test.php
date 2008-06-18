@@ -70,7 +70,7 @@ class ScoTestCase extends CakeTestCase {
 		
 	}
 	
-	function testInstance() { die();
+	function testInstance() {
 		$this->assertTrue(is_a($this->TestObject,'Sco'));
 	}
 	

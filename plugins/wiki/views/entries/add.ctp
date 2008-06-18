@@ -8,10 +8,10 @@
 		if (isset($this->params['named']['title']))
 			$options = array('value' => $this->params['named']['title']);
 		echo $form->input('title',$options);
-		echo $form->input('content');
+		echo $form->input('content',array('label' => array('text' => __('Content',true),'class' => 'hidden')));
 	?>
 	</fieldset>
 <?php echo $form->end('Add Entry');?>
 </div>
 <?php echo $javascript->link('tiny_mce/tiny_mce',null,null,false); ?>
-<?php echo $this->renderElement('ui/editor'); ?>
+<?php echo $this->element('ui/editor'); ?>

@@ -133,25 +133,37 @@ class QuizzesController extends QuizAppController {
 		}
 	}
 
-	function add_question($quiz_id = null) {
-		if (empty($this->data) || !$quiz_id) {
+	function add_question($id = null) {
+		if (empty($this->data) || !$id) {
 			$this->Session->setFlash(__('Invalid Quiz', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			$this->Quiz->id = $quiz_id;
+			$this->Quiz->id = $id;
 			if ($this->Quiz->addQuestions($this->data)) {
 				$this->Session->setFlash(__('The questions where added to the quiz.', true));
 				$this->redirect(
-					array('controller' => 'quizzes', 'action' => 'edit', $quiz_id)
+					array('controller' => 'quizzes', 'action' => 'edit', $id)
 				);
 			} else {
 				$this->Session->setFlash(__('The questions could not be added to the quiz.', true));
 				$this->redirect(
-					array('controller' => 'quizzes', 'action' => 'edit', $quiz_id)
+					array('controller' => 'quizzes', 'action' => 'edit', $id)
 				);
 			}
 		}
+	}
+	
+	function answer($id = null) {
+		if (!$id) {
+			$this->Session->setFlash(__('Invalid Quiz', true));
+			$this->redirect(array('action' => 'index'));
+		}
+		
+		$conditions = array('Quiz.id' => $id);
+		$recursive = 2;
+		$quiz = $this->Quiz->find('first',compact('conditions','recursive'));
+		$this->set(compact('quiz'));
 	}
 
 }

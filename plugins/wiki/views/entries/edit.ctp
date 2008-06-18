@@ -5,11 +5,11 @@
  		<legend><?php __('Edit Entry');?></legend>
 	<?php
 		echo $form->input('id');
-		echo $form->textarea('content');
+		echo $form->input('content',array('label' => array('text' => __('Content',true),'class' => 'hidden')));
 		echo $form->hidden('title');
 	?>
 	</fieldset>
 <?php echo $form->end('Edit Entry');?>
 </div>
 <?php echo $javascript->link('tiny_mce/tiny_mce',null,null,false); ?>
-<?php echo $this->renderElement('ui/editor'); ?>
+<?php echo $this->element('ui/editor'); ?>
