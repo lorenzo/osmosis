@@ -1,0 +1,244 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  Revision: 323 /controllers/entries_controller.php
+#  Revision: 323 /controllers/wikis_controller.php
+#  Revision: 364 /controllers/installer_controller.php
+#  Revision: 323 /controllers/revisions_controller.php
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-06-17 17:22-0430\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /controllers/entries_controller.php:52
+msgid "Invalid Entry."
+msgstr ""
+
+#: /controllers/entries_controller.php:79
+#: /controllers/wikis_controller.php:69
+msgid "Invalid Wiki"
+msgstr ""
+
+#: /controllers/entries_controller.php:87;112
+msgid "The Entry has been saved"
+msgstr ""
+
+#: /controllers/entries_controller.php:93;121
+msgid "The Entry could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/entries_controller.php:104
+msgid "Invalid Entry"
+msgstr ""
+
+#: /controllers/entries_controller.php:127
+msgid "Editing Entry %s"
+msgstr ""
+
+#: /controllers/entries_controller.php:132
+msgid "Invalid id for Entry"
+msgstr ""
+
+#: /controllers/entries_controller.php:136
+msgid "Entry deleted"
+msgstr ""
+
+#: /controllers/entries_controller.php:143
+msgid "Entry revision restored"
+msgstr ""
+
+#: /controllers/entries_controller.php:146
+msgid "An error occured. The entry revision was not restored"
+msgstr ""
+
+#: /controllers/installer_controller.php:47
+msgid "An error occurred while setting plugin permissions"
+msgstr ""
+
+#: /controllers/installer_controller.php:49
+msgid "An error occurred while installing the plugin"
+msgstr "Ha ocurrido un error durante la instalación del plugin."
+
+#: /controllers/installer_controller.php:51
+msgid "Plugin Wiki installed"
+msgstr "El plugin Wiki ha sido instalado."
+
+#: /controllers/revisions_controller.php:63
+msgid "Invalid Revision."
+msgstr ""
+
+#: /controllers/wikis_controller.php:44
+msgid "Invalid Wiki."
+msgstr "Wiki no válido."
+
+#: /controllers/wikis_controller.php:57;74
+msgid "The Wiki has been saved"
+msgstr "El Wiki ha sido guardado."
+
+#: /controllers/wikis_controller.php:60;77
+msgid "The Wiki could not be saved. Please, try again."
+msgstr "El Wiki no pudo ser guardado. Por favor, intente de nuevo."
+
+#: /controllers/wikis_controller.php:89
+msgid "Invalid id for Wiki"
+msgstr ""
+
+#: /controllers/wikis_controller.php:93
+msgid "Wiki deleted"
+msgstr "Wiki eliminado."
+
+#: /views/entries/add.ctp:4
+msgid "Add Entry"
+msgstr ""
+
+#: /views/entries/edit.ctp:5
+msgid "Edit Entry"
+msgstr ""
+
+#: /views/entries/index.ctp:2
+msgid "Entries"
+msgstr ""
+
+#: /views/entries/index.ctp:6
+#: /views/wikis/index.ctp:6
+msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
+msgstr "Página %page% de %page%, mostrando %current% resutados de %count% totales, comenzando en el resultado %start%, finalizando en %end%"
+
+#: /views/entries/index.ctp:17
+#: /views/wikis/index.ctp:15
+msgid "Actions"
+msgstr "Acciones"
+
+#: /views/entries/index.ctp:47
+#: /views/wikis/index.ctp:39
+msgid "View"
+msgstr "Ver"
+
+#: /views/entries/index.ctp:48
+msgid "History"
+msgstr "Historial"
+
+#: /views/entries/index.ctp:49
+#: /views/wikis/index.ctp:40
+#: /views/wikis/view.ctp:29
+msgid "Edit"
+msgstr "Editar"
+
+#: /views/entries/index.ctp:50
+#: /views/wikis/edit.ctp:16
+#: /views/wikis/index.ctp:41
+msgid "Delete"
+msgstr "Eliminar"
+
+#: /views/entries/index.ctp:50
+#: /views/wikis/edit.ctp:16
+#: /views/wikis/index.ctp:41
+msgid "Are you sure you want to delete # %s?"
+msgstr ""
+
+#: /views/entries/index.ctp:57
+#: /views/revisions/history.ctp:43
+#: /views/wikis/index.ctp:48
+msgid "previous"
+msgstr "Previo"
+
+#: /views/entries/index.ctp:59
+#: /views/revisions/history.ctp:45
+#: /views/wikis/index.ctp:50
+msgid "next"
+msgstr "Siguiente"
+
+#: /views/entries/view.ctp:4
+msgid "edit"
+msgstr "Editar"
+
+#: /views/revisions/diff.ctp:6
+#: /views/revisions/view.ctp:4
+msgid "Revision as of %s, modified by %s"
+msgstr ""
+
+#: /views/revisions/history.ctp:2
+msgid "Revision history of %s"
+msgstr ""
+
+#: /views/revisions/history.ctp:13
+#: /views/wikis/view.ctp:25
+msgid "Revision"
+msgstr ""
+
+#: /views/revisions/history.ctp:23
+#: /views/revisions/view.ctp:17
+msgid "restore"
+msgstr ""
+
+#: /views/revisions/history.ctp:31
+msgid "compare"
+msgstr "Comparar"
+
+#: /views/revisions/view.ctp:11
+msgid "current version"
+msgstr ""
+
+#: /views/wikis/add.ctp:4
+msgid "Add Wiki"
+msgstr "Agregar wiki."
+
+#: /views/wikis/add.ctp:15
+#: /views/wikis/edit.ctp:17
+msgid "List Wikis"
+msgstr "Listar wikis."
+
+#: /views/wikis/add.ctp:16
+#: /views/wikis/edit.ctp:18
+#: /views/wikis/index.ctp:55
+msgid "List Courses"
+msgstr "Listar cursos."
+
+#: /views/wikis/add.ctp:17
+#: /views/wikis/edit.ctp:19
+#: /views/wikis/index.ctp:56
+msgid "New Course"
+msgstr "Nuevo curso."
+
+#: /views/wikis/add.ctp:18
+#: /views/wikis/edit.ctp:20
+#: /views/wikis/index.ctp:57
+msgid "List Entries"
+msgstr ""
+
+#: /views/wikis/add.ctp:19
+#: /views/wikis/edit.ctp:21
+#: /views/wikis/index.ctp:58
+#: /views/wikis/view.ctp:5
+msgid "New Entry"
+msgstr ""
+
+#: /views/wikis/edit.ctp:4
+msgid "Edit Wiki"
+msgstr ""
+
+#: /views/wikis/index.ctp:2
+msgid "Wikis"
+msgstr "Wikis"
+
+#: /views/wikis/index.ctp:54
+msgid "New Wiki"
+msgstr "Nuevo wiki"
+
+#: /views/wikis/view.ctp:9
+msgid "Recent Entries"
+msgstr ""
+
+#: /views/wikis/view.ctp:26
+msgid "history"
+msgstr ""
+

@@ -18,7 +18,7 @@ class InstallerController extends AppController {
 		} elseif (!$this->Installer->createSchema('Forum')) {
 			$this->Session->setFlash(__('An error occurred while installing the plugin',true));
 		} elseif ($this->Plugin->install('Forum'))
-			$this->Session->setFlash(__('Plugin Wiki installed',true));
+			$this->Session->setFlash(__('Plugin Forum installed',true));
 			
 		
 		$this->redirect(array('plugin'=>'','admin' => true,'controller' => 'plugins'));

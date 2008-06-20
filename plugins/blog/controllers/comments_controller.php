@@ -71,7 +71,7 @@ class CommentsController extends BlogAppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Comment->del($id)) {
-			$this->Session->setFlash(__('Comment #'.$id.' deleted',true));
+			$this->Session->setFlash(__('Comment deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

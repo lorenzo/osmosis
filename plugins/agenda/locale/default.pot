@@ -1,0 +1,134 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# No version information was available in the source files.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-06-06 13:50-0430\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /controllers/events_controller.php:23
+msgid "Invalid Event."
+msgstr "Evento no válido"
+
+#: /controllers/events_controller.php:36;54
+msgid "The Event has been saved"
+msgstr "El evento ha sido guardado"
+
+#: /controllers/events_controller.php:39;57
+msgid "The Event could not be saved. Please, try again."
+msgstr "El evento no pudo ser guardado. Por favor, intente de nuevo"
+
+#: /controllers/events_controller.php:49
+msgid "Invalid Event"
+msgstr "Evento no válido"
+
+#: /controllers/events_controller.php:70
+msgid "Invalid id for Event"
+msgstr "Id no válido para el evento"
+
+#: /controllers/events_controller.php:74
+msgid "Event deleted"
+msgstr "Evento eliminado"
+
+#: /controllers/installer_controller.php:17
+msgid "An error occurred while installing the plugin"
+msgstr "Ha ocurrido un error durante la instalación del plugin"
+
+#: /controllers/installer_controller.php:19
+msgid "Plugin Agenda installed"
+msgstr "El plugin Agenda ha sido instalado"
+
+#: /views/events/add.ctp:4;14
+msgid "Add Event"
+msgstr "Agregar evento"
+
+#: /views/events/edit.ctp:4
+#: /views/events/view.ctp:38
+msgid "Edit Event"
+msgstr "Editar evento"
+
+#: /views/events/edit.ctp:14
+msgid "Save"
+msgstr "Guardar"
+
+#: /views/events/index.ctp:10
+msgid "Mon"
+msgstr "Lun"
+
+#: /views/events/index.ctp:10
+msgid "Tue"
+msgstr "Mar"
+
+#: /views/events/index.ctp:10
+msgid "Wed"
+msgstr "Mie"
+
+#: /views/events/index.ctp:10
+msgid "Thu"
+msgstr "Jue"
+
+#: /views/events/index.ctp:10
+msgid "Fri"
+msgstr "Vie"
+
+#: /views/events/index.ctp:10
+msgid "Sat"
+msgstr "Sáb"
+
+#: /views/events/index.ctp:10
+msgid "Sun"
+msgstr "Dom"
+
+#: /views/events/view.ctp:2
+msgid "Event"
+msgstr "Evento"
+
+#: /views/events/view.ctp:4
+msgid "Id"
+msgstr ""
+
+#: /views/events/view.ctp:9
+msgid "Date"
+msgstr "Día"
+
+#: /views/events/view.ctp:14
+msgid "Location"
+msgstr "Lugar"
+
+#: /views/events/view.ctp:19
+msgid "All Day"
+msgstr "Todo el día"
+
+#: /views/events/view.ctp:24
+msgid "Headline"
+msgstr "Título"
+
+#: /views/events/view.ctp:29
+msgid "Detail"
+msgstr "Detalles"
+
+#: /views/events/view.ctp:39
+msgid "Delete Event"
+msgstr ""
+
+#: /views/events/view.ctp:39
+msgid "Are you sure you want to delete # %s?"
+msgstr "Está seguro de que desea eliminar #"
+
+#: /views/events/view.ctp:40
+msgid "List Events"
+msgstr "Lista de eventos"
+
+#: /views/events/view.ctp:41
+msgid "New Event"
+msgstr "Nuevo evento"
+

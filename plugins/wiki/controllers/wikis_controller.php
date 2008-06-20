@@ -90,7 +90,7 @@ class WikisController extends WikiAppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Wiki->del($id)) {
-			$this->Session->setFlash(__('Wiki #'.$id.' deleted',true));
+			$this->Session->setFlash(__('Wiki deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

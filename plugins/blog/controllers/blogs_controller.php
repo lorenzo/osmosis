@@ -96,7 +96,7 @@ class BlogsController extends BlogAppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Blog->del($id)) {
-			$this->Session->setFlash(__('Blog #'.$id.' deleted',true));
+			$this->Session->setFlash(__('Blog deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		

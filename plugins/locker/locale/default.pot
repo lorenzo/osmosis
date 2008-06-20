@@ -1,0 +1,205 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  Revision: 323 /controllers/documents_controller.php
+#  Revision: 323 /controllers/folders_controller.php
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-06-17 17:09-0430\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /controllers/documents_controller.php:45
+msgid "Invalid LockerDocument."
+msgstr ""
+
+#: /controllers/documents_controller.php:57;74
+msgid "The LockerDocument has been saved"
+msgstr "El documento ha sido guardado"
+
+#: /controllers/documents_controller.php:60;77
+msgid "The LockerDocument could not be saved. Please, try again."
+msgstr "El documento no pudo ser guardado. Por favor, intente de nuevo."
+
+#: /controllers/documents_controller.php:69
+msgid "Invalid LockerDocument"
+msgstr "Documento no válido."
+
+#: /controllers/documents_controller.php:90
+msgid "Invalid id for LockerDocument"
+msgstr ""
+
+#: /controllers/documents_controller.php:94
+msgid "LockerDocument deleted"
+msgstr "Documento eliminado."
+
+#: /controllers/documents_controller.php:101;107
+msgid "Invalid Document"
+msgstr "Documento no válido"
+
+#: /controllers/folders_controller.php:45
+msgid "Invalid LockerFolder."
+msgstr ""
+
+#: /controllers/folders_controller.php:56;73
+msgid "The LockerFolder has been saved"
+msgstr ""
+
+#: /controllers/folders_controller.php:59;76
+msgid "The LockerFolder could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/folders_controller.php:68
+msgid "Invalid LockerFolder"
+msgstr "Carpeta no válida."
+
+#: /controllers/folders_controller.php:88
+msgid "Invalid id for LockerFolder"
+msgstr ""
+
+#: /controllers/folders_controller.php:92
+msgid "LockerFolder deleted"
+msgstr "Carpeta eliminada."
+
+#: /views/documents/add.ctp:4
+msgid "Add File"
+msgstr "Agregar archivo"
+
+#: /views/documents/edit.ctp:4
+msgid "Edit Document Info"
+msgstr "Editar información del documento"
+
+#: /views/documents/index.ctp:2
+msgid "LockerDocuments"
+msgstr ""
+
+#: /views/documents/index.ctp:6
+#: /views/folders/index.ctp:6
+msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
+msgstr "Página %page% de %page%, mostrando %current% resutados de %count% totales, comenzando en el resultado %start%, finalizando en %end%"
+
+#: /views/documents/index.ctp:16
+#: /views/folders/index.ctp:14
+msgid "Actions"
+msgstr "Acciones"
+
+#: /views/documents/index.ctp:43
+#: /views/folders/index.ctp:35
+msgid "View"
+msgstr "Ver"
+
+#: /views/documents/index.ctp:44
+#: /views/folders/index.ctp:36
+msgid "Edit"
+msgstr "Editar"
+
+#: /views/documents/index.ctp:45
+#: /views/folders/index.ctp:37
+msgid "Delete"
+msgstr "Eliminar"
+
+#: /views/documents/index.ctp:45
+#: /views/documents/view.ctp:34
+#: /views/folders/index.ctp:37
+#: /views/folders/view.ctp:24
+msgid "Are you sure you want to delete # %s?"
+msgstr "¿Está seguro de que desea eliminar # %s?"
+
+#: /views/documents/index.ctp:52
+#: /views/folders/index.ctp:44
+msgid "previous"
+msgstr "Previo"
+
+#: /views/documents/index.ctp:54
+#: /views/folders/index.ctp:46
+msgid "next"
+msgstr "Siguiente"
+
+#: /views/documents/index.ctp:58
+#: /views/documents/view.ctp:36
+msgid "New LockerDocument"
+msgstr ""
+
+#: /views/documents/view.ctp:2
+msgid "LockerDocument"
+msgstr ""
+
+#: /views/documents/view.ctp:4
+#: /views/folders/view.ctp:4
+msgid "Id"
+msgstr ""
+
+#: /views/documents/view.ctp:9
+#: /views/folders/view.ctp:9
+msgid "Name"
+msgstr "Nombre"
+
+#: /views/documents/view.ctp:14
+msgid "Description"
+msgstr "Descripción"
+
+#: /views/documents/view.ctp:19
+msgid "Member Id"
+msgstr ""
+
+#: /views/documents/view.ctp:24
+msgid "Folder Id"
+msgstr ""
+
+#: /views/documents/view.ctp:33
+msgid "Edit LockerDocument"
+msgstr ""
+
+#: /views/documents/view.ctp:34
+msgid "Delete LockerDocument"
+msgstr ""
+
+#: /views/documents/view.ctp:35
+msgid "List LockerDocuments"
+msgstr ""
+
+#: /views/folders/add.ctp:4
+msgid "Add Folder"
+msgstr ""
+
+#: /views/folders/edit.ctp:4
+msgid "Change Folder Name"
+msgstr "Cambiar nombre de carpeta"
+
+#: /views/folders/index.ctp:2
+msgid "LockerFolders"
+msgstr ""
+
+#: /views/folders/index.ctp:50
+#: /views/folders/view.ctp:26
+msgid "New LockerFolder"
+msgstr ""
+
+#: /views/folders/view.ctp:2
+msgid "LockerFolder"
+msgstr ""
+
+#: /views/folders/view.ctp:14
+msgid "Parent Id"
+msgstr ""
+
+#: /views/folders/view.ctp:23
+msgid "Edit LockerFolder"
+msgstr ""
+
+#: /views/folders/view.ctp:24
+msgid "Delete LockerFolder"
+msgstr ""
+
+#: /views/folders/view.ctp:25
+msgid "List LockerFolders"
+msgstr ""
+

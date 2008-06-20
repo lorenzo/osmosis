@@ -1,0 +1,995 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  Revision: 335 /osmosis/app_controller.php
+#  Revision: 331 /osmosis/app_model.php
+#  Revision: 323 /osmosis/controllers/courses_controller.php
+#  Revision: 323 /osmosis/controllers/departments_controller.php
+#  Revision: 331 /osmosis/controllers/members_controller.php
+#  Revision: 323 /osmosis/controllers/plugins_controller.php
+#  Revision: 323 /osmosis/models/course.php
+#  Revision: 323 /osmosis/models/department.php
+#  Revision: 331 /osmosis/models/member.php
+#  Revision: 323 /osmosis/models/behaviors/bindable.php
+#  Revision: 323 /osmosis/webroot/css.php
+#  Revision: 323 /osmosis/webroot/test.php
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-06-06 13:44-0430\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /app_controller.php:131
+msgid "Invalid access"
+msgstr ""
+
+#: /app_controller.php:184
+msgid "Invalid Access"
+msgstr ""
+
+#: /app_model.php:67;74
+msgid "Please use \"contain\" instead of \"restrict\""
+msgstr ""
+
+#: /controllers/courses_controller.php:66;107;134;154
+msgid "Invalid Course"
+msgstr "Curso no válido"
+
+#: /controllers/courses_controller.php:86;112
+msgid "The Course has been saved"
+msgstr "El curso ha sido guardado"
+
+#: /controllers/courses_controller.php:89;115
+msgid "The Course could not be saved. Please, try again."
+msgstr "El curso no pudo ser guardado. Por favor, intente de nuevo"
+
+#: /controllers/courses_controller.php:138
+msgid "Course %s deleted"
+msgstr "Curso %s eliminado"
+
+#: /controllers/courses_controller.php:158
+msgid "You have been already enrolled in this course"
+msgstr "Usted ya está inscrito en este curso"
+
+#: /controllers/courses_controller.php:161
+msgid "You have been enrolled"
+msgstr "Usted ha sido inscrito"
+
+#: /controllers/courses_controller.php:164
+msgid "Enrollment failed"
+msgstr "Inscripción fallida"
+
+#: /controllers/courses_controller.php:180
+msgid "The Tool has been added"
+msgstr "La herramienta ha sido agregada"
+
+#: /controllers/courses_controller.php:182
+msgid "The could not be added"
+msgstr "La herramienta no pudo ser agregada"
+
+#: /controllers/courses_controller.php:187
+msgid "The Tool has been removed"
+msgstr "La herramienta ha sido eliminada"
+
+#: /controllers/courses_controller.php:189
+msgid "The Tool could not be removed"
+msgstr "La herramienta no pudo ser eliminada"
+
+#: /controllers/departments_controller.php:67;102;127
+msgid "Invalid Department"
+msgstr "Departamento no válido"
+
+#: /controllers/departments_controller.php:85;107
+msgid "The Department has been saved"
+msgstr "El departamento ha sido guardado"
+
+#: /controllers/departments_controller.php:88;110
+msgid "The Department could not be saved. Please, try again."
+msgstr "El departamento no pudo ser guardado. Por favor, intente de nuevo"
+
+#: /controllers/departments_controller.php:131
+msgid "Department %s deleted"
+msgstr "Departamento %s elimininado"
+
+#: /controllers/members_controller.php:68
+msgid "Invalid Member."
+msgstr ""
+
+#: /controllers/members_controller.php:85;111
+msgid "The Member has been saved"
+msgstr ""
+
+#: /controllers/members_controller.php:88;114
+msgid "The Member could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/members_controller.php:106
+msgid "Invalid Member"
+msgstr ""
+
+#: /controllers/members_controller.php:134
+msgid "Invalid id for Member"
+msgstr ""
+
+#: /controllers/plugins_controller.php:54;77
+msgid "Invalid Plugin."
+msgstr "Plugin no válido"
+
+#: /controllers/plugins_controller.php:58
+msgid "Plugin already Installed."
+msgstr "Plugin ya instalado"
+
+#: /controllers/plugins_controller.php:68
+msgid "Plugin Instaled."
+msgstr "El plugin ha sido instalado"
+
+#: /controllers/plugins_controller.php:70
+msgid "An error ocurred while installing the plugin. Try again"
+msgstr "Ha ocurrido un error durante la instalación del plugin"
+
+#: /controllers/plugins_controller.php:87;104
+msgid "The Plugin has been saved"
+msgstr "El plugin ha sido guardado"
+
+#: /controllers/plugins_controller.php:90;107
+msgid "The Plugin could not be saved. Please, try again."
+msgstr "El Plugin no pudo ser guardado. Por favor, intente de nuevo"
+
+#: /controllers/plugins_controller.php:99
+msgid "Invalid Plugin"
+msgstr "Plugin no válido"
+
+#: /controllers/plugins_controller.php:119
+msgid "Invalid id for Plugin"
+msgstr "Id no válido para el Plugin"
+
+#: /controllers/plugins_controller.php:123
+msgid "Plugin deleted"
+msgstr "El Plugin ha sido eliminado"
+
+#: /models/course.php:129
+msgid "Please select a departement"
+msgstr "Por favor seleccione un departamento"
+
+#: /models/course.php:133
+msgid "Please set the course owner"
+msgstr ""
+
+#: /models/course.php:137
+msgid "The length of this field should be less than 10"
+msgstr "El "
+
+#: /models/course.php:141
+msgid "Please write the Course name"
+msgstr "Por favor, indique el nombre del curso"
+
+#: /models/course.php:145
+msgid "The lenght of the name should be lees than 150"
+msgstr ""
+
+#: /models/course.php:149
+msgid "Please write the course description"
+msgstr "Por favor, indique la descripción del curso"
+
+#: /models/department.php:62
+msgid "The name can not be empty"
+msgstr "El nombre no puede ser vacío"
+
+#: /models/department.php:63
+msgid "The description can not be empty"
+msgstr ""
+
+#: /models/member.php:90
+msgid "Please write your full name"
+msgstr "Por favor, indique su nombre completo"
+
+#: /models/member.php:94
+msgid "Please write a valid email address"
+msgstr "Por favor, indique una dirección de email válida"
+
+#: /models/member.php:98
+msgid "Please write your email address"
+msgstr "Por favor, indique su dirección de email"
+
+#: /models/member.php:102
+msgid "Please write your username"
+msgstr "Por favor, indique su nombre de usuario"
+
+#: /models/member.php:106
+msgid "This username is taken"
+msgstr "Este nombre de usuario ya está siendo usado"
+
+#: /models/member.php:110
+msgid "The password and its confirmation do not match"
+msgstr "El password indicado y su confirmación no coinciden"
+
+#: /models/member.php:114
+msgid "Please confirm the password"
+msgstr "Por favor, confirme su password"
+
+#: /models/behaviors/bindable.php:490
+msgid "%s.%s is not a valid binding"
+msgstr ""
+
+#: /views/courses/add.ctp:4
+#: /views/departments/add.ctp:4
+#: /views/members/add.ctp:4
+msgid "Add %s"
+msgstr "Agregar"
+
+#: /views/courses/add.ctp:4
+#: /views/courses/admin_view.ctp:2
+#: /views/courses/edit.ctp:4
+#: /views/departments/add.ctp:16
+#: /views/departments/edit.ctp:18
+msgid "Course"
+msgstr "Curso"
+
+#: /views/courses/admin_add.ctp:4
+msgid "Add Course"
+msgstr "Agregar curso"
+
+#: /views/courses/admin_add.ctp:17
+#: /views/courses/admin_edit.ctp:19
+#: /views/courses/admin_view.ctp:45
+#: /views/departments/admin_add.ctp:15
+#: /views/departments/admin_edit.ctp:17
+#: /views/departments/admin_index.ctp:67
+#: /views/departments/admin_view.ctp:27
+#: /views/plugins/admin_add.ctp:17
+#: /views/plugins/admin_edit.ctp:19
+#: /views/plugins/admin_view.ctp:32
+msgid "List Courses"
+msgstr "Listar cursos"
+
+#: /views/courses/admin_add.ctp:18
+#: /views/courses/admin_edit.ctp:20
+#: /views/courses/admin_index.ctp:67
+#: /views/courses/admin_view.ctp:47
+#: /views/departments/admin_add.ctp:14
+#: /views/departments/admin_edit.ctp:16
+#: /views/departments/admin_view.ctp:25
+msgid "List Departments"
+msgstr "Listar departamentos"
+
+#: /views/courses/admin_add.ctp:19
+#: /views/courses/admin_edit.ctp:21
+#: /views/courses/admin_index.ctp:68
+#: /views/courses/admin_view.ctp:48
+#: /views/departments/admin_index.ctp:66
+#: /views/departments/admin_view.ctp:26
+msgid "New Department"
+msgstr "Nuevo departamento"
+
+#: /views/courses/admin_add.ctp:20
+#: /views/courses/admin_edit.ctp:22
+#: /views/courses/admin_index.ctp:69
+#: /views/courses/admin_view.ctp:49
+#: /views/members/admin_edit.ctp:25
+#: /views/members/admin_view.ctp:70
+msgid "List Members"
+msgstr ""
+
+#: /views/courses/admin_add.ctp:21
+#: /views/courses/admin_edit.ctp:23
+#: /views/courses/admin_index.ctp:70
+#: /views/courses/admin_view.ctp:50
+msgid "New Owner"
+msgstr ""
+
+#: /views/courses/admin_edit.ctp:4
+#: /views/courses/admin_view.ctp:43
+msgid "Edit Course"
+msgstr "Editar curso"
+
+#: /views/courses/admin_edit.ctp:18
+#: /views/courses/admin_index.ctp:53
+#: /views/courses/edit.ctp:18
+#: /views/courses/index.ctp:53
+#: /views/departments/admin_edit.ctp:15
+#: /views/departments/admin_index.ctp:49
+#: /views/departments/admin_view.ctp:64
+#: /views/departments/edit.ctp:15
+#: /views/members/admin_edit.ctp:24
+#: /views/members/admin_index.ctp:65
+#: /views/members/edit.ctp:24
+#: /views/members/index.ctp:29
+#: /views/plugins/admin_edit.ctp:17
+#: /views/plugins/admin_view.ctp:69
+msgid "Delete"
+msgstr "Eliminar"
+
+#: /views/courses/admin_edit.ctp:18
+#: /views/courses/admin_index.ctp:53
+#: /views/courses/admin_view.ctp:44
+#: /views/courses/edit.ctp:18
+#: /views/courses/index.ctp:53
+#: /views/departments/admin_edit.ctp:15
+#: /views/departments/admin_index.ctp:51
+#: /views/departments/admin_view.ctp:24;64
+#: /views/departments/edit.ctp:15
+#: /views/members/admin_edit.ctp:24
+#: /views/members/admin_index.ctp:65
+#: /views/members/admin_view.ctp:69
+#: /views/members/edit.ctp:24
+#: /views/members/index.ctp:29
+#: /views/members/view.ctp:55
+#: /views/plugins/admin_edit.ctp:17
+#: /views/plugins/admin_view.ctp:29;69
+msgid "Are you sure you want to delete # %s?"
+msgstr "¿Está seguro de que desea eliminar # %s?"
+
+#: /views/courses/admin_index.ctp:2
+#: /views/courses/edit.ctp:19
+#: /views/departments/add.ctp:15
+#: /views/departments/edit.ctp:17
+#: /views/departments/view.ctp:14
+#: /views/layouts/admin.ctp:27
+msgid "Courses"
+msgstr "Cursos"
+
+#: /views/courses/admin_index.ctp:6
+#: /views/departments/admin_index.ctp:6
+#: /views/members/admin_index.ctp:6
+#: /views/members/index.ctp:6
+msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
+msgstr "Página %page% de %page%, mostrando %current% resutados de %count% totales, comenzando en el resultado %start%, finalizando en %end%"
+#: /views/courses/admin_index.ctp:18
+#: /views/departments/admin_index.ctp:14
+#: /views/departments/admin_view.ctp:43
+#: /views/members/admin_index.ctp:21
+#: /views/members/index.ctp:12
+#: /views/plugins/admin_view.ctp:48
+msgid "Actions"
+msgstr "Acciones"
+
+#: /views/courses/admin_index.ctp:51
+#: /views/courses/index.ctp:51
+#: /views/departments/admin_index.ctp:37
+#: /views/departments/admin_view.ctp:62
+#: /views/members/admin_index.ctp:63
+#: /views/members/index.ctp:27
+#: /views/plugins/admin_view.ctp:67
+msgid "View"
+msgstr "Ver"
+
+#: /views/courses/admin_index.ctp:52
+#: /views/courses/index.ctp:52
+#: /views/departments/admin_index.ctp:43
+#: /views/departments/admin_view.ctp:63
+#: /views/members/admin_index.ctp:64
+#: /views/members/index.ctp:28
+#: /views/plugins/admin_view.ctp:68
+msgid "Edit"
+msgstr "Editar"
+
+#: /views/courses/admin_index.ctp:60
+#: /views/departments/admin_index.ctp:60
+#: /views/departments/index.ctp:13
+#: /views/departments/view.ctp:53
+#: /views/members/admin_index.ctp:72
+#: /views/members/index.ctp:36
+msgid "previous"
+msgstr "Previo"
+
+#: /views/courses/admin_index.ctp:62
+#: /views/departments/admin_index.ctp:62
+#: /views/departments/index.ctp:15
+#: /views/departments/view.ctp:55
+#: /views/members/admin_index.ctp:74
+#: /views/members/index.ctp:38
+msgid "next"
+msgstr "Siguiente"
+
+#: /views/courses/admin_index.ctp:66
+#: /views/courses/admin_view.ctp:46
+#: /views/departments/admin_add.ctp:16
+#: /views/departments/admin_edit.ctp:18
+#: /views/departments/admin_index.ctp:68
+#: /views/departments/admin_view.ctp:28;73
+#: /views/plugins/admin_add.ctp:18
+#: /views/plugins/admin_edit.ctp:20
+#: /views/plugins/admin_view.ctp:33;78
+msgid "New Course"
+msgstr ""
+
+#: /views/courses/admin_view.ctp:4
+#: /views/departments/admin_view.ctp:4;36
+#: /views/members/admin_view.ctp:4
+#: /views/plugins/admin_view.ctp:4;41
+msgid "Id"
+msgstr ""
+
+#: /views/courses/admin_view.ctp:9
+#: /views/courses/edit.ctp:21
+#: /views/departments/add.ctp:4
+#: /views/departments/admin_view.ctp:2
+#: /views/departments/edit.ctp:4
+msgid "Department"
+msgstr ""
+
+#: /views/courses/admin_view.ctp:14
+msgid "Owner"
+msgstr ""
+
+#: /views/courses/admin_view.ctp:19
+#: /views/departments/admin_view.ctp:39
+#: /views/plugins/admin_view.ctp:44
+msgid "Code"
+msgstr ""
+
+#: /views/courses/admin_view.ctp:24
+#: /views/departments/admin_view.ctp:9;40
+#: /views/plugins/admin_view.ctp:9;45
+msgid "Name"
+msgstr "Nombre"
+
+#: /views/courses/admin_view.ctp:29
+#: /views/departments/admin_view.ctp:14;41
+#: /views/plugins/admin_view.ctp:46
+msgid "Description"
+msgstr "Descripción"
+
+#: /views/courses/admin_view.ctp:34
+#: /views/departments/admin_view.ctp:42
+#: /views/plugins/admin_view.ctp:47
+msgid "Created"
+msgstr "Creado"
+
+#: /views/courses/admin_view.ctp:44
+msgid "Delete Course"
+msgstr ""
+
+#: /views/courses/edit.ctp:4
+#: /views/departments/edit.ctp:4
+#: /views/members/edit.ctp:4
+#: /views/members/view.ctp:54
+msgid "Edit %s"
+msgstr "Editar"
+
+#: /views/courses/edit.ctp:19;20;22
+#: /views/departments/add.ctp:14;15
+#: /views/departments/edit.ctp:16;17
+#: /views/departments/view.ctp:10
+#: /views/members/add.ctp:23;24
+#: /views/members/edit.ctp:25;26
+#: /views/members/view.ctp:56;58
+msgid "List %s"
+msgstr ""
+
+#: /views/courses/edit.ctp:20
+#: /views/departments/add.ctp:14
+#: /views/departments/admin_index.ctp:2
+#: /views/departments/edit.ctp:16
+#: /views/departments/index.ctp:2
+#: /views/departments/view.ctp:10
+#: /views/layouts/admin.ctp:32
+msgid "Departments"
+msgstr "Departamentos"
+
+#: /views/courses/edit.ctp:21;23
+#: /views/departments/add.ctp:16
+#: /views/departments/edit.ctp:18
+#: /views/members/add.ctp:25
+#: /views/members/edit.ctp:27
+#: /views/members/view.ctp:57;59
+msgid "New %s"
+msgstr "Nuevo %s"
+
+#: /views/courses/edit.ctp:22
+#: /views/layouts/admin.ctp:37
+#: /views/members/add.ctp:23
+#: /views/members/admin_index.ctp:2
+#: /views/members/edit.ctp:25
+#: /views/members/index.ctp:2
+#: /views/members/view.ctp:56
+msgid "Members"
+msgstr ""
+
+#: /views/courses/edit.ctp:23
+#: /views/members/add.ctp:4
+#: /views/members/admin_view.ctp:2
+#: /views/members/edit.ctp:4
+#: /views/members/view.ctp:54;55;57
+msgid "Member"
+msgstr ""
+
+#: /views/courses/index.ctp:14
+msgid "Updates"
+msgstr "Actualizaciones"
+
+#: /views/courses/index.ctp:24
+msgid "Professors"
+msgstr "Profesores"
+
+#: /views/courses/tools.ctp:2
+#: /views/layouts/default.ctp:40
+msgid "Tools"
+msgstr "Herramientas"
+
+#: /views/courses/tools.ctp:25
+#: /views/plugins/admin_index.ctp:25;66
+msgid "Author"
+msgstr "Autor"
+
+#: /views/courses/tools.ctp:41
+msgid "Add to course"
+msgstr ""
+
+#: /views/courses/tools.ctp:45
+msgid "Remove from course"
+msgstr ""
+
+#: /views/dashboards/admin_dashboard.ctp:1
+msgid "Welcome"
+msgstr ""
+
+#: /views/dashboards/admin_dashboard.ctp:3
+msgid "Manage"
+msgstr ""
+
+#: /views/dashboards/admin_dashboard.ctp:7
+msgid "Your Courses"
+msgstr ""
+
+#: /views/departments/admin_add.ctp:4
+msgid "Add Department"
+msgstr ""
+
+#: /views/departments/admin_edit.ctp:4
+#: /views/departments/admin_view.ctp:23
+msgid "Edit Department"
+msgstr ""
+
+#: /views/departments/admin_view.ctp:24
+msgid "Delete Department"
+msgstr ""
+
+#: /views/departments/admin_view.ctp:32
+#: /views/plugins/admin_view.ctp:37
+msgid "Related Courses"
+msgstr ""
+
+#: /views/departments/admin_view.ctp:37
+#: /views/plugins/admin_view.ctp:42
+msgid "Department Id"
+msgstr ""
+
+#: /views/departments/admin_view.ctp:38
+#: /views/plugins/admin_view.ctp:43
+msgid "Owner Id"
+msgstr ""
+
+#: /views/departments/index.ctp:8
+msgid "%s Courses"
+msgstr ""
+
+#: /views/departments/view.ctp:38
+msgid "Enroll"
+msgstr ""
+
+#: /views/elements/course_description.ctp:6
+msgid "No professors, this must be your lucky day!"
+msgstr ""
+
+#: /views/elements/dashboard/profile.ctp:2
+#: /views/members/view.ctp:2
+msgid "Profile"
+msgstr ""
+
+#: /views/elements/dashboard/profile.ctp:4
+msgid "Full Name:"
+msgstr "Nombre completo"
+
+#: /views/elements/dashboard/profile.ctp:8
+msgid "Email:"
+msgstr ""
+
+#: /views/elements/dashboard/profile.ctp:12
+msgid "Phone:"
+msgstr "Teléfono"
+
+#: /views/elements/dashboard/profile.ctp:16
+msgid "Country:"
+msgstr "País"
+
+#: /views/elements/dashboard/profile.ctp:20
+msgid "Age:"
+msgstr "Edad"
+
+#: /views/elements/dashboard/profile.ctp:24
+msgid "Sex:"
+msgstr "Sexo"
+
+#: /views/elements/dashboard/profile.ctp:29
+msgid "Modify your profile"
+msgstr ""
+
+#: /views/elements/layout/conectivism.ctp:4
+msgid "Classes"
+msgstr ""
+
+#: /views/elements/layout/logo.ctp:2
+msgid "Ósmosis 2 // e-learning innovation"
+msgstr "Ósmosis 2 // e-learning innovation"
+#: /views/elements/layout/top_nav.ctp:5
+msgid "Logout"
+msgstr ""
+
+#: /views/elements/layout/user_courses.ctp:2
+msgid "My Courses"
+msgstr ""
+
+#: /views/elements/layout/user_courses.ctp:26
+msgid "You aren't enrolled in any course."
+msgstr ""
+
+#: /views/elements/layout/user_courses.ctp:29
+msgid "Find a Course to enroll"
+msgstr ""
+
+#: /views/layouts/admin.ctp:42
+#: /views/plugins/admin_index.ctp:2
+msgid "Plugins"
+msgstr "Plugins"
+
+#: /views/members/add.ctp:24
+#: /views/members/edit.ctp:26
+#: /views/members/view.ctp:58
+msgid "Roles"
+msgstr ""
+
+#: /views/members/add.ctp:25
+#: /views/members/admin_view.ctp:49
+#: /views/members/edit.ctp:27
+#: /views/members/view.ctp:24;59
+msgid "Role"
+msgstr ""
+
+#: /views/members/admin_add.ctp:4
+msgid "Add Member"
+msgstr ""
+
+#: /views/members/admin_add.ctp:6
+msgid "Personal Data"
+msgstr ""
+
+#: /views/members/admin_add.ctp:16
+msgid "Location"
+msgstr "Lugar"
+
+#: /views/members/admin_add.ctp:25
+msgid "Access Information"
+msgstr ""
+
+#: /views/members/admin_add.ctp:30
+msgid "Give this user administrative access"
+msgstr ""
+
+#: /views/members/admin_edit.ctp:4
+#: /views/members/admin_view.ctp:68
+msgid "Edit Member"
+msgstr ""
+
+#: /views/members/admin_edit.ctp:26
+#: /views/members/admin_view.ctp:72
+msgid "List Roles"
+msgstr ""
+
+#: /views/members/admin_edit.ctp:27
+#: /views/members/admin_view.ctp:73
+msgid "New Role"
+msgstr ""
+
+#: /views/members/admin_index.ctp:78
+#: /views/members/admin_view.ctp:71
+msgid "New Member"
+msgstr ""
+
+#: /views/members/admin_view.ctp:9
+#: /views/members/view.ctp:9
+msgid "Institution Id"
+msgstr ""
+
+#: /views/members/admin_view.ctp:14
+#: /views/members/view.ctp:4
+msgid "Full Name"
+msgstr "Nombre completo"
+
+#: /views/members/admin_view.ctp:19
+#: /views/members/view.ctp:14
+msgid "Email"
+msgstr ""
+
+#: /views/members/admin_view.ctp:24
+#: /views/members/view.ctp:19
+msgid "Phone"
+msgstr "Teléfono"
+
+#: /views/members/admin_view.ctp:29
+#: /views/members/view.ctp:30
+msgid "Country"
+msgstr "País"
+
+#: /views/members/admin_view.ctp:34
+#: /views/members/view.ctp:35
+msgid "City"
+msgstr "Ciudad"
+
+#: /views/members/admin_view.ctp:39
+#: /views/members/view.ctp:40
+msgid "Age"
+msgstr "Edad"
+
+#: /views/members/admin_view.ctp:44
+#: /views/members/view.ctp:45
+msgid "Sex"
+msgstr "Sexo"
+
+#: /views/members/admin_view.ctp:54
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: /views/members/admin_view.ctp:59
+msgid "Password"
+msgstr "Contraseña"
+
+#: /views/members/admin_view.ctp:69
+msgid "Delete Member"
+msgstr ""
+
+#: /views/members/login.ctp:4
+msgid "member.login.legend"
+msgstr ""
+
+#: /views/members/login.ctp:10
+msgid "member.login.submit"
+msgstr ""
+
+#: /views/members/view.ctp:55
+msgid "Delete %s"
+msgstr "Eliminar"
+
+#: /views/pages/home.ctp:10
+msgid "Your tmp directory is writable."
+msgstr ""
+
+#: /views/pages/home.ctp:12
+msgid "Your tmp directory is NOT writable."
+msgstr ""
+
+#: /views/pages/home.ctp:21
+msgid "Your cache is set up and initialized properly."
+msgstr ""
+
+#: /views/pages/home.ctp:34
+msgid "Your cache is NOT working."
+msgstr ""
+
+#: /views/pages/home.ctp:39
+msgid "Your cache directory is not writable"
+msgstr ""
+
+#: /views/pages/home.ctp:50
+msgid "Your database configuration file is present."
+msgstr ""
+
+#: /views/pages/home.ctp:53
+msgid "Your database configuration file is NOT present."
+msgstr ""
+
+#: /views/pages/home.ctp:70
+msgid "Cake is able to connect to the database."
+msgstr ""
+
+#: /views/pages/home.ctp:72
+msgid "Cake is NOT able to connect to the database."
+msgstr ""
+
+#: /views/pages/home.ctp:78
+msgid "Release Notes for CakePHP %s."
+msgstr ""
+
+#: /views/pages/home.ctp:79
+msgid "Read the release notes and get the latest version"
+msgstr ""
+
+#: /views/pages/home.ctp:80
+msgid "Editing this Page"
+msgstr ""
+
+#: /views/pages/home.ctp:82
+msgid "To change the content of this page, edit: /Users/phpnut/Sites/helloworld/1.2.x.x/sampleapp/pages/home.ctp.<br />\nTo change its layout, edit: /Users/phpnut/Sites/helloworld/1.2.x.x/sampleapp/layouts/default.ctp.<br />\nYou can also add some CSS styles for your pages at: /Users/phpnut/Sites/helloworld/1.2.x.x/sampleapp/webroot/css.\n"
+msgstr ""
+
+#: /views/pages/home.ctp:86
+msgid "Getting Started"
+msgstr ""
+
+#: /views/pages/home.ctp:88
+msgid "The 15 min Blog Tutorial"
+msgstr ""
+
+#: /views/pages/home.ctp:89
+msgid "The OCPHP presentation on new features in 1.2"
+msgstr ""
+
+#: /views/pages/home.ctp:91
+msgid "More about Cake"
+msgstr ""
+
+#: /views/pages/home.ctp:93
+msgid "CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC."
+msgstr ""
+
+#: /views/pages/home.ctp:96
+msgid "Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility."
+msgstr ""
+
+#: /views/pages/home.ctp:100
+msgid "Cake Software Foundation"
+msgstr ""
+
+#: /views/pages/home.ctp:101
+msgid "Promoting development related to CakePHP"
+msgstr ""
+
+#: /views/pages/home.ctp:102
+msgid "The Show"
+msgstr ""
+
+#: /views/pages/home.ctp:103
+msgid "The Show is a weekly live internet radio broadcast where we discuss CakePHP-related topics and answer questions live via IRC, Skype, and telephone."
+msgstr ""
+
+#: /views/pages/home.ctp:104
+msgid "The Bakery"
+msgstr ""
+
+#: /views/pages/home.ctp:105
+msgid "Everything CakePHP"
+msgstr ""
+
+#: /views/pages/home.ctp:106
+msgid "Book Store"
+msgstr ""
+
+#: /views/pages/home.ctp:107
+msgid "Recommended Software Books"
+msgstr ""
+
+#: /views/pages/home.ctp:108
+msgid "CakeSchwag"
+msgstr ""
+
+#: /views/pages/home.ctp:109
+msgid "Get your own CakePHP gear - Doughnate to Cake"
+msgstr ""
+
+#: /views/pages/home.ctp:110
+msgid "CakePHP"
+msgstr ""
+
+#: /views/pages/home.ctp:111
+msgid "The Rapid Development Framework"
+msgstr ""
+
+#: /views/pages/home.ctp:112
+msgid "CakePHP Manual"
+msgstr ""
+
+#: /views/pages/home.ctp:113
+msgid "Your Rapid Development Cookbook"
+msgstr ""
+
+#: /views/pages/home.ctp:114
+msgid "CakePHP API"
+msgstr ""
+
+#: /views/pages/home.ctp:115
+msgid "Docblock Your Best Friend"
+msgstr ""
+
+#: /views/pages/home.ctp:116
+msgid "CakeForge"
+msgstr ""
+
+#: /views/pages/home.ctp:117
+msgid "Open Development for CakePHP"
+msgstr ""
+
+#: /views/pages/home.ctp:118
+msgid "CakePHP Trac"
+msgstr ""
+
+#: /views/pages/home.ctp:119
+msgid "For the Development of CakePHP (Tickets, SVN browser, Roadmap, Changelogs)"
+msgstr ""
+
+#: /views/pages/home.ctp:120
+msgid "CakePHP Google Group"
+msgstr ""
+
+#: /views/pages/home.ctp:121
+msgid "Community mailing list"
+msgstr ""
+
+#: /views/pages/home.ctp:123
+msgid "Live chat about CakePHP"
+msgstr ""
+
+#: /views/plugins/admin_add.ctp:4
+msgid "Add Plugin"
+msgstr "Agregar Plugin"
+
+#: /views/plugins/admin_add.ctp:16
+#: /views/plugins/admin_edit.ctp:18
+#: /views/plugins/admin_view.ctp:30
+msgid "List Plugins"
+msgstr "Listar plugins"
+
+#: /views/plugins/admin_edit.ctp:4
+#: /views/plugins/admin_view.ctp:28
+msgid "Edit Plugin"
+msgstr "Editar plugin"
+
+#: /views/plugins/admin_index.ctp:5
+msgid "Installed"
+msgstr "Instalado"
+
+#: /views/plugins/admin_index.ctp:34
+msgid "Uninstall"
+msgstr "Desinstalar"
+
+#: /views/plugins/admin_index.ctp:39
+msgid "Activate"
+msgstr "Activado"
+
+#: /views/plugins/admin_index.ctp:42
+msgid "Deactivate"
+msgstr "Desactivar"
+
+#: /views/plugins/admin_index.ctp:54
+msgid "Not Installed"
+msgstr "No instalado"
+
+#: /views/plugins/admin_index.ctp:74
+msgid "Install"
+msgstr "Instalar"
+
+#: /views/plugins/admin_view.ctp:2
+msgid "Plugin"
+msgstr "Plugin"
+
+#: /views/plugins/admin_view.ctp:14
+msgid "Active"
+msgstr "Activo"
+
+#: /views/plugins/admin_view.ctp:19
+msgid "Folder"
+msgstr "Carpeta"
+
+#: /views/plugins/admin_view.ctp:29
+msgid "Delete Plugin"
+msgstr "Eliminar plugin"
+
+#: /views/plugins/admin_view.ctp:31
+msgid "New Plugin"
+msgstr "Nuevo plugin"
+
+#: /webroot/css.php:71;79
+msgid "Wrong file name."
+msgstr "Nombre de archivo incorrecto"
+
+#: /webroot/test.php:78
+msgid "Debug setting does not allow access to this url."
+msgstr ""
+
