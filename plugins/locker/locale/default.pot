@@ -19,7 +19,7 @@ msgstr ""
 
 #: /controllers/documents_controller.php:45
 msgid "Invalid LockerDocument."
-msgstr ""
+msgstr "Documento inválido"
 
 #: /controllers/documents_controller.php:57;74
 msgid "The LockerDocument has been saved"
@@ -47,15 +47,15 @@ msgstr "Documento no válido"
 
 #: /controllers/folders_controller.php:45
 msgid "Invalid LockerFolder."
-msgstr ""
+msgstr "Carpeta no válida."
 
 #: /controllers/folders_controller.php:56;73
 msgid "The LockerFolder has been saved"
-msgstr ""
+msgstr "La carpeta ha sido guardada."
 
 #: /controllers/folders_controller.php:59;76
 msgid "The LockerFolder could not be saved. Please, try again."
-msgstr ""
+msgstr "La carpeta no pudo ser guardada. Por favor, intente de nuevo."
 
 #: /controllers/folders_controller.php:68
 msgid "Invalid LockerFolder"
@@ -79,12 +79,12 @@ msgstr "Editar información del documento"
 
 #: /views/documents/index.ctp:2
 msgid "LockerDocuments"
-msgstr ""
+msgstr "Documentos"
 
 #: /views/documents/index.ctp:6
 #: /views/folders/index.ctp:6
 msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
-msgstr "Página %page% de %page%, mostrando %current% resutados de %count% totales, comenzando en el resultado %start%, finalizando en %end%"
+msgstr "Página %page% de %page%, mostrando %current% resultados de %count% totales, comenzando en el resultado %start%, finalizando en %end%"
 
 #: /views/documents/index.ctp:16
 #: /views/folders/index.ctp:14
@@ -126,11 +126,11 @@ msgstr "Siguiente"
 #: /views/documents/index.ctp:58
 #: /views/documents/view.ctp:36
 msgid "New LockerDocument"
-msgstr ""
+msgstr "Nuevo documento"
 
 #: /views/documents/view.ctp:2
 msgid "LockerDocument"
-msgstr ""
+msgstr "Documento"
 
 #: /views/documents/view.ctp:4
 #: /views/folders/view.ctp:4
@@ -156,19 +156,19 @@ msgstr ""
 
 #: /views/documents/view.ctp:33
 msgid "Edit LockerDocument"
-msgstr ""
+msgstr "Editar documento"
 
 #: /views/documents/view.ctp:34
 msgid "Delete LockerDocument"
-msgstr ""
+msgstr "Eliminar documento"
 
 #: /views/documents/view.ctp:35
 msgid "List LockerDocuments"
-msgstr ""
+msgstr "Listar documentos"
 
 #: /views/folders/add.ctp:4
 msgid "Add Folder"
-msgstr ""
+msgstr "Agregar carpeta"
 
 #: /views/folders/edit.ctp:4
 msgid "Change Folder Name"
@@ -176,16 +176,16 @@ msgstr "Cambiar nombre de carpeta"
 
 #: /views/folders/index.ctp:2
 msgid "LockerFolders"
-msgstr ""
+msgstr "Carpetas"
 
 #: /views/folders/index.ctp:50
 #: /views/folders/view.ctp:26
 msgid "New LockerFolder"
-msgstr ""
+msgstr "Nueva carpeta"
 
 #: /views/folders/view.ctp:2
 msgid "LockerFolder"
-msgstr ""
+msgstr "Carpeta"
 
 #: /views/folders/view.ctp:14
 msgid "Parent Id"
@@ -193,13 +193,13 @@ msgstr ""
 
 #: /views/folders/view.ctp:23
 msgid "Edit LockerFolder"
-msgstr ""
+msgstr "Editar carpeta"
 
 #: /views/folders/view.ctp:24
 msgid "Delete LockerFolder"
-msgstr ""
+msgstr "Eliminar carpeta"
 
 #: /views/folders/view.ctp:25
 msgid "List LockerFolders"
-msgstr ""
+msgstr "Listar carpetas"
 

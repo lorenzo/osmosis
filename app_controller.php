@@ -51,6 +51,7 @@ class AppController extends Controller {
 	 */
 	
 	function beforeFilter() {
+		Configure::write('Config.language','spa');
 		if (isset($this->Auth)) {
 			$this->_initializeAuth();
 		}

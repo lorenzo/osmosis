@@ -112,7 +112,7 @@ class MembersController extends AppController {
 	}
 
 	/**
-	 * Deletes a memeber
+	 * Deletes a member
 	 *
 	 * @param string $id 
 	 * @return void

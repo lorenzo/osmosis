@@ -51,7 +51,10 @@ class CoursesController extends AppController {
 	function index() {
 		$user_courses = $this->Course->Owner->courses($this->Auth->user('id'));
 		$this->set('courses', $user_courses);
-		$professors = $this->Course->professors(Set::extract('/Course/id', $user_courses));
+		$professors = array();
+		if (!empty($user_courses)) {
+			$professors = $this->Course->professors(Set::extract('/Course/id', $user_courses));
+		}
 		$this->layout = 'no_course';
 		$this->Placeholder->attach('plugin_updates');
 		$this->set(compact('professors'));
