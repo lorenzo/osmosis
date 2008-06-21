@@ -1,0 +1,388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>LaTeX Equation Editor</title>
+<script type="text/javascript" src="js/eq_editor.js"></script>
+<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+<script type="text/javascript" src="../../utils/form_utils.js"></script>
+<script type="text/javascript">
+// Send the equation to the opening window.
+function updateOpener() {
+	
+}
+
+function getSelection() {
+	ed = tinyMCEPopup.editor;
+	document.getElementById('latex_formula').value = ed.selection.getContent({format : 'text'});
+	textchanged();
+}
+</script>
+<link rel="stylesheet" type="text/css" href="css/latex.css" />
+</head>
+<body onload="getSelection()">
+<div class="center">
+<div class="top">
+<select title="Spaces" onchange="insertText(this.options[this.selectedIndex].value); this.selectedIndex=0;">
+  <option selected="selected" value="" style="color:#8080ff">Spaces...</option>
+  <option value="\,">thin</option>
+  <option value="\:">medium</option>
+  <option value="\;">thick</option>
+  <option value="\!">negative</option>
+</select>
+<select title="Styles" onchange="insertText(this.options[this.selectedIndex].value, 1000); this.selectedIndex=0;">
+  <option selected="selected" value="" style="color:#8080ff">Style...</option>
+  <optgroup label="Equation Only">
+  <option value="\mathbb{}" title="\mathbb{}">Blackboard</option>
+  <option value="\mathbf{}" title="\mathbf{}">Bold</option>
+  <option value="\boldsymbol{}" title="\boldsymbol{}">Bold Greek</option>
+  <option value="\mathit{}" title="\mathit{}">Italic</option>
+  
+  <option value="\mathrm{}" title="\mathrm{}">Roman</option>
+  <option value="\mathfrak{}" title="\mathfrak{}">Fraktur</option>
+  </optgroup>
+  <optgroup label="Text Only">
+  <option value="\texttt{}" title="\texttt{}">Typewriter</option>
+  <option value="\textrm{}" title="\textrm{}">Roman</option>
+  <option value="\textup{}" title="\textup{}">Upright</option>
+  <option value="\textit{}" title="\textit{}">Italic</option>
+  <option value="\textsl{}" title="\textsl{}">Slanted</option>
+  <option value="\textsc{}" title="\textsc{}">SMALL CAPS</option>
+  <option value="\emph{}"   title="\emph{}">Emphasis</option>
+  </optgroup>
+</select>
+<select title="Functions" onchange="insertText(this.options[this.selectedIndex].value); this.selectedIndex=0;">
+  <option selected="selected" value="" style="color:#8080ff">Functions&hellip;</option>
+  <option value="\arg">arg</option>
+  <option value="\deg">deg</option>
+  <option value="\det">det</option>
+  <option value="\dim">dim</option>
+  <option value="\gcd">gcd</option>
+  <option value="\hom">hom</option>
+  <option value="\ker">ker</option>
+  <option value="\Pr">Pr</option>
+  <option value="\sup">sup</option>  
+  <optgroup label="Trig">
+  <option value="\sin">sin</option>
+  <option value="\cos">cos</option>
+  <option value="\tan">tan</option>
+  <option value="\csc">csc</option>
+  <option value="\sec">sec</option>
+  <option value="\cot">cot</option>
+  <option value="\sinh">sinh</option>
+  <option value="\cosh">cosh</option>
+  <option value="\tanh">tanh</option>
+  <option value="\coth">coth</option>
+  <option value="\arcsin">arcsin</option>
+  <option value="\arccos">arccos</option>
+  <option value="\arctan">arctan</option>
+  </optgroup>
+  <optgroup label="Limits">
+  <option value="\lim">lim</option>
+  <option value="\liminf">liminf</option>
+  <option value="\limsup">limsup</option>
+  <option value="\max">max</option>
+  <option value="\min">min</option>
+  <option value="\inf">inf</option> 			
+  </optgroup>
+  <optgroup label="Logs">
+  <option value="\exp">exp</option>
+  <option value="\lg">lg</option>
+  <option value="\ln">ln</option>
+  <option value="\log">log</option>
+  <option value="\log e">log e</option>
+  <option value="\log_{10}">log<sub>10</sub></option>
+  </optgroup>
+
+</select>
+<select title="Foreign Characters" onchange="insertText(this.options[this.selectedIndex].value); this.selectedIndex=0;">
+  <option selected="selected" value="" style="color:#8080ff">Foreign...</option>
+  <option value="\oe">&oelig;</option>
+  <option value="\OE">&OElig;</option>
+  <option value="\ae">&aelig;</option>
+  <option value="\AE">&AElig;</option>
+  <option value="\aa">&aring;</option>
+  <option value="\AA">&Aring;</option>
+  <option value="\ss">&szlig;</option>
+  <option value="\S">(&sect;) section</option>
+  <option value="\P">(&para;) paragraph</option>
+  <option value="\o">o</option>
+  <option value="\O">O</option>
+  <option value="\l">l</option>
+  <option value="\L">L</option>
+  <option value="\dag">dag</option>
+  <option value="\ddag">ddag</option>
+  <option value="\copyright">&copy;</option>
+  <option value="\pounds">&pound;</option>
+</select>
+<select title="Symbols" onchange="insertText(this.options[this.selectedIndex].value); this.selectedIndex=0;">
+  <option selected="selected" value="" style="color:#8080ff">Symbols...</option>
+	<option value="\pm" title="\pm">(&plusmn;) plus or minus</option>
+  <option value="\mp" title="\mp">minus or plus</option>
+  <option value="\times">(&times;) times</option>
+  <option value="\div" title="\div">(&divide;) divided by</option>
+  <option value="\ast" title="\ast">(&lowast;) asterisk</option>
+  <option value="\star">(*) star</option>
+  <option value="\circ" title="\circ">circle</option>
+  <option value="^{\circ}" title="^{\circ}">degree symbol</option>
+  <option value="\bullet">(&bull;) bullet</option>
+  <option value="\cdot">(&middot;) center dot</option>
+  <option value="\uplus">u plus</option>
+  <option value="\sqcap">square cap</option>
+  <option value="\sqcup">square cup</option>
+  <option value="\vee">(&or;) vee</option>
+  <option value="\wedge">(&and;) wedge</option>
+  <option value="\diamond">(&loz;) diamond</option>
+  <option value="\bigtriangleup">big triangle up</option>
+  <option value="\bigtriangledown">big triangle down</option>
+  <option value="\triangleleft">triangle left</option>
+  <option value="\triangleright">triangle right</option>
+  <option value="\lhd">large triangle left</option>
+  <option value="\rhd">large triangle right</option>
+  <option value="\oplus">(&oplus;) circle plus</option>
+  <option value="\ominus">circle minus</option>
+  <option value="\otimes">(&otimes;) circle times</option>
+  <option value="\oslash">circle slash</option>
+  <option value="\odot">circle dot</option>
+  <option value="\bigcirc">big circle</option>  
+  <option value="\dagger">(&dagger;) dagger</option>
+  <option value="\ddagger">(&Dagger;) double dagger</option>
+  <option value="\amalg">coproduct</option>
+</select>
+</div>
+<div class="top">
+<select name="fontsize" id="fontsize" title="Equation Font Size" onchange="textchanged();">
+  <option value="\tiny">(8pt) Tiny</option>
+  <option value="\small">(10pt) Small</option>
+  <option value="" selected="selected">(12pt) Normal</option>
+  <option value="\large">(14pt) Large</option>
+  <option value="\huge">(20pt) Huge</option>
+</select>
+
+<select title="Color" onchange="insertText(this.options[this.selectedIndex].value, this.options[this.selectedIndex].value.length-1);">
+  <option selected="selected" value="" style="color:#8080ff">Colors...</option>
+  <option value="\color{red}{}">red</option>
+  <option value="\color{green}{}">green</option>
+  <option value="\color{blue}{}">blue</option>
+</select>
+<select name="history" id="history" onchange="insertText(this.options[this.selectedIndex].value); this.selectedIndex=0;">
+  <option selected="selected" value="" style="color:#8080ff">History...</option>
+
+</select>
+</div>
+
+<div id="toolbar_wrapper">
+<div id="toolbar">
+<div class="panel" id="panel1" onmouseover="this.style.overflow='visible'" onmouseout="this.style.overflow='hidden'">
+	<!-- Operators Panel -->
+	<img src="img/operators_panel.gif" width="133" height="102" border="0" alt="Operators Panel" usemap="#operators_map" />
+	<map name="operators_map" id="operators_map">
+	<area shape="rect" alt="a^b"         title="a^b"         coords="0,0,25,24"  href="javascript:insertText('{}^{}',1)" />
+	<area shape="rect" alt="a_b"         title="a_b"         coords="0,26,25,50" href="javascript:insertText('{}_{}',1)" />
+	<area shape="rect" alt="\frac{a}{b}" title="\frac{a}{b}" coords="0,52,25,76" href="javascript:insertText('\\frac{}{}',6)" />
+
+	<area shape="rect" alt="\int"       title="\int"         coords="27,0,52,24"   href="javascript:insertText('\\int')" />
+	<area shape="rect" alt="\int_a^b"   title="\int_a^b"     coords="27,26,52,50"  href="javascript:insertText('\\int_{}^{}',6)" />
+	<area shape="rect" alt="\oint_a^b"  title="\oint_a^b"    coords="27,52,52,76"  href="javascript:insertText('\\oint_{}^{}',7)" />
+	<area shape="rect" alt="\lim_{x \rightarrow 0}" title="\lim_{x \rightarrow 0}" coords="27,78,52,102" href="javascript:insertText('\\lim_{}',6)" />
+
+	<area shape="rect" alt="\prod"       title="\prod"       coords="54,0,79,24"   href="javascript:insertText('\\prod')" />
+	<area shape="rect" alt="\prod_a^b"   title="\prod_a^b"   coords="54,26,79,50"  href="javascript:insertText('\\prod_{}^{}',7)" />
+	<area shape="rect" alt="\coprod"     title="\coprod"     coords="54,52,79,76"  href="javascript:insertText('\\coprod')" />
+	<area shape="rect" alt="\coprod_a^b" title="\coprod_a^b" coords="54,78,79,102" href="javascript:insertText('\\coprod_{}^{}',9)" />
+
+	<area shape="rect" alt="\bigcap"     title="\bigcap"     coords="81,0,106,24"  href="javascript:insertText('\\bigcap')" />
+	<area shape="rect" alt="\bigcap_a^b" title="\bigcap_a^b" coords="81,26,106,50" href="javascript:insertText('\\bigcap_{}^{}',9)" />
+	<area shape="rect" alt="\bigcup"     title="\bigcup"     coords="81,52,106,76" href="javascript:insertText('\\bigcup')" />
+	<area shape="rect" alt="\bigcup_a^b" title="\bigcup_a^b" coords="81,78,106,102" href="javascript:insertText('\\bigcup_{}^{}',9)" />
+
+	<area shape="rect" alt="\sum"       title="\sum_a^b"     coords="108,0,133,24" href="javascript:insertText('\\sum')" />
+	<area shape="rect" alt="\sum_a^b"   title="\sum_a^b"     coords="108,26,133,50" href="javascript:insertText('\\sum_{}^{}',6)" />
+	<area shape="rect" alt="\sqrt{x}"   title="\sqrt{x}"     coords="108,52,133,76" href="javascript:insertText('\\sqrt{}',6)" />
+	<area shape="rect" alt="\sqrt[n]{x}" title="\sqrt[n]{x}" coords="108,78,133,102" href="javascript:insertText('\\sqrt[]{}',6)" />
+	</map>
+</div>
+
+<div class="panel" id="panel2" onmouseover="this.style.overflow='visible'" onmouseout="this.style.overflow='hidden'">
+	<!-- Brackets Panel -->
+	<img src="img/brackets_panel.gif" width="25" height="102" border="0" alt="Brackets Panel" usemap="#brackets_map" />
+	<map name="brackets_map" id="brackets_map">
+
+	<area shape="rect" alt="\left( \right)" title="\left( \right)" coords="0,0,25,24" href="javascript:insertText('\\left( \\right)',6)" />
+	<area shape="rect" alt="\left[ \right]" title="\left[ \right]" coords="0,26,25,50" href="javascript:insertText('\\left[ \\right]',6)" />
+	<area shape="rect" alt="\left| \right|" title="\left| \right|" coords="0,52,25,76" href="javascript:insertText('\\left| \\right|',6)" />
+	<area shape="rect" alt="\left< \right>" title="\left< \right>" coords="0,78,25,102" href="javascript:insertText('\\left< \\right>',6)" />
+	</map>
+</div>
+
+<div class="panel2" id="panel3" onmouseover="this.style.overflow='visible'" onmouseout="this.style.overflow='hidden'">
+	<!-- Greek Letters -->
+	<img src="img/greekletters_panel.gif" width="94" height="112" border="0" alt="Greek Letters Panel" usemap="#greekletters_map" />
+	<map name="greekletters_map" id="greekletters_map">
+	<area shape="rect" alt="\alpha"    title="\alpha"   coords="0,0,14,14"   href="javascript:insertText('\\alpha')" />
+	<area shape="rect" alt="\beta"     title="\beta"    coords="16,0,30,14"  href="javascript:insertText('\\beta')" />
+	<area shape="rect" alt="\gamma"    title="\gamma"   coords="32,0,46,14"  href="javascript:insertText('\\gamma')" />
+	<area shape="rect" alt="\delta"    title="\delta"   coords="48,0,62,14"  href="javascript:insertText('\\delta')" />
+	<area shape="rect" alt="\epsilon"  title="\epsilon" coords="64,0,78,14"  href="javascript:insertText('\\epsilon')" />
+	<area shape="rect" alt="\varepsilon" title="\varepsilon" coords="80,0,94,14" href="javascript:insertText('\\varepsilon')" />
+
+	<area shape="rect" alt="\zeta"     title="\zeta"     coords="0,16,14,30" href="javascript:insertText('\\zeta')" />
+	<area shape="rect" alt="\eta"      title="\eta"      coords="16,16,30,30" href="javascript:insertText('\\eta')" />
+	<area shape="rect" alt="\theta"    title="\theta"    coords="32,16,46,30" href="javascript:insertText('\\theta')" />
+	<area shape="rect" alt="\vartheta" title="\vartheta" coords="48,16,62,30" href="javascript:insertText('\\vartheta')" />
+	<area shape="rect" alt="\iota"     title="\iota"     coords="64,16,78,30" href="javascript:insertText('\\iota')" />
+	<area shape="rect" alt="\kappa"    title="\kappa"    coords="80,16,94,30" href="javascript:insertText('\\kappa')" />
+
+	<area shape="rect" alt="\lambda"   title="\lambda"  coords="0,32,14,46"  href="javascript:insertText('\\lambda')" />
+	<area shape="rect" alt="\mu"       title="\mu"      coords="16,32,30,46" href="javascript:insertText('\\mu')" />
+	<area shape="rect" alt="\nu"       title="\nu"      coords="32,32,46,46" href="javascript:insertText('\\nu')" />
+	<area shape="rect" alt="\xi"       title="\xi"      coords="48,32,62,46" href="javascript:insertText('\\xi')" />
+	<area shape="rect" alt="\pi"       title="\pi"      coords="64,32,78,46" href="javascript:insertText('\\pi')" />
+	<area shape="rect" alt="\varpi"    title="\varpi"   coords="80,32,94,46" href="javascript:insertText('\\varpi')" />
+
+	<area shape="rect" alt="\rho"      title="\rho"     coords="0,48,14,62"   href="javascript:insertText('\\rho')" />
+	<area shape="rect" alt="\varrho"   title="\varrho"  coords="16,48,30,62"   href="javascript:insertText('\\varrho')" />
+	<area shape="rect" alt="\sigma"    title="\sigma"   coords="32,48,46,62"   href="javascript:insertText('\\sigma')" />
+	<area shape="rect" alt="\varsigma" title="\varsigma" coords="48,48,62,62" href="javascript:insertText('\\varsigma')" />
+	<area shape="rect" alt="\tau"      title="\tau"     coords="64,48,78,62" href="javascript:insertText('\\tau')" />
+	<area shape="rect" alt="\upsilon"  title="\upsilon" coords="80,48,94,62" href="javascript:insertText('\\upsilon')" />
+
+	<area shape="rect" alt="\phi"      title="\phi"     coords="0,64,14,78" href="javascript:insertText('\\phi')" />
+	<area shape="rect" alt="\varphi"   title="\varphi"  coords="16,64,30,78" href="javascript:insertText('\\varphi')" />
+	<area shape="rect" alt="\chi"      title="\chi"     coords="32,64,46,78" href="javascript:insertText('\\chi')" />
+	<area shape="rect" alt="\psi"      title="\psi"     coords="48,64,62,78" href="javascript:insertText('\\psi')" />
+	<area shape="rect" alt="\omega"    title="\omega"   coords="64,64,78,78" href="javascript:insertText('\\omega')" />
+
+	<area shape="rect" alt="\Gamma"    title="\Gamma"   coords="0,82,14,96"    href="javascript:insertText('\\Gamma')" />
+	<area shape="rect" alt="\Delta"    title="\Delta"   coords="16,82,30,96"   href="javascript:insertText('\\Delta')" />
+	<area shape="rect" alt="\Theta"    title="\Theta"   coords="32,82,46,96"   href="javascript:insertText('\\Theta')" />
+	<area shape="rect" alt="\Lambda"   title="\Lambda"  coords="48,82,62,96"   href="javascript:insertText('\\Lambda')" />
+	<area shape="rect" alt="\Xi"       title="\Xi"      coords="64,82,78,96"   href="javascript:insertText('\\Xi')" />
+	<area shape="rect" alt="\Pi"       title="\Pi"      coords="80,82,94,96"   href="javascript:insertText('\\Pi')" />
+
+	<area shape="rect" alt="\Sigma"    title="\Sigma"   coords="0,98,14,112"  href="javascript:insertText('\\Sigma')" />
+	<area shape="rect" alt="\Upsilon"  title="\Upsilon" coords="16,98,30,112" href="javascript:insertText('\\Upsilon')" />
+	<area shape="rect" alt="\Phi"      title="\Phi"     coords="32,98,46,112" href="javascript:insertText('\\Phi')" />
+	<area shape="rect" alt="\Psi"      title="\Psi"     coords="48,98,62,112" href="javascript:insertText('\\Psi')" />
+	<area shape="rect" alt="\Omega"    title="\Omega"   coords="64,98,78,112" href="javascript:insertText('\\Omega')" />
+	</map>
+</div>
+
+<div class="panel2" id="panel4" onmouseover="this.style.overflow='visible'" onmouseout="this.style.overflow='hidden'">
+	<!-- Relations Panel -->
+	<img src="img/relations_panel.gif" width="46" height="190" border="0" alt="Relations Panel" usemap="#relations_map" />
+	<map name="relations_map" id="relations_map">
+	<area shape="rect" alt="\leq"        title="\leq"      coords="0,0,14,14"   href="javascript:insertText('\\leq')" />
+	<area shape="rect" alt="\prec"       title="\prec"     coords="0,16,14,30"  href="javascript:insertText('\\prec')" />
+	<area shape="rect" alt="\preceq"     title="\preceq"   coords="0,32,14,46"  href="javascript:insertText('\\preceq')" />
+	<area shape="rect" alt="\ll"         title="\ll"       coords="0,48,14,62"  href="javascript:insertText('\\ll')" />
+	<area shape="rect" alt="\subset"     title="\subset"   coords="0,64,14,78"  href="javascript:insertText('\\subset')" />
+	<area shape="rect" alt="\subseteq"   title="\subseteq" coords="0,80,14,94"  href="javascript:insertText('\\subseteq')" />
+	<area shape="rect" alt="\sqsubset"   title="\sqsubset" coords="0,96,14,110" href="javascript:insertText('\\sqsubset')" />
+	<area shape="rect" alt="\sqsubseteq" title="\sqsubseteq" coords="0,112,14,126" href="javascript:insertText('\\sqsubseteq')" />
+	<area shape="rect" alt="\in"         title="\in"       coords="0,128,14,142" href="javascript:insertText('\\in')" />
+	<area shape="rect" alt="\vdash"      title="\vdash"    coords="0,144,14,158" href="javascript:insertText('\\vdash')" />
+	<area shape="rect" alt="\models"     title="\models"   coords="0,160,14,174" href="javascript:insertText('\\models')" />
+	<area shape="rect" alt="\bowtie"     title="\bowtie"   coords="0,176,14,190" href="javascript:insertText('\\bowtie')" />
+
+
+	<area shape="rect" alt="\geq"        title="\geq"      coords="16,0,30,14"    href="javascript:insertText('\\geq')" />
+	<area shape="rect" alt="\succ"       title="\succ"     coords="16,16,30,30"   href="javascript:insertText('\\succ')" />
+	<area shape="rect" alt="\succeq"     title="\succeq"   coords="16,32,30,46"   href="javascript:insertText('\\succeq')" />
+	<area shape="rect" alt="\gg"         title="\gg"       coords="16,48,30,62"   href="javascript:insertText('\\gg')" />
+	<area shape="rect" alt="\supset"     title="\supset"   coords="16,64,30,78"   href="javascript:insertText('\\supset')">
+	<area shape="rect" alt="\supseteq"   title="\supseteq" coords="16,80,30,94"   href="javascript:insertText('\\supseteq')" />
+	<area shape="rect" alt="\sqsupset"   title="\sqsupset" coords="16,96,30,110"  href="javascript:insertText('\\sqsupset')" />
+	<area shape="rect" alt="\sqsupseteq" title="\sqsupseteq" coords="16,112,30,126" href="javascript:insertText('\\sqsupseteq')" />
+	<area shape="rect" alt="\ni"         title="\ni"       coords="16,128,30,142" href="javascript:insertText('\\ni')" />
+	<area shape="rect" alt="\dashv"      title="\dashv"    coords="16,144,30,158" href="javascript:insertText('\\dashv')" />
+	<area shape="rect" alt="\perp"     title="\perp"       coords="16,160,30,174" href="javascript:insertText('\\perp')" />
+	<area shape="rect" alt="\Join"     title="\Join"       coords="16,176,30,190" href="javascript:insertText('\\Join')" />
+
+
+	<area shape="rect" alt="\neq"    title="\neq"    coords="32,0,46,14"    href="javascript:insertText('\\neq')" />
+	<area shape="rect" alt="\equiv"  title="\equiv"  coords="32,16,46,30"   href="javascript:insertText('\\equiv')" />
+	<area shape="rect" alt="\doteq"  title="\doteq"  coords="32,32,46,46"   href="javascript:insertText('\\doteq')" />
+	<area shape="rect" alt="\sim"    title="\sim"    coords="32,48,46,62"   href="javascript:insertText('\\sim')" />
+	<area shape="rect" alt="\approx" title="\approx" coords="32,64,46,78"   href="javascript:insertText('\\approx')" />
+	<area shape="rect" alt="\simeq"  title="\simeq"  coords="32,80,46,94"   href="javascript:insertText('\\simeq')" />
+	<area shape="rect" alt="\cong"   title="\cong"   coords="32,96,46,110"  href="javascript:insertText('\\cong')" />
+	<area shape="rect" alt="\asymp"  title="\asymp"  coords="32,112,46,126" href="javascript:insertText('\\asymp')" />
+	<area shape="rect" alt="\propto" title="\propto" coords="32,128,46,142" href="javascript:insertText('\\propto')" />
+	<area shape="rect" alt="\mid"    title="\mid"    coords="32,144,46,158" href="javascript:insertText('\\mid')" />
+	<area shape="rect" alt="\parallel" title="\parallel" coords="32,160,46,174" href="javascript:insertText('\\parallel')" />
+	</map>
+
+</div>
+
+<div class="panel2" id="panel5" onmouseover="this.style.overflow='visible'" onmouseout="this.style.overflow='hidden'">
+<!-- Arrows Panel -->
+	<img src="img/arrows_panel.gif" width="52" height="46" border="0" alt="Accents Panel" usemap="#arrows_map" />
+	<map name="arrows_map" id="arrows_map">
+	<area shape="rect" alt="\leftarrow" title="\leftarrow" coords="0,0,25,14" href="javascript:insertText('\\leftarrow')" />
+	<area shape="rect" alt="\Leftarrow" title="\Leftarrow" coords="0,16,25,30" href="javascript:insertText('\\Leftarrow')" />
+	<area shape="rect" alt="\rightarrow" title="\rightarrow" coords="27,0,52,14" href="javascript:insertText('\\rightarrow')" />
+	<area shape="rect" alt="\Rightarrow" title="\Rightarrow" coords="27,16,52,30" href="javascript:insertText('\\Rightarrow')" />
+	<area shape="rect" alt="\leftrightarrow" title="\leftrightarrow" coords="0,32,25,46" href="javascript:insertText('\\leftrightarrow')" />
+	<area shape="rect" alt="\Leftrightarrow" title="\Leftrightarrow" coords="27,32,52,46" href="javascript:insertText('\\Leftrightarrow')" />
+	</map>
+</div>
+
+<div class="panel2" id="panel6" onmouseover="this.style.overflow='visible'" onmouseout="this.style.overflow='hidden'">
+<!-- Accents Panel -->
+	<img src="img/accents_panel.gif" width="30" height="78" border="0" alt="Accents Panel" usemap="#accents_map" />
+	<map name="accents_map" id="accents_map">
+	<area shape="rect" alt="\hat{a}" title="\hat{a}" coords="0,0,14,14" href="javascript:insertText('\\hat{}',5)" />
+	<area shape="rect" alt="\check{a}" title="\check{a}" coords="0,16,14,30" href="javascript:insertText('\\check{}',7)" />
+	<area shape="rect" alt="\tilde{a}" title="\tilde{a}" coords="0,32,14,46" href="javascript:insertText('\\tilde{}',7)" />
+	<area shape="rect" alt="\acute{a}" title="\acute{a}" coords="0,48,14,62" href="javascript:insertText('\\acute{}',7)" />
+	<area shape="rect" alt="\grave{a}" title="\grave{a}" coords="0,64,14,78" href="javascript:insertText('\\grave{}',7)" />
+
+	<area shape="rect" alt="\dot{a}"   title="\dot{a}"   coords="16,0,30,14" href="javascript:insertText('\\dot{}',5)" />
+	<area shape="rect" alt="\ddot{a}"  title="\ddot{a}"  coords="16,16,30,30" href="javascript:insertText('\\ddot{}',6)" />
+	<area shape="rect" alt="\breve{a}" title="\breve{a}" coords="16,32,30,46" href="javascript:insertText('\\breve{}',7)" />
+	<area shape="rect" alt="\bar{a}"   title="\bar{a}"   coords="16,48,30,62" href="javascript:insertText('\\bar{}',5)" />
+	<area shape="rect" alt="\vec{a}"   title="\vec{a}"   coords="16,64,30,78" href="javascript:insertText('\\vec{}',5)" />
+	</map>
+</div>
+
+<div class="panel" id="panel7" onmouseover="this.style.overflow='visible'" onmouseout="this.style.overflow='hidden'">
+<!-- Matrix Panel -->
+	<img src="img/matrix_panel.gif" width="79" height="128" border="0" alt="Matrix Panel" usemap="#matrix_map" />
+	<map name="matrix_map" id="matrix_map">
+	<area shape="rect" alt="\begin{matrix} ... \end{matrix}"    title="\begin{matrix} ... \end{matrix}"       coords="0,0,25,24"   href="javascript:makeArrayMatrix('','','')" />
+	<area shape="rect" alt="\begin{pmatrix} ... \end{pmatrix}"  title="\begin{pmatrix} ... \end{pmatrix}"      coords="0,26,25,50"  href="javascript:makeArrayMatrix('p','','')" />
+	<area shape="rect" alt="\begin{vmatrix} ... \end{vmatrix}"  title="\begin{vmatrix} ... \end{vmatrix}"      coords="0,52,25,76"  href="javascript:makeArrayMatrix('v','','')" />
+	<area shape="rect" alt="\begin{Vmatrix} ... \end{Vmatrix}"  title="\begin{Vmatrix} ... \end{Vmatrix}"      coords="0,78,25,102" href="javascript:makeArrayMatrix('V','','')" />
+	<area shape="rect" alt="\left.\begin{matrix}... \end{matrix}\right|"    title="\left.\begin{matrix}... \end{matrix}\right|" coords="0,104,25,128" href="javascript:makeArrayMatrix('','\\left.','\\right|')" />
+
+	<area shape="rect" alt="\being{bmatrix} ... \end{bmatrix}"  title="\begin{bmatrix} ... \end{bmatrix}"      coords="27,0,52,24"   href="javascript:makeArrayMatrix('b','','')" />
+	<area shape="rect" alt="\bigl(\begin{smallmatrix} ... \end{smallmatrix}\bigr)" title="\bigl(\begin{smallmatrix} ... \end{smallmatrix}\bigr)" coords="27,26,52,50"  href="javascript:makeArrayMatrix('small','\\bigl(','\\bigr)')" />
+	<area shape="rect" alt="\begin{Bmatrix} ... \end{Bmatrix}"  title="\begin{Bmatrix} ... \end{Bmatrix}"  coords="27,52,52,76"  href="javascript:makeArrayMatrix('B','','')" />
+	<area shape="rect" alt="\begin{Bmatrix} ... \end{matrix}"   title="\left\{\begin{matrix} ... \end{matrix}\right."  coords="27,78,52,102" href="javascript:makeArrayMatrix('','\\left\\{','\\right.')" />
+	<area shape="rect" alt="\begin{matrix} ... \end{Bmatrix}"   title="\left.\begin{matrix} ... \end{Bmatrix}\right\}"  coords="27,104,52,128"  href="javascript:makeArrayMatrix('','\\left.','\\right\\}')" />
+
+	<area shape="rect" alt="\begin{cases} ... \end{cases}"   title="\begin{cases} ... \end{cases}"   coords="54,0,79,24"   href="javascript:makeEquationsMatrix('cases', true, true)" />
+	<area shape="rect" alt="\begin{align} ... \end{align}"   title="\begin{align} ... \end{align}"   coords="54,26,79,50"  href="javascript:makeEquationsMatrix('align', false)" />
+	</map>
+	
+</div>
+
+</div>   
+</div>
+<form action="#" onsubmit="insertLatex()">
+<div id="toolbar_space" class="bottom"></div> 
+<textarea name="latex_formula" id="latex_formula" cols="80" rows="10" onkeydown="textchanged();"></textarea>
+
+<div id="input">
+<input type="button" class="mceButton" onclick="cleartext()" value="Clear" title="Clear the editor window"/>
+<input id="renderbutton" class="mceButton" type="button"  onclick="renderEqn(null)" value="Render" title="Click to see your equation rendered below" />
+<input id="copybutton" class="mceButton" type="submit"  value="Insert" />
+<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+</form>
+<div id="equationcomment"></div>
+<img id="equationview" src="img/spacer.gif" onload="processEquationChange();" />
+
+</div>
+</body>
+</html>

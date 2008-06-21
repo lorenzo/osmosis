@@ -1,0 +1,7 @@
+.mceItemLatex{
+	border:1px dotted #cc0000; 
+	background-position:bottom right; 
+	background-repeat:no-repeat; 
+	background-color:#ffffcc;
+	background-image:url(../img/latex.gif);
+}

@@ -13,7 +13,7 @@ if (isset($settings['height']))
 		mode : "textareas",
 		theme : "advanced",
 		skin : "osmosis",
-		plugins : "safari,table,save,inlinepopups,preview,media,contextmenu,paste,fullscreen,noneditable,visualchars,xhtmlxtras,latex",
+		plugins : "safari,table,save,inlinepopups,preview,media,contextmenu,paste,fullscreen,noneditable,visualchars,xhtmlxtras,noneditable,latex",
 		theme_advanced_buttons1: "save,preview,|,cut,copy,paste,pasteword,|,undo,redo,|,link,unlink,|,image,media,|,removeformat,code,fullscreen",
 		theme_advanced_buttons2 : "bold,italic,underline,|,justifyleft,justifyfull,|,bullist,numlist,|,blockquote,formatselect,|,charmap,latex",
 		theme_advanced_buttons3 : "",

@@ -31,7 +31,6 @@
  */
 
 class LockerAppController extends AppController {
-
 }
 
 ?>

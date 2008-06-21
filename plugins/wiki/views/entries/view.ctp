@@ -8,6 +8,6 @@
 		</span>
 	</h1>
 	<div class="wiki-content">
-		<?php echo $wiki->format($entry['Entry']['content']); ?>
+		<?php echo $wiki->format($latex->filter($entry['Entry']['content'])); ?>
 	</div>
 </div>

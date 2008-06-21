@@ -32,7 +32,7 @@
 class EntriesController extends WikiAppController {
 
 	var $name = 'Entries';
-	var $helpers = array('Html', 'Form', 'Javascript','Wiki' );
+	var $helpers = array('Html', 'Form', 'Javascript','Wiki','Latex');
 	var $components = array('HtmlPurifier','Diff');
 	
 	function _setActiveCourse() {
