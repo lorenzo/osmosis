@@ -7,5 +7,5 @@
 		echo $form->input('name');
 	?>
 	</fieldset>
-<?php echo $form->end('Save');?>
+<?php echo $form->end(__('Save', true));?>
 </div>

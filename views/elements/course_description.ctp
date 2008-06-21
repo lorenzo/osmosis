@@ -5,7 +5,7 @@
 		<?php
 			if (!isset($this->viewVars['Osmosis']['active_course']['professors']) ||
 			 	empty($this->viewVars['Osmosis']['active_course']['professors'])) :
-				echo '<p>' . __('No professors, this must be your lucky day!', true) . '</p>';
+				echo '<p>' . __('There are no professors for this course', true) . '</p>';
 			else :
 				echo $this->element(
 					'professor_list',

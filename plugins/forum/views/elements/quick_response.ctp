@@ -7,7 +7,7 @@
 		echo $form->input('content', array('label' => __('Message', true)));
 	?>
 	</fieldset>
-<?php echo $form->end('Submit');?>
+<?php echo $form->end(__('Submit', true));?>
 </div>
 <?php
 	echo $this->renderElement('ui/editor');

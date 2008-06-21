@@ -1495,7 +1495,7 @@ msgstr "Carpeta eliminada."
 
 #: /plugins/locker/models/locker_folder.php:130
 msgid "Folder names have a maximum length 20 characters"
-msgstr ""
+msgstr "Los nombres de carpetas deben tener 20 caracteres máximo."
 
 #: /plugins/locker/views/documents/add.ctp:4
 msgid "Add File"
@@ -1590,7 +1590,7 @@ msgstr "Nueva carpeta"
 
 #: /plugins/locker/views/folders/view.ctp:2
 msgid "%s's Locker"
-msgstr ""
+msgstr "Locker de %s"
 
 #: /plugins/quiz/controllers/choice_questions_controller.php:44
 msgid "Invalid Choice Question."
@@ -2263,7 +2263,7 @@ msgstr ""
 #: /plugins/quiz/views/quizzes/view.ctp:241
 #: /plugins/quiz/views/text_questions/view.ctp:19
 msgid "Format"
-msgstr ""
+msgstr "Formato"
 
 #: /plugins/quiz/views/text_questions/add.ctp:4
 msgid "Create %s"
@@ -2861,11 +2861,11 @@ msgstr "Wiki eliminado."
 
 #: /plugins/wiki/views/entries/add.ctp:4
 msgid "Add Entry"
-msgstr "Agregar página"
+msgstr "Agregar Página"
 
 #: /plugins/wiki/views/entries/edit.ctp:5
 msgid "Edit Entry"
-msgstr "Editar páginas"
+msgstr "Editar página"
 
 #: /plugins/wiki/views/entries/index.ctp:2
 msgid "Entries"
@@ -2878,7 +2878,7 @@ msgstr "Historial"
 #: /plugins/wiki/views/revisions/diff.ctp:6
 #: /plugins/wiki/views/revisions/view.ctp:4
 msgid "Revision as of %s, modified by %s"
-msgstr ""
+msgstr "Revisión del %s, modificada por %s"
 
 #: /plugins/wiki/views/revisions/history.ctp:2
 msgid "Revision history of %s"
@@ -3100,8 +3100,8 @@ msgid "Enroll"
 msgstr "Inscribir"
 
 #: /views/elements/course_description.ctp:8
-msgid "No professors, this must be your lucky day!"
-msgstr ""
+msgid "There are no professors for this course"
+msgstr "No hay profesores asignados a este curso."
 
 #: /views/elements/dashboard/profile.ctp:2 /views/members/view.ctp:2
 msgid "Profile"
@@ -3157,7 +3157,7 @@ msgstr "Usted no se ha inscrito en un curso"
 
 #: /views/elements/layout/user_courses.ctp:31
 msgid "Find a Course to enroll"
-msgstr ""
+msgstr "Inscribirse en un curso"
 
 #: /views/layouts/admin.ctp:43 /views/plugins/admin_index.ctp:2
 msgid "Plugins"
@@ -3175,7 +3175,7 @@ msgstr "Rol"
 
 #: /views/members/admin_add.ctp:4
 msgid "Add Member"
-msgstr ""
+msgstr "Agregar miembro"
 
 #: /views/members/admin_add.ctp:6
 msgid "Personal Data"
@@ -3410,48 +3410,48 @@ msgstr ""
 
 #: /views/plugins/admin_add.ctp:4
 msgid "Add Plugin"
-msgstr ""
+msgstr "Agregar plugin"
 
 #: /views/plugins/admin_add.ctp:16 /views/plugins/admin_edit.ctp:18
 #: /views/plugins/admin_view.ctp:30
 msgid "List Plugins"
-msgstr ""
+msgstr "Listar plugins"
 
 #: /views/plugins/admin_edit.ctp:4 /views/plugins/admin_view.ctp:28
 msgid "Edit Plugin"
-msgstr ""
+msgstr "Editar plugin"
 
 #: /views/plugins/admin_index.ctp:5
 msgid "Installed"
-msgstr ""
+msgstr "Instalados"
 
 #: /views/plugins/admin_index.ctp:34
 msgid "Uninstall"
-msgstr ""
+msgstr "Desinstalar"
 
 #: /views/plugins/admin_index.ctp:39
 msgid "Activate"
-msgstr ""
+msgstr "Activar"
 
 #: /views/plugins/admin_index.ctp:42
 msgid "Deactivate"
-msgstr ""
+msgstr "Desactivar"
 
 #: /views/plugins/admin_index.ctp:54
 msgid "Not Installed"
-msgstr ""
+msgstr "No Instalados"
 
 #: /views/plugins/admin_index.ctp:74
 msgid "Install"
-msgstr ""
+msgstr "Instalar"
 
 #: /views/plugins/admin_view.ctp:2
 msgid "Plugin"
-msgstr ""
+msgstr "Plugin"
 
 #: /views/plugins/admin_view.ctp:14
 msgid "Active"
-msgstr ""
+msgstr "Activo"
 
 #: /views/plugins/admin_view.ctp:19
 msgid "Folder"
@@ -3459,15 +3459,15 @@ msgstr "Carpeta"
 
 #: /views/plugins/admin_view.ctp:29
 msgid "Delete Plugin"
-msgstr ""
+msgstr "Eliminar plugin"
 
 #: /views/plugins/admin_view.ctp:31
 msgid "New Plugin"
-msgstr ""
+msgstr "Nuevo plugin"
 
 #: /webroot/css.php:71;79
 msgid "Wrong file name."
-msgstr ""
+msgstr "Nombre de archivo incorrecto"
 
 #: /webroot/test.php:78
 msgid "Debug setting does not allow access to this url."
@@ -3475,4 +3475,8 @@ msgstr ""
 
 #: /plugins/quiz/views/quizzes/index.ctp:25
 msgid "Change name"
-msgstr ""
+msgstr "Cambiar nombre"
+
+#: /plugins/locker/views/documents/add.ctp:7
+msgid "File"
+msgstr "Archivo"

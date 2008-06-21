@@ -11,7 +11,7 @@
 		echo $form->input('content',array('label' => array('text' => __('Content',true),'class' => 'hidden')));
 	?>
 	</fieldset>
-<?php echo $form->end('Add Entry');?>
+<?php echo $form->end(__('Add Entry', true));?>
 </div>
 <?php echo $javascript->link('tiny_mce/tiny_mce',null,null,false); ?>
 <?php echo $this->element('ui/editor'); ?>

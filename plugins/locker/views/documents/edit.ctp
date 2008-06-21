@@ -9,5 +9,5 @@
 		echo $form->input('folder_id');
 	?>
 	</fieldset>
-<?php echo $form->end('Save');?>
+<?php echo $form->end(__('Save', true));?>
 </div>

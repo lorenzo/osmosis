@@ -9,7 +9,7 @@
 		echo $form->hidden('title');
 	?>
 	</fieldset>
-<?php echo $form->end('Edit Entry');?>
+<?php echo $form->end(__('Edit Entry', true));?>
 </div>
 <?php echo $javascript->link('tiny_mce/tiny_mce',null,null,false); ?>
 <?php echo $this->element('ui/editor'); ?>

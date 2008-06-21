@@ -8,7 +8,7 @@
 		echo $form->hidden('blog_id');
 	?>
 	</fieldset>
-<?php echo $form->end('Submit');?>
+<?php echo $form->end(__('Submit', true));?>
 </div>
 <?php echo $javascript->link('tiny_mce/tiny_mce',null,null,false); ?>
 <?php echo $this->renderElement('ui/editor'); ?>

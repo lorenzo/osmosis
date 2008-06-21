@@ -9,14 +9,12 @@
 		</p>
 	<?php
 		echo $form->input('course_id');
-		echo $form->input('name');
-		echo $form->input('file_name', array('type' => 'file'));
-		echo $form->input('description');
-		//echo $form->input('version');
-		//echo $form->input('hash');
+		echo $form->input('name', array('label' =>  __('Name', true)));
+		echo $form->input('file_name', array('type' => 'file'), array('label' =>  __('File Name', true)));
+		echo $form->input('description', array('label' =>  __('Description', true)));
 	?>
 	</fieldset>
-<?php echo $form->end('Submit');?>
+<?php echo $form->end(__('Submit', true));?>
 </div>
 <div class="actions">
 	<ul>

@@ -52,7 +52,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2008-06-21 12:22-0430\n"
+"POT-Creation-Date: 2008-06-21 15:38-0430\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -307,6 +307,9 @@ msgid "Edit Event"
 msgstr ""
 
 #: /plugins/agenda/views/events/edit.ctp:14
+#: /plugins/locker/views/documents/add.ctp:12
+#: /plugins/locker/views/documents/edit.ctp:12
+#: /plugins/locker/views/folders/edit.ctp:10
 msgid "Save"
 msgstr ""
 
@@ -552,7 +555,68 @@ msgid "Add Blog"
 msgstr ""
 
 #: /plugins/blog/views/blogs/add.ctp:10
+#: /plugins/blog/views/blogs/edit.ctp:12
+#: /plugins/blog/views/comments/add.ctp:12
+#: /plugins/blog/views/comments/edit.ctp:11
+#: /plugins/blog/views/elements/add_comment.ctp:11
+#: /plugins/blog/views/elements/comments/add_comment.ctp:10
+#: /plugins/blog/views/posts/add.ctp:11
+#: /plugins/blog/views/posts/edit.ctp:12
+#: /plugins/forum/views/discussions/edit.ctp:26
+#: /plugins/forum/views/elements/quick_response.ctp:10
+#: /plugins/forum/views/responses/edit.ctp:10
+#: /plugins/forum/views/subjects/add.ctp:13
+#: /plugins/forum/views/subjects/edit.ctp:14
+#: /plugins/forum/views/topics/edit.ctp:23
+#: /plugins/quiz/views/choice_questions/edit.ctp:14
+#: /plugins/quiz/views/matching_questions/add.ctp:74
+#: /plugins/quiz/views/matching_questions/edit.ctp:14
+#: /plugins/quiz/views/ordering_questions/add.ctp:63
+#: /plugins/quiz/views/ordering_questions/edit.ctp:14
+#: /plugins/quiz/views/quizzes/add.ctp:9
+#: /plugins/quiz/views/text_questions/edit.ctp:13
+#: /plugins/scorm/views/conditions/add.ctp:13
+#: /plugins/scorm/views/conditions/edit.ctp:14
+#: /plugins/scorm/views/control_modes/add.ctp:15
+#: /plugins/scorm/views/control_modes/edit.ctp:16
+#: /plugins/scorm/views/delivery_controls/add.ctp:12
+#: /plugins/scorm/views/delivery_controls/edit.ctp:13
+#: /plugins/scorm/views/map_infos/add.ctp:12
+#: /plugins/scorm/views/map_infos/edit.ctp:12
+#: /plugins/scorm/views/objectives/add.ctp:13
+#: /plugins/scorm/views/objectives/edit.ctp:14
+#: /plugins/scorm/views/randomizations/add.ctp:13
+#: /plugins/scorm/views/randomizations/edit.ctp:14
+#: /plugins/scorm/views/rollup_considerations/add.ctp:14
+#: /plugins/scorm/views/rollup_considerations/edit.ctp:15
+#: /plugins/scorm/views/rollups/add.ctp:12
+#: /plugins/scorm/views/rollups/edit.ctp:13
+#: /plugins/scorm/views/rules/add.ctp:15
+#: /plugins/scorm/views/rules/edit.ctp:16
+#: /plugins/scorm/views/sco_presentations/add.ctp:10
+#: /plugins/scorm/views/sco_presentations/edit.ctp:11
+#: /plugins/scorm/views/scorm_attendee_trackings/add.ctp:13
+#: /plugins/scorm/views/scorm_attendee_trackings/edit.ctp:14
+#: /plugins/scorm/views/scorms/add.ctp:19
+#: /plugins/scorm/views/scorms/edit.ctp:15
+#: /plugins/scorm/views/scos/add.ctp:22
+#: /plugins/scorm/views/scos/edit.ctp:23
+#: /plugins/wiki/views/wikis/add.ctp:11
 #: /plugins/wiki/views/wikis/edit.ctp:12
+#: /views/courses/add.ctp:12
+#: /views/courses/admin_add.ctp:13
+#: /views/courses/admin_edit.ctp:14
+#: /views/courses/edit.ctp:14
+#: /views/departments/add.ctp:10
+#: /views/departments/admin_add.ctp:10
+#: /views/departments/admin_edit.ctp:11
+#: /views/departments/edit.ctp:11
+#: /views/members/add.ctp:19
+#: /views/members/admin_add.ctp:34
+#: /views/members/admin_edit.ctp:20
+#: /views/members/edit.ctp:20
+#: /views/plugins/admin_add.ctp:12
+#: /views/plugins/admin_edit.ctp:13
 msgid "Submit"
 msgstr ""
 
@@ -1537,6 +1601,10 @@ msgstr ""
 
 #: /plugins/locker/views/documents/add.ctp:4
 msgid "Add File"
+msgstr ""
+
+#: /plugins/locker/views/documents/add.ctp:7
+msgid "File"
 msgstr ""
 
 #: /plugins/locker/views/documents/add.ctp:9
@@ -2911,11 +2979,11 @@ msgstr ""
 msgid "Wiki deleted"
 msgstr ""
 
-#: /plugins/wiki/views/entries/add.ctp:4
+#: /plugins/wiki/views/entries/add.ctp:4;14
 msgid "Add Entry"
 msgstr ""
 
-#: /plugins/wiki/views/entries/edit.ctp:5
+#: /plugins/wiki/views/entries/edit.ctp:5;12
 msgid "Edit Entry"
 msgstr ""
 

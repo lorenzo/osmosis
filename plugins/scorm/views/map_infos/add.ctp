@@ -9,7 +9,7 @@ Warning: Invalid argument supplied for foreach() in /home/joaquin/sitios/cake1.2
 Warning: Invalid argument supplied for foreach() in /home/joaquin/sitios/cake1.2.x/cake/console/libs/templates/views/form.ctp on line 40
 	?>
 	</fieldset>
-<?php echo $form->end('Submit');?>
+<?php echo $form->end(__('Submit', true));?>
 </div>
 <div class="actions">
 	<ul>

@@ -87,7 +87,6 @@ class ScormsController extends ScormAppController {
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->cleanUpFields();
 			$this->Scorm->create();
 			$uploaded_file = $this->data['Scorm']['file_name'];
 			
