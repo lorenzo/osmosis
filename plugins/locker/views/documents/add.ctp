@@ -4,10 +4,10 @@
  		<legend><?php __('Add File');?></legend>
 	<?php
 		echo $form->input('name');
-		echo $form->input('file', array('type' => 'file'));
+		echo $form->input('file', array('type' => 'file'), array('label' => __('File', true)));
 		echo $form->input('description', array('label' =>__('Description', true)));
 		echo $form->input('folder_id', array('label' =>__('Folder', true)));
 	?>
 	</fieldset>
-<?php echo $form->end('Save');?>
+<?php echo $form->end(__('Save', true));?>
 </div>
