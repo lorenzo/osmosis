@@ -126,7 +126,7 @@ class OrderingQuestionsController extends AppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->OrderingQuestion->del($id)) {
-			$this->Session->setFlash(__('Ordering Question #'.$id.' deleted',true));
+			$this->Session->setFlash(__('Ordering Question deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

@@ -22,7 +22,7 @@ foreach ($quizzes as $quiz):
 	<tr<?php echo $class;?>>
 		<td>
 			<?php echo $quiz['Quiz']['name'] ?>
-			<?php echo $html->link(__('Cambiar', true), array('action'=>'rename', $quiz['Quiz']['id'])); ?>
+			<?php echo $html->link(__('Change name', true), array('action'=>'rename', $quiz['Quiz']['id'])); ?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('View', true), array('action'=>'view', $quiz['Quiz']['id'])); ?>

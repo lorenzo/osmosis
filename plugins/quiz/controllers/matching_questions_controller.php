@@ -153,7 +153,7 @@ class MatchingQuestionsController extends AppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->MatchingQuestion->del($id)) {
-			$this->Session->setFlash(__('Matching Question #'.$id.' deleted',true));
+			$this->Session->setFlash(__('Matching Question deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

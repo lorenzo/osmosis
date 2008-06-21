@@ -107,7 +107,7 @@ class TextQuestionsController extends QuizAppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->TextQuestion->del($id)) {
-			$this->Session->setFlash(__('Text Question #'.$id.' deleted',true));
+			$this->Session->setFlash(__('Text Question deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

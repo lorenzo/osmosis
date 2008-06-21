@@ -21,12 +21,6 @@
 			<?php echo $member['Member']['phone'] ?>
 			&nbsp;
 		</dd>
-<!--		<dt><?php __('Role') ?></dt>
-		<dd>
-			<?php echo $html->link(__($member['Role']['id'], true), array('controller'=> 'roles', 'action'=>'view', $member['Role']['id'])); ?>
-			&nbsp;
-		</dd>
--->
 		<dt class="altrow"><?php __('Country') ?></dt>
 		<dd class="altrow">
 			<?php echo $member['Member']['country'] ?>

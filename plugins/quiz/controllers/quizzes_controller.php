@@ -110,7 +110,7 @@ class QuizzesController extends QuizAppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Quiz->del($id)) {
-			$this->Session->setFlash(__('Quiz #'.$id.' deleted',true));
+			$this->Session->setFlash(__('Quiz deleted',true));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

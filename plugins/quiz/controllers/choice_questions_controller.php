@@ -137,7 +137,7 @@ class ChoiceQuestionsController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->ChoiceQuestion->del($id)) {
-			$this->Session->setFlash(__('Choice Question #'.$id.' deleted',true));
+			$this->Session->setFlash(__('Choice Question deleted',true));
 			$this->redirect(array('action'=>'index'));
 		}
 	}
