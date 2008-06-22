@@ -61,7 +61,7 @@ class OsmosisShell extends Shell {
 					$this->out('');
 					continue;
 				}
-				if (!$this->add_header($file, $matches[1])) {
+				if (!$this->add_header($file, array_pop($matches))) {
 					$this->err('Header could not be added');
 					$this->out('');
 					continue;
