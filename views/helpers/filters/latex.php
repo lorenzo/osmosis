@@ -1,7 +1,5 @@
 <?php
 class LatexHelper extends Helper {
-	
-	var $helpers = array('Html');
 	var $Engine = null;
 
 	function __construct() {

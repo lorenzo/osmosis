@@ -20,7 +20,7 @@
 	</td>
 	<td>
 		<?php
-			echo $this->renderElement('TextQuestion.view', array('question' => $question));
+			echo $this->element('TextQuestion.view', array('question' => $question));
 		?>
 	</td>
 </tr>

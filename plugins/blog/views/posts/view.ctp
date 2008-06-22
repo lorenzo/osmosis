@@ -2,7 +2,7 @@
 	$html->css('/blog/css/blog.css', null, null, false);
 ?>
 <?php
-	echo $this->renderElement('post', array('post' => $post['Post']));
+	echo $this->element('post', array('post' => $post['Post']));
 ?>
 <div class="comments">
 	<h3><?php __('Comments');?></h3>
@@ -16,7 +16,7 @@
 			}
 ?>
 	<div class="comment">
-		<?php echo $comment['comment'];?>
+		<?php echo $filter->filter($comment['comment']);?>
 	</div>
 	<?php endforeach; ?>
 <?php endif; ?>

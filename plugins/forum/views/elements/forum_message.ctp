@@ -23,7 +23,7 @@
 			?>
 		</span>
 		<?php
-			echo $message['content'];
+			echo $filter->filter($message['content']);
 		?>
 		<?php
 		if ($author['id'] == $session->read('Auth.Member.id')):

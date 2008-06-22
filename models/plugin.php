@@ -243,8 +243,7 @@ class Plugin extends AppModel {
 	}
 	
 	function getPath($name) {
-		$configure = Configure::getInstance();
-		$pluginPaths = $configure->pluginPaths;
+		$pluginPaths = Configure::read('pluginPaths');
 		$path = null;
 		foreach ($pluginPaths as $pp) {
 			if (is_dir($pp.Inflector::underscore($name))) {

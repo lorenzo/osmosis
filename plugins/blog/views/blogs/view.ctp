@@ -24,10 +24,9 @@
 			if ($i++ % 2 == 0) {
 				$class = ' class="altrow"';
 			}
-			echo $this->renderElement('post', array('post' => $post));
+			echo $this->element('post', array('post' => $post));
 		endforeach; ?>
 <?php endif; ?>
-
 	<div class="actions">
 		<ul>
 			<li><?php echo $html->link(__('New Post', true), array('controller'=> 'posts', 'action'=>'add', $blog['Blog']['id'])); ?> </li>

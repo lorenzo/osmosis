@@ -6,7 +6,7 @@
 		<?php
 			foreach ($question['ChoiceQuestion']['ChoiceChoice'] as $i => $choice) {
 		?>
-		<li><?php echo $choice['text']; ?></li>
+		<li><?php echo $filter->filter($choice['text']); ?></li>
 		<?php
 			}
 		?>

@@ -4,6 +4,6 @@
 	<span class="day"><?php echo $time->format('d', $post['created']);?></span>
 </div>
 <div class="body">	
-	<?php echo $post['body'];?>
+	<?php echo $filter->filter($post['body']);?>
 </div>
 <?php echo $html->link(__('Edit', true), array('controller'=>'posts', 'action' => 'edit', $post['id'])); ?>

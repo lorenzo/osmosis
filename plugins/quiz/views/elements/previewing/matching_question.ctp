@@ -4,7 +4,7 @@
 		<ol>
 	<?php
 		foreach ($question['MatchingQuestion']['SourceChoice'] as $key => $value) {
-			echo '<li>'.$value['text'].'</li>';
+			echo '<li>'.$filter->filter($value['text']).'</li>';
 		}
 	?>
 		</ol>
@@ -13,7 +13,7 @@
 		<ol>
 	<?php
 		foreach ($question['MatchingQuestion']['TargetChoice'] as $key => $value) {
-			echo '<li>'.$value['text'].'</li>';
+			echo '<li>'.$filter->filter($value['text']).'</li>';
 		}
 	?>
 		</ol>

@@ -42,7 +42,7 @@
 						$topic['name'],
 						array('controller'=> 'topics', 'action'=>'view', 'topic_id' =>  $topic['id'])
 					);
-				?> <br /> <?php echo $topic['description']; ?> &mdash;
+				?> <br /> <?php echo $filter->filter($topic['description']); ?> &mdash;
 				<?php
 					if ($topic['status']!='locked') :
 						echo $html->link(

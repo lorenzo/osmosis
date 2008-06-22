@@ -4,7 +4,7 @@
 	<?php
 		foreach ($question['OrderingQuestion']['OrderingChoice'] as $i => $choice) {
 	?>
-		<li><?php echo $choice['text']?></li>
+		<li><?php echo $filter->filter($choice['text']) ?></li>
 	<?php
 		}
 	?>

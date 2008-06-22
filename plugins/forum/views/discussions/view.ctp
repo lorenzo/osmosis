@@ -25,14 +25,14 @@
 		?>
 	</div>
 <?php
-	echo $this->renderElement('discussion_responses', array('responses' => $responses));
+	echo $this->element('discussion_responses', array('responses' => $responses));
 ?>
 </div>
 <div class="quick-respond">
 	<h3><?php __('Reply to this discussion'); ?></h3>
 	<?php
 	if ($discussion['Discussion']['status']=='unlocked') :
-		echo $this->renderElement('quick_response', array('discussion_id' => $discussion['Discussion']['id']));
+		echo $this->element('quick_response', array('discussion_id' => $discussion['Discussion']['id']));
 	else :
 		__('This Discussion is locked, you cannot reply.');
 	endif;

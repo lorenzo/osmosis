@@ -1,5 +1,5 @@
 <h2><?php echo $wiki['Wiki']['name']; ?></h2>
-<p><?php echo $wiki['Wiki']['description']; ?></p>
+<p><?php echo $filter->filter($wiki['Wiki']['description']); ?></p>
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('New Entry', true), array('controller'=> 'entries', 'action'=>'add', 'wiki_id' => $wiki['Wiki']['id']));?> </li>

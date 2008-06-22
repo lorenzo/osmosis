@@ -1,7 +1,7 @@
 <div class="content">	
 	<h1><?php echo $course['Course']['name']; ?></h1>
 	<div class="course-data">
-		<p class="course-description"><?php echo $course['Course']['description']; ?></p>
+		<p class="course-description"><?php echo $filter->filter($course['Course']['description']); ?></p>
 		<?php
 			if (!isset($this->viewVars['Osmosis']['active_course']['professors']) ||
 			 	empty($this->viewVars['Osmosis']['active_course']['professors'])) :
