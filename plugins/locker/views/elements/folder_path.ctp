@@ -5,7 +5,7 @@
 				array(
 					'controller'	=> 'folders',
 					'action'		=> 'view',
-					'member_id'		=> $member['Member']['id']
+					'member_id'		=> $member['id']
 				)
 			);
 		?>
@@ -17,17 +17,26 @@
 ?>
 	<li>
 		<?php
-			echo $html->link($folder['name'],
-				array(
-					'controller'	=> 'folders',
-					'action'		=> 'view',
-					$folder['parent_id']
-				)
-			);
+			if ($i != count($path) - 1 || isset($document)) {
+				echo $html->link($folder['name'],
+					array(
+						'controller'	=> 'folders',
+						'action'		=> 'view',
+						$folder['id']
+					)
+				);
+			} else {
+				echo $folder['name'];
+			}
 		?>
 	</li>
 <?php
 		endforeach;
 	endif;
+	if (isset($document)) :
 ?>
+	<li><?php echo $document['name']; ?></li>
+<?php
+	endif;
+?>	
 </ul>

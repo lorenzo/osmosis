@@ -219,19 +219,18 @@ class Course extends AppModel {
 			$roles = Set::combine($roles, '/Role/id', '/Role/role');
 		}
 		
-		if ($groupedByCourse) {
+		// if ($groupedByCourse) {
 			$fields[] = 'course_id';
-		}
+		// }
 		$this->Member->Enrollment->contain('Member(id,full_name,email,phone)');
 		$enrolled = $this->Member->Enrollment->find('all', compact('conditions', 'fields', 'order'));
-		
 		$members_by_role = array();	
 		$members_by_course = array();
 		foreach ($enrolled as $i => $member) {
 			$enrollment = $member['Enrollment'];
 			$member = $member['Member'];
 			$role_name = $roles[$enrollment['role_id']];
-			$members_by_role[$role_name][] = $members_by_course[$enrollment['course_id']][] = $member;
+			$members_by_role[$role_name][] = $members_by_course[$enrollment['course_id']][] = array('Member' => $member);
 		}
 		
 		if (!$groupedByCourse) {

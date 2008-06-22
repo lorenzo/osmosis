@@ -57,8 +57,12 @@ class DocumentView extends MediaView {
 		$size = null;
 		if (isset($this->viewVars['mime']) && !empty($this->viewVars['mime']))
 			$this->mimeType[$this->viewVars['extension']] = $this->viewVars['mime'];
-			
+
 		extract($this->viewVars, EXTR_OVERWRITE);
+		
+		if (!$extension) {
+			$extension = 'bin';
+		}
 
 		if (file_exists($path) && isset($extension) && array_key_exists($extension, $this->mimeType) && connection_status() == 0) {
 			$chunkSize = 1 * (1024 * 8);
@@ -86,7 +90,7 @@ class DocumentView extends MediaView {
 				}
 
 				header('Content-Type: ' . $contentType);
-				header("Content-Disposition: attachment; filename=\"" . $name . '.' . $extension . "\";");
+				header("Content-Disposition: attachment; filename=\"" . $name . "\";");
 				header("Expires: 0");
 				header('Accept-Ranges: bytes');
 				header("Cache-Control: private", false);

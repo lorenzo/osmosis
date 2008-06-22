@@ -45,7 +45,14 @@ class DocumentsController extends LockerAppController {
 			$this->Session->setFlash(__('Invalid LockerDocument.', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->set('lockerDocument', $this->LockerDocument->read(null, $id));
+		$this->LockerDocument->contain('Member');
+		$lockerDocument = $this->LockerDocument->read(null, $id);
+		$member = $lockerDocument['Member'];
+		$path = $this->LockerDocument->Folder->path($lockerDocument['LockerDocument']['folder_id']);
+		$this->set(compact('lockerDocument','path', 'member'));
+		if ($this->RequestHandler->isAjax()) {
+			$this->render('ajax/view');
+		}
 	}
 
 	function add() {
@@ -80,9 +87,9 @@ class DocumentsController extends LockerAppController {
 		if (empty($this->data)) {
 			$this->data = $this->LockerDocument->read(null, $id);
 		}
-		$members = $this->LockerDocument->Member->find('list');
-		$folders = $this->LockerDocument->Folder->find('list');
-		$this->set(compact('members','folders'));
+		// $members = $this->LockerDocument->Member->find('list');
+		// $folders = $this->LockerDocument->Folder->find('list');
+		// $this->set(compact('members','folders'));
 	}
 
 	function delete($id = null) {

@@ -30,7 +30,14 @@
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 
-class LockerAppController extends AppController {
-	var $helpers = array('Mime');
+class MimeHelper extends AppHelper {
+	
+	function convert($type, $filename) {
+		$type = Inflector::slug($type);
+		if ($type=='text_plain' || $type=='application_octet_stream') {
+			$type = array_pop(explode('.', $filename));
+		}
+		return $type;
+	}
 }
 ?>

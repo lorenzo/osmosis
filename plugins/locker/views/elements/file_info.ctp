@@ -1,27 +1,49 @@
 <li>
 	<?php
 		if ($type == 'folder') {
+			$url = array(
+				'controller'	=> 'folders',
+				'action'		=> 'view',
+				$file['id']
+			);
 			echo $html->link(
-				$file['name'],
+				$file['name'], $url,
 				array(
-					'controller'	=> 'folders',
-					'action'		=> 'view',
-					$file['id']
-				), array('class' => 'item folder')
+					'class'	=> 'item folder',
+					'rev'	=> $file['id'],
+					'rel'	=> $html->url($url),
+					'title'	=> $file['name']
+				)
 			);
 		}
 		if ($type == 'document') {
-			$file_type = Inflector::slug($file['type']);
-			if ($file_type=='text_plain' || $file_type=='application_octet_stream') {
-				$file_type = array_pop(explode('.', $file['file_name']));
+			$file_type = $mime->convert($file['type'], $file['file_name']);
+			$url = array(
+				'controller'	=> 'documents',
+				'action'		=> 'view',
+				$file['id']
+			);
+			$title = $name = $file['name'];
+			$ext = '';
+			$name = explode('.', $name);
+			$plus = 0;
+			if (count($name)==1) {
+				$plus = 4;
+				$name = $title;
+			} else {
+				$ext = '.' . array_pop($name);
+				$name = implode('.', $name);
 			}
-			echo $html->link(
-				wordwrap($text->truncate($file['file_name'], 20), 10, '<br />', 1),
+			$name = str_replace(' ', '^', $name);
+			$name = wordwrap($text->truncate($name, 16 + $plus, '[...]'), 10, '<br />', true);
+			$name = str_replace('^', ' ', $name) . $ext;
+			echo $html->link($name, $url,
 				array(
-					'controller'	=> 'documents',
-					'action'		=> 'view',
-					$file['id']
-				), array('class' => 'item ' . $file_type, 'rel' => '#hola'), false, false
+					'class'	=> 'item document ' . $file_type,
+					'rev'	=> $file['id'],
+					'rel'	=> $html->url($url),
+					'title'	=> $title
+				), false, false
 			);
 		}
 	?>

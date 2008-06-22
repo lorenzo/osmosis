@@ -1,5 +1,5 @@
 <div id="locker">
-<h1><?php printf(__("%s's Locker", true), $member['Member']['full_name']);?></h1>
+<h1><?php printf(__("%s's Locker", true), $member['full_name']);?></h1>
 <?php
 	$folder_id = $parentFolder['LockerFolder']['id'];
 	echo $this->element('folder_path', compact('path', 'member'));
@@ -9,17 +9,40 @@
 </div>
 <?php
 	$javascript->link('jquery/plugins/jquery.dimensions', false);
+	$javascript->link('jquery/plugins/jquery.hoverIntent', false);
 	$javascript->link('jquery/plugins/jquery.cluetip', false);
+	$javascript->link('jquery/plugins/jquery.jeditable', false);
+	$javascript->link('jquery/plugins/jquery.jeditable.autogrow', false);
+	$javascript->link('jquery/plugins/jquery.autogrow', false);
+	$javascript->link('jquery/plugins/jquery.lockerItem', false);
+	$javascript->link('jquery/plugins/jquery.blockUI', false);
 	$html->css('jquery.cluetip', null, null, false);
 ?>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
-		$('#locker #locker-contents ul li a').cluetip({
-					sticky: true,
-					local : true
-				});
+		var settings = {
+ 			updating	: <?php echo "'" . __("Updating...", true) . "'"; ?>,
+			cancel		: <?php echo "'" . __("Cancel", true) . "'"; ?>,
+			ok			: <?php echo "'" . __("OK", true) . "'"; ?>,
+			urlDocuments : <?php
+				echo "'" . $html->url(
+					array(
+						'controller'	=> 'documents',
+						'action'		=> 'edit',
+						'ext'			=> 'json'
+					)
+				) . "'";
+			?>,
+			urlFolders : <?php
+				echo "'" . $html->url(
+					array(
+						'controller'	=> 'folders',
+						'action'		=> 'edit',
+						'ext'			=> 'json'
+					)
+				) . "'";
+			?>
+		}
+		$('#locker #locker-contents ul li a').lockerItem(settings);
 	});
 </script>
-<div id="name">
-	cosa
-</div>

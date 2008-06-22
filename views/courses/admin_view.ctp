@@ -30,7 +30,7 @@
 </div>
 <h3><?php __('Members'); ?></h3>
 <?php
-foreach ($roles as $role) :
+	foreach ($roles as $role) :
 	$role = $role['Role']['role'];
 	$members = array();
 	if (isset($enrolled[$role]))
@@ -94,6 +94,7 @@ $url = sprintf("'%s'",
 						return item.Member.full_name;
 					},
 					parse : function(items) {
+						items = items.response;
 						parsed = [];
 						for (var i = items.length - 1; i >= 0; i--) {
 							parsed[parsed.length] = {

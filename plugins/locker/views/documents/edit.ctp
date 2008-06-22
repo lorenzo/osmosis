@@ -6,7 +6,6 @@
 		echo $form->input('id');
 		echo $form->input('name');
 		echo $form->input('description');
-		echo $form->input('folder_id');
 	?>
 	</fieldset>
 <?php echo $form->end(__('Save', true));?>

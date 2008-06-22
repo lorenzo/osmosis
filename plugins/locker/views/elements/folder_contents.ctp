@@ -1,6 +1,9 @@
 <div id="locker-contents">
 <?php
-	if (isset($parentFolder['SubFolder']) && count($parentFolder['SubFolder'])>0) :
+	if (
+		isset($parentFolder['SubFolder']) && count($parentFolder['SubFolder'])>0 ||
+		isset($parentFolder['Document']) && count($parentFolder['Document'])>0
+	) :
 ?>
 	<ul>
 	<?php

@@ -35,31 +35,37 @@ class LockerDocument extends LockerAppModel {
 	var $name = 'LockerDocument';
 	var $validate = array(
 		'name' => array(
-			'max' => array(
-				'rule' => array('maxLength',100),
-				'allowEmpty' => true
-				)
+			'required' => array(
+				'rule' => array('custom', '/.+/'),
+				'allowEmpty' => false,
+				'last' => true
 			),
+			'max' => array(
+				'rule' => array('maxLength', 30),
+				'allowEmpty' => false
+			)
+		),
 		'file' => array(
 			'valid' => array(
 				'rule' => array('validFile'),
 				'on' => 'create'
-				)
-			),
+			)
+		),
 		'member_id' => array(
 			'valid' => array(
 				'rule' => array('custom','/.*/'),
 				'allowEmpty' => false,
-				'on' => 'create',
-				)
-			),
+				'required' => false,
+				'on' => 'create'
+			)
+		),
 		'member_username' => array(
 			'valid' => array(
 				'rule' => array('custom','/.*/'),
 				'allowEmpty' => false,
 				'on' => 'create',
-				)
 			)
+		)
 	);
 
 	var $belongsTo = array(
@@ -78,7 +84,25 @@ class LockerDocument extends LockerAppModel {
 	);
 	
 	var $actsAs = array('Bindable');
-	
+
+	/**
+	 * Model contructor. Initializes the validation error messages with i18n
+	 *
+	 * @see Model::__construct
+	 */
+	function __construct($id = false, $table = null, $ds = null) {
+		$this->setErrorMessage(
+			'name.required', __('Please write a name for this file',true)
+		);
+		$this->setErrorMessage(
+			'name.max', __('Please limit the name to a maximum of 30 characters',true)
+		);
+		$this->setErrorMessage(
+			'file.valid', __('The file is incorrect',true)
+		);
+		parent::__construct($id,$table,$ds);
+	}
+
 	function validFile($check) {
 		extract($check); 
 		if (!is_uploaded_file($file['tmp_name']))
@@ -95,12 +119,42 @@ class LockerDocument extends LockerAppModel {
 			return $this->_saveFile($file);
 		}
 		if ($this->exists() && isset($this->data[$this->alias]['folder_id'])) {
-			$this->restrict(array('Member' => array('username'),'id','file_name','folder_id'));
-			$file = $this->findById($this->id);
+			$this->contain(array('Member' => array('username')));
+			$file = $this->find('first',
+				array(
+					'fields' => array('id','file_name','folder_id'),
+					'conditions' => array('LockerDocument.id' => $this->id)
+				)
+			);
 			if ($file[$this->alias]['folder_id'] != $this->data[$this->alias]['folder_id']) {
-				$old = $this->Folder->getDirectory($file[$this->alias]['folder_id'],$file['Member']['username']).DS.$file[$this->alias]['file_name'];
-				$new = $this->Folder->getDirectory($this->data[$this->alias]['folder_id'],$file['Member']['username']).DS.$file[$this->alias]['file_name'];
-				return is_file($old) && !is_file($new) && rename($old,$new);
+				
+				$old = $this->Folder->getDirectory($file[$this->alias]['folder_id'], $file['Member']['username']);
+				$old .= DS.$file[$this->alias]['file_name'];
+				$old = trim($old);
+				$new = $this->Folder->getDirectory($this->data[$this->alias]['folder_id'], $file['Member']['username']);
+				$new .= DS.$file[$this->alias]['file_name'];
+				$new = trim($new);
+				return is_file($old) && !is_file($new) && rename($old, $new);
+			}
+		}
+		if ($this->exists() && isset($this->data[$this->alias]['name'])) {
+			$this->contain(array('Member' => array('username')));
+			$file = $this->find('first',
+				array(
+					'fields' => array('id','name', 'file_name','folder_id'),
+					'conditions' => array('LockerDocument.id' => $this->id)
+				)
+			);
+			if ($file[$this->alias]['name'] != $this->data[$this->alias]['name']) {
+				$f = new File($this->data[$this->alias]['name']);
+				$this->data[$this->alias]['file_name'] = $f->safe($this->data[$this->alias]['name'], true);
+				$old = $this->Folder->getDirectory($file[$this->alias]['folder_id'], $file['Member']['username']);
+				$old .= DS.$file[$this->alias]['file_name'];
+				$old = trim($old);
+				$new = $this->Folder->getDirectory($file[$this->alias]['folder_id'], $file['Member']['username']);
+				$new .= DS . $this->data[$this->alias]['file_name'];
+				$new = trim($new);
+				return is_file($old) && !is_file($new) && rename($old, $new);
 			}
 		}
 		return true;
@@ -109,9 +163,10 @@ class LockerDocument extends LockerAppModel {
 	private function _saveFile($info) {
 		$file = new File($info['tmp_name']);
 		$name = $file->safe($info['name']);
-		$folder_id = (isset($this->data[$this->alias]['folder_id'])) ? $this->data[$this->alias]['folder_id'] : '';
+		$folder_id = isset($this->data[$this->alias]['folder_id']) ? $this->data[$this->alias]['folder_id'] : '';
 		$dest = $this->Folder->getDirectory($folder_id,$this->data[$this->alias]['member_username']).DS.$name;
 		$this->data[$this->alias]['file_name'] = $name;
+		$this->data[$this->alias]['name'] = $info['name'];
 		return move_uploaded_file($info['tmp_name'],$dest);
 	}
 	
@@ -123,6 +178,20 @@ class LockerDocument extends LockerAppModel {
 		$base = $this->Folder->getDirectory($this->data[$this->alias]['folder_id'],$username);
 		return $base . DS .$file[$this->name]['file_name'];
 	}
-
+	
+	/**
+	 * Returns a filename without the esxtension
+	 *
+	 * @param string filename
+	 * @return string filename without extension
+	 **/
+	function removeExtension($file) {
+		$file = explode('.', $file);
+		$ext = array_pop($file);
+		if (count($file)==1) {
+			return $file[0];
+		}
+		return array(implode('.', $file), $ext);
+	}
 }
 ?>

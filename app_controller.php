@@ -295,6 +295,18 @@ class AppController extends Controller {
 			$this->redirect($url);
 		}
 	}
-		
+
+	/**
+	 * Extend redirect to manage Ajax
+	 *
+	 * @return void
+	 **/
+	function redirect($url) {
+		if ($this->RequestHandler->isAjax()) {
+			$this->set('redirect', $url);
+		} else {
+			parent::redirect($url);
+		}
+	}
 }
 ?>

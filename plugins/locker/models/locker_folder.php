@@ -32,7 +32,7 @@
 App::import('Core','Folder');
 class LockerFolder extends LockerAppModel {
 
-	var $name = 'LockerFolder';
+	var $name = 'Folder';
 	
 	/**
 	 * Validation Rules for Fields
@@ -187,15 +187,16 @@ class LockerFolder extends LockerAppModel {
 	 */
 	function path($id) {
 		$this->recursive = -1;
-		$data = $this->read(array('name', 'parent_id'), $id);
 		$path = array();
-		array_unshift($path, $data['LockerFolder']);
-		while($data) {
-			if (empty($data['LockerFolder']['parent_id'])) {
+		$fields = array('name', 'parent_id', 'id');
+		while($id) {
+			$conditions = compact('id');
+			$data = $this->find('first' , compact('fields', 'conditions'));
+			if (!$data) {
 				break;
 			}
-			$data = $this->read(array('name', 'parent_id'), $data['LockerFolder']['parent_id']);
-			array_unshift($path, $data['LockerFolder']);
+			$id = $data[$this->alias]['parent_id'];
+			array_unshift($path, $data[$this->alias]);
 		}
 		return $path;
 	}
@@ -290,18 +291,28 @@ class LockerFolder extends LockerAppModel {
 	 * @param $member_id int Id of the member
 	 * @return mixed The parent folder data of the member's locker or false if not found
 	 **/
-	function userLocker($member_id) {
+	function userLocker($member_id, $just_id = false) {
 		$conditions = array(
 			'LockerFolder.member_id' => $member_id,
 			'LockerFolder.parent_id' => null
 		);
-		$this->contain(
-			array(
-				'Member' => array('id', 'full_name'),
-				'SubFolder'
-			)
-		);
-		$parent_folder = $this->find('first', compact('conditions'));
+		if ($just_id) {
+			$id = $this->field('id', $conditions);
+			if (!$id) {
+				$parent_folder = $this->createLocker($member_id);
+				$id = $parent_folder['LockerFolder']['id'];
+			}
+			return $id;
+		} else {
+			$this->contain(
+				array(
+					'Member' => array('id', 'full_name'),
+					'SubFolder'
+				)
+			);
+			$parent_folder = $this->find('first', compact('conditions'));
+		}
+		
 		if (!$parent_folder) {
 			$parent_folder = $this->createLocker($member_id);
 		}

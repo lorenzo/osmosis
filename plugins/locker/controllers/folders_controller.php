@@ -48,20 +48,14 @@ class FoldersController extends LockerAppController {
 				$this->redirect('/');
 			} else {
 				$member_id = $this->params['named']['member_id'];
-				$parentFolder = $this->LockerFolder->userLocker($member_id);
-				if (!isset($parentFolder['Member'])) {
-					$member = $this->LockerFolder->Member->read(null, $member_id);
-				} else {
-					$member['Member'] = $parentFolder['Member'];
-				}
+				$id = $this->LockerFolder->userLocker($member_id, true);
 			}
-		} else {
-			$this->LockerFolder->contain('Member', 'SubFolder', 'Document');
-			$parentFolder = $this->LockerFolder->read(null, $id);
-			$this->_redirectIf(!$parentFolder);
-			$path = $this->LockerFolder->path($id);
-			$member['Member'] = $parentFolder['Member'];
 		}
+		$this->LockerFolder->contain('Member', 'SubFolder', 'Document');
+		$parentFolder = $this->LockerFolder->read(null, $id);
+		$this->_redirectIf(!$parentFolder);
+		$path = $this->LockerFolder->path($id);
+		$member = $parentFolder['Member'];
 		$this->set(compact('member', 'parentFolder', 'path'));
 	}
 

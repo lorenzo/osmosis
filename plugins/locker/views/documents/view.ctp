@@ -1,38 +1,61 @@
-<div class="lockerDocuments view">
-<h2><?php  __('LockerDocument');?></h2>
-	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $lockerDocument['LockerDocument']['id']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Name'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $lockerDocument['LockerDocument']['name']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Description'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $lockerDocument['LockerDocument']['description']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Member Id'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $lockerDocument['LockerDocument']['member_id']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Folder Id'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $lockerDocument['LockerDocument']['folder_id']; ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('Edit LockerDocument', true), array('action'=>'edit', $lockerDocument['LockerDocument']['id'])); ?> </li>
-		<li><?php echo $html->link(__('Delete LockerDocument', true), array('action'=>'delete', $lockerDocument['LockerDocument']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $lockerDocument['LockerDocument']['id'])); ?> </li>
-		<li><?php echo $html->link(__('List LockerDocuments', true), array('action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New LockerDocument', true), array('action'=>'add')); ?> </li>
-	</ul>
+<?php
+$document = $lockerDocument['LockerDocument'];
+echo $this->element('folder_path', compact('path', 'member', 'document'));
+?>
+<div class="<?php echo $mime->convert($document['type'], $document['name']); ?>">
+	<h2>
+	<?php
+		$name = $document['name'];
+		echo $name;
+	?>
+	</h2>
+	<div id="document-description">
+		<?php
+			$description = $document['description'];
+			if (empty($description)) {
+				__('This file has no description');
+			} else {
+				echo $description;
+			}
+		?>
+		<ul class="actions">
+			<li class="edit">
+			<?php
+				echo $html->link(
+					__('Edit', true),
+					array(
+						'controller'	=> 'documents',
+						'action'		=> 'edit',
+						$document['id']
+					)
+				);
+			?>
+			</li>
+			<li class="delete">
+			<?php
+				echo $html->link(
+					__('Delete', true),
+					array(
+						'controller'	=> 'documents',
+						'action'		=> 'delete',
+						$document['id']
+					), null,
+					sprintf(__('Please confirm the deletion of %s', true), $document['name'])
+				);
+			?>
+			</li>
+			<li class="download">
+			<?php
+				echo $html->link(
+					__('Download', true),
+					array(
+						'controller'	=> 'documents',
+						'action'		=> 'download',
+						$document['id']
+					)
+				);
+			?>
+			</li>
+		</ul>
+	</div>
 </div>

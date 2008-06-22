@@ -57,10 +57,10 @@
 }
 #locker-contents ul li a.item {
 	display:block;
-	background:#f5f5f5 url('../img/text_plain.png') no-repeat center 5px;
 	width:82px;
 	height:21px;
 	padding:51px 0 10px 0;
+	background:#f5f5f5 url('../img/text_plain.png') no-repeat center 5px;
 	text-align:center;
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
@@ -69,98 +69,165 @@
 	border:#f5f5f5 1px solid;
 }
 
+.txt #document-description {
+	background-repeat:no-repeat;
+	background-image:url('../img/text_plain.png');
+}
 #locker-contents ul li a.item:hover {
 	border:#aaa 1px solid;
 }
 
+.folder #document-description,
 #locker-contents ul li a.item.folder {
+	background-repeat:no-repeat;
 	background-image:url('../img/folder.png');
 }
+.application_x_gzip #document-description,
 #locker-contents ul li a.item.application_x_gzip {
+	background-repeat:no-repeat;
 	background-image:url('../img/application_x_compressed_tar.png');
 }
+.application_x_javascript #document-description,
 #locker-contents ul li a.item.application_x_javascript {
+	background-repeat:no-repeat;
 	background-image:url('../img/application_x_javascript.png');
 }
+.pl #document-description,
 #locker-contents ul li a.item.pl {
+	background-repeat:no-repeat;
 	background-image:url('../img/source_pl.png');
 }
+.text_xml #document-description,
 #locker-contents ul li a.item.text_xml {
+	background-repeat:no-repeat;
 	background-image:url('../img/application_xml.png');
 }
+.java #document-description,
 #locker-contents ul li a.item.java {
+	background-repeat:no-repeat;
 	background-image:url('../img/source_java.png');
 }
+.jar #document-description,
 #locker-contents ul li a.item.jar {
+	background-repeat:no-repeat;
 	background-image:url('../img/jar.png');
 }
+.application_x_tex #document-description,
 #locker-contents ul li a.item.application_x_tex {
+	background-repeat:no-repeat;
 	background-image:url('../img/tex.png');
 }
+.application_pdf #document-description,
 #locker-contents ul li a.item.application_pdf {
+	background-repeat:no-repeat;
 	background-image:url('../img/pdf.png');
 }
+.image_jpeg #document-description,
 #locker-contents ul li a.item.image_jpeg,
+.image_png #document-description,
 #locker-contents ul li a.item.image_png,
+.image_gif #document-description,
 #locker-contents ul li a.item.image_gif,
+.image_tiff #document-description,
 #locker-contents ul li a.item.image_tiff,
+.psd #document-description,
 #locker-contents ul li a.item.psd {
+	background-repeat:no-repeat;
 	background-image:url('../img/image.png');
 }
+.application_postscript #document-description,
 #locker-contents ul li a.item.application_postscript {
+	background-repeat:no-repeat;
 	background-image:url('../img/postscript.png');
 }
+.image_svg_xml #document-description,
 #locker-contents ul li a.item.image_svg_xml {
+	background-repeat:no-repeat;
 	background-image:url('../img/image_svg_xml.png');
 }
+.odt #document-description,
 #locker-contents ul li a.item.odt,
+.application_rtf #document-description,
 #locker-contents ul li a.item.application_rtf {
+	background-repeat:no-repeat;
 	background-image:url('../img/wordprocessing.png');
 }
+.ods #document-description,
 #locker-contents ul li a.item.ods {
+	background-repeat:no-repeat;
 	background-image:url('../img/spreadsheet.png');
 }
+.odp #document-description,
 #locker-contents ul li a.item.odp {
+	background-repeat:no-repeat;
 	background-image:url('../img/presentation.png');
 }
+.application_msword #document-description,
 #locker-contents ul li a.item.application_msword {
+	background-repeat:no-repeat;
 	background-image:url('../img/application_vnd.ms_word.png');
 }
+.application_vnd_ms_excel #document-description,
 #locker-contents ul li a.item.application_vnd_ms_excel {
+	background-repeat:no-repeat;
 	background-image:url('../img/application_vnd.ms_excel.png');
 }
+.application_vnd_ms_powerpoint #document-description,
 #locker-contents ul li a.item.application_vnd_ms_powerpoint {
+	background-repeat:no-repeat;
 	background-image:url('../img/application_vnd.ms_powerpoint.png');
 }
+.application_zip #document-description,
 #locker-contents ul li a.item.application_zip,
+.rar #document-description,
 #locker-contents ul li a.item.rar,
+.bz2 #document-description,
 #locker-contents ul li a.item.bz2 {
+	background-repeat:no-repeat;
 	background-image:url('../img/compressed.png');
 }
+.cpp #document-description,
 #locker-contents ul li a.item.cpp {
+	background-repeat:no-repeat;
 	background-image:url('../img/source_cpp.png');
 }
+.text_css #document-description,
 #locker-contents ul li a.item.text_css {
+	background-repeat:no-repeat;
 	background-image:url('../img/stylesheets.png');
 }
+.h #document-description,
 #locker-contents ul li a.item.h {
+	background-repeat:no-repeat;
 	background-image:url('../img/source_h.png');
 }
+.text_html #document-description,
 #locker-contents ul li a.item.text_html {
+	background-repeat:no-repeat;
 	background-image:url('../img/text_html.png');
 }
+.application_x_shockwave_flash #document-description,
 #locker-contents ul li a.item.application_x_shockwave_flash,
+.fla #document-description,
 #locker-contents ul li a.item.fla {
+	background-repeat:no-repeat;
 	background-image:url('../img/flv.png');
 }
+.video_quicktime #document-description,
 #locker-contents ul li a.item.video_quicktime,
+.video_mpeg #document-description,
 #locker-contents ul li a.item.video_mpeg {
+	background-repeat:no-repeat;
 	background-image:url('../img/video.png');
 }
+.text_x_php #document-description,
 #locker-contents ul li a.item.text_x_php {
+	background-repeat:no-repeat;
 	background-image:url('../img/php.png');
 }
+.audio_mpg #document-description,
 #locker-contents ul li a.item.audio_mpg {
+	background-repeat:no-repeat;
 	background-image:url('../img/audio.png');
 }
 ul#path,
@@ -210,4 +277,79 @@ h1 {
 	position:absolute;
 	right:0;
 	top:30px;
+}
+#cluetip-inner .actions {
+	margin:10px 0 0 0;
+	padding-top:3px;
+	border-top:#dedede 1px solid;
+	text-align:right;
+	clear:both;
+}
+#cluetip-inner .actions .delete {
+	border-right:#ccc 1px solid;
+	padding-right:3px;
+}
+#cluetip-inner .actions .download {
+	border-left:#fff 1px solid;
+	padding-left:3px;
+}
+#cluetip-close {
+	display:none;
+}
+.blockUI {
+	cursor:default!important;
+}
+#document-description {
+	padding:5px 0 45px 55px;
+}
+#document-description ul.actions {
+	border-left:#ccc 1px solid;
+	list-style:none;
+	padding:0;
+}
+#document-description ul.actions li {
+	float:left;
+	margin-right:10px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	padding:2px 5px 2px 0;
+}
+#document-description ul.actions li a {
+	padding-left:20px;
+}
+#document-description ul.actions li.delete {
+	background:#FFAFAF url('../img/delete.png') no-repeat 2px 2px;
+	border:#BD0000 1px solid;
+}
+#document-description ul.actions li.delete a {
+	color:#BD0000;
+	text-decoration:none;
+}
+#document-description ul.actions li.delete a:hover {
+	color:#8F0000;
+}
+#document-description ul.actions li.download {
+	background:#BFD9FF url('../img/down.png') no-repeat 2px 2px;
+	border:#005BDF 1px solid;
+}
+#document-description ul.actions li.download a {
+	color:#005BDF;
+	text-decoration:none;
+}
+#document-description ul.actions li.download a:hover {
+	color:#00275F;
+}
+
+
+#document-description ul.actions li.edit {
+	background:#FFF4BF url('../img/edit.png') no-repeat 2px 2px;
+	border:#DFB700 1px solid;
+}
+#document-description ul.actions li.edit a {
+	padding-left:22px;
+	color:#DFB700;
+	text-decoration:none;
+}
+#document-description ul.actions li.edit a:hover {
+	color:#9F8300;
 }
