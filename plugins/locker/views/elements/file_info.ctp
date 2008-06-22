@@ -6,15 +6,13 @@
 				'action'		=> 'view',
 				$file['id']
 			);
-			echo $html->link(
-				$file['name'], $url,
-				array(
-					'class'	=> 'item folder',
-					'rev'	=> $file['id'],
-					'rel'	=> $html->url($url),
-					'title'	=> $file['name']
-				)
-			);
+			$class = 'item folder';
+			if ($file['name'] == 'dropbox' && $parentFolder['parent_id'] == null) {
+				$file['name'] = __('Dropbox', true);
+				$class .= ' dropbox';
+			}
+			list($rev, $rel, $title) = array($file['id'], $html->url($url), $file['name']);
+			echo $html->link($file['name'], $url, compact('class', 'rev', 'rel', 'title'));
 		}
 		if ($type == 'document') {
 			$file_type = $mime->convert($file['type'], $file['file_name']);
@@ -39,14 +37,8 @@
 				$name = wordwrap($text->truncate($name, 16 + $plus, '[...]'), 10, '<br />', true);
 				$name = str_replace('^', ' ', $name) . $ext;
 			}
-			echo $html->link($name, $url,
-				array(
-					'class'	=> 'item document ' . $file_type,
-					'rev'	=> $file['id'],
-					'rel'	=> $html->url($url),
-					'title'	=> $title
-				), false, false
-			);
+			list($class, $rev, $rel) = array('item document ' . $file_type, $file['id'], $html->url($url));
+			echo $html->link($name, $url, compact('class', 'rev', 'rel', 'title'), false, false);
 		}
 	?>
 </li>

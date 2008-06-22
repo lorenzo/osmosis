@@ -41,9 +41,21 @@ class LockerFolder extends LockerAppModel {
 	 **/
 	var $validate = array(
 		'name' => array(
+			'required' => array(
+				'rule'			=> array('custom', '/.+/'),
+				'allowEmpty'	=> false,
+				'last'			=> true,
+				'on'			=> 'update'
+			),
+			'dropbox' => array(
+				'rule'			=> array('dropboxUntouchable'),
+				'allowEmpty'	=> true,
+				'last'			=> true,
+				'on'			=> 'update'
+			),
 			'max' => array(
-				'rule' => array('maxLength',20),
-				'allowEmpty' => false
+				'rule'			=> array('maxLength', 20),
+				'allowEmpty'	=> false
 			)
 		)
 	);
@@ -126,6 +138,12 @@ class LockerFolder extends LockerAppModel {
 	 * @see Model::__construct
 	 */
 	function __construct($id = false, $table = null, $ds = null) {
+		$this->setErrorMessage(
+			'name.dropbox', __('The Dropbox cannot be modified', true)
+		);
+		$this->setErrorMessage(
+			'name.required', __('Folders need a name, please write one',true)
+		);
 		$this->setErrorMessage(
 			'name.max', __('Folder names have a maximum length 20 characters',true)
 		);
@@ -329,10 +347,25 @@ class LockerFolder extends LockerAppModel {
 		if ($this->Member->find('count', array('conditions' => array('id' => $member_id)))) {
 			$this->create();
 			$data = $this->save(array('name' => 'locker', 'member_id' => $member_id));
-			$data['LockerFolder']['id'] = $this->id;
+			$parent_id = $data['LockerFolder']['id'] = $this->id;
+			$this->create();
+			$dropbox_data = $this->save(array('name' => 'dropbox', 'member_id' => $member_id, 'parent_id' => $parent_id));
 			return $data;
 		}
 		return false;
+	}
+	
+	/**
+	 * Validation rule to prevent modifications to the dropbox
+	 *
+	 * @return boolean true if the file being modified is not the dropbox
+	 **/
+	function dropboxUntouchable() {
+		$this->contain('ParentFolder(parent_id)');
+		$conditions = array('LockerFolder.id' => $this->data['LockerFolder']['id']);
+		$info = $this->find('first', compact('conditions'));
+		$isDropbox = $info['LockerFolder']['name'] == 'dropbox' && $info['ParentFolder']['parent_id'] == null;
+		return !$isDropbox;
 	}
 }
 ?>

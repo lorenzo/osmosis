@@ -90,6 +90,9 @@
 	background-repeat:no-repeat;
 	background-image:url('../img/folder.png');
 }
+#locker-contents ul li a.item.folder.dropbox {
+	background-image:url('../img/dropbox.png');
+}
 .application_x_gzip #document-description,
 #locker-contents ul li a.item.application_x_gzip {
 	background-repeat:no-repeat;

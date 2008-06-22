@@ -56,7 +56,6 @@ jQuery.fn.lockerItem = function(params) {
 		}
 		var options = {type : inputType};
 		if (inputType=='autogrow') {
-			console.debug('jo');
 			options.submit = lockerItemSetting.ok;
 			options.cancel = lockerItemSetting.cancel;
 			options.height = 'auto';
@@ -130,7 +129,6 @@ jQuery.fn.lockerItem = function(params) {
 			return true;
 		},
 		onShow : function(ct, c) {
-			console.debug('jojojojo');
 			makeEditable(ct, c, '#cluetip-title', 'text', 'name');
 			if (!$(active).hasClass('folder')) {
 				makeEditable(ct, c, '#document-description', 'autogrow', 'description');
@@ -138,7 +136,6 @@ jQuery.fn.lockerItem = function(params) {
 			$('body').block({message : null, overlayCSS: {backgroundColor: '#f00', color: '#fff', cursor : 'dafault'}});
 			$('#cluetip-inner a').click(function(evt) {
 				window.location = this.href;
-				// console.debug(this);
 			});
 		}
 	})

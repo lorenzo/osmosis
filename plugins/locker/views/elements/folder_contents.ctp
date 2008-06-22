@@ -11,7 +11,7 @@
 	<ul>
 	<?php
 		foreach ($parentFolder['SubFolder'] as $i => $folder) :
-			echo $this->element('file_info', array('file' => $folder, 'type' => 'folder', 'wrap_names' => $wrap_names));
+			echo $this->element('file_info', array('file' => $folder, 'type' => 'folder', 'wrap_names' => $wrap_names, 'parentFolder' => $parentFolder['LockerFolder']));
 		endforeach;
 		foreach ($parentFolder['Document'] as $i => $document) :
 			echo $this->element('file_info', array('file' => $document, 'type' => 'document', 'wrap_names' => $wrap_names));
