@@ -1,5 +1,6 @@
 <?php
 $document = $lockerDocument['LockerDocument'];
+$is_owner = $document['member_id'] == $session->read('Auth.Member.id');
 echo $this->element('folder_path', compact('path', 'member', 'document'));
 ?>
 <div class="<?php echo $mime->convert($document['type'], $document['name']); ?>">
@@ -19,6 +20,9 @@ echo $this->element('folder_path', compact('path', 'member', 'document'));
 			}
 		?>
 		<ul class="actions">
+		<?php
+			if ($is_owner) :
+		?>
 			<li class="edit">
 			<?php
 				echo $html->link(
@@ -44,6 +48,9 @@ echo $this->element('folder_path', compact('path', 'member', 'document'));
 				);
 			?>
 			</li>
+		<?php
+			endif;
+		?>
 			<li class="download">
 			<?php
 				echo $html->link(

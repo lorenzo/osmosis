@@ -1546,7 +1546,7 @@ msgstr "Listar Documentos"
 
 #: /plugins/locker/views/elements/folder_actions.ctp:5
 msgid "Add Folder:"
-msgstr "Agregar carpeta"
+msgstr "Agregar carpeta:"
 
 #: /plugins/locker/views/elements/folder_actions.ctp:7
 msgid "Create Folder"

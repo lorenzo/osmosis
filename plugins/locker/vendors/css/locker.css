@@ -5,8 +5,7 @@
 	padding:1px 10px;
 }
 #locker-actions div.input,
-#locker-actions div.submit,
-#locker-actions label {
+#locker-actions div.submit {
 	border:none;
 	display:inline;
 	width:auto;
@@ -25,8 +24,18 @@
 	float:left;
 }
 #locker-actions label {
-	margin-right:5px;
-	font-weight:bold;
+	display:block;
+	text-indent:-9000px;
+	float:left;
+	margin-right:7px;
+	width:17px!important;
+	height:19px;
+}
+#locker-actions .create-folder label {
+	background:transparent url('../img/folder_new.png') no-repeat 1px 3px;
+}
+#locker-actions .upload-file label {
+	background:transparent url('../img/document_new.png') no-repeat 0px 3px;
 }
 #locker-actions,
 #locker-contents {
@@ -77,7 +86,6 @@
 	border:#aaa 1px solid;
 }
 
-.folder #document-description,
 #locker-contents ul li a.item.folder {
 	background-repeat:no-repeat;
 	background-image:url('../img/folder.png');
@@ -352,4 +360,153 @@ h1 {
 }
 #document-description ul.actions li.edit a:hover {
 	color:#9F8300;
+}
+#cluetip-inner h2 {
+	font-size:1em;
+	margin:0;
+	text-align:right;
+	color:#777;
+}
+#cluetip-inner #locker-contents ul {
+	margin:inherit -10px;
+}
+#cluetip-inner #locker-contents ul li {
+	float:none;
+	font-size:1.2em;
+	padding:0;
+	overflow:hidden;
+}
+#cluetip-inner #locker-contents ul li a {
+	width:auto;
+	-moz-border-radius:0;
+	-webkit-border-radius:0;
+	border:none;
+	color:#666;
+	border-bottom:#ededed 1px solid;
+	padding:0 0 0 22px;
+	text-align:left;
+	white-space:nowrap;
+}
+#cluetip-inner #locker-contents ul li a {
+	background-position: 0 0!important;
+	background-repeat:no-repeat!important;
+}
+#cluetip-inner #locker-contents ul li a.item.folder {
+	background-image:url('../img/mini/folder.png');
+}
+#cluetip-inner #locker-contents ul li a:hover {
+	color:#000;
+}
+
+#cluetip-inner #locker-contents ul li a.item.application_x_gzip {
+	background-image:url('../img/mini/application_x_compressed_tar.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.application_x_javascript {
+	background-image:url('../img/mini/application_x_javascript.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.pl {
+	background-image:url('../img/mini/source_pl.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.text_xml {
+	background-image:url('../img/mini/application_xml.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.java {
+	background-image:url('../img/mini/source_java.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.jar {
+	background-image:url('../img/mini/jar.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.application_x_tex {
+	background-image:url('../img/mini/tex.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.application_pdf {
+	background-image:url('../img/mini/pdf.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.image_jpeg,
+#cluetip-inner #locker-contents ul li a.item.image_png,
+#cluetip-inner #locker-contents ul li a.item.image_gif,
+#cluetip-inner #locker-contents ul li a.item.image_tiff,
+#cluetip-inner #locker-contents ul li a.item.psd {
+	background-image:url('../img/mini/image.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.application_postscript {
+	background-image:url('../img/mini/postscript.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.image_svg_xml {
+	background-image:url('../img/mini/image_svg_xml.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.odt,
+#cluetip-inner #locker-contents ul li a.item.application_rtf {
+	background-image:url('../img/mini/wordprocessing.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.ods {
+	background-image:url('../img/mini/spreadsheet.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.odp {
+	background-image:url('../img/mini/presentation.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.application_msword {
+	background-image:url('../img/mini/application_vnd.ms_word.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.application_vnd_ms_excel {
+	background-image:url('../img/mini/application_vnd.ms_excel.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.application_vnd_ms_powerpoint {
+	background-image:url('../img/mini/application_vnd.ms_powerpoint.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.application_zip,
+#cluetip-inner #locker-contents ul li a.item.rar,
+#cluetip-inner #locker-contents ul li a.item.bz2 {
+	background-image:url('../img/mini/compressed.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.cpp {
+	background-image:url('../img/mini/source_cpp.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.text_css {
+	background-image:url('../img/mini/stylesheets.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.h {
+	background-image:url('../img/mini/source_h.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.text_html {
+	background-image:url('../img/mini/text_html.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.application_x_shockwave_flash,
+#cluetip-inner #locker-contents ul li a.item.fla {
+	background-image:url('../img/mini/flv.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.video_quicktime,
+#cluetip-inner #locker-contents ul li a.item.video_mpeg {
+	background-image:url('../img/mini/video.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.text_x_php {
+	background-image:url('../img/mini/php.png');
+}
+
+#cluetip-inner #locker-contents ul li a.item.audio_mpg {
+	background-image:url('../img/mini/audio.png');
 }

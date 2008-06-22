@@ -11,6 +11,13 @@ label {
 	float:left;
 }
 
+#login form {
+	width:400px;
+	margin:30px auto;
+}
+#login label {
+	width:120px;
+}
 form .help {
 	display:block;
 	margin-left:85px;

@@ -74,6 +74,7 @@
 }
 .cluetip-default #cluetip-inner {
   padding: 10px;
+max-height:300px;
 }
 .cluetip-default div#cluetip-close {
   text-align: right;

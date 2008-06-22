@@ -115,6 +115,8 @@ jQuery.fn.lockerItem = function(params) {
 		closeText : '',
 		leftOffset : -290,
 		topOffset : 60,
+		clickThrough : true,
+		cursor : 'hand',
 		fx : {
 			open : 'fadeIn',
 			openSpeed:  'fast'
@@ -128,9 +130,16 @@ jQuery.fn.lockerItem = function(params) {
 			return true;
 		},
 		onShow : function(ct, c) {
+			console.debug('jojojojo');
 			makeEditable(ct, c, '#cluetip-title', 'text', 'name');
-			makeEditable(ct, c, '#document-description', 'autogrow', 'description');
+			if (!$(active).hasClass('folder')) {
+				makeEditable(ct, c, '#document-description', 'autogrow', 'description');
+			}
 			$('body').block({message : null, overlayCSS: {backgroundColor: '#f00', color: '#fff', cursor : 'dafault'}});
+			$('#cluetip-inner a').click(function(evt) {
+				window.location = this.href;
+				// console.debug(this);
+			});
 		}
 	})
 }

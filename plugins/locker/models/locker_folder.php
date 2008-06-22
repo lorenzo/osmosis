@@ -140,7 +140,7 @@ class LockerFolder extends LockerAppModel {
 	function beforeSave() {
 		if ($this->exists()) {
 			$folderName = $this->slug($this->data[$this->alias]['name']);
-			if ($this->_updateDirectoryName($this->id,$folderName)) {
+			if ($this->_updateDirectoryName($this->id, $folderName)) {
 				$this->data[$this->alias]['folder_name'] = $folderName;
 				return true;
 			}
@@ -230,8 +230,8 @@ class LockerFolder extends LockerAppModel {
 		$this->contain(array('Member'));
 		$info = $this->findById($id);
 		$folder =& $this->getFolder($id, $info['Member']['username']);
-		$new_path = implode(array_pop(explode(DS, $folder->pwd()))) . DS . $new_name;
-		return !is_dir($new_path) && rename($folder->pwd(), $path);
+		$new_path = dirname($folder->pwd()) . DS . $new_name;
+		return !is_dir($new_path) && rename($folder->pwd(), $new_path);
 	}
 	
 	/**

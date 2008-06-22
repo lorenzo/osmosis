@@ -57,6 +57,9 @@ class FoldersController extends LockerAppController {
 		$path = $this->LockerFolder->path($id);
 		$member = $parentFolder['Member'];
 		$this->set(compact('member', 'parentFolder', 'path'));
+		if ($this->RequestHandler->isAjax()) {
+			$this->render('ajax/view');
+		}
 	}
 
 	function add() {
