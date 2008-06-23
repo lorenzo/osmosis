@@ -106,6 +106,32 @@ class FoldersController extends LockerAppController {
 			$this->redirect(array('action'=>'index'));
 		}
 	}
-
+	
+	/**
+	 * Handles Document and Folder Movements
+	 *
+	 **/
+	function move() {
+		$success = false;
+		if (!empty($this->data)) {
+			$model = $this->data['LockerFolder']['model'];
+			if ($model == 'LockerFolder') {
+				$item = __('Folder', true);
+				$success = $this->LockerFolder->move($this->data['LockerFolder']['moved'], $this->data['LockerFolder']['id']);
+			} else {
+				$item = __('Document', true);
+				$success = $this->LockerFolder->Document->move($this->data['LockerFolder']['moved'], $this->data['LockerFolder']['id']);
+			}
+			if ($success) {
+				$this->Session->setFlash(sprintf(__('The %s was moved successfully', true), $item));
+			} else {
+				$this->Session->setFlash(sprintf(__('The %s could not be moved', true), $item));
+			}
+			$this->set(compact('success'));
+		} else {
+			$this->Session->setFlash(__('Invalid Access', true));
+			$this->_redirectIf(true);
+		}
+	}
 }
 ?>

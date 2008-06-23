@@ -123,7 +123,7 @@ class LockerDocument extends LockerAppModel {
 			$file = $this->find('first',
 				array(
 					'fields' => array('id','file_name','folder_id'),
-					'conditions' => array('LockerDocument.id' => $this->id)
+					'conditions' => array($this->alias . '.id' => $this->id)
 				)
 			);
 			if ($file[$this->alias]['folder_id'] != $this->data[$this->alias]['folder_id']) {
@@ -178,7 +178,32 @@ class LockerDocument extends LockerAppModel {
 		$base = $this->Folder->getDirectory($this->data[$this->alias]['folder_id'],$username);
 		return $base . DS .$file[$this->name]['file_name'];
 	}
-	
+
+	/**
+	 * Moves a Document to another Folder
+	 *
+	 * @param string $id Id of the Document to move.
+	 * @param string $folder_id Id of the Folder to where the Document is to be moved
+	 * @return boolean True on success
+	 **/
+	function move($id, $folder_id) {
+		$this->contain('Folder(id,member_id)');
+		$document = $this->read(null, $id);
+		if (!$document || $document['Folder']['member_id']!=$document['Document']['member_id']) {
+			return false;
+		}
+		if ($document['Folder']['id']==$folder_id) {
+			return true;
+		}
+		$this->Folder->recursive = -1;
+		$target_folder = $this->Folder->read(array('member_id'), $folder_id);
+		if (!$target_folder || $target_folder['Folder']['member_id']!=$document['Document']['member_id']) {
+			return false;
+		}
+		$this->data['Document']['folder_id'] = $folder_id;
+		return $this->save();
+	}
+
 	/**
 	 * Returns a filename without the esxtension
 	 *

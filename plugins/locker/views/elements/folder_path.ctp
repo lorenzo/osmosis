@@ -1,32 +1,24 @@
 <ul id="path">
-	<li class="home">
-		<?php
-			echo $html->link(__('home', true),
-				array(
-					'controller'	=> 'folders',
-					'action'		=> 'view',
-					'member_id'		=> $member['id']
-				)
-			);
-		?>
-	</li>
 <?php
 	if (is_array($path)) :
-		array_shift($path);
 		foreach ($path as $i => $folder) :
+			$class = '';
+			if ($folder['name'] == 'locker' && $folder['parent_id']==null) {
+				$class = ' class="home"';
+			}
 ?>
-	<li>
+	<li<?php echo $class; ?>>
 		<?php
-			if ($i != count($path) - 1 || isset($document)) {
+			if (($i != count($path) - 1 || count($path) == 1) || isset($document)) {
 				echo $html->link($folder['name'],
 					array(
 						'controller'	=> 'folders',
 						'action'		=> 'view',
 						$folder['id']
-					)
+					), array('class' => 'item', 'rev' => $folder['id'])
 				);
 			} else {
-				echo $folder['name'];
+				echo '<span>' . $folder['name'] . '</span>';
 			}
 		?>
 	</li>

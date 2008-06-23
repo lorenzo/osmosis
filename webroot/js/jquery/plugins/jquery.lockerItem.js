@@ -30,13 +30,16 @@
  */
 
 jQuery.fn.lockerItem = function(params) {
-	var active = null;
+	var active = null,
+		dragging = false;
 	var lockerItemSetting = {
 		updating		: 'Updating...',
 		ok				: 'OK',
 		cancel			: 'Cancel',
+		moveOverSame	: 'You cannot move a folder to itself',
 		urlFolders		: window.location,
-		urlDocuments	: window.location
+		urlDocuments	: window.location,
+		urlMove			: window.location
 	};
 	lockerItemSetting = jQuery.merge(params, lockerItemSetting);
 	
@@ -105,7 +108,66 @@ jQuery.fn.lockerItem = function(params) {
 		);
 	}
 	
-	return $(this).cluetip({
+	function activateDragDrop(element, dropZonesOnly) {
+		dropZonesOnly = dropZonesOnly || false;
+		if (!dropZonesOnly)
+			element.draggable(
+				{
+					helper : 'clone',
+					opacity : 0.5,
+					revert : true,
+					zIndex : 10001,
+					start : function() {
+						dragging  = true;
+						$('#cluetip *').addClass('hide');
+						$('body').addClass('hideBlocker');
+					},
+					drag : function() {
+						$(this).removeClass('hovered');
+						$('body').unblock();
+					},
+					stop : function() {
+						$('#cluetip *').removeClass('hide');
+						$('#cluetip').hide();
+						$('body').removeClass('hideBlocker');
+						dragging  = false;
+					}
+				}
+			);
+		if (element.hasClass('folder') || dropZonesOnly) {
+			element.droppable(
+				{
+					accept : '.item',
+					activeClass : 'droppable',
+					hoverClass : 'drophover',
+					drop : function(ev, ui) {
+						var dragged = ui.draggable.attr('rev'),
+							dropTarget = this.rev,
+							model = ui.draggable.hasClass('document') ? 'LockerDocument' : 'LockerFolder',
+							data = new Object();
+							
+						data['data[LockerFolder][id]'] = dropTarget;
+						data['data[LockerFolder][moved]'] = dragged;
+						data['data[LockerFolder][model]'] = model;
+						ui.draggable.fadeTo('normal', 0.5);
+						$.post(lockerItemSetting.urlMove, data,
+							function(data) {
+								if (data.response.status == 'ok') {
+									ui.draggable.parent().slideUp('fast');
+								} else {
+									ui.draggable.fadeTo('normal', 1, function() {
+										alert(data.flash.message);
+									});
+								}
+							}, 'json'
+						);
+					}
+				}
+			);
+		}
+	}
+	
+	var elements = $(this).cluetip({
 		sticky: true,
 		positionBy : 'fixed',
 		topOffset : 0,
@@ -114,8 +176,9 @@ jQuery.fn.lockerItem = function(params) {
 		closeText : '',
 		leftOffset : -290,
 		topOffset : 60,
-		clickThrough : true,
-		cursor : 'hand',
+		// clickThrough : true,
+		cursor : 'default',
+		activation : 'hover',
 		fx : {
 			open : 'fadeIn',
 			openSpeed:  'fast'
@@ -125,10 +188,18 @@ jQuery.fn.lockerItem = function(params) {
 		arrows : true,
 		dropShadow : false,
 		onActivate : function(e) {
+			if (dragging) {
+				return false;
+			}
 			active = e[0];
 			return true;
 		},
 		onShow : function(ct, c) {
+			if (dragging) {
+				$('#cluetip *').addClass('hide');
+				$('body').addClass('hideBlocker');
+				return;
+			}
 			makeEditable(ct, c, '#cluetip-title', 'text', 'name');
 			if (!$(active).hasClass('folder')) {
 				makeEditable(ct, c, '#document-description', 'autogrow', 'description');
@@ -139,6 +210,21 @@ jQuery.fn.lockerItem = function(params) {
 			});
 		}
 	})
+	.dblclick(function(evt) {
+		evt.preventDefault();
+		window.location = this.href;
+	})
+	.css('cursor', 'default');
+	
+	$('#locker-contents .item').not('.dropbox').each(function() {
+		activateDragDrop($(this));
+	});
+	
+	$('#path a').each(function() {
+		activateDragDrop($(this), true);
+	});
+	
+	return elements;
 }
 
 String.prototype.wordWrap = function(m, b, c){

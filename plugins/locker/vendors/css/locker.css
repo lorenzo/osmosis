@@ -77,7 +77,6 @@
 	color:#000;
 	border:#f5f5f5 1px solid;
 }
-
 .txt #document-description {
 	background-repeat:no-repeat;
 	background-image:url('../img/text_plain.png');
@@ -85,7 +84,13 @@
 #locker-contents ul li a.item:hover {
 	border:#aaa 1px solid;
 }
-
+#locker-contents ul li a.item.droppable {
+	background-color:#E0E9EF;
+	border:#8FCFFF 1px solid;
+}
+#locker-contents ul li a.item.drophover {
+	background-color:#BFD9FF;
+}
 #locker-contents ul li a.item.folder {
 	background-repeat:no-repeat;
 	background-image:url('../img/folder.png');
@@ -260,13 +265,25 @@ ul#path li {
 	padding-left:13px;
 	margin-right:2px;
 }
-ul#path li a {
+ul#path li a,
+ul#path li span {
+	background: url('../img/mini/folder.png') no-repeat 0 0;
+	padding-left:20px;
 	text-decoration:none;
 	color:#000;
 	font-weight:bold;
 }
+ul#path li span {
+	font-weight:normal;
+}
 ul#path li a:hover {
 	color:#666;
+}
+ul#path li a.drophover {
+	color:#6EA6D5!important;
+}
+ul#path li.home a.drophover {
+	background:transparent url('../img/gohome_hover.png') no-repeat 0 0;
 }
 ul#path li.home {
 	background:transparent;
@@ -275,7 +292,8 @@ ul#path li.home {
 ul#path li.home a {
 	background:transparent url('../img/gohome.png') no-repeat 0 0;
 	display:block;
-	width:16px;
+	padding-left:16px;
+	width:0;
 	height:16px;
 	text-indent:-120px;
 	margin-left:10px;
@@ -512,4 +530,8 @@ h1 {
 
 #cluetip-inner #locker-contents ul li a.item.audio_mpg {
 	background-image:url('../img/mini/audio.png');
+}
+body.hideBlocker .blockUI,
+.hide {
+	display:none!important;
 }

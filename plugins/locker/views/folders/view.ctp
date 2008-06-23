@@ -16,6 +16,9 @@
 	$javascript->link('jquery/plugins/jquery.autogrow', false);
 	$javascript->link('jquery/plugins/jquery.lockerItem', false);
 	$javascript->link('jquery/plugins/jquery.blockUI', false);
+	$javascript->link('jquery/plugins/jquery.ui.core', false);
+	$javascript->link('jquery/plugins/jquery.ui.draggable', false);
+	$javascript->link('jquery/plugins/jquery.ui.droppable', false);
 	$html->css('jquery.cluetip', null, null, false);
 ?>
 <script type="text/javascript" charset="utf-8">
@@ -24,6 +27,7 @@
  			updating	: <?php echo "'" . __("Updating...", true) . "'"; ?>,
 			cancel		: <?php echo "'" . __("Cancel", true) . "'"; ?>,
 			ok			: <?php echo "'" . __("OK", true) . "'"; ?>,
+			moveOverSame: <?php echo "'" . __('You cannot move a folder to itself', true) . "'"; ?>,
 			urlDocuments : <?php
 				echo "'" . $html->url(
 					array(
@@ -38,6 +42,15 @@
 					array(
 						'controller'	=> 'folders',
 						'action'		=> 'edit',
+						'ext'			=> 'json'
+					)
+				) . "'";
+			?>,
+			urlMove : <?php
+				echo "'" . $html->url(
+					array(
+						'controller'	=> 'folders',
+						'action'		=> 'move',
 						'ext'			=> 'json'
 					)
 				) . "'";

@@ -158,16 +158,22 @@ class LockerFolder extends LockerAppModel {
 	function beforeSave() {
 		if ($this->exists()) {
 			$folderName = $this->slug($this->data[$this->alias]['name']);
-			if ($this->_updateDirectoryName($this->id, $folderName)) {
-				$this->data[$this->alias]['folder_name'] = $folderName;
-				return true;
+			if ($folderName != $this->data[$this->alias]['folder_name']) {
+				if ($this->_updateDirectoryName($this->id, $folderName)) {
+					$this->data[$this->alias]['folder_name'] = $folderName;
+					return true;
+				}
+				return false;
 			}
-			return false;
+			$this->Member->recursive = -1;
+			$username = $this->Member->field('username', $this->data[$this->alias]['member_id']);
+			$old = $this->getDirectory($this->data[$this->alias]['id'], $username);
+			$new = $this->getDirectory($this->data[$this->alias]['parent_id'], $username) . DS . $this->data[$this->alias]['folder_name'];
+			return !is_dir($new) && rename($old, $new);
 		} else {
 			$parent_id = (isset($this->data[$this->alias]['parent_id'])) ? $this->data[$this->alias]['parent_id'] : '';
 			$folder =& $this->getFolder($parent_id,$this->Member->field('username',array('id' => $this->data[$this->alias]['member_id'])));
-			$exists = is_dir($folder->pwd().DS.$this->slug($this->data[$this->alias]['name'])); 
-			return !$exists;
+			return !is_dir($folder->pwd().DS.$this->slug($this->data[$this->alias]['name']));
 		}
 	}
 	
@@ -366,6 +372,32 @@ class LockerFolder extends LockerAppModel {
 		$info = $this->find('first', compact('conditions'));
 		$isDropbox = $info['LockerFolder']['name'] == 'dropbox' && $info['ParentFolder']['parent_id'] == null;
 		return !$isDropbox;
+	}
+	
+	/**
+	 * Moves a Folder to another
+	 *
+	 * @param string $id Id of the Folder to move.
+	 * @param string $folder_id Id of the Folder to where the Folder is to be moved
+	 * @return boolean True on success
+	 **/
+	function move($id, $folder_id) {
+		$this->recursive = -1;
+		$destiny = $this->read(null, $folder_id);
+		if (!$destiny) {
+			return false;
+		}
+		$source = $this->read(null, $id);
+		if (!$source || $source['LockerFolder']['member_id']!=$destiny['LockerFolder']['member_id']) {
+			return false;
+		}
+		if ($source['LockerFolder']['parent_id']==$destiny['LockerFolder']['id']) {
+			return true;
+		}
+		$this->data['LockerFolder']['parent_id'] = $destiny['LockerFolder']['id'];
+		return $this->save();
+		// debug($this->data);
+		// die;
 	}
 }
 ?>

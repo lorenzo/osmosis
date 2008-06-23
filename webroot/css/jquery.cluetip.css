@@ -31,8 +31,6 @@
 
 .cluetip-default {
   background-color:#f5f5f5;
-  border:#ccc 1px solid;
-  border-top:0;
 }
 .cluetip-default #cluetip-outer {
   position: relative;
@@ -74,7 +72,11 @@
 }
 .cluetip-default #cluetip-inner {
   padding: 10px;
-max-height:300px;
+  max-height:300px;
+  float:left;
+  width:177px;
+  border:#ccc 1px solid;
+  border-top:0;
 }
 .cluetip-default div#cluetip-close {
   text-align: right;
