@@ -850,7 +850,7 @@ msgstr "Editar"
 #: /views/departments/admin_index.ctp:60 /views/departments/index.ctp:13
 #: /views/departments/view.ctp:53 /views/members/admin_index.ctp:72
 msgid "previous"
-msgstr "Previo"
+msgstr "Anterior"
 
 #: /plugins/blog/views/blogs/index.ctp:50
 #: /plugins/blog/views/comments/index.ctp:46
@@ -1149,7 +1149,7 @@ msgstr "Modificado"
 #: /plugins/forum/views/elements/discussion_responses.ctp:6
 #: /plugins/forum/views/topics/view.ctp:38
 msgid "Responses"
-msgstr ""
+msgstr "Respuestas"
 
 #: /plugins/forum/views/elements/discussion_responses.ctp:10
 msgid "Page %page% of %pages%"
@@ -1360,15 +1360,15 @@ msgstr ""
 #: /plugins/wiki/views/entries/add.ctp:11
 #: /plugins/wiki/views/entries/edit.ctp:8
 msgid "Content"
-msgstr ""
+msgstr "Contenido"
 
 #: /plugins/forum/views/topics/add.ctp:4;11
 msgid "Create Topic"
-msgstr "Crear tópico"
+msgstr "Crear Tópico"
 
 #: /plugins/forum/views/topics/edit.ctp:4
 msgid "Edit Topic"
-msgstr "Editar tópico"
+msgstr "Editar Tópico"
 
 #: /plugins/forum/views/topics/edit.ctp:16
 msgid "Lock this topic"
@@ -1376,11 +1376,11 @@ msgstr "Bloquear este tópico"
 
 #: /plugins/forum/views/topics/edit.ctp:17
 msgid "(Nobody will be able to create more discussions on this topic)"
-msgstr ""
+msgstr "(No se podrán crear discusiones en este tópico)"
 
 #: /plugins/forum/views/topics/index.ctp:8
 msgid "You are currently viewing the topics in the <em>%s</em> course forum."
-msgstr ""
+msgstr "Usted está viendo los tópico en el foro del curso <em>%s</em>"
 
 #: /plugins/forum/views/topics/index.ctp:16;72
 msgid "Create a new Topic"
@@ -1411,7 +1411,8 @@ msgstr "Tópico:"
 msgid ""
 "You are currently viewing the discussions started around this topic <strong>"
 "\"%s\"</strong> inside the <em>%s</em> course forum."
-msgstr ""
+msgstr "Usted está viendo las discusiones del tópico <strong>"
+"\"%s\"</strong> en el foro del curso <em>%s</em> "
 
 #: /plugins/forum/views/topics/view.ctp:21;108
 msgid "Start a discussion"
@@ -1419,7 +1420,7 @@ msgstr "Comenzar una discusión"
 
 #: /plugins/forum/views/topics/view.ctp:36
 msgid "Author &mdash; Created"
-msgstr ""
+msgstr "Autor &mdash; Creado"
 
 #: /plugins/forum/views/topics/view.ctp:37
 msgid "Last Response"
@@ -1427,7 +1428,7 @@ msgstr "Última respuesta"
 
 #: /plugins/forum/views/topics/view.ctp:39
 msgid "Views"
-msgstr ""
+msgstr "Visitas"
 
 #: /plugins/forum/views/topics/view.ctp:74
 msgid "By: %s"
@@ -2712,15 +2713,15 @@ msgid "Scorm"
 msgstr ""
 
 #: /plugins/scorm/views/scorms/add.ctp:7
-msgid "Indique el archivo zip..."
-msgstr ""
+msgid "Select the zip file"
+msgstr "Indique el archivo zip que desea cargar."
 
 #: /plugins/scorm/views/scorms/add.ctp:23
 #: /plugins/scorm/views/scorms/edit.ctp:20
 #: /plugins/scorm/views/scorms/index.ctp:2
 #: /plugins/scorm/views/scorms/index2.ctp:2
 msgid "Scorms"
-msgstr ""
+msgstr "Scorms"
 
 #: /plugins/scorm/views/scorms/add.ctp:24
 #: /plugins/scorm/views/scorms/edit.ctp:21
@@ -2729,7 +2730,7 @@ msgstr ""
 #: /plugins/scorm/views/scos/add.ctp:26 /plugins/scorm/views/scos/edit.ctp:28
 #: /plugins/scorm/views/scos/index.ctp:2 /plugins/scorm/views/scos/view.ctp:85
 msgid "Scos"
-msgstr ""
+msgstr "Scos"
 
 #: /plugins/scorm/views/scorms/add.ctp:25
 #: /plugins/scorm/views/scorms/edit.ctp:22
@@ -2739,19 +2740,19 @@ msgstr ""
 #: /plugins/scorm/views/scos/index.ctp:92
 #: /plugins/scorm/views/scos/view.ctp:2;83;84;86
 msgid "Sco"
-msgstr ""
+msgstr "Sco"
 
 #: /plugins/scorm/views/scorms/view.ctp:19
 msgid "&laquo; Previous"
-msgstr ""
+msgstr "&laquo; Anterior"
 
 #: /plugins/scorm/views/scorms/view.ctp:26
 msgid "Exit Scorm"
-msgstr ""
+msgstr "Salir del Scorm"
 
 #: /plugins/scorm/views/scorms/view.ctp:28
 msgid "Next &raquo;"
-msgstr ""
+msgstr "Siguiente &raquo"
 
 #: /plugins/scorm/views/scos/view.ctp:92;123
 msgid "Primary Objective"
@@ -3145,7 +3146,7 @@ msgstr ""
 
 #: /views/elements/layout/top_nav.ctp:5
 msgid "Logout"
-msgstr ""
+msgstr "Salir"
 
 #: /views/elements/layout/user_courses.ctp:3
 msgid "My Courses"
@@ -3480,3 +3481,7 @@ msgstr "Cambiar nombre"
 #: /plugins/locker/views/documents/add.ctp:7
 msgid "File"
 msgstr "Archivo"
+
+#: /plugins/scorm/views/scorms/add.ctp:13
+msgid "File Name"
+msgstr "Nombre de archivo"

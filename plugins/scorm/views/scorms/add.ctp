@@ -4,7 +4,7 @@
  		<legend><?php __('Add');?> <?php __('Scorm');?></legend>
  		<p>
 			<?php
-				__('Indique el archivo zip...');
+				__('Select the zip file');
 			?>
 		</p>
 	<?php

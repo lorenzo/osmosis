@@ -12,10 +12,10 @@
 			)
 		);
 		echo ' ';
-		echo $html->link(
-			__('Create a new Topic', true),
-			array('controller' => 'topics', 'action' => 'add', 'course_id' => $course['Course']['id'])
-		);
+		//echo $html->link(
+			//__('Create a new Topic', true),
+			//array('controller' => 'topics', 'action' => 'add', 'course_id' => $course['Course']['id'])
+		//);
 	?>
 </p>
 <?php if (!empty($topics)):?>

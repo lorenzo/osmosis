@@ -40,7 +40,7 @@
 #  Revision: 395 /osmosis/plugins/quiz/models/choice_question.php
 #  Revision: 395 /osmosis/plugins/quiz/models/matching_question.php
 #  Revision: 408 /osmosis/plugins/quiz/models/ordering_question.php
-#  Revision: 323 /osmosis/plugins/scorm/controllers/scorms_controller.php
+#  Revision: 416 /osmosis/plugins/scorm/controllers/scorms_controller.php
 #  Revision: 323 /osmosis/plugins/scorm/controllers/scos_controller.php
 #  Revision: 323 /osmosis/plugins/wiki/controllers/entries_controller.php
 #  Revision: 410 /osmosis/plugins/wiki/controllers/wikis_controller.php
@@ -52,7 +52,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2008-06-21 15:38-0430\n"
+"POT-Creation-Date: 2008-06-21 17:10-0430\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -597,7 +597,7 @@ msgstr ""
 #: /plugins/scorm/views/sco_presentations/edit.ctp:11
 #: /plugins/scorm/views/scorm_attendee_trackings/add.ctp:13
 #: /plugins/scorm/views/scorm_attendee_trackings/edit.ctp:14
-#: /plugins/scorm/views/scorms/add.ctp:19
+#: /plugins/scorm/views/scorms/add.ctp:17
 #: /plugins/scorm/views/scorms/edit.ctp:15
 #: /plugins/scorm/views/scos/add.ctp:22
 #: /plugins/scorm/views/scos/edit.ctp:23
@@ -1030,6 +1030,7 @@ msgstr ""
 #: /plugins/blog/views/comments/view.ctp:9
 #: /plugins/locker/views/documents/add.ctp:8
 #: /plugins/locker/views/documents/view.ctp:14
+#: /plugins/scorm/views/scorms/add.ctp:14
 #: /views/departments/admin_view.ctp:14;41
 #: /views/plugins/admin_view.ctp:46
 msgid "Description"
@@ -1635,6 +1636,7 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/view.ctp:85
 #: /plugins/quiz/views/quizzes/view.ctp:9
 #: /plugins/quiz/views/text_questions/view.ctp:42
+#: /plugins/scorm/views/scorms/add.ctp:12
 #: /views/departments/admin_view.ctp:9;40
 #: /views/plugins/admin_view.ctp:9;45
 msgid "Name"
@@ -2397,39 +2399,39 @@ msgstr ""
 msgid "TextQuestions"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:103
+#: /plugins/scorm/controllers/scorms_controller.php:102
 msgid "The Scorm file could not be unzipped."
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:111
+#: /plugins/scorm/controllers/scorms_controller.php:110
 msgid "The Scorm file could not be parsed."
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:117
+#: /plugins/scorm/controllers/scorms_controller.php:116
 msgid "The Scorm has not a right version"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:121
+#: /plugins/scorm/controllers/scorms_controller.php:120
 msgid "The Scorm has been saved"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:125
+#: /plugins/scorm/controllers/scorms_controller.php:124
 msgid "The Scorm could not be uploaded. Please, try again."
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:132
+#: /plugins/scorm/controllers/scorms_controller.php:131
 msgid "Invalid Scorm"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:138
+#: /plugins/scorm/controllers/scorms_controller.php:137
 msgid "The Scorm saved"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:141
+#: /plugins/scorm/controllers/scorms_controller.php:140
 msgid "The Scorm could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:151
+#: /plugins/scorm/controllers/scorms_controller.php:150
 msgid "Invalid id for Scorm"
 msgstr ""
 
@@ -2513,7 +2515,7 @@ msgstr ""
 #: /plugins/scorm/views/sco_presentations/add.ctp:14
 #: /plugins/scorm/views/sco_presentations/edit.ctp:16
 #: /plugins/scorm/views/sco_presentations/view.ctp:25
-#: /plugins/scorm/views/scorms/add.ctp:23;24
+#: /plugins/scorm/views/scorms/add.ctp:21;22
 #: /plugins/scorm/views/scorms/edit.ctp:20;21
 #: /plugins/scorm/views/scorms/index.ctp:69
 #: /plugins/scorm/views/scorms/index2.ctp:69
@@ -2579,7 +2581,7 @@ msgstr ""
 #: /plugins/scorm/views/rules/view.ctp:51;53;96
 #: /plugins/scorm/views/sco_presentations/index.ctp:44
 #: /plugins/scorm/views/sco_presentations/view.ctp:26
-#: /plugins/scorm/views/scorms/add.ctp:25
+#: /plugins/scorm/views/scorms/add.ctp:23
 #: /plugins/scorm/views/scorms/edit.ctp:22
 #: /plugins/scorm/views/scorms/index.ctp:68;70
 #: /plugins/scorm/views/scorms/index2.ctp:68;70
@@ -2833,14 +2835,18 @@ msgstr ""
 msgid "Indique el archivo zip..."
 msgstr ""
 
-#: /plugins/scorm/views/scorms/add.ctp:23
+#: /plugins/scorm/views/scorms/add.ctp:13
+msgid "File Name"
+msgstr ""
+
+#: /plugins/scorm/views/scorms/add.ctp:21
 #: /plugins/scorm/views/scorms/edit.ctp:20
 #: /plugins/scorm/views/scorms/index.ctp:2
 #: /plugins/scorm/views/scorms/index2.ctp:2
 msgid "Scorms"
 msgstr ""
 
-#: /plugins/scorm/views/scorms/add.ctp:24
+#: /plugins/scorm/views/scorms/add.ctp:22
 #: /plugins/scorm/views/scorms/edit.ctp:21
 #: /plugins/scorm/views/scorms/index.ctp:69
 #: /plugins/scorm/views/scorms/index2.ctp:69
@@ -2851,7 +2857,7 @@ msgstr ""
 msgid "Scos"
 msgstr ""
 
-#: /plugins/scorm/views/scorms/add.ctp:25
+#: /plugins/scorm/views/scorms/add.ctp:23
 #: /plugins/scorm/views/scorms/edit.ctp:22
 #: /plugins/scorm/views/scorms/index.ctp:70
 #: /plugins/scorm/views/scorms/index2.ctp:70
@@ -3261,7 +3267,7 @@ msgid "Enroll"
 msgstr ""
 
 #: /views/elements/course_description.ctp:8
-msgid "No professors, this must be your lucky day!"
+msgid "There are no professors for this course"
 msgstr ""
 
 #: /views/elements/dashboard/profile.ctp:2
