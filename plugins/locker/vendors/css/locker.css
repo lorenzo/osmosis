@@ -280,11 +280,15 @@ ul#path li a:hover {
 	color:#666;
 }
 ul#path li a.drophover {
-	color:#6EA6D5!important;
+	color:#000!important;
 }
 ul#path li.home a.drophover {
 	background:transparent url('../img/gohome_hover.png') no-repeat 0 0;
 }
+ul#path li a.item.droppable {
+	color:#0084EF;
+}
+
 ul#path li.home {
 	background:transparent;
 	padding:0 8px 0 0;
@@ -306,6 +310,9 @@ h1 {
 	position:absolute;
 	right:0;
 	top:30px;
+}
+h1.loading {
+	
 }
 #cluetip-inner .actions {
 	margin:10px 0 0 0;
@@ -411,6 +418,11 @@ h1 {
 #cluetip-inner #locker-contents ul li a {
 	background-position: 0 0!important;
 	background-repeat:no-repeat!important;
+}
+
+#cluetip-inner #locker-contents ul li a.item {
+	background-repeat:no-repeat;
+	background-image:url('../img/mini/text_plain.png');
 }
 #cluetip-inner #locker-contents ul li a.item.folder {
 	background-image:url('../img/mini/folder.png');
