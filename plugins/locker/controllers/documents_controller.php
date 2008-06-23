@@ -58,9 +58,7 @@ class DocumentsController extends LockerAppController {
 	function add() {
 		if (!empty($this->data)) {
 			$this->LockerDocument->create();
-			$this->data['LockerDocument']['member_id'] = $this->Auth->user('id');
-			$this->data['LockerDocument']['member_username'] = $this->Auth->user('username');
-			if ($this->LockerDocument->save($this->data)) {
+			if ($this->__saveFile()) {
 				$this->Session->setFlash(__('The LockerDocument has been saved', true));
 				$this->redirect(array('controller' => 'folders', 'action'=>'view', $this->data['LockerDocument']['folder_id']));
 			} else {
@@ -71,6 +69,29 @@ class DocumentsController extends LockerAppController {
 		$this->set(compact('members','folders'));
 	}
 
+	/**
+	 * Helper function that saves a file to the locker
+	 *
+	 * @return boolean True on success
+	 **/
+	function __saveFile($member_id = null, $folder_id = null, $username = null) {
+		if ($member_id) {
+			$this->data['LockerDocument']['member_id'] = $member_id;
+		} else {
+			$this->data['LockerDocument']['member_id'] = $this->Auth->user('id');
+		}
+		if ($folder_id) {
+			$this->data['LockerDocument']['folder_id'] = $folder_id;
+		}
+		if ($username) {
+			$this->data['LockerDocument']['member_username'] = $username;
+		} else {
+			$this->data['LockerDocument']['member_username'] = $this->Auth->user('username');
+		}
+		// debug($this->data);die;
+		return $this->LockerDocument->save($this->data);
+	}
+	
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid LockerDocument', true));
@@ -124,6 +145,46 @@ class DocumentsController extends LockerAppController {
 
 		$this->set(compact('path','extension','download','mime','name'));
 		
+	}
+	
+	/**
+	 * Manages drop of files from other users
+	 *
+	 * @return void
+	 **/
+	function drop() {
+		if (!empty($this->data)) {
+			$this->LockerDocument->Folder->contain('Member');
+			$current_folder = $this->LockerDocument->Folder->find(
+				'first',
+				array(
+					'conditions' => array('Folder.id' => $this->data['LockerDocument']['folder_id']),
+					'fields'	 => array('id')
+				)
+			);
+			$folder_id = $current_folder['Folder']['id'];
+			$username = $current_folder['Member']['username'];
+			$user_id = $current_folder['Member']['id'];
+			$this->LockerDocument->Folder->recursive = -1;
+			$conditions = array(
+				'Folder.parent_id'	=> null,
+				'Folder.member_id'	=> $user_id
+			);
+			$locker_id = $this->LockerDocument->Folder->field('id', $conditions);
+			
+			$conditions['Folder.parent_id'] = $locker_id;
+			$conditions['Folder.name'] = 'dropbox';
+			$dropbox = $this->LockerDocument->Folder->field('id', $conditions);
+
+			if ($this->__saveFile(null, $dropbox, $username)) {
+				$this->Session->setFlash(__('The file was dropped correctly', true));
+				$this->redirect(array('controller' => 'folders', 'action'=>'view', $folder_id));
+			} else {
+				$this->Session->setFlash(__('The file could not be saved. Please, try again.', true));
+			}
+		}
+		$folders = $this->LockerDocument->Folder->find('list');
+		$this->set(compact('members','folders'));
 	}
 
 }

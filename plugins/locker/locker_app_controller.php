@@ -31,6 +31,6 @@
  */
 
 class LockerAppController extends AppController {
-	var $helpers = array('Mime');
+	var $helpers = array('Mime', 'Tree');
 }
 ?>

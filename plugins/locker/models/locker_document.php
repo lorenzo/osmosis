@@ -127,7 +127,6 @@ class LockerDocument extends LockerAppModel {
 				)
 			);
 			if ($file[$this->alias]['folder_id'] != $this->data[$this->alias]['folder_id']) {
-				
 				$old = $this->Folder->getDirectory($file[$this->alias]['folder_id'], $file['Member']['username']);
 				$old .= DS.$file[$this->alias]['file_name'];
 				$old = trim($old);
@@ -187,20 +186,29 @@ class LockerDocument extends LockerAppModel {
 	 * @return boolean True on success
 	 **/
 	function move($id, $folder_id) {
-		$this->contain('Folder(id,member_id)');
+		$this->contain(array('Folder' => array('id','member_id','name','parent_id', 'ParentFolder')));
 		$document = $this->read(null, $id);
-		if (!$document || $document['Folder']['member_id']!=$document['Document']['member_id']) {
+		if (!$document) {
 			return false;
 		}
-		if ($document['Folder']['id']==$folder_id) {
-			return true;
-		}
-		$this->Folder->recursive = -1;
-		$target_folder = $this->Folder->read(array('member_id'), $folder_id);
-		if (!$target_folder || $target_folder['Folder']['member_id']!=$document['Document']['member_id']) {
+		$destiny = $this->Folder->find('first', array('Folder.id' => $folder_id));
+		if (!$destiny) {
 			return false;
+		}
+		if ($document['Document']['member_id'] != $destiny['Folder']['member_id']) {
+			$parent = $document['Folder']['ParentFolder'];
+			if ($parent['name'] != 'locker' || $parent['parent_id']!=null) {
+				return false;
+			}
+			$data = $this->updateAll(
+				array('member_id' => $destiny['Folder']['member_id']),
+				array('Document.id' => $id) 
+			);
+			if (!$data) return false;
 		}
 		$this->data['Document']['folder_id'] = $folder_id;
+		$this->data['Document']['member_id'] = $destiny['Folder']['member_id'];
+		
 		return $this->save();
 	}
 

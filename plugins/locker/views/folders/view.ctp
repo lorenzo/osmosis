@@ -1,10 +1,9 @@
 <div id="locker">
 <h1><?php printf(__("%s's Locker", true), $member['full_name']);?></h1>
 <?php
-	$folder_id = $parentFolder['LockerFolder']['id'];
 	echo $this->element('folder_path', compact('path', 'member'));
 	echo $this->element('folder_contents', compact('parentFolder'));
-	echo $this->element('folder_actions', compact('folder_id'));
+	echo $this->element('folder_actions', compact('parentFolder'));
 ?>
 </div>
 <?php

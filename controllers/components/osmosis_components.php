@@ -65,7 +65,19 @@ class OsmosisComponentsComponent extends Object {
 		}
 	}
 	
+	/**
+	 * Sets the current active user on the $Osmosis view Var
+	 *
+	 * @return void
+	 **/
+	function _setActiveMember() {
+		if (!isset($this->controller->Auth))
+			return array();
+		$this->controller->viewVars['Osmosis']['active_member'] = $this->controller->Auth->user('id');
+	}
+	
 	function beforeRender() {
+		$this->_setActiveMember();
 		$this->getUserCourses();
 		$this->_setActiveCourseProfessors();
 	}

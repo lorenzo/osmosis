@@ -387,9 +387,14 @@ class LockerFolder extends LockerAppModel {
 	 **/
 	function notRepeated() {
 		$this->recursive = -1;
+		$parent_id = null;
+		if (isset($this->data['LockerFolder']['parent_id'])) {
+			$parent_id = $this->data['LockerFolder']['parent_id'];
+		}
 		$conditions = array(
 			'name'		=> $this->data['LockerFolder']['name'],
-			'parent_id'	=> $this->data['LockerFolder']['parent_id']
+			'parent_id'	=> $parent_id,
+			'member_id' => $this->data['LockerFolder']['member_id']
 		);
 		return !$this->find('count', compact('conditions'));
 	}

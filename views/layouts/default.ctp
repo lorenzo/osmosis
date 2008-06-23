@@ -5,7 +5,9 @@
 	<?php
 		echo $this->element('layout/common_header');
 	?>
+	<!-- Begin plugins header -->
 	<?php echo $placeholder->render('head'); ?> 
+	<!-- End plugins header -->
 	<?php echo $scripts_for_layout ?>
 	<title>Ósmosis - Default :: <?php echo $title_for_layout;?></title> 
 </head>

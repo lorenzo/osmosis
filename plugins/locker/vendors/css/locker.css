@@ -3,6 +3,7 @@
 }
 #locker-actions form {
 	padding:1px 10px;
+	margin:0!important;
 }
 #locker-actions div.input,
 #locker-actions div.submit {
@@ -30,6 +31,13 @@
 	margin-right:7px;
 	width:17px!important;
 	height:19px;
+}
+#locker-actions .drop-file label {
+	width:auto!important;
+	text-indent:0;
+	margin-top:5px;
+	padding-left:20px;
+	background:transparent url('../img/mini/mail_receive.png') no-repeat 1px 0px;
 }
 #locker-actions .create-folder label {
 	background:transparent url('../img/folder_new.png') no-repeat 1px 3px;

@@ -1,7 +1,7 @@
 <div id="actions" class="boxed dashboard-element">
 	<strong class="title"><?php __('Locker'); ?></strong>
-	Aquí deberían ir algunos archivos...
 	<?php
+		debug($data);
 		echo $html->link(
 			__('your locker', true),
 			array(

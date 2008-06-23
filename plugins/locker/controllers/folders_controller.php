@@ -51,7 +51,7 @@ class FoldersController extends LockerAppController {
 				$id = $this->LockerFolder->userLocker($member_id, true);
 			}
 		}
-		$this->LockerFolder->contain('Member', 'SubFolder', 'Document');
+		$this->LockerFolder->contain('Member(username,full_name)', 'SubFolder', 'Document');
 		$parentFolder = $this->LockerFolder->read(null, $id);
 		$this->_redirectIf(!$parentFolder);
 		$path = $this->LockerFolder->path($id);
