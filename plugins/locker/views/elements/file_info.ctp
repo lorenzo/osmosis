@@ -2,6 +2,7 @@
 	<?php
 		if ($type == 'folder') {
 			$url = array(
+				'plugin'		=> 'locker',
 				'controller'	=> 'folders',
 				'action'		=> 'view',
 				$file['id']
@@ -18,6 +19,7 @@
 		if ($type == 'document') {
 			$file_type = $mime->convert($file['type'], $file['file_name']);
 			$url = array(
+				'plugin'		=> 'locker',
 				'controller'	=> 'documents',
 				'action'		=> 'view',
 				$file['id']

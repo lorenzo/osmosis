@@ -94,6 +94,10 @@ class PlaceholderHelper extends AppHelper {
 		}
 
 		$view->viewVars['placeholders'][$type] = Set::merge($view->viewVars['placeholders'][$type],$data);
+
+		if ($component->controller->helpers != $view->helpers) {
+			$view->helpers = array_merge($component->controller->helpers, $view->helpers);
+		}
 	}
 	
 	function renderToolBar($type = 'course_toolbar') {

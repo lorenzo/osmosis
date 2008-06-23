@@ -75,6 +75,7 @@ class FoldersController extends LockerAppController {
 				$this->redirect(array('action' => 'view', $this->data['LockerFolder']['parent_id']));
 			}
 		}
+		$this->redirect(array('action' => 'view', $this->data['LockerFolder']['parent_id']));
 	}
 
 	function edit($id = null) {

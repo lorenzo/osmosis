@@ -34,6 +34,12 @@ class MimeHelper extends AppHelper {
 	
 	function convert($type, $filename) {
 		$type = Inflector::slug($type);
+		if ($type == 'application_vnd_oasis_opendocument_spreadsheet') {
+			$type = 'ods';
+		}
+		if ($type == 'application_x_rar_compressed') {
+			$type = 'rar';
+		}
 		if ($type=='text_plain' || $type=='application_octet_stream') {
 			$type = array_pop(explode('.', $filename));
 		}

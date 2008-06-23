@@ -1,4 +1,4 @@
-<div id="locker-contents">
+<div id="locker-contents"<?php echo ($this->layout == 'ajax') || (isset($isAjax) && $isAjax) ? 'class="mini"' : '' ?>>
 <?php
 	if (
 		isset($parentFolder['SubFolder']) && count($parentFolder['SubFolder'])>0 ||

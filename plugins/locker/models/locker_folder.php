@@ -422,5 +422,32 @@ class LockerFolder extends LockerAppModel {
 		$this->data['LockerFolder']['parent_id'] = $destiny['LockerFolder']['id'];
 		return $this->save();
 	}
+	
+	function dropbox($member_id, $just_id = false, $contents = true) {
+		$locker = $this->locker($member_id, true);
+		$this->recursive = -1;
+		$conditions = array('member_id' => $member_id, 'parent_id' => $locker, 'name' => 'dropbox');
+		if (!$just_id) {
+			if ($contents) {
+				$this->recursive = 0;
+				$this->contain('Document');
+			}
+			$dropbox = $this->find('first', compact('conditions'));
+		} else {
+			$dropbox = $this->field('id', $conditions);
+		}
+		return $dropbox;
+	}
+	
+	function locker($member_id, $just_id = false) {
+		$this->recursive = -1;
+		$conditions = array('member_id' => $member_id, 'parent_id' => null);
+		if (!$just_id) {
+			$locker = $this->find('first', compact('conditions'));
+		} else {
+			$locker = $this->field('id', $conditions);
+		}
+		return $locker;
+	}
 }
 ?>

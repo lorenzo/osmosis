@@ -17,19 +17,11 @@ class LockerHolderComponent extends PlaceholderDataComponent {
 	 * @return mixed Data or False if no data sent do placeholder
 	 **/
 	function connectionsDashboard() {
-		$folder = ClassRegistry::init('LockerFolder');
-		$conditions = array(
-			'member_id'	=> Configure::read('ActiveUser.Member.id'),
-			'parent_id'	=> null
-		);
-		$locker_id = $folder->field('id', $conditions);
-		$conditions['name'] = 'dropbox';
-		$conditions['parent_id'] = $locker_id;
-		$fields = array('id', 'name', 'parent_id');
-		$folder->recursive = 2;
-		$data = $folder->find('first', compact('conditions', 'fields'));
-		if (!$data) $data = true;
-		return $data;
+		$this->controller->helpers[] = 'Locker.Mime';
+		$folder = ClassRegistry::init('Locker.LockerFolder', 'Model');
+		$dropbox = $folder->dropbox(Configure::read('ActiveUser.Member.id'));
+		$dropbox['Member']['id'] = Configure::read('ActiveUser.Member.id');
+		return $dropbox;
 	}
 }
 ?>
