@@ -27,7 +27,7 @@
 						continue;
 					}
 					$haveQuestions = true;
-					echo $this->element($type . '_selection_list', array('questions' => $questions));
+					echo $this->element('listing/'.Inflector::underscore($type), array('questions' => $questions));
 				}
 				
 				if (!$haveQuestions)
@@ -51,7 +51,7 @@
 				echo '<ol>';
 				foreach ($question_list as $i => $question) {
 					$question = array($type => $question);
-					echo '<li>' . $this->element($type . '_view', array('question' => $question)) . '&nbsp;</li>';
+					echo '<li>' . $this->element('previewing/'.Inflector::underscore($type), array('question' => $question)) . '&nbsp;</li>';
 				}
 				echo '</ol>';
 			}

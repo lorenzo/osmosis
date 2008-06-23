@@ -56,6 +56,7 @@ class FoldersController extends LockerAppController {
 		$this->_redirectIf(!$parentFolder);
 		$path = $this->LockerFolder->path($id);
 		$member = $parentFolder['Member'];
+		$this->pageTitle = $parentFolder['LockerFolder']['name'];
 		$this->set(compact('member', 'parentFolder', 'path'));
 		if ($this->RequestHandler->isAjax()) {
 			$this->render('ajax/view');

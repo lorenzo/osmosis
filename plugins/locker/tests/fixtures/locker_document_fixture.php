@@ -28,6 +28,7 @@
  * @modifiedby		$LastChangedBy$
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
+*/
 
 /* LockerDocument Fixure generated on: 2008-04-29 15:04:06 : 1209497166*/
 
