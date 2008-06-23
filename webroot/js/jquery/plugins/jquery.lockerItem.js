@@ -228,6 +228,7 @@ jQuery.fn.lockerItem = function(params) {
 	.dblclick(function(evt) {
 		evt.preventDefault();
 		dragging  = true;
+		$(this).unbind('hover');
 		$('#cluetip *').addClass('hide');
 		$('body').addClass('hideBlocker');
 		window.location = this.href;
