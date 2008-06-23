@@ -55,7 +55,6 @@ class OsmosisComponentsComponent extends Object {
 	 * Sets to the view the professors of the active course
 	 *
 	 * @return void
-	 * @author Joaquín Windmüller
 	 **/
 	function _setActiveCourseProfessors() {
 		if (!$this->controller) return;

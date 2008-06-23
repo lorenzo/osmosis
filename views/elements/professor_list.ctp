@@ -1,6 +1,7 @@
 <ul class="professors-list">
 	<?php
 		foreach ($professors as $i => $professor):
+			$professor = $professor['Member'];
 	?>
 		<li>
 			<div id="hcard-<?php echo Inflector::slug($professor['full_name'])?>" class="vcard">
