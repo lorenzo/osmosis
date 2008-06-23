@@ -123,6 +123,7 @@ jQuery.fn.lockerItem = function(params) {
 						$('body').addClass('hideBlocker');
 					},
 					drag : function() {
+						hideSpinner();
 						$(this).removeClass('hovered');
 						$('body').unblock();
 					},
@@ -141,6 +142,7 @@ jQuery.fn.lockerItem = function(params) {
 					activeClass : 'droppable',
 					hoverClass : 'drophover',
 					drop : function(ev, ui) {
+						showSpinner();
 						var dragged = ui.draggable.attr('rev'),
 							dropTarget = this.rev,
 							model = ui.draggable.hasClass('document') ? 'LockerDocument' : 'LockerFolder',
@@ -152,6 +154,7 @@ jQuery.fn.lockerItem = function(params) {
 						ui.draggable.fadeTo('normal', 0.5);
 						$.post(lockerItemSetting.urlMove, data,
 							function(data) {
+								hideSpinner();
 								if (data.response.status == 'ok') {
 									ui.draggable.parent().slideUp('fast');
 								} else {
@@ -167,6 +170,15 @@ jQuery.fn.lockerItem = function(params) {
 		}
 	}
 	
+	$('#locker h1').createPrepend('img', {src : webroot + 'locker/img/loading.gif', style : 'display:none'}, '');
+
+	function showSpinner() {
+		$('#locker h1 img').show();
+	}
+
+	function hideSpinner() {
+		$('#locker h1 img').hide();
+	}
 	var elements = $(this).cluetip({
 		sticky: true,
 		positionBy : 'fixed',
@@ -176,7 +188,6 @@ jQuery.fn.lockerItem = function(params) {
 		closeText : '',
 		leftOffset : -290,
 		topOffset : 60,
-		// clickThrough : true,
 		cursor : 'default',
 		activation : 'hover',
 		fx : {
@@ -188,13 +199,13 @@ jQuery.fn.lockerItem = function(params) {
 		arrows : true,
 		dropShadow : false,
 		onActivate : function(e) {
-			if (dragging) {
-				return false;
-			}
+			console.debug('jooj');
+			showSpinner();
 			active = e[0];
 			return true;
 		},
 		onShow : function(ct, c) {
+			hideSpinner();
 			if (dragging) {
 				$('#cluetip *').addClass('hide');
 				$('body').addClass('hideBlocker');
@@ -212,6 +223,9 @@ jQuery.fn.lockerItem = function(params) {
 	})
 	.dblclick(function(evt) {
 		evt.preventDefault();
+		dragging  = true;
+		$('#cluetip *').addClass('hide');
+		$('body').addClass('hideBlocker');
 		window.location = this.href;
 	})
 	.css('cursor', 'default');

@@ -27,7 +27,6 @@
  			updating	: <?php echo "'" . __("Updating...", true) . "'"; ?>,
 			cancel		: <?php echo "'" . __("Cancel", true) . "'"; ?>,
 			ok			: <?php echo "'" . __("OK", true) . "'"; ?>,
-			moveOverSame: <?php echo "'" . __('You cannot move a folder to itself', true) . "'"; ?>,
 			urlDocuments : <?php
 				echo "'" . $html->url(
 					array(

@@ -56,6 +56,9 @@ class LockerFolder extends LockerAppModel {
 			'max' => array(
 				'rule'			=> array('maxLength', 20),
 				'allowEmpty'	=> false
+			),
+			'unique' => array(
+				'rule'			=> array('isUnique')
 			)
 		)
 	);
@@ -146,6 +149,9 @@ class LockerFolder extends LockerAppModel {
 		);
 		$this->setErrorMessage(
 			'name.max', __('Folder names have a maximum length 20 characters',true)
+		);
+		$this->setErrorMessage(
+			'name.unique', __('This Folder name is repeated',true)
 		);
 		parent::__construct($id,$table,$ds);
 	}

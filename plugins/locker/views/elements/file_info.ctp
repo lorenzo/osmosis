@@ -12,6 +12,7 @@
 				$class .= ' dropbox';
 			}
 			list($rev, $rel, $title) = array($file['id'], $html->url($url), $file['name']);
+			$rel .= '?q=ajax';
 			echo $html->link($file['name'], $url, compact('class', 'rev', 'rel', 'title'));
 		}
 		if ($type == 'document') {
@@ -38,6 +39,7 @@
 				$name = str_replace('^', ' ', $name) . $ext;
 			}
 			list($class, $rev, $rel) = array('item document ' . $file_type, $file['id'], $html->url($url));
+			$rel .= '?q=ajax';
 			echo $html->link($name, $url, compact('class', 'rev', 'rel', 'title'), false, false);
 		}
 	?>

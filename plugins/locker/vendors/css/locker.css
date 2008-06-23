@@ -311,8 +311,9 @@ h1 {
 	right:0;
 	top:30px;
 }
-h1.loading {
-	
+h1 img {
+	vertical-align:middle;
+	margin-right:5px;
 }
 #cluetip-inner .actions {
 	margin:10px 0 0 0;
