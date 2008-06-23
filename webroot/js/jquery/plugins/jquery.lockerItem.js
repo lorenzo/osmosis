@@ -124,7 +124,7 @@ jQuery.fn.lockerItem = function(params) {
 					},
 					drag : function() {
 						hideSpinner();
-						$(this).removeClass('hovered');
+						$(this).removeClass('droppable');
 						$('body').unblock();
 					},
 					stop : function() {
@@ -199,10 +199,14 @@ jQuery.fn.lockerItem = function(params) {
 		arrows : true,
 		dropShadow : false,
 		onActivate : function(e) {
-			console.debug('jooj');
 			showSpinner();
 			active = e[0];
 			return true;
+		},
+		ajaxProcess:function(data) {
+			hideSpinner();
+			data = $(data).not('style, meta, link, script, title');
+			return data;
 		},
 		onShow : function(ct, c) {
 			hideSpinner();

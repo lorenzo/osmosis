@@ -79,7 +79,8 @@ class DocumentsController extends LockerAppController {
 		if (!empty($this->data)) {
 			if ($this->LockerDocument->save($this->data)) {
 				$this->Session->setFlash(__('The LockerDocument has been saved', true));
-				$this->redirect(array('action'=>'index'));
+				$folder_id = $this->LockerDocument->field('folder_id');
+				$this->redirect(array('controller' => 'folders', 'action'=>'view', $folder_id));
 			} else {
 				$this->Session->setFlash(__('The LockerDocument could not be saved. Please, try again.', true));
 			}
@@ -87,9 +88,6 @@ class DocumentsController extends LockerAppController {
 		if (empty($this->data)) {
 			$this->data = $this->LockerDocument->read(null, $id);
 		}
-		// $members = $this->LockerDocument->Member->find('list');
-		// $folders = $this->LockerDocument->Folder->find('list');
-		// $this->set(compact('members','folders'));
 	}
 
 	function delete($id = null) {

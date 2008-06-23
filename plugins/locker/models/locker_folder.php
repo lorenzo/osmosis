@@ -58,7 +58,7 @@ class LockerFolder extends LockerAppModel {
 				'allowEmpty'	=> false
 			),
 			'unique' => array(
-				'rule'			=> array('isUnique')
+				'rule'			=> array('notRepeated')
 			)
 		)
 	);
@@ -379,7 +379,21 @@ class LockerFolder extends LockerAppModel {
 		$isDropbox = $info['LockerFolder']['name'] == 'dropbox' && $info['ParentFolder']['parent_id'] == null;
 		return !$isDropbox;
 	}
-	
+
+	/**
+	 * Validation rule to check that there is not another Folder with the same name
+	 *
+	 * @return boolean
+	 **/
+	function notRepeated() {
+		$this->recursive = -1;
+		$conditions = array(
+			'name'		=> $this->data['LockerFolder']['name'],
+			'parent_id'	=> $this->data['LockerFolder']['parent_id']
+		);
+		return !$this->find('count', compact('conditions'));
+	}
+
 	/**
 	 * Moves a Folder to another
 	 *
@@ -402,8 +416,6 @@ class LockerFolder extends LockerAppModel {
 		}
 		$this->data['LockerFolder']['parent_id'] = $destiny['LockerFolder']['id'];
 		return $this->save();
-		// debug($this->data);
-		// die;
 	}
 }
 ?>
