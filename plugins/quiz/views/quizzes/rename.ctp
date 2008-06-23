@@ -6,7 +6,7 @@
 		echo $form->input('name');
 	?>
 	</fieldset>
-<?php echo $form->end('Rename');?>
+<?php echo $form->end(__('Rename', true));?>
 </div>
 <div class="actions">
 	<ul>

@@ -1108,7 +1108,7 @@ msgstr ""
 
 #: /plugins/forum/views/elements/Response.updates.ctp:18
 msgid "read :pronoun :response"
-msgstr ""
+msgstr "leer :pronoun :response"
 
 #: /plugins/forum/views/elements/Response.updates.ctp:20
 msgid "his"
@@ -1120,7 +1120,7 @@ msgstr "su"
 
 #: /plugins/forum/views/elements/Response.updates.ctp:20
 msgid "the"
-msgstr ""
+msgstr "el"
 
 #: /plugins/forum/views/elements/Response.updates.ctp:26
 msgid "and others..."
@@ -1131,7 +1131,7 @@ msgid ""
 "The following classmates wrote a response on the discussion <em>:"
 "discussion_name</em>:<br /> :link_list"
 msgstr ""
-"Los siguientes compañeros de clases respondió en la discusión <em>:"
+"Los siguientes compañeros de clases respondieron en la discusión <em>:"
 "discussion_name</em>:<br /> :link_list."
 
 #: /plugins/forum/views/elements/Topic.updates.ctp:10
@@ -1411,8 +1411,9 @@ msgstr "Tópico:"
 msgid ""
 "You are currently viewing the discussions started around this topic <strong>"
 "\"%s\"</strong> inside the <em>%s</em> course forum."
-msgstr "Usted está viendo las discusiones del tópico <strong>"
-"\"%s\"</strong> en el foro del curso <em>%s</em> "
+msgstr ""
+"Usted está viendo las discusiones del tópico <strong>\"%s\"</strong> en el "
+"foro del curso <em>%s</em> "
 
 #: /plugins/forum/views/topics/view.ctp:21;108
 msgid "Start a discussion"
@@ -1595,19 +1596,19 @@ msgstr "Locker de %s"
 
 #: /plugins/quiz/controllers/choice_questions_controller.php:44
 msgid "Invalid Choice Question."
-msgstr ""
+msgstr "Pregunta de selección no válida."
 
 #: /plugins/quiz/controllers/choice_questions_controller.php:65;119
 msgid "The Choice Question has been saved"
-msgstr ""
+msgstr "La pregunta de selección ha sido guardada."
 
 #: /plugins/quiz/controllers/choice_questions_controller.php:70;123
 msgid "The Choice Question could not be saved. Please, try again."
-msgstr ""
+msgstr "La pregunta de selección no pudo ser guardada. Por favor, intente de nuevo."
 
 #: /plugins/quiz/controllers/choice_questions_controller.php:106
 msgid "Invalid Choice Question"
-msgstr ""
+msgstr "Pregunta de selección no válida."
 
 #: /plugins/quiz/controllers/choice_questions_controller.php:136
 msgid "Invalid id for Choice Question"
@@ -1615,23 +1616,23 @@ msgstr ""
 
 #: /plugins/quiz/controllers/choice_questions_controller.php:140
 msgid "Choice Question deleted"
-msgstr ""
+msgstr "Pregunta de selección eliminada."
 
 #: /plugins/quiz/controllers/installer_controller.php:19
 msgid "Plugin Quiz installed"
-msgstr ""
+msgstr "El plugin Quiz ha sido instalado."
 
 #: /plugins/quiz/controllers/matching_questions_controller.php:44
 msgid "Invalid Matching Question."
-msgstr ""
+msgstr "Pregunta de emparejamiento no válida."
 
 #: /plugins/quiz/controllers/matching_questions_controller.php:70;137
 msgid "The Matching Question has been saved"
-msgstr ""
+msgstr "La pregunta de emparejamiento ha sido guardada."
 
 #: /plugins/quiz/controllers/matching_questions_controller.php:75;140
 msgid "The Matching Question could not be saved. Please, try again."
-msgstr ""
+msgstr "La pregunta de emparejamiento no pudo ser guardada. Por favor, intente de nuevo."
 
 #: /plugins/quiz/controllers/matching_questions_controller.php:131
 msgid "Invalid Matching Question"
@@ -1643,23 +1644,23 @@ msgstr ""
 
 #: /plugins/quiz/controllers/matching_questions_controller.php:156
 msgid "Matching Question deleted"
-msgstr ""
+msgstr "Pregunta de emparejamiento eliminada."
 
 #: /plugins/quiz/controllers/ordering_questions_controller.php:44
 msgid "Invalid Ordering Question."
-msgstr ""
+msgstr "Pregunta de ordenamiento no válida"
 
 #: /plugins/quiz/controllers/ordering_questions_controller.php:64;110
 msgid "The Ordering Question has been saved"
-msgstr ""
+msgstr "La pregunta de ordenamiento ha sido guardada."
 
 #: /plugins/quiz/controllers/ordering_questions_controller.php:71;113
 msgid "The Ordering Question could not be saved. Please, try again."
-msgstr ""
+msgstr "La pregunta de ordenamiento no pudo ser guardada. Por favor, intente de nuevo."
 
 #: /plugins/quiz/controllers/ordering_questions_controller.php:105
 msgid "Invalid Ordering Question"
-msgstr ""
+msgstr "Pregunta de ordenamiento no válida."
 
 #: /plugins/quiz/controllers/ordering_questions_controller.php:125
 msgid "Invalid id for Ordering Question"
@@ -1667,44 +1668,44 @@ msgstr ""
 
 #: /plugins/quiz/controllers/ordering_questions_controller.php:129
 msgid "Ordering Question deleted"
-msgstr ""
+msgstr "Pregunta de ordenamiento eliminada."
 
 #: /plugins/quiz/controllers/quizzes_controller.php:45
 #: /plugins/quiz/views/quizzes/view.ctp:106
 msgid "Choice Question"
-msgstr ""
+msgstr "Pregunta de Selección"
 
 #: /plugins/quiz/controllers/quizzes_controller.php:47
 #: /plugins/quiz/views/quizzes/view.ctp:186
 msgid "Matching Question"
-msgstr ""
+msgstr "Pregunta de Emparejamiento"
 
 #: /plugins/quiz/controllers/quizzes_controller.php:48
 #: /plugins/quiz/views/quizzes/view.ctp:227
 msgid "Ordering Question"
-msgstr ""
+msgstr "Pregunta de Ordenamiento"
 
 #: /plugins/quiz/controllers/quizzes_controller.php:49
 #: /plugins/quiz/views/quizzes/view.ctp:267
 #: /plugins/quiz/views/text_questions/add.ctp:4
 msgid "Text Question"
-msgstr ""
+msgstr "Pregunta de Desarrollo"
 
 #: /plugins/quiz/controllers/quizzes_controller.php:61
 msgid "Invalid Quiz."
-msgstr ""
+msgstr "Quiz no válido"
 
 #: /plugins/quiz/controllers/quizzes_controller.php:71;125
 msgid "The Quiz has been saved"
-msgstr ""
+msgstr "El quiz ha sido guardado."
 
 #: /plugins/quiz/controllers/quizzes_controller.php:74;128
 msgid "The Quiz could not be saved. Please, try again."
-msgstr ""
+msgstr "El quiz no pudo ser guardado. Por favor, intente de nuevo."
 
 #: /plugins/quiz/controllers/quizzes_controller.php:81;120;138;159
 msgid "Invalid Quiz"
-msgstr ""
+msgstr "Quiz no válido."
 
 #: /plugins/quiz/controllers/quizzes_controller.php:109
 msgid "Invalid id for Quiz"
@@ -1712,7 +1713,7 @@ msgstr ""
 
 #: /plugins/quiz/controllers/quizzes_controller.php:113
 msgid "Quiz deleted"
-msgstr "Quiz eliminado"
+msgstr "Quiz eliminado."
 
 #: /plugins/quiz/controllers/quizzes_controller.php:144
 msgid "The questions where added to the quiz."
@@ -1724,23 +1725,23 @@ msgstr "Las preguntas no pudieron ser agregadas al quiz."
 
 #: /plugins/quiz/controllers/text_questions_controller.php:44
 msgid "Invalid Text Question."
-msgstr ""
+msgstr "Pregunta de desarrollo no válida."
 
 #: /plugins/quiz/controllers/text_questions_controller.php:62;91
 msgid "The Text Question has been saved"
-msgstr ""
+msgstr "La pregunta de desarrollo ha sido guardada."
 
 #: /plugins/quiz/controllers/text_questions_controller.php:66;94
 msgid "The Text Question could not be saved. Please, try again."
-msgstr ""
+msgstr "La pregunta de desarrollo no pudo ser guardada. Por favor, intente de nuevo."
 
 #: /plugins/quiz/controllers/text_questions_controller.php:73
 msgid "No format"
-msgstr ""
+msgstr "Sin formato"
 
 #: /plugins/quiz/controllers/text_questions_controller.php:74
 msgid "Preserve original format"
-msgstr ""
+msgstr "Formato original"
 
 #: /plugins/quiz/controllers/text_questions_controller.php:75
 msgid "Enriched text"
@@ -1834,7 +1835,7 @@ msgstr ""
 
 #: /plugins/quiz/views/choice_questions/add.ctp:4
 msgid "Create a Choice Question"
-msgstr ""
+msgstr "Crear Pregunta de Selección"
 
 #: /plugins/quiz/views/choice_questions/add.ctp:8
 #: /plugins/quiz/views/ordering_questions/add.ctp:8
@@ -1849,7 +1850,7 @@ msgstr ""
 #: /plugins/quiz/views/matching_questions/add.ctp:13
 #: /plugins/quiz/views/ordering_questions/add.ctp:14
 msgid "Always shuffle the order of the choices."
-msgstr ""
+msgstr "Mezclar el orden de las opciones"
 
 #: /plugins/quiz/views/choice_questions/add.ctp:29
 #: /plugins/quiz/views/matching_questions/add.ctp:29
@@ -1859,7 +1860,7 @@ msgstr "Opciones"
 
 #: /plugins/quiz/views/choice_questions/add.ctp:44
 msgid "Fixed position"
-msgstr ""
+msgstr "Posición fija"
 
 #: /plugins/quiz/views/choice_questions/add.ctp:45
 msgid "Correct answer"
@@ -1868,7 +1869,7 @@ msgstr "Respuesta correcta"
 #: /plugins/quiz/views/choice_questions/add.ctp:52
 #: /plugins/quiz/views/ordering_questions/add.ctp:56
 msgid "Add New Choice"
-msgstr "Agregar nueva opción"
+msgstr "Agregar opción"
 
 #: /plugins/quiz/views/choice_questions/add.ctp:56
 #: /plugins/quiz/views/text_questions/add.ctp:13
@@ -1969,7 +1970,7 @@ msgstr ""
 #: /plugins/quiz/views/quizzes/view.ctp:32;74;117;154;196;240
 #: /plugins/quiz/views/text_questions/view.ctp:14
 msgid "Body"
-msgstr ""
+msgstr "Planteamiento"
 
 #: /plugins/quiz/views/choice_questions/view.ctp:14
 #: /plugins/quiz/views/matching_questions/view.ctp:14
@@ -1982,13 +1983,13 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/view.ctp:19
 #: /plugins/quiz/views/quizzes/view.ctp:76;198
 msgid "Max Choices"
-msgstr ""
+msgstr "Máximo de opciones"
 
 #: /plugins/quiz/views/choice_questions/view.ctp:24
 #: /plugins/quiz/views/ordering_questions/view.ctp:24
 #: /plugins/quiz/views/quizzes/view.ctp:77;199
 msgid "Min Choices"
-msgstr ""
+msgstr "Mínimo de opciones"
 
 #: /plugins/quiz/views/choice_questions/view.ctp:34
 #: /plugins/quiz/views/matching_questions/view.ctp:34
@@ -2047,12 +2048,12 @@ msgstr "Quiz"
 
 #: /plugins/quiz/views/elements/question_drop_list.ctp:5
 msgid "All"
-msgstr "Toda"
+msgstr "Todas"
 
 #: /plugins/quiz/views/elements/question_drop_list.ctp:39
 #: /plugins/quiz/views/quizzes/edit.ctp:17
 msgid "create one"
-msgstr "Crear una"
+msgstr "Crear"
 
 #: /plugins/quiz/views/elements/selection_list.add_question.ctp:7
 msgid "Add this question to the Quiz"
@@ -2072,11 +2073,11 @@ msgstr "%s Opción"
 #: /plugins/quiz/views/elements/listing/matching_question.ctp:18
 #: /plugins/quiz/views/elements/listing/ordering_question.ctp:18
 msgid "view"
-msgstr ""
+msgstr "ver"
 
 #: /plugins/quiz/views/elements/listing/matching_question.ctp:10
 msgid "%s Match items"
-msgstr ""
+msgstr "%s Opciones de emparejamiento"
 
 #: /plugins/quiz/views/elements/listing/matching_question.ctp:12
 msgid "%s Match item"
@@ -2103,7 +2104,7 @@ msgstr "Respuesta correcta"
 
 #: /plugins/quiz/views/matching_questions/add.ctp:53
 msgid "Add Question"
-msgstr "Agregar pregunta"
+msgstr "Agregar Pregunta"
 
 #: /plugins/quiz/views/matching_questions/add.ctp:57
 msgid "Answers"
@@ -2111,7 +2112,7 @@ msgstr "Respuestas"
 
 #: /plugins/quiz/views/matching_questions/add.ctp:66
 msgid "Add Answer"
-msgstr "Agregar respuestas"
+msgstr "Agregar respuesta"
 
 #: /plugins/quiz/views/matching_questions/edit.ctp:4
 #: /plugins/quiz/views/matching_questions/index.ctp:58
@@ -2140,12 +2141,12 @@ msgstr ""
 #: /plugins/quiz/views/matching_questions/view.ctp:19
 #: /plugins/quiz/views/quizzes/view.ctp:34;156
 msgid "Max Associations"
-msgstr ""
+msgstr "Máximo de asociaciones"
 
 #: /plugins/quiz/views/matching_questions/view.ctp:24
 #: /plugins/quiz/views/quizzes/view.ctp:35;157
 msgid "Min Associations"
-msgstr ""
+msgstr "Mínimo de asociaciones"
 
 #: /plugins/quiz/views/matching_questions/view.ctp:47
 msgid "Matching Question Id"
@@ -2157,16 +2158,18 @@ msgstr "Fuente"
 
 #: /plugins/quiz/views/ordering_questions/add.ctp:4
 msgid "Create Ordering Question"
-msgstr ""
+msgstr "Crear Pregunta de Ordenamiento"
 
 #: /plugins/quiz/views/ordering_questions/add.ctp:32
 msgid ""
 "Write the choices in the correct order. Leave both fields empty to ignore."
 msgstr ""
+"Escriba las opciones en el orden correcto. Deje ambos campos vacíos si desea "
+"ignorar la opción"
 
 #: /plugins/quiz/views/ordering_questions/add.ctp:49
 msgid "Fixed Position"
-msgstr ""
+msgstr "Posición Fija"
 
 #: /plugins/quiz/views/ordering_questions/edit.ctp:4
 #: /plugins/quiz/views/ordering_questions/index.ctp:58
@@ -2217,7 +2220,7 @@ msgstr "No hay preguntas disponibles"
 
 #: /plugins/quiz/views/quizzes/edit.ctp:39
 msgid "Associate"
-msgstr ""
+msgstr "Asociar"
 
 #: /plugins/quiz/views/quizzes/index.ctp:25
 msgid "Change"
@@ -2226,12 +2229,12 @@ msgstr "Cambiar nombre"
 #: /plugins/quiz/views/quizzes/index.ctp:44
 #: /plugins/quiz/views/quizzes/view.ctp:22;27
 msgid "Association Questions"
-msgstr ""
+msgstr "Preguntas de Asociación"
 
 #: /plugins/quiz/views/quizzes/index.ctp:45
 #: /plugins/quiz/views/quizzes/view.ctp:23;64
 msgid "Association Question"
-msgstr ""
+msgstr "Pregunta de Asociación"
 
 #: /plugins/quiz/views/quizzes/rename.ctp:4
 msgid "Rename %s"
@@ -2239,7 +2242,7 @@ msgstr "Renombrar"
 
 #: /plugins/quiz/views/quizzes/view.ctp:69
 msgid "Choice Questions"
-msgstr ""
+msgstr "Preguntas de Selección"
 
 #: /plugins/quiz/views/quizzes/view.ctp:111
 msgid "Cloze Questions"
@@ -2251,15 +2254,15 @@ msgstr ""
 
 #: /plugins/quiz/views/quizzes/view.ctp:149
 msgid "Matching Questions"
-msgstr ""
+msgstr "Preguntas de Emparejamiento"
 
 #: /plugins/quiz/views/quizzes/view.ctp:192
 msgid "Ordering Questions"
-msgstr ""
+msgstr "Preguntas de Ordenamiento"
 
 #: /plugins/quiz/views/quizzes/view.ctp:235
 msgid "Text Questions"
-msgstr ""
+msgstr "Preguntas de Desarrollo"
 
 #: /plugins/quiz/views/quizzes/view.ctp:241
 #: /plugins/quiz/views/text_questions/view.ctp:19
@@ -2272,7 +2275,7 @@ msgstr "Crear %s"
 
 #: /plugins/quiz/views/text_questions/add.ctp:7
 msgid "Something"
-msgstr ""
+msgstr "Enunciado de la pregunta"
 
 #: /plugins/quiz/views/text_questions/edit.ctp:4
 #: /plugins/quiz/views/text_questions/index.ctp:54
@@ -3176,7 +3179,7 @@ msgstr "Rol"
 
 #: /views/members/admin_add.ctp:4
 msgid "Add Member"
-msgstr "Agregar miembro"
+msgstr "Agregar Miembro"
 
 #: /views/members/admin_add.ctp:6
 msgid "Personal Data"
@@ -3485,3 +3488,150 @@ msgstr "Archivo"
 #: /plugins/scorm/views/scorms/add.ctp:13
 msgid "File Name"
 msgstr "Nombre de archivo"
+
+#: /plugins/locker/controllers/folders_controller.php:122
+msgid "Document"
+msgstr ""
+
+#: /plugins/locker/controllers/folders_controller.php:126
+msgid "The %s was moved successfully"
+msgstr ""
+
+#: /plugins/locker/controllers/folders_controller.php:128
+msgid "The %s could not be moved"
+msgstr ""
+
+#: /plugins/locker/models/locker_document.php:95
+msgid "Please write a name for this file"
+msgstr ""
+
+#: /plugins/locker/models/locker_document.php:98
+msgid "Please limit the name to a maximum of 30 characters"
+msgstr ""
+
+#: /plugins/locker/models/locker_document.php:101
+msgid "The file is incorrect"
+msgstr ""
+
+#: /plugins/locker/models/locker_folder.php:145
+msgid "The Dropbox cannot be modified"
+msgstr ""
+
+#: /plugins/locker/models/locker_folder.php:148
+msgid "Folders need a name, please write one"
+msgstr ""
+
+#: /plugins/locker/models/locker_folder.php:154
+msgid "This Folder name is repeated"
+msgstr ""
+
+#: /plugins/locker/views/documents/view.ctp:17
+#: /plugins/locker/views/documents/ajax/view.ctp:4
+msgid "This file has no description"
+msgstr ""
+
+#: /plugins/locker/views/documents/view.ctp:47
+#: /plugins/locker/views/documents/ajax/view.ctp:19
+msgid "Please confirm the deletion of %s"
+msgstr ""
+
+#: /plugins/locker/views/documents/view.ctp:57
+#: /plugins/locker/views/documents/ajax/view.ctp:22
+msgid "Download"
+msgstr ""
+
+#: /plugins/locker/views/elements/file_info.ctp:11
+msgid "Dropbox"
+msgstr ""
+
+#: /plugins/locker/views/folders/view.ctp:27
+msgid "Updating..."
+msgstr ""
+
+#: /plugins/locker/views/folders/view.ctp:28
+msgid "Cancel"
+msgstr ""
+
+#: /plugins/locker/views/folders/view.ctp:29
+msgid "OK"
+msgstr ""
+
+#: /plugins/locker/views/folders/ajax/view.ctp:4
+msgid "View this Folder's Content"
+msgstr ""
+
+#: /plugins/quiz/views/quizzes/rename.ctp:9
+msgid "Rename"
+msgstr ""
+
+#: /views/members/login.ctp:4;10
+msgid "Login"
+msgstr ""
+
+#: /plugins/quiz/views/choice_questions/add.ctp:17
+msgid ""
+"Maximum number of choices that the student is allowed to select. Leave empty "
+"to have no restriction."
+msgstr ""
+"Número máximo de opciones que el estudiante puede seleccionar. Dejar en "
+"blanco si no hay límite para ello."
+
+#: /plugins/quiz/views/choice_questions/add.ctp:23
+msgid ""
+"Minimum number of choices that the student is required to select. Leave "
+"empty to have no restriction."
+msgstr ""
+"Número mínimo de opciones que el estudiante puede seleccionar. Dejar en "
+"blanco si no hay límite para ello."
+
+#: /plugins/quiz/views/choice_questions/edit.ctp:7
+msgid "body"
+msgstr ""
+
+#: /plugins/quiz/views/choice_questions/edit.ctp:8
+msgid "shuffle"
+msgstr "mezclar"
+
+#: /plugins/quiz/views/choice_questions/edit.ctp:9
+msgid "max_choices"
+msgstr ""
+
+#: /plugins/quiz/views/choice_questions/edit.ctp:10
+msgid "min_choices"
+msgstr ""
+
+#: /plugins/quiz/views/matching_questions/add.ctp:17
+msgid ""
+"Maximum number of associations that the student is allowed to create. Leave "
+"empty to have no restriction."
+msgstr ""
+"Número máximo de asociaciones que el estudiante debe crear. Dejar en blanco "
+"si no hay límite para ello."
+
+#: /plugins/quiz/views/matching_questions/add.ctp:23
+msgid ""
+"Minimum number of associations that the student is required to create. Leave "
+"empty to have no restriction."
+msgstr ""
+"Número mínimo de asociaciones que el estudiante debe crear. Dejar en blanco "
+"si no hay límite para ello."
+
+#: /plugins/quiz/views/ordering_questions/add.ctp:18
+msgid ""
+"Maximum number of choices that the student is allowed to select to create an "
+"answer. Leave empty to have no restriction."
+msgstr ""
+"Número máximo de opciones que el estudiante debe seleccionar para crear una respuesta. Dejar en "
+"blanco si no hay límite para ello."
+
+#: /plugins/quiz/views/ordering_questions/add.ctp:24
+msgid ""
+"Minimum number of choices that the student is required to select to create "
+"an answer. Leave empty to have no restriction."
+msgstr ""
+"Número mínimo de opciones que el estudiante debe seleccionar para crear una respuesta. Dejar en "
+"blanco si no hay límite para ello."
+
+#: /plugins/quiz/views/quizzes/edit.ctp:39
+msgid "Add to quiz"
+msgstr "Agregar al quiz"

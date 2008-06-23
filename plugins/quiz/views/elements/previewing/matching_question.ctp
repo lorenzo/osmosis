@@ -1,5 +1,5 @@
 <div class="matchingQuestion view">
-	<p><?php echo $question['MatchingQuestion']['body'] ?></p>
+	<?php echo $question['MatchingQuestion']['body'] ?>
 	<div class="choice question set">
 		<ol>
 	<?php

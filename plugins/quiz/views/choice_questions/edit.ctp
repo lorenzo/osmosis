@@ -4,11 +4,11 @@
  		<legend><?php echo sprintf(__('Edit %s', true), __('ChoiceQuestion', true));?></legend>
 	<?php
 		echo $form->input('id');
-		echo $form->input('body');
-		echo $form->input('shuffle');
-		echo $form->input('max_choices');
-		echo $form->input('min_choices');
-		 echo $form->input('Quiz');
+		echo $form->input('body', array('label' => __('body', true)));
+		echo $form->input('shuffle', array('label' => __('shuffle', true)));
+		echo $form->input('max_choices', array('label' => __('max_choices', true)));
+		echo $form->input('min_choices', array('label' => __('min_choices', true)));
+		 echo $form->input('Quiz', array('label' => __('Quiz', true)));
 	?>
 	</fieldset>
 <?php echo $form->end(__('Submit', true));?>

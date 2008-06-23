@@ -14,13 +14,13 @@
 				echo $form->input(
 					'max_associations',
 					array(
-						'after' => '<span class="help">Maximum number of associations that the student is allowed to create. Leave empty to have no restriction.</span>'
+						'after' => '<span class="help">'.__('Maximum number of associations that the student is allowed to create. Leave empty to have no restriction.', true).'</span>'
 					)
 				);
 				echo $form->input(
 					'min_associations',
 					array(
-						'after' => '<span class="help">Minimum number of associations that the student is required to create. Leave empty to have no restriction.</span>'
+						'after' => '<span class="help">'.__('Minimum number of associations that the student is required to create. Leave empty to have no restriction.', true).'</span>'
 					)
 				);
 			?>

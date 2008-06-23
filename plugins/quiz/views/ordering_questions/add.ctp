@@ -15,13 +15,13 @@
 		echo $form->input(
 				'max_choices',
 				array(
-					'after' => '<span class="help">Maximum number of choices that the student is allowed to select to create an answer. Leave empty to have no restriction.</span>'
+					'after' => '<span class="help">'.__('Maximum number of choices that the student is allowed to select to create an answer. Leave empty to have no restriction.',true).'</span>'
 				)
 			);
 			echo $form->input(
 				'min_choices',
 				array(
-					'after' => '<span class="help">Minimum number of choices that the student is required to select to create an answer. Leave empty to have no restriction.</span>'
+					'after' => '<span class="help">'.__('Minimum number of choices that the student is required to select to create an answer. Leave empty to have no restriction.', true).'</span>'
 				)
 			);
 	?>

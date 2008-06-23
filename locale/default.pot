@@ -1,13 +1,14 @@
 # LANGUAGE translation of CakePHP Application
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  Revision: 412 /osmosis/app_controller.php
+#  Revision: 430 /osmosis/app_controller.php
+#  Revision: 431 /osmosis/plugins/locker/controllers/folders_controller.php
 #  Revision: 396 /osmosis/app_model.php
 #  Revision: 412 /osmosis/controllers/courses_controller.php
 #  Revision: 323 /osmosis/controllers/departments_controller.php
 #  Revision: 413 /osmosis/controllers/members_controller.php
 #  Revision: 323 /osmosis/controllers/plugins_controller.php
-#  Revision: 401 /osmosis/models/course.php
+#  Revision: 418 /osmosis/models/course.php
 #  Revision: 323 /osmosis/models/department.php
 #  Revision: 403 /osmosis/plugins/forum/models/topic.php
 #  Revision: 395 /osmosis/plugins/quiz/models/quiz.php
@@ -26,9 +27,9 @@
 #  Revision: 403 /osmosis/plugins/forum/models/response.php
 #  Revision: 323 /osmosis/plugins/forum/controllers/topics_controller.php
 #  Revision: 404 /osmosis/plugins/forum/models/discussion.php
-#  Revision: 409 /osmosis/plugins/locker/controllers/documents_controller.php
-#  Revision: 409 /osmosis/plugins/locker/controllers/folders_controller.php
-#  Revision: 409 /osmosis/plugins/locker/models/locker_folder.php
+#  Revision: 428 /osmosis/plugins/locker/controllers/documents_controller.php
+#  Revision: 424 /osmosis/plugins/locker/models/locker_document.php
+#  Revision: 428 /osmosis/plugins/locker/models/locker_folder.php
 #  Revision: 413 /osmosis/plugins/quiz/controllers/choice_questions_controller.php
 #  Revision: 413 /osmosis/plugins/quiz/controllers/matching_questions_controller.php
 #  Revision: 413 /osmosis/plugins/quiz/controllers/ordering_questions_controller.php
@@ -42,7 +43,7 @@
 #  Revision: 408 /osmosis/plugins/quiz/models/ordering_question.php
 #  Revision: 416 /osmosis/plugins/scorm/controllers/scorms_controller.php
 #  Revision: 323 /osmosis/plugins/scorm/controllers/scos_controller.php
-#  Revision: 323 /osmosis/plugins/wiki/controllers/entries_controller.php
+#  Revision: 423 /osmosis/plugins/wiki/controllers/entries_controller.php
 #  Revision: 410 /osmosis/plugins/wiki/controllers/wikis_controller.php
 #  Revision: 323 /osmosis/plugins/wiki/controllers/revisions_controller.php
 #  Revision: 323 /osmosis/webroot/css.php
@@ -52,7 +53,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2008-06-21 17:10-0430\n"
+"POT-Creation-Date: 2009-06-23 16:08-0430\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -66,6 +67,7 @@ msgid "Invalid access"
 msgstr ""
 
 #: /app_controller.php:294
+#: /plugins/locker/controllers/folders_controller.php:133
 msgid "Invalid Access"
 msgstr ""
 
@@ -308,7 +310,7 @@ msgstr ""
 
 #: /plugins/agenda/views/events/edit.ctp:14
 #: /plugins/locker/views/documents/add.ctp:12
-#: /plugins/locker/views/documents/edit.ctp:12
+#: /plugins/locker/views/documents/edit.ctp:11
 #: /plugins/locker/views/folders/edit.ctp:10
 msgid "Save"
 msgstr ""
@@ -348,7 +350,6 @@ msgstr ""
 #: /plugins/agenda/views/events/view.ctp:4
 #: /plugins/blog/views/comments/view.ctp:4
 #: /plugins/forum/views/subjects/view.ctp:4;60
-#: /plugins/locker/views/documents/view.ctp:4
 #: /plugins/quiz/views/choice_questions/view.ctp:4;46;84
 #: /plugins/quiz/views/matching_questions/view.ctp:4;46;86
 #: /plugins/quiz/views/ordering_questions/view.ctp:4;46;84
@@ -398,7 +399,6 @@ msgstr ""
 #: /plugins/forum/views/subjects/index.ctp:53
 #: /plugins/forum/views/subjects/view.ctp:44;88
 #: /plugins/locker/views/documents/index.ctp:45
-#: /plugins/locker/views/documents/view.ctp:34
 #: /plugins/locker/views/folders/index.ctp:37
 #: /plugins/quiz/views/choice_questions/edit.ctp:18
 #: /plugins/quiz/views/choice_questions/index.ctp:45
@@ -640,6 +640,8 @@ msgstr ""
 #: /plugins/forum/views/subjects/index.ctp:53
 #: /plugins/forum/views/subjects/view.ctp:88
 #: /plugins/locker/views/documents/index.ctp:45
+#: /plugins/locker/views/documents/view.ctp:41
+#: /plugins/locker/views/documents/ajax/view.ctp:13
 #: /plugins/locker/views/folders/index.ctp:37
 #: /plugins/quiz/views/choice_questions/edit.ctp:18
 #: /plugins/quiz/views/choice_questions/index.ctp:45
@@ -722,7 +724,7 @@ msgid "List Posts"
 msgstr ""
 
 #: /plugins/blog/views/blogs/edit.ctp:19
-#: /plugins/blog/views/blogs/view.ctp:33
+#: /plugins/blog/views/blogs/view.ctp:32
 #: /plugins/blog/views/comments/add.ctp:18
 #: /plugins/blog/views/comments/edit.ctp:18
 #: /plugins/blog/views/comments/view.ctp:28
@@ -851,6 +853,7 @@ msgstr ""
 #: /plugins/forum/views/subjects/index.ctp:52
 #: /plugins/forum/views/subjects/view.ctp:87
 #: /plugins/locker/views/documents/index.ctp:44
+#: /plugins/locker/views/documents/view.ctp:29
 #: /plugins/locker/views/folders/index.ctp:36
 #: /plugins/quiz/views/choice_questions/index.ctp:44
 #: /plugins/quiz/views/choice_questions/view.ctp:65;101
@@ -1029,7 +1032,6 @@ msgstr ""
 
 #: /plugins/blog/views/comments/view.ctp:9
 #: /plugins/locker/views/documents/add.ctp:8
-#: /plugins/locker/views/documents/view.ctp:14
 #: /plugins/scorm/views/scorms/add.ctp:14
 #: /views/departments/admin_view.ctp:14;41
 #: /views/plugins/admin_view.ctp:46
@@ -1146,7 +1148,6 @@ msgid "Incorrect status"
 msgstr ""
 
 #: /plugins/forum/views/discussions/add.ctp:4
-#: /plugins/forum/views/elements/quick_response.ctp:19
 #: /plugins/forum/views/subjects/add.ctp:23
 #: /plugins/forum/views/subjects/edit.ctp:25
 #: /plugins/forum/views/subjects/index.ctp:72
@@ -1272,96 +1273,10 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: /plugins/forum/views/elements/quick_response.ctp:17
-msgid "List Responses"
-msgstr ""
-
-#: /plugins/forum/views/elements/quick_response.ctp:18
-#: /plugins/forum/views/subjects/add.ctp:22
-#: /plugins/forum/views/subjects/edit.ctp:24
-#: /plugins/forum/views/subjects/index.ctp:71
-#: /plugins/forum/views/subjects/view.ctp:51
-msgid "List Discussions"
-msgstr ""
-
-#: /plugins/forum/views/elements/quick_response.ctp:20
-#: /plugins/forum/views/subjects/add.ctp:20
-#: /plugins/forum/views/subjects/edit.ctp:22
-#: /plugins/forum/views/subjects/index.ctp:69
-#: /plugins/forum/views/subjects/view.ctp:49
-#: /views/courses/admin_add.ctp:20
-#: /views/courses/admin_edit.ctp:22
-#: /views/courses/admin_index.ctp:69
-#: /views/members/admin_edit.ctp:25
-#: /views/members/admin_view.ctp:70
-msgid "List Members"
-msgstr ""
-
-#: /plugins/forum/views/elements/quick_response.ctp:21
-#: /plugins/forum/views/subjects/add.ctp:21
-#: /plugins/forum/views/subjects/edit.ctp:23
-#: /plugins/forum/views/subjects/index.ctp:70
-#: /plugins/forum/views/subjects/view.ctp:50
-#: /views/members/admin_index.ctp:78
-#: /views/members/admin_view.ctp:71
-msgid "New Member"
-msgstr ""
-
 #: /plugins/forum/views/elements/placeholders/plugin_updates.ctp:2
 #: /plugins/forum/views/subjects/view.ctp:14
 #: /plugins/forum/views/topics/index.ctp:3
 msgid "Forum"
-msgstr ""
-
-#: /plugins/forum/views/pages/home.ctp:12
-#: /views/pages/home.ctp:10
-msgid "Your tmp directory is writable."
-msgstr ""
-
-#: /plugins/forum/views/pages/home.ctp:16
-#: /views/pages/home.ctp:12
-msgid "Your tmp directory is NOT writable."
-msgstr ""
-
-#: /plugins/forum/views/pages/home.ctp:26
-msgid "The %s is being used for caching. To change the config edit APP/config/core.php "
-msgstr ""
-
-#: /plugins/forum/views/pages/home.ctp:30
-msgid "Your cache is NOT working. Please check the settings in APP/config/core.php"
-msgstr ""
-
-#: /plugins/forum/views/pages/home.ctp:40
-#: /views/pages/home.ctp:50
-msgid "Your database configuration file is present."
-msgstr ""
-
-#: /plugins/forum/views/pages/home.ctp:45
-#: /views/pages/home.ctp:53
-msgid "Your database configuration file is NOT present."
-msgstr ""
-
-#: /plugins/forum/views/pages/home.ctp:47
-msgid "Rename config/database.php.default to config/database.php"
-msgstr ""
-
-#: /plugins/forum/views/pages/home.ctp:62
-#: /views/pages/home.ctp:70
-msgid "Cake is able to connect to the database."
-msgstr ""
-
-#: /plugins/forum/views/pages/home.ctp:66
-#: /views/pages/home.ctp:72
-msgid "Cake is NOT able to connect to the database."
-msgstr ""
-
-#: /plugins/forum/views/pages/home.ctp:72
-#: /views/pages/home.ctp:80
-msgid "Editing this Page"
-msgstr ""
-
-#: /plugins/forum/views/pages/home.ctp:75
-msgid "To change the content of this page, edit: %s\n\t\tTo change its layout, edit: %s\n\t\tYou can also add some CSS styles for your pages at: %s"
 msgstr ""
 
 #: /plugins/forum/views/responses/edit.ctp:4
@@ -1390,6 +1305,34 @@ msgstr ""
 #: /plugins/forum/views/subjects/index.ctp:68
 #: /plugins/forum/views/subjects/view.ctp:48
 msgid "New Forum"
+msgstr ""
+
+#: /plugins/forum/views/subjects/add.ctp:20
+#: /plugins/forum/views/subjects/edit.ctp:22
+#: /plugins/forum/views/subjects/index.ctp:69
+#: /plugins/forum/views/subjects/view.ctp:49
+#: /views/courses/admin_add.ctp:20
+#: /views/courses/admin_edit.ctp:22
+#: /views/courses/admin_index.ctp:69
+#: /views/members/admin_edit.ctp:25
+#: /views/members/admin_view.ctp:70
+msgid "List Members"
+msgstr ""
+
+#: /plugins/forum/views/subjects/add.ctp:21
+#: /plugins/forum/views/subjects/edit.ctp:23
+#: /plugins/forum/views/subjects/index.ctp:70
+#: /plugins/forum/views/subjects/view.ctp:50
+#: /views/members/admin_index.ctp:78
+#: /views/members/admin_view.ctp:71
+msgid "New Member"
+msgstr ""
+
+#: /plugins/forum/views/subjects/add.ctp:22
+#: /plugins/forum/views/subjects/edit.ctp:24
+#: /plugins/forum/views/subjects/index.ctp:71
+#: /plugins/forum/views/subjects/view.ctp:51
+msgid "List Discussions"
 msgstr ""
 
 #: /plugins/forum/views/subjects/edit.ctp:4
@@ -1457,7 +1400,6 @@ msgid "Subject Id"
 msgstr ""
 
 #: /plugins/forum/views/subjects/view.ctp:62
-#: /plugins/locker/views/documents/view.ctp:19
 msgid "Member Id"
 msgstr ""
 
@@ -1487,10 +1429,6 @@ msgstr ""
 msgid "You are currently viewing the topics in the <em>%s</em> course forum."
 msgstr ""
 
-#: /plugins/forum/views/topics/index.ctp:16;72
-msgid "Create a new Topic"
-msgstr ""
-
 #: /plugins/forum/views/topics/index.ctp:25
 msgid "Topic"
 msgstr ""
@@ -1508,16 +1446,16 @@ msgstr ""
 msgid "This will also delete all discussions on this topic"
 msgstr ""
 
+#: /plugins/forum/views/topics/index.ctp:72
+msgid "Create a new Topic"
+msgstr ""
+
 #: /plugins/forum/views/topics/view.ctp:4
 msgid "Topic:"
 msgstr ""
 
 #: /plugins/forum/views/topics/view.ctp:12
 msgid "You are currently viewing the discussions started around this topic <strong>\"%s\"</strong> inside the <em>%s</em> course forum."
-msgstr ""
-
-#: /plugins/forum/views/topics/view.ctp:21;108
-msgid "Start a discussion"
 msgstr ""
 
 #: /plugins/forum/views/topics/view.ctp:36
@@ -1544,31 +1482,35 @@ msgstr ""
 msgid "No discussions registered yet"
 msgstr ""
 
+#: /plugins/forum/views/topics/view.ctp:108
+msgid "Start a discussion"
+msgstr ""
+
 #: /plugins/locker/controllers/documents_controller.php:45
 msgid "Invalid LockerDocument."
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:57;74
+#: /plugins/locker/controllers/documents_controller.php:64;81
 msgid "The LockerDocument has been saved"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:60;77
+#: /plugins/locker/controllers/documents_controller.php:67;85
 msgid "The LockerDocument could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:69
+#: /plugins/locker/controllers/documents_controller.php:76
 msgid "Invalid LockerDocument"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:90
+#: /plugins/locker/controllers/documents_controller.php:95
 msgid "Invalid id for LockerDocument"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:94
+#: /plugins/locker/controllers/documents_controller.php:99
 msgid "LockerDocument deleted"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:101;107
+#: /plugins/locker/controllers/documents_controller.php:106;112
 msgid "Invalid Document"
 msgstr ""
 
@@ -1576,28 +1518,70 @@ msgstr ""
 msgid "Invalid Locker"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:73;89
+#: /plugins/locker/controllers/folders_controller.php:71;87
 msgid "The LockerFolder has been saved"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:84
+#: /plugins/locker/controllers/folders_controller.php:82
 msgid "Invalid LockerFolder"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:92
+#: /plugins/locker/controllers/folders_controller.php:90
 msgid "The LockerFolder could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:104
+#: /plugins/locker/controllers/folders_controller.php:102
 msgid "Invalid id for LockerFolder"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:108
+#: /plugins/locker/controllers/folders_controller.php:106
 msgid "LockerFolder deleted"
 msgstr ""
 
-#: /plugins/locker/models/locker_folder.php:130
+#: /plugins/locker/controllers/folders_controller.php:120
+#: /plugins/locker/views/documents/add.ctp:9
+#: /views/plugins/admin_view.ctp:19
+msgid "Folder"
+msgstr ""
+
+#: /plugins/locker/controllers/folders_controller.php:123
+msgid "Document"
+msgstr ""
+
+#: /plugins/locker/controllers/folders_controller.php:127
+msgid "The %s was moved successfully"
+msgstr ""
+
+#: /plugins/locker/controllers/folders_controller.php:129
+msgid "The %s could not be moved"
+msgstr ""
+
+#: /plugins/locker/models/locker_document.php:95
+msgid "Please write a name for this file"
+msgstr ""
+
+#: /plugins/locker/models/locker_document.php:98
+msgid "Please limit the name to a maximum of 30 characters"
+msgstr ""
+
+#: /plugins/locker/models/locker_document.php:101
+msgid "The file is incorrect"
+msgstr ""
+
+#: /plugins/locker/models/locker_folder.php:145
+msgid "The Dropbox cannot be modified"
+msgstr ""
+
+#: /plugins/locker/models/locker_folder.php:148
+msgid "Folders need a name, please write one"
+msgstr ""
+
+#: /plugins/locker/models/locker_folder.php:151
 msgid "Folder names have a maximum length 20 characters"
+msgstr ""
+
+#: /plugins/locker/models/locker_folder.php:154
+msgid "This Folder name is repeated"
 msgstr ""
 
 #: /plugins/locker/views/documents/add.ctp:4
@@ -1606,11 +1590,6 @@ msgstr ""
 
 #: /plugins/locker/views/documents/add.ctp:7
 msgid "File"
-msgstr ""
-
-#: /plugins/locker/views/documents/add.ctp:9
-#: /views/plugins/admin_view.ctp:19
-msgid "Folder"
 msgstr ""
 
 #: /plugins/locker/views/documents/edit.ctp:4
@@ -1622,40 +1601,26 @@ msgid "LockerDocuments"
 msgstr ""
 
 #: /plugins/locker/views/documents/index.ctp:58
-#: /plugins/locker/views/documents/view.ctp:36
 msgid "New LockerDocument"
 msgstr ""
 
-#: /plugins/locker/views/documents/view.ctp:2
-msgid "LockerDocument"
+#: /plugins/locker/views/documents/view.ctp:17
+#: /plugins/locker/views/documents/ajax/view.ctp:4
+msgid "This file has no description"
 msgstr ""
 
-#: /plugins/locker/views/documents/view.ctp:9
-#: /plugins/quiz/views/choice_questions/view.ctp:85
-#: /plugins/quiz/views/matching_questions/view.ctp:87
-#: /plugins/quiz/views/ordering_questions/view.ctp:85
-#: /plugins/quiz/views/quizzes/view.ctp:9
-#: /plugins/quiz/views/text_questions/view.ctp:42
-#: /plugins/scorm/views/scorms/add.ctp:12
-#: /views/departments/admin_view.ctp:9;40
-#: /views/plugins/admin_view.ctp:9;45
-msgid "Name"
+#: /plugins/locker/views/documents/view.ctp:47
+#: /plugins/locker/views/documents/ajax/view.ctp:19
+msgid "Please confirm the deletion of %s"
 msgstr ""
 
-#: /plugins/locker/views/documents/view.ctp:24
-msgid "Folder Id"
+#: /plugins/locker/views/documents/view.ctp:57
+#: /plugins/locker/views/documents/ajax/view.ctp:22
+msgid "Download"
 msgstr ""
 
-#: /plugins/locker/views/documents/view.ctp:33
-msgid "Edit LockerDocument"
-msgstr ""
-
-#: /plugins/locker/views/documents/view.ctp:34
-msgid "Delete LockerDocument"
-msgstr ""
-
-#: /plugins/locker/views/documents/view.ctp:35
-msgid "List LockerDocuments"
+#: /plugins/locker/views/elements/file_info.ctp:11
+msgid "Dropbox"
 msgstr ""
 
 #: /plugins/locker/views/elements/folder_actions.ctp:5
@@ -1674,12 +1639,8 @@ msgstr ""
 msgid "Upload File"
 msgstr ""
 
-#: /plugins/locker/views/elements/folder_contents.ctp:18
+#: /plugins/locker/views/elements/folder_contents.ctp:24
 msgid "This folder is empty"
-msgstr ""
-
-#: /plugins/locker/views/elements/folder_path.ctp:4
-msgid "home"
 msgstr ""
 
 #: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:2
@@ -1704,6 +1665,22 @@ msgstr ""
 
 #: /plugins/locker/views/folders/view.ctp:2
 msgid "%s's Locker"
+msgstr ""
+
+#: /plugins/locker/views/folders/view.ctp:27
+msgid "Updating..."
+msgstr ""
+
+#: /plugins/locker/views/folders/view.ctp:28
+msgid "Cancel"
+msgstr ""
+
+#: /plugins/locker/views/folders/view.ctp:29
+msgid "OK"
+msgstr ""
+
+#: /plugins/locker/views/folders/ajax/view.ctp:4
+msgid "View this Folder's Content"
 msgstr ""
 
 #: /plugins/quiz/controllers/choice_questions_controller.php:44
@@ -1959,6 +1936,14 @@ msgstr ""
 msgid "Always shuffle the order of the choices."
 msgstr ""
 
+#: /plugins/quiz/views/choice_questions/add.ctp:17
+msgid "Maximum number of choices that the student is allowed to select. Leave empty to have no restriction."
+msgstr ""
+
+#: /plugins/quiz/views/choice_questions/add.ctp:23
+msgid "Minimum number of choices that the student is required to select. Leave empty to have no restriction."
+msgstr ""
+
 #: /plugins/quiz/views/choice_questions/add.ctp:29
 #: /plugins/quiz/views/matching_questions/add.ctp:29
 #: /plugins/quiz/views/ordering_questions/add.ctp:30
@@ -2005,6 +1990,37 @@ msgstr ""
 #: /plugins/quiz/views/choice_questions/index.ctp:58
 #: /plugins/quiz/views/choice_questions/view.ctp:2;33;34;36
 msgid "ChoiceQuestion"
+msgstr ""
+
+#: /plugins/quiz/views/choice_questions/edit.ctp:7
+msgid "body"
+msgstr ""
+
+#: /plugins/quiz/views/choice_questions/edit.ctp:8
+msgid "shuffle"
+msgstr ""
+
+#: /plugins/quiz/views/choice_questions/edit.ctp:9
+msgid "max_choices"
+msgstr ""
+
+#: /plugins/quiz/views/choice_questions/edit.ctp:10
+msgid "min_choices"
+msgstr ""
+
+#: /plugins/quiz/views/choice_questions/edit.ctp:11
+#: /plugins/quiz/views/choice_questions/view.ctp:111
+#: /plugins/quiz/views/matching_questions/view.ctp:113
+#: /plugins/quiz/views/ordering_questions/view.ctp:111
+#: /plugins/quiz/views/quizzes/add.ctp:4
+#: /plugins/quiz/views/quizzes/edit.ctp:1
+#: /plugins/quiz/views/quizzes/index.ctp:43
+#: /plugins/quiz/views/quizzes/rename.ctp:4
+#: /plugins/quiz/views/quizzes/view.ctp:2;18;19;21
+#: /plugins/quiz/views/text_questions/edit.ctp:20
+#: /plugins/quiz/views/text_questions/index.ctp:56
+#: /plugins/quiz/views/text_questions/view.ctp:33;68
+msgid "Quiz"
 msgstr ""
 
 #: /plugins/quiz/views/choice_questions/edit.ctp:19;20
@@ -2147,18 +2163,15 @@ msgstr ""
 msgid "Quizzes"
 msgstr ""
 
-#: /plugins/quiz/views/choice_questions/view.ctp:111
-#: /plugins/quiz/views/matching_questions/view.ctp:113
-#: /plugins/quiz/views/ordering_questions/view.ctp:111
-#: /plugins/quiz/views/quizzes/add.ctp:4
-#: /plugins/quiz/views/quizzes/edit.ctp:1
-#: /plugins/quiz/views/quizzes/index.ctp:43
-#: /plugins/quiz/views/quizzes/rename.ctp:4
-#: /plugins/quiz/views/quizzes/view.ctp:2;18;19;21
-#: /plugins/quiz/views/text_questions/edit.ctp:20
-#: /plugins/quiz/views/text_questions/index.ctp:56
-#: /plugins/quiz/views/text_questions/view.ctp:33;68
-msgid "Quiz"
+#: /plugins/quiz/views/choice_questions/view.ctp:85
+#: /plugins/quiz/views/matching_questions/view.ctp:87
+#: /plugins/quiz/views/ordering_questions/view.ctp:85
+#: /plugins/quiz/views/quizzes/view.ctp:9
+#: /plugins/quiz/views/text_questions/view.ctp:42
+#: /plugins/scorm/views/scorms/add.ctp:12
+#: /views/departments/admin_view.ctp:9;40
+#: /views/plugins/admin_view.ctp:9;45
+msgid "Name"
 msgstr ""
 
 #: /plugins/quiz/views/elements/question_drop_list.ctp:5
@@ -2204,6 +2217,14 @@ msgstr ""
 
 #: /plugins/quiz/views/matching_questions/add.ctp:8
 msgid "This type of question has two sets of options: each element &mdash; question &mdash; in the first, has one correct answer in the other. This question requests the student to select a correct answer for each question."
+msgstr ""
+
+#: /plugins/quiz/views/matching_questions/add.ctp:17
+msgid "Maximum number of associations that the student is allowed to create. Leave empty to have no restriction."
+msgstr ""
+
+#: /plugins/quiz/views/matching_questions/add.ctp:23
+msgid "Minimum number of associations that the student is required to create. Leave empty to have no restriction."
 msgstr ""
 
 #: /plugins/quiz/views/matching_questions/add.ctp:31
@@ -2272,6 +2293,14 @@ msgstr ""
 msgid "Create Ordering Question"
 msgstr ""
 
+#: /plugins/quiz/views/ordering_questions/add.ctp:18
+msgid "Maximum number of choices that the student is allowed to select to create an answer. Leave empty to have no restriction."
+msgstr ""
+
+#: /plugins/quiz/views/ordering_questions/add.ctp:24
+msgid "Minimum number of choices that the student is required to select to create an answer. Leave empty to have no restriction."
+msgstr ""
+
 #: /plugins/quiz/views/ordering_questions/add.ctp:32
 msgid "Write the choices in the correct order. Leave both fields empty to ignore."
 msgstr ""
@@ -2329,7 +2358,7 @@ msgid "There are no questions available"
 msgstr ""
 
 #: /plugins/quiz/views/quizzes/edit.ctp:39
-msgid "Associate"
+msgid "Add to quiz"
 msgstr ""
 
 #: /plugins/quiz/views/quizzes/index.ctp:25
@@ -2348,6 +2377,10 @@ msgstr ""
 
 #: /plugins/quiz/views/quizzes/rename.ctp:4
 msgid "Rename %s"
+msgstr ""
+
+#: /plugins/quiz/views/quizzes/rename.ctp:9
+msgid "Rename"
 msgstr ""
 
 #: /plugins/quiz/views/quizzes/view.ctp:69
@@ -2832,7 +2865,7 @@ msgid "Scorm"
 msgstr ""
 
 #: /plugins/scorm/views/scorms/add.ctp:7
-msgid "Indique el archivo zip..."
+msgid "Select the zip file"
 msgstr ""
 
 #: /plugins/scorm/views/scorms/add.ctp:13
@@ -3315,15 +3348,15 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: /views/elements/layout/user_courses.ctp:3
+#: /views/elements/layout/user_courses.ctp:6
 msgid "My Courses"
 msgstr ""
 
-#: /views/elements/layout/user_courses.ctp:27
+#: /views/elements/layout/user_courses.ctp:30
 msgid "You aren't enrolled in any course."
 msgstr ""
 
-#: /views/elements/layout/user_courses.ctp:31
+#: /views/elements/layout/user_courses.ctp:34
 msgid "Find a Course to enroll"
 msgstr ""
 
@@ -3428,12 +3461,16 @@ msgstr ""
 msgid "Delete Member"
 msgstr ""
 
-#: /views/members/login.ctp:4
-msgid "member.login.legend"
+#: /views/members/login.ctp:4;10
+msgid "Login"
 msgstr ""
 
-#: /views/members/login.ctp:10
-msgid "member.login.submit"
+#: /views/pages/home.ctp:10
+msgid "Your tmp directory is writable."
+msgstr ""
+
+#: /views/pages/home.ctp:12
+msgid "Your tmp directory is NOT writable."
 msgstr ""
 
 #: /views/pages/home.ctp:21
@@ -3448,12 +3485,32 @@ msgstr ""
 msgid "Your cache directory is not writable"
 msgstr ""
 
+#: /views/pages/home.ctp:50
+msgid "Your database configuration file is present."
+msgstr ""
+
+#: /views/pages/home.ctp:53
+msgid "Your database configuration file is NOT present."
+msgstr ""
+
+#: /views/pages/home.ctp:70
+msgid "Cake is able to connect to the database."
+msgstr ""
+
+#: /views/pages/home.ctp:72
+msgid "Cake is NOT able to connect to the database."
+msgstr ""
+
 #: /views/pages/home.ctp:78
 msgid "Release Notes for CakePHP %s."
 msgstr ""
 
 #: /views/pages/home.ctp:79
 msgid "Read the release notes and get the latest version"
+msgstr ""
+
+#: /views/pages/home.ctp:80
+msgid "Editing this Page"
 msgstr ""
 
 #: /views/pages/home.ctp:82

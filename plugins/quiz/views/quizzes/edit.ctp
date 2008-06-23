@@ -36,7 +36,7 @@
 		</div>
 	</div>
 	<?php
-		echo $form->submit(__('Associate', true));
+		echo $form->submit(__('Add to quiz', true));
 		echo $form->end();
 	?>
 </div>

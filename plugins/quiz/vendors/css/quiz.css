@@ -28,6 +28,12 @@
 	clear:both;
 }
 
+.quiz-preview li{
+	float: left;
+	clear:both;
+	margin-bottom:10px;
+}
+
 .droplist {
 	position:relative;
 	width:160px;
@@ -236,8 +242,7 @@ fieldset.question-choices .choice.set ol label {
 }
 .set ol li  {
 	list-style-position:inside;
-	border-bottom:#ccc 1px dashed;
-	padding-bottom:10px;
+	padding-bottom:0px;
 	margin-bottom:10px;
 	clear:both;
 	float:left;
@@ -282,4 +287,7 @@ fieldset.question-choices .choice.set ol label {
 	clear:both;
 	bottom:0;
 	margin-left:5px;
+}
+ol li div ol {
+	margin-top:10px;
 }
