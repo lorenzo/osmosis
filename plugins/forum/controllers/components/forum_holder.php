@@ -76,51 +76,11 @@ class ForumHolderComponent extends PlaceholderDataComponent {
 		$modelLog = ClassRegistry::getObject('ModelLog');
 		$user_courses = $modelLog->Member->courses($this->controller->Auth->user('id'));
 		$user_courses = Set::extract('/Course/id', $user_courses);
-		$logs = $modelLog->find('all',
-			array(
-				'conditions' => array(
-					'time >' => strtotime("-1 weeks"),
-					'model' => array_keys($this->useful_fields),
-					'course_id' => $user_courses
-				),
-				'limit' => 50
-			)
-		);
-		$Topic = $Discussion = $Response = null;
-		$results = array();
-		foreach ($logs as $i => $log) {
-			$modelLog = $log['ModelLog'];
-			$modelName = $modelLog['model'];
-			$entity_id = $modelLog['entity_id'];
-			$data = $this->__getModelData(
-				$modelName,
-				${$modelName},
-				'Forum',
-				$entity_id,
-				$this->useful_fields[$modelName]['restrict'],
-				$this->useful_fields[$modelName]['fields']
+			$logs = $modelLog->find('log',
+				array('models' => $this->useful_fields,'plugin' => 'Forum','course_id' => $user_courses)
 			);
-			if (!$data) continue;
-			$log['ModelLog']['data'] = $data;
-			if (isset($this->useful_fields[$modelName]['order_by'])){
-				$entity_id = Set::extract($this->useful_fields[$modelName]['order_by'] . '[:first]', $log['ModelLog']['data'] );
-				$entity_id = $entity_id[0];
-			}
-			$results[$modelLog['course_id']][$modelName][$entity_id][] = $log;
-		}
-		return $results;
+		return $logs;
 	}
 	
-	function __getModelData($modelName, &$Model, $plugin, $id, $restrict, $fields) {
-		if (!$Model) {
-			App::import('Model', $plugin . '.' . $modelName);
-			$Model = new $modelName;
-		}
-		if ($restrict) {
-			$Model->contain($restrict);
-		}
-		$result = $Model->find('first', array('conditions' => array($modelName . '.id' => $id), 'fields' => $fields));
-		return $result;
-	}
 }
 ?>

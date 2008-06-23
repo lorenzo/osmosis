@@ -35,6 +35,12 @@ class WikiHolderComponent extends PlaceholderDataComponent {
 	var $name = 'WikiHolder';
 	var $auto = true;
 	var $cache = false;
+	var $useful_fields = array(
+		'Entry' => array(
+			'fields' =>  array('Entry.id', 'Entry.title','Entry.slug'),
+			'contain' => false
+		)
+	);
 	
 	function courseToolbar() {
 		return array('url' => array(
@@ -43,5 +49,16 @@ class WikiHolderComponent extends PlaceholderDataComponent {
 			'action' => 'view', 
 			'course_id' =>$this->controller->_getActiveCourse()));
 	}
+	
+	function pluginUpdates() {
+		$modelLog = ClassRegistry::getObject('ModelLog');
+		$user_courses = $modelLog->Member->courses($this->controller->Auth->user('id'));
+		$user_courses = Set::extract('/Course/id', $user_courses);
+		$logs = $modelLog->find('log',
+			array('models' => $this->useful_fields,'plugin' => 'Wiki','course_id' => $user_courses)
+		);
+		return $logs;
+	}
+	
 }
 ?>

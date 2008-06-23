@@ -42,6 +42,77 @@ class ModelLog extends AppModel {
 								'order' => ''
 			)
 	);
+	
+	function __construct($id = false, $table = null, $ds = null) {
+		parent::__construct($id, $table, $ds);
+		$this->__findMethods['sql'] = true;
+	}
+	
+	function find($conditions = null, $fields = array(), $order = null, $recursive = null) {
+		if (is_string($conditions) && $conditions == 'log') {
+			return $this->_findLog($fields);
+		} else
+			return parent::find($conditions,$fields,$order,$recursive);
+	}
+	
+	function _findLog($options) {
+		$logs = $this->find('all',
+			array(
+				'conditions' => array(
+					'time >' => strtotime("-1 weeks"),
+					'model' => array_keys($options['models']),
+					'course_id' => $options['course_id']
+				),
+				'limit' => 50
+			)
+		);
+
+		$results = $queried = array();
+		foreach ($logs as $i => $log) {
+			$modelLog = $log['ModelLog'];
+			$modelName = $modelLog['model'];
+			$entity_id = $modelLog['entity_id'];
+			
+			if (isset($queried[$modelName][$entity_id]))
+				$data = $queried[$modelName][$entity_id];
+			else {
+				$data = $this->__getModelData(
+					$modelName,
+					${$modelName},
+					$options['plugin'],
+					$entity_id,
+					isset($options['models'][$modelName]['contain']) ? $options['models'][$modelName]['contain'] : array(),
+					$options['models'][$modelName]['fields']
+				);
+					
+				if (!$data) continue;
+				$queried[$modelName][$entity_id] = $data;
+			}
+			
+			$log['ModelLog']['data'] = $data;
+			if (isset($options['models'][$modelName]['order_by'])){
+				$entity_id = Set::extract($options['models'][$modelName]['order_by'] . '[:first]', $log['ModelLog']['data'] );
+				$entity_id = $entity_id[0];
+			}
+			$results[$modelLog['course_id']][$modelName][$entity_id][] = $log;
+		}
+		return $results;
+	}
+	
+	function __getModelData($modelName, &$Model, $plugin, $id, $contain, $fields) {
+		if (!$Model) {
+			$Model = ClassRegistry::init($plugin.'.'.$modelName);
+		}
+		if ($contain) {
+			$Model->contain($contain);
+		} elseif ($contain === false) {
+			$recursive = -1;
+		}
+		
+		$conditions = array($modelName . '.id' => $id);
+		$result = $Model->find('first',compact('conditions','fields','recursive'));
+		return $result;
+	}
 
 }
 ?>

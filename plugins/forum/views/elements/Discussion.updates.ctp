@@ -1,6 +1,5 @@
 <li>
 <?php
-// debug($events);
 $members = Set::extract('/Member', $events);
 $member_links = array();
 foreach ($members as $i => $member) {
@@ -14,6 +13,7 @@ foreach ($members as $i => $member) {
 $member_links = array_unique($member_links);
 $member_links = $text->toList($member_links, __('and', true));
 $discussion = $events[0]['ModelLog']['data']['Discussion'];
+
 echo String::insert(
 	__(':member_links :action the discussion <em>:discussion_name</em>.', true),
 	array(
