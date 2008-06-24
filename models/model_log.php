@@ -51,8 +51,9 @@ class ModelLog extends AppModel {
 	function find($conditions = null, $fields = array(), $order = null, $recursive = null) {
 		if (is_string($conditions) && $conditions == 'log') {
 			return $this->_findLog($fields);
-		} else
+		} else {
 			return parent::find($conditions,$fields,$order,$recursive);
+		}
 	}
 	
 	function _findLog($options) {

@@ -143,7 +143,7 @@ abstract class PlaceholderDataComponent extends Object {
 		if (!$data && method_exists($this, $method)) {
 			$data = $this->{$method}();
 		}
-		if ($data == false)
+		if ($data === false)
 			return;
 		$this->saveToCache($data, $type);
 		$this->setData($data, $type);
@@ -201,7 +201,7 @@ abstract class PlaceholderDataComponent extends Object {
 	
 	private function setData($data, $type = null) {
 
-		if ($data) {
+		if ($data!==false) {
 			if (!$this->cache) {
 				$elementData['cache'] = false;
 			} else if (!Configure::read('Cache.disabled') && $this->cacheExpires) {

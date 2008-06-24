@@ -37,7 +37,8 @@ class BlogHolderComponent extends PlaceholderDataComponent {
 	var $cache = false;
 	
 	function head() {
-		return $this->controller->plugin == 'blog';
+		
+		return $this->controller->plugin == 'blog' || $this->controller->name == 'Dashboards' && $this->controller->action == 'messages';
 	}
 	
 	/**
@@ -46,7 +47,21 @@ class BlogHolderComponent extends PlaceholderDataComponent {
 	 * @return mixed Data or False if no data sent do placeholder
 	 **/
 	function messagesDashboard() {
-		return true;
+		$blog = ClassRegistry::init('Blog.Blog');
+		$blog->Post->Comment->contain(
+			array(
+				'Member' => array('id', 'full_name'),
+				'Post(member_id)'
+			)
+		);
+		$conditions = array(
+			'Post.member_id' => $this->controller->Auth->user('id')
+		);
+		$data = $blog->Post->Comment->find('all', compact('conditions'));
+		if (!$data) {
+			$data = array();
+		}
+		return $data;
 	}
 }
 ?>

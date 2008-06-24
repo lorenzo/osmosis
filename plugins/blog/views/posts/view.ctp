@@ -20,7 +20,6 @@
 			if ($post['Blog']['member_id'] == $comment['Member']['id']) {
 				$class = ' owner';
 			}
-			// debug($comment);
 ?>
 	<div class="comment<?php echo $class ?>">
 		<cite>
@@ -34,7 +33,7 @@
 					)
 				);
 			?>
-		</cite> <?php __('said:'); ?>
+		</cite> <?php __('wrote:'); ?>
 		<blockquote>
 			<?php
 				echo $filter->filter($comment['comment']);

@@ -30,7 +30,7 @@
 			endforeach;
 		?>
 		</ul>
-		<p class='locker'>
+		<p class='go'>
 			<?php
 				echo $html->link(
 					__('Go to your locker', true),
