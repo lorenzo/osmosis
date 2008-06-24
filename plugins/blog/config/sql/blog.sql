@@ -21,8 +21,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS `blog_blogs` (
   `id` int(11) NOT NULL auto_increment,
-  `title` varchar(200) NOT NULL,
-  `description` text NOT NULL,
   `member_id` varchar(100) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
