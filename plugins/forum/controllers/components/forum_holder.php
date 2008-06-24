@@ -39,15 +39,15 @@ class ForumHolderComponent extends PlaceholderDataComponent {
 	var $useful_fields = array(
 		'Topic' => array(
 			'fields' => array(),
-			'restrict' => null
+			'contain' => false
 		),
 		'Discussion' => array(
 			'fields' =>  array('Discussion.id', 'Discussion.title', 'Discussion.status'),
-			'restrict' => null
+			'contain' => false
 		),
 		'Response' => array(
 			'fields' => array(),
-			 'restrict' => array('Discussion'),
+			'contain' => array('Discussion'),
 			'order_by' => '/Discussion/id'
 		)
 	);

@@ -50,7 +50,7 @@ class ChatsController extends ChatAppController {
 		$enrollments = $this->Member->Enrollment->find('all',
 		array(
 			'conditions' => array('member_id' => $this->Auth->user('id')),
-			'restrict'	=> 'Enrollment'
+			'contain'	=> 'Enrollment'
 			)
 		);
 		
