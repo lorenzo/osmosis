@@ -2,7 +2,7 @@
 	<?php
 		$folder_id = $parentFolder['LockerFolder']['id'];
 		$owner = $parentFolder['LockerFolder']['member_id'];
-		if ($Osmosis['active_member']==$owner) :
+		if ($Osmosis['active_member']['id']==$owner) :
 	?>
 		<div class="create-folder action">
 			<?php

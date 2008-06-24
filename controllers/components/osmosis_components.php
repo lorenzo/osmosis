@@ -73,7 +73,8 @@ class OsmosisComponentsComponent extends Object {
 	function _setActiveMember() {
 		if (!isset($this->controller->Auth))
 			return array();
-		$this->controller->viewVars['Osmosis']['active_member'] = $this->controller->Auth->user('id');
+		$member = $this->controller->Auth->user();
+		$this->controller->viewVars['Osmosis']['active_member'] = $member['Member'];
 	}
 	
 	function beforeRender() {
