@@ -1,0 +1,1 @@
+<?php echo $html->css('/wiki/css/wiki.css'); ?>

@@ -210,11 +210,11 @@ a:visited {
 }
 
 #plugin-updates ul {
-	padding-left:25px;
+	padding-left:0px;
 	border-left:none;
 }
 #plugin-updates ul li {
-	padding:10px 0;
+	padding:10px 0 10px 25px;
 }
 #plugin-updates ul ul li {
 	border:none;

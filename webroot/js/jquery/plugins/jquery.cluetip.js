@@ -485,7 +485,7 @@ clearTimeout(closeOnDelay);
     // settings for when hoverIntent plugin is used             
     hoverIntent: {    
                       sensitivity:  3,
-              			  interval:     50,
+              			  interval:     200,
               			  timeout:      0
     },
 

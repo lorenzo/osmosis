@@ -19,7 +19,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `locker_documents`
 --
 
-CREATE TABLE `locker_documents` (
+CREATE OR UPDATE TABLE `locker_documents` (
   `id` char(36) character set ascii NOT NULL COMMENT 'document id',
   `name` varchar(100) collate utf8_unicode_ci NOT NULL COMMENT 'The name of the document',
   `description` text collate utf8_unicode_ci NOT NULL COMMENT 'document''s description',
@@ -39,7 +39,7 @@ CREATE TABLE `locker_documents` (
 -- Table structure for table `locker_folders`
 --
 
-CREATE TABLE `locker_folders` (
+CREATE OR UPDATE TABLE `locker_folders` (
   `id` char(36) character set ascii NOT NULL,
   `name` varchar(100) collate utf8_unicode_ci NOT NULL,
   `folder_name` varchar(150) collate utf8_unicode_ci NOT NULL,

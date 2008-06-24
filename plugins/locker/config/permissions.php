@@ -29,40 +29,24 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-App::import('Component', 'PlaceholderData');
 
-class WikiHolderComponent extends PlaceholderDataComponent {
-	var $name = 'WikiHolder';
-	var $auto = true;
-	var $cache = false;
-	var $useful_fields = array(
-		'Entry' => array(
-			'fields' =>  array('Entry.id', 'Entry.title','Entry.slug'),
-			'contain' => false
-		)
+class LockerPermissions extends Object {
+	
+	var $Folders = array(
+		'view'	=> 'Public',
+		'add' => 'Member',
+		'edit'	=> 'Member',
+		'delete' => 'Member',
+		'move'	=> 'Member'
 	);
-	
-	function head() {
-		return $this->controller->plugin == 'forum' || ($this->controller->name == 'Courses' && $this->controller->action =='index');
-	}
-	
-	function courseToolbar() {
-		return array('url' => array(
-			'plugin' => 'wiki', 
-			'controller' => 'wikis',
-			'action' => 'view', 
-			'course_id' =>$this->controller->_getActiveCourse()));
-	}
-	
-	function pluginUpdates() {
-		$modelLog = ClassRegistry::getObject('ModelLog');
-		$user_courses = $modelLog->Member->courses($this->controller->Auth->user('id'));
-		$user_courses = Set::extract('/Course/id', $user_courses);
-		$logs = $modelLog->find('log',
-			array('models' => $this->useful_fields,'plugin' => 'Wiki','course_id' => $user_courses)
-		);
-		return $logs;
-	}
-	
+		
+	var $Documents = array(
+		'add'	=> 'Member',
+		'edit'	=> 'Member',
+		'view'	=> 'Public',
+		'download' => 'Member',
+		'delete'	=> 'Member',
+		'drop'	=> 'Member'
+	);
 }
 ?>

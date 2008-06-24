@@ -1,0 +1,14 @@
+#plugin-updates ul#wiki li {
+	background:url('../img/edit.png');
+	background-repeat:no-repeat;
+	background-position:0px 10px;
+}
+
+#plugin-updates ul#wiki li li {
+	list-style:square outside;
+}
+
+#wiki-updates strong.title {
+	background:#f5f5f5 url('../img/wiki.png') no-repeat 10px 0;
+	padding-left:30px;
+}

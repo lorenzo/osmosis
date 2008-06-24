@@ -1,4 +1,4 @@
-<div id="forum-updates">
+<div id="wiki-updates">
 <strong class="title"><?php __('Wiki'); ?></strong>
 <?php
 foreach ($data as $modelName => $entity) :

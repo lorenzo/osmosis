@@ -180,7 +180,9 @@ table tr .number {
 }
 
 #plugin-updates ul#forum li {
-	list-style:url('../img/edit.png');
+	background:url('../img/message.png');
+	background-repeat:no-repeat;
+	background-position:0px 10px;
 }
 
 #plugin-updates ul#forum li li {
