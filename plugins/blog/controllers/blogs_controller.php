@@ -32,7 +32,7 @@
 class BlogsController extends BlogAppController {
 
 	var $name = 'Blogs';
-	var $helpers = array('Html', 'Form' );
+	var $helpers = array('Html', 'Form');
 
 	function index() {
 		$myblog = $this->Session->read('Auth.Member.Blog.id');
@@ -45,18 +45,22 @@ class BlogsController extends BlogAppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Blog.',true));
-			$my_blog = $this->Session->read('Auth.Member.Blog.id');
-			$this->redirect(array('action'=>'view', $my_blog));
+			if (!isset($this->params['named']['member_id'])) {
+				$this->Session->setFlash(__('Invalid Blog.',true));
+				$this->redirectIf(true);
+			} else {
+				$id = $this->Blog->userBlog($this->params['named']['member_id'], true);
+				$this->redirect(
+					array(
+						'plugin'		=> 'blog',
+						'controller'	=> 'blogs',
+						'action'		=> 'view',
+						$id
+					)
+				);
+			}
 		}
-		$this->set('blog',
-			$this->Blog->find(
-				'first',
-				array(
-					'conditions' => array('Blog.id' => $id)
-				)
-			)
-		);
+		$this->set('blog', $this->Blog->read(null, $id));
 	}
 
 	function add() {

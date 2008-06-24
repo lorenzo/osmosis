@@ -33,56 +33,55 @@ class Blog extends BlogAppModel {
 
 	var $name = 'Blog';
 	var $useTable = 'blog_blogs';
-	var $validate = array(
-		'title' => array(
-		    'Error.empty' => array(
-		        'rule' => array( 'custom','/.+/'),
-		        'required' => true,
-		        'on' => 'create',
-				),
-		),
-		'description' => array(
-		    'Error.empty' => array(
-		        'rule' => array( 'custom','/.+/'),
-		        'required' => true,
-		        'on' => 'create',
-				),
-		),
-		'member_id' => array(
-		    'Error.empty' => array(
-		        'rule' => array( 'custom','/.+/'),
-		        'required' => true,
-		        'on' => 'create',
-				),
-		),
-	);
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+	/**
+	 * HasMany (N-1) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $hasMany = array(
-			'Post' => array('className' => 'Blog.Post',
-								'foreignKey' => 'blog_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => 'created DESC',
-								'limit' => '',
-								'offset' => '',
-								'dependent' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''),
+		// Blog HasMany Post
+		'Post' => array(
+			'className'		=> 'Blog.Post',
+			'foreignKey'	=> 'blog_id',
+			'conditions'	=> '',
+			'fields'		=> '',
+			'order'			=> 'created DESC',
+			'limit'			=> '',
+			'offset'		=> '',
+			'dependent'		=> '',
+			'exclusive'		=> '',
+			'finderQuery'	=> '',
+			'counterQuery'	=> ''
+		)
 	);
 	
+	/**
+	 * BelongsTo (1-N) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $belongsTo = array(
+		// Blog BelongsTo Member (Writer)
 		'Member' => array(
 			'className' => 'Member'
 		)
 	);
-	
-	function __construct($id = false, $table = null, $ds = null) {
-			$this->validate['title']['Error.empty']['message'] = __('The title can not be empty',true);
-			$this->validate['description']['Error.empty']['message'] = __('The description can not be empty',true);
-			$this->validate['member_id']['Error.empty']['message'] = __('The member can not be empty',true);
-			parent::__construct($id,$table,$ds);
+		
+	/**
+	 * Returns the blog (and creates it, if it doesn't exists) of the member
+	 *
+	 * @param $member_id int Id of the member 
+	 * @param $just_id boolean wether the return value is the blog data or just the id
+	 * @return mixed The parent folder data of the member's locker or false if not found
+	 **/
+	function userBlog($member_id) {
+		$id = $this->field('id', compact('member_id'));
+		if (!$id) {
+			$blog = $this->save(array('Blog' => compact('member_id')));
+			$id = $this->id;
+		}
+		return $id;
 	}
 }
 ?>

@@ -319,6 +319,7 @@ class LockerFolder extends LockerAppModel {
 	 * Returns the locker (and creates it, if it doesn't exists) of the member
 	 *
 	 * @param $member_id int Id of the member
+	 * @param $just_id boolean wether the return value is the locker data or just the id
 	 * @return mixed The parent folder data of the member's locker or false if not found
 	 **/
 	function userLocker($member_id, $just_id = false) {

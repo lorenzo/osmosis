@@ -51,7 +51,7 @@ echo $this->element('folder_path', compact('path', 'member', 'document'));
 		<?php
 			endif;
 		?>
-			<li class="download">
+			<li class="info download">
 			<?php
 				echo $html->link(
 					__('Download', true),

@@ -1,23 +1,27 @@
+<h1>
+	<?php
+		printf(__('%s\' Blog', true), $blog['Member']['full_name']);
+	?>
+</h1>
 <?php
-	$html->css('/blog/css/blog.css', null, null, false);
+	if ($Osmosis['active_member']['id']==$blog['Member']['id']) :
 ?>
-<div id="blog-header">
-	<h2><?php echo $blog['Blog']['title']; ?></h2>
-	<p class="description"><?php echo $blog['Blog']['description']; ?></p>
-	<p class="author"><?php __('By:'); ?> 
-	<?php
-		echo $html->link(
-			$blog['Member']['full_name'],
-			'/members/view/' . $blog['Member']['id'],
-			array(
-				'title' => 'Ver el perfil de ' . $blog['Member']['full_name']
-			)
-		);
-	?></p>
-</div>
+	<ul class="reverse actions">
+		<li class="add">
+			<?php
+				echo $html->link(
+					__('New Post', true),
+					array('controller'=> 'posts', 'action'=>'add', $blog['Blog']['id'])
+				);
+			?>
+		</li>
+	</ul>
+<?php
+	endif;
+?>
 <div class="blog-posts">
-	<?php if (!empty($blog['Post'])):?>
-	<?php
+<?php
+	if (!empty($blog['Post'])):
 		$i = 0;
 		foreach ($blog['Post'] as $post):
 			$class = null;
@@ -25,11 +29,15 @@
 				$class = ' class="altrow"';
 			}
 			echo $this->element('post', array('post' => $post));
-		endforeach; ?>
-<?php endif; ?>
-	<div class="actions">
-		<ul>
-			<li><?php echo $html->link(__('New Post', true), array('controller'=> 'posts', 'action'=>'add', $blog['Blog']['id'])); ?> </li>
-		</ul>
-	</div>
+		endforeach;
+	else :
+?>
+	<p>
+		<?php
+			__('No Posts written yet');
+		?>
+	</p>
+<?php
+	endif;
+?>
 </div>

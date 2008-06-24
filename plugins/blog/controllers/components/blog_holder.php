@@ -29,20 +29,24 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-class DashboardsController extends AppController {
 
-	var $name = 'Dashboards';
-	var $helpers = array('Html', 'Form', 'Tree');
-	var $components = array('OsmosisComponents', 'Placeholder');
-	var $uses = array('Role');
+App::import('Component', 'PlaceholderData');
+class BlogHolderComponent extends PlaceholderDataComponent {
+	var $name = 'BlogHolder';
+	var $auto = true;
+	var $cache = false;
 	
-	function admin_dashboard() {
+	function head() {
+		return $this->controller->plugin == 'blog';
 	}
 	
-	function connections() {
-	}
-	
-	function messages() {
+	/**
+	 * Set data to be used on the connectionsDashboard placeholder
+	 *
+	 * @return mixed Data or False if no data sent do placeholder
+	 **/
+	function messagesDashboard() {
+		return true;
 	}
 }
 ?>

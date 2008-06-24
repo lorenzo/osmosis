@@ -42,6 +42,7 @@ class PostsController extends BlogAppController {
 		}
 		if (!empty($this->data)) {
 			$this->Post->create();
+			$this->data['Post']['member_id'] = $this->Auth->user('id');
 			$this->data['Post']['body'] = $this->HtmlPurifier->purify($this->data['Post']['body']);			
 			if ($this->Post->save($this->data)) {
 				$this->Session->setFlash(__('The Post has been saved',true));
@@ -88,7 +89,8 @@ class PostsController extends BlogAppController {
 		}
 	}
 	
-	function view($slug) {		
+	function view($slug) {
+		$this->Post->contain(array('Blog' => 'Member(full_name,id)'));
 		$this->set('post', $this->Post->findBySlug($slug));
 	} 
 

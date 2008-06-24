@@ -294,3 +294,64 @@ ul.professors-list .vcard .tel {
 	margin-right:2%;
 	margin-bottom:15px;
 }
+ul.actions {
+	list-style:none;
+}
+ul.actions li {
+	float:left;
+	margin-right:10px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	padding:2px 5px 2px 0;
+}
+ul.actions.reverse li {
+	float:right;
+}
+ul.actions li a {
+	padding-left:20px;
+}
+ul.actions li.edit {
+	background:#FFF4BF url('../../img/default/edit.png') no-repeat 2px 2px;
+	border:#DFB700 1px solid;
+}
+ul.actions li.edit a {
+	padding-left:22px;
+	color:#DFB700;
+	text-decoration:none;
+}
+ul.actions li.edit a:hover {
+	color:#9F8300;
+}
+ul.actions li.delete {
+	background:#FFAFAF url('../../img/default/delete.png') no-repeat 2px 2px;
+	border:#BD0000 1px solid;
+}
+ul.actions li.delete a {
+	color:#BD0000;
+	text-decoration:none;
+}
+ul.actions li.delete a:hover {
+	color:#8F0000;
+}
+ul.actions li.info {
+	background:#BFD9FF url('../../img/default/info.png') no-repeat 2px 2px;
+	border:#005BDF 1px solid;
+}
+ul.actions li.info a {
+	color:#005BDF;
+	text-decoration:none;
+}
+ul.actions li.info a:hover {
+	color:#00275F;
+}
+ul.actions li.add {
+	background:#C8FFBF url('../../img/default/edit_add.png') no-repeat 2px 1px;
+	border:#21DF00 1px solid;
+}
+ul.actions li.add a {
+	color:#1CBF00;
+	text-decoration:none;
+}
+ul.actions li.add a:hover {
+	color:#106F00;
+}

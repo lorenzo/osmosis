@@ -353,51 +353,8 @@ ul#path li.home a {
 	list-style:none;
 	padding:0;
 }
-#document-description ul.actions li {
-	float:left;
-	margin-right:10px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	padding:2px 5px 2px 0;
-}
-#document-description ul.actions li a {
-	padding-left:20px;
-}
-#document-description ul.actions li.delete {
-	background:#FFAFAF url('../img/delete.png') no-repeat 2px 2px;
-	border:#BD0000 1px solid;
-}
-#document-description ul.actions li.delete a {
-	color:#BD0000;
-	text-decoration:none;
-}
-#document-description ul.actions li.delete a:hover {
-	color:#8F0000;
-}
-#document-description ul.actions li.download {
+#document-description ul.actions li.info.download {
 	background:#BFD9FF url('../img/down.png') no-repeat 2px 2px;
-	border:#005BDF 1px solid;
-}
-#document-description ul.actions li.download a {
-	color:#005BDF;
-	text-decoration:none;
-}
-#document-description ul.actions li.download a:hover {
-	color:#00275F;
-}
-
-
-#document-description ul.actions li.edit {
-	background:#FFF4BF url('../img/edit.png') no-repeat 2px 2px;
-	border:#DFB700 1px solid;
-}
-#document-description ul.actions li.edit a {
-	padding-left:22px;
-	color:#DFB700;
-	text-decoration:none;
-}
-#document-description ul.actions li.edit a:hover {
-	color:#9F8300;
 }
 #cluetip-inner h2 {
 	font-size:1em;

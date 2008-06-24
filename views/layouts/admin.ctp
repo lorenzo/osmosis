@@ -47,7 +47,12 @@
 					</div>
 					<div id="main">
 						<div class="content">
-							<?php echo $content_for_layout; ?>
+							<?php
+								if ($session->check('Message.flash')) {
+									$session->flash();
+								}
+								echo $content_for_layout;
+							?>
 						</div>
 					</div>
 					<div id="more-courses">

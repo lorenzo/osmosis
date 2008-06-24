@@ -10,7 +10,12 @@
 			?>
 		</li>
 		<li class="messages">
-			<a href="#">Mensajes</a>
+			<?php
+				echo $html->link(
+					__('Messages', true),
+					array('plugin' => '', 'controller' => 'dashboards', 'action' => 'messages')
+				);
+			?>
 		</li>
 		<li class="conections">
 			<?php

@@ -1,10 +1,14 @@
-<h2><?php echo $wiki['Wiki']['name']; ?></h2>
+<?php debug($wiki);?><h2><?php echo $wiki['Wiki']['name']; ?></h2>
 <p><?php echo $filter->filter($wiki['Wiki']['description']); ?></p>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('New Entry', true), array('controller'=> 'entries', 'action'=>'add', 'wiki_id' => $wiki['Wiki']['id']));?> </li>
+	<ul class="actions">
+		<li class="add">
+			<?php
+				echo $html->link(
+					__('New Entry', true),
+					array('controller'=> 'entries', 'action'=>'add', 'wiki_id' => $wiki['Wiki']['id']));
+			?>
+		</li>
 	</ul>
-</div>
 <div class="related">
 	<h3><?php __('Recent Entries');?></h3>
 	<?php if (!empty($wiki['Entry'])):?>
