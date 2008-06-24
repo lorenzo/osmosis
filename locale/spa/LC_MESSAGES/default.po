@@ -3528,17 +3528,17 @@ msgstr ""
 #: /plugins/locker/views/documents/view.ctp:17
 #: /plugins/locker/views/documents/ajax/view.ctp:4
 msgid "This file has no description"
-msgstr ""
+msgstr "Este archivo no tiene descripción"
 
 #: /plugins/locker/views/documents/view.ctp:47
 #: /plugins/locker/views/documents/ajax/view.ctp:19
 msgid "Please confirm the deletion of %s"
-msgstr ""
+msgstr "Por favor, confirme que desea eliminar %s"
 
 #: /plugins/locker/views/documents/view.ctp:57
 #: /plugins/locker/views/documents/ajax/view.ctp:22
 msgid "Download"
-msgstr ""
+msgstr "Descargar"
 
 #: /plugins/locker/views/elements/file_info.ctp:11
 msgid "Dropbox"
@@ -3550,15 +3550,15 @@ msgstr ""
 
 #: /plugins/locker/views/folders/view.ctp:28
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: /plugins/locker/views/folders/view.ctp:29
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: /plugins/locker/views/folders/ajax/view.ctp:4
 msgid "View this Folder's Content"
-msgstr ""
+msgstr "Ver el contenido de esta carpeta"
 
 #: /plugins/quiz/views/quizzes/rename.ctp:9
 msgid "Rename"

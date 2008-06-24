@@ -16,15 +16,15 @@
 				array('controller' => 'topics', 'action' => 'index', 'course_id' => $topic['Course']['id'])
 			)
 		);
-		//echo ' ';
-		//echo  $html->link(
-			//__('Start a discussion', true),
-			//array(
-			//	'controller'=> 'discussions',
-			//	'action'=>'add',
-			//	'topic_id' => $topic['Topic']['id']
-			//)
-		//);
+	?>
+</p>
+<p class="actions-button">
+	<?php
+		echo ' ';
+		echo  $html->link(
+			__('Start a discussion', true),
+			array('controller'=> 'discussions','action'=>'add','topic_id' => $topic['Topic']['id'])
+		);
 	?>
 </p>
 <?php

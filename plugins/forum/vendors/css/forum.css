@@ -148,6 +148,14 @@ table tr .number {
 	margin-top:0;
 }
 
+.forum p.actions-button {
+	position:absolute;
+	right:20px;
+	top:20px;
+	margin:0;
+	
+}
+
 .paging {
 	background:#6EA6D5;
 	color:#ccc;
