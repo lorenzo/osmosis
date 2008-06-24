@@ -33,40 +33,78 @@ class Comment extends BlogAppModel {
 
 	var $name = 'Comment';
 	var $useTable = 'blog_comments';
+
+	/**
+	 * Validation Rules for Fields
+	 *
+	 * @var array
+	 **/
 	var $validate = array(
 		'comment' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+			'required' => array(
+				'rule'		=> array('custom', '/.+/'),
+				'required'	=> true,
+				'on'		=> 'create'
+			)
 		),
 		'post_id' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+			'required' => array(
+				'rule'		=> array('custom', '/.+/'),
+				'required'	=> true,
+				'on'		=> 'create'
+			)
 		),
 		'member_id' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+			'required' => array(
+				'rule'		=> array('custom', '/.+/'),
+				'required'	=> true,
+				'on'		=> 'create'
+			)
 		)
 	);
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+	/**
+	 * BelongsTo (1-N) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $belongsTo = array(
-			'Post' => array('className' => 'Blog.Post',
-								'foreignKey' => 'post_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
-								
-			'Member' => array('className' => 'Member',
-								'foreignKey' => 'member_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
+		// Comment BelongsTo Post
+		'Post' => array(
+			'className'		=> 'Blog.Post',
+			'foreignKey'	=> 'post_id',
+			'conditions'	=> '',
+			'fields'		=> '',
+			'order'			=> '',
+			'counterCache'	=> ''
+		),
+		// Comment BelongsTo Member
+		'Member' => array(
+			'className'		=> 'Member',
+			'foreignKey'	=> 'member_id',
+			'conditions'	=> '',
+			'fields'		=> '',
+			'order'			=> '',
+			'counterCache'	=> ''
+		)
 	);
-	
+
+	/**
+	 * Model contructor. Initializes the validation error messages with i18n
+	 *
+	 * @see Model::__construct
+	 */
 	function __construct($id = false, $table = null, $ds = null) {
-			$this->validate['comment']['Error.empty']['message'] = __('The comment can not be empty',true);
-			$this->validate['post_id']['Error.empty']['message'] = __('The post_id can not be empty',true);
-			$this->validate['member_id']['Error.empty']['message'] = __('The member_id can not be empty',true);
-			parent::__construct($id,$table,$ds);
+		$this->setErrorMessage(
+			'comment.required', __('Please write your comment', true)
+		);
+		$this->setErrorMessage(
+			'post_id.required', __('Post ID missing', true)
+		);
+		$this->setErrorMessage(
+			'member_id.required', __('Member ID missing', true)
+		);
+		parent::__construct($id,$table,$ds);
 	}
 }
 ?>

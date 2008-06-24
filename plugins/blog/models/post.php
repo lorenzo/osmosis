@@ -32,64 +32,101 @@
 class Post extends BlogAppModel {
 
 	var $name = 'Post';
+	var $useTable = 'blog_posts';
+
+	/**
+	 * Validation Rules for Fields
+	 *
+	 * @var array
+	 **/
+	var $validate = array(
+		'title' => array(
+		    'required' => array(
+		        'rule'		=> array( 'custom','/.+/'),
+		        'required'	=> true,
+		        'on'		=> 'create'
+			)
+		),
+		'body' => array(
+		    'required'		=> array(
+		        'rule'		=> array( 'custom','/.+/'),
+		        'required'	=> true,
+		        'on'		=> 'create'
+			)
+		),
+		'blog_id' => array(
+		    'required' => array(
+		        'rule'		=> array( 'custom','/.+/'),
+		        'required'	=> true,
+		        'on'		=> 'create'
+			)
+		),
+	);
+
+	/**
+	 * Attached behaviors
+	 *
+	 * @var array
+	 **/
 	var $actsAs = array(
 		'Sluggable' => array('label' => 'title', 'slug' => 'slug', 'overwrite' => false)
 	);
-	var $useTable = 'blog_posts';
-	var $validate = array(
-		'title' => array(
-		    'Error.empty' => array(
-		        'rule' => array( 'custom','/.+/'),
-		        'required' => true,
-		        'on' => 'create',
-				),
-		),
-		'body' => array(
-		    'Error.empty' => array(
-		        'rule' => array( 'custom','/.+/'),
-		        'required' => true,
-		        'on' => 'create',
-				),
-		),
-		'blog_id' => array(
-		    'Error.empty' => array(
-		        'rule' => array( 'custom','/.+/'),
-		        'required' => true,
-		        'on' => 'create',
-				),
-		),
+
+	/**
+	 * BelongsTo (1-N) relation descriptors
+	 *
+	 * @var array
+	 **/
+	var $belongsTo = array(
+		// Post BelongsTo Post
+		'Blog' => array(
+			'className'		=> 'Blog.Blog',
+			'foreignKey'	=> 'blog_id',
+			'conditions'	=> '',
+			'fields'		=> '',
+			'order'			=> '',
+			'counterCache'	=> ''
+		)
 	);
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
-	var $belongsTo = array(
-			'Blog' => array('className' => 'Blog.Blog',
-								'foreignKey' => 'blog_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
-								);
-
+	/**
+	 * HasMany (N-1) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $hasMany = array(
-			'Comment' => array('className' => 'Blog.Comment',
-								'foreignKey' => 'post_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'limit' => '',
-								'offset' => '',
-								'dependent' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''),
+		// Post HasMany Comments
+		'Comment' => array(
+			'className'		=> 'Blog.Comment',
+			'foreignKey'	=> 'post_id',
+			'conditions'	=> '',
+			'fields'		=> '',
+			'order'			=> '',
+			'limit'			=> '',
+			'offset'		=> '',
+			'dependent'		=> true,
+			'exclusive'		=> '',
+			'finderQuery'	=> '',
+			'counterQuery'	=> ''
+		)
 	);
 	
+	/**
+	 * Model contructor. Initializes the validation error messages with i18n
+	 *
+	 * @see Model::__construct
+	 */
 	function __construct($id = false, $table = null, $ds = null) {
-			$this->validate['title']['Error.empty']['message'] = __('The title can not be empty',true);
-			$this->validate['body']['Error.empty']['message'] = __('The body can not be empty',true);
-			$this->validate['blog_id']['Error.empty']['message'] = __('The post must belong to a blog',true);
-			parent::__construct($id,$table,$ds);
+		$this->setErrorMessage(
+			'title.required', __('Please write the title of the post', true)
+		);
+		$this->setErrorMessage(
+			'body.required', __('Please write the content of the posts', true)
+		);
+		$this->setErrorMessage(
+			'blog_id.required', __('Blog ID missing', true)
+		);
+		parent::__construct($id,$table,$ds);
 	}
-
 }
 ?>

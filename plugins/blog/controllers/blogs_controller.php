@@ -47,7 +47,7 @@ class BlogsController extends BlogAppController {
 		if (!$id) {
 			if (!isset($this->params['named']['member_id'])) {
 				$this->Session->setFlash(__('Invalid Blog.',true));
-				$this->redirectIf(true);
+				$this->_redirectIf(true);
 			} else {
 				$id = $this->Blog->userBlog($this->params['named']['member_id'], true);
 				$this->redirect(

@@ -83,10 +83,10 @@ class Quiz extends QuizAppModel {
 			),
 	);
 	function __construct($id = false, $table = null, $ds = null) {
-			$this->setErrorMessage(
-				'name.required', __('The name can not be empty',true)
-			);
-			parent::__construct($id,$table,$ds);
+		$this->setErrorMessage(
+			'name.required', __('The name can not be empty',true)
+		);
+		parent::__construct($id,$table,$ds);
 	}
 
 	function getQuestions($question_type=null, $id = null) {

@@ -89,9 +89,12 @@ class PostsController extends BlogAppController {
 			$this->Session->setFlash(__('Invalid id for Post',true));
 			$this->redirect(array('action'=>'view', 'controller' => 'blogs', $this->data['Post']['blog_id']), null, true);
 		}
+		$this->Post->contain('Blog(id)');
+		$data = $this->Post->read(array('id'), $id);
+		$blog_id = $data['Blog']['id'];
 		if ($this->Post->del($id)) {
 			$this->Session->setFlash(__('Post deleted',true));
-			$this->redirect(array('action'=>'view', 'controller' => 'blogs', $this->data['Post']['blog_id']), null, true);
+			$this->redirect(array('action'=>'view', 'controller' => 'blogs', $blog_id), null, true);
 		}
 	}
 	
