@@ -1,7 +1,7 @@
 <h2 id="post<?php echo $post['id']?>" class="post-title">
 	<?php echo $html->link($post['title'], array('controller'=>'posts','action'=>'view', $post['slug']));?>
 </h2>
-<div class="date">
+<div class="post-date">
 	<span class="month"><?php echo $time->format('M', $post['created']);?></span>
 	<span class="day"><?php echo $time->format('d', $post['created']);?></span>
 </div>
