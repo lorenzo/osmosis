@@ -11,7 +11,7 @@
 		echo $javascript->codeBlock('var scorm_id = "' . $scorm['Scorm']['id'] . '";');
 		echo $javascript->codeBlock('var sco_id = "yokjojojo";');
 		echo $javascript->codeBlock('$(document).ready(function(){ $("#scorm_toc ul").treeview(); });');
-		echo $this->renderElement('scorms/scorm_toc', array('cache' => '1 day', 'scorm' => $scorm,"foo". $scorm['Scorm']['id'] =>'foo'));
+		echo $this->element('scorms/scorm_toc', array('cache' => '1 day', 'scorm' => $scorm,"foo". $scorm['Scorm']['id'] =>'foo'));
 	?>
 	<div id="scorm_controls">
 		<?php

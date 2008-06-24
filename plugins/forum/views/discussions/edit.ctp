@@ -26,5 +26,5 @@
 <?php echo $form->end(__('Submit', true));?>
 </div>
 <?php
-	echo $this->renderElement('ui/editor');
+	echo $this->element('ui/editor');
 ?>

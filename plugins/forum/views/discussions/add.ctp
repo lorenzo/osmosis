@@ -14,5 +14,5 @@
 <?php echo $form->end(__('Create Discussion', true));?>
 </div>
 <?php
-	echo $this->renderElement('ui/editor');
+	echo $this->element('ui/editor');
 ?>

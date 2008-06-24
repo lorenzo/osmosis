@@ -16,7 +16,7 @@
 			<?php
 			 	echo sprintf($num, $num_choices) . ' | ';
 				echo $html->link(__('view', true), array('controller' => 'choice_questions', 'action' => 'view', $question['id']));
-				echo $this->renderElement(
+				echo $this->element(
 					'selection_list.add_question',
 					array('question_id' => $question['id'], 'i' => $i++, 'type'=>'OrderingQuestion')
 				);

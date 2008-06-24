@@ -13,4 +13,4 @@
 	echo $form->end(__('Create Question',true));
 ?>
 </div>
-<?php echo $this->renderElement('ui/editor',array('theme' => 'simple')); ?>
+<?php echo $this->element('ui/editor',array('theme' => 'simple')); ?>

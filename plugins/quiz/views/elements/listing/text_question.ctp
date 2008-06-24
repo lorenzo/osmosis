@@ -8,7 +8,7 @@
 			<strong><?php echo $question['title']; ?></strong><br />
 			<?php
 				echo $text->truncate($question['body'], 200);
-				echo $this->renderElement('selection_list.add_question', array('question_id' => $question['id'], 'i' => $i++, 'type' => 'TextQuestion'));
+				echo $this->element('selection_list.add_question', array('question_id' => $question['id'], 'i' => $i++, 'type' => 'TextQuestion'));
 			?>
 		</li>
 	<?php	
