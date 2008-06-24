@@ -5,7 +5,7 @@
 	?>
 </h1>
 <?php
-	echo $this->element('post', array('post' => $post['Post']));
+	echo $this->element('post', array('post' => $post['Post'], 'single' => true));
 ?>
 <h3 id="comments"><?php __('Comments');?></h3>
 <div class="comments">

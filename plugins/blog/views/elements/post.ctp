@@ -21,6 +21,9 @@
 <?php
 	endif;
 ?>
+<?php
+if (!$single) :
+?>
 	<li class="info comments">
 		<?php
 			echo $html->link(
@@ -29,4 +32,7 @@
 			);
 		?>		
 	</li>
+<?php
+endif;
+?>
 </ul>

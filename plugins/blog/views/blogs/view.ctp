@@ -28,7 +28,7 @@
 			if ($i++ % 2 == 0) {
 				$class = ' class="altrow"';
 			}
-			echo $this->element('post', array('post' => $post));
+			echo $this->element('post', array('post' => $post, 'single' => false));
 		endforeach;
 	else :
 ?>
