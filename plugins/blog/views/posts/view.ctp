@@ -15,11 +15,31 @@
 		foreach ($post['Comment'] as $comment):
 			$class = null;
 			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
+				$class = ' altrow';
 			}
+			if ($post['Blog']['member_id'] == $comment['Member']['id']) {
+				$class = ' owner';
+			}
+			// debug($comment);
 ?>
-	<div class="comment">
-		<?php echo $filter->filter($comment['comment']);?>
+	<div class="comment<?php echo $class ?>">
+		<cite>
+			<?php
+				echo $html->link($comment['Member']['full_name'],
+					array(
+						'plugin'		=> null,
+						'controller'	=> 'members',
+						'action'		=> 'view',
+						$comment['Member']['id']
+					)
+				);
+			?>
+		</cite> <?php __('said:'); ?>
+		<blockquote>
+			<?php
+				echo $filter->filter($comment['comment']);
+			?>
+		</blockquote>
 	</div>
 <?php
 	endforeach;

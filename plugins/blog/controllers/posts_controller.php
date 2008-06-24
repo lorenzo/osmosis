@@ -37,8 +37,14 @@ class PostsController extends BlogAppController {
 
 	function add($blog_id = null) {
 		if (!$blog_id && empty($this->data)) {		
-			$this->Session->setFlash(__('Invalid Blog',true));
-			$this->redirect(array('action'=>'index', 'controller' => 'members', $this->Session->read('Member.id'), 'plugin'=> null));
+			$this->Session->setFlash(__('Invalid Blog', true));
+			$this->redirect(
+				array(
+					'controller'	=> 'blogs',
+					'action'		=> 'view',
+					'member_id'		=> $this->Auth->user('id')
+				)
+			);
 		}
 		if (!empty($this->data)) {
 			$this->Post->create();
@@ -90,7 +96,7 @@ class PostsController extends BlogAppController {
 	}
 	
 	function view($slug) {
-		$this->Post->contain(array('Blog' => 'Member(full_name,id)'));
+		$this->Post->contain(array('Blog' => array('Member'), 'Comment' => array('Member')));
 		$this->set('post', $this->Post->findBySlug($slug));
 	} 
 
