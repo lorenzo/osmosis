@@ -21,7 +21,7 @@
 				$class = ' owner';
 			}
 ?>
-	<div class="comment<?php echo $class ?>">
+	<div id="comment-<?php echo $comment['id']; ?>" class="comment<?php echo $class ?>">
 		<cite>
 			<?php
 				echo $html->link($comment['Member']['full_name'],
@@ -34,6 +34,18 @@
 				);
 			?>
 		</cite> <?php __('wrote:'); ?>
+		<?php
+			echo $html->link(
+				'#',
+				array(
+					'plugin'		=> 'blog',
+					'controller'	=> 'posts',
+					'action'		=> 'view',
+					$post['Post']['slug'],
+					'#'				=> 'comment-' . $comment['id']
+				)
+			);
+		?>
 		<blockquote>
 			<?php
 				echo $filter->filter($comment['comment']);

@@ -51,7 +51,7 @@ class BlogHolderComponent extends PlaceholderDataComponent {
 		$blog->Post->Comment->contain(
 			array(
 				'Member' => array('id', 'full_name'),
-				'Post(member_id)'
+				'Post(member_id,slug)'
 			)
 		);
 		$conditions = array(

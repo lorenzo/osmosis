@@ -2,7 +2,7 @@
 	<strong class="title"><?php __('Blog Comments'); ?></strong>
 	<p>
 		<?php
-			__('These are the las comments received in your posts');
+			__('These are the last comments received in your posts');
 		?>
 	</p>
 <?php
@@ -15,11 +15,24 @@ if (!empty($data)) :
 		<li>
 			<span class="author">
 				<?php
+				// debug($comment);
 					__('Comment by');
 				?>
 				<cite><?php echo $comment['Member']['full_name']; ?></cite>
+				<?php
+					echo $html->link(
+						'#',
+						array(
+							'plugin'		=> 'blog',
+							'controller'	=> 'posts',
+							'action'		=> 'view',
+							$comment['Post']['slug'],
+							'#'				=> 'comment-' . $comment['Comment']['id']
+						)
+					);
+				?>
 			</span>
-			<q><?php echo $text->truncate($comment['Comment']['comment'], 255); ?></q>
+			<q><?php echo $text->truncate($comment['Comment']['comment'], 120); ?></q>
 			<span class="date">&mdash; <?php echo $time->format('d.m.Y', $comment['Comment']['created']); ?></span>
 		</li>
 	<?php
