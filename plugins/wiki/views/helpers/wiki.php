@@ -46,44 +46,38 @@ class WikiHelper extends AppHelper {
 		return $string;
 	}
 	
-	function convertLinks($string) {
-		preg_match_all('/<a([\s^>].*)*href="([^"]+)"([\s^>].*)*>([^<]+)<\/a[.^<]*>/U', $string, &$matches);
-		$entry = ClassRegistry::getObject('Entry');
+	function _convertLink($match) {
+		if (strpos($match[2], 'http://')===0) return $match[0];
 		$view = ClassRegistry::getObject('View');
 		
-		foreach($matches[2] as $key => $match) {
-			if (strpos($match, 'http://')===0) continue;
-			
-			$locators = array();
-			
-			if (isset($view->params['named']['wiki_id'])) {
-				$locators['wiki_id'] = $view->params['named']['wiki_id'];
-			}
-			
-			if (isset($view->params['named']['course_id'])) {
-				$locators['course_id'] = $view->params['named']['course_id'];
-			}
-			
-			$slug = $entry->generateSlug($matches[2][$key]);
-			$url = array('controller' => 'entries');
-			$attributes = array('title' => $matches[2][$key]);
-			if (!$entry->created($slug,$locators)) {
-				$url['action'] = 'add';
-				$locators['title'] = $matches[2][$key];
-				$attributes['class'] = 'unexistent';
-			}else {
-				$url['action'] = 'view';
-				$url[] = $slug;
-			}
-			
-			$url = Set::merge($url,$locators);
-			
-			
-			
-			$link = $this->Html->link($matches[4][$key],$url,$attributes);
-			$string = str_replace($matches[0][$key],$link,$string);
+		if (isset($view->params['named']['wiki_id'])) {
+			$locators['wiki_id'] = $view->params['named']['wiki_id'];
 		}
-		return $string;
+		
+		if (isset($view->params['named']['course_id'])) {
+			$locators['course_id'] = $view->params['named']['course_id'];
+		}
+		$entry = ClassRegistry::getObject('Entry');
+		$location = urldecode($match[2]);
+		$slug = $entry->generateSlug($location);
+		$url = array('controller' => 'entries');
+		$attributes = array('title' => $location);
+		if (!$entry->created($slug,$locators)) {
+			$url['action'] = 'add';
+			$locators['title'] = $location;
+			$attributes['class'] = 'unexistent';
+		}else {
+			$url['action'] = 'view';
+			$url[] = $slug;
+		}
+		
+		$url = Set::merge($url,$locators);
+		$link = $this->Html->link($match[4],$url,$attributes);
+		return $link;
+	}
+	
+	function convertLinks($string) {
+		return preg_replace_callback('/<a([\s^>].*)*href="([^"]+)"([\s^>].*)*>([^<]+)<\/a[.^<]*>/U',array(&$this,'_convertLink'),$string);
 	}
 }
 ?>

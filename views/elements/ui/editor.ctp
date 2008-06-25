@@ -22,6 +22,7 @@ if (isset($settings['height']))
 		theme_advanced_statusbar_location : "bottom",
 		theme_advanced_resizing : true,
 		media_types : 'flash',
+		convert_urls: false,
 		width: <?php echo $width?>,
 		height: <?php echo $height?>
 	});
