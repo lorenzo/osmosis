@@ -31,7 +31,7 @@ $member_links = array_unique($member_links);
 $member_links = $html->nestedList($member_links, null, array('class' => 'users'));
 $discussion = $events[0]['ModelLog']['data']['Discussion'];
 echo String::insert(
-	__('The following classmates wrote a response on the discussion <em>:discussion_name</em>:<br /> :link_list', true),
+	__('The following classmates wrote a response on the discussion <em>:discussion_name</em><br /> :link_list', true),
 	array(
 		'link_list' => $member_links,
 		'discussion_name' => $html->link(

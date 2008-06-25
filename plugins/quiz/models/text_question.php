@@ -33,8 +33,18 @@ class TextQuestion extends QuizAppModel {
 
 	var $name = 'TextQuestion';
 	var $validate = array(
-		'title' => VALID_NOT_EMPTY,
-		'body' => VALID_NOT_EMPTY,
+		'title' => array(
+			'required' => array(
+				'rule' => array('custom', '/.+/'),
+				'allowEmpty' => false
+		)
+	),
+		'body' => array(
+				'required' => array(
+					'rule' => array('custom', '/.+/'),
+					'allowEmpty' => false
+			)
+		),
 		'format' => VALID_NOT_EMPTY,
 	);
 
@@ -48,5 +58,20 @@ class TextQuestion extends QuizAppModel {
 				'with' => 'QuizText'
 			),
 	);
+	
+	/**
+	 * Model contructor. Initializes the validation error messages with i18n
+	 *
+	 * @see Model::__construct
+	 */
+	function __construct($id = false, $table = null, $ds = null) {
+		$this->setErrorMessage(
+			'title.required', __('The title can not be empty',true)
+		);
+		$this->setErrorMessage(
+			'body.required', __('The message of the question can not be empty',true)
+		);
+		parent::__construct($id,$table,$ds);
+	}
 }
 ?>

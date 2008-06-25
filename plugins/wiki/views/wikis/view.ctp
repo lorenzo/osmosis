@@ -1,4 +1,4 @@
-<?php debug($wiki);?><h2><?php echo $wiki['Wiki']['name']; ?></h2>
+<h2><?php echo $wiki['Wiki']['name']; ?></h2>
 <p><?php echo $filter->filter($wiki['Wiki']['description']); ?></p>
 	<ul class="actions">
 		<li class="add">

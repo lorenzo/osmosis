@@ -899,7 +899,7 @@ msgstr "Por:"
 #: /plugins/blog/views/elements/add_comment.ctp:4
 #: /plugins/blog/views/elements/comments/add_comment.ctp:4
 msgid "Add Comment"
-msgstr "Agregar comentario"
+msgstr "Agregar Comentario"
 
 #: /plugins/blog/views/comments/add.ctp:16
 #: /plugins/blog/views/comments/edit.ctp:16
@@ -945,11 +945,11 @@ msgstr "Eliminar comentario"
 
 #: /plugins/blog/views/posts/add.ctp:4
 msgid "Add Post"
-msgstr "Agregar entrada"
+msgstr "Agregar Entrada"
 
 #: /plugins/blog/views/posts/edit.ctp:4
 msgid "Edit Post"
-msgstr "Editar entrada"
+msgstr "Editar Entrada"
 
 #: /plugins/blog/views/posts/index.ctp:2
 msgid "Posts"
@@ -1100,11 +1100,11 @@ msgstr "y"
 
 #: /plugins/forum/views/elements/Discussion.updates.ctp:18
 msgid ":member_links :action the discussion <em>:discussion_name</em>."
-msgstr ""
+msgstr ":member_links :action la discussión <em>:discussion_name</em>."
 
 #: /plugins/forum/views/elements/Response.updates.ctp:9
 msgid "response"
-msgstr ""
+msgstr "respuesta"
 
 #: /plugins/forum/views/elements/Response.updates.ctp:18
 msgid "read :pronoun :response"
@@ -1136,7 +1136,7 @@ msgstr ""
 
 #: /plugins/forum/views/elements/Topic.updates.ctp:10
 msgid ":member_name :action the Topic: :topic_name"
-msgstr ""
+msgstr ":member_name :action el Tópico :topic_name"
 
 #: /plugins/forum/views/elements/Topic.updates.ctp:16
 msgid "created"
@@ -1604,7 +1604,8 @@ msgstr "La pregunta de selección ha sido guardada."
 
 #: /plugins/quiz/controllers/choice_questions_controller.php:70;123
 msgid "The Choice Question could not be saved. Please, try again."
-msgstr "La pregunta de selección no pudo ser guardada. Por favor, intente de nuevo."
+msgstr ""
+"La pregunta de selección no pudo ser guardada. Por favor, intente de nuevo."
 
 #: /plugins/quiz/controllers/choice_questions_controller.php:106
 msgid "Invalid Choice Question"
@@ -1632,11 +1633,13 @@ msgstr "La pregunta de emparejamiento ha sido guardada."
 
 #: /plugins/quiz/controllers/matching_questions_controller.php:75;140
 msgid "The Matching Question could not be saved. Please, try again."
-msgstr "La pregunta de emparejamiento no pudo ser guardada. Por favor, intente de nuevo."
+msgstr ""
+"La pregunta de emparejamiento no pudo ser guardada. Por favor, intente de "
+"nuevo."
 
 #: /plugins/quiz/controllers/matching_questions_controller.php:131
 msgid "Invalid Matching Question"
-msgstr ""
+msgstr "Pregunta de emparejamiento no válida."
 
 #: /plugins/quiz/controllers/matching_questions_controller.php:152
 msgid "Invalid id for Matching Question"
@@ -1656,7 +1659,9 @@ msgstr "La pregunta de ordenamiento ha sido guardada."
 
 #: /plugins/quiz/controllers/ordering_questions_controller.php:71;113
 msgid "The Ordering Question could not be saved. Please, try again."
-msgstr "La pregunta de ordenamiento no pudo ser guardada. Por favor, intente de nuevo."
+msgstr ""
+"La pregunta de ordenamiento no pudo ser guardada. Por favor, intente de "
+"nuevo."
 
 #: /plugins/quiz/controllers/ordering_questions_controller.php:105
 msgid "Invalid Ordering Question"
@@ -1733,7 +1738,8 @@ msgstr "La pregunta de desarrollo ha sido guardada."
 
 #: /plugins/quiz/controllers/text_questions_controller.php:66;94
 msgid "The Text Question could not be saved. Please, try again."
-msgstr "La pregunta de desarrollo no pudo ser guardada. Por favor, intente de nuevo."
+msgstr ""
+"La pregunta de desarrollo no pudo ser guardada. Por favor, intente de nuevo."
 
 #: /plugins/quiz/controllers/text_questions_controller.php:73
 msgid "No format"
@@ -1756,40 +1762,42 @@ msgid "Invalid id for Text Question"
 msgstr ""
 
 #: /plugins/quiz/controllers/text_questions_controller.php:110
-msgid "Text Question deleted"
+msgid "Text Question deleted."
 msgstr ""
 
 #: /plugins/quiz/models/choice_choice.php:59
 #: /plugins/quiz/models/matching_choice.php:80
 msgid "Please write the text for this choice"
-msgstr ""
+msgstr "Por favor, indique el texto de esta pregunta."
 
 #: /plugins/quiz/models/choice_choice.php:63
 #: /plugins/quiz/models/ordering_choice.php:76
 msgid "This position is higher the total number of choices available"
 msgstr ""
+"Esta posición tiene un número mayor al total de número de opciones "
+"disponibles."
 
 #: /plugins/quiz/models/choice_question.php:102
 #: /plugins/quiz/models/matching_question.php:111
 #: /plugins/quiz/models/ordering_choice.php:68
 #: /plugins/quiz/models/ordering_question.php:97
 msgid "This field is required"
-msgstr "Este campo es requerido"
+msgstr "Este campo es requerido."
 
 #: /plugins/quiz/models/choice_question.php:106
 #: /plugins/quiz/models/ordering_question.php:101
 msgid "Max Choices should be greater than zero"
-msgstr ""
+msgstr "El máximo de opciones debe ser mayor a cero."
 
 #: /plugins/quiz/models/choice_question.php:110
 #: /plugins/quiz/models/ordering_question.php:105
 msgid "Min Choices should be less than Max Choices"
-msgstr ""
+msgstr "El mínimo de opciones debe ser menor que el máximo de opciones."
 
 #: /plugins/quiz/models/choice_question.php:114
 #: /plugins/quiz/models/ordering_question.php:109
 msgid "Min Choices should be greater than zero"
-msgstr ""
+msgstr "El mínimo de opciones debe ser mayor a cero."
 
 #: /plugins/quiz/models/choice_question.php:118
 msgid "The number of correct answers is not enough compared to Min Choices"
@@ -1802,23 +1810,24 @@ msgstr "La posición está repetida."
 
 #: /plugins/quiz/models/matching_choice.php:84
 msgid "The correct answer should be a number"
-msgstr "La respuesta correcta debería ser un número."
+msgstr "La respuesta correcta debe ser un número."
 
 #: /plugins/quiz/models/matching_question.php:115
 msgid "Max Associations should be greater than zero"
-msgstr ""
+msgstr "El máximo de asociaciones debe ser mayor a cero."
 
 #: /plugins/quiz/models/matching_question.php:119
 msgid "Max Associations should be a number"
-msgstr ""
+msgstr "El máximo de opciones debe ser indicada con un número."
 
 #: /plugins/quiz/models/matching_question.php:123
 msgid "Min Associations should be a number"
-msgstr ""
+msgstr "El mínimo de opciones debe ser indicada con un número."
 
 #: /plugins/quiz/models/matching_question.php:127
 msgid "Min Associations should be less than Max Associations"
 msgstr ""
+"El mínimo de asociaciones debe ser menor que el máximo de asociaciones."
 
 #: /plugins/quiz/models/matching_question.php:131
 msgid ""
@@ -1827,11 +1836,11 @@ msgstr ""
 
 #: /plugins/quiz/models/matching_question.php:179
 msgid "Invalid number for correct answer"
-msgstr ""
+msgstr "Número para respuesta correcta no válido."
 
 #: /plugins/quiz/models/ordering_choice.php:72
 msgid "Position should be greater than zero"
-msgstr ""
+msgstr "La posición deber ser mayor a cero."
 
 #: /plugins/quiz/views/choice_questions/add.ctp:4
 msgid "Create a Choice Question"
@@ -1896,7 +1905,7 @@ msgstr "Editar %s"
 #: /plugins/quiz/views/choice_questions/index.ctp:58
 #: /plugins/quiz/views/choice_questions/view.ctp:2;33;34;36
 msgid "ChoiceQuestion"
-msgstr ""
+msgstr "Pregunta de Selección"
 
 #: /plugins/quiz/views/choice_questions/edit.ctp:19;20
 #: /plugins/quiz/views/choice_questions/index.ctp:59
@@ -1928,7 +1937,7 @@ msgstr "Listar %s"
 #: /plugins/quiz/views/choice_questions/index.ctp:2
 #: /plugins/quiz/views/choice_questions/view.ctp:35
 msgid "ChoiceQuestions"
-msgstr ""
+msgstr "Preguntas de Selección"
 
 #: /plugins/quiz/views/choice_questions/edit.ctp:20
 #: /plugins/quiz/views/choice_questions/index.ctp:59
@@ -1977,7 +1986,7 @@ msgstr "Planteamiento"
 #: /plugins/quiz/views/ordering_questions/view.ctp:14
 #: /plugins/quiz/views/quizzes/view.ctp:33;75;155;197
 msgid "Shuffle"
-msgstr ""
+msgstr "Mezclar"
 
 #: /plugins/quiz/views/choice_questions/view.ctp:19
 #: /plugins/quiz/views/ordering_questions/view.ctp:19
@@ -2085,7 +2094,7 @@ msgstr ""
 
 #: /plugins/quiz/views/matching_questions/add.ctp:4
 msgid "Create a Matching Question"
-msgstr ""
+msgstr "Crear una Pregunta de Emparejamiento"
 
 #: /plugins/quiz/views/matching_questions/add.ctp:8
 msgid ""
@@ -2093,6 +2102,10 @@ msgid ""
 "&mdash; in the first, has one correct answer in the other. This question "
 "requests the student to select a correct answer for each question."
 msgstr ""
+"Esta pregunta tiene dos grupos de opciones: cada elemento &mdash;"
+"pregunta&mdash; en el primer conjunto tiene una respuesta correcta en el "
+"segundo. El estudiante debe seleccionar una respuesta correcta para cada "
+"pregunta."
 
 #: /plugins/quiz/views/matching_questions/add.ctp:31
 msgid "Questions"
@@ -2118,25 +2131,25 @@ msgstr "Agregar respuesta"
 #: /plugins/quiz/views/matching_questions/index.ctp:58
 #: /plugins/quiz/views/matching_questions/view.ctp:2;33;34;36
 msgid "MatchingQuestion"
-msgstr ""
+msgstr "Pregunta de Emparejamiento"
 
 #: /plugins/quiz/views/matching_questions/edit.ctp:19
 #: /plugins/quiz/views/matching_questions/index.ctp:2
 #: /plugins/quiz/views/matching_questions/view.ctp:35
 msgid "MatchingQuestions"
-msgstr ""
+msgstr "Preguntas de Emparejamiento"
 
 #: /plugins/quiz/views/matching_questions/edit.ctp:20
 #: /plugins/quiz/views/matching_questions/index.ctp:59
 #: /plugins/quiz/views/matching_questions/view.ctp:37;42
 msgid "Matching Choices"
-msgstr ""
+msgstr "Opciones de emparejamiento"
 
 #: /plugins/quiz/views/matching_questions/edit.ctp:21
 #: /plugins/quiz/views/matching_questions/index.ctp:60
 #: /plugins/quiz/views/matching_questions/view.ctp:38;77
 msgid "Matching Choice"
-msgstr ""
+msgstr "Opción de emparejamiento"
 
 #: /plugins/quiz/views/matching_questions/view.ctp:19
 #: /plugins/quiz/views/quizzes/view.ctp:34;156
@@ -2175,13 +2188,13 @@ msgstr "Posición Fija"
 #: /plugins/quiz/views/ordering_questions/index.ctp:58
 #: /plugins/quiz/views/ordering_questions/view.ctp:2;33;34;36
 msgid "OrderingQuestion"
-msgstr ""
+msgstr "Pregunta de Ordenamiento"
 
 #: /plugins/quiz/views/ordering_questions/edit.ctp:19
 #: /plugins/quiz/views/ordering_questions/index.ctp:2
 #: /plugins/quiz/views/ordering_questions/view.ctp:35
 msgid "OrderingQuestions"
-msgstr ""
+msgstr "Preguntas de Ordenamiento"
 
 #: /plugins/quiz/views/ordering_questions/edit.ctp:20
 #: /plugins/quiz/views/ordering_questions/index.ctp:59
@@ -2281,13 +2294,13 @@ msgstr "Enunciado de la pregunta"
 #: /plugins/quiz/views/text_questions/index.ctp:54
 #: /plugins/quiz/views/text_questions/view.ctp:2;28;29;31
 msgid "TextQuestion"
-msgstr ""
+msgstr "Pregunta de Desarrollo"
 
 #: /plugins/quiz/views/text_questions/edit.ctp:18
 #: /plugins/quiz/views/text_questions/index.ctp:2
 #: /plugins/quiz/views/text_questions/view.ctp:30
 msgid "TextQuestions"
-msgstr ""
+msgstr "Preguntas de Desarrollo"
 
 #: /plugins/scorm/controllers/scorms_controller.php:103
 msgid "The Scorm file could not be unzipped."
@@ -3056,7 +3069,7 @@ msgstr "Bienvenido"
 
 #: /views/dashboards/admin_dashboard.ctp:3
 msgid "Manage"
-msgstr ""
+msgstr "Administrar"
 
 #: /views/dashboards/admin_dashboard.ctp:7
 msgid "Your Courses"
@@ -3546,7 +3559,7 @@ msgstr ""
 
 #: /plugins/locker/views/folders/view.ctp:27
 msgid "Updating..."
-msgstr ""
+msgstr "Actualizando..."
 
 #: /plugins/locker/views/folders/view.ctp:28
 msgid "Cancel"
@@ -3562,7 +3575,7 @@ msgstr "Ver el contenido de esta carpeta"
 
 #: /plugins/quiz/views/quizzes/rename.ctp:9
 msgid "Rename"
-msgstr ""
+msgstr "Renombrar"
 
 #: /views/members/login.ctp:4;10
 msgid "Login"
@@ -3621,17 +3634,149 @@ msgid ""
 "Maximum number of choices that the student is allowed to select to create an "
 "answer. Leave empty to have no restriction."
 msgstr ""
-"Número máximo de opciones que el estudiante debe seleccionar para crear una respuesta. Dejar en "
-"blanco si no hay límite para ello."
+"Número máximo de opciones que el estudiante debe seleccionar para crear una "
+"respuesta. Dejar en blanco si no hay límite para ello."
 
 #: /plugins/quiz/views/ordering_questions/add.ctp:24
 msgid ""
 "Minimum number of choices that the student is required to select to create "
 "an answer. Leave empty to have no restriction."
 msgstr ""
-"Número mínimo de opciones que el estudiante debe seleccionar para crear una respuesta. Dejar en "
-"blanco si no hay límite para ello."
+"Número mínimo de opciones que el estudiante debe seleccionar para crear una "
+"respuesta. Dejar en blanco si no hay límite para ello."
 
 #: /plugins/quiz/views/quizzes/edit.ctp:39
 msgid "Add to quiz"
 msgstr "Agregar al quiz"
+
+#: /plugins/blog/views/blogs/view.ctp:3 /plugins/blog/views/posts/view.ctp:3
+msgid "%s' Blog"
+msgstr "Blog de %s"
+
+#: /plugins/blog/views/blogs/view.ctp:37
+msgid "No Posts written yet"
+msgstr "Aún no hay entradas escritas."
+
+#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:2
+msgid "Blog Comments"
+msgstr "Comentarios del blog."
+
+#: /plugins/blog/views/posts/view.ctp:28
+msgid "No comments yet"
+msgstr "Aún no hay comentarios."
+
+#: /plugins/locker/controllers/installer_controller.php:52
+msgid "Plugin Locker installed"
+msgstr "El plugin Locker ha sido instalado."
+
+#: /plugins/locker/views/elements/folder_actions.ctp:32
+msgid "Leave a File to this user:"
+msgstr "Dejar un archivo para este usuario"
+
+#: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:5
+msgid "These are the Documents sent to you by other members."
+msgstr "Estos documentos han sido enviados por otros miembros"
+
+#: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:8
+msgid "Go to your dropbox"
+msgstr ""
+
+#: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:36
+msgid "Go to your locker"
+msgstr "Abrir el casillero"
+
+#: /plugins/wiki/views/elements/updates.ctp:20
+msgid " has created"
+msgstr " ha creado"
+
+#: /plugins/wiki/views/elements/updates.ctp:20
+msgid "has modified"
+msgstr "ha modificado"
+
+#: /plugins/wiki/views/elements/updates.ctp:22
+msgid "have modified"
+msgstr "han modificado"
+
+#: /plugins/wiki/views/elements/updates.ctp:29
+msgid "<li>:member_links :action the page <em>:entry_title</em>.</li>"
+msgstr "<li>:member_links :action la página <em>:entry_title</em>.</li>"
+
+#: /plugins/wiki/views/elements/placeholders/plugin_updates.ctp:2
+msgid "Wiki"
+msgstr "Wiki"
+
+#: /views/dashboards/messages.ctp:1 /views/elements/layout/conectivism.ctp:15
+msgid "Messages"
+msgstr "Mensajes"
+
+#: /views/elements/layout/top_nav.ctp:10
+msgid "Admin"
+msgstr "Admin"
+
+#: /plugins/blog/views/elements/comments/add_comment.ctp:4
+msgid "Leave a Comment"
+msgstr "Dejar un Comentario"
+
+#: /plugins/blog/views/posts/view.ctp:37
+msgid "said:"
+msgstr "dijo:"
+
+#: /plugins/forum/views/elements/Response.updates.ctp:34
+msgid ""
+"The following classmates wrote a response on the discussion <em>:"
+"discussion_name</em><br /> :link_list"
+msgstr ""
+"Los siguientes compañeros de clases respondieron en la discusión <em>:"
+"discussion_name</em>:<br /> :link_list."
+
+#: /plugins/blog/models/comment.php:99
+msgid "Please write your comment"
+msgstr ""
+
+#: /plugins/blog/models/comment.php:102
+msgid "Post ID missing"
+msgstr ""
+
+#: /plugins/blog/models/comment.php:105
+msgid "Member ID missing"
+msgstr ""
+
+#: /plugins/blog/models/post.php:121
+msgid "Please write the title of the post"
+msgstr "Por favor, indique el título de la entrada."
+
+#: /plugins/blog/models/post.php:124
+msgid "Please write the content of the posts"
+msgstr "Por favor, indique el contenido de la entrada."
+
+#: /plugins/blog/models/post.php:127
+msgid "Blog ID missing"
+msgstr ""
+
+#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:5
+msgid "These are the last comments received in your posts"
+msgstr "Estos son los últimos comentarios recibidos en sus entradas."
+
+#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:19
+msgid "Comment by"
+msgstr "Comentado por"
+
+#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:44
+msgid "No comments in your blog"
+msgstr "No hay comentarios en el blog"
+
+#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:50
+msgid "Go to your blog"
+msgstr "Ir al blog"
+
+#: /plugins/blog/views/posts/view.ctp:36
+msgid "wrote:"
+msgstr "escribió:"
+
+#: /plugins/quiz/controllers/text_questions_controller.php:110
+msgid "Text Question deleted"
+msgstr "Pregunta de desarrollo eliminada."
+
+#: /plugins/quiz/models/text_question.php:72
+msgid "The message of the question can not be empty"
+msgstr "El contenido de la pregunta no puede ser vacío."

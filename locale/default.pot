@@ -2,7 +2,7 @@
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
 #  Revision: 430 /osmosis/app_controller.php
-#  Revision: 431 /osmosis/plugins/locker/controllers/folders_controller.php
+#  Revision: 435 /osmosis/plugins/locker/controllers/folders_controller.php
 #  Revision: 396 /osmosis/app_model.php
 #  Revision: 412 /osmosis/controllers/courses_controller.php
 #  Revision: 323 /osmosis/controllers/departments_controller.php
@@ -11,16 +11,16 @@
 #  Revision: 418 /osmosis/models/course.php
 #  Revision: 323 /osmosis/models/department.php
 #  Revision: 403 /osmosis/plugins/forum/models/topic.php
-#  Revision: 395 /osmosis/plugins/quiz/models/quiz.php
-#  Revision: 323 /osmosis/plugins/blog/models/blog.php
+#  Revision: 446 /osmosis/plugins/quiz/models/quiz.php
 #  Revision: 393 /osmosis/models/member.php
 #  Revision: 323 /osmosis/models/behaviors/bindable.php
+#  Revision: 438 /osmosis/plugins/locker/controllers/installer_controller.php
 #  Revision: 364 /osmosis/plugins/wiki/controllers/installer_controller.php
-#  Revision: 410 /osmosis/plugins/blog/controllers/blogs_controller.php
-#  Revision: 410 /osmosis/plugins/blog/controllers/posts_controller.php
+#  Revision: 446 /osmosis/plugins/blog/controllers/blogs_controller.php
+#  Revision: 446 /osmosis/plugins/blog/controllers/posts_controller.php
 #  Revision: 410 /osmosis/plugins/blog/controllers/comments_controller.php
-#  Revision: 323 /osmosis/plugins/blog/models/post.php
-#  Revision: 323 /osmosis/plugins/blog/models/comment.php
+#  Revision: 446 /osmosis/plugins/blog/models/comment.php
+#  Revision: 446 /osmosis/plugins/blog/models/post.php
 #  Revision: 393 /osmosis/plugins/chat/controllers/messages_controller.php
 #  Revision: 399 /osmosis/plugins/forum/controllers/discussions_controller.php
 #  Revision: 396 /osmosis/plugins/forum/controllers/responses_controller.php
@@ -28,8 +28,8 @@
 #  Revision: 323 /osmosis/plugins/forum/controllers/topics_controller.php
 #  Revision: 404 /osmosis/plugins/forum/models/discussion.php
 #  Revision: 428 /osmosis/plugins/locker/controllers/documents_controller.php
-#  Revision: 424 /osmosis/plugins/locker/models/locker_document.php
-#  Revision: 428 /osmosis/plugins/locker/models/locker_folder.php
+#  Revision: 432 /osmosis/plugins/locker/models/locker_document.php
+#  Revision: 439 /osmosis/plugins/locker/models/locker_folder.php
 #  Revision: 413 /osmosis/plugins/quiz/controllers/choice_questions_controller.php
 #  Revision: 413 /osmosis/plugins/quiz/controllers/matching_questions_controller.php
 #  Revision: 413 /osmosis/plugins/quiz/controllers/ordering_questions_controller.php
@@ -41,6 +41,7 @@
 #  Revision: 395 /osmosis/plugins/quiz/models/choice_question.php
 #  Revision: 395 /osmosis/plugins/quiz/models/matching_question.php
 #  Revision: 408 /osmosis/plugins/quiz/models/ordering_question.php
+#  Revision: 323 /osmosis/plugins/quiz/models/text_question.php
 #  Revision: 416 /osmosis/plugins/scorm/controllers/scorms_controller.php
 #  Revision: 323 /osmosis/plugins/scorm/controllers/scos_controller.php
 #  Revision: 423 /osmosis/plugins/wiki/controllers/entries_controller.php
@@ -53,7 +54,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2009-06-23 16:08-0430\n"
+"POT-Creation-Date: 2008-06-25 09:00-0430\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -67,7 +68,7 @@ msgid "Invalid access"
 msgstr ""
 
 #: /app_controller.php:294
-#: /plugins/locker/controllers/folders_controller.php:133
+#: /plugins/locker/controllers/folders_controller.php:134
 msgid "Invalid Access"
 msgstr ""
 
@@ -226,7 +227,6 @@ msgid "The name can not be empty"
 msgstr ""
 
 #: /models/department.php:63
-#: /plugins/blog/models/blog.php:83
 msgid "The description can not be empty"
 msgstr ""
 
@@ -290,6 +290,7 @@ msgstr ""
 #: /plugins/blog/controllers/installer_controller.php:19
 #: /plugins/chat/controllers/installer_controller.php:17
 #: /plugins/forum/controllers/installer_controller.php:19
+#: /plugins/locker/controllers/installer_controller.php:50
 #: /plugins/quiz/controllers/installer_controller.php:17
 #: /plugins/wiki/controllers/installer_controller.php:49
 msgid "An error occurred while installing the plugin"
@@ -393,7 +394,6 @@ msgstr ""
 #: /plugins/blog/views/comments/edit.ctp:15
 #: /plugins/blog/views/comments/index.ctp:37
 #: /plugins/blog/views/comments/view.ctp:24
-#: /plugins/blog/views/posts/edit.ctp:18
 #: /plugins/blog/views/posts/index.ctp:49
 #: /plugins/forum/views/subjects/edit.ctp:18
 #: /plugins/forum/views/subjects/index.ctp:53
@@ -445,28 +445,28 @@ msgstr ""
 msgid "New Event"
 msgstr ""
 
-#: /plugins/blog/controllers/blogs_controller.php:48
+#: /plugins/blog/controllers/blogs_controller.php:49
 msgid "Invalid Blog."
 msgstr ""
 
-#: /plugins/blog/controllers/blogs_controller.php:67;82
+#: /plugins/blog/controllers/blogs_controller.php:71;86
 msgid "The Blog has been saved"
 msgstr ""
 
-#: /plugins/blog/controllers/blogs_controller.php:70;85
+#: /plugins/blog/controllers/blogs_controller.php:74;89
 msgid "The Blog could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/blog/controllers/blogs_controller.php:77
+#: /plugins/blog/controllers/blogs_controller.php:81
 #: /plugins/blog/controllers/posts_controller.php:40
 msgid "Invalid Blog"
 msgstr ""
 
-#: /plugins/blog/controllers/blogs_controller.php:95
+#: /plugins/blog/controllers/blogs_controller.php:99
 msgid "Invalid id for Blog"
 msgstr ""
 
-#: /plugins/blog/controllers/blogs_controller.php:99
+#: /plugins/blog/controllers/blogs_controller.php:103
 msgid "Blog deleted"
 msgstr ""
 
@@ -475,7 +475,7 @@ msgid "Invalid Comment."
 msgstr ""
 
 #: /plugins/blog/controllers/comments_controller.php:52
-#: /plugins/blog/controllers/posts_controller.php:63
+#: /plugins/blog/controllers/posts_controller.php:70
 msgid "Invalid Post"
 msgstr ""
 
@@ -497,6 +497,7 @@ msgstr ""
 
 #: /plugins/blog/controllers/installer_controller.php:17
 #: /plugins/forum/controllers/installer_controller.php:17
+#: /plugins/locker/controllers/installer_controller.php:48
 #: /plugins/wiki/controllers/installer_controller.php:47
 msgid "An error occurred while setting plugin permissions"
 msgstr ""
@@ -505,49 +506,44 @@ msgstr ""
 msgid "Plugin Blog installed"
 msgstr ""
 
-#: /plugins/blog/controllers/posts_controller.php:47;69
+#: /plugins/blog/controllers/posts_controller.php:54;76
 msgid "The Post has been saved"
 msgstr ""
 
-#: /plugins/blog/controllers/posts_controller.php:50;72
+#: /plugins/blog/controllers/posts_controller.php:57;79
 msgid "The Post could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/blog/controllers/posts_controller.php:82
+#: /plugins/blog/controllers/posts_controller.php:89
 msgid "Invalid id for Post"
 msgstr ""
 
-#: /plugins/blog/controllers/posts_controller.php:86
+#: /plugins/blog/controllers/posts_controller.php:96
 msgid "Post deleted"
 msgstr ""
 
-#: /plugins/blog/models/blog.php:82
-#: /plugins/blog/models/post.php:88
-msgid "The title can not be empty"
+#: /plugins/blog/models/comment.php:99
+msgid "Please write your comment"
 msgstr ""
 
-#: /plugins/blog/models/blog.php:84
-msgid "The member can not be empty"
+#: /plugins/blog/models/comment.php:102
+msgid "Post ID missing"
 msgstr ""
 
-#: /plugins/blog/models/comment.php:66
-msgid "The comment can not be empty"
+#: /plugins/blog/models/comment.php:105
+msgid "Member ID missing"
 msgstr ""
 
-#: /plugins/blog/models/comment.php:67
-msgid "The post_id can not be empty"
+#: /plugins/blog/models/post.php:121
+msgid "Please write the title of the post"
 msgstr ""
 
-#: /plugins/blog/models/comment.php:68
-msgid "The member_id can not be empty"
+#: /plugins/blog/models/post.php:124
+msgid "Please write the content of the posts"
 msgstr ""
 
-#: /plugins/blog/models/post.php:89
-msgid "The body can not be empty"
-msgstr ""
-
-#: /plugins/blog/models/post.php:90
-msgid "The post must belong to a blog"
+#: /plugins/blog/models/post.php:127
+msgid "Blog ID missing"
 msgstr ""
 
 #: /plugins/blog/views/blogs/add.ctp:4
@@ -559,9 +555,8 @@ msgstr ""
 #: /plugins/blog/views/comments/add.ctp:12
 #: /plugins/blog/views/comments/edit.ctp:11
 #: /plugins/blog/views/elements/add_comment.ctp:11
-#: /plugins/blog/views/elements/comments/add_comment.ctp:10
 #: /plugins/blog/views/posts/add.ctp:11
-#: /plugins/blog/views/posts/edit.ctp:12
+#: /plugins/blog/views/posts/edit.ctp:11
 #: /plugins/forum/views/discussions/edit.ctp:26
 #: /plugins/forum/views/elements/quick_response.ctp:10
 #: /plugins/forum/views/responses/edit.ctp:10
@@ -634,7 +629,7 @@ msgstr ""
 #: /plugins/blog/views/blogs/index.ctp:41
 #: /plugins/blog/views/comments/edit.ctp:15
 #: /plugins/blog/views/comments/index.ctp:37
-#: /plugins/blog/views/posts/edit.ctp:18
+#: /plugins/blog/views/elements/post.ctp:16
 #: /plugins/blog/views/posts/index.ctp:49
 #: /plugins/forum/views/subjects/edit.ctp:18
 #: /plugins/forum/views/subjects/index.ctp:53
@@ -718,17 +713,14 @@ msgstr ""
 #: /plugins/blog/views/comments/edit.ctp:17
 #: /plugins/blog/views/comments/index.ctp:50
 #: /plugins/blog/views/comments/view.ctp:27
-#: /plugins/blog/views/elements/add_comment.ctp:16
-#: /plugins/blog/views/posts/edit.ctp:19
 msgid "List Posts"
 msgstr ""
 
 #: /plugins/blog/views/blogs/edit.ctp:19
-#: /plugins/blog/views/blogs/view.ctp:32
+#: /plugins/blog/views/blogs/view.ctp:13
 #: /plugins/blog/views/comments/add.ctp:18
 #: /plugins/blog/views/comments/edit.ctp:18
 #: /plugins/blog/views/comments/view.ctp:28
-#: /plugins/blog/views/elements/add_comment.ctp:17
 #: /plugins/blog/views/posts/index.ctp:62
 msgid "New Post"
 msgstr ""
@@ -847,7 +839,7 @@ msgstr ""
 
 #: /plugins/blog/views/blogs/index.ctp:40
 #: /plugins/blog/views/comments/index.ctp:36
-#: /plugins/blog/views/elements/post.ctp:9
+#: /plugins/blog/views/elements/post.ctp:19
 #: /plugins/blog/views/posts/index.ctp:48
 #: /plugins/forum/views/elements/forum_message.ctp:34
 #: /plugins/forum/views/subjects/index.ctp:52
@@ -904,7 +896,7 @@ msgstr ""
 #: /plugins/scorm/views/scos/view.ctp:83;123;159;191;219;259;303;335;387;431;479;517
 #: /plugins/wiki/views/entries/index.ctp:49
 #: /plugins/wiki/views/wikis/index.ctp:40
-#: /plugins/wiki/views/wikis/view.ctp:29
+#: /plugins/wiki/views/wikis/view.ctp:33
 #: /views/courses/admin_index.ctp:52
 #: /views/departments/admin_index.ctp:43
 #: /views/departments/admin_view.ctp:63
@@ -992,21 +984,23 @@ msgstr ""
 msgid "New Blog"
 msgstr ""
 
-#: /plugins/blog/views/blogs/view.ctp:7
-msgid "By:"
+#: /plugins/blog/views/blogs/view.ctp:3
+#: /plugins/blog/views/posts/view.ctp:3
+msgid "%s' Blog"
+msgstr ""
+
+#: /plugins/blog/views/blogs/view.ctp:37
+msgid "No Posts written yet"
 msgstr ""
 
 #: /plugins/blog/views/comments/add.ctp:5
 #: /plugins/blog/views/elements/add_comment.ctp:4
-#: /plugins/blog/views/elements/comments/add_comment.ctp:4
 msgid "Add Comment"
 msgstr ""
 
 #: /plugins/blog/views/comments/add.ctp:16
 #: /plugins/blog/views/comments/edit.ctp:16
 #: /plugins/blog/views/comments/view.ctp:25
-#: /plugins/blog/views/elements/add_comment.ctp:15
-#: /plugins/blog/views/posts/edit.ctp:20
 msgid "List Comments"
 msgstr ""
 
@@ -1016,17 +1010,18 @@ msgid "Edit Comment"
 msgstr ""
 
 #: /plugins/blog/views/comments/index.ctp:2
-#: /plugins/blog/views/posts/view.ctp:8
+#: /plugins/blog/views/elements/post.ctp:30
+#: /plugins/blog/views/posts/view.ctp:10
 msgid "Comments"
 msgstr ""
 
 #: /plugins/blog/views/comments/index.ctp:51
 #: /plugins/blog/views/comments/view.ctp:26
-#: /plugins/blog/views/posts/edit.ctp:21
 msgid "New Comment"
 msgstr ""
 
 #: /plugins/blog/views/comments/view.ctp:2
+#: /plugins/blog/views/elements/comments/add_comment.ctp:10
 msgid "Comment"
 msgstr ""
 
@@ -1046,6 +1041,30 @@ msgstr ""
 msgid "Delete Comment"
 msgstr ""
 
+#: /plugins/blog/views/elements/comments/add_comment.ctp:4
+msgid "Leave a Comment"
+msgstr ""
+
+#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:2
+msgid "Blog Comments"
+msgstr ""
+
+#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:5
+msgid "These are the last comments received in your posts"
+msgstr ""
+
+#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:19
+msgid "Comment by"
+msgstr ""
+
+#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:44
+msgid "No comments in your blog"
+msgstr ""
+
+#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:50
+msgid "Go to your blog"
+msgstr ""
+
 #: /plugins/blog/views/posts/add.ctp:4
 msgid "Add Post"
 msgstr ""
@@ -1058,8 +1077,12 @@ msgstr ""
 msgid "Posts"
 msgstr ""
 
-#: /plugins/blog/views/posts/view.ctp:26
-msgid "List Post"
+#: /plugins/blog/views/posts/view.ctp:36
+msgid "wrote:"
+msgstr ""
+
+#: /plugins/blog/views/posts/view.ctp:59
+msgid "No comments yet"
 msgstr ""
 
 #: /plugins/chat/controllers/installer_controller.php:19
@@ -1192,11 +1215,13 @@ msgstr ""
 msgid "This Discussion is locked, you cannot reply."
 msgstr ""
 
-#: /plugins/forum/views/elements/Discussion.updates.ctp:10
+#: /plugins/forum/views/elements/Discussion.updates.ctp:9
+#: /plugins/wiki/views/elements/updates.ctp:14
 msgid "others..."
 msgstr ""
 
-#: /plugins/forum/views/elements/Discussion.updates.ctp:15
+#: /plugins/forum/views/elements/Discussion.updates.ctp:14
+#: /plugins/wiki/views/elements/updates.ctp:24
 msgid "and"
 msgstr ""
 
@@ -1229,7 +1254,7 @@ msgid "and others..."
 msgstr ""
 
 #: /plugins/forum/views/elements/Response.updates.ctp:34
-msgid "The following classmates wrote a response on the discussion <em>:discussion_name</em>:<br /> :link_list"
+msgid "The following classmates wrote a response on the discussion <em>:discussion_name</em><br /> :link_list"
 msgstr ""
 
 #: /plugins/forum/views/elements/Topic.updates.ctp:10
@@ -1370,7 +1395,7 @@ msgid "Member"
 msgstr ""
 
 #: /plugins/forum/views/subjects/view.ctp:24
-#: /plugins/forum/views/topics/index.ctp:26
+#: /plugins/forum/views/topics/index.ctp:31
 #: /views/courses/admin_view.ctp:26
 #: /views/departments/admin_view.ctp:42
 #: /views/plugins/admin_view.ctp:47
@@ -1382,7 +1407,7 @@ msgid "Locked"
 msgstr ""
 
 #: /plugins/forum/views/subjects/view.ctp:34;66
-#: /plugins/forum/views/topics/index.ctp:24
+#: /plugins/forum/views/topics/index.ctp:29
 #: /plugins/forum/views/topics/view.ctp:35
 msgid "Status"
 msgstr ""
@@ -1429,25 +1454,25 @@ msgstr ""
 msgid "You are currently viewing the topics in the <em>%s</em> course forum."
 msgstr ""
 
-#: /plugins/forum/views/topics/index.ctp:25
+#: /plugins/forum/views/topics/index.ctp:21;77
+msgid "Create a new Topic"
+msgstr ""
+
+#: /plugins/forum/views/topics/index.ctp:30
 msgid "Topic"
 msgstr ""
 
-#: /plugins/forum/views/topics/index.ctp:49
+#: /plugins/forum/views/topics/index.ctp:54
 #: /plugins/wiki/views/entries/view.ctp:4
 msgid "edit"
 msgstr ""
 
-#: /plugins/forum/views/topics/index.ctp:56
+#: /plugins/forum/views/topics/index.ctp:61
 msgid "delete"
 msgstr ""
 
-#: /plugins/forum/views/topics/index.ctp:58
+#: /plugins/forum/views/topics/index.ctp:63
 msgid "This will also delete all discussions on this topic"
-msgstr ""
-
-#: /plugins/forum/views/topics/index.ctp:72
-msgid "Create a new Topic"
 msgstr ""
 
 #: /plugins/forum/views/topics/view.ctp:4
@@ -1456,6 +1481,10 @@ msgstr ""
 
 #: /plugins/forum/views/topics/view.ctp:12
 msgid "You are currently viewing the discussions started around this topic <strong>\"%s\"</strong> inside the <em>%s</em> course forum."
+msgstr ""
+
+#: /plugins/forum/views/topics/view.ctp:25;108
+msgid "Start a discussion"
 msgstr ""
 
 #: /plugins/forum/views/topics/view.ctp:36
@@ -1480,10 +1509,6 @@ msgstr ""
 
 #: /plugins/forum/views/topics/view.ctp:98
 msgid "No discussions registered yet"
-msgstr ""
-
-#: /plugins/forum/views/topics/view.ctp:108
-msgid "Start a discussion"
 msgstr ""
 
 #: /plugins/locker/controllers/documents_controller.php:45
@@ -1518,42 +1543,46 @@ msgstr ""
 msgid "Invalid Locker"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:71;87
+#: /plugins/locker/controllers/folders_controller.php:71;88
 msgid "The LockerFolder has been saved"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:82
+#: /plugins/locker/controllers/folders_controller.php:83
 msgid "Invalid LockerFolder"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:90
+#: /plugins/locker/controllers/folders_controller.php:91
 msgid "The LockerFolder could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:102
+#: /plugins/locker/controllers/folders_controller.php:103
 msgid "Invalid id for LockerFolder"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:106
+#: /plugins/locker/controllers/folders_controller.php:107
 msgid "LockerFolder deleted"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:120
+#: /plugins/locker/controllers/folders_controller.php:121
 #: /plugins/locker/views/documents/add.ctp:9
 #: /views/plugins/admin_view.ctp:19
 msgid "Folder"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:123
+#: /plugins/locker/controllers/folders_controller.php:124
 msgid "Document"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:127
+#: /plugins/locker/controllers/folders_controller.php:128
 msgid "The %s was moved successfully"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:129
+#: /plugins/locker/controllers/folders_controller.php:130
 msgid "The %s could not be moved"
+msgstr ""
+
+#: /plugins/locker/controllers/installer_controller.php:52
+msgid "Plugin Locker installed"
 msgstr ""
 
 #: /plugins/locker/models/locker_document.php:95
@@ -1619,24 +1648,28 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
-#: /plugins/locker/views/elements/file_info.ctp:11
+#: /plugins/locker/views/elements/file_info.ctp:12
 msgid "Dropbox"
 msgstr ""
 
-#: /plugins/locker/views/elements/folder_actions.ctp:5
+#: /plugins/locker/views/elements/folder_actions.ctp:10
 msgid "Add Folder:"
 msgstr ""
 
-#: /plugins/locker/views/elements/folder_actions.ctp:7
+#: /plugins/locker/views/elements/folder_actions.ctp:12
 msgid "Create Folder"
 msgstr ""
 
-#: /plugins/locker/views/elements/folder_actions.ctp:13
+#: /plugins/locker/views/elements/folder_actions.ctp:18
 msgid "Upload File:"
 msgstr ""
 
-#: /plugins/locker/views/elements/folder_actions.ctp:15
+#: /plugins/locker/views/elements/folder_actions.ctp:20;34
 msgid "Upload File"
+msgstr ""
+
+#: /plugins/locker/views/elements/folder_actions.ctp:32
+msgid "Leave a File to this user:"
 msgstr ""
 
 #: /plugins/locker/views/elements/folder_contents.ctp:24
@@ -1647,8 +1680,16 @@ msgstr ""
 msgid "Locker"
 msgstr ""
 
-#: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:6
-msgid "your locker"
+#: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:5
+msgid "These are the Documents sent to you by other members."
+msgstr ""
+
+#: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:8
+msgid "Go to your dropbox"
+msgstr ""
+
+#: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:36
+msgid "Go to your locker"
 msgstr ""
 
 #: /plugins/locker/views/folders/edit.ctp:4
@@ -1667,15 +1708,15 @@ msgstr ""
 msgid "%s's Locker"
 msgstr ""
 
-#: /plugins/locker/views/folders/view.ctp:27
+#: /plugins/locker/views/folders/view.ctp:26
 msgid "Updating..."
 msgstr ""
 
-#: /plugins/locker/views/folders/view.ctp:28
+#: /plugins/locker/views/folders/view.ctp:27
 msgid "Cancel"
 msgstr ""
 
-#: /plugins/locker/views/folders/view.ctp:29
+#: /plugins/locker/views/folders/view.ctp:28
 msgid "OK"
 msgstr ""
 
@@ -1921,6 +1962,14 @@ msgstr ""
 msgid "Position should be greater than zero"
 msgstr ""
 
+#: /plugins/quiz/models/text_question.php:69
+msgid "The title can not be empty"
+msgstr ""
+
+#: /plugins/quiz/models/text_question.php:72
+msgid "The message of the question can not be empty"
+msgstr ""
+
 #: /plugins/quiz/views/choice_questions/add.ctp:4
 msgid "Create a Choice Question"
 msgstr ""
@@ -1964,7 +2013,7 @@ msgid "Add New Choice"
 msgstr ""
 
 #: /plugins/quiz/views/choice_questions/add.ctp:56
-#: /plugins/quiz/views/text_questions/add.ctp:13
+#: /plugins/quiz/views/text_questions/add.ctp:17
 msgid "Create Question"
 msgstr ""
 
@@ -2416,7 +2465,7 @@ msgstr ""
 msgid "Create %s"
 msgstr ""
 
-#: /plugins/quiz/views/text_questions/add.ctp:7
+#: /plugins/quiz/views/text_questions/add.ctp:10
 msgid "Something"
 msgstr ""
 
@@ -3018,6 +3067,26 @@ msgstr ""
 msgid "Wiki deleted"
 msgstr ""
 
+#: /plugins/wiki/views/elements/updates.ctp:20
+msgid " has created"
+msgstr ""
+
+#: /plugins/wiki/views/elements/updates.ctp:20
+msgid "has modified"
+msgstr ""
+
+#: /plugins/wiki/views/elements/updates.ctp:22
+msgid "have modified"
+msgstr ""
+
+#: /plugins/wiki/views/elements/updates.ctp:29
+msgid "<li>:member_links :action the page <em>:entry_title</em>.</li>"
+msgstr ""
+
+#: /plugins/wiki/views/elements/placeholders/plugin_updates.ctp:2
+msgid "Wiki"
+msgstr ""
+
 #: /plugins/wiki/views/entries/add.ctp:4;14
 msgid "Add Entry"
 msgstr ""
@@ -3044,7 +3113,7 @@ msgid "Revision history of %s"
 msgstr ""
 
 #: /plugins/wiki/views/revisions/history.ctp:13
-#: /plugins/wiki/views/wikis/view.ctp:25
+#: /plugins/wiki/views/wikis/view.ctp:29
 msgid "Revision"
 msgstr ""
 
@@ -3108,7 +3177,7 @@ msgstr ""
 #: /plugins/wiki/views/wikis/add.ctp:19
 #: /plugins/wiki/views/wikis/edit.ctp:21
 #: /plugins/wiki/views/wikis/index.ctp:58
-#: /plugins/wiki/views/wikis/view.ctp:5
+#: /plugins/wiki/views/wikis/view.ctp:7
 msgid "New Entry"
 msgstr ""
 
@@ -3124,11 +3193,11 @@ msgstr ""
 msgid "New Wiki"
 msgstr ""
 
-#: /plugins/wiki/views/wikis/view.ctp:9
+#: /plugins/wiki/views/wikis/view.ctp:13
 msgid "Recent Entries"
 msgstr ""
 
-#: /plugins/wiki/views/wikis/view.ctp:26
+#: /plugins/wiki/views/wikis/view.ctp:30
 msgid "history"
 msgstr ""
 
@@ -3224,7 +3293,7 @@ msgid "Professors"
 msgstr ""
 
 #: /views/courses/tools.ctp:2
-#: /views/layouts/default.ctp:41
+#: /views/layouts/default.ctp:43
 msgid "Tools"
 msgstr ""
 
@@ -3254,8 +3323,13 @@ msgid "Your Courses"
 msgstr ""
 
 #: /views/dashboards/connections.ctp:1
-#: /views/elements/layout/conectivism.ctp:10
+#: /views/elements/layout/conectivism.ctp:23
 msgid "Connections"
+msgstr ""
+
+#: /views/dashboards/messages.ctp:1
+#: /views/elements/layout/conectivism.ctp:15
+msgid "Messages"
 msgstr ""
 
 #: /views/departments/admin_add.ctp:4
@@ -3336,7 +3410,7 @@ msgstr ""
 msgid "Modify your profile"
 msgstr ""
 
-#: /views/elements/layout/conectivism.ctp:4
+#: /views/elements/layout/conectivism.ctp:9
 msgid "Classes"
 msgstr ""
 
@@ -3344,8 +3418,17 @@ msgstr ""
 msgid "Ósmosis 2 // e-learning innovation"
 msgstr ""
 
-#: /views/elements/layout/top_nav.ctp:5
+#: /views/elements/layout/top_nav.ctp:10
+msgid "Admin"
+msgstr ""
+
+#: /views/elements/layout/top_nav.ctp:20
 msgid "Logout"
+msgstr ""
+
+#: /views/elements/layout/top_nav.ctp:25
+#: /views/members/login.ctp:4;10
+msgid "Login"
 msgstr ""
 
 #: /views/elements/layout/user_courses.ctp:6
@@ -3459,10 +3542,6 @@ msgstr ""
 
 #: /views/members/admin_view.ctp:69
 msgid "Delete Member"
-msgstr ""
-
-#: /views/members/login.ctp:4;10
-msgid "Login"
 msgstr ""
 
 #: /views/pages/home.ctp:10
