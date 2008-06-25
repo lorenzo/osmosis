@@ -28,6 +28,20 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
+function debugGroup(str) {
+	if (console)
+		console.group(str);
+}
+
+function debugGroupClose() {
+	if (console)
+		console.groupEnd();
+}
+
+function debug(str) {
+	if (console)
+		console.debug(str);
+}
 var ScormControl = new function(){
 	this.updateUI = function(link) {
 		debugGroup("Activado el link " + link.id);
