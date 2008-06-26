@@ -46,6 +46,8 @@
 				'$(document).ready(function(){'. "\n" .
 				'	var link = $("a[href='.$html->url('/scorm/scos/view/' . $show_sco['id'] . '/' . $show_sco['href']).']");' . "\n" .
 				'	ScormControl.updateUI(link[0]);' . "\n" .
+				'	ScormControl.storeDataCallback();'. "\n".
+				'	ScormControl.getCompleted('.$show_sco['id'].');'.
 				'});'
 			);
 		}

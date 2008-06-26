@@ -29,12 +29,14 @@
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 var ScormControl = new function(){
+	var lastLink = null;
 	this.updateUI = function(link) {
 		var href = link.href;
 		var id = link.id;
 		var id_data = id.match(/([^0-9])*([0-9]+)/);
 		var local_sco_id = id_data[2];
 		var local_sco_number =  parseInt(id_data[2]);
+		this.lastLink = link;
 		this.updateLinks(local_sco_number-1, local_sco_number+1, local_sco_id);
 		var className = link.className;
 		id_data = className.match(/([^0-9])*([0-9]+)/);
@@ -55,28 +57,32 @@ var ScormControl = new function(){
 			}
 		);
 		
-		real_id_data = link.className.match(/([^0-9])*([0-9]+)/);
-		real_id = real_id_data[2];
-		//This will query all scoes completed in the same scorm than real_id sco
-		$.get(webroot+'scorm/scos/completed/'+real_id+'.json',{},ScormControl.showCompleted,'json');
-		
 		return false;
+	}
+	
+	this.storeDataCallback = function () {
+		$().ajaxSuccess(function (event,request,options) {
+			if (!options.url.match(/.*scorm_attendee_trackings\/store_data.*/))
+				return;
+			real_id_data = ScormControl.lastLink.className.match(/([^0-9])*([0-9]+)/);
+			real_id = real_id_data[2];
+			//This will query all scoes completed in the same scorm than real_id sco
+			ScormControl.getCompleted(real_id)
+		});
+	}
+	
+	this.getCompleted = function (sco) {
+		$.get(webroot+'scorm/scos/completed/'+sco+'.json',{},ScormControl.showCompleted,'json');
 	}
 	
 	this.showCompleted = function (data) {
 		var completed = data.response;
 		if (completed.length < 1) return;
-		$('#scorm_toc li:not(.completed)').each(function() {
-			
+		$('#scorm_toc li:not(.completed)').each(function() {	
 			if (jQuery.inArray(this.className.match(/([^0-9])*([0-9]+)/)[2],completed) > -1) {
 				$(this).addClass('completed');
-			}
-				
+			}		
 		});
-	}
-	
-	this.setupLinks = function() {
-		
 	}
 	
 	this.updateLinks = function(prev, next, id) {
