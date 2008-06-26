@@ -25,7 +25,7 @@
 					<?php
 						echo $this->element('layout/conectivism');
 					?>
-					<div id="main">
+					<div class="main">
 						<div class="content">
 							<?php
 								if ($session->check('Message.flash')) {

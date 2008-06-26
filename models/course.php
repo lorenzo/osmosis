@@ -200,43 +200,90 @@ class Course extends AppModel {
 	}
 	
 	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @deprecated use find
+	 * @see Course::find
+	 **/
+	function enrolled($id, $role = null, $groupedByCourse = false, $limit = 0, $fields = array()) {
+		// trigger_error('Course::enrolled deprecated, use Course::find("enrolled", ...) instead');
+		return $this->__enrolled(
+			array(
+				'course_id'	=> $id,
+				'role'		=> $role,
+				'by'		=> $groupedByCourse ? 'course' : 'role',
+				'limit'		=> $limit,
+				'fields'	=> $fields
+			)
+		);
+	}
+
+	/**
 	 * Returns the members enrolled in the course, grouped by role.
 	 *
 	 * @param int $id ID of the course
 	 * @param mixed $role specific role (or roles) of the enrolled members. Null to get all entrolled members.
 	 * @return Array members enrolled in the course
-	 * @author Joaquín Windmüller
 	 */	
-	function enrolled($id, $role = null, $groupedByCourse = false) {
-		$fields = array('Enrollment.member_id', 'Enrollment.role_id');
+	function __enrolled($params) {
+		$fields = array('Enrollment.member_id', 'Enrollment.role_id', 'course_id');
+		if (isset($params['fields'])) {
+			$fields = array_merge($fields, $params['fields']);
+		}
 		$order = array('course_id, role_id ASC');
+		$id = null;
+		if (isset($params['course_id'])) {
+			$id = $params['course_id'];
+		}
 		$conditions = array('course_id' => $id);
-		
+		if (isset($params['conditions'])) {
+			$conditions = array_merge($conditions, $params['conditions']);
+		}
 		$this->bindModel(array('hasAndBelongsToMany' => array('Member')));
-		$roles = $this->Member->Enrollment->roles($role);
+		if (isset($params['role'])) {
+			$roles = $this->Member->Enrollment->roles($params['role']);
+		} else {
+			$roles = $this->Member->Enrollment->roles();
+		}
 		if ($roles) {
 			$conditions['Enrollment.role_id'] = Set::extract('/Role/id', $roles);
 			$roles = Set::combine($roles, '/Role/id', '/Role/role');
 		}
 		
-		// if ($groupedByCourse) {
-			$fields[] = 'course_id';
-		// }
-		$this->Member->Enrollment->contain('Member(id,full_name,email,phone)');
-		$enrolled = $this->Member->Enrollment->find('all', compact('conditions', 'fields', 'order'));
-		$members_by_role = array();	
-		$members_by_course = array();
+		$this->Member->Enrollment->contain(
+			array('Member' => array('id', 'full_name', 'email', 'phone'))
+		);
+		if (isset($params['contain'])) {
+			$this->Member->Enrollment->contain($params['contain']);
+		}
+		$limit = isset($params['limit']) ? $params['limit'] : 0;
+		$enrolled = $this->Member->Enrollment->find('all', compact('conditions', 'fields', 'order', 'limit'));
+		$members_by_role = $members_by_course = array();
 		foreach ($enrolled as $i => $member) {
 			$enrollment = $member['Enrollment'];
 			$member = $member['Member'];
 			$role_name = $roles[$enrollment['role_id']];
 			$members_by_role[$role_name][] = $members_by_course[$enrollment['course_id']][] = array('Member' => $member);
 		}
-		
-		if (!$groupedByCourse) {
+		if ($params['by'] == 'role') {
 			return $members_by_role;
 		} else {
 			return $members_by_course;
+		}
+	}
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author Joaquín Windmüller
+	 **/
+	function find($conditions = null, $fields = array(), $order = null, $recursive = null) {
+		if (is_string($conditions) && $conditions == 'enrolled') {
+			return $this->__enrolled($fields);
+		} else {
+			return parent::find($conditions, $fields, $order, $recursive);
 		}
 	}
 }

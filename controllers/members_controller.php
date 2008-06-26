@@ -177,5 +177,46 @@ class MembersController extends AppController {
 			$this->Auth->loginRedirect = array('controller' => 'dashboards', 'action' => 'dashboard', 'admin' => true);
 		}
 	}
+	
+	/**
+	 * Generates a list of online members
+	 *
+	 * @return void
+	 **/
+	function online() {
+		$active_member = $this->Auth->user('id');
+		$active_course = $this->_getActiveCourse();
+		$active_course_classmates = $this->Member->Course->find(
+			'enrolled', 
+			array(
+				'course_id'	=> $active_course,
+				'by'		=> 'course',
+				'conditions' => array('member_id <>' => $active_member)
+			)
+		);
+		$active_course_classmates = array_pop($active_course_classmates);
+		if (count($active_course_classmates) < 10) {
+			$conditions = array('course_id <>' => $active_course);
+			$fields = array('course_id');
+			$my_courses = $this->Member->Enrollment->find('all', compact('conditions', 'fields'));
+			$my_courses = Set::extract('/Enrollment/course_id', $my_courses);
+			$classmates = $this->Member->Course->find(
+				'enrolled',
+				array(
+					'course_id'		=> $my_courses,
+					'conditions'	=> array('member_id <>' => $active_member),
+					'by'			=> 'role'
+				)
+			);
+			foreach ($classmates as $course_id => $classmate_list) {
+				foreach ($classmate_list as $i => $classmate) {
+					if (!in_array($classmate, $active_course_classmates)) {
+						$active_course_classmates[] = $classmate;
+					}
+				}
+			}
+		}
+		$this->set('classmates', $active_course_classmates);
+	}
 }
 ?>

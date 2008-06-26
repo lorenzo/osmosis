@@ -45,7 +45,7 @@
 							</li>
 						</ul>
 					</div>
-					<div id="main">
+					<div class="main">
 						<div class="content">
 							<?php
 								if ($session->check('Message.flash')) {

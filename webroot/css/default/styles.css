@@ -65,7 +65,7 @@ a:visited {
 	display:block;
 	margin:0;
 }
-#upper-content #main h1 {
+#upper-content .main h1 {
 	clear:both;
 	margin:0 0 10px 0;
 	padding:0;
@@ -77,49 +77,49 @@ a:visited {
 	border-left:none;
 	background:#F5F5F5 url('../../img/default/arrow_g.gif') no-repeat 10px 50%;
 }
-#upper-content #main h1.selected {
+#upper-content .main h1.selected {
 	background:#F5F5F5 url('../../img/default/arrow_g_down.gif') no-repeat 7px 50%;
 }
-#upper-content #main h1 a.title {
+#upper-content .main h1 a.title {
 	display:block;
 	color:#000;
 	text-decoration:none;
 }
-#upper-content #main h2 {
+#upper-content .main h2 {
 	padding:5px 0 0 0;
 	text-align:left;
 	font-family:Verdana, Arial, sans-serif;
 	font-weight:normal;
 	border-bottom:#ccc 1px dashed;
 }
-#upper-content #main p.course-description {
+#upper-content .main p.course-description {
 	font-size:1.1em;
 	margin:5px 5px 15px;
 	color:#A8A9AB;
 }
-#upper-content #main ul.professors {
+#upper-content .main ul.professors {
 	font-weight:bold;
 	font-size:1.1em;
 	line-height:1.3em;
 }
-#upper-content #main ul.professors a.email,
-#upper-content #main ul.professors .tel,
-#upper-content #main ul.professors .office {
+#upper-content .main ul.professors a.email,
+#upper-content .main ul.professors .tel,
+#upper-content .main ul.professors .office {
 	font-weight:normal;
 	padding-left:10px;
 	color:#A8A9AB;
 }
-#upper-content #main ul.professors a.url {
+#upper-content .main ul.professors a.url {
 	padding:0;
 	text-decoration:none;
 	font-weight:bold;
 }
-#upper-content #main ul.professors a.url span {
+#upper-content .main ul.professors a.url span {
 	color:#000;
 	padding:0;
 }
 
-#upper-content #main ul li.users {
+#upper-content .main ul li.users {
 	list-style:url('../../forum/css/img/users.png');
 }
 

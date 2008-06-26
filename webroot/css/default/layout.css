@@ -94,7 +94,7 @@ body {
 	border-top:#888 1px dashed;
 }
 
-#upper-content #main {
+#upper-content .main {
 	width:80%;
 	float:left;
 	position:relative;
@@ -188,16 +188,17 @@ body {
 
 #main-content #side-content.small {
 	width:141px;
-	position:absolute;
+	float:left;
+/*	position:absolute;*/
 	top:10px;
 	left:0;
 }
 
-#main-content #main {
+#main-content .main {
 	padding:10px 20px 0 160px;
 	min-height:200px;
 }
-#main-content #main .boxed {
+#main-content .main .boxed {
 	width:30%;
 	float:left;
 	margin-right:2%;

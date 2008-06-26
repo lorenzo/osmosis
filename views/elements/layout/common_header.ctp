@@ -10,7 +10,15 @@
 	<?php echo $html->css('default/ie6_layout'); ?> 
 <![endif]-->
 <?php if(Configure::read()>0) echo $html->css('debug');?> 
-<?php echo $javascript->codeBlock('var webroot = "' . $html->url('/') .'"'); ?> 
+<?php
+	$webroot = $html->url('/');
+	$active_course = isset($Osmosis['active_course']['id']) ? $Osmosis['active_course']['id'] : '';
+	$js = <<<globaljs
+		var webroot = '$webroot';
+		var active_course = '$active_course';
+globaljs;
+	echo $javascript->codeBlock($js);
+?> 
 <?php echo $javascript->link('jquery/jquery'); ?> 
 
 <?php echo $javascript->link('jquery/plugins/jquery.flydom'); ?> 

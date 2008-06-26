@@ -1,2 +1,6 @@
-<?php e($xml->header()); ?>
-<?php echo $content_for_layout; ?>
+<?php
+	header('Content-Type: text/xml');
+	Configure::write('debug', 0);
+	e($xml->header());
+	echo $content_for_layout;
+?>

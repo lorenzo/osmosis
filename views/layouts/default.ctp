@@ -25,7 +25,7 @@
 					<?php
 						echo $this->element('layout/conectivism');
 					?>
-					<div id="main">
+					<div class="main">
 						<?php
 							echo $this->element('course_description');
 						?>
@@ -47,7 +47,7 @@
 				<div id="side-content" class="small">
 					<?php echo $placeholder->render('course_sidebar'); ?>
 				</div>
-				<div id="main">
+				<div class="main">
 					<?php
 						if ($session->check('Message.flash')) {
 							$session->flash();

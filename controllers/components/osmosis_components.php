@@ -62,6 +62,7 @@ class OsmosisComponentsComponent extends Object {
 		if ($active_course) {
 			$professors = $this->Member->Course->professors($active_course);
 			$this->controller->viewVars['Osmosis']['active_course']['professors'] = array_pop($professors);
+			$this->controller->viewVars['Osmosis']['active_course']['id'] = $active_course;
 		}
 	}
 	

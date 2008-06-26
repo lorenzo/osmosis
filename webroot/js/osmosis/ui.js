@@ -29,5 +29,5 @@
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 $(document).ready(function() {
-	$('select[multiple]').osmosisSelector();
+	// $('select[multiple]').osmosisSelector();
 });

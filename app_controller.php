@@ -177,10 +177,14 @@ class AppController extends Controller {
 			$this->layout = 'no_course';
 		}
 		if ($this->RequestHandler->isAjax()) {
-			if ($this->RequestHandler->prefers()=='json') {
-				$this->layout = 'default';
-			} else {
-				$this->layout = 'ajax';
+			switch ($this->RequestHandler->prefers()) {
+				case 'json':
+				case 'xml':
+					$this->layout = 'default';
+					break;
+				default:
+					$this->layout = 'ajax';
+					break;
 			}
 			Configure::write('debug', 0);
 		}
