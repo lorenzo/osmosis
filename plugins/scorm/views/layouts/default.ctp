@@ -25,7 +25,7 @@
 					<?php
 						echo $this->element('layout/conectivism');
 					?>
-					<div id="main">
+					<div class="main">
 						<?php
 							echo $this->element('course_description');
 						?>
@@ -44,7 +44,7 @@
 					<?php echo $placeholder->renderToolBar(); ?>
 			</div>
 			<div id="main-content">
-				<div id="main">
+				<div class="main">
 					<?php
 						if ($session->check('Message.flash')) {
 							$session->flash();
