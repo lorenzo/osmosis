@@ -49,7 +49,7 @@ class Quiz extends QuizAppModel {
 				'joinTable' => 'quiz_choice_questions_quizzes',
 				'foreignKey' => 'quiz_id',
 				'associationForeignKey' => 'choice_question_id',
-				'with' => 'QuizChoice',
+				'with' => 'Quiz.QuizChoice',
 				'unique' => true
 			),
 			// 'ClozeQuestion' => array(
@@ -64,21 +64,21 @@ class Quiz extends QuizAppModel {
 				'joinTable' => 'quiz_matching_questions_quizzes',
 				'foreignKey' => 'quiz_id',
 				'associationForeignKey' => 'matching_question_id',
-				'with' => 'QuizMatching'
+				'with' => 'Quiz.QuizMatching'
 			),
 			'OrderingQuestion' => array(
 				'className' => 'quiz.OrderingQuestion',
 				'joinTable' => 'quiz_ordering_questions_quizzes',
 				'foreignKey' => 'quiz_id',
 				'associationForeignKey' => 'ordering_question_id',
-				'with' => 'QuizOrdering'
+				'with' => 'Quiz.QuizOrdering'
 			),
 			'TextQuestion' => array(
 				'className' => 'quiz.TextQuestion',
 				'joinTable' => 'quiz_text_questions_quizzes',
 				'foreignKey' => 'quiz_id',
 				'associationForeignKey' => 'text_question_id',
-				'with' => 'QuizText',
+				'with' => 'Quiz.QuizText',
 				'unique' => true
 			),
 	);
@@ -139,6 +139,17 @@ class Quiz extends QuizAppModel {
 			}
 		}
 		return true;
+	}
+	
+	function saveAnswers($id,$answers,$member_id) {
+		foreach ($answers as $questionType => $answer) {
+			if (!isset($this->hasAndBelongsToMany[$questionType])) {
+				continue;
+			}
+			$with = $this->hasAndBelongsToMany[$questionType]['with'];
+			$this->{$with}->saveAnswers($answer,$member_id);
+		}
+		return false;
 	}
 }
 ?>

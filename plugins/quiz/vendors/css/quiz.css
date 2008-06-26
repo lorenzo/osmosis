@@ -276,8 +276,43 @@ fieldset.question-choices .choice.set ol label {
 	list-style:lower-alpha;
 }
 
+.orderingQuestion.answering ul li {
+	position:relative;
+	padding-left:50px;
+	
+}
+
+
+.orderingQuestion.answering ul li div.input input{
+	position:absolute;
+	top:0;
+	left:0;
+	width:20px;
+}
+
+
 .matchingQuestion.view div.question {
 	float:left;
+}
+
+.matchingQuestion.view div.question {
+	float:left;
+}
+
+.matchingQuestion.view.answering div.question ol li{
+	width:100%;
+}
+
+.matchingQuestion.view.answering div.question ol li{
+	position:relative;
+	padding-right:30px;
+}
+
+.matchingQuestion.view.answering ol li div.input input{
+	position:absolute;
+	top:0;
+	right:0;
+	width:20px;
 }
 
 .matchingQuestion.view div.answer {

@@ -162,6 +162,10 @@ class Sco extends ScormAppModel {
 		);
 	
 	function save($data=null,$validate=true,$fields=array()) {
+		$this->create();
+		if (isset($data['xml:base']) && isset($data['href'])) {
+			$data['href'] = $data['xml:base'].$data['href'];
+		}
 		$saved = parent::save($data,$validate,$fields);
 		$organization = isset($data['Sco']) ? $data['Sco']['organization'] : $data['organization'];
 		$manifest = isset($data['Sco']) ? $data['Sco']['manifest'] : $data['manifest'];

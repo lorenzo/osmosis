@@ -40,13 +40,14 @@ class Objective extends ScormAppModel {
 	);
 	var $actsAs = array('transaction');
 	var $validate = array(
-			'objectiveID' => array(
-				'required' =>  array(
-					'rule' => VALID_NOT_EMPTY,
-					'message' => 'scormplugin.objective.objectiveid.empty',
-					'required' => true,
-				)
-			),
+			// 'objectiveID' => array(
+			// 				'required' =>  array(
+			// 					'rule' => VALID_NOT_EMPTY,
+			// 					'message' => 'scormplugin.objective.objectiveid.empty',
+			// 					'required' => true,
+			// 					'allowEmpty'
+			// 				)
+			// 			),
 			'satisfiedByMeasure' => array(
 				'required' =>  array(
 					'rule' => IS_BOOLEAN,

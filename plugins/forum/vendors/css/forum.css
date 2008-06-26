@@ -186,7 +186,9 @@ table tr .number {
 }
 
 #plugin-updates ul#forum li li {
+	background:none;
 	list-style:square outside;
+	margin-left:10px;
 }
 
 #forum-updates strong.title {

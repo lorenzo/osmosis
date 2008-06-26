@@ -1,16 +1,7 @@
 /**
-Jojo
-<?php var_dump($trackings); ?>
+<?php var_dump($trackings); var_dump($user['full_name'])?>
 */
-function debug(elem) {
-	if (typeof console != 'undefined') console.debug(elem);
-}
-function debugGroup(title) {
-	if (typeof console != 'undefined') console.group(title);
-}
-function debugGroupClose() {
-	if (typeof console != 'undefined') console.groupEnd();
-}
+
 var adminEmail = 'joaquin@aikon.com.ve';
 function underscore(str) {
 	str = str.replace(/.N/g,".");
@@ -142,7 +133,7 @@ var Scorm_2004 = function(){
 			'mode':'r'
 		},*/
 		'cmi.entry':{
-			'defaultvalue':'<?php echo $trackings['entry']; ?>',
+			'defaultvalue':"<?php echo $trackings['entry']; ?>",
 			'mode':'r'
 		},
 		'cmi.exit':{
@@ -222,13 +213,13 @@ var Scorm_2004 = function(){
 		'cmi.launch_data':{
 //			'defaultvalue':<?php echo isset($userdata->datafromlms)?'\''.$userdata->datafromlms.'\'':'null' ?>,
 			'mode':'r'
-		},
-		'cmi.learner_id':{
-//			'defaultvalue':'<?php echo $userdata->student_id ?>',
-			'mode':'r'
 		},*/
+		'cmi.learner_id':{
+			'defaultvalue':'<?php echo $user['id'] ?>',
+			'mode':'r'
+		},
 		'cmi.learner_name':{
-			'defaultvalue':'<?php echo addslashes($user['name']) ?>',
+			'defaultvalue':'<?php echo addslashes($user['full_name']) ?>',
 			'mode':'r'
 		},/*
 		'cmi.learner_preference._children':{
@@ -487,11 +478,7 @@ var Scorm_2004 = function(){
 			'&' + underscore('adl.nav.request') + '=' + this.adl.nav.request : '';
 		datastring += navrequest;
 		//datastring += '&attempt=<?php echo $attempt ?>';
-		//datastring += '&scoid=<?php echo $scoid ?>';
-		debugGroup("Storing Data...");
-		debug('Data: \n' + datastring);
-		debug('URL: \n' + this.serverside_url);
-		debugGroupClose();
+		//datastring += '&scoid=<?php echo scoid ?>';
 		return jQuery.post(this.serverside_url + 'scorm:' + scorm_id + '/sco:' + this.sco_id, datastring);
 	}
 
@@ -524,7 +511,6 @@ var Scorm_2004 = function(){
 	};
 	
 	this.Terminate = function(param) {
-		debug("Terminando =)");
 		this.errorCode = "0";
 		if (param == "") {
 			if ((this.Initialized) && (!this.Terminated)) {
@@ -534,11 +520,11 @@ var Scorm_2004 = function(){
 				if (this.adl.nav.request != '_none_') {
 					switch (this.adl.nav.request) {
 						case 'continue':
-							debug("Show next SCO.");
+							//debug("Show next SCO.");
 							//setTimeout('top.nextSCO();',500);
 						break;
 						case 'previous':
-							debug("Show previous SCO.");
+							// debug("Show previous SCO.");
 							//setTimeout('top.prevSCO();',500);
 						break;
 						case 'choice':
@@ -553,7 +539,7 @@ var Scorm_2004 = function(){
 						break;
 					}
 				} else {
-					debug("Show next SCO (if auto next is enabled).");
+					//debug("Show next SCO (if auto next is enabled).");
 					/*if (<?php //echo $scorm->auto ?> == 1) {
 						setTimeout('top.nextSCO();',500);
 					}*/
@@ -598,10 +584,6 @@ var Scorm_2004 = function(){
 		}
 		
 		
-		debugGroup("GetValue: '"+element+"'");
-		debug(eval('this.' + element));
-		debug(typeof eval('this.' + element));
-		debugGroupClose();
 		
 		if (element.match('._count')!=null) {
 			element = element.replace('._count', '.elements.length');
@@ -706,10 +688,6 @@ var Scorm_2004 = function(){
 		var formatRegex = new RegExp(rules.format);
 		value = new String(value);
 		var matches = value.match(formatRegex);
-		debugGroup("validateDataModelElement " + element + " '" + value + "'");
-		debug("Matches: '" + matches + "'");
-		debug("Join: '" + matches.join('') + "'");
-		debugGroupClose();
 		if (matches==null) return false;
 		return matches.join('').length != 0 || value.length == 0;
 	}
@@ -760,12 +738,11 @@ var Scorm_2004 = function(){
 				this.errorCode = "402";
 				return "false";
 			}
-			debugGroup("Processing: " + element + " = '" + value + "'");
+			
 			var validates = this._validateDataModelElement(element, value);
 
 			// If there was no match or if the match is empty (when value is not empty)
 			if (!validates) {
-				debug("!!Validates");
 				this.errorCode = "406";
 				return "false";
 			}
@@ -773,12 +750,6 @@ var Scorm_2004 = function(){
 			var elementPath = element.split('.');
 
 			//if (this.errorCode == "0") {
-				debugGroup("Type OF this.datamodel[element]");
-				debug("ElementModel: " + element);
-				debug("this.datamodel[element]");
-				debug(this.datamodel[element]);
-				debug("Type: " + (typeof this.datamodel[element]));
-				debugGroupClose();
 				if (typeof this.datamodel[element].range != 'undefined') {
 					alert("Range not implemented.");
 					/*range = this.datamodel[elementmodel].range;
@@ -824,7 +795,6 @@ var Scorm_2004 = function(){
 					}
 				}
 				eval(obj_str_parent + " = '" + value + "'");
-				debugGroupClose();
 				this.errorCode = "0"; 
 				return "true";
 			//}

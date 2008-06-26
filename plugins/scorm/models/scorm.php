@@ -587,13 +587,13 @@ class Scorm extends ScormAppModel {
 			foreach($data['Organization'] as $org){
 			$scos = Set::extract($org,'Item');
 				foreach($scos as $sco) {
-				$this->Sco->create();
-				$sco['organization'] = $org['identifier'];
-				$sco['manifest'] = $data['Scorm']['identifier'];
-				$sco['scorm_id'] = $this->getLastInsertId();
-				$saved = $this->Sco->save($sco);
-				if(!$saved)
-						break;
+					$this->Sco->create();
+					$sco['organization'] = $org['identifier'];
+					$sco['manifest'] = $data['Scorm']['identifier'];
+					$sco['scorm_id'] = $this->getLastInsertId();
+					$saved = $this->Sco->save($sco); 
+					if(!$saved) 
+							break;
 				}	
 					if(!$saved)
 						break;

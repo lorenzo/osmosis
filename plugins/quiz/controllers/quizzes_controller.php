@@ -157,7 +157,14 @@ class QuizzesController extends QuizAppController {
 	function answer($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Quiz', true));
-			$this->redirect(array('action' => 'index'));
+			$this->redirect('/');
+		}
+		
+		if (!empty($this->data)) {
+			if ($this->Quiz->saveAnswers($id,$this->data,$this->Auth->user('id'))) {
+				$this->Session->setFlash(__('You have completed the Quiz.', true));
+				$this->redirect(array('action' => 'index'));
+			}
 		}
 		
 		$conditions = array('Quiz.id' => $id);

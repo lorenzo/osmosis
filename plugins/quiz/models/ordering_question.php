@@ -120,7 +120,8 @@ class OrderingQuestion extends QuizAppModel {
 	 */
 	
 	function afterFind($results,$primary = false) {
-		array_walk($results,array(&$this,'shuffleChoices'));	
+		if (isset($results['OrderingChoice']))
+			array_walk($results,array(&$this,'shuffleChoices'));	
 		return $results;
 	}
 	

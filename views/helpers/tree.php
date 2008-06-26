@@ -55,11 +55,24 @@ class TreeHelper extends Helper
 		$li_tabs = $tabs . $this->tab;
 		
 		$output = $tabs. "<ul>";
-		foreach ($data as $key=>$val) {
+		foreach ($data as $key => $val) {
 			$value = $val[$modelName][$fieldName];
 			if ($options && isset($options['link'])) {
 				$condition = isset($options['link']['ifPresent']) ?
 					isset($val[$modelName][$options['link']['ifPresent']]) : true;
+					
+				if (isset($htmlOptions['class'])) {
+					$className = '';
+					
+					foreach ($htmlOptions['class'] as $className_item) {
+						if ($className_item[0]==':') {
+							$className_item = substr($className_item, 1);
+							$className .= $val[$modelName][$className_item];
+						} else $className .= $className_item;
+					}
+					$htmlOp['class'] = $className;
+				}
+				
 				if ($condition) {
 					$params = $options['link']['url'];
 					foreach ($params as $index => $field) {
@@ -72,17 +85,6 @@ class TreeHelper extends Helper
 					        $htmlOptions['id'] :
 					        'tree_element_';
 					$htmlOp['id'] .= $this->count++;
-					if (isset($htmlOptions['class'])) {
-						$className = '';
-						
-						foreach ($htmlOptions['class'] as $className_item) {
-							if ($className_item[0]==':') {
-								$className_item = substr($className_item, 1);
-								$className .= $val[$modelName][$className_item];
-							} else $className .= $className_item;
-						}
-						$htmlOp['class'] = $className;
-					}
 					$params = Set::merge($url, $params);
 					$value = $this->Html->link(
 					    $value,
@@ -91,7 +93,7 @@ class TreeHelper extends Helper
 					);
 				}
 			}
-			$output .= $li_tabs . "<li>".$value;
+			$output .= $li_tabs . '<li class="'.$className.'">'.$value;
 			if(isset($val['children'][0]))
 			{
 				$output .= $this->listElement($val['children'], $modelName, $fieldName, $options, $htmlOptions);

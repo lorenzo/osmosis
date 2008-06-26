@@ -211,7 +211,8 @@ class MatchingQuestion extends QuizAppModel {
 	 */
 	
 	function afterFind($results,$primary = false) {
-		array_walk($results,array(&$this,'shuffleChoices'));	
+		if (isset($question['SourceChoice']) && isset($question['TargetChoice']))
+			array_walk($results,array(&$this,'shuffleChoices'));	
 		return $results;
 	}
 	

@@ -23,44 +23,24 @@
  * @package			org.osmosislms
  * @subpackage		org.osmosislms.app
  * @since			Version 2.0 
- * @version			$Revision$
- * @modifiedby		$LastChangedBy$
- * @lastmodified	$Date$
+ * @version			$Revision: 451 $
+ * @modifiedby		$LastChangedBy: jose.zap $
+ * @lastmodified	$Date: 2008-06-25 15:45:38 -0430 (Wed, 25 Jun 2008) $
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-function debugGroup(str) {
-	if (console)
-		console.group(str);
-}
-
-function debugGroupClose() {
-	if (console)
-		console.groupEnd();
-}
-
-function debug(str) {
-	if (console)
-		console.debug(str);
-}
 var ScormControl = new function(){
 	this.updateUI = function(link) {
-		debugGroup("Activado el link " + link.id);
-		debug(link.href);
-		debugGroupClose();
 		var href = link.href;
 		var id = link.id;
-		var id_data = id.match(/(.*)(\d+)/);
-		var local_sco_id = id_data[1];
+		var id_data = id.match(/([^0-9])*([0-9]+)/);
+		var local_sco_id = id_data[2];
 		var local_sco_number =  parseInt(id_data[2]);
 		this.updateLinks(local_sco_number-1, local_sco_number+1, local_sco_id);
-		//alert('Luego de cerrar esta ventana, espere un momento... ' +href);
 		var className = link.className;
-		debug('ClassName' + className);
-		id_data = className.match(/(.*)(\d+)/);
+		id_data = className.match(/([^0-9])*([0-9]+)/);
 		var sco_id = parseInt(id_data[2]);		
 
 		$('script#api').remove();
-		debug('<h1><img src="' + webroot + 'img/loading.gif" /> Cargando...</h1>');
 		$.blockUI('<h1><img src="' + webroot + '/img/loading.gif" /> Cargando...</h1>'); 
 		$('head').createAppend(
 			'script',
@@ -74,9 +54,25 @@ var ScormControl = new function(){
 				}
 			}
 		);
-
+		
+		real_id_data = link.className.match(/([^0-9])*([0-9]+)/);
+		real_id = real_id_data[2];
+		//This will query all scoes completed in the same scorm than real_id sco
+		$.get(webroot+'scorm/scos/completed/'+real_id+'.json',{},ScormControl.showCompleted,'json');
 		
 		return false;
+	}
+	
+	this.showCompleted = function (data) {
+		var completed = data.response;
+		if (completed.length < 1) return;
+		$('#scorm_toc li:not(.completed)').each(function() {
+			
+			if (jQuery.inArray(this.className.match(/([^0-9])*([0-9]+)/)[2],completed) > -1) {
+				$(this).addClass('completed');
+			}
+				
+		});
 	}
 	
 	this.setupLinks = function() {
@@ -84,26 +80,21 @@ var ScormControl = new function(){
 	}
 	
 	this.updateLinks = function(prev, next, id) {
-		this.updateLink(id+prev, 'previous');
-		this.updateLink(id+next, 'next');
+		this.updateLink(prev, 'previous');
+		this.updateLink(next, 'next');
 	}
 
 	this.updateLink = function(id, which) {
+		id = 'sco-'+id;
 		link_id = 'scorm_control_' + which;
 		if (document.getElementById(id)!=null) {
 			var link_element = document.getElementById(link_id);
 			link_element.href = document.getElementById(id).href;
-			debugGroup("LE PONGO: " + id);
-			debugGroupClose();
 			link_element.className = id;
 			link_element.style.display = "inline";
 			link_element.onclick = function() {
 				var className = this.className;
 				var id_data = className.match(/(.*)(\d+)/);
-				debugGroup('Aja: ' + className);
-				debug(id_data);
-				debug(id_data[1] + (id_data[2]))
-				debugGroupClose();
 				var link = document.getElementById(id_data[1] + (id_data[2]));
 				ScormControl.updateUI(link);
 			}

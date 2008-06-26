@@ -1,8 +1,10 @@
 <?php
-	$type = 'select';
+	$type = 'radio';
+	$legend = false;
 	$label = false;
 	$empty = true;
 	if ($question['ChoiceQuestion']['max_choices'] > 1) {
+		$type = 'select';
 		$multiple = 'checkbox';
 		$empty = false;
 	}
@@ -12,6 +14,6 @@
 <div class="question choiceQuestion">
 	<?php
 		echo $question['ChoiceQuestion']['body'];
-		echo $form->input('ChoiceQuestion.'.$question['ChoiceQuestion']['id'].'.answer',compact('type','multiple','label','empty','options'));
+		echo $form->input('ChoiceQuestion.'.$question['ChoiceQuestion']['id'],compact('type','multiple','label','empty','options','legend'));
 	?>
 </div>
