@@ -30,6 +30,6 @@
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 Configure::write('Blog.description','Lorem ipsum dolor sit amet, consectetuer adipiscing elit.');
-Configure::write('Blog.title','Blog');
+Configure::write('Blog.title',__('Blog',true));
 Configure::write('Blog.type',array('other'));
 ?>

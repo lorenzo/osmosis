@@ -1,14 +1,14 @@
 # LANGUAGE translation of CakePHP Application
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  Revision: 430 /osmosis/app_controller.php
+#  Revision: 453 /osmosis/app_controller.php
 #  Revision: 435 /osmosis/plugins/locker/controllers/folders_controller.php
 #  Revision: 396 /osmosis/app_model.php
 #  Revision: 412 /osmosis/controllers/courses_controller.php
 #  Revision: 323 /osmosis/controllers/departments_controller.php
-#  Revision: 413 /osmosis/controllers/members_controller.php
+#  Revision: 453 /osmosis/controllers/members_controller.php
 #  Revision: 323 /osmosis/controllers/plugins_controller.php
-#  Revision: 418 /osmosis/models/course.php
+#  Revision: 453 /osmosis/models/course.php
 #  Revision: 323 /osmosis/models/department.php
 #  Revision: 403 /osmosis/plugins/forum/models/topic.php
 #  Revision: 446 /osmosis/plugins/quiz/models/quiz.php
@@ -16,20 +16,24 @@
 #  Revision: 323 /osmosis/models/behaviors/bindable.php
 #  Revision: 438 /osmosis/plugins/locker/controllers/installer_controller.php
 #  Revision: 364 /osmosis/plugins/wiki/controllers/installer_controller.php
+#  Revision: 323 /osmosis/plugins/blog/config/description.php
 #  Revision: 446 /osmosis/plugins/blog/controllers/blogs_controller.php
 #  Revision: 446 /osmosis/plugins/blog/controllers/posts_controller.php
 #  Revision: 410 /osmosis/plugins/blog/controllers/comments_controller.php
 #  Revision: 446 /osmosis/plugins/blog/models/comment.php
 #  Revision: 446 /osmosis/plugins/blog/models/post.php
 #  Revision: 393 /osmosis/plugins/chat/controllers/messages_controller.php
+#  Revision: 323 /osmosis/plugins/forum/config/description.php
 #  Revision: 399 /osmosis/plugins/forum/controllers/discussions_controller.php
 #  Revision: 396 /osmosis/plugins/forum/controllers/responses_controller.php
 #  Revision: 403 /osmosis/plugins/forum/models/response.php
 #  Revision: 323 /osmosis/plugins/forum/controllers/topics_controller.php
 #  Revision: 404 /osmosis/plugins/forum/models/discussion.php
-#  Revision: 428 /osmosis/plugins/locker/controllers/documents_controller.php
+#  Revision: 438 /osmosis/plugins/locker/config/description.php
+#  Revision: 449 /osmosis/plugins/locker/controllers/documents_controller.php
 #  Revision: 432 /osmosis/plugins/locker/models/locker_document.php
 #  Revision: 439 /osmosis/plugins/locker/models/locker_folder.php
+#  Revision: 335 /osmosis/plugins/quiz/config/description.php
 #  Revision: 413 /osmosis/plugins/quiz/controllers/choice_questions_controller.php
 #  Revision: 413 /osmosis/plugins/quiz/controllers/matching_questions_controller.php
 #  Revision: 413 /osmosis/plugins/quiz/controllers/ordering_questions_controller.php
@@ -41,9 +45,11 @@
 #  Revision: 395 /osmosis/plugins/quiz/models/choice_question.php
 #  Revision: 395 /osmosis/plugins/quiz/models/matching_question.php
 #  Revision: 408 /osmosis/plugins/quiz/models/ordering_question.php
-#  Revision: 323 /osmosis/plugins/quiz/models/text_question.php
+#  Revision: 452 /osmosis/plugins/quiz/models/text_question.php
+#  Revision: 323 /osmosis/plugins/scorm/config/description.php
 #  Revision: 416 /osmosis/plugins/scorm/controllers/scorms_controller.php
 #  Revision: 323 /osmosis/plugins/scorm/controllers/scos_controller.php
+#  Revision: 323 /osmosis/plugins/wiki/config/description.php
 #  Revision: 423 /osmosis/plugins/wiki/controllers/entries_controller.php
 #  Revision: 410 /osmosis/plugins/wiki/controllers/wikis_controller.php
 #  Revision: 323 /osmosis/plugins/wiki/controllers/revisions_controller.php
@@ -54,7 +60,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2008-06-25 09:00-0430\n"
+"POT-Creation-Date: 2008-06-26 12:20-0430\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -67,7 +73,7 @@ msgstr ""
 msgid "Invalid access"
 msgstr ""
 
-#: /app_controller.php:294
+#: /app_controller.php:298
 #: /plugins/locker/controllers/folders_controller.php:134
 msgid "Invalid Access"
 msgstr ""
@@ -262,6 +268,10 @@ msgstr ""
 msgid "%s.%s is not a valid binding"
 msgstr ""
 
+#: /plugins/agenda/config/description.php:3
+msgid "Schedule"
+msgstr ""
+
 #: /plugins/agenda/controllers/events_controller.php:23
 msgid "Invalid Event."
 msgstr ""
@@ -443,6 +453,10 @@ msgstr ""
 
 #: /plugins/agenda/views/events/view.ctp:41
 msgid "New Event"
+msgstr ""
+
+#: /plugins/blog/config/description.php:33
+msgid "Blog"
 msgstr ""
 
 #: /plugins/blog/controllers/blogs_controller.php:49
@@ -1093,20 +1107,24 @@ msgstr ""
 msgid "The message could not be delivered"
 msgstr ""
 
-#: /plugins/chat/views/elements/placeholders/course_sidebar.ctp:39
-msgid "minimize"
+#: /plugins/chat/views/elements/placeholders/course_sidebar.ctp:2
+msgid "Chat"
 msgstr ""
 
-#: /plugins/chat/views/elements/placeholders/course_sidebar.ctp:40
-msgid "close"
-msgstr ""
-
-#: /plugins/chat/views/elements/placeholders/course_sidebar.ctp:102
+#: /plugins/chat/views/elements/placeholders/course_sidebar.ctp:8
 msgid "me"
 msgstr ""
 
-#: /plugins/chat/views/elements/placeholders/course_sidebar.ctp:160
-msgid "Chat"
+#: /plugins/chat/views/elements/placeholders/course_sidebar.ctp:9
+msgid "minimize"
+msgstr ""
+
+#: /plugins/chat/views/elements/placeholders/course_sidebar.ctp:10
+msgid "close"
+msgstr ""
+
+#: /plugins/forum/config/description.php:33
+msgid "Forums"
 msgstr ""
 
 #: /plugins/forum/controllers/discussions_controller.php:68;83
@@ -1511,6 +1529,11 @@ msgstr ""
 msgid "No discussions registered yet"
 msgstr ""
 
+#: /plugins/locker/config/description.php:34
+#: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:2
+msgid "Locker"
+msgstr ""
+
 #: /plugins/locker/controllers/documents_controller.php:45
 msgid "Invalid LockerDocument."
 msgstr ""
@@ -1676,10 +1699,6 @@ msgstr ""
 msgid "This folder is empty"
 msgstr ""
 
-#: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:2
-msgid "Locker"
-msgstr ""
-
 #: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:5
 msgid "These are the Documents sent to you by other members."
 msgstr ""
@@ -1722,6 +1741,20 @@ msgstr ""
 
 #: /plugins/locker/views/folders/ajax/view.ctp:4
 msgid "View this Folder's Content"
+msgstr ""
+
+#: /plugins/quiz/config/description.php:33
+#: /plugins/quiz/views/choice_questions/view.ctp:80
+#: /plugins/quiz/views/matching_questions/view.ctp:82
+#: /plugins/quiz/views/ordering_questions/view.ctp:80
+#: /plugins/quiz/views/quizzes/add.ctp:13
+#: /plugins/quiz/views/quizzes/index.ctp:2
+#: /plugins/quiz/views/quizzes/rename.ctp:13
+#: /plugins/quiz/views/quizzes/view.ctp:20
+#: /plugins/quiz/views/text_questions/edit.ctp:19
+#: /plugins/quiz/views/text_questions/index.ctp:55
+#: /plugins/quiz/views/text_questions/view.ctp:32;37
+msgid "Quizzes"
 msgstr ""
 
 #: /plugins/quiz/controllers/choice_questions_controller.php:44
@@ -1967,7 +2000,7 @@ msgid "The title can not be empty"
 msgstr ""
 
 #: /plugins/quiz/models/text_question.php:72
-msgid "The message of the question can not be empty"
+msgid "The content of the question can not be empty"
 msgstr ""
 
 #: /plugins/quiz/views/choice_questions/add.ctp:4
@@ -2197,19 +2230,6 @@ msgstr ""
 #: /plugins/quiz/views/matching_questions/view.ctp:48
 #: /plugins/quiz/views/ordering_questions/view.ctp:48
 msgid "Text"
-msgstr ""
-
-#: /plugins/quiz/views/choice_questions/view.ctp:80
-#: /plugins/quiz/views/matching_questions/view.ctp:82
-#: /plugins/quiz/views/ordering_questions/view.ctp:80
-#: /plugins/quiz/views/quizzes/add.ctp:13
-#: /plugins/quiz/views/quizzes/index.ctp:2
-#: /plugins/quiz/views/quizzes/rename.ctp:13
-#: /plugins/quiz/views/quizzes/view.ctp:20
-#: /plugins/quiz/views/text_questions/edit.ctp:19
-#: /plugins/quiz/views/text_questions/index.ctp:55
-#: /plugins/quiz/views/text_questions/view.ctp:32;37
-msgid "Quizzes"
 msgstr ""
 
 #: /plugins/quiz/views/choice_questions/view.ctp:85
@@ -2479,6 +2499,10 @@ msgstr ""
 #: /plugins/quiz/views/text_questions/index.ctp:2
 #: /plugins/quiz/views/text_questions/view.ctp:30
 msgid "TextQuestions"
+msgstr ""
+
+#: /plugins/scorm/config/description.php:33
+msgid "Lessons"
 msgstr ""
 
 #: /plugins/scorm/controllers/scorms_controller.php:102
@@ -2998,6 +3022,11 @@ msgstr ""
 msgid "Presentation"
 msgstr ""
 
+#: /plugins/wiki/config/description.php:33
+#: /plugins/wiki/views/elements/placeholders/plugin_updates.ctp:2
+msgid "Wiki"
+msgstr ""
+
 #: /plugins/wiki/controllers/entries_controller.php:52
 msgid "Invalid Entry."
 msgstr ""
@@ -3081,10 +3110,6 @@ msgstr ""
 
 #: /plugins/wiki/views/elements/updates.ctp:29
 msgid "<li>:member_links :action the page <em>:entry_title</em>.</li>"
-msgstr ""
-
-#: /plugins/wiki/views/elements/placeholders/plugin_updates.ctp:2
-msgid "Wiki"
 msgstr ""
 
 #: /plugins/wiki/views/entries/add.ctp:4;14

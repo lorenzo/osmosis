@@ -30,8 +30,8 @@
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 
-Configure::write('Locker.description','A file manager and sharing tool for each member.');
-Configure::write('Locker.title','Locker');
+Configure::write('Locker.description',__('A file manager and sharing tool for each member.',true));
+Configure::write('Locker.title',__('Locker', true));
 Configure::write('Loecker.type',array('other'));
 Configure::write('Loecker.author','Ósmosis Team');
 ?>

@@ -1051,7 +1051,7 @@ msgstr "Estatus incorrecto."
 #: /plugins/forum/views/subjects/index.ctp:72
 #: /plugins/forum/views/subjects/view.ctp:52;97
 msgid "New Discussion"
-msgstr "Nueva discusión"
+msgstr "Nueva Discusión"
 
 #: /plugins/forum/views/discussions/add.ctp:11
 #: /plugins/forum/views/discussions/edit.ctp:22
@@ -1568,7 +1568,7 @@ msgstr "Esta carpeta está vacía"
 
 #: /plugins/locker/views/elements/folder_path.ctp:4
 msgid "home"
-msgstr ""
+msgstr "inicio"
 
 #: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:2
 msgid "Locker"
@@ -3780,3 +3780,23 @@ msgstr "Pregunta de desarrollo eliminada."
 #: /plugins/quiz/models/text_question.php:72
 msgid "The message of the question can not be empty"
 msgstr "El contenido de la pregunta no puede ser vacío."
+
+#: /plugins/agenda/config/description.php:3
+msgid "Schedule"
+msgstr "Agenda"
+
+#: /plugins/blog/config/description.php:33
+msgid "Blog"
+msgstr "Blog"
+
+#: /plugins/forum/config/description.php:33
+msgid "Forums"
+msgstr "Foro"
+
+#: /plugins/quiz/models/text_question.php:72
+msgid "The content of the question can not be empty"
+msgstr "El contenido de esta pregunta no puede ser vacío."
+
+#: /plugins/scorm/config/description.php:33
+msgid "Lessons"
+msgstr "SCORM"

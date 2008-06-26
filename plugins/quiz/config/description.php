@@ -29,8 +29,8 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-Configure::write('Quiz.description','Create Quizzes the easy way');
-Configure::write('Quiz.title','Quizzes');
+Configure::write('Quiz.description',__('Create Quizzes the easy way',true));
+Configure::write('Quiz.title',__('Quizzes',true));
 Configure::write('Quiz.type',array('tool'));
 Configure::write('Quiz.author','Osmosis Team');
 ?>
