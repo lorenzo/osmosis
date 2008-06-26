@@ -175,7 +175,8 @@
 }
 
 .choices fieldset.question-choices div.submit {
-	text-align:right;
+	text-align:left;
+	
 }
 
 fieldset.question-choices .choice {
@@ -221,8 +222,9 @@ fieldset.question-choices .choice.question.set {
 	float:left;
 }
 fieldset.question-choices .choice.question.set textarea{
-	float:left;
-	width:80%;
+	float:right;
+	width:75%;
+	margin-right: 25%;
 }	
 fieldset.question-choices .choice.answer.set {
 	float:right;
@@ -243,14 +245,14 @@ fieldset.question-choices .choice.set ol label {
 .set ol li  {
 	list-style-position:inside;
 	padding-bottom:0px;
-	margin-bottom:10px;
+	margin-bottom:20px;
 	clear:both;
 	float:left;
 	position:relative;
 }
 
 .set ol li span {
-	margin:0;
+	margin:;
 }
 .set ol li span.correct {
 	display:block;
@@ -259,7 +261,7 @@ fieldset.question-choices .choice.set ol label {
 	top:13px;
 	width:15%;
 	text-align:center;
-	margin:-10px 0 0 0;
+	margin:-5px 3px 0 0;
 }
 .matching .submit {
 	clear:both;
@@ -287,6 +289,8 @@ fieldset.question-choices .choice.set ol label {
 	clear:both;
 	bottom:0;
 	margin-left:5px;
+	float:left;
+	margin: 0px 40px 0px 0px;
 }
 ol li div ol {
 	margin-top:10px;

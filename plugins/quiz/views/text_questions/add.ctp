@@ -4,9 +4,13 @@
  		<legend><?php echo sprintf(__('Create %s', true), __('Text Question', true));?></legend>
 	<?php
 		echo $form->input('title');
+	?>
+	<div class="body">
+	<?php
 		echo $form->input('body', array('label' => __('Something', true)));
 		echo $form->input('format');
 	?>
+	</div>
 	</fieldset>
 <?php
 	echo $form->input('Quiz.0.id');

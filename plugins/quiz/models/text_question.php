@@ -69,7 +69,7 @@ class TextQuestion extends QuizAppModel {
 			'title.required', __('The title can not be empty',true)
 		);
 		$this->setErrorMessage(
-			'body.required', __('The message of the question can not be empty',true)
+			'body.required', __('The content of the question can not be empty',true)
 		);
 		parent::__construct($id,$table,$ds);
 	}
