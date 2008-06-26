@@ -47,8 +47,8 @@ class ScormsController extends ScormAppController {
 	
 
 	function index() {
-		$this->Scorm->recursive = 0;
-		$this->set('scorms', $this->paginate());
+		$this->Scorm->recursive = -1;
+		$this->set('scorms', $this->paginate(array('course_id' => $this->activeCourse)));
 	}
 	
 	function toc($id) {

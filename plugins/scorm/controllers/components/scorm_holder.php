@@ -37,10 +37,8 @@ class ScormHolderComponent extends PlaceholderDataComponent {
 	var $cache = false;
 	var $types = array('course_toolbar');
 	
-	function getData($type = null) {
-		if ($type == 'course_toolbar')
-			return array('url' => array('plugin' => 'scorm', 'controller' => 'scorms', 'action' => 'index'));
-		return false;
+	function courseToolBar() {
+		return array('url' => array('plugin' => 'scorm', 'controller' => 'scorms', 'action' => 'index','course_id' => $this->controller->_getActiveCourse()));
 	}
 }
 ?>
