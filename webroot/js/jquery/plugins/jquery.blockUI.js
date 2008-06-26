@@ -202,6 +202,8 @@ $.blockUI.impl = {
     boxCallback: null,
     pageBlock: null,
     pageBlockEls: [],
+	// Selector that should not be blocked
+	blockExcept: '',
     op8: window.opera && window.opera.version() < 9,
     ie6: $.browser.msie && /MSIE 6.0/.test(navigator.userAgent),
     install: function(el, msg, css, opts) {
@@ -209,6 +211,9 @@ $.blockUI.impl = {
         this.boxCallback = typeof opts.displayMode == 'function' ? opts.displayMode : null;
         this.box = opts.displayMode ? msg : null;
         var full = (el == window);
+		if (opts.blockExcept) {
+			this.blockExcept = opts.blockExcept;
+		}
 
         // use logical settings for opacity support based on browser but allow overrides via opts arg
         var noalpha = this.op8 || $.browser.mozilla && /Linux/.test(navigator.platform);
@@ -338,7 +343,7 @@ $.blockUI.impl = {
         // don't bother unbinding if there is nothing to unbind
         if (!b && (full && !this.pageBlock || !full && !el.$blocked)) return;
         if (!full) el.$blocked = b;
-        var $e = $(el).find('a,:input');
+        var $e = $(el).find('a,:input').not($($.blockUI.impl.blockExcept));
         $.each(['mousedown','mouseup','keydown','keypress','click'], function(i,o) {
             $e[b?'bind':'unbind'](o, $.blockUI.impl.handler);
         });

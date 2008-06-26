@@ -219,10 +219,11 @@ jQuery.fn.lockerItem = function(params) {
 			if (!$(active).hasClass('folder')) {
 				makeEditable(ct, c, '#document-description', 'autogrow', 'description');
 			}
-			$('body').block({message : null, overlayCSS: {backgroundColor: '#f00', color: '#fff', cursor : 'dafault'}});
-			$('#cluetip-inner a').click(function(evt) {
-				window.location = this.href;
-			});
+			$('body').block(
+				null,
+				{backgroundColor: '#f00', color: '#fff', cursor : 'dafault'},
+				{blockExcept: '#cluetip a'}
+			);
 		}
 	})
 	.dblclick(function(evt) {
