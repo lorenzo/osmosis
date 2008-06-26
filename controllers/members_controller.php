@@ -179,7 +179,7 @@ class MembersController extends AppController {
 	}
 	
 	/**
-	 * Generates a list of online members
+	 * Generates a list of online members known to the actual active member
 	 *
 	 * @return void
 	 **/
@@ -191,32 +191,57 @@ class MembersController extends AppController {
 			array(
 				'course_id'	=> $active_course,
 				'by'		=> 'course',
-				'conditions' => array('member_id <>' => $active_member)
+				'conditions' => array('member_id <>' => $active_member),
+				'contain'	=> array('Member' => array('id', 'full_name', 'last_seen'))
 			)
 		);
 		$active_course_classmates = array_pop($active_course_classmates);
 		if (count($active_course_classmates) < 10) {
-			$conditions = array('course_id <>' => $active_course);
+			$conditions = array('course_id <>' => $active_course, 'member_id' => $active_member);
 			$fields = array('course_id');
 			$my_courses = $this->Member->Enrollment->find('all', compact('conditions', 'fields'));
 			$my_courses = Set::extract('/Enrollment/course_id', $my_courses);
+			$ids_me = $ids = Set::extract('/Member/id', $active_course_classmates);
+			$ids_me[] = $active_member;
 			$classmates = $this->Member->Course->find(
 				'enrolled',
 				array(
 					'course_id'		=> $my_courses,
-					'conditions'	=> array('member_id <>' => $active_member),
-					'by'			=> 'role'
+					'conditions'	=> array('NOT' => array('member_id' => $ids_me)),
+					'by'			=> 'course',
+					'contain'		=> array('Member' => array('id', 'full_name', 'last_seen'))
 				)
 			);
-			foreach ($classmates as $course_id => $classmate_list) {
-				foreach ($classmate_list as $i => $classmate) {
-					if (!in_array($classmate, $active_course_classmates)) {
-						$active_course_classmates[] = $classmate;
+			foreach ($classmates as $course_id => $members) {
+				foreach ($members as $i => $member) {
+					if (!in_array($member['Member']['id'], $ids_me)) {
+						$active_course_classmates[] = $member;
 					}
 				}
 			}
+			$classmates = array(
+				'Online'	=> array(),
+				'Offline'	=> array(),
+				'Away'		=> array()
+			);
+			$time = time();
+			$timeout = (Security::inactiveMins() * Configure::read('Session.timeout'))/60;
+			foreach ($active_course_classmates as $i => $member) {
+				$minus = ($time - $member['Member']['last_seen'])/60;
+				$member['Member']['timeout'] = $minus;
+				if ($minus >= 0 && $minus < 5) {
+					$classmates['Online'][] = $member;
+				} else if ($minus >= 5 && $minus < $timeout) {
+					$classmates['Away'][] = $member;
+				} else if ($minus >= $timeout) {
+					$classmates['Offline'][] = $member;
+				} else {
+					$classmates['???'][] = $member;
+				}
+			}
 		}
-		$this->set('classmates', $active_course_classmates);
+		// debug($classmates);die;
+		$this->set(compact('classmates'));
 	}
 }
 ?>

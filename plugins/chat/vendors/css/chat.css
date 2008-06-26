@@ -1,7 +1,9 @@
 #side-content.small #chat.boxed {
 	width:130px;
 	margin:10px auto;
-/*	border:red 1px solid;*/
+}
+#side-content.small #chat.boxed li {
+	border:none;
 }
 #side-content.small #chat.boxed p.wait {
 	margin:5px 0;
@@ -31,7 +33,7 @@
 #chat a {
 	display:block;
 	text-indent:20px;
-	background:transparent url('../img/chat_icons.gif') no-repeat;
+	background:transparent url('../img/chat_icons.gif') no-repeat 5px 100px;
 }
 #chat a.online {
 	background-position:5px -16px;
@@ -39,7 +41,7 @@
 #chat a.offline {
 	background-position:5px -1px;
 }
-#chat a.busy {
+#chat a.away {
 	background-position:5px -32px;
 }
 
@@ -48,13 +50,19 @@ div#chat_container {
 	bottom:0;
 	right:0;
 }
-
-div.chat_window {
-	display:-moz-inline-box;
-	display:inline-block;
-	float:right;
-	margin-right:20px;
+div.chat_window_container {
+	height:100%;
 	width:225px;
+	position:relative;
+	float:left;
+	margin-right:20px;
+}
+div.chat_window {
+	z-index:1000000;
+	position:absolute;
+	bottom:0;
+	margin-right:20px;
+	width:100%;
 	border:#6EA6D5 1px solid;
 	border-bottom:none;
 	background:#fff;

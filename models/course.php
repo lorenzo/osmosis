@@ -231,6 +231,10 @@ class Course extends AppModel {
 		if (isset($params['fields'])) {
 			$fields = array_merge($fields, $params['fields']);
 		}
+		$contain = array('Member' => array('id', 'full_name', 'email'));
+		if (isset($params['contain'])) {
+			$contain = $params['contain'];
+		}
 		$order = array('course_id, role_id ASC');
 		$id = null;
 		if (isset($params['course_id'])) {
@@ -251,9 +255,7 @@ class Course extends AppModel {
 			$roles = Set::combine($roles, '/Role/id', '/Role/role');
 		}
 		
-		$this->Member->Enrollment->contain(
-			array('Member' => array('id', 'full_name', 'email', 'phone'))
-		);
+		$this->Member->Enrollment->contain($contain);
 		if (isset($params['contain'])) {
 			$this->Member->Enrollment->contain($params['contain']);
 		}

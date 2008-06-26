@@ -13,12 +13,16 @@
 			?>
 		</fieldset>
 		<fieldset class="col">
+			<legend><?php __('Institutional Information')?></legend>
+			<?php
+				echo $form->input('institution_id', array('label' => __('Institution ID', true)));
+			?>
+		</fieldset>
+		<fieldset class="col">
 			<legend><?php __('Location'); ?></legend>
 			<?php
-				echo $form->input('institution_id');
 				echo $form->input('country');
 				echo $form->input('city');
-			
 			?>
 		</fieldset>
 		<fieldset class="full">

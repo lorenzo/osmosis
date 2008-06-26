@@ -10,10 +10,14 @@ OsmosisChat = {
 	},
 	
 	drawChatContainer: function () {
-		$('body').createAppend(
+		$('body').createPrepend(
 		    'div', { id : 'chat_container'}
 		);
 		OsmosisChat.container = $('#chat_container');
+		OsmosisChat.container.height($(window).height());
+		$(window).wresize(function() {
+			OsmosisChat.container.height($(window).height());
+		});
 	},
 	
 	connect: function() {
@@ -46,25 +50,35 @@ OsmosisChat = {
 				// Unhandled
 			},
 			success : function(xml) {
-				var list = $('ul', OsmosisChat.chat_box).html('');
 				OsmosisChat.stopWaiting();
-				$('member', xml).each(function() {
-					var member = $(this);
-					var member_id = member.attr('id'),
-						full_name = member.attr('full_name');
-					list.createAppend('li', {}, ['a', {href : '#', rel : 'member_id:' + member_id + ',member_name:' + full_name}, full_name]);
+				var list = $('ul', OsmosisChat.chat_box).html('');
+				$(xml).children().children().each(function() {
+					var status = this.nodeName;
+					$(this).children().each(function() {
+						OsmosisChat.addContact($(this), status, list);
+					});
 				});
-				$('a', list).click(function(evt) {
-					evt.preventDefault();
-					var rel = this.rel;
-					rel = rel.split(',');
-					var member_id = rel[0].replace('member_id:', ''),
-						member_name = rel[1].replace('member_name:', '');
-					OsmosisChat.begin(member_id, member_name, true);
-				})
-				setTimeout('OsmosisChat.updateContactList()', 2500);
+				setTimeout('OsmosisChat.updateContactList()', 10000);
 			}
 		});
+	},
+	
+	addContact : function(member, status, list) {
+		var member_id = member.attr('id'),
+			full_name = member.attr('full_name');
+		list.createAppend('li', {},
+			[
+				'a', {className : status, href : '#', rel : 'member_id:' + member_id + ',member_name:' + full_name}, full_name
+			]
+		);
+		$('a', list).click(function(evt) {
+			evt.preventDefault();
+			var rel = this.rel;
+			rel = rel.split(',');
+			var member_id = rel[0].replace('member_id:', ''),
+				member_name = rel[1].replace('member_name:', '');
+			OsmosisChat.begin(member_id, member_name, true);
+		})
 	},
 	
 	begin: function(member_id, member_name, forceFocus) {
@@ -81,14 +95,14 @@ OsmosisChat = {
 			)
 			.focus(OsmosisChat.onBoxFocus)
 			.blur(OsmosisChat.onBoxBlur);
-		if (forceFocus) $('#chat_window_'+user+' .chat_sendbox textarea',container).focus();
+		if (forceFocus) $('#chat_window_'+user+' .chat_sendbox textarea', container).focus();
 		return win;
 	},
 
 	onBoxRestore: function() {
-		$(this).parents('.chat_window')
+		$(this).parents('.chat_window_container')
 			.find('a.chat_minimize').removeClass('chat_restore')
-		.parents('.chat_window')
+		.parents('.chat_window_container')
 			.find('.chat_canvas').slideDown('fast')
 				.find('textarea').focus();
 	},
@@ -112,9 +126,10 @@ OsmosisChat = {
 
 	onBoxClose : function(evt) {
 		evt.preventDefault();
-		$(this).parents('.chat_window').hide('fast', function() {
-			$(this).find('textarea').blur()
-		});
+		$(this).parents('.chat_window_container').hide('fast')
+			.find('.chat_window').hide('fast', function() {
+				$(this).find('textarea').blur()
+			});
 	},
 
 	onBoxFocus: function() {
@@ -206,27 +221,34 @@ OsmosisChat = {
 		var win = $('#chat_window_' + member_id);
 		if (win.length==1) {
 			if (win.css('display') == 'none') {
-				win.css('display', 'inline-block');
+				win.parents('.chat_window_container').css('display', 'inline-block')
+					.find('.chat_window').css('display', 'inline-block');
 			}
 			return win;
 		}
 		OsmosisChat.container.createAppend(
-		    'div', {className: 'chat_window', id : 'chat_window_' + member_id},
+			'div', {id : 'chat_window_container' + member_id, className: 'chat_window_container'},
 				[
-					'div', {className: 'chat_head'},
-					[
-						'span', {className: 'chat_peername'}, member_name,
-						'a', {className: 'chat_minimize' , href: '#', title: OsmosisChat.labels.minimize}, '',
-						'a', {className: 'chat_close' , href: '#', title: OsmosisChat.labels.close}, '',
-					],
-					'div', {className: 'chat_canvas'},
-					[
-						'div', {className: 'chat_messages'} , '',
-						'div', {className: 'chat_sendbox'} , ['textarea'],
-					]
+			    	'div', {className: 'chat_window', id : 'chat_window_' + member_id},
+						[
+							'div', {className: 'chat_head'},
+								[
+									'span', {className: 'chat_peername'}, member_name,
+									'a', {className: 'chat_minimize' , href: '#', title: OsmosisChat.labels.minimize}, '',
+									'a', {className: 'chat_close' , href: '#', title: OsmosisChat.labels.close}, '',
+								],
+							'div', {className: 'chat_canvas'},
+								[
+									'div', {className: 'chat_messages'} , '',
+									'div', {className: 'chat_sendbox'} , ['textarea'],
+								]
+						]
 				]
 		);
-		var container = $('#chat_window_' + member_id).show('fast');
+		var container = $('#chat_window_' + member_id);
+		container.parents('.chat_window_container').css('display', 'inline-block')
+			.find('.chat_window').css('display', 'inline-block');
+		
 		container.find('textarea').autogrow();
 		container.find('.chat_messages').minmax();
 		return container;
