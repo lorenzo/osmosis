@@ -423,7 +423,15 @@ class LockerFolder extends LockerAppModel {
 		$this->data['LockerFolder']['parent_id'] = $destiny['LockerFolder']['id'];
 		return $this->save();
 	}
-	
+
+	/**
+	 * Returns the member's dropbox data
+	 *
+	 * @param string $member_id Id of the Member
+	 * @param string $just_id wether the return value should be the ID of the Dropbox
+	 * @param string $contents wether the return value should include the contents of the Dropbox
+	 * @return mixed array of data or string ID of Dropbox
+	 */
 	function dropbox($member_id, $just_id = false, $contents = true) {
 		$locker = $this->locker($member_id, true);
 		$this->recursive = -1;
@@ -439,7 +447,14 @@ class LockerFolder extends LockerAppModel {
 		}
 		return $dropbox;
 	}
-	
+
+	/**
+	 * Returns the root Folder data of a member's locker
+	 *
+	 * @param string $member_id Id of the Member
+	 * @param string $just_id wether the return value should be the ID of the root Folder
+	 * @return mixed array of data or string ID of root Folder
+	 */	
 	function locker($member_id, $just_id = false) {
 		$this->recursive = -1;
 		$conditions = array('member_id' => $member_id, 'parent_id' => null);

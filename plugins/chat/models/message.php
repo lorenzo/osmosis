@@ -33,25 +33,46 @@ class Message extends ChatAppModel {
 
 	var $name = 'Message';
 	var $useTable = 'chat_messages';
+
+	/**
+	 * BelongsTo (1-N) relation descriptors
+	 *
+	 * @var array
+	 **/	
 	var $belongsTo = array(
-			'Sender' => array('className' => 'Member',
-								'foreignKey' => 'sender_id',
-								'conditions' => '',
-								'fields' => array('id','username','full_name'),
-			),
-			'Receiver' => array('className' => 'Member',
-								'foreignKey' => 'receiver_id',
-								'conditions' => '',
-								'fields' => array('id','username','full_name'),
-			),
-			/*'Room' => array('className' => 'Room',
-								'foreignKey' => 'room_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => ''
-			)*/
+		// Message BelongsTo Member (Sender)
+		'Sender' => array(
+			'className'		=> 'Member',
+			'foreignKey'	=> 'sender_id',
+			'conditions'	=> '',
+			'fields'		=> array('id','username','full_name')
+		),
+		// Message BelongsTo Member (Receiver)
+		'Receiver' => array(
+			'className'		=> 'Member',
+			'foreignKey'	=> 'receiver_id',
+			'conditions'	=> '',
+			'fields'		=> array('id','username','full_name'),
+		),
+		/*
+		'Room' => array(
+			'className' => 'Room',
+			'foreignKey' => 'room_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+		*/
 	);
-	
+
+	/**
+	 * Registers a message
+	 *
+	 * @param string $sender_id Id of the sending member
+	 * @param string $receiver_id Id of the receiving member
+	 * @param string $message Message sent
+	 * @return boolean true on success
+	 */
 	function send($sender_id,$receiver_id,$message) {
 		$data = array();
 		$data['Message']['sender_id'] = $sender_id;
@@ -60,17 +81,22 @@ class Message extends ChatAppModel {
 		$data['Message']['created'] = time();
 		return $this->save($data);
 	}
-	
-	function receive($receiver_id,$since) {
-		$conditions = array('receiver_id' => $receiver_id, 'created >' => "$since");
+
+	/**
+	 * Returns all messages since a date (timestamp)
+	 *
+	 * @param string $receiver_id Id of the receiving member
+	 * @param int $since timestamp since last request
+	 * @return mixed array of messages or false if none found
+	 */
+	function receive($receiver_id, $since) {
 		return $this->find('all',array(
-			'conditions' => $conditions,
-			'order' => 'created ASC',
-			'limit' => 10,
-			'fields' => array('id','created','text','sender_id', 'Sender.full_name')
+			'conditions'	=> array('receiver_id' => $receiver_id, 'created >' => "$since"),
+			'order'			=> 'created ASC',
+			'limit'			=> 10,
+			'fields'		=> array('id','created','text','sender_id', 'Sender.full_name')
 			)
 		);
 	}
-
 }
 ?>

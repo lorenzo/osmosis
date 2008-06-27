@@ -33,6 +33,12 @@ App::import('Core','File');
 class LockerDocument extends LockerAppModel {
 
 	var $name = 'LockerDocument';
+
+	/**
+	 * Validation Rules for Fields
+	 *
+	 * @var array
+	 **/
 	var $validate = array(
 		'name' => array(
 			'required' => array(
@@ -58,32 +64,32 @@ class LockerDocument extends LockerAppModel {
 				'required' => false,
 				'on' => 'create'
 			)
-		),
-		'member_username' => array(
-			'valid' => array(
-				'rule' => array('custom','/.*/'),
-				'allowEmpty' => false,
-				'on' => 'create',
-			)
 		)
 	);
 
+	/**
+	 * BelongsTo (1-N) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $belongsTo = array(
-			'Member' => array('className' => 'Member',
-								'foreignKey' => 'member_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => ''
-			),
-			'Folder' => array('className' => 'Locker.LockerFolder',
-								'foreignKey' => 'folder_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => ''
-			)
+		// LockerDocument BelongsTo Member (owner or the person that uploads - only when left on the dropbox)
+		'Member' => array(
+			'className'		=> 'Member',
+			'foreignKey'	=> 'member_id',
+			'conditions'	=> '',
+			'fields'		=> '',
+			'order'			=> ''
+		),
+		// LockerDocument BelongsTo LockerFolder (folder containig the Document)
+		'Folder' => array(
+			'className' => 'Locker.LockerFolder',
+			'foreignKey' => 'folder_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
 	);
-	
-	var $actsAs = array('Bindable');
 
 	/**
 	 * Model contructor. Initializes the validation error messages with i18n
@@ -100,16 +106,29 @@ class LockerDocument extends LockerAppModel {
 		$this->setErrorMessage(
 			'file.valid', __('The file is incorrect',true)
 		);
+		$this->setErrorMessage(
+			'member_id.valid', __('The Member ID is invalid',true)
+		);
 		parent::__construct($id,$table,$ds);
 	}
 
+	/**
+	 * Validation function that checks the file was uploaded 
+	 *
+	 * @param string $check 
+	 * @return boolean true if it is a n uploaded file
+	 * @author Joaquín Windmüller
+	 */
 	function validFile($check) {
 		extract($check); 
-		if (!is_uploaded_file($file['tmp_name']))
-			return false;
-		return true;
+		return is_uploaded_file($file['tmp_name']);
 	}
-	
+
+	/**
+	 * beforeSave Callback. 
+	 *
+	 * @see Model::beforeSave
+	 */
 	function beforeSave() {
 		if (isset($this->data[$this->alias]['file'])) {
 			$file = $this->data[$this->alias]['file'];
@@ -157,8 +176,14 @@ class LockerDocument extends LockerAppModel {
 			}
 		}
 		return true;
-	}	
-	
+	}
+
+	/**
+	 * Moves a uploaded file to the correct place
+	 *
+	 * @param string $info uploaded file info
+	 * @return boolean true on success
+	 */
 	private function _saveFile($info) {
 		$file = new File($info['tmp_name']);
 		$name = $file->safe($info['name']);
@@ -168,13 +193,30 @@ class LockerDocument extends LockerAppModel {
 		$this->data[$this->alias]['name'] = $info['name'];
 		return move_uploaded_file($info['tmp_name'],$dest);
 	}
-	
-	function getFilePath($id,$username = null) {
-		$recursive = (empty($username)) ? $this->recursive : -1;
-		$file = $this->find('first', array('conditions' => array($this->alias.'.id' => $id),'recursive' => $recursive));
-		$username = (isset($first['Member']['username'])) ? $first['Member']['username'] : $username;
-		$folder_id = (isset($this->data[$this->alias]['folder_id'])) ? $this->data[$this->alias]['folder_id'] : '';
-		$base = $this->Folder->getDirectory($this->data[$this->alias]['folder_id'],$username);
+
+	/**
+	 * Returns the path to a file
+	 *
+	 * @param string $id Id of the File
+	 * @param string $username username of the owner of the file
+	 * @return string path
+	 */	
+	function getFilePath($id, $username = null) {
+		$recursive = $this->recursive;
+		if (!empty($username)) {
+			$recursive = -1;
+		}
+		$conditions = array($this->alias . '.id' => $id);
+		$file = $this->find('first', compact('conditions', 'recursive'));
+		
+		if (isset($file['Member']['username'])) {
+			$username = $file['Member']['username'];
+		}
+		$folder_id = '';
+		if (isset($this->data[$this->alias]['folder_id'])) {
+			$folder_id = $this->data[$this->alias]['folder_id'];
+		}
+		$base = $this->Folder->getDirectory($this->data[$this->alias]['folder_id'], $username);
 		return $base . DS .$file[$this->name]['file_name'];
 	}
 
@@ -210,21 +252,6 @@ class LockerDocument extends LockerAppModel {
 		$this->data['Document']['member_id'] = $destiny['Folder']['member_id'];
 		
 		return $this->save();
-	}
-
-	/**
-	 * Returns a filename without the esxtension
-	 *
-	 * @param string filename
-	 * @return string filename without extension
-	 **/
-	function removeExtension($file) {
-		$file = explode('.', $file);
-		$ext = array_pop($file);
-		if (count($file)==1) {
-			return $file[0];
-		}
-		return array(implode('.', $file), $ext);
 	}
 }
 ?>
