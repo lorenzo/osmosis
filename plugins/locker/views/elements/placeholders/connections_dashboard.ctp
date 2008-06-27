@@ -4,17 +4,22 @@
 		<p>
 			<?php __('These are the Documents sent to you by other members.'); ?> 
 			<?php
-				echo $html->link(
-					__('Go to your dropbox', true),
-					array(
-						'plugin'		=> 'locker',
-						'controller'	=> 'folders',
-						'action'		=> 'view',
-						$data['LockerFolder']['id']
-					)
-				);
+				if (isset($data['LockerFolder']['id'])) {
+					echo $html->link(
+						__('Go to your dropbox', true),
+						array(
+							'plugin'		=> 'locker',
+							'controller'	=> 'folders',
+							'action'		=> 'view',
+							$data['LockerFolder']['id']
+						)
+					);
+				}
 			?>
 		</p>
+		<?php
+			if (isset($data['Document'])) :
+		?>
 		<ul>
 		<?php
 			foreach ($data['Document'] as $i => $document) :
@@ -30,6 +35,9 @@
 			endforeach;
 		?>
 		</ul>
+		<?php
+			endif;
+		?>
 		<p class='go'>
 			<?php
 				echo $html->link(
