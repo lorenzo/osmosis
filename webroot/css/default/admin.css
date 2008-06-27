@@ -1,43 +1,17 @@
-div.plugins.index ul li{
-	list-style:none;
-
-}
-div.plugins.index ul li div.actions {
-	background:#6EA6D5;
-	float:left;
-	width:100%;
-	border-top:#ccc 2px solid;
-}
-div.plugins.index ul li div.actions a{
-	text-decoration:none;
-	color:#000;
-	background:#ddd;
-	border:#fff 1px solid;
-	border-right:#666 1px solid;
-	border-bottom:#666 1px solid;
+p.go a {
 	padding:1px 3px;
 	display:block;
 	font-size:90%;
 	text-align:center;
 	float:right;
 	margin:3px;
-	
 }
 
-div.plugins.index ul li div.actions a:hover{
-	border:#666 1px solid;
-	border-right:#ccc 1px solid;
-	border-bottom:#ccc 1px solid;
-	background:#f5f5f5;
-	color:#000;
+p.go a:hover{
+	background-color:#FFF5DF!important;
+	border-color:#FFCC5F!important;
 }
 
-div.plugins.index ul li dl dd{
-	padding: 0 10px;
-	margin-left:0;
-	height:150px;
-	overflow-y:auto;
-}
 p.author {
 	text-align:right;
 	padding-top:5px;

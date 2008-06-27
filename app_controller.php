@@ -105,9 +105,10 @@ class AppController extends Controller {
 			$this->Auth->Acl =& $this->Acl;
 			$this->Auth->authorize = 'controller';
 			$this->Auth->userModel = 'Member';
-			$this->Auth->loginAction = array('controller' => 'members', 'action' => 'login', 'plugin' => '');
+			$this->Auth->loginAction = array('controller' => 'members', 'action' => 'login', 'plugin' => '', 'admin' => false);
+			$this->Auth->loginError = __('Login or password incorrect', true);
 			$this->Auth->loginRedirect = array('controller' => 'courses');
-			$this->Auth->autoRedirect = true;
+			// $this->Auth->autoRedirect = true;
 			$this->set('user', $this->Session->read('Auth.Member'));
 			//TODO: Borrar lo siguiente cuando sea el momento
 			if ($this->name == 'InitAcl') {
@@ -160,7 +161,7 @@ class AppController extends Controller {
 	 */
 	
 	function _blackHoledAction() {
-		$this->Session->setFlash(__('Invalid access', true));
+		$this->Session->setFlash(__('Invalid access', true), 'default', array('class' => 'error'));
 		$this->redirect(array('controller' => 'members', 'action' => 'login', 'plugin' => ''));
 	}
 	
@@ -294,7 +295,7 @@ class AppController extends Controller {
 	
 	function _redirectIf($condition, $url = '/') {
 		if ($condition) {
-			$this->Session->setFlash(__('Invalid Access', true));
+			$this->Session->setFlash(__('Invalid Access', true), 'default', array('class' => 'error'));
 			$this->redirect($url);
 		}
 	}
@@ -304,11 +305,11 @@ class AppController extends Controller {
 	 *
 	 * @return void
 	 **/
-	function redirect($url) {
+	function redirect($url, $status = null, $redirect = true) {
 		if ($this->RequestHandler->isAjax()) {
 			$this->set('redirect', $url);
 		} else {
-			parent::redirect($url);
+			parent::redirect($url, $status, $redirect);
 		}
 	}
 }

@@ -322,11 +322,32 @@ ul.professors-list .vcard .tel {
 	margin-top:2px!important;
 	margin-left:4px!important;
 }
+ul.dashboard-elements {
+	list-style:none;
+}
 .boxed.dashboard-element {
 	width:30%;
 	float:left;
 	margin-right:2%;
 	margin-bottom:15px;
+}
+.boxed.dashboard-element dl dd {
+	padding: 0 10px;
+	margin-left:0;
+	height:150px;
+	overflow-y:auto;
+}
+p.go,
+div.go.action {
+	background:#6EA6D5;
+	float:left;
+	margin:0;
+	width:100%;
+	padding:0;
+	border-top:#ccc 2px solid;
+}
+div.go.action div.submit {
+	margin:4px 0;
 }
 ul.actions {
 	list-style:none;
@@ -388,4 +409,35 @@ ul.actions li.add a {
 }
 ul.actions li.add a:hover {
 	color:#106F00;
+}
+
+#flashMessage,
+#authMessage {
+	background:#f5f5f5;
+	margin:-10px 10px 10px;
+	padding:5px;
+	padding-left:30px;
+	border:#0011CC 1px solid;
+	border-top:0;
+	color:#121A5F;
+	background:#DDE0FF url('../../img/default/messagebox_info.png') no-repeat 4px 50%;;
+}
+
+#authMessage,
+#flashMessage.error {
+	border-color:#CC0000;
+	color:#901B1B;
+	background:#FFDDDD url('../../img/default/messagebox_critical.png') no-repeat 4px 50%;
+}
+
+#flashMessage.success {
+	border-color:#1ECC00;
+	color:#0E5F00;
+	background:#DFFFDD url('../../img/default/messagebox_success.png') no-repeat 4px 50%;
+}
+
+#flashMessage.warning {
+	border-color:#FFD100;
+	color:#DAA600;
+	background:#FCFFDD url('../../img/default/messagebox_warning.png') no-repeat 4px 50%;
 }

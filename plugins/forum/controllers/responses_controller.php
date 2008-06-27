@@ -49,9 +49,9 @@ class ResponsesController extends ForumAppController {
 			$this->data['Response']['member_id'] = $this->Auth->user('id');
 			$this->data['Response']['content'] = $this->HtmlPurifier->purify($this->data['Response']['content']);
 			if ($this->Response->save($this->data)) {
-				$this->Session->setFlash(__('The Response has been saved', true));
+				$this->Session->setFlash(__('The Response has been saved', true), 'default', array('class' => 'success'));
 			} else {
-				$this->Session->setFlash(__('Please write a response', true));
+				$this->Session->setFlash(__('Please write a response', true), 'default', array('class' => 'info'));
 			}
 			$this->redirect(
 				array(
@@ -67,7 +67,7 @@ class ResponsesController extends ForumAppController {
 	function edit() {
 		if (!empty($this->data)) {
 			if ($this->Response->save($this->data)) {
-				$this->Session->setFlash(__('The Response has been saved', true));
+				$this->Session->setFlash(__('The Response has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(
 					array(
 						'controller' => 'discussions',
@@ -76,7 +76,7 @@ class ResponsesController extends ForumAppController {
 					)
 				);
 			} else {
-				$this->Session->setFlash(__('The Response could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The Response could not be saved. Please, try again', true), 'default', array('class' => 'error'));
 			}
 		} else {
 			$this->_redirectIf(!isset($this->params['named']['response_id']));

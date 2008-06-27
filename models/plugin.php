@@ -56,9 +56,8 @@ class Plugin extends AppModel {
 	 */
 	
 	function actives($fields=null,$conditions = array()) {
-		$conditions = am($conditions,array('active' => 1));
-		
-		return $this->find('all',array('conditions' => $conditions, 'fields' => $fields, 'recursive' => 1));
+		$conditions = am($conditions, array('active' => 1));
+		return $this->find('all', array('conditions' => $conditions, 'fields' => $fields, 'recursive' => 1));
 	}
 	
 	/**

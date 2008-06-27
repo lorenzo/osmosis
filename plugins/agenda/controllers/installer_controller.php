@@ -14,9 +14,9 @@ class InstallerController extends AppController {
 	
 	function admin_install() {
 		if (!$this->Installer->createSchema('Agenda')) {
-			$this->Session->setFlash(__('An error occurred while installing the plugin',true));
+			$this->Session->setFlash(__('An error occurred while installing the plugin',true), 'default', array('class' => 'error'));
 		} elseif ($this->Plugin->install('Agenda'))
-			$this->Session->setFlash(__('Plugin Agenda installed',true));
+			$this->Session->setFlash(__('Plugin Agenda installed',true), 'default', array('class' => 'success'));
 			
 		$this->redirect(array('plugin'=>'','admin' => true,'controller' => 'plugins'));
 	}

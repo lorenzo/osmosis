@@ -51,11 +51,11 @@ class PluginsController extends AppController {
 	function admin_install($plugin) {
 		$inServer = $this->Plugin->inServer();
 		if (!$plugin || !array_key_exists(Inflector::camelize($plugin),$inServer)) {
-			$this->Session->setFlash(__('Invalid Plugin.', true));
+			$this->Session->setFlash(__('Invalid Plugin.', true), 'default', array('class' => 'error'));
 		}
 		
 		if ($this->Plugin->find('count',array('conditions' => array('name' => $plugin)))) {
-			$this->Session->setFlash(__('Plugin already Installed.', true));
+			$this->Session->setFlash(__('Plugin already Installed.', true), 'default', array('class' => 'info'));
 			$this->redirect(array('action'=>'index'));
 		}
 		
@@ -65,16 +65,16 @@ class PluginsController extends AppController {
 		}
 
 		if ($this->Plugin->install(Inflector::camelize($plugin))) {
-			$this->Session->setFlash(__('Plugin Instaled.', true));
+			$this->Session->setFlash(__('Plugin Instaled.', true), 'default', array('class' => 'success'));
 		} else {
-			$this->Session->setFlash(__('An error ocurred while installing the plugin. Try again', true));
+			$this->Session->setFlash(__('An error ocurred while installing the plugin. Try again', true), 'default', array('class' => 'error'));
 		}
 		$this->redirect(array('action'=>'index'));
 	}
 
 	function admin_view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Plugin.', true));
+			$this->Session->setFlash(__('Invalid Plugin.', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		$this->set('plugin', $this->Plugin->read(null, $id));
@@ -84,10 +84,10 @@ class PluginsController extends AppController {
 		if (!empty($this->data)) {
 			$this->Plugin->create();
 			if ($this->Plugin->save($this->data)) {
-				$this->Session->setFlash(__('The Plugin has been saved', true));
+				$this->Session->setFlash(__('The Plugin has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'));
 			} else {
-				$this->Session->setFlash(__('The Plugin could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The Plugin could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
 			}
 		}
 		$availables = $this->Plugin->installable();
@@ -96,15 +96,15 @@ class PluginsController extends AppController {
 
 	function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Plugin', true));
+			$this->Session->setFlash(__('Invalid Plugin', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Plugin->save($this->data)) {
-				$this->Session->setFlash(__('The Plugin has been saved', true));
+				$this->Session->setFlash(__('The Plugin has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'));
 			} else {
-				$this->Session->setFlash(__('The Plugin could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The Plugin could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
 			}
 		}
 		if (empty($this->data)) {
@@ -116,11 +116,11 @@ class PluginsController extends AppController {
 
 	function admin_delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Plugin', true));
+			$this->Session->setFlash(__('Invalid id for Plugin', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Plugin->del($id)) {
-			$this->Session->setFlash(__('Plugin deleted', true));
+			$this->Session->setFlash(__('Plugin deleted', true), 'default', array('class' => 'success'));
 			$this->redirect(array('action'=>'index'));
 		}
 	}

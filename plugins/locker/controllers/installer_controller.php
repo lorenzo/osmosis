@@ -45,11 +45,11 @@ class InstallerController extends AppController {
 	
 	function admin_install() {
 		if (!$this->InitAcl->loadPermissions()) {
-			$this->Session->setFlash(__('An error occurred while setting plugin permissions',true));
+			$this->Session->setFlash(__('An error occurred while setting plugin permissions',true), 'default', array('class' => 'error'));
 		} elseif (!$this->Installer->createSchema('Locker')) {
-			$this->Session->setFlash(__('An error occurred while installing the plugin',true));
+			$this->Session->setFlash(__('An error occurred while installing the plugin',true), 'default', array('class' => 'error'));
 		} elseif ($this->Plugin->install('Locker'))
-			$this->Session->setFlash(__('Plugin Locker installed',true));
+			$this->Session->setFlash(__('Plugin Locker installed',true), 'default', array('class' => 'success'));
 			
 		
 		$this->redirect(array('plugin'=>'','admin' => true,'controller' => 'plugins'));

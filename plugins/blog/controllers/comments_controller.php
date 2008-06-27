@@ -41,7 +41,7 @@ class CommentsController extends BlogAppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Comment.',true));
+			$this->Session->setFlash(__('Invalid Comment',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('comment', $this->Comment->read(null, $id));
@@ -49,16 +49,16 @@ class CommentsController extends BlogAppController {
 
 	function add($post_id = null) {
 		if (!$post_id && empty($this->data)) {		
-			$this->Session->setFlash(__('Invalid Post',true));
+			$this->Session->setFlash(__('Invalid Post',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->Comment->create();
 			$this->data['Comment']['member_id'] = $this->Auth->user('id');
 			if ($this->Comment->save($this->data)) {
-				$this->Session->setFlash(__('The Comment has been saved',true));
+				$this->Session->setFlash(__('The Comment has been saved',true), 'default', array('class' => 'success'));
 			} else {
-				$this->Session->setFlash(__('The Comment could not be saved. Please, try again.',true));
+				$this->Session->setFlash(__('The Comment could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 			$slug = $this->Comment->Post->field('slug',array('id'=>$this->data['Comment']['post_id']));
 			$this->redirect(array('controller'=> 'posts','action'=>'view', $slug), null, true);
@@ -67,11 +67,11 @@ class CommentsController extends BlogAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Comment',true));
+			$this->Session->setFlash(__('Invalid id for Comment',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Comment->del($id)) {
-			$this->Session->setFlash(__('Comment deleted',true));
+			$this->Session->setFlash(__('Comment deleted',true), 'default', array('class' => 'success'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

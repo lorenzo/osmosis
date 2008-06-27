@@ -41,7 +41,7 @@ class ChoiceQuestionsController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Choice Question.',true));
+			$this->Session->setFlash(__('Invalid Choice Question',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		$this->set('choiceQuestion', $this->ChoiceQuestion->read(null, $id));
@@ -62,12 +62,12 @@ class ChoiceQuestionsController extends AppController {
 					'quiz_id' => $this->data['Quiz'][0]['id']
 				);
 				if ($this->ChoiceQuestion->QuizChoice->save($habtm_data)) {
-					$this->Session->setFlash(__('The Choice Question has been saved',true));
+					$this->Session->setFlash(__('The Choice Question has been saved',true), 'default', array('class' => 'success'));
 					$this->redirect(array('controller' => 'quizzes', 'action'=>'edit', $this->data['Quiz'][0]['id']));
 				}
 			} else {
 				$totalChoices = count($this->data['ChoiceChoice']);
-				$this->Session->setFlash(__('The Choice Question could not be saved. Please, try again.',true));
+				$this->Session->setFlash(__('The Choice Question could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 		$this->set('totalChoices',$totalChoices);
@@ -103,7 +103,7 @@ class ChoiceQuestionsController extends AppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Choice Question',true));
+			$this->Session->setFlash(__('Invalid Choice Question',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		
@@ -116,11 +116,11 @@ class ChoiceQuestionsController extends AppController {
 		
 		if (!empty($this->data)) {
 			if ($this->ChoiceQuestion->save($this->data)) {
-				$this->Session->setFlash(__('The Choice Question has been saved'));
+				$this->Session->setFlash(__('The Choice Question has been saved'), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'));
 			} else {
 				$totalChoices = count($this->data['ChoiceChoice']);
-				$this->Session->setFlash(__('The Choice Question could not be saved. Please, try again.',true));
+				$this->Session->setFlash(__('The Choice Question could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 		if (empty($this->data)) {
@@ -133,11 +133,11 @@ class ChoiceQuestionsController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Choice Question',true));
+			$this->Session->setFlash(__('Invalid id for Choice Question',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->ChoiceQuestion->del($id)) {
-			$this->Session->setFlash(__('Choice Question deleted',true));
+			$this->Session->setFlash(__('Choice Question deleted',true), 'default', array('class' => 'success'));
 			$this->redirect(array('action'=>'index'));
 		}
 	}

@@ -32,4 +32,5 @@
 Configure::write('Blog.description','Lorem ipsum dolor sit amet, consectetuer adipiscing elit.');
 Configure::write('Blog.title',__('Blog',true));
 Configure::write('Blog.type',array('other'));
+Configure::write('Loecker.author','Ósmosis Team');
 ?>

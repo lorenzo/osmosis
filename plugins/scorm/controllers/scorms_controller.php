@@ -61,7 +61,7 @@ class ScormsController extends ScormAppController {
 	function view($id = null) {
 		Configure::write('debug',0);
 		if (!$id) {
-			$this->Session->setFlash('Invalid Scorm.');
+			$this->Session->setFlash('Invalid Scorm', 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$trackings = $this->ScormAttendeeTracking->findAll(
@@ -109,7 +109,7 @@ class ScormsController extends ScormAppController {
 				$scorm_files_location = TMP.'tests'.DS.'imsmanifests'.DS.'uploads'.DS.$uploaded_file['name'].DS;
 				$this->data['Scorm']['path']= str_replace(APP, '', $scorm_files_location);
 				if ($this->Zip->extract($scorm_files_location)===false) {
-					$this->Session->setFlash(__('The Scorm file could not be unzipped.',true));
+					$this->Session->setFlash(__('The Scorm file could not be unzipped',true), 'default', array('class' => 'error'));
 					return;
 				}
 				$this->Zip->close();
@@ -117,39 +117,39 @@ class ScormsController extends ScormAppController {
 				if (!$this->Scorm->parseManifest($scorm_files_location)){
 					$folder = new Folder($scorm_files_location);
 					$folder->delete($scorm_files_location);
-					$this->Session->setFlash(__('The Scorm file could not be parsed.',true));
+					$this->Session->setFlash(__('The Scorm file could not be parsed',true), 'default', array('class' => 'error'));
 					return;
 				}
 				if ($this->Scorm->data['Scorm']['version']!= '2004 3rd Edition'){
 					$folder = new Folder($scorm_files_location);
 					$folder->delete($scorm_files_location);
-					$this->Session->setFlash(__('The Scorm has not a right version',true));
+					$this->Session->setFlash(__('The Scorm doesn\'t have the right version',true), 'default', array('class' => 'error'));
 				
 				} elseif ($this->Scorm->save($this->data)) {
-					$this->Session->setFlash(__('The Scorm has been saved',true));
+					$this->Session->setFlash(__('The Scorm has been saved',true), 'default', array('class' => 'success'));
 					$this->redirect(array('action'=>'index'), null, true);
 				} else {
 					$folder = new Folder(TMP.'tests'.DS.'imsmanifests'.DS.'uploads'.DS.$uploaded_file['name'].DS);
 					//$folder->delete();
 				}
 			} else { 
-				$this->Session->setFlash(__('The Scorm could not be uploaded. Please, try again.',true));
+				$this->Session->setFlash(__('The Scorm could not be uploaded. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 	}
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Scorm',true));
+			$this->Session->setFlash(__('Invalid Scorm',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->Scorm->save($this->data)) {
-				$this->Session->setFlash(__('The Scorm saved',true));
+				$this->Session->setFlash(__('The Scorm saved',true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash(__('The Scorm could not be saved. Please, try again.',true));
+				$this->Session->setFlash(__('The Scorm could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 		if (empty($this->data)) {
@@ -159,7 +159,7 @@ class ScormsController extends ScormAppController {
 	
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Scorm',true));
+			$this->Session->setFlash(__('Invalid id for Scorm',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->data = $this->Scorm->find(array('id'=> $id),null,null,null);			
@@ -168,7 +168,7 @@ class ScormsController extends ScormAppController {
 			$folder = new Folder($scorm_files_location);
 			$folder->delete($scorm_files_location);
 		if ($this->Scorm->del($id)) {			
-			$this->Session->setFlash(__('Scorm #'.$id.' deleted',true));
+			$this->Session->setFlash(__('Scorm #'.$id.' deleted',true), 'default', array('class' => 'success'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}
@@ -176,8 +176,9 @@ class ScormsController extends ScormAppController {
 	function __selectLayout() {
 		if ($this->action == 'view') {
 			$this->layout = 'default';
-		} else
+		} else {
 			parent::__selectLayout();
+		}
 	}
 	
 	

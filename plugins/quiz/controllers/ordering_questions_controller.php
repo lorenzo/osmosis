@@ -41,7 +41,7 @@ class OrderingQuestionsController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Ordering Question.',true));
+			$this->Session->setFlash(__('Invalid Ordering Question',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('orderingQuestion', $this->OrderingQuestion->read(null, $id));
@@ -61,14 +61,14 @@ class OrderingQuestionsController extends AppController {
 					'quiz_id' => $this->data['Quiz'][0]['id']
 				);
 				if ($this->OrderingQuestion->QuizOrdering->save($habtm_data)) {
-					$this->Session->setFlash(__('The Ordering Question has been saved',true));
+					$this->Session->setFlash(__('The Ordering Question has been saved',true), 'default', array('class' => 'success'));
 					$this->redirect(
 						array('controller' => 'quizzes', 'action'=>'edit', 	$this->data['Quiz'][0]['id'])
 					);
 				}
 			} else {
 				$totalChoices = count($this->data['OrderingChoice']);
-				$this->Session->setFlash(__('The Ordering Question could not be saved. Please, try again.',true));
+				$this->Session->setFlash(__('The Ordering Question could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 
@@ -102,15 +102,15 @@ class OrderingQuestionsController extends AppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Ordering Question',true));
+			$this->Session->setFlash(__('Invalid Ordering Question',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			if ($this->OrderingQuestion->save($this->data)) {
-				$this->Session->setFlash(__('The Ordering Question has been saved',true));
+				$this->Session->setFlash(__('The Ordering Question has been saved',true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash(__('The Ordering Question could not be saved. Please, try again.',true));
+				$this->Session->setFlash(__('The Ordering Question could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 		if (empty($this->data)) {
@@ -122,11 +122,11 @@ class OrderingQuestionsController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Ordering Question',true));
+			$this->Session->setFlash(__('Invalid id for Ordering Question',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->OrderingQuestion->del($id)) {
-			$this->Session->setFlash(__('Ordering Question deleted',true));
+			$this->Session->setFlash(__('Ordering Question deleted',true), 'default', array('class' => 'success'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

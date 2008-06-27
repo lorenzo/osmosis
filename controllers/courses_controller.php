@@ -35,7 +35,7 @@ class CoursesController extends AppController {
 	var $helpers = array('Html', 'Form','Rating','Javascript');
 	
 	function _setActiveCourse() {
-		if ($this->action == 'view') 
+		if ($this->action == 'view' && isset($this->params['pass'][0])) 
 			$this->activeCourse = $this->params['pass'][0];
 		else
 			parent::_setActiveCourse();
@@ -74,7 +74,7 @@ class CoursesController extends AppController {
 	 */
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Course',true));
+			$this->Session->setFlash(__('Invalid Course',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('course', $this->Course->read(null, $id));
@@ -90,7 +90,7 @@ class CoursesController extends AppController {
 	 */
 	function admin_view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Course',true));
+			$this->Session->setFlash(__('Invalid Course',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('course', $this->Course->read(null, $id));
@@ -111,10 +111,10 @@ class CoursesController extends AppController {
 			$this->Course->create();
 			$this->data['Course']['owner_id'] = $this->Auth->user('id');
 			if ($this->Course->save($this->data)) {
-				$this->Session->setFlash(__('The Course has been saved',true));
+				$this->Session->setFlash(__('The Course has been saved',true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash(__('The Course could not be saved. Please, try again.',true));
+				$this->Session->setFlash(__('The Course could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 		$departments = $this->Course->Department->find("list");
@@ -132,15 +132,15 @@ class CoursesController extends AppController {
 	
 	function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Course',true));
+			$this->Session->setFlash(__('Invalid Course',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			if ($this->Course->save($this->data)) {
-				$this->Session->setFlash(__('The Course has been saved',true));
+				$this->Session->setFlash(__('The Course has been saved',true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash(__('The Course could not be saved. Please, try again.',true));
+				$this->Session->setFlash(__('The Course could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 		if (empty($this->data)) {
@@ -161,11 +161,11 @@ class CoursesController extends AppController {
 	
 	function admin_delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Course'));
+			$this->Session->setFlash(__('Invalid Course'), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Course->del($id)) {
-			$this->Session->setFlash(sprintf(__('Course %s deleted',true),"# $id"));
+			$this->Session->setFlash(sprintf(__('Course %s deleted',true),"# $id"), 'default', array('class' => 'success'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}
@@ -216,18 +216,18 @@ class CoursesController extends AppController {
 	function __enroll($id, $member_id, $role = 'attendee', $redirect = true) {
 		$this->Course->id = $id;
 		if (!$this->Course->exists()) {
-			$this->Session->setFlash(__('Invalid Course',true));
+			$this->Session->setFlash(__('Invalid Course',true), 'default', array('class' => 'error'));
 			$this->_redirectIf($redirect);
 		}
 		if($this->Course->alreadyEnrolled($member_id, $id)===true) {
-			$this->Session->setFlash(__('You have been already enrolled in this course',true));
+			$this->Session->setFlash(__('You have been already enrolled in this course',true), 'default', array('class' => 'info'));
 			$this->redirect(array('action' => 'index'));
 		} else if ($this->Course->enroll($member_id, $role, $id)) {
-			$this->Session->setFlash(__('You have been enrolled',true));
+			$this->Session->setFlash(__('You have been enrolled',true), 'default', array('class' => 'success'));
 			$this->_redirectIf($redirect, array('action' => 'view', $id));
 			return true;
 		}
-		$this->Session->setFlash(__('Enrollment failed',true));
+		$this->Session->setFlash(__('Enrollment failed',true), 'default', array('class' => 'error'));
 		$this->_redirectIf($redirect, array('action' => 'index'));
 		return false;
 	}
@@ -236,27 +236,25 @@ class CoursesController extends AppController {
 	 * Adds or removes a tool from a course
 	 *
 	 * @param string $id course identifier
-	 * @author José Lorenzo
 	 */
-	
 	function tools($id) {
 		if (!empty($this->data)) {
 			if (isset($this->data['CourseTool']['add'])) {
 				
 				if ($this->Course->Tool->CourseTool->save($this->data))
-					$this->Session->setFlash(__('The Tool has been added',true));
+					$this->Session->setFlash(__('The Tool has been added',true), 'default', array('class' => 'success'));
 				else
-					$this->Session->setFlash(__('The could not be added',true));
+					$this->Session->setFlash(__('The could not be added',true), 'default', array('class' => 'error'));
 			} elseif (isset($this->data['CourseTool']['remove'])) {
-				
+
 				unset($this->data['CourseTool']['remove']);
 				if ($this->Course->Tool->CourseTool->deleteAll($this->data['CourseTool']))
-					$this->Session->setFlash(__('The Tool has been removed',true));
+					$this->Session->setFlash(__('The Tool has been removed',true), 'default', array('class' => 'success'));
 				else 
-					$this->Session->setFlash(__('The Tool could not be removed',true));
+					$this->Session->setFlash(__('The Tool could not be removed',true), 'default', array('class' => 'error'));
 			}
 		}
-		$tools = $this->Course->Tool->actives();
+		$tools = $this->Course->Tool->actives(null, );
 		$this->set(compact('tools','id'));
 	}
 

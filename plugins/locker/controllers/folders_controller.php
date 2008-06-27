@@ -44,7 +44,7 @@ class FoldersController extends LockerAppController {
 		$member = $parentFolder = $path = null;
 		if (!$id) {
 			if (!isset($this->params['named']['member_id'])) {
-				$this->Session->setFlash(__('Invalid Locker', true));
+				$this->Session->setFlash(__('Invalid Locker', true), 'default', array('class' => 'error'));
 				$this->redirect('/');
 			} else {
 				$member_id = $this->params['named']['member_id'];
@@ -68,7 +68,7 @@ class FoldersController extends LockerAppController {
 			$this->LockerFolder->create();
 			$this->data['LockerFolder']['member_id'] = $this->Auth->user('id');
 			if ($this->LockerFolder->save($this->data)) {
-				$this->Session->setFlash(__('The LockerFolder has been saved', true));
+				$this->Session->setFlash(__('The LockerFolder has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(array('action' => 'view', $this->data['LockerFolder']['parent_id']));
 			} else {
 				$this->Session->setFlash($this->LockerFolder->validationErrors['name']);
@@ -80,15 +80,15 @@ class FoldersController extends LockerAppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid LockerFolder', true));
+			$this->Session->setFlash(__('Invalid LockerFolder', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->LockerFolder->save($this->data)) {
-				$this->Session->setFlash(__('The LockerFolder has been saved', true));
+				$this->Session->setFlash(__('The LockerFolder has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'));
 			} else {
-				$this->Session->setFlash(__('The LockerFolder could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The LockerFolder could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
 			}
 		}
 		if (empty($this->data)) {
@@ -100,11 +100,11 @@ class FoldersController extends LockerAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for LockerFolder', true));
+			$this->Session->setFlash(__('Invalid id for LockerFolder', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->LockerFolder->del($id)) {
-			$this->Session->setFlash(__('LockerFolder deleted', true));
+			$this->Session->setFlash(__('LockerFolder deleted', true), 'default', array('class' => 'success'));
 			$this->redirect(array('action'=>'index'));
 		}
 	}
@@ -125,13 +125,13 @@ class FoldersController extends LockerAppController {
 				$success = $this->LockerFolder->Document->move($this->data['LockerFolder']['moved'], $this->data['LockerFolder']['id']);
 			}
 			if ($success) {
-				$this->Session->setFlash(sprintf(__('The %s was moved successfully', true), $item));
+				$this->Session->setFlash(sprintf(__('The %s was moved successfully', true), $item), 'default', array('class' => 'success'));
 			} else {
-				$this->Session->setFlash(sprintf(__('The %s could not be moved', true), $item));
+				$this->Session->setFlash(sprintf(__('The %s could not be moved', true), $item), 'default', array('class' => 'error'));
 			}
 			$this->set(compact('success'));
 		} else {
-			$this->Session->setFlash(__('Invalid Access', true));
+			$this->Session->setFlash(__('Invalid Access', true), 'default', array('class' => 'error'));
 			$this->_redirectIf(true);
 		}
 	}

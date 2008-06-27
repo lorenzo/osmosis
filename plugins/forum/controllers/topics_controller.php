@@ -44,7 +44,7 @@ class TopicsController extends ForumAppController {
 
 	function index() {
 		if (!isset($this->params['named']['course_id'])) {
-			$this->Session->setFlash(__('Invalid Topic.', true));
+			$this->Session->setFlash(__('Invalid Topic', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		$course_id = $this->params['named']['course_id'];
@@ -53,7 +53,7 @@ class TopicsController extends ForumAppController {
 	
 	function view() {
 		if (!isset($this->params['named']['topic_id'])) {
-			$this->Session->setFlash(__('Invalid Topic.', true));
+			$this->Session->setFlash(__('Invalid Topic', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		$this->set('topic', $this->Topic->getListSummary($this->params['named']['topic_id']));
@@ -63,10 +63,10 @@ class TopicsController extends ForumAppController {
 		if (!empty($this->data)) {
 			$this->Topic->create();
 			if ($this->Topic->save($this->data)) {
-				$this->Session->setFlash(__('The Topic has been saved', true));
+				$this->Session->setFlash(__('The Topic has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(array('controller' => 'topics', 'action'=> 'index', 'course_id' => $this->data['Topic']['course_id']));
 			} else {
-				$this->Session->setFlash(__('The Topic could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The Topic could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
 			}
 		} else {
 			$this->data['Topic']['course_id'] = $this->activeCourse;
@@ -76,7 +76,7 @@ class TopicsController extends ForumAppController {
 	function edit() {
 		if (!empty($this->data)) {
 			if ($this->Topic->save($this->data)) {
-				$this->Session->setFlash(__('The Topic has been saved', true));
+				$this->Session->setFlash(__('The Topic has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(
 					array(
 						'controller'	=> 'topics',
@@ -85,13 +85,13 @@ class TopicsController extends ForumAppController {
 					)
 				);
 			} else {
-				$this->Session->setFlash(__('The Topic could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The Topic could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
 			}
 		} else {
 			$this->_redirectIf(!isset($this->params['named']['topic_id']));
 			$this->data = $this->Topic->read(null, $this->params['named']['topic_id']);
 			if ($this->data['Topic']['status']=='locked') {
-				$this->Session->setFlash(__('This topic is locked, you cannot edit it anymore.', true));
+				$this->Session->setFlash(__('This topic is locked, you cannot edit it anymore.', true), 'default', array('class' => 'info'));
 				$this->redirect(
 					array(
 						'controller'	=> 'topics',
@@ -105,12 +105,12 @@ class TopicsController extends ForumAppController {
 	
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Topic', true));
+			$this->Session->setFlash(__('Invalid id for Topic', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		$course_id = $this->Topic->field('course_id', $id);
 		if ($this->Topic->del($id)) {
-			$this->Session->setFlash(__('Topic deleted', true));
+			$this->Session->setFlash(__('Topic deleted', true), 'default', array('class' => 'success'));
 			$this->redirect(array('controller' => 'topics', 'action' => 'index', 'course_id' => $course_id));
 		}
 	}

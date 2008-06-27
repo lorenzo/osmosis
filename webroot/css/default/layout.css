@@ -129,6 +129,10 @@ body {
 	border-top:#6EA6D5 30px solid;
 	margin-top:-30px;
 }
+#upper-content #more-courses.login {
+	border-top:#888 1px dashed;
+	margin-top:0;
+}
 #upper-content #more-courses .content {
 	border-top:#888 1px dashed;
 	display:block;

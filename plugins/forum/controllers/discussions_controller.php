@@ -65,10 +65,10 @@ class DiscussionsController extends ForumAppController {
 			$this->Discussion->create();
 			$this->data['Discussion']['member_id'] = $this->Auth->user('id');
 			if ($this->Discussion->save($this->data)) {
-				$this->Session->setFlash(__('The Discussion has been saved', true));
+				$this->Session->setFlash(__('The Discussion has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(array('controller' => 'topics', 'action'=>'view', 'topic_id' => $this->data['Discussion']['topic_id']));
 			} else {
-				$this->Session->setFlash(__('The Discussion could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The Discussion could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
 			}
 		} else {
 			$this->_redirectIf(!isset($this->params['named']['topic_id']));
@@ -80,17 +80,17 @@ class DiscussionsController extends ForumAppController {
 		if (!empty($this->data)) {
 			$this->data['Discussion']['member_id'] = $this->Auth->user('id');
 			if ($this->Discussion->save($this->data)) {
-				$this->Session->setFlash(__('The Discussion has been saved', true));
+				$this->Session->setFlash(__('The Discussion has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(array('controller' => 'discussions', 'action'=>'view', 'discussion_id' => $this->Discussion->field('id')));
 			} else {
-				$this->Session->setFlash(__('The Discussion could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The Discussion could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
 			}
 		} else {
 			$this->_redirectIf(!isset($this->params['named']['discussion_id']));
 			$id = $this->params['named']['discussion_id'];
 			$this->data = $this->Discussion->read(null, $id);
 			if ($this->data['Discussion']['status']=='locked') {
-				$this->Session->setFlash(__('This discussion is locked, you cannot edit it anymore.', true));
+				$this->Session->setFlash(__('This discussion is locked, you cannot edit it anymore.', true), 'default', array('class' => 'info'));
 				$this->redirect(array('controller' => 'discussions', 'action'=>'view', $id));
 			}
 		}

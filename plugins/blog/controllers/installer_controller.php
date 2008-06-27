@@ -14,11 +14,11 @@ class InstallerController extends AppController {
 	
 	function admin_install() {
 		if (!$this->InitAcl->loadPermissions()) {
-			$this->Session->setFlash(__('An error occurred while setting plugin permissions',true));
+			$this->Session->setFlash(__('An error occurred while setting plugin permissions',true), 'default', array('class' => 'error'));
 		} elseif (!$this->Installer->createSchema('Blog')) {
-			$this->Session->setFlash(__('An error occurred while installing the plugin',true));
+			$this->Session->setFlash(__('An error occurred while installing the plugin',true), 'default', array('class' => 'error'));
 		} elseif ($this->Plugin->install('Blog'))
-			$this->Session->setFlash(__('Plugin Blog installed',true));
+			$this->Session->setFlash(__('Plugin Blog installed',true), 'default', array('class' => 'success'));
 			
 		
 		$this->redirect(array('plugin'=>'','admin' => true,'controller' => 'plugins'));

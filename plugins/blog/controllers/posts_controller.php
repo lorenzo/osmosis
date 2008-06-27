@@ -37,7 +37,7 @@ class PostsController extends BlogAppController {
 
 	function add($blog_id = null) {
 		if (!$blog_id && empty($this->data)) {		
-			$this->Session->setFlash(__('Invalid Blog', true));
+			$this->Session->setFlash(__('Invalid Blog', true), 'default', array('class' => 'error'));
 			$this->redirect(
 				array(
 					'controller'	=> 'blogs',
@@ -51,10 +51,10 @@ class PostsController extends BlogAppController {
 			$this->data['Post']['member_id'] = $this->Auth->user('id');
 			$this->data['Post']['body'] = $this->HtmlPurifier->purify($this->data['Post']['body']);			
 			if ($this->Post->save($this->data)) {
-				$this->Session->setFlash(__('The Post has been saved',true));
+				$this->Session->setFlash(__('The Post has been saved',true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'view', 'controller' => 'blogs', $this->data['Post']['blog_id']));
 			} else {
-			 	$this->Session->setFlash(__('The Post could not be saved. Please, try again.',true));
+			 	$this->Session->setFlash(__('The Post could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 		if(!isset($this->data['Post']['blog_id'])) {
@@ -67,16 +67,16 @@ class PostsController extends BlogAppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Post',true));
+			$this->Session->setFlash(__('Invalid Post',true), 'default', array('class' => 'error'));
 			//$this->redirect(array('action'=>'index'), null, true);
 			$this->redirect(array('action'=>'view', 'controller' => 'blogs', $this->data['Post']['blog_id']));
 		}
 		if (!empty($this->data)) {
 			if ($this->Post->save($this->data)) {
-				$this->Session->setFlash(__('The Post has been saved',true));
+				$this->Session->setFlash(__('The Post has been saved',true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'view', 'controller' => 'blogs', $this->data['Post']['blog_id']));
 			} else {
-				$this->Session->setFlash(__('The Post could not be saved. Please, try again.',true));
+				$this->Session->setFlash(__('The Post could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 		if (empty($this->data)) {
@@ -86,14 +86,14 @@ class PostsController extends BlogAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Post',true));
+			$this->Session->setFlash(__('Invalid id for Post',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'view', 'controller' => 'blogs', $this->data['Post']['blog_id']), null, true);
 		}
 		$this->Post->contain('Blog(id)');
 		$data = $this->Post->read(array('id'), $id);
 		$blog_id = $data['Blog']['id'];
 		if ($this->Post->del($id)) {
-			$this->Session->setFlash(__('Post deleted',true));
+			$this->Session->setFlash(__('Post deleted',true), 'default', array('class' => 'success'));
 			$this->redirect(array('action'=>'view', 'controller' => 'blogs', $blog_id), null, true);
 		}
 	}

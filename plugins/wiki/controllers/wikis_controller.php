@@ -41,7 +41,7 @@ class WikisController extends WikiAppController {
 
 	function view($id = null) {
 		if (!$id && !isset($this->params['named']['course_id'])) {
-			$this->Session->setFlash(__('Invalid Wiki.',true));
+			$this->Session->setFlash(__('Invalid Wiki',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!$id)
@@ -54,10 +54,10 @@ class WikisController extends WikiAppController {
 		if (!empty($this->data)) {
 			$this->Wiki->create();
 			if ($this->Wiki->save($this->data)) {
-				$this->Session->setFlash(__('The Wiki has been saved', true));
+				$this->Session->setFlash(__('The Wiki has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash(__('The Wiki could not be saved. Please, try again.',true));
+				$this->Session->setFlash(__('The Wiki could not be saved. Please, try again',true), 'default', array('class' => 'error'));
 			}
 		}
 		$courses = @$this->Wiki->Course->generateList();
@@ -66,15 +66,15 @@ class WikisController extends WikiAppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Wiki',true));
+			$this->Session->setFlash(__('Invalid Wiki',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			if ($this->Wiki->save($this->data)) {
-				$this->Session->setFlash(__('The Wiki has been saved',true));
+				$this->Session->setFlash(__('The Wiki has been saved',true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash(__('The Wiki could not be saved. Please, try again.',true));
+				$this->Session->setFlash(__('The Wiki could not be saved. Please, try again',true), 'default', array('class' => 'error'));
 			}
 		}
 		if (empty($this->data)) {
@@ -86,11 +86,11 @@ class WikisController extends WikiAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Wiki',true));
+			$this->Session->setFlash(__('Invalid id for Wiki',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Wiki->del($id)) {
-			$this->Session->setFlash(__('Wiki deleted',true));
+			$this->Session->setFlash(__('Wiki deleted',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

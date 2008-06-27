@@ -60,7 +60,7 @@ class RevisionsController extends WikiAppController {
 	
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Revision.',true));
+			$this->Session->setFlash(__('Invalid Revision',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('revision', $this->Revision->read(null, $id));

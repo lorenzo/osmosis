@@ -1,49 +1,52 @@
 <div class="tools">
-<h1><?php __('Tools'); ?></h1>
+<h1><?php __('Available Tools'); ?></h1>
 
 <?php 
 if(!empty($tools)) :
 ?>
-<ul>
+<ul class="dashboard-elements">
 	<?php foreach($tools as $tool) :?>
-		<li class="boxed">
+		<li class="boxed dashboard-element">
 			<dl>
 				<dt>
-				<strong class="title">
-					<?php
-						echo (isset($tool['Tool']['title'])) ?
-							$tool['Tool']['title'] : Inflector::humanize($tool['Tool']['name']);
-					?>
-				</strong>
+					<strong class="title">
+						<?php
+							echo (isset($tool['Tool']['title'])) ?
+								$tool['Tool']['title'] : Inflector::humanize($tool['Tool']['name']);
+						?>
+					</strong>
 				</dt>				
-				<?php if (!empty($tool['Tool']['description'])) :?>
-					<dd>
-						<p><?php echo $tool['Tool']['description'] ?></p>
-						
-						<?php if (isset($tool['Tool']['author'])) :?>
-							<p class="author">
-								<strong><?php echo __('Author')?> </strong>
-								<span><?php echo $tool['Tool']['author'] ?></span>
-							</p>
-						<?php endif;?>
-						
-					</dd>
-				<?php endif;?>
+				<dd>
+					<p>
+						<?php
+							if (!empty($tool['Tool']['description'])) {
+								echo $tool['Tool']['description'];
+							} else {
+								__('This plugin has no description.');
+							}
+						?>
+					</p>
+					<?php if (isset($tool['Tool']['author'])) :?>
+						<p class="author">
+							<strong><?php echo __('Author')?> </strong>
+							<span><?php echo $tool['Tool']['author'] ?></span>
+						</p>
+					<?php endif;?>
+				</dd>
 			</dl>
-			<div class="actions">
+			<div class="go action">
 			<?php 
-			echo $form->create('Course',array('url'=>array('action' => 'tools',$id)));
-			echo $form->input('CourseTool.course_id',array('type'=>'hidden','value'=>$id));
-			echo $form->input('CourseTool.plugin_id',array('type'=>'hidden','value'=>$tool['Tool']['id']));
-			
-			if (!Set::matches("/Course[id=$id]",$tool)) {
-				echo $form->input('CourseTool.add',array('type'=>'hidden','value'=>1));
-				echo $form->end(__('Add to course',true));
-			}
-			else {
-				echo $form->input('CourseTool.remove',array('type'=>'hidden','value'=>1));
-				echo $form->end(__('Remove from course',true));
-			}
+				echo $form->create('Course',array('url'=>array('action' => 'tools',$id)));
+				echo $form->input('CourseTool.course_id',array('type'=>'hidden','value'=>$id));
+				echo $form->input('CourseTool.plugin_id',array('type'=>'hidden','value'=>$tool['Tool']['id']));
+				if (!Set::matches("/Course[id=$id]",$tool)) {
+					echo $form->input('CourseTool.add',array('type'=>'hidden','value'=>1));
+					$action = __('Add to course', true);
+				} else {
+					echo $form->input('CourseTool.remove',array('type'=>'hidden','value'=>1));
+					$action = __('Remove from course', true);
+				}
+				echo $form->end($action);
 			?>
 			</div>
 		</li>

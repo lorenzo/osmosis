@@ -31,11 +31,20 @@
 								if ($session->check('Message.flash')) {
 									$session->flash();
 								}
+								if ($session->check('Message.auth')) {
+									$session->flash('auth');
+								}
 								echo $content_for_layout;
 							?>
 						</div>
 					</div>
-					<div id="more-courses">
+					<?php
+						$class = null;
+						if ($this->action == 'login') {
+							$class = 'class="login"';
+						}
+					?>
+					<div id="more-courses"<?php echo $class?>>
 						<?php
 							if (isset($Osmosis['courseList'])) {
 								echo $this->element('layout/user_courses',array('courses' => $Osmosis['courseList']));

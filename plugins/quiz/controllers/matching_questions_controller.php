@@ -41,7 +41,7 @@ class MatchingQuestionsController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Matching Question.',true));
+			$this->Session->setFlash(__('Invalid Matching Question',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->set('matchingQuestion', $this->MatchingQuestion->read(null, $id));
@@ -67,12 +67,12 @@ class MatchingQuestionsController extends AppController {
 			} else return;
 			
 			if ($this->MatchingQuestion->saveAll($newData,array('validate' => false))) {
-				$this->Session->setFlash(__('The Matching Question has been saved',true));
+				$this->Session->setFlash(__('The Matching Question has been saved',true), 'default', array('class' => 'success'));
 				$this->redirect(
 					array('controller' => 'quizzes', 'action'=>'edit', 	$this->data['Quiz'][0]['id'])
 				);
 			} else {
-				$this->Session->setFlash(__('The Matching Question could not be saved. Please, try again.',true));
+				$this->Session->setFlash(__('The Matching Question could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 		if(isset($this->params['named']['quiz'])) {
@@ -128,16 +128,16 @@ class MatchingQuestionsController extends AppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Matching Question',true));
+			$this->Session->setFlash(__('Invalid Matching Question',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			$this->cleanUpFields();
 			if ($this->MatchingQuestion->save($this->data)) {
-				$this->Session->setFlash(__('The Matching Question has been saved',true));
+				$this->Session->setFlash(__('The Matching Question has been saved',true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash(__('The Matching Question could not be saved. Please, try again.',true));
+				$this->Session->setFlash(__('The Matching Question could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 		if (empty($this->data)) {
@@ -149,11 +149,11 @@ class MatchingQuestionsController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Matching Question',true));
+			$this->Session->setFlash(__('Invalid id for Matching Question',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->MatchingQuestion->del($id)) {
-			$this->Session->setFlash(__('Matching Question deleted',true));
+			$this->Session->setFlash(__('Matching Question deleted',true), 'default', array('class' => 'success'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}
