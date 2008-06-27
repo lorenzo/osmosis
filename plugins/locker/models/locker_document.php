@@ -138,6 +138,7 @@ class LockerDocument extends LockerAppModel {
 			return $this->_saveFile($file);
 		}
 		if ($this->exists() && isset($this->data[$this->alias]['folder_id'])) {
+			$this->bindModel(array('belongsTo' => array('Member'))); // Woraround to solve a strange bug in ContainableBehavior
 			$file = $this->find('first',
 				array(
 					'fields' => array('id','file_name','folder_id'),
@@ -236,6 +237,7 @@ class LockerDocument extends LockerAppModel {
 		if (!$document) {
 			return false;
 		}
+		$this->data = Set::merge($document,$this->data);
 		$destiny = $this->Folder->find('first', array('Folder.id' => $folder_id));
 		if (!$destiny) {
 			return false;
@@ -251,8 +253,9 @@ class LockerDocument extends LockerAppModel {
 			);
 			if (!$data) return false;
 		}
+		
 		$this->data['Document']['folder_id'] = $folder_id;
-		$this->data['Document']['member_id'] = $destiny['Folder']['member_id'];
+		$this->id = $document['Document']['id'];
 		
 		return $this->save();
 	}
