@@ -138,11 +138,11 @@ class LockerDocument extends LockerAppModel {
 			return $this->_saveFile($file);
 		}
 		if ($this->exists() && isset($this->data[$this->alias]['folder_id'])) {
-			$this->contain(array('Member' => array('username')));
 			$file = $this->find('first',
 				array(
 					'fields' => array('id','file_name','folder_id'),
-					'conditions' => array($this->alias . '.id' => $this->id)
+					'conditions' => array($this->alias . '.id' => $this->id),
+					'contain'	=> array('Member' => array('username'))
 				)
 			);
 			if ($file[$this->alias]['folder_id'] != $this->data[$this->alias]['folder_id']) {
@@ -156,11 +156,11 @@ class LockerDocument extends LockerAppModel {
 			}
 		}
 		if ($this->exists() && isset($this->data[$this->alias]['name'])) {
-			$this->contain(array('Member' => array('username')));
 			$file = $this->find('first',
 				array(
 					'fields' => array('id','name', 'file_name','folder_id'),
-					'conditions' => array('LockerDocument.id' => $this->id)
+					'conditions' => array('LockerDocument.id' => $this->id),
+					'contain'	=> array('Member' => array('username'))
 				)
 			);
 			if ($file[$this->alias]['name'] != $this->data[$this->alias]['name']) {
@@ -228,8 +228,11 @@ class LockerDocument extends LockerAppModel {
 	 * @return boolean True on success
 	 **/
 	function move($id, $folder_id) {
-		$this->contain(array('Folder' => array('id','member_id','name','parent_id', 'ParentFolder')));
-		$document = $this->read(null, $id);
+		$document = $this->find('first',array(
+			'conditions' => array($this->alias.'.id' => $id),
+			'contain' => array('Folder' => array('id','member_id','name','parent_id', 'ParentFolder'))
+			)
+		);
 		if (!$document) {
 			return false;
 		}

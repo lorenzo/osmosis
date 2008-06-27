@@ -171,7 +171,6 @@ class LockerFolder extends LockerAppModel {
 				}
 				return false;
 			}
-			$this->Member->recursive = -1;
 			$username = $this->Member->field('username', $this->data[$this->alias]['member_id']);
 			$old = $this->getDirectory($this->data[$this->alias]['id'], $username);
 			$new = $this->getDirectory($this->data[$this->alias]['parent_id'], $username) . DS . $this->data[$this->alias]['folder_name'];
@@ -387,7 +386,7 @@ class LockerFolder extends LockerAppModel {
 	 * @return boolean
 	 **/
 	function notRepeated() {
-		$this->recursive = -1;
+		$recursive = -1;
 		$parent_id = null;
 		if (isset($this->data['LockerFolder']['parent_id'])) {
 			$parent_id = $this->data['LockerFolder']['parent_id'];
@@ -397,7 +396,7 @@ class LockerFolder extends LockerAppModel {
 			'parent_id'	=> $parent_id,
 			'member_id' => $this->data['LockerFolder']['member_id']
 		);
-		return !$this->find('count', compact('conditions'));
+		return !$this->find('count', compact('conditions','recursive'));
 	}
 
 	/**
@@ -408,19 +407,24 @@ class LockerFolder extends LockerAppModel {
 	 * @return boolean True on success
 	 **/
 	function move($id, $folder_id) {
-		$this->recursive = -1;
-		$destiny = $this->read(null, $folder_id);
+		$destiny = $this->find('first',array('conditions' => array('id' => $folder_id), 'recursive' => -1));
 		if (!$destiny) {
 			return false;
 		}
-		$source = $this->read(null, $id);
+		$source = $this->find('first',array('conditions' => array('id' => $id), 'recursive' => -1));
 		if (!$source || $source['LockerFolder']['member_id']!=$destiny['LockerFolder']['member_id']) {
 			return false;
 		}
 		if ($source['LockerFolder']['parent_id']==$destiny['LockerFolder']['id']) {
 			return true;
 		}
+
 		$this->data['LockerFolder']['parent_id'] = $destiny['LockerFolder']['id'];
+		$this->data['LockerFolder']['member_id'] = $source['LockerFolder']['member_id'];
+		$this->data['LockerFolder']['name']	= $source['LockerFolder']['name'];
+		$this->data['LockerFolder']['folder_name']	= $source['LockerFolder']['folder_name'];
+		$this->data['LockerFolder']['id']	= $source['LockerFolder']['id'];
+		$this->id = $source['LockerFolder']['id'];
 		return $this->save();
 	}
 
@@ -434,14 +438,14 @@ class LockerFolder extends LockerAppModel {
 	 */
 	function dropbox($member_id, $just_id = false, $contents = true) {
 		$locker = $this->locker($member_id, true);
-		$this->recursive = -1;
+		$recursive = -1;
 		$conditions = array('member_id' => $member_id, 'parent_id' => $locker, 'name' => 'dropbox');
 		if (!$just_id) {
 			if ($contents) {
 				$this->recursive = 0;
 				$this->contain('Document');
 			}
-			$dropbox = $this->find('first', compact('conditions'));
+			$dropbox = $this->find('first', compact('conditions','recursive'));
 		} else {
 			$dropbox = $this->field('id', $conditions);
 		}
@@ -456,10 +460,10 @@ class LockerFolder extends LockerAppModel {
 	 * @return mixed array of data or string ID of root Folder
 	 */	
 	function locker($member_id, $just_id = false) {
-		$this->recursive = -1;
+		$recursive = -1;
 		$conditions = array('member_id' => $member_id, 'parent_id' => null);
 		if (!$just_id) {
-			$locker = $this->find('first', compact('conditions'));
+			$locker = $this->find('first', compact('conditions','recursive'));
 		} else {
 			$locker = $this->field('id', $conditions);
 		}
