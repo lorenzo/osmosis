@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `blog_comments` (
   `comment` text NOT NULL,
   `post_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
+  `created` datetime default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 

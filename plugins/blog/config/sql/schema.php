@@ -25,6 +25,7 @@ class BlogSchema extends CakeSchema {
 			'comment' => array('type'=>'text', 'null' => false),
 			'post_id' => array('type'=>'integer', 'null' => false),
 			'member_id' => array('type'=>'integer', 'null' => false),
+			'created' => array('type'=>'datetime', 'null' => true, 'default' => NULL),
 			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
 			);
 }
