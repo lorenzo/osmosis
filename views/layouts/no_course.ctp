@@ -19,8 +19,12 @@
 		<div class="contentcolumn">
 			<?php
 				echo $this->element('layout/top_nav');
+				$class = null;
+				if ($this->action == 'login') {
+					$class = 'class="login"';
+				}
 			?>
-			<div id="upper-content">
+			<div id="upper-content"<?php echo $class?>>
 				<div id="wrap">
 					<?php
 						echo $this->element('layout/conectivism');
@@ -38,13 +42,7 @@
 							?>
 						</div>
 					</div>
-					<?php
-						$class = null;
-						if ($this->action == 'login') {
-							$class = 'class="login"';
-						}
-					?>
-					<div id="more-courses"<?php echo $class?>>
+					<div id="more-courses">
 						<?php
 							if (isset($Osmosis['courseList'])) {
 								echo $this->element('layout/user_courses',array('courses' => $Osmosis['courseList']));

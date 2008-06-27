@@ -129,9 +129,24 @@ body {
 	border-top:#6EA6D5 30px solid;
 	margin-top:-30px;
 }
-#upper-content #more-courses.login {
+#upper-content.login #wrap .main {
+	width:100%;
+}
+#upper-content.login #wrap {
 	border-top:#888 1px dashed;
-	margin-top:0;
+	width:100%;
+}
+#upper-content.login #wrap .main .content {
+	padding:10px 0;
+	border:none;
+}
+#upper-content.login #flashMessage,
+#upper-content.login #authMessage {
+	width:400px;
+	margin:-10px auto 0 auto;
+}
+#upper-content.login #wrap #more-courses {
+	display:none;
 }
 #upper-content #more-courses .content {
 	border-top:#888 1px dashed;
