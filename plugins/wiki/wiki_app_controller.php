@@ -30,5 +30,6 @@
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 class WikiAppController extends AppController {
+	var $helpers = array('Wiki');
 }
 ?>

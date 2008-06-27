@@ -33,40 +33,114 @@ class Wiki extends AppModel {
 
 	var $name = 'Wiki';
 	var $useTable = 'wiki_wikis';
+	
+	/**
+	 * Validation Rules for Fields
+	 *
+	 * @var array
+	 **/
 	var $validate = array(
 		'course_id' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+			'required' => array(
+				'rule'			=> array('custom', '/.+/'),
+				'required'		=> true,
+				'allowEmpty'	=> false,
+				'on'			=> 'create'
+			)
 		),
 		'name' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
-		),
-		'description' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
-		),
+			'required' => array(
+				'rule'			=> array('custom', '/.+/'),
+				'required'		=> true,
+				'allowEmpty'	=> false,
+				'on'			=> 'create'
+			)
+		)
 	);
 
+	/**
+	 * BelongsTo (1-N) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $belongsTo = array(
-			'Course' => array('className' => 'Course',
-								'foreignKey' => 'course_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
+		// Wiki BelongsTo Course
+		'Course' => array(
+			'className' => 'Course',
+			'foreignKey' => 'course_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'counterCache' => ''
+		)
 	);
 
+	/**
+	 * HasMany (N-1) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $hasMany = array(
-			'Entry' => array('className' => 'wiki.Entry',
-								'foreignKey' => 'wiki_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => 'updated DESC',
-								'limit' => 50,
-								'offset' => '',
-								'dependent' => true,
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''),
+		// Wiki HasMany Entries (Pages)
+		'Entry' => array(
+			'className' => 'wiki.Entry',
+			'foreignKey' => 'wiki_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => 'updated DESC',
+			'limit' => 50,
+			'offset' => '',
+			'dependent' => true,
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
 	);
 
+	/**
+	 * Model contructor. Initializes the validation error messages with i18n
+	 *
+	 * @see Model::__construct
+	 */
+	function __construct($id = false, $table = null, $ds = null) {
+		$this->setErrorMessage(
+			'course_id.required', __('No Course ID set',true)
+		);
+		$this->setErrorMessage(
+			'name.required', __('Please set the wikis name',true)
+		);
+		parent::__construct($id,$table,$ds);
+	}
+	
+	/**
+	 * Creates a new empty wiki
+	 *
+	 * @param int $id Id of the course
+	 * @return array data of the wiki
+	 **/
+	function newWiki($course_id, $member_id) {
+		$data = $this->save(
+			array(
+				'course_id'	=> $course_id,
+				'name'		=> __('Wiki', true),
+				'description' => ''
+			)
+		);
+		if (!$data) {
+			return false;
+		}
+		$data['Wiki']['id'] = $this->id;
+		$entry = $this->Entry->save(
+			array(
+				'wiki_id'	=> $this->id,
+				'member_id'	=> $member_id,
+				'title'		=> __('Main Page', true),
+				'content'	=> __('<p>Wellcome to the wiki, start by editing this page!</p>', true)
+			)
+		);
+		$entry['Entry']['id'] = $this->Entry->id;
+		$data['Entry'][] = $entry['Entry'];
+		return $data;
+	}
 }
 ?>

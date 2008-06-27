@@ -44,10 +44,31 @@ class WikisController extends WikiAppController {
 			$this->Session->setFlash(__('Invalid Wiki',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-		if (!$id)
-			$this->set('wiki', $this->Wiki->findByCourseId($this->params['named']['course_id']));
-		else
-			$this->set('wiki', $this->Wiki->read(null, $id));
+		$wiki = null;
+		$course_id = $this->params['named']['course_id'];
+		if (!$id){
+			$wiki = $this->Wiki->findByCourseId($course_id);
+			if (!$wiki) {
+				$wiki = $this->Wiki->newWiki($course_id, $this->Auth->user('id'));
+			}
+		} else {
+			$this->Wiki->contain('Entry');
+			$wiki = $this->Wiki->read(null, $id);
+		}
+		if (!$wiki) {
+			$this->Session->setFlash(
+				__('The wiki for this course could not be found', true), 'default', array('class' => 'error')
+			);
+			$this->redirect(
+				array(
+					'plugin'		=> null,
+					'controller'	=> 'courses',
+					'action'		=> 'view',
+					$course_id
+				)
+			);
+		}
+		$this->set(array('data' => $wiki));
 	}
 
 	function add() { 

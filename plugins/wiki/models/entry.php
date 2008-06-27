@@ -33,50 +33,100 @@ class Entry extends AppModel {
 
 	var $name = 'Entry';
 	var $useTable = 'wiki_entries';
+	
+	/**
+	 * Validation Rules for Fields
+	 *
+	 * @var array
+	 **/
 	var $validate = array(
 		'wiki_id' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+			'required' => array(
+				'rule'			=> array('custom', '/.+/'),
+				'required'		=> true,
+				'allowEmpty'	=> false,
+				'on'			=> 'create'
+			)
 		),
 		'member_id' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'message'=>'Error.empty'),
+			'required' => array(
+				'rule'			=> array('custom', '/.+/'),
+				'required'		=> true,
+				'allowEmpty'	=> false,
+				'on'			=> 'create'
+			)
 		),
 		'title' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'on'=>'create','message'=>'Error.empty'),
+			'required' => array(
+				'rule'			=> array('custom', '/.+/'),
+				'required'		=> true,
+				'allowEmpty'	=> false,
+				'on'			=> 'create'
+			)
 		),
 		'content' => array(
-			'Error.empty' => array('rule'=>'/.+/','required'=>true,'message'=>'Error.empty'),
+			'required' => array(
+				'rule'			=> array('custom', '/.+/'),
+				'required'		=> true,
+				'allowEmpty'	=> false,
+				'on'			=> 'create'
+			)
 		),
 	);
 
+	/**
+	 * BelongsTo (1-N) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $belongsTo = array(
-			'Wiki' => array('className' => 'wiki.Wiki',
-								'foreignKey' => 'wiki_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
-			'Member' => array('className' => 'Member',
-								'foreignKey' => 'member_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
+		// Entry BelongsTo Wiki
+		'Wiki' => array(
+			'className' => 'wiki.Wiki',
+			'foreignKey' => 'wiki_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'counterCache' => ''
+		),
+		// Entry BelongsTo Member (Author)
+		'Member' => array(
+			'className' => 'Member',
+			'foreignKey' => 'member_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'counterCache' => ''
+		)
 	);
 
+	/**
+	 * HasMany (N-1) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $hasMany = array(
-			'Revision' => array('className' => 'wiki.Revision',
-								'foreignKey' => 'entry_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'limit' => '',
-								'offset' => '',
-								'dependent' => true,
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''),
+		// Entry HasMany Revision (one each time it is modified)
+		'Revision' => array(
+			'className' => 'wiki.Revision',
+			'foreignKey' => 'entry_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'dependent' => true,
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
 	);
-	
+
+	/**
+	 * Attached behaviors
+	 *
+	 * @var array
+	 **/
 	var $actsAs = array(
 		'Transaction',
 		'Sluggable' => array('label' => 'title', 'slug' => 'slug', 'overwrite' => false, 'separator' => '_','translation' => 'utf-8'),
@@ -118,16 +168,14 @@ class Entry extends AppModel {
 		$this->rollback();
 		return false;
 	}
-	
+
 	/**
 	 * Creates a new revision with the contents of a previous one
 	 *
 	 * @param string $id revision id
 	 * @param string $revision_number number of revision to restore, if null the most recent is used
 	 * @return boolean true if the operation was successful
-	 * @author José Lorenzo
 	 */
-	
 	function restore($id,$revision_number = null) {
 		$this->recurive = -1;
 		$entry = $this->read(null,$id);
@@ -153,12 +201,10 @@ class Entry extends AppModel {
 	 * @param string $string 
 	 * @return string
 	 */
-	
 	function generateSlug($string) {
 		return $this->slug($string,$this->alias);
 	}
-	
-	
+
 	/**
 	 * Returns true if an entry has been created with a slug that matches $slug an $locators conditions
 	 *
@@ -166,7 +212,6 @@ class Entry extends AppModel {
 	 * @param array $locators an array containing the key wiki_id or course_id
 	 * @return boolean
 	 */
-	
 	function created($slug,$locators = array()) {
 		$conditions = array('slug' => $slug);
 		if (isset($locators['wiki_id']))

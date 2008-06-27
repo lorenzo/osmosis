@@ -43,7 +43,7 @@ class WikiHolderComponent extends PlaceholderDataComponent {
 	);
 	
 	function head() {
-		return $this->controller->plugin == 'forum' || ($this->controller->name == 'Courses' && $this->controller->action =='index');
+		return $this->controller->plugin == 'wiki' || ($this->controller->name == 'Courses' && $this->controller->action =='index');
 	}
 	
 	function courseToolbar() {
