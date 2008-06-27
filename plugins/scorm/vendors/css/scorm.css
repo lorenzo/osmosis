@@ -1,6 +1,3 @@
-#main-content .main {
-	padding:0;
-}
 #scorm_ui {
 	width:100%;
 	height:100%;
@@ -44,4 +41,16 @@
 
 #scorm_toc li.completed {
 	background-image:url('../img/completed.png');
+}
+
+div.scorm.index div.lesson-summary {
+	border:1px #ccc dashed;
+	padding-left:10px;
+	padding-right:10px;
+	margin:5px 0 10px 0;
+	width:75%;
+}
+
+div.scorm.index div.lesson-summary .description {
+	
 }

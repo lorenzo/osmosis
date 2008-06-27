@@ -34,7 +34,7 @@ class ScormsController extends ScormAppController {
 
 	var $name = 'Scorms';
 	var $components = array('Zip');
-	var $helpers = array('Html', 'Form', 'Tree', 'Javascript');
+	var $helpers = array('Html', 'Form', 'Tree', 'Javascript','Dynamicjs');
 	var $uses = array('Scorm.Scorm', 'Scorm.ScormAttendeeTracking');
 	
 	function _setActiveCourse() {
@@ -103,7 +103,6 @@ class ScormsController extends ScormAppController {
 			$is_uploaded = is_uploaded_file($uploaded_file['tmp_name']); 
 			if ($is_uploaded) {
 				$this->data['Scorm']['file_name'] = $uploaded_file['name'];
-				// TODO: md5 of zip file
 				// Extract the zip file to TMP
 				$this->Zip->begin($uploaded_file['tmp_name']);
 				$scorm_files_location = TMP.'tests'.DS.'imsmanifests'.DS.'uploads'.DS.$uploaded_file['name'].DS;
@@ -130,12 +129,13 @@ class ScormsController extends ScormAppController {
 					$this->redirect(array('action'=>'index'), null, true);
 				} else {
 					$folder = new Folder(TMP.'tests'.DS.'imsmanifests'.DS.'uploads'.DS.$uploaded_file['name'].DS);
-					//$folder->delete();
+					$folder->delete();
 				}
 			} else { 
 				$this->Session->setFlash(__('The Scorm could not be uploaded. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
+		$this->set('course_id',$this->activeCourse);
 	}
 
 	function edit($id = null) {
@@ -144,7 +144,6 @@ class ScormsController extends ScormAppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
-			$this->cleanUpFields();
 			if ($this->Scorm->save($this->data)) {
 				$this->Session->setFlash(__('The Scorm saved',true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'), null, true);

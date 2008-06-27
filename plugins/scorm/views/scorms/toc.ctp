@@ -1,8 +1,5 @@
 <div id="scorm_toc">
 	<h2><?php echo $scorm['Scorm']['name']?></h2>
-	<p>
-		<?php echo $scorm['Scorm']['description']?>
-	</p>
 	<?php
 		echo $tree->show(
 			'Sco/title',

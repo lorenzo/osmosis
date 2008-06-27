@@ -1,5 +1,5 @@
 <div class="entry-title">
-	<h1><?php echo $entry['title']?></h1>
+	<h2><?php echo $entry['title']?></h2>
 	<ul class="actions">
 		<li class="edit">
 			<?php

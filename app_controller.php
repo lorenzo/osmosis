@@ -32,7 +32,7 @@
 App::import('Core', 'Sanitize');
 class AppController extends Controller {
 	var $components = array('Acl','Auth','RequestHandler','OsmosisComponents','Placeholder');
-	var $helpers = array('Javascript', 'Html', 'Form', 'Dynamicjs', 'Time', 'Placeholder', 'Text','Filter');
+	var $helpers = array('Javascript', 'Html', 'Form', 'Time', 'Placeholder', 'Text','Filter');
 
 	/**
 	 * Contains the id of the course the member is visiting. False if the member is viewing a page outside a course

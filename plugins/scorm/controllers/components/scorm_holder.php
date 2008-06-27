@@ -40,5 +40,9 @@ class ScormHolderComponent extends PlaceholderDataComponent {
 	function courseToolBar() {
 		return array('url' => array('plugin' => 'scorm', 'controller' => 'scorms', 'action' => 'index','course_id' => $this->controller->_getActiveCourse()));
 	}
+	
+	function head() {
+		return $this->controller->plugin == 'scorm';
+	}
 }
 ?>

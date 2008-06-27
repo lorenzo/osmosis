@@ -123,6 +123,12 @@ a:visited {
 	list-style:url('../../forum/css/img/users.png');
 }
 
+#main-content .main h2  {
+	color:#666;
+	letter-spacing:1px;
+	font-size:2em;
+	margin-bottom:2px;
+}
 /* Styles "Abstract" list */
 .abstract strong.title {
 	text-indent:20px;
