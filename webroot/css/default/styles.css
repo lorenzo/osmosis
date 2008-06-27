@@ -331,13 +331,13 @@ ul.dashboard-elements {
 	margin-right:2%;
 	margin-bottom:15px;
 }
-.boxed.dashboard-element dl dd {
+.boxed.dashboard-element dl.plugin dd {
 	padding: 0 10px;
 	margin-left:0;
 	height:150px;
 	overflow-y:auto;
 }
-p.go,
+p.go.action,
 div.go.action {
 	background:#6EA6D5;
 	float:left;

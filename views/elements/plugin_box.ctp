@@ -1,5 +1,5 @@
 <li class="boxed dashboard-element">
-	<dl>
+	<dl class="plugin">
 		<dt>
 		<strong class="title">
 			<?php
@@ -27,7 +27,7 @@
 			<?php endif;?>
 		</dd>
 	</dl>
-	<p class="go">
+	<p class="go action">
 <?php
 	if (isset($plugin['Plugin']['id'])) {
 		echo $html->link(

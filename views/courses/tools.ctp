@@ -7,7 +7,7 @@ if(!empty($tools)) :
 <ul class="dashboard-elements">
 	<?php foreach($tools as $tool) :?>
 		<li class="boxed dashboard-element">
-			<dl>
+			<dl class="plugin">
 				<dt>
 					<strong class="title">
 						<?php
