@@ -33,20 +33,32 @@ class Role extends AppModel {
 
 	var $name = 'Role';
 	var $displayField = 'role';
-	var $validate = null;/*array(
-		'parent_id' => VALID_NOT_EMPTY,
-		'role' => VALID_NOT_EMPTY,
-	);*/
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
-	var $belongsTo = array(
-			'Parent' => array('className' => 'Role',
-								'foreignKey' => 'parent_id'
-								),
-	);
-	
+	/**
+	 * Attached behaviors
+	 *
+	 * @var array
+	 **/
     var $actsAs = array('Acl' => array('type' => 'requester'));
 
+	/**
+	 * BelongsTo (1-N) relation descriptors
+	 *
+	 * @var array
+	 **/
+	var $belongsTo = array(
+		// Role BelongsTo Role (Parent Role in a hierarchy)
+		'Parent' => array(
+			'className' => 'Role',
+			'foreignKey' => 'parent_id'
+		)
+	);
+
+	/**
+	 * Returns the parentNode in the Roles hierarchy
+	 *
+	 * @see AclBehavior
+	 */	
     function parentNode() {
         if (!$this->id) {
             return null;
@@ -58,6 +70,5 @@ class Role extends AppModel {
             return array('model' => 'Role', 'foreign_key' => $data[$this->name]['parent_id']);
         }
     }
-
 }
 ?>

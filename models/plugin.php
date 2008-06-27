@@ -29,22 +29,49 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
+/**
+ * Course's active Tools
+ */
 class Plugin extends AppModel {
 
 	var $name = 'Plugin';
+
+	/**
+	 * Validation Rules for Fields
+	 *
+	 * @var array
+	 **/
 	var $validate = array(
-		'name' => VALID_NOT_EMPTY,
-		'active' => VALID_NOT_EMPTY,
-	);
-	
-	var $hasAndBelongsToMany = array(
-			'Course' => array(
-				'className' => 'Course',
-				'joinTable' => 'course_tools',
-				'foreignKey' => 'plugin_id',
-				'associationForeignKey' => 'course_id',
-				'with' => 'CourseTool'
+		'name' => array(
+			'required' => array(
+				'rule' => array('custom', '/.+/'),
+				'required' => true,
+				'allowEmpty' => false
 			)
+		),
+		'active' => array(
+			'required' => array(
+				'rule' => array('custom', '/.+/'),
+				'required' => true,
+				'allowEmpty' => false
+			)
+		)
+	);
+
+	/**
+	 * HasAndBelongsToMany (N-N) relation descriptors
+	 *
+	 * @var array
+	 **/
+	var $hasAndBelongsToMany = array(
+		// Plugin HasAndBelongsToMany Course (Courses that have the plugin active)
+		'Course' => array(
+			'className' => 'Course',
+			'joinTable' => 'course_tools',
+			'foreignKey' => 'plugin_id',
+			'associationForeignKey' => 'course_id',
+			'with' => 'CourseTool'
+		)
 	);
 
 	/**
@@ -54,12 +81,11 @@ class Plugin extends AppModel {
 	 * @param array $conditions search conditions as in Model::find
 	 * @return array result as in Model::find
 	 */
-	
 	function actives($fields=null,$conditions = array()) {
 		$conditions = am($conditions, array('active' => 1));
 		return $this->find('all', array('conditions' => $conditions, 'fields' => $fields, 'recursive' => 1));
 	}
-	
+
 	/**
 	 * Returns the inactive plugins
 	 *
@@ -72,25 +98,23 @@ class Plugin extends AppModel {
 		
 		return $this->find('all',array('conditions' => $conditions, 'fields' => $fields));
 	}
-	
+
 	/**
 	 * Returns all plugin folders stored in server
 	 *
 	 * @return array
 	 */
-	
 	function inServer() {
 		$stored = $this->getpluginPackages();
 		
 		return $stored;
 	}
-	
+
 	/**
 	 * Auxiliar function to retreive plugin folders in disk
 	 *
 	 * @return array
 	 */
-	
 	private function getpluginPackages() {
 		$plugins = Configure::listObjects('plugin');
 		Configure::load('plugin_descriptions');
@@ -99,17 +123,15 @@ class Plugin extends AppModel {
 			$result[$plugin] = Configure::read($plugin);
 			unset($result[$plugin]['id'],$result[$plugin]['name'],$result[$plugin]['active']);
 		}
-		
 		return $result;
 	}
-	
+
 	/**
 	 * Adds a plugin folder to the database, an marks it as active
 	 *
 	 * @param string $plugin Folder name of the plugin
 	 * @return boolean
 	 */
-	
 	function install($plugin) {
 		if ($this->find('count',array('conditions' => array('name' => $plugin)))) {
 			return false;
@@ -123,14 +145,13 @@ class Plugin extends AppModel {
 		
 		return $this->save($data);
 	}
-	
+
 	/**
 	 * Returns a list of objects from plugins that participates in placeholders based on a type
 	 *
 	 * @param string $type type of placeholder the objects participate
 	 * @return array with reference to objects
 	 */
-	
 	function getHolders($type, $plugin = null) {
 		
 		if ($plugin) {
@@ -156,7 +177,7 @@ class Plugin extends AppModel {
 		
 		return $holders;
 	}
-	
+
 	/**
 	 * Returns a list of plugins with its correspondent PlaceholderData object if exists, if the plugin is associated
 	 * to a Course with id $course_id
@@ -165,7 +186,6 @@ class Plugin extends AppModel {
 	 * @param boolean $fetchHolders tru to find PlaceholderData objects of plugin
 	 * @return array list of plugins with correspondent holder object if any
 	 */
-	
 	function getCourseTools($course_id, $fetchHolders = false) {
 		$plugins = $this->actives(array('name', 'title','id'));
 		if ($fetchHolders) {
@@ -194,7 +214,7 @@ class Plugin extends AppModel {
 
 		return $tools;
 	}
-	
+
 	/**
 	 * Find a plugin depending on it's name
 	 *
@@ -203,7 +223,6 @@ class Plugin extends AppModel {
 	 * @param string $active active status of the plugin
 	 * @return mixed
 	 */
-	
 	function findByName($name,$fields = array(),$active = true) {
 		return $this->find('first',array(
 			'conditions'=>array(
@@ -230,17 +249,22 @@ class Plugin extends AppModel {
 			'recursive' => -1
 			));
 	}
-	
+
 	/**
 	 * Deconstruct the array of types an converts it to a comma separated string
 	 *
 	 * @see Model::deconstruct 
 	 */
-	
 	function deconstruct($field, $value) {
 		return implode(',',$value);
 	}
-	
+
+	/**
+	 * Returns physical path to plugin folder
+	 *
+	 * @param string $name Name of the plugin
+	 * @return string physical path to plugin folder
+	 */
 	function getPath($name) {
 		$pluginPaths = Configure::read('pluginPaths');
 		$path = null;
@@ -252,7 +276,5 @@ class Plugin extends AppModel {
 		}
 		return $path;
 	}
-	
-	
 }
 ?>

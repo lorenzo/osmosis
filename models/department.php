@@ -32,36 +32,60 @@
 class Department extends AppModel {
 
 	var $name = 'Department';
+
+	/**
+	 * Validation Rules for Fields
+	 *
+	 * @var array
+	 **/
 	var $validate = array(
 		'name' => array(
-		    'Error.empty' => array(
-		        'rule' => array( 'custom','/.+/'),
-				),
+		    'required' => array(
+	        	'rule' => array( 'custom','/.+/'),
+			),
 		),
 		'description' => array(
-		    'Error.empty' => array(
+		    'required' => array(
 		        'rule' => array('custom','/.+/'),
-				),
-		),
+			)
+		)
 	);
 
+	/**
+	 * HasMany (N-1) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $hasMany = array(
-			'Course' => array('className' => 'Course',
-								'foreignKey' => 'department_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'limit' => '',
-								'offset' => '',
-								'dependent' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''),
+		// Department HasMany Course
+		'Course' => array(
+			'className'		=> 'Course',
+			'foreignKey'	=> 'department_id',
+			'conditions'	=> '',
+			'fields'		=> '',
+			'order'			=> '',
+			'limit'			=> '',
+			'offset'		=> '',
+			'dependent'		=> '',
+			'exclusive'		=> '',
+			'finderQuery'	=> '',
+			'counterQuery'	=> ''
+		)
 	);
+	
+	/**
+	 * Model contructor. Initializes the validation error messages with i18n
+	 *
+	 * @see Model::__construct
+	 */
 	function __construct($id = false, $table = null, $ds = null) {
-			$this->validate['name']['Error.empty']['message'] = __('The name can not be empty',true);
-			$this->validate['description']['Error.empty']['message'] = __('The description can not be empty',true);
-			parent::__construct($id,$table,$ds);
+		$this->setErrorMessage(
+			'name.required', __('Please write the name of the Department',true)
+		);
+		$this->setErrorMessage(
+			'description.required', __('Please write a description for the Department',true)
+		);
+		parent::__construct($id,$table,$ds);
 	}
 }
 ?>

@@ -33,6 +33,11 @@ class Member extends AppModel {
 	var $name = 'Member';
 	var $displayField = 'full_name';
 
+	/**
+	 * Validation Rules for Fields
+	 *
+	 * @var array
+	 **/
 	var $validate = array(
 		'full_name' => array(
 			'required' => array(
@@ -71,17 +76,28 @@ class Member extends AppModel {
 		)
 	);
 
+	/**
+	 * HasAndBelongsToMany (N-N) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $hasAndBelongsToMany = array(
+		// Member HasAndBelongsToMany Course (Member enrollments in courses)
 		'Course' => array(
-			'className' => 'Course',
-			'joinTable' => 'courses_members',
-			'foreignKey' => 'member_id',
-			'associationForeignKey' => 'course_id',
-			'with' => 'Enrollment',
-			'unique' => true
+			'className'				=> 'Course',
+			'joinTable'				=> 'courses_members',
+			'foreignKey'			=> 'member_id',
+			'associationForeignKey'	=> 'course_id',
+			'with'					=> 'Enrollment',
+			'unique'				=> true
 		)
 	);
-	
+
+	/**
+	 * Model contructor. Initializes the validation error messages with i18n
+	 *
+	 * @see Model::__construct
+	 */
     function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
 			'full_name.required',
@@ -113,8 +129,13 @@ class Member extends AppModel {
 		);
 		parent::__construct($id, $table, $ds);
     }
-    
 
+	/**
+	 * Returns the courses that a member is enrolled in
+	 *
+	 * @param mixed $id ID or array of Id's of members
+	 * @return mixed data on success, false otherwise
+	 */
 	function courses($id) {
 		$ids = $this->Enrollment->find('all',
 			array(
@@ -134,7 +155,15 @@ class Member extends AppModel {
 		);
 		return $courses;
 	}
-	
+
+	/**
+	 * Determines if a member is online
+	 *
+	 * @param string $id ID of the member
+	 * @return mixed data of the member or false on failure
+	 * @todo Not really in use, MemberController::online could.
+	 * @deprecated Not really in user
+	 */
 	function isOnline($id) {
 		$timeout = time() - (Security::inactiveMins() * Configure::read('Session.timeout'));
 		return $this->find('first', array('conditions' => array('id' => $id, 'last_seen' => '< ' . $timeout )));
@@ -162,7 +191,13 @@ class Member extends AppModel {
 	function isAdmin($username) {
 		return $this->field('admin', compact('username'));
 	}
-	
+
+	/**
+	 * Returns the members enrolled in a course
+	 *
+	 * @param string $course_id Id of the course_id
+	 * @return array members enrolled
+	 */
 	function members($course_id) {
 		$members = $this->Enrollment->find('all', array(
 			'conditions'=> array('course_id' => $course_id),
@@ -170,16 +205,24 @@ class Member extends AppModel {
 		));
 		return Set::extract('/Enrollment/member_id', $members);
 	}
-	
-	function role($id,$course) {
+
+	/**
+	 * Returns the role of the Member in a course
+	 *
+	 * @param string $id ID of the member
+	 * @param string $course ID of the course
+	 * @return string role name
+	 */
+	function role($id, $course) {
 		$this->Enrollment->bind('Role');
-		$enrollment = $this->Enrollment->find('first', array('conditions' => array('course_id' => $course, 'member_id' => $id)));
+		$conditions = array('course_id' => $course, 'member_id' => $id);
+		// TODO: use Model::field instead
+		$enrollment = $this->Enrollment->find('first', compact('conditions'));
 		
 		if (!empty($enrollment))
 			return $enrollment['Role']['role'];
 			
 		return 'Member';
-	}
-		
+	}		
 }
 ?>

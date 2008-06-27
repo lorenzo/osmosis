@@ -35,6 +35,12 @@
 class Course extends AppModel {
 
 	var $name = 'Course';
+
+	/**
+	 * Validation Rules for Fields
+	 *
+	 * @var array
+	 **/
 	var $validate = array(
 		'department_id' => array(
 		    'empty' => array(
