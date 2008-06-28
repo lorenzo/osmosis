@@ -13,6 +13,20 @@
 		<?php
 			endif;
 		?>
+		<?php
+			if (!empty($Osmosis['active_member'])) :
+		?>
+		<li>
+			<?php
+				echo $html->link(
+					$Osmosis['active_member']['full_name'],
+					array('plugin' => null, 'controller' => 'members', 'action' => 'view', 'admin' => false, $Osmosis['active_member']['id'])
+				);
+			?>
+		</li>
+		<?php
+			endif
+		?>
 		<li>
 			<?php
 				if (!empty($Osmosis['active_member'])) {
