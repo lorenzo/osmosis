@@ -54,7 +54,7 @@ class ModelLog extends AppModel {
 	);
 
 	/**
-	 * Extensión de la función find para admitir find('log',...)
+	 * Override to support find('log') on this model
 	 *
 	 * @see Model::find 
 	 * @see ModelLog::_findLog
