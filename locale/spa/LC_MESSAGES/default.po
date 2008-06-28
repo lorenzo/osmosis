@@ -87,39 +87,39 @@ msgstr "El curso no pudo ser guardado. Por favor, intente de nuevo"
 
 #: /controllers/courses_controller.php:168
 msgid "Course %s deleted"
-msgstr "Curso %s eliminado"
+msgstr "Curso %s eliminado."
 
 #: /controllers/courses_controller.php:223
 msgid "You have been already enrolled in this course"
-msgstr "Usted ya está inscrito en este curso"
+msgstr "Usted ya está inscrito en este curso."
 
 #: /controllers/courses_controller.php:226
 msgid "You have been enrolled"
-msgstr "Usted ha sido inscrito"
+msgstr "Usted ha sido inscrito."
 
 #: /controllers/courses_controller.php:230
 msgid "Enrollment failed"
-msgstr "Inscripción fallida"
+msgstr "Inscripción fallida."
 
 #: /controllers/courses_controller.php:247
 msgid "The Tool has been added"
-msgstr "La herramienta ha sido agregada"
+msgstr "La herramienta ha sido agregada."
 
 #: /controllers/courses_controller.php:249
 msgid "The could not be added"
-msgstr "La herramienta no pudo ser agregada"
+msgstr "La herramienta no pudo ser agregada."
 
 #: /controllers/courses_controller.php:254
 msgid "The Tool has been removed"
-msgstr "La herramienta ha sido eliminada"
+msgstr "La herramienta ha sido eliminada."
 
 #: /controllers/courses_controller.php:256
 msgid "The Tool could not be removed"
-msgstr "La herramienta no pudo ser eliminada"
+msgstr "La herramienta no pudo ser eliminada."
 
 #: /controllers/departments_controller.php:67;102;127
 msgid "Invalid Department"
-msgstr "Departamento no válido"
+msgstr "Departamento no válido."
 
 #: /controllers/departments_controller.php:85;107
 msgid "The Department has been saved"
@@ -135,19 +135,19 @@ msgstr "Departamento %s eliminado."
 
 #: /controllers/members_controller.php:62
 msgid "Invalid Member."
-msgstr ""
+msgstr "Miembro no válido."
 
 #: /controllers/members_controller.php:78;103
 msgid "The Member has been saved"
-msgstr ""
+msgstr "El miembro ha sido guardado."
 
 #: /controllers/members_controller.php:81;106
 msgid "The Member could not be saved. Please, try again."
-msgstr ""
+msgstr "El miembro no pudo ser guardado. Por favor, intente de nuevo."
 
 #: /controllers/members_controller.php:98
 msgid "Invalid Member"
-msgstr ""
+msgstr "Miembro no válido."
 
 #: /controllers/members_controller.php:123
 msgid "Invalid id for Member"
@@ -155,7 +155,7 @@ msgstr ""
 
 #: /controllers/members_controller.php:127
 msgid "Member deleted"
-msgstr ""
+msgstr "Miembro eliminado."
 
 #: /controllers/plugins_controller.php:54;77
 msgid "Invalid Plugin."
@@ -1290,7 +1290,7 @@ msgstr "Listar foros"
 #: /plugins/forum/views/subjects/index.ctp:68
 #: /plugins/forum/views/subjects/view.ctp:48
 msgid "New Forum"
-msgstr "Nuevo foro"
+msgstr "Nuevo Foro"
 
 #: /plugins/forum/views/subjects/edit.ctp:4
 #: /plugins/forum/views/subjects/view.ctp:43
@@ -2308,7 +2308,7 @@ msgstr "El archivo Scorm no pudo ser descomprimido."
 
 #: /plugins/scorm/controllers/scorms_controller.php:111
 msgid "The Scorm file could not be parsed."
-msgstr "El archivo no es un archivo de Scorm correcto"
+msgstr "El archivo indicado no es un archivo de Scorm correcto."
 
 #: /plugins/scorm/controllers/scorms_controller.php:117
 msgid "The Scorm has not a right version"
@@ -2882,7 +2882,7 @@ msgstr "Agregar Página"
 
 #: /plugins/wiki/views/entries/edit.ctp:5
 msgid "Edit Entry"
-msgstr "Editar página"
+msgstr "Editar Página"
 
 #: /plugins/wiki/views/entries/index.ctp:2
 msgid "Entries"
@@ -2943,7 +2943,7 @@ msgstr "Listar cursos"
 #: /views/departments/admin_view.ctp:28;73 /views/plugins/admin_add.ctp:18
 #: /views/plugins/admin_edit.ctp:20 /views/plugins/admin_view.ctp:33;78
 msgid "New Course"
-msgstr "Nuevo curso"
+msgstr "Nuevo Curso"
 
 #: /plugins/wiki/views/wikis/add.ctp:18 /plugins/wiki/views/wikis/edit.ctp:20
 #: /plugins/wiki/views/wikis/index.ctp:57
@@ -2953,7 +2953,7 @@ msgstr "Listar páginas"
 #: /plugins/wiki/views/wikis/add.ctp:19 /plugins/wiki/views/wikis/edit.ctp:21
 #: /plugins/wiki/views/wikis/index.ctp:58 /plugins/wiki/views/wikis/view.ctp:5
 msgid "New Entry"
-msgstr "Nueva página"
+msgstr "Nueva Página"
 
 #: /plugins/wiki/views/wikis/edit.ctp:4
 msgid "Edit Wiki"
@@ -2994,7 +2994,7 @@ msgstr "Listar departamentos"
 #: /views/courses/admin_index.ctp:68 /views/departments/admin_index.ctp:66
 #: /views/departments/admin_view.ctp:26
 msgid "New Department"
-msgstr "Nuevo departamento"
+msgstr "Nuevo Departamento"
 
 #: /views/courses/admin_add.ctp:21 /views/courses/admin_edit.ctp:23
 #: /views/courses/admin_index.ctp:70
@@ -3003,7 +3003,7 @@ msgstr "Nuevo dueño"
 
 #: /views/courses/admin_edit.ctp:4
 msgid "Edit Course"
-msgstr "Editar curso"
+msgstr "Editar Curso"
 
 #: /views/courses/admin_index.ctp:2 /views/courses/edit.ctp:19
 #: /views/departments/add.ctp:15 /views/departments/edit.ctp:17
@@ -3800,3 +3800,147 @@ msgstr "El contenido de esta pregunta no puede ser vacío."
 #: /plugins/scorm/config/description.php:33
 msgid "Lessons"
 msgstr "SCORM"
+
+#: /app_controller.php:110
+msgid "Login or password incorrect"
+msgstr "Nombre de usuario o contraseña no válido."
+
+#: /controllers/plugins_controller.php:81
+msgid "Plugin installed"
+msgstr "El plugin ha sido instalado."
+
+#: /controllers/plugins_controller.php:95
+msgid "The Plugin has been uninstalled"
+msgstr "El plugin ha sido desinstalado."
+
+#: /controllers/plugins_controller.php:97
+msgid "The Plugin could not be uninstalled"
+msgstr "El plugin no pudo ser instalado."
+
+#: /controllers/plugins_controller.php:160
+msgid "Plugin activated"
+msgstr "Plugin activado."
+
+#: /controllers/plugins_controller.php:162
+msgid "Unable to activate the plugin"
+msgstr "Imposible activar el plugin"
+
+#: /controllers/plugins_controller.php:171
+msgid "Plugin deactivated"
+msgstr "Plugin desactivado."
+
+#: /controllers/plugins_controller.php:173
+msgid "Unable to deactivate plugin"
+msgstr ""
+
+#: /models/department.php:83
+msgid "Please write the name of the Department"
+msgstr "Por favor, indique el nombre del departamento."
+
+#: /models/department.php:86
+msgid "Please write a description for the Department"
+msgstr "Por favor, indique la descripción del departamento."
+
+#: /plugins/agenda/config/description.php:2
+msgid "A calendar tool for organizing events by date and tags"
+msgstr "Calendario que le permite organizar eventos por día y palabras claves."
+
+#: /plugins/blog/controllers/comments_controller.php:44
+msgid "Invalid Comment"
+msgstr "Comentario no válido."
+
+#: /plugins/forum/controllers/responses_controller.php:79
+msgid "The Response could not be saved. Please, try again"
+msgstr "La respuesta no pudo ser guardada. Por favor, intente de nuevo."
+
+#: /plugins/forum/controllers/topics_controller.php:47;56
+msgid "Invalid Topic"
+msgstr "Tópico no válido."
+
+#: /plugins/locker/config/description.php:32
+msgid "A file manager and sharing tool for each member."
+msgstr ""
+
+#: /plugins/locker/controllers/documents_controller.php:180
+msgid "The file was dropped correctly"
+msgstr ""
+
+#: /plugins/locker/controllers/documents_controller.php:183
+msgid "The file could not be saved. Please, try again."
+msgstr "El archivo no pudo ser guardado. Por favor, intente de nuevo."
+
+#: /plugins/locker/models/locker_document.php:110
+msgid "The Member ID is invalid"
+msgstr ""
+
+#: /plugins/quiz/config/description.php:32
+msgid "Create Quizzes the easy way"
+msgstr ""
+
+#: /plugins/quiz/controllers/quizzes_controller.php:179
+msgid "You have completed the Quiz."
+msgstr "El quiz ha sido completado."
+
+#: /plugins/scorm/controllers/scorms_controller.php:111
+msgid "The Scorm file could not be unzipped"
+msgstr "El archivo Scorm no pudo ser descomprimido."
+
+#: /plugins/scorm/controllers/scorms_controller.php:119
+msgid "The Scorm file could not be parsed"
+msgstr "El archivo indicado no es un archivo de Scorm correcto."
+
+#: /plugins/scorm/controllers/scorms_controller.php:125
+msgid "The Scorm doesn't have the right version"
+msgstr "El archivo Scorm no tiene una versión correcta."
+
+#: /plugins/wiki/controllers/revisions_controller.php:63
+msgid "Invalid Revision"
+msgstr "Revisión no válida."
+
+#: /plugins/wiki/controllers/wikis_controller.php:60
+msgid "The wiki for this course could not be found"
+msgstr "No se encontró un wiki para este curso."
+
+#: /plugins/wiki/controllers/wikis_controller.php:81;98
+msgid "The Wiki could not be saved. Please, try again"
+msgstr "El Wiki no pudo ser guardado. Por favor, intente de nuevo."
+
+#: /plugins/wiki/models/wiki.php:107
+msgid "No Course ID set"
+msgstr ""
+
+#: /plugins/wiki/models/wiki.php:110
+msgid "Please set the wikis name"
+msgstr "Por favor, indique el nombre del wiki."
+
+#: /plugins/wiki/models/wiki.php:137
+msgid "Main Page"
+msgstr "Página principal"
+
+#: /plugins/wiki/models/wiki.php:138
+msgid "<p>Wellcome to the wiki, start by editing this page!</p>"
+msgstr "<p>Bienvenido al wiki, puede comenzar editando esta página</p>"
+
+#: /plugins/wiki/views/wikis/view.ctp:8
+msgid "Recent changes"
+msgstr "Cambios recientes"
+
+#: /views/courses/tools.ctp:2
+msgid "Available Tools"
+msgstr "Herramientas disponibles"
+
+#: /views/courses/tools.ctp:25 /views/elements/plugin_box.ctp:18
+msgid "This plugin has no description."
+msgstr "Este plugin no tiene descripción."
+
+#: /views/members/admin_add.ctp:16
+msgid "Institutional Information"
+msgstr "Información Institucional"
+
+#: /views/members/admin_add.ctp:18
+msgid "Institution ID"
+msgstr ""
+
+#: /plugins/wiki/models/entry.php:135
+msgid "Please write a content for this entry"
+msgstr "Por favor, indique el contenido de esta página."

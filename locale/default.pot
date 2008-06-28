@@ -1,58 +1,57 @@
 # LANGUAGE translation of CakePHP Application
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  Revision: 453 /osmosis/app_controller.php
-#  Revision: 435 /osmosis/plugins/locker/controllers/folders_controller.php
-#  Revision: 396 /osmosis/app_model.php
-#  Revision: 412 /osmosis/controllers/courses_controller.php
-#  Revision: 323 /osmosis/controllers/departments_controller.php
-#  Revision: 453 /osmosis/controllers/members_controller.php
-#  Revision: 323 /osmosis/controllers/plugins_controller.php
-#  Revision: 453 /osmosis/models/course.php
-#  Revision: 323 /osmosis/models/department.php
-#  Revision: 403 /osmosis/plugins/forum/models/topic.php
-#  Revision: 446 /osmosis/plugins/quiz/models/quiz.php
-#  Revision: 393 /osmosis/models/member.php
+#  Revision: 472 /osmosis/app_controller.php
+#  Revision: 463 /osmosis/plugins/locker/controllers/folders_controller.php
+#  Revision: 483 /osmosis/app_model.php
+#  Revision: 476 /osmosis/controllers/courses_controller.php
+#  Revision: 463 /osmosis/controllers/departments_controller.php
+#  Revision: 463 /osmosis/controllers/members_controller.php
+#  Revision: 476 /osmosis/controllers/plugins_controller.php
+#  Revision: 468 /osmosis/models/course.php
+#  Revision: 468 /osmosis/models/department.php
+#  Revision: 468 /osmosis/models/member.php
 #  Revision: 323 /osmosis/models/behaviors/bindable.php
-#  Revision: 438 /osmosis/plugins/locker/controllers/installer_controller.php
-#  Revision: 364 /osmosis/plugins/wiki/controllers/installer_controller.php
-#  Revision: 323 /osmosis/plugins/blog/config/description.php
-#  Revision: 446 /osmosis/plugins/blog/controllers/blogs_controller.php
-#  Revision: 446 /osmosis/plugins/blog/controllers/posts_controller.php
-#  Revision: 410 /osmosis/plugins/blog/controllers/comments_controller.php
-#  Revision: 446 /osmosis/plugins/blog/models/comment.php
-#  Revision: 446 /osmosis/plugins/blog/models/post.php
+#  Revision: 463 /osmosis/plugins/blog/config/description.php
+#  Revision: 483 /osmosis/plugins/blog/controllers/blogs_controller.php
+#  Revision: 483 /osmosis/plugins/blog/controllers/posts_controller.php
+#  Revision: 463 /osmosis/plugins/blog/controllers/comments_controller.php
+#  Revision: 469 /osmosis/plugins/blog/models/comment.php
+#  Revision: 483 /osmosis/plugins/blog/models/post.php
 #  Revision: 393 /osmosis/plugins/chat/controllers/messages_controller.php
-#  Revision: 323 /osmosis/plugins/forum/config/description.php
-#  Revision: 399 /osmosis/plugins/forum/controllers/discussions_controller.php
-#  Revision: 396 /osmosis/plugins/forum/controllers/responses_controller.php
+#  Revision: 454 /osmosis/plugins/forum/config/description.php
+#  Revision: 463 /osmosis/plugins/forum/controllers/discussions_controller.php
+#  Revision: 463 /osmosis/plugins/forum/controllers/responses_controller.php
 #  Revision: 403 /osmosis/plugins/forum/models/response.php
-#  Revision: 323 /osmosis/plugins/forum/controllers/topics_controller.php
-#  Revision: 404 /osmosis/plugins/forum/models/discussion.php
-#  Revision: 438 /osmosis/plugins/locker/config/description.php
-#  Revision: 449 /osmosis/plugins/locker/controllers/documents_controller.php
-#  Revision: 432 /osmosis/plugins/locker/models/locker_document.php
-#  Revision: 439 /osmosis/plugins/locker/models/locker_folder.php
-#  Revision: 335 /osmosis/plugins/quiz/config/description.php
-#  Revision: 413 /osmosis/plugins/quiz/controllers/choice_questions_controller.php
-#  Revision: 413 /osmosis/plugins/quiz/controllers/matching_questions_controller.php
-#  Revision: 413 /osmosis/plugins/quiz/controllers/ordering_questions_controller.php
-#  Revision: 413 /osmosis/plugins/quiz/controllers/quizzes_controller.php
-#  Revision: 413 /osmosis/plugins/quiz/controllers/text_questions_controller.php
+#  Revision: 463 /osmosis/plugins/forum/controllers/topics_controller.php
+#  Revision: 469 /osmosis/plugins/forum/models/discussion.php
+#  Revision: 466 /osmosis/plugins/wiki/models/entry.php
+#  Revision: 403 /osmosis/plugins/forum/models/topic.php
+#  Revision: 458 /osmosis/plugins/quiz/models/quiz.php
+#  Revision: 463 /osmosis/plugins/locker/config/description.php
+#  Revision: 484 /osmosis/plugins/locker/controllers/documents_controller.php
+#  Revision: 476 /osmosis/plugins/locker/models/locker_document.php
+#  Revision: 474 /osmosis/plugins/locker/models/locker_folder.php
+#  Revision: 454 /osmosis/plugins/quiz/config/description.php
+#  Revision: 482 /osmosis/plugins/quiz/controllers/choice_questions_controller.php
+#  Revision: 482 /osmosis/plugins/quiz/controllers/matching_questions_controller.php
+#  Revision: 482 /osmosis/plugins/quiz/controllers/ordering_questions_controller.php
+#  Revision: 482 /osmosis/plugins/quiz/controllers/quizzes_controller.php
+#  Revision: 482 /osmosis/plugins/quiz/controllers/text_questions_controller.php
 #  Revision: 323 /osmosis/plugins/quiz/models/choice_choice.php
 #  Revision: 395 /osmosis/plugins/quiz/models/matching_choice.php
 #  Revision: 323 /osmosis/plugins/quiz/models/ordering_choice.php
 #  Revision: 395 /osmosis/plugins/quiz/models/choice_question.php
-#  Revision: 395 /osmosis/plugins/quiz/models/matching_question.php
-#  Revision: 408 /osmosis/plugins/quiz/models/ordering_question.php
+#  Revision: 458 /osmosis/plugins/quiz/models/matching_question.php
+#  Revision: 458 /osmosis/plugins/quiz/models/ordering_question.php
 #  Revision: 452 /osmosis/plugins/quiz/models/text_question.php
-#  Revision: 323 /osmosis/plugins/scorm/config/description.php
-#  Revision: 416 /osmosis/plugins/scorm/controllers/scorms_controller.php
-#  Revision: 323 /osmosis/plugins/scorm/controllers/scos_controller.php
-#  Revision: 323 /osmosis/plugins/wiki/config/description.php
-#  Revision: 423 /osmosis/plugins/wiki/controllers/entries_controller.php
-#  Revision: 410 /osmosis/plugins/wiki/controllers/wikis_controller.php
-#  Revision: 323 /osmosis/plugins/wiki/controllers/revisions_controller.php
+#  Revision: 454 /osmosis/plugins/scorm/config/description.php
+#  Revision: 472 /osmosis/plugins/scorm/controllers/scorms_controller.php
+#  Revision: 454 /osmosis/plugins/wiki/config/description.php
+#  Revision: 466 /osmosis/plugins/wiki/models/wiki.php
+#  Revision: 466 /osmosis/plugins/wiki/controllers/entries_controller.php
+#  Revision: 466 /osmosis/plugins/wiki/controllers/wikis_controller.php
+#  Revision: 463 /osmosis/plugins/wiki/controllers/revisions_controller.php
 #  Revision: 323 /osmosis/webroot/css.php
 #  Revision: 323 /osmosis/webroot/test.php
 #
@@ -60,7 +59,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2008-06-26 12:20-0430\n"
+"POT-Creation-Date: 2008-06-28 15:13-0430\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -69,11 +68,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /app_controller.php:164
+#: /app_controller.php:110
+msgid "Login or password incorrect"
+msgstr ""
+
+#: /app_controller.php:165
 msgid "Invalid access"
 msgstr ""
 
-#: /app_controller.php:298
+#: /app_controller.php:299
 #: /plugins/locker/controllers/folders_controller.php:134
 msgid "Invalid Access"
 msgstr ""
@@ -110,35 +113,35 @@ msgstr ""
 msgid "Enrollment failed"
 msgstr ""
 
-#: /controllers/courses_controller.php:247
+#: /controllers/courses_controller.php:245
 msgid "The Tool has been added"
 msgstr ""
 
-#: /controllers/courses_controller.php:249
+#: /controllers/courses_controller.php:247
 msgid "The could not be added"
 msgstr ""
 
-#: /controllers/courses_controller.php:254
+#: /controllers/courses_controller.php:252
 msgid "The Tool has been removed"
 msgstr ""
 
-#: /controllers/courses_controller.php:256
+#: /controllers/courses_controller.php:254
 msgid "The Tool could not be removed"
 msgstr ""
 
-#: /controllers/departments_controller.php:67;102;127
+#: /controllers/departments_controller.php:66;97;120
 msgid "Invalid Department"
 msgstr ""
 
-#: /controllers/departments_controller.php:85;107
+#: /controllers/departments_controller.php:82;102
 msgid "The Department has been saved"
 msgstr ""
 
-#: /controllers/departments_controller.php:88;110
+#: /controllers/departments_controller.php:85;105
 msgid "The Department could not be saved. Please, try again."
 msgstr ""
 
-#: /controllers/departments_controller.php:131
+#: /controllers/departments_controller.php:124
 msgid "Department %s deleted"
 msgstr ""
 
@@ -166,101 +169,131 @@ msgstr ""
 msgid "Member deleted"
 msgstr ""
 
-#: /controllers/plugins_controller.php:54;77
+#: /controllers/plugins_controller.php:55;105
 msgid "Invalid Plugin."
 msgstr ""
 
-#: /controllers/plugins_controller.php:58
+#: /controllers/plugins_controller.php:60
 msgid "Plugin already Installed."
 msgstr ""
 
-#: /controllers/plugins_controller.php:68
-msgid "Plugin Instaled."
+#: /controllers/plugins_controller.php:70
+msgid "An error occurred while setting plugin permissions"
 msgstr ""
 
-#: /controllers/plugins_controller.php:70
+#: /controllers/plugins_controller.php:73
+msgid "An error occurred while installing the plugin"
+msgstr ""
+
+#: /controllers/plugins_controller.php:76
 msgid "An error ocurred while installing the plugin. Try again"
 msgstr ""
 
-#: /controllers/plugins_controller.php:87;104
+#: /controllers/plugins_controller.php:81
+msgid "Plugin installed"
+msgstr ""
+
+#: /controllers/plugins_controller.php:95
+msgid "The Plugin has been uninstalled"
+msgstr ""
+
+#: /controllers/plugins_controller.php:97
+msgid "The Plugin could not be uninstalled"
+msgstr ""
+
+#: /controllers/plugins_controller.php:115;132
 msgid "The Plugin has been saved"
 msgstr ""
 
-#: /controllers/plugins_controller.php:90;107
+#: /controllers/plugins_controller.php:118;135
 msgid "The Plugin could not be saved. Please, try again."
 msgstr ""
 
-#: /controllers/plugins_controller.php:99
+#: /controllers/plugins_controller.php:127
 msgid "Invalid Plugin"
 msgstr ""
 
-#: /controllers/plugins_controller.php:119
+#: /controllers/plugins_controller.php:147
 msgid "Invalid id for Plugin"
 msgstr ""
 
-#: /controllers/plugins_controller.php:123
+#: /controllers/plugins_controller.php:151
 msgid "Plugin deleted"
 msgstr ""
 
-#: /models/course.php:129
+#: /controllers/plugins_controller.php:160
+msgid "Plugin activated"
+msgstr ""
+
+#: /controllers/plugins_controller.php:162
+msgid "Unable to activate the plugin"
+msgstr ""
+
+#: /controllers/plugins_controller.php:171
+msgid "Plugin deactivated"
+msgstr ""
+
+#: /controllers/plugins_controller.php:173
+msgid "Unable to deactivate plugin"
+msgstr ""
+
+#: /models/course.php:135
 msgid "Please select a departement"
 msgstr ""
 
-#: /models/course.php:133
+#: /models/course.php:139
 msgid "Please set the course owner"
 msgstr ""
 
-#: /models/course.php:137
+#: /models/course.php:143
 msgid "The length of this field should be less than 10"
 msgstr ""
 
-#: /models/course.php:141
+#: /models/course.php:147
 msgid "Please write the Course name"
 msgstr ""
 
-#: /models/course.php:145
+#: /models/course.php:151
 msgid "The lenght of the name should be lees than 150"
 msgstr ""
 
-#: /models/course.php:149
+#: /models/course.php:155
 msgid "Please write the course description"
 msgstr ""
 
-#: /models/department.php:62
-#: /plugins/forum/models/topic.php:114
-#: /plugins/quiz/models/quiz.php:87
-msgid "The name can not be empty"
+#: /models/department.php:83
+msgid "Please write the name of the Department"
 msgstr ""
 
-#: /models/department.php:63
-msgid "The description can not be empty"
-msgstr ""
-
-#: /models/member.php:88
-msgid "Please write your full name"
-msgstr ""
-
-#: /models/member.php:92
-msgid "Please write a valid email address"
-msgstr ""
-
-#: /models/member.php:96
-msgid "Please write your email address"
-msgstr ""
-
-#: /models/member.php:100
-msgid "Please write your username"
+#: /models/department.php:86
+msgid "Please write a description for the Department"
 msgstr ""
 
 #: /models/member.php:104
-msgid "This username is taken"
+msgid "Please write your full name"
 msgstr ""
 
 #: /models/member.php:108
-msgid "The password and its confirmation do not match"
+msgid "Please write a valid email address"
 msgstr ""
 
 #: /models/member.php:112
+msgid "Please write your email address"
+msgstr ""
+
+#: /models/member.php:116
+msgid "Please write your username"
+msgstr ""
+
+#: /models/member.php:120
+msgid "This username is taken"
+msgstr ""
+
+#: /models/member.php:124
+msgid "The password and its confirmation do not match"
+msgstr ""
+
+#: /models/member.php:128
 msgid "Please confirm the password"
 msgstr ""
 
@@ -268,12 +301,16 @@ msgstr ""
 msgid "%s.%s is not a valid binding"
 msgstr ""
 
+#: /plugins/agenda/config/description.php:2
+msgid "A calendar tool for organizing events by date and tags"
+msgstr ""
+
 #: /plugins/agenda/config/description.php:3
 msgid "Schedule"
 msgstr ""
 
-#: /plugins/agenda/controllers/events_controller.php:23
-msgid "Invalid Event."
+#: /plugins/agenda/controllers/events_controller.php:23;49
+msgid "Invalid Event"
 msgstr ""
 
 #: /plugins/agenda/controllers/events_controller.php:36;54
@@ -284,30 +321,12 @@ msgstr ""
 msgid "The Event could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/agenda/controllers/events_controller.php:49
-msgid "Invalid Event"
-msgstr ""
-
 #: /plugins/agenda/controllers/events_controller.php:70
 msgid "Invalid id for Event"
 msgstr ""
 
 #: /plugins/agenda/controllers/events_controller.php:74
 msgid "Event deleted"
-msgstr ""
-
-#: /plugins/agenda/controllers/installer_controller.php:17
-#: /plugins/blog/controllers/installer_controller.php:19
-#: /plugins/chat/controllers/installer_controller.php:17
-#: /plugins/forum/controllers/installer_controller.php:19
-#: /plugins/locker/controllers/installer_controller.php:50
-#: /plugins/quiz/controllers/installer_controller.php:17
-#: /plugins/wiki/controllers/installer_controller.php:49
-msgid "An error occurred while installing the plugin"
-msgstr ""
-
-#: /plugins/agenda/controllers/installer_controller.php:19
-msgid "Plugin Agenda installed"
 msgstr ""
 
 #: /plugins/agenda/views/events/add.ctp:4;14
@@ -366,7 +385,6 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/view.ctp:4;46;84
 #: /plugins/quiz/views/quizzes/view.ctp:4;31;73;115;153;195;238
 #: /plugins/quiz/views/text_questions/view.ctp:4;41
-#: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:4
 #: /views/departments/admin_view.ctp:4;36
 #: /views/members/admin_view.ctp:4
 #: /views/plugins/admin_view.ctp:4;41
@@ -378,7 +396,7 @@ msgid "Date"
 msgstr ""
 
 #: /plugins/agenda/views/events/view.ctp:14
-#: /views/members/admin_add.ctp:16
+#: /views/members/admin_add.ctp:22
 msgid "Location"
 msgstr ""
 
@@ -424,9 +442,6 @@ msgstr ""
 #: /plugins/quiz/views/text_questions/edit.ctp:17
 #: /plugins/quiz/views/text_questions/index.ctp:41
 #: /plugins/quiz/views/text_questions/view.ctp:29;59
-#: /plugins/scorm/views/scorm_attendee_trackings/edit.ctp:18
-#: /plugins/scorm/views/scorm_attendee_trackings/index.ctp:49
-#: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:39
 #: /plugins/wiki/views/entries/index.ctp:50
 #: /plugins/wiki/views/wikis/edit.ctp:16
 #: /plugins/wiki/views/wikis/index.ctp:41
@@ -459,8 +474,9 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: /plugins/blog/controllers/blogs_controller.php:49
-msgid "Invalid Blog."
+#: /plugins/blog/controllers/blogs_controller.php:49;81
+#: /plugins/blog/controllers/posts_controller.php:64
+msgid "Invalid Blog"
 msgstr ""
 
 #: /plugins/blog/controllers/blogs_controller.php:71;86
@@ -469,11 +485,6 @@ msgstr ""
 
 #: /plugins/blog/controllers/blogs_controller.php:74;89
 msgid "The Blog could not be saved. Please, try again."
-msgstr ""
-
-#: /plugins/blog/controllers/blogs_controller.php:81
-#: /plugins/blog/controllers/posts_controller.php:40
-msgid "Invalid Blog"
 msgstr ""
 
 #: /plugins/blog/controllers/blogs_controller.php:99
@@ -485,11 +496,11 @@ msgid "Blog deleted"
 msgstr ""
 
 #: /plugins/blog/controllers/comments_controller.php:44
-msgid "Invalid Comment."
+msgid "Invalid Comment"
 msgstr ""
 
 #: /plugins/blog/controllers/comments_controller.php:52
-#: /plugins/blog/controllers/posts_controller.php:70
+#: /plugins/blog/controllers/posts_controller.php:94
 msgid "Invalid Post"
 msgstr ""
 
@@ -509,30 +520,19 @@ msgstr ""
 msgid "Comment deleted"
 msgstr ""
 
-#: /plugins/blog/controllers/installer_controller.php:17
-#: /plugins/forum/controllers/installer_controller.php:17
-#: /plugins/locker/controllers/installer_controller.php:48
-#: /plugins/wiki/controllers/installer_controller.php:47
-msgid "An error occurred while setting plugin permissions"
-msgstr ""
-
-#: /plugins/blog/controllers/installer_controller.php:21
-msgid "Plugin Blog installed"
-msgstr ""
-
-#: /plugins/blog/controllers/posts_controller.php:54;76
+#: /plugins/blog/controllers/posts_controller.php:78;100
 msgid "The Post has been saved"
 msgstr ""
 
-#: /plugins/blog/controllers/posts_controller.php:57;79
+#: /plugins/blog/controllers/posts_controller.php:81;103
 msgid "The Post could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/blog/controllers/posts_controller.php:89
+#: /plugins/blog/controllers/posts_controller.php:113
 msgid "Invalid id for Post"
 msgstr ""
 
-#: /plugins/blog/controllers/posts_controller.php:96
+#: /plugins/blog/controllers/posts_controller.php:120
 msgid "Post deleted"
 msgstr ""
 
@@ -582,34 +582,10 @@ msgstr ""
 #: /plugins/quiz/views/matching_questions/edit.ctp:14
 #: /plugins/quiz/views/ordering_questions/add.ctp:63
 #: /plugins/quiz/views/ordering_questions/edit.ctp:14
-#: /plugins/quiz/views/quizzes/add.ctp:9
+#: /plugins/quiz/views/quizzes/add.ctp:10
 #: /plugins/quiz/views/text_questions/edit.ctp:13
-#: /plugins/scorm/views/conditions/add.ctp:13
-#: /plugins/scorm/views/conditions/edit.ctp:14
-#: /plugins/scorm/views/control_modes/add.ctp:15
-#: /plugins/scorm/views/control_modes/edit.ctp:16
-#: /plugins/scorm/views/delivery_controls/add.ctp:12
-#: /plugins/scorm/views/delivery_controls/edit.ctp:13
-#: /plugins/scorm/views/map_infos/add.ctp:12
-#: /plugins/scorm/views/map_infos/edit.ctp:12
-#: /plugins/scorm/views/objectives/add.ctp:13
-#: /plugins/scorm/views/objectives/edit.ctp:14
-#: /plugins/scorm/views/randomizations/add.ctp:13
-#: /plugins/scorm/views/randomizations/edit.ctp:14
-#: /plugins/scorm/views/rollup_considerations/add.ctp:14
-#: /plugins/scorm/views/rollup_considerations/edit.ctp:15
-#: /plugins/scorm/views/rollups/add.ctp:12
-#: /plugins/scorm/views/rollups/edit.ctp:13
-#: /plugins/scorm/views/rules/add.ctp:15
-#: /plugins/scorm/views/rules/edit.ctp:16
-#: /plugins/scorm/views/sco_presentations/add.ctp:10
-#: /plugins/scorm/views/sco_presentations/edit.ctp:11
-#: /plugins/scorm/views/scorm_attendee_trackings/add.ctp:13
-#: /plugins/scorm/views/scorm_attendee_trackings/edit.ctp:14
 #: /plugins/scorm/views/scorms/add.ctp:17
-#: /plugins/scorm/views/scorms/edit.ctp:15
-#: /plugins/scorm/views/scos/add.ctp:22
-#: /plugins/scorm/views/scos/edit.ctp:23
+#: /plugins/scorm/views/scorms/edit.ctp:11
 #: /plugins/wiki/views/wikis/add.ctp:11
 #: /plugins/wiki/views/wikis/edit.ctp:12
 #: /views/courses/add.ctp:12
@@ -621,7 +597,7 @@ msgstr ""
 #: /views/departments/admin_edit.ctp:11
 #: /views/departments/edit.ctp:11
 #: /views/members/add.ctp:19
-#: /views/members/admin_add.ctp:34
+#: /views/members/admin_add.ctp:38
 #: /views/members/admin_edit.ctp:20
 #: /views/members/edit.ctp:20
 #: /views/plugins/admin_add.ctp:12
@@ -666,44 +642,6 @@ msgstr ""
 #: /plugins/quiz/views/text_questions/edit.ctp:17
 #: /plugins/quiz/views/text_questions/index.ctp:41
 #: /plugins/quiz/views/text_questions/view.ctp:59
-#: /plugins/scorm/views/conditions/edit.ctp:18
-#: /plugins/scorm/views/conditions/index.ctp:43
-#: /plugins/scorm/views/conditions/view.ctp:39
-#: /plugins/scorm/views/control_modes/edit.ctp:20
-#: /plugins/scorm/views/control_modes/index.ctp:51
-#: /plugins/scorm/views/control_modes/view.ctp:49
-#: /plugins/scorm/views/delivery_controls/edit.ctp:17
-#: /plugins/scorm/views/delivery_controls/index.ctp:39
-#: /plugins/scorm/views/delivery_controls/view.ctp:34
-#: /plugins/scorm/views/map_infos/edit.ctp:16
-#: /plugins/scorm/views/map_infos/index.ctp:23
-#: /plugins/scorm/views/map_infos/view.ctp:11
-#: /plugins/scorm/views/objectives/edit.ctp:18
-#: /plugins/scorm/views/objectives/index.ctp:43
-#: /plugins/scorm/views/objectives/view.ctp:39
-#: /plugins/scorm/views/randomizations/edit.ctp:18
-#: /plugins/scorm/views/randomizations/index.ctp:43
-#: /plugins/scorm/views/randomizations/view.ctp:39
-#: /plugins/scorm/views/rollup_considerations/edit.ctp:19
-#: /plugins/scorm/views/rollup_considerations/index.ctp:47
-#: /plugins/scorm/views/rollup_considerations/view.ctp:44
-#: /plugins/scorm/views/rollups/edit.ctp:17
-#: /plugins/scorm/views/rollups/index.ctp:39
-#: /plugins/scorm/views/rollups/view.ctp:34;76
-#: /plugins/scorm/views/rules/edit.ctp:20
-#: /plugins/scorm/views/rules/index.ctp:51
-#: /plugins/scorm/views/rules/view.ctp:49;87
-#: /plugins/scorm/views/sco_presentations/edit.ctp:15
-#: /plugins/scorm/views/sco_presentations/index.ctp:31
-#: /plugins/scorm/views/sco_presentations/view.ctp:24
-#: /plugins/scorm/views/scorm_attendee_trackings/edit.ctp:18
-#: /plugins/scorm/views/scorm_attendee_trackings/index.ctp:49
-#: /plugins/scorm/views/scorms/edit.ctp:19
-#: /plugins/scorm/views/scorms/index.ctp:55
-#: /plugins/scorm/views/scorms/index2.ctp:55
-#: /plugins/scorm/views/scos/edit.ctp:27
-#: /plugins/scorm/views/scos/index.ctp:79
-#: /plugins/scorm/views/scos/view.ctp:84;388;432;480;518
 #: /plugins/wiki/views/entries/index.ctp:50
 #: /plugins/wiki/views/wikis/edit.ctp:16
 #: /plugins/wiki/views/wikis/index.ctp:41
@@ -754,7 +692,6 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/index.ctp:6
 #: /plugins/quiz/views/quizzes/index.ctp:6
 #: /plugins/quiz/views/text_questions/index.ctp:6
-#: /plugins/scorm/views/scorm_attendee_trackings/index.ctp:6
 #: /plugins/wiki/views/entries/index.ctp:6
 #: /plugins/wiki/views/wikis/index.ctp:6
 #: /views/courses/admin_index.ctp:6
@@ -780,23 +717,6 @@ msgstr ""
 #: /plugins/quiz/views/quizzes/view.ctp:36;78;118;158;200;242
 #: /plugins/quiz/views/text_questions/index.ctp:15
 #: /plugins/quiz/views/text_questions/view.ctp:43
-#: /plugins/scorm/views/conditions/index.ctp:11
-#: /plugins/scorm/views/control_modes/index.ctp:13
-#: /plugins/scorm/views/delivery_controls/index.ctp:10
-#: /plugins/scorm/views/map_infos/index.ctp:7
-#: /plugins/scorm/views/objectives/index.ctp:11
-#: /plugins/scorm/views/randomizations/index.ctp:11
-#: /plugins/scorm/views/rollup_considerations/index.ctp:12
-#: /plugins/scorm/views/rollups/index.ctp:10
-#: /plugins/scorm/views/rollups/view.ctp:54
-#: /plugins/scorm/views/rules/index.ctp:13
-#: /plugins/scorm/views/rules/view.ctp:67
-#: /plugins/scorm/views/sco_presentations/index.ctp:8
-#: /plugins/scorm/views/scorm_attendee_trackings/index.ctp:17
-#: /plugins/scorm/views/scorms/index.ctp:14
-#: /plugins/scorm/views/scorms/index2.ctp:14
-#: /plugins/scorm/views/scos/index.ctp:20
-#: /plugins/scorm/views/scos/view.ctp:359;412;458;501
 #: /plugins/wiki/views/entries/index.ctp:17
 #: /plugins/wiki/views/wikis/index.ctp:15
 #: /views/courses/admin_index.ctp:18
@@ -824,23 +744,6 @@ msgstr ""
 #: /plugins/quiz/views/quizzes/view.ctp:53;95;133;175;217;258
 #: /plugins/quiz/views/text_questions/index.ctp:39
 #: /plugins/quiz/views/text_questions/view.ctp:57
-#: /plugins/scorm/views/conditions/index.ctp:41
-#: /plugins/scorm/views/control_modes/index.ctp:49
-#: /plugins/scorm/views/delivery_controls/index.ctp:37
-#: /plugins/scorm/views/map_infos/index.ctp:21
-#: /plugins/scorm/views/objectives/index.ctp:41
-#: /plugins/scorm/views/randomizations/index.ctp:41
-#: /plugins/scorm/views/rollup_considerations/index.ctp:45
-#: /plugins/scorm/views/rollups/index.ctp:37
-#: /plugins/scorm/views/rollups/view.ctp:74
-#: /plugins/scorm/views/rules/index.ctp:49
-#: /plugins/scorm/views/rules/view.ctp:85
-#: /plugins/scorm/views/sco_presentations/index.ctp:29
-#: /plugins/scorm/views/scorm_attendee_trackings/index.ctp:47
-#: /plugins/scorm/views/scorms/index.ctp:53
-#: /plugins/scorm/views/scorms/index2.ctp:53
-#: /plugins/scorm/views/scos/index.ctp:77
-#: /plugins/scorm/views/scos/view.ctp:386;430;478;516
 #: /plugins/wiki/views/entries/index.ctp:47
 #: /plugins/wiki/views/wikis/index.ctp:39
 #: /views/courses/admin_index.ctp:51
@@ -871,46 +774,10 @@ msgstr ""
 #: /plugins/quiz/views/quizzes/view.ctp:54;96;134;176;218;259
 #: /plugins/quiz/views/text_questions/index.ctp:40
 #: /plugins/quiz/views/text_questions/view.ctp:58
-#: /plugins/scorm/views/conditions/edit.ctp:4
-#: /plugins/scorm/views/conditions/index.ctp:42
-#: /plugins/scorm/views/conditions/view.ctp:38
-#: /plugins/scorm/views/control_modes/edit.ctp:4
-#: /plugins/scorm/views/control_modes/index.ctp:50
-#: /plugins/scorm/views/control_modes/view.ctp:48
-#: /plugins/scorm/views/delivery_controls/edit.ctp:4
-#: /plugins/scorm/views/delivery_controls/index.ctp:38
-#: /plugins/scorm/views/delivery_controls/view.ctp:33
-#: /plugins/scorm/views/map_infos/edit.ctp:4
-#: /plugins/scorm/views/map_infos/index.ctp:22
-#: /plugins/scorm/views/map_infos/view.ctp:10
-#: /plugins/scorm/views/objectives/edit.ctp:4
-#: /plugins/scorm/views/objectives/index.ctp:42
-#: /plugins/scorm/views/objectives/view.ctp:38;62
-#: /plugins/scorm/views/randomizations/edit.ctp:4
-#: /plugins/scorm/views/randomizations/index.ctp:42
-#: /plugins/scorm/views/randomizations/view.ctp:38
-#: /plugins/scorm/views/rollup_considerations/edit.ctp:4
-#: /plugins/scorm/views/rollup_considerations/index.ctp:46
-#: /plugins/scorm/views/rollup_considerations/view.ctp:43
-#: /plugins/scorm/views/rollups/edit.ctp:4
-#: /plugins/scorm/views/rollups/index.ctp:38
-#: /plugins/scorm/views/rollups/view.ctp:33;75
-#: /plugins/scorm/views/rules/edit.ctp:4
-#: /plugins/scorm/views/rules/index.ctp:50
-#: /plugins/scorm/views/rules/view.ctp:48;86
-#: /plugins/scorm/views/sco_presentations/edit.ctp:4
-#: /plugins/scorm/views/sco_presentations/index.ctp:30
-#: /plugins/scorm/views/sco_presentations/view.ctp:23
-#: /plugins/scorm/views/scorm_attendee_trackings/index.ctp:48
 #: /plugins/scorm/views/scorms/edit.ctp:4
-#: /plugins/scorm/views/scorms/index.ctp:54
-#: /plugins/scorm/views/scorms/index2.ctp:54
-#: /plugins/scorm/views/scos/edit.ctp:4
-#: /plugins/scorm/views/scos/index.ctp:78
-#: /plugins/scorm/views/scos/view.ctp:83;123;159;191;219;259;303;335;387;431;479;517
 #: /plugins/wiki/views/entries/index.ctp:49
 #: /plugins/wiki/views/wikis/index.ctp:40
-#: /plugins/wiki/views/wikis/view.ctp:33
+#: /plugins/wiki/views/wikis/view.ctp:46
 #: /views/courses/admin_index.ctp:52
 #: /views/departments/admin_index.ctp:43
 #: /views/departments/admin_view.ctp:63
@@ -931,20 +798,6 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/index.ctp:52
 #: /plugins/quiz/views/quizzes/index.ctp:37
 #: /plugins/quiz/views/text_questions/index.ctp:48
-#: /plugins/scorm/views/conditions/index.ctp:50
-#: /plugins/scorm/views/control_modes/index.ctp:58
-#: /plugins/scorm/views/delivery_controls/index.ctp:46
-#: /plugins/scorm/views/map_infos/index.ctp:30
-#: /plugins/scorm/views/objectives/index.ctp:50
-#: /plugins/scorm/views/randomizations/index.ctp:50
-#: /plugins/scorm/views/rollup_considerations/index.ctp:54
-#: /plugins/scorm/views/rollups/index.ctp:46
-#: /plugins/scorm/views/rules/index.ctp:58
-#: /plugins/scorm/views/sco_presentations/index.ctp:38
-#: /plugins/scorm/views/scorm_attendee_trackings/index.ctp:56
-#: /plugins/scorm/views/scorms/index.ctp:62
-#: /plugins/scorm/views/scorms/index2.ctp:62
-#: /plugins/scorm/views/scos/index.ctp:86
 #: /plugins/wiki/views/entries/index.ctp:57
 #: /plugins/wiki/views/revisions/history.ctp:43
 #: /plugins/wiki/views/wikis/index.ctp:48
@@ -968,20 +821,6 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/index.ctp:54
 #: /plugins/quiz/views/quizzes/index.ctp:39
 #: /plugins/quiz/views/text_questions/index.ctp:50
-#: /plugins/scorm/views/conditions/index.ctp:52
-#: /plugins/scorm/views/control_modes/index.ctp:60
-#: /plugins/scorm/views/delivery_controls/index.ctp:48
-#: /plugins/scorm/views/map_infos/index.ctp:32
-#: /plugins/scorm/views/objectives/index.ctp:52
-#: /plugins/scorm/views/randomizations/index.ctp:52
-#: /plugins/scorm/views/rollup_considerations/index.ctp:56
-#: /plugins/scorm/views/rollups/index.ctp:48
-#: /plugins/scorm/views/rules/index.ctp:60
-#: /plugins/scorm/views/sco_presentations/index.ctp:40
-#: /plugins/scorm/views/scorm_attendee_trackings/index.ctp:58
-#: /plugins/scorm/views/scorms/index.ctp:64
-#: /plugins/scorm/views/scorms/index2.ctp:64
-#: /plugins/scorm/views/scos/index.ctp:88
 #: /plugins/wiki/views/entries/index.ctp:59
 #: /plugins/wiki/views/revisions/history.ctp:45
 #: /plugins/wiki/views/wikis/index.ctp:50
@@ -1099,10 +938,6 @@ msgstr ""
 msgid "No comments yet"
 msgstr ""
 
-#: /plugins/chat/controllers/installer_controller.php:19
-msgid "Plugin Chat installed"
-msgstr ""
-
 #: /plugins/chat/controllers/messages_controller.php:43
 msgid "The message could not be delivered"
 msgstr ""
@@ -1139,10 +974,6 @@ msgstr ""
 msgid "This discussion is locked, you cannot edit it anymore."
 msgstr ""
 
-#: /plugins/forum/controllers/installer_controller.php:21
-msgid "Plugin Forum installed"
-msgstr ""
-
 #: /plugins/forum/controllers/responses_controller.php:52;70
 msgid "The Response has been saved"
 msgstr ""
@@ -1153,11 +984,11 @@ msgid "Please write a response"
 msgstr ""
 
 #: /plugins/forum/controllers/responses_controller.php:79
-msgid "The Response could not be saved. Please, try again."
+msgid "The Response could not be saved. Please, try again"
 msgstr ""
 
 #: /plugins/forum/controllers/topics_controller.php:47;56
-msgid "Invalid Topic."
+msgid "Invalid Topic"
 msgstr ""
 
 #: /plugins/forum/controllers/topics_controller.php:66;79
@@ -1181,11 +1012,17 @@ msgid "Topic deleted"
 msgstr ""
 
 #: /plugins/forum/models/discussion.php:120
+#: /plugins/wiki/models/entry.php:132
 msgid "Please set a title"
 msgstr ""
 
 #: /plugins/forum/models/discussion.php:123
 msgid "Incorrect status"
+msgstr ""
+
+#: /plugins/forum/models/topic.php:114
+#: /plugins/quiz/models/quiz.php:87
+msgid "The name can not be empty"
 msgstr ""
 
 #: /plugins/forum/views/discussions/add.ctp:4
@@ -1481,6 +1318,7 @@ msgid "Topic"
 msgstr ""
 
 #: /plugins/forum/views/topics/index.ctp:54
+#: /plugins/wiki/views/elements/entry_title.ctp:7
 #: /plugins/wiki/views/entries/view.ctp:4
 msgid "edit"
 msgstr ""
@@ -1529,37 +1367,45 @@ msgstr ""
 msgid "No discussions registered yet"
 msgstr ""
 
-#: /plugins/locker/config/description.php:34
+#: /plugins/locker/config/description.php:32
+msgid "A file manager and sharing tool for each member."
+msgstr ""
+
+#: /plugins/locker/config/description.php:33
 #: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:2
 msgid "Locker"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:45
-msgid "Invalid LockerDocument."
-msgstr ""
-
-#: /plugins/locker/controllers/documents_controller.php:64;81
-msgid "The LockerDocument has been saved"
-msgstr ""
-
-#: /plugins/locker/controllers/documents_controller.php:67;85
-msgid "The LockerDocument could not be saved. Please, try again."
-msgstr ""
-
-#: /plugins/locker/controllers/documents_controller.php:76
+#: /plugins/locker/controllers/documents_controller.php:45;97
 msgid "Invalid LockerDocument"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:95
+#: /plugins/locker/controllers/documents_controller.php:62;102
+msgid "The LockerDocument has been saved"
+msgstr ""
+
+#: /plugins/locker/controllers/documents_controller.php:65;106
+msgid "The LockerDocument could not be saved. Please, try again."
+msgstr ""
+
+#: /plugins/locker/controllers/documents_controller.php:116
 msgid "Invalid id for LockerDocument"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:99
+#: /plugins/locker/controllers/documents_controller.php:120
 msgid "LockerDocument deleted"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:106;112
+#: /plugins/locker/controllers/documents_controller.php:127;133
 msgid "Invalid Document"
+msgstr ""
+
+#: /plugins/locker/controllers/documents_controller.php:180
+msgid "The file was dropped correctly"
+msgstr ""
+
+#: /plugins/locker/controllers/documents_controller.php:183
+msgid "The file could not be saved. Please, try again."
 msgstr ""
 
 #: /plugins/locker/controllers/folders_controller.php:47
@@ -1604,20 +1450,20 @@ msgstr ""
 msgid "The %s could not be moved"
 msgstr ""
 
-#: /plugins/locker/controllers/installer_controller.php:52
-msgid "Plugin Locker installed"
-msgstr ""
-
-#: /plugins/locker/models/locker_document.php:95
+#: /plugins/locker/models/locker_document.php:101
 msgid "Please write a name for this file"
 msgstr ""
 
-#: /plugins/locker/models/locker_document.php:98
+#: /plugins/locker/models/locker_document.php:104
 msgid "Please limit the name to a maximum of 30 characters"
 msgstr ""
 
-#: /plugins/locker/models/locker_document.php:101
+#: /plugins/locker/models/locker_document.php:107
 msgid "The file is incorrect"
+msgstr ""
+
+#: /plugins/locker/models/locker_document.php:110
+msgid "The Member ID is invalid"
 msgstr ""
 
 #: /plugins/locker/models/locker_folder.php:145
@@ -1703,11 +1549,11 @@ msgstr ""
 msgid "These are the Documents sent to you by other members."
 msgstr ""
 
-#: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:8
+#: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:9
 msgid "Go to your dropbox"
 msgstr ""
 
-#: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:36
+#: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:44
 msgid "Go to your locker"
 msgstr ""
 
@@ -1743,11 +1589,14 @@ msgstr ""
 msgid "View this Folder's Content"
 msgstr ""
 
+#: /plugins/quiz/config/description.php:32
+msgid "Create Quizzes the easy way"
+msgstr ""
+
 #: /plugins/quiz/config/description.php:33
 #: /plugins/quiz/views/choice_questions/view.ctp:80
 #: /plugins/quiz/views/matching_questions/view.ctp:82
 #: /plugins/quiz/views/ordering_questions/view.ctp:80
-#: /plugins/quiz/views/quizzes/add.ctp:13
 #: /plugins/quiz/views/quizzes/index.ctp:2
 #: /plugins/quiz/views/quizzes/rename.ctp:13
 #: /plugins/quiz/views/quizzes/view.ctp:20
@@ -1757,79 +1606,64 @@ msgstr ""
 msgid "Quizzes"
 msgstr ""
 
-#: /plugins/quiz/controllers/choice_questions_controller.php:44
-msgid "Invalid Choice Question."
-msgstr ""
-
-#: /plugins/quiz/controllers/choice_questions_controller.php:65;119
-msgid "The Choice Question has been saved"
-msgstr ""
-
-#: /plugins/quiz/controllers/choice_questions_controller.php:70;123
-msgid "The Choice Question could not be saved. Please, try again."
-msgstr ""
-
-#: /plugins/quiz/controllers/choice_questions_controller.php:106
+#: /plugins/quiz/controllers/choice_questions_controller.php:55;118
 msgid "Invalid Choice Question"
 msgstr ""
 
-#: /plugins/quiz/controllers/choice_questions_controller.php:136
+#: /plugins/quiz/controllers/choice_questions_controller.php:76;131
+#: /plugins/quiz/controllers/matching_questions_controller.php:87
+msgid "The Choice Question has been saved"
+msgstr ""
+
+#: /plugins/quiz/controllers/choice_questions_controller.php:81;135
+msgid "The Choice Question could not be saved. Please, try again."
+msgstr ""
+
+#: /plugins/quiz/controllers/choice_questions_controller.php:148
 msgid "Invalid id for Choice Question"
 msgstr ""
 
-#: /plugins/quiz/controllers/choice_questions_controller.php:140
+#: /plugins/quiz/controllers/choice_questions_controller.php:152
 msgid "Choice Question deleted"
 msgstr ""
 
-#: /plugins/quiz/controllers/installer_controller.php:19
-msgid "Plugin Quiz installed"
-msgstr ""
-
-#: /plugins/quiz/controllers/matching_questions_controller.php:44
-msgid "Invalid Matching Question."
-msgstr ""
-
-#: /plugins/quiz/controllers/matching_questions_controller.php:70;137
-msgid "The Matching Question has been saved"
-msgstr ""
-
-#: /plugins/quiz/controllers/matching_questions_controller.php:75;140
-msgid "The Matching Question could not be saved. Please, try again."
-msgstr ""
-
-#: /plugins/quiz/controllers/matching_questions_controller.php:131
+#: /plugins/quiz/controllers/matching_questions_controller.php:55;147
 msgid "Invalid Matching Question"
 msgstr ""
 
-#: /plugins/quiz/controllers/matching_questions_controller.php:152
+#: /plugins/quiz/controllers/matching_questions_controller.php:91;156
+msgid "The Matching Question could not be saved. Please, try again."
+msgstr ""
+
+#: /plugins/quiz/controllers/matching_questions_controller.php:153
+msgid "The Matching Question has been saved"
+msgstr ""
+
+#: /plugins/quiz/controllers/matching_questions_controller.php:168
 msgid "Invalid id for Matching Question"
 msgstr ""
 
-#: /plugins/quiz/controllers/matching_questions_controller.php:156
+#: /plugins/quiz/controllers/matching_questions_controller.php:172
 msgid "Matching Question deleted"
 msgstr ""
 
-#: /plugins/quiz/controllers/ordering_questions_controller.php:44
-msgid "Invalid Ordering Question."
-msgstr ""
-
-#: /plugins/quiz/controllers/ordering_questions_controller.php:64;110
-msgid "The Ordering Question has been saved"
-msgstr ""
-
-#: /plugins/quiz/controllers/ordering_questions_controller.php:71;113
-msgid "The Ordering Question could not be saved. Please, try again."
-msgstr ""
-
-#: /plugins/quiz/controllers/ordering_questions_controller.php:105
+#: /plugins/quiz/controllers/ordering_questions_controller.php:55;116
 msgid "Invalid Ordering Question"
 msgstr ""
 
-#: /plugins/quiz/controllers/ordering_questions_controller.php:125
+#: /plugins/quiz/controllers/ordering_questions_controller.php:75;121
+msgid "The Ordering Question has been saved"
+msgstr ""
+
+#: /plugins/quiz/controllers/ordering_questions_controller.php:82;124
+msgid "The Ordering Question could not be saved. Please, try again."
+msgstr ""
+
+#: /plugins/quiz/controllers/ordering_questions_controller.php:136
 msgid "Invalid id for Ordering Question"
 msgstr ""
 
-#: /plugins/quiz/controllers/ordering_questions_controller.php:129
+#: /plugins/quiz/controllers/ordering_questions_controller.php:140
 msgid "Ordering Question deleted"
 msgstr ""
 
@@ -1854,71 +1688,67 @@ msgstr ""
 msgid "Text Question"
 msgstr ""
 
-#: /plugins/quiz/controllers/quizzes_controller.php:61
-msgid "Invalid Quiz."
-msgstr ""
-
-#: /plugins/quiz/controllers/quizzes_controller.php:71;125
-msgid "The Quiz has been saved"
-msgstr ""
-
-#: /plugins/quiz/controllers/quizzes_controller.php:74;128
-msgid "The Quiz could not be saved. Please, try again."
-msgstr ""
-
-#: /plugins/quiz/controllers/quizzes_controller.php:81;120;138;159
+#: /plugins/quiz/controllers/quizzes_controller.php:72;94;134;152;173
 msgid "Invalid Quiz"
 msgstr ""
 
-#: /plugins/quiz/controllers/quizzes_controller.php:109
+#: /plugins/quiz/controllers/quizzes_controller.php:83;139
+msgid "The Quiz has been saved"
+msgstr ""
+
+#: /plugins/quiz/controllers/quizzes_controller.php:86;142
+msgid "The Quiz could not be saved. Please, try again."
+msgstr ""
+
+#: /plugins/quiz/controllers/quizzes_controller.php:123
 msgid "Invalid id for Quiz"
 msgstr ""
 
-#: /plugins/quiz/controllers/quizzes_controller.php:113
+#: /plugins/quiz/controllers/quizzes_controller.php:127
 msgid "Quiz deleted"
 msgstr ""
 
-#: /plugins/quiz/controllers/quizzes_controller.php:144
+#: /plugins/quiz/controllers/quizzes_controller.php:158
 msgid "The questions where added to the quiz."
 msgstr ""
 
-#: /plugins/quiz/controllers/quizzes_controller.php:149
+#: /plugins/quiz/controllers/quizzes_controller.php:163
 msgid "The questions could not be added to the quiz."
 msgstr ""
 
-#: /plugins/quiz/controllers/text_questions_controller.php:44
-msgid "Invalid Text Question."
+#: /plugins/quiz/controllers/quizzes_controller.php:179
+msgid "You have completed the Quiz."
 msgstr ""
 
-#: /plugins/quiz/controllers/text_questions_controller.php:62;91
-msgid "The Text Question has been saved"
-msgstr ""
-
-#: /plugins/quiz/controllers/text_questions_controller.php:66;94
-msgid "The Text Question could not be saved. Please, try again."
-msgstr ""
-
-#: /plugins/quiz/controllers/text_questions_controller.php:73
-msgid "No format"
-msgstr ""
-
-#: /plugins/quiz/controllers/text_questions_controller.php:74
-msgid "Preserve original format"
-msgstr ""
-
-#: /plugins/quiz/controllers/text_questions_controller.php:75
-msgid "Enriched text"
-msgstr ""
-
-#: /plugins/quiz/controllers/text_questions_controller.php:85
+#: /plugins/quiz/controllers/text_questions_controller.php:55;96
 msgid "Invalid Text Question"
 msgstr ""
 
-#: /plugins/quiz/controllers/text_questions_controller.php:106
+#: /plugins/quiz/controllers/text_questions_controller.php:73;102
+msgid "The Text Question has been saved"
+msgstr ""
+
+#: /plugins/quiz/controllers/text_questions_controller.php:77;105
+msgid "The Text Question could not be saved. Please, try again."
+msgstr ""
+
+#: /plugins/quiz/controllers/text_questions_controller.php:84
+msgid "No format"
+msgstr ""
+
+#: /plugins/quiz/controllers/text_questions_controller.php:85
+msgid "Preserve original format"
+msgstr ""
+
+#: /plugins/quiz/controllers/text_questions_controller.php:86
+msgid "Enriched text"
+msgstr ""
+
+#: /plugins/quiz/controllers/text_questions_controller.php:117
 msgid "Invalid id for Text Question"
 msgstr ""
 
-#: /plugins/quiz/controllers/text_questions_controller.php:110
+#: /plugins/quiz/controllers/text_questions_controller.php:121
 msgid "Text Question deleted"
 msgstr ""
 
@@ -1959,7 +1789,7 @@ msgid "The number of correct answers is not enough compared to Min Choices"
 msgstr ""
 
 #: /plugins/quiz/models/choice_question.php:142
-#: /plugins/quiz/models/ordering_question.php:145
+#: /plugins/quiz/models/ordering_question.php:146
 msgid "This position is repeated"
 msgstr ""
 
@@ -2059,8 +1889,6 @@ msgstr ""
 #: /plugins/quiz/views/quizzes/view.ctp:18
 #: /plugins/quiz/views/text_questions/edit.ctp:4
 #: /plugins/quiz/views/text_questions/view.ctp:28
-#: /plugins/scorm/views/scorm_attendee_trackings/edit.ctp:4
-#: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:38
 #: /views/courses/edit.ctp:4
 #: /views/departments/edit.ctp:4
 #: /views/members/edit.ctp:4
@@ -2114,16 +1942,11 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/edit.ctp:19;20
 #: /plugins/quiz/views/ordering_questions/index.ctp:59
 #: /plugins/quiz/views/ordering_questions/view.ctp:35;37
-#: /plugins/quiz/views/quizzes/add.ctp:13
-#: /plugins/quiz/views/quizzes/index.ctp:44
 #: /plugins/quiz/views/quizzes/rename.ctp:13
 #: /plugins/quiz/views/quizzes/view.ctp:20;22
 #: /plugins/quiz/views/text_questions/edit.ctp:18;19
 #: /plugins/quiz/views/text_questions/index.ctp:55
 #: /plugins/quiz/views/text_questions/view.ctp:30;32
-#: /plugins/scorm/views/scorm_attendee_trackings/add.ctp:17
-#: /plugins/scorm/views/scorm_attendee_trackings/edit.ctp:19
-#: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:40
 #: /views/courses/edit.ctp:19;20;22
 #: /views/departments/add.ctp:14;15
 #: /views/departments/edit.ctp:16;17
@@ -2155,13 +1978,11 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/edit.ctp:21
 #: /plugins/quiz/views/ordering_questions/index.ctp:58;60
 #: /plugins/quiz/views/ordering_questions/view.ctp:36;38;75;111
-#: /plugins/quiz/views/quizzes/index.ctp:43;45
+#: /plugins/quiz/views/quizzes/index.ctp:43
 #: /plugins/quiz/views/quizzes/view.ctp:21;23;64;106;144;186;227;267
 #: /plugins/quiz/views/text_questions/edit.ctp:20
 #: /plugins/quiz/views/text_questions/index.ctp:54;56
 #: /plugins/quiz/views/text_questions/view.ctp:31;33;68
-#: /plugins/scorm/views/scorm_attendee_trackings/index.ctp:62
-#: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:41
 #: /views/courses/edit.ctp:21;23
 #: /views/departments/add.ctp:16
 #: /views/departments/edit.ctp:18
@@ -2209,7 +2030,6 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/view.ctp:34
 #: /plugins/quiz/views/quizzes/view.ctp:19
 #: /plugins/quiz/views/text_questions/view.ctp:29
-#: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:39
 #: /views/members/view.ctp:49
 msgid "Delete %s"
 msgstr ""
@@ -2247,7 +2067,7 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: /plugins/quiz/views/elements/question_drop_list.ctp:39
+#: /plugins/quiz/views/elements/question_drop_list.ctp:40
 #: /plugins/quiz/views/quizzes/edit.ctp:17
 msgid "create one"
 msgstr ""
@@ -2407,7 +2227,6 @@ msgid "Ordering Question Id"
 msgstr ""
 
 #: /plugins/quiz/views/quizzes/add.ctp:4
-#: /plugins/scorm/views/scorm_attendee_trackings/add.ctp:4
 #: /views/courses/add.ctp:4
 #: /views/departments/add.ctp:4
 #: /views/members/add.ctp:4
@@ -2434,22 +2253,20 @@ msgstr ""
 msgid "Change name"
 msgstr ""
 
-#: /plugins/quiz/views/quizzes/index.ctp:44
-#: /plugins/quiz/views/quizzes/view.ctp:22;27
-msgid "Association Questions"
-msgstr ""
-
-#: /plugins/quiz/views/quizzes/index.ctp:45
-#: /plugins/quiz/views/quizzes/view.ctp:23;64
-msgid "Association Question"
-msgstr ""
-
 #: /plugins/quiz/views/quizzes/rename.ctp:4
 msgid "Rename %s"
 msgstr ""
 
 #: /plugins/quiz/views/quizzes/rename.ctp:9
 msgid "Rename"
+msgstr ""
+
+#: /plugins/quiz/views/quizzes/view.ctp:22;27
+msgid "Association Questions"
+msgstr ""
+
+#: /plugins/quiz/views/quizzes/view.ctp:23;64
+msgid "Association Question"
 msgstr ""
 
 #: /plugins/quiz/views/quizzes/view.ctp:69
@@ -2502,438 +2319,56 @@ msgid "TextQuestions"
 msgstr ""
 
 #: /plugins/scorm/config/description.php:33
+#: /plugins/scorm/views/scorms/index.ctp:2
 msgid "Lessons"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:102
-msgid "The Scorm file could not be unzipped."
+#: /plugins/scorm/controllers/scorms_controller.php:111
+msgid "The Scorm file could not be unzipped"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:110
-msgid "The Scorm file could not be parsed."
+#: /plugins/scorm/controllers/scorms_controller.php:119
+msgid "The Scorm file could not be parsed"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:116
-msgid "The Scorm has not a right version"
+#: /plugins/scorm/controllers/scorms_controller.php:125
+msgid "The Scorm doesn't have the right version"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:120
+#: /plugins/scorm/controllers/scorms_controller.php:128
 msgid "The Scorm has been saved"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:124
+#: /plugins/scorm/controllers/scorms_controller.php:135
 msgid "The Scorm could not be uploaded. Please, try again."
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:131
+#: /plugins/scorm/controllers/scorms_controller.php:143
 msgid "Invalid Scorm"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:137
+#: /plugins/scorm/controllers/scorms_controller.php:148
 msgid "The Scorm saved"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:140
+#: /plugins/scorm/controllers/scorms_controller.php:151
 msgid "The Scorm could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:150
+#: /plugins/scorm/controllers/scorms_controller.php:161
 msgid "Invalid id for Scorm"
 msgstr ""
 
-#: /plugins/scorm/controllers/scos_controller.php:90
-msgid "The Sco has been saved"
+#: /plugins/scorm/views/layouts/default.ctp:43
+#: /views/layouts/default.ctp:43
+msgid "Tools"
 msgstr ""
 
-#: /plugins/scorm/controllers/scos_controller.php:93;109
-msgid "The Sco could not be saved. Please, try again."
-msgstr ""
-
-#: /plugins/scorm/controllers/scos_controller.php:100
-msgid "Invalid Sco"
-msgstr ""
-
-#: /plugins/scorm/controllers/scos_controller.php:106
-msgid "The Sco saved"
-msgstr ""
-
-#: /plugins/scorm/controllers/scos_controller.php:119
-msgid "Invalid id for Sco"
-msgstr ""
-
-#: /plugins/scorm/views/conditions/add.ctp:4
-#: /plugins/scorm/views/control_modes/add.ctp:4
-#: /plugins/scorm/views/delivery_controls/add.ctp:4
-#: /plugins/scorm/views/map_infos/add.ctp:4
-#: /plugins/scorm/views/objectives/add.ctp:4
-#: /plugins/scorm/views/randomizations/add.ctp:4
-#: /plugins/scorm/views/rollup_considerations/add.ctp:4
-#: /plugins/scorm/views/rollups/add.ctp:4
-#: /plugins/scorm/views/rules/add.ctp:4
-#: /plugins/scorm/views/sco_presentations/add.ctp:4
 #: /plugins/scorm/views/scorms/add.ctp:4
-#: /plugins/scorm/views/scos/add.ctp:4
 msgid "Add"
 msgstr ""
 
-#: /plugins/scorm/views/conditions/add.ctp:4
-#: /plugins/scorm/views/conditions/edit.ctp:4
-#: /plugins/scorm/views/conditions/index.ctp:56
-#: /plugins/scorm/views/conditions/view.ctp:2;38;39;41
-#: /plugins/scorm/views/rules/add.ctp:21
-#: /plugins/scorm/views/rules/edit.ctp:23
-#: /plugins/scorm/views/rules/index.ctp:66
-#: /plugins/scorm/views/rules/view.ctp:53;96
-msgid "Condition"
-msgstr ""
-
-#: /plugins/scorm/views/conditions/add.ctp:17;18
-#: /plugins/scorm/views/conditions/edit.ctp:19;20
-#: /plugins/scorm/views/conditions/index.ctp:57
-#: /plugins/scorm/views/conditions/view.ctp:40;42
-#: /plugins/scorm/views/control_modes/add.ctp:19
-#: /plugins/scorm/views/control_modes/edit.ctp:21
-#: /plugins/scorm/views/control_modes/view.ctp:50
-#: /plugins/scorm/views/delivery_controls/add.ctp:16
-#: /plugins/scorm/views/delivery_controls/edit.ctp:18
-#: /plugins/scorm/views/delivery_controls/view.ctp:35
-#: /plugins/scorm/views/map_infos/add.ctp:16
-#: /plugins/scorm/views/map_infos/edit.ctp:17
-#: /plugins/scorm/views/map_infos/view.ctp:12
-#: /plugins/scorm/views/objectives/add.ctp:17;18
-#: /plugins/scorm/views/objectives/edit.ctp:19;20
-#: /plugins/scorm/views/objectives/index.ctp:57
-#: /plugins/scorm/views/objectives/view.ctp:40;42
-#: /plugins/scorm/views/randomizations/add.ctp:17
-#: /plugins/scorm/views/randomizations/edit.ctp:19
-#: /plugins/scorm/views/randomizations/view.ctp:40
-#: /plugins/scorm/views/rollup_considerations/add.ctp:18
-#: /plugins/scorm/views/rollup_considerations/edit.ctp:20
-#: /plugins/scorm/views/rollup_considerations/view.ctp:45
-#: /plugins/scorm/views/rollups/add.ctp:16;17
-#: /plugins/scorm/views/rollups/edit.ctp:18;19
-#: /plugins/scorm/views/rollups/index.ctp:53
-#: /plugins/scorm/views/rollups/view.ctp:35;37
-#: /plugins/scorm/views/rules/add.ctp:19;20
-#: /plugins/scorm/views/rules/edit.ctp:21;22
-#: /plugins/scorm/views/rules/index.ctp:65
-#: /plugins/scorm/views/rules/view.ctp:50;52
-#: /plugins/scorm/views/sco_presentations/add.ctp:14
-#: /plugins/scorm/views/sco_presentations/edit.ctp:16
-#: /plugins/scorm/views/sco_presentations/view.ctp:25
-#: /plugins/scorm/views/scorms/add.ctp:21;22
-#: /plugins/scorm/views/scorms/edit.ctp:20;21
-#: /plugins/scorm/views/scorms/index.ctp:69
-#: /plugins/scorm/views/scorms/index2.ctp:69
-#: /plugins/scorm/views/scos/add.ctp:26;27
-#: /plugins/scorm/views/scos/edit.ctp:28;29
-#: /plugins/scorm/views/scos/index.ctp:93
-#: /plugins/scorm/views/scos/view.ctp:85;87
-msgid "List"
-msgstr ""
-
-#: /plugins/scorm/views/conditions/add.ctp:17
-#: /plugins/scorm/views/conditions/edit.ctp:19
-#: /plugins/scorm/views/conditions/index.ctp:2
-#: /plugins/scorm/views/conditions/view.ctp:40
-#: /plugins/scorm/views/rules/add.ctp:20
-#: /plugins/scorm/views/rules/edit.ctp:22
-#: /plugins/scorm/views/rules/index.ctp:65
-#: /plugins/scorm/views/rules/view.ctp:52;57
-msgid "Conditions"
-msgstr ""
-
-#: /plugins/scorm/views/conditions/add.ctp:18
-#: /plugins/scorm/views/conditions/edit.ctp:20
-#: /plugins/scorm/views/conditions/index.ctp:57
-#: /plugins/scorm/views/conditions/view.ctp:42
-#: /plugins/scorm/views/rollups/add.ctp:17
-#: /plugins/scorm/views/rollups/edit.ctp:19
-#: /plugins/scorm/views/rollups/index.ctp:53
-#: /plugins/scorm/views/rollups/view.ctp:37;42
-#: /plugins/scorm/views/rules/add.ctp:19
-#: /plugins/scorm/views/rules/edit.ctp:21
-#: /plugins/scorm/views/rules/index.ctp:2
-#: /plugins/scorm/views/rules/view.ctp:50
-#: /plugins/scorm/views/scos/view.ctp:446
-msgid "Rules"
-msgstr ""
-
-#: /plugins/scorm/views/conditions/add.ctp:19
-#: /plugins/scorm/views/conditions/edit.ctp:21
-#: /plugins/scorm/views/conditions/index.ctp:56;58
-#: /plugins/scorm/views/conditions/view.ctp:41;43
-#: /plugins/scorm/views/control_modes/index.ctp:64
-#: /plugins/scorm/views/control_modes/view.ctp:51
-#: /plugins/scorm/views/delivery_controls/index.ctp:52
-#: /plugins/scorm/views/delivery_controls/view.ctp:36
-#: /plugins/scorm/views/map_infos/index.ctp:36
-#: /plugins/scorm/views/map_infos/view.ctp:13
-#: /plugins/scorm/views/objectives/add.ctp:19
-#: /plugins/scorm/views/objectives/edit.ctp:21
-#: /plugins/scorm/views/objectives/index.ctp:56;58
-#: /plugins/scorm/views/objectives/view.ctp:41;43
-#: /plugins/scorm/views/randomizations/index.ctp:56
-#: /plugins/scorm/views/randomizations/view.ctp:41
-#: /plugins/scorm/views/rollup_considerations/index.ctp:60
-#: /plugins/scorm/views/rollup_considerations/view.ctp:46
-#: /plugins/scorm/views/rollups/add.ctp:18
-#: /plugins/scorm/views/rollups/edit.ctp:20
-#: /plugins/scorm/views/rollups/index.ctp:52;54
-#: /plugins/scorm/views/rollups/view.ctp:36;38;85
-#: /plugins/scorm/views/rules/add.ctp:21
-#: /plugins/scorm/views/rules/edit.ctp:23
-#: /plugins/scorm/views/rules/index.ctp:64;66
-#: /plugins/scorm/views/rules/view.ctp:51;53;96
-#: /plugins/scorm/views/sco_presentations/index.ctp:44
-#: /plugins/scorm/views/sco_presentations/view.ctp:26
-#: /plugins/scorm/views/scorms/add.ctp:23
-#: /plugins/scorm/views/scorms/edit.ctp:22
-#: /plugins/scorm/views/scorms/index.ctp:68;70
-#: /plugins/scorm/views/scorms/index2.ctp:68;70
-#: /plugins/scorm/views/scos/add.ctp:28
-#: /plugins/scorm/views/scos/edit.ctp:30
-#: /plugins/scorm/views/scos/index.ctp:92;94
-#: /plugins/scorm/views/scos/view.ctp:86;88;397;441;489;527
-msgid "New"
-msgstr ""
-
-#: /plugins/scorm/views/conditions/add.ctp:19
-#: /plugins/scorm/views/conditions/edit.ctp:21
-#: /plugins/scorm/views/conditions/index.ctp:58
-#: /plugins/scorm/views/conditions/view.ctp:43
-#: /plugins/scorm/views/rollups/add.ctp:18
-#: /plugins/scorm/views/rollups/edit.ctp:20
-#: /plugins/scorm/views/rollups/index.ctp:54
-#: /plugins/scorm/views/rollups/view.ctp:38;85
-#: /plugins/scorm/views/rules/add.ctp:4
-#: /plugins/scorm/views/rules/edit.ctp:4
-#: /plugins/scorm/views/rules/index.ctp:64
-#: /plugins/scorm/views/rules/view.ctp:2;48;49;51
-#: /plugins/scorm/views/scos/view.ctp:489
-msgid "Rule"
-msgstr ""
-
-#: /plugins/scorm/views/conditions/edit.ctp:18
-#: /plugins/scorm/views/conditions/index.ctp:43
-#: /plugins/scorm/views/conditions/view.ctp:39
-#: /plugins/scorm/views/control_modes/edit.ctp:20
-#: /plugins/scorm/views/control_modes/index.ctp:51
-#: /plugins/scorm/views/control_modes/view.ctp:49
-#: /plugins/scorm/views/delivery_controls/edit.ctp:17
-#: /plugins/scorm/views/delivery_controls/index.ctp:39
-#: /plugins/scorm/views/delivery_controls/view.ctp:34
-#: /plugins/scorm/views/map_infos/edit.ctp:16
-#: /plugins/scorm/views/map_infos/index.ctp:23
-#: /plugins/scorm/views/map_infos/view.ctp:11
-#: /plugins/scorm/views/objectives/edit.ctp:18
-#: /plugins/scorm/views/objectives/index.ctp:43
-#: /plugins/scorm/views/objectives/view.ctp:39
-#: /plugins/scorm/views/randomizations/edit.ctp:18
-#: /plugins/scorm/views/randomizations/index.ctp:43
-#: /plugins/scorm/views/randomizations/view.ctp:39
-#: /plugins/scorm/views/rollup_considerations/edit.ctp:19
-#: /plugins/scorm/views/rollup_considerations/index.ctp:47
-#: /plugins/scorm/views/rollup_considerations/view.ctp:44
-#: /plugins/scorm/views/rollups/edit.ctp:17
-#: /plugins/scorm/views/rollups/index.ctp:39
-#: /plugins/scorm/views/rollups/view.ctp:34;76
-#: /plugins/scorm/views/rules/edit.ctp:20
-#: /plugins/scorm/views/rules/index.ctp:51
-#: /plugins/scorm/views/rules/view.ctp:49;87
-#: /plugins/scorm/views/sco_presentations/edit.ctp:15
-#: /plugins/scorm/views/sco_presentations/index.ctp:31
-#: /plugins/scorm/views/sco_presentations/view.ctp:24
-#: /plugins/scorm/views/scorms/edit.ctp:19
-#: /plugins/scorm/views/scorms/index.ctp:55
-#: /plugins/scorm/views/scorms/index2.ctp:55
-#: /plugins/scorm/views/scos/edit.ctp:27
-#: /plugins/scorm/views/scos/index.ctp:79
-#: /plugins/scorm/views/scos/view.ctp:84;388;432;480;518
-msgid "Are you sure you want to delete"
-msgstr ""
-
-#: /plugins/scorm/views/control_modes/add.ctp:4
-#: /plugins/scorm/views/control_modes/edit.ctp:4
-#: /plugins/scorm/views/control_modes/index.ctp:64
-#: /plugins/scorm/views/control_modes/view.ctp:2;48;49;51
-msgid "ControlMode"
-msgstr ""
-
-#: /plugins/scorm/views/control_modes/add.ctp:19
-#: /plugins/scorm/views/control_modes/edit.ctp:21
-#: /plugins/scorm/views/control_modes/index.ctp:2
-#: /plugins/scorm/views/control_modes/view.ctp:50
-msgid "ControlModes"
-msgstr ""
-
-#: /plugins/scorm/views/delivery_controls/add.ctp:4
-#: /plugins/scorm/views/delivery_controls/edit.ctp:4
-#: /plugins/scorm/views/delivery_controls/index.ctp:52
-#: /plugins/scorm/views/delivery_controls/view.ctp:2;33;34;36
-msgid "DeliveryControl"
-msgstr ""
-
-#: /plugins/scorm/views/delivery_controls/add.ctp:16
-#: /plugins/scorm/views/delivery_controls/edit.ctp:18
-#: /plugins/scorm/views/delivery_controls/index.ctp:2
-#: /plugins/scorm/views/delivery_controls/view.ctp:35
-msgid "DeliveryControls"
-msgstr ""
-
-#: /plugins/scorm/views/map_infos/add.ctp:4
-#: /plugins/scorm/views/map_infos/edit.ctp:4
-#: /plugins/scorm/views/map_infos/index.ctp:36
-#: /plugins/scorm/views/map_infos/view.ctp:2;10;11;13
-msgid "MapInfo"
-msgstr ""
-
-#: /plugins/scorm/views/map_infos/add.ctp:16
-#: /plugins/scorm/views/map_infos/edit.ctp:17
-#: /plugins/scorm/views/map_infos/index.ctp:2
-#: /plugins/scorm/views/map_infos/view.ctp:12
-msgid "MapInfos"
-msgstr ""
-
-#: /plugins/scorm/views/objectives/add.ctp:4
-#: /plugins/scorm/views/objectives/edit.ctp:4
-#: /plugins/scorm/views/objectives/index.ctp:56
-#: /plugins/scorm/views/objectives/view.ctp:2;38;39;41
-#: /plugins/scorm/views/scos/add.ctp:28
-#: /plugins/scorm/views/scos/edit.ctp:30
-#: /plugins/scorm/views/scos/index.ctp:94
-#: /plugins/scorm/views/scos/view.ctp:88;441
-msgid "Objective"
-msgstr ""
-
-#: /plugins/scorm/views/objectives/add.ctp:17
-#: /plugins/scorm/views/objectives/edit.ctp:19
-#: /plugins/scorm/views/objectives/index.ctp:2
-#: /plugins/scorm/views/objectives/view.ctp:40
-#: /plugins/scorm/views/scos/add.ctp:27
-#: /plugins/scorm/views/scos/edit.ctp:29
-#: /plugins/scorm/views/scos/index.ctp:93
-#: /plugins/scorm/views/scos/view.ctp:87;402
-msgid "Objectives"
-msgstr ""
-
-#: /plugins/scorm/views/objectives/add.ctp:18
-#: /plugins/scorm/views/objectives/edit.ctp:20
-#: /plugins/scorm/views/objectives/index.ctp:57
-#: /plugins/scorm/views/objectives/view.ctp:42
-msgid "Map Infos"
-msgstr ""
-
-#: /plugins/scorm/views/objectives/add.ctp:19
-#: /plugins/scorm/views/objectives/edit.ctp:21
-#: /plugins/scorm/views/objectives/index.ctp:58
-#: /plugins/scorm/views/objectives/view.ctp:43;53;62
-msgid "Map Info"
-msgstr ""
-
-#: /plugins/scorm/views/objectives/view.ctp:53
-#: /plugins/scorm/views/rollups/view.ctp:42
-#: /plugins/scorm/views/rules/view.ctp:57
-#: /plugins/scorm/views/scos/view.ctp:92;128;164;196;224;264;308;340;402;446;494
-msgid "Related"
-msgstr ""
-
-#: /plugins/scorm/views/randomizations/add.ctp:4
-#: /plugins/scorm/views/randomizations/edit.ctp:4
-#: /plugins/scorm/views/randomizations/index.ctp:56
-#: /plugins/scorm/views/randomizations/view.ctp:2;38;39;41
-#: /plugins/scorm/views/scos/view.ctp:128;159
-msgid "Randomization"
-msgstr ""
-
-#: /plugins/scorm/views/randomizations/add.ctp:17
-#: /plugins/scorm/views/randomizations/edit.ctp:19
-#: /plugins/scorm/views/randomizations/index.ctp:2
-#: /plugins/scorm/views/randomizations/view.ctp:40
-msgid "Randomizations"
-msgstr ""
-
-#: /plugins/scorm/views/rollup_considerations/add.ctp:4
-#: /plugins/scorm/views/rollup_considerations/edit.ctp:4
-#: /plugins/scorm/views/rollup_considerations/index.ctp:60
-#: /plugins/scorm/views/rollup_considerations/view.ctp:2;43;44;46
-msgid "RollupConsideration"
-msgstr ""
-
-#: /plugins/scorm/views/rollup_considerations/add.ctp:18
-#: /plugins/scorm/views/rollup_considerations/edit.ctp:20
-#: /plugins/scorm/views/rollup_considerations/index.ctp:2
-#: /plugins/scorm/views/rollup_considerations/view.ctp:45
-msgid "RollupConsiderations"
-msgstr ""
-
-#: /plugins/scorm/views/rollups/add.ctp:4
-#: /plugins/scorm/views/rollups/edit.ctp:4
-#: /plugins/scorm/views/rollups/index.ctp:52
-#: /plugins/scorm/views/rollups/view.ctp:2;33;34;36
-#: /plugins/scorm/views/scos/view.ctp:164;191
-msgid "Rollup"
-msgstr ""
-
-#: /plugins/scorm/views/rollups/add.ctp:16
-#: /plugins/scorm/views/rollups/edit.ctp:18
-#: /plugins/scorm/views/rollups/index.ctp:2
-#: /plugins/scorm/views/rollups/view.ctp:35
-msgid "Rollups"
-msgstr ""
-
-#: /plugins/scorm/views/sco_presentations/add.ctp:4
-#: /plugins/scorm/views/sco_presentations/edit.ctp:4
-#: /plugins/scorm/views/sco_presentations/index.ctp:44
-#: /plugins/scorm/views/sco_presentations/view.ctp:2;23;24;26
-msgid "ScoPresentation"
-msgstr ""
-
-#: /plugins/scorm/views/sco_presentations/add.ctp:14
-#: /plugins/scorm/views/sco_presentations/edit.ctp:16
-#: /plugins/scorm/views/sco_presentations/index.ctp:2
-#: /plugins/scorm/views/sco_presentations/view.ctp:25
-msgid "ScoPresentations"
-msgstr ""
-
-#: /plugins/scorm/views/scorm_attendee_trackings/add.ctp:4
-#: /plugins/scorm/views/scorm_attendee_trackings/edit.ctp:4
-#: /plugins/scorm/views/scorm_attendee_trackings/index.ctp:62
-#: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:2;38;39;41
-msgid "ScormAttendeeTracking"
-msgstr ""
-
-#: /plugins/scorm/views/scorm_attendee_trackings/add.ctp:17
-#: /plugins/scorm/views/scorm_attendee_trackings/edit.ctp:19
-#: /plugins/scorm/views/scorm_attendee_trackings/index.ctp:2
-#: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:40
-msgid "ScormAttendeeTrackings"
-msgstr ""
-
-#: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:9
-msgid "Scorm Id"
-msgstr ""
-
-#: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:14
-msgid "Sco Id"
-msgstr ""
-
-#: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:19
-msgid "Student Id"
-msgstr ""
-
-#: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:24
-msgid "Datamodel Element"
-msgstr ""
-
-#: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:29
-msgid "Value"
-msgstr ""
-
 #: /plugins/scorm/views/scorms/add.ctp:4
-#: /plugins/scorm/views/scorms/edit.ctp:4
-#: /plugins/scorm/views/scorms/index.ctp:68
-#: /plugins/scorm/views/scorms/index2.ctp:68
 msgid "Scorm"
 msgstr ""
 
@@ -2945,84 +2380,20 @@ msgstr ""
 msgid "File Name"
 msgstr ""
 
-#: /plugins/scorm/views/scorms/add.ctp:21
-#: /plugins/scorm/views/scorms/edit.ctp:20
-#: /plugins/scorm/views/scorms/index.ctp:2
-#: /plugins/scorm/views/scorms/index2.ctp:2
-msgid "Scorms"
-msgstr ""
-
-#: /plugins/scorm/views/scorms/add.ctp:22
-#: /plugins/scorm/views/scorms/edit.ctp:21
-#: /plugins/scorm/views/scorms/index.ctp:69
-#: /plugins/scorm/views/scorms/index2.ctp:69
-#: /plugins/scorm/views/scos/add.ctp:26
-#: /plugins/scorm/views/scos/edit.ctp:28
-#: /plugins/scorm/views/scos/index.ctp:2
-#: /plugins/scorm/views/scos/view.ctp:85
-msgid "Scos"
-msgstr ""
-
-#: /plugins/scorm/views/scorms/add.ctp:23
-#: /plugins/scorm/views/scorms/edit.ctp:22
-#: /plugins/scorm/views/scorms/index.ctp:70
-#: /plugins/scorm/views/scorms/index2.ctp:70
-#: /plugins/scorm/views/scos/add.ctp:4
-#: /plugins/scorm/views/scos/edit.ctp:4
-#: /plugins/scorm/views/scos/index.ctp:92
-#: /plugins/scorm/views/scos/view.ctp:2;83;84;86
-msgid "Sco"
-msgstr ""
-
-#: /plugins/scorm/views/scorms/view.ctp:19
+#: /plugins/scorm/views/scorms/view.ctp:16
 msgid "&laquo; Previous"
 msgstr ""
 
-#: /plugins/scorm/views/scorms/view.ctp:26
+#: /plugins/scorm/views/scorms/view.ctp:23
 msgid "Exit Scorm"
 msgstr ""
 
-#: /plugins/scorm/views/scorms/view.ctp:28
+#: /plugins/scorm/views/scorms/view.ctp:25
 msgid "Next &raquo;"
 msgstr ""
 
-#: /plugins/scorm/views/scos/view.ctp:92;123
-msgid "Primary Objective"
-msgstr ""
-
-#: /plugins/scorm/views/scos/view.ctp:196;219
-msgid "Choice"
-msgstr ""
-
-#: /plugins/scorm/views/scos/view.ctp:224;259
-msgid "Consideration"
-msgstr ""
-
-#: /plugins/scorm/views/scos/view.ctp:264;303
-msgid "Control"
-msgstr ""
-
-#: /plugins/scorm/views/scos/view.ctp:308;335
-msgid "Delivery Control"
-msgstr ""
-
-#: /plugins/scorm/views/scos/view.ctp:340
-msgid "Sub Items"
-msgstr ""
-
-#: /plugins/scorm/views/scos/view.ctp:397
-msgid "Sub Item"
-msgstr ""
-
-#: /plugins/scorm/views/scos/view.ctp:494
-msgid "Presentations"
-msgstr ""
-
-#: /plugins/scorm/views/scos/view.ctp:527
-msgid "Presentation"
-msgstr ""
-
 #: /plugins/wiki/config/description.php:33
+#: /plugins/wiki/models/wiki.php:125
 #: /plugins/wiki/views/elements/placeholders/plugin_updates.ctp:2
 msgid "Wiki"
 msgstr ""
@@ -3032,7 +2403,7 @@ msgid "Invalid Entry."
 msgstr ""
 
 #: /plugins/wiki/controllers/entries_controller.php:79
-#: /plugins/wiki/controllers/wikis_controller.php:69
+#: /plugins/wiki/controllers/wikis_controller.php:44;90
 msgid "Invalid Wiki"
 msgstr ""
 
@@ -3068,32 +2439,48 @@ msgstr ""
 msgid "An error occured. The entry revision was not restored"
 msgstr ""
 
-#: /plugins/wiki/controllers/installer_controller.php:51
-msgid "Plugin Wiki installed"
-msgstr ""
-
 #: /plugins/wiki/controllers/revisions_controller.php:63
-msgid "Invalid Revision."
+msgid "Invalid Revision"
 msgstr ""
 
-#: /plugins/wiki/controllers/wikis_controller.php:44
-msgid "Invalid Wiki."
+#: /plugins/wiki/controllers/wikis_controller.php:60
+msgid "The wiki for this course could not be found"
 msgstr ""
 
-#: /plugins/wiki/controllers/wikis_controller.php:57;74
+#: /plugins/wiki/controllers/wikis_controller.php:78;95
 msgid "The Wiki has been saved"
 msgstr ""
 
-#: /plugins/wiki/controllers/wikis_controller.php:60;77
-msgid "The Wiki could not be saved. Please, try again."
+#: /plugins/wiki/controllers/wikis_controller.php:81;98
+msgid "The Wiki could not be saved. Please, try again"
 msgstr ""
 
-#: /plugins/wiki/controllers/wikis_controller.php:89
+#: /plugins/wiki/controllers/wikis_controller.php:110
 msgid "Invalid id for Wiki"
 msgstr ""
 
-#: /plugins/wiki/controllers/wikis_controller.php:93
+#: /plugins/wiki/controllers/wikis_controller.php:114
 msgid "Wiki deleted"
+msgstr ""
+
+#: /plugins/wiki/models/entry.php:135
+msgid "Please write a content for this entry"
+msgstr ""
+
+#: /plugins/wiki/models/wiki.php:107
+msgid "No Course ID set"
+msgstr ""
+
+#: /plugins/wiki/models/wiki.php:110
+msgid "Please set the wikis name"
+msgstr ""
+
+#: /plugins/wiki/models/wiki.php:137
+msgid "Main Page"
+msgstr ""
+
+#: /plugins/wiki/models/wiki.php:138
+msgid "<p>Wellcome to the wiki, start by editing this page!</p>"
 msgstr ""
 
 #: /plugins/wiki/views/elements/updates.ctp:20
@@ -3138,7 +2525,7 @@ msgid "Revision history of %s"
 msgstr ""
 
 #: /plugins/wiki/views/revisions/history.ctp:13
-#: /plugins/wiki/views/wikis/view.ctp:29
+#: /plugins/wiki/views/wikis/view.ctp:42
 msgid "Revision"
 msgstr ""
 
@@ -3202,7 +2589,7 @@ msgstr ""
 #: /plugins/wiki/views/wikis/add.ctp:19
 #: /plugins/wiki/views/wikis/edit.ctp:21
 #: /plugins/wiki/views/wikis/index.ctp:58
-#: /plugins/wiki/views/wikis/view.ctp:7
+#: /plugins/wiki/views/wikis/view.ctp:14
 msgid "New Entry"
 msgstr ""
 
@@ -3218,11 +2605,15 @@ msgstr ""
 msgid "New Wiki"
 msgstr ""
 
-#: /plugins/wiki/views/wikis/view.ctp:13
+#: /plugins/wiki/views/wikis/view.ctp:8
+msgid "Recent changes"
+msgstr ""
+
+#: /plugins/wiki/views/wikis/view.ctp:26
 msgid "Recent Entries"
 msgstr ""
 
-#: /plugins/wiki/views/wikis/view.ctp:30
+#: /plugins/wiki/views/wikis/view.ctp:43
 msgid "history"
 msgstr ""
 
@@ -3318,20 +2709,24 @@ msgid "Professors"
 msgstr ""
 
 #: /views/courses/tools.ctp:2
-#: /views/layouts/default.ctp:43
-msgid "Tools"
+msgid "Available Tools"
 msgstr ""
 
 #: /views/courses/tools.ctp:25
-#: /views/plugins/admin_index.ctp:25;66
+#: /views/elements/plugin_box.ctp:18
+msgid "This plugin has no description."
+msgstr ""
+
+#: /views/courses/tools.ctp:31
+#: /views/elements/plugin_box.ctp:24
 msgid "Author"
 msgstr ""
 
-#: /views/courses/tools.ctp:41
+#: /views/courses/tools.ctp:44
 msgid "Add to course"
 msgstr ""
 
-#: /views/courses/tools.ctp:45
+#: /views/courses/tools.ctp:47
 msgid "Remove from course"
 msgstr ""
 
@@ -3400,6 +2795,22 @@ msgstr ""
 
 #: /views/elements/course_description.ctp:8
 msgid "There are no professors for this course"
+msgstr ""
+
+#: /views/elements/plugin_box.ctp:34
+msgid "Uninstall"
+msgstr ""
+
+#: /views/elements/plugin_box.ctp:39
+msgid "Activate"
+msgstr ""
+
+#: /views/elements/plugin_box.ctp:44
+msgid "Deactivate"
+msgstr ""
+
+#: /views/elements/plugin_box.ctp:50
+msgid "Install"
 msgstr ""
 
 #: /views/elements/dashboard/profile.ctp:2
@@ -3494,11 +2905,19 @@ msgstr ""
 msgid "Personal Data"
 msgstr ""
 
-#: /views/members/admin_add.ctp:25
+#: /views/members/admin_add.ctp:16
+msgid "Institutional Information"
+msgstr ""
+
+#: /views/members/admin_add.ctp:18
+msgid "Institution ID"
+msgstr ""
+
+#: /views/members/admin_add.ctp:29
 msgid "Access Information"
 msgstr ""
 
-#: /views/members/admin_add.ctp:30
+#: /views/members/admin_add.ctp:34
 msgid "Give this user administrative access"
 msgstr ""
 
@@ -3752,28 +3171,12 @@ msgstr ""
 msgid "Edit Plugin"
 msgstr ""
 
-#: /views/plugins/admin_index.ctp:5
+#: /views/plugins/admin_index.ctp:7
 msgid "Installed"
 msgstr ""
 
-#: /views/plugins/admin_index.ctp:34
-msgid "Uninstall"
-msgstr ""
-
-#: /views/plugins/admin_index.ctp:39
-msgid "Activate"
-msgstr ""
-
-#: /views/plugins/admin_index.ctp:42
-msgid "Deactivate"
-msgstr ""
-
-#: /views/plugins/admin_index.ctp:54
+#: /views/plugins/admin_index.ctp:20
 msgid "Not Installed"
-msgstr ""
-
-#: /views/plugins/admin_index.ctp:74
-msgid "Install"
 msgstr ""
 
 #: /views/plugins/admin_view.ctp:2

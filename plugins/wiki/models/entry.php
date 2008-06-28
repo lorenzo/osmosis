@@ -121,6 +121,21 @@ class Entry extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+	
+	/**
+	 * Model contructor. Initializes the validation error messages with i18n
+	 *
+	 * @see Model::__construct
+	 */
+	function __construct($id = false, $table = null, $ds = null) {
+		$this->setErrorMessage(
+			'title.required', __('Please set a title',true)
+		);
+		$this->setErrorMessage(
+			'content.required', __('Please write a content for this entry',true)
+		);
+		parent::__construct($id,$table,$ds);
+	}
 
 	/**
 	 * Attached behaviors
