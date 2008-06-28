@@ -161,7 +161,7 @@ class Topic extends AppModel {
 				'Course',
 				'Discussion' => array(
 					'Member',
-					'Response' => array('Member' => array('id', 'full_name'))
+					'Response(id,created)' => array('Member' => array('id', 'full_name'))
 				)
 			)
 		);
@@ -174,10 +174,12 @@ class Topic extends AppModel {
 	 * Returns the parent course of the current entity 
 	 *
 	 * @return mixed Parent Course id or false if not found
-	 * @author Joaquín Windmüller
 	 **/
 	function getParentCourse() {
-		return $this->data['Topic']['course_id'];
+		if (!isset($this->data['Topic']['course_id'])) {
+			$this->read();
+		}
+		return $this->data['Topic']['course_id'];		
 	}
 }
 ?>

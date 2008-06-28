@@ -168,7 +168,7 @@ class Discussion extends AppModel {
 		$this->contain(
 			array(
 				'Member',
-				'Topic' => array('id', 'name')
+				'Topic' => array('id', 'name', 'status')
 			)
 		);
 		$discussion = $this->find('first', array('conditions' => array('Discussion.id' => $id), 'count_view' => true));

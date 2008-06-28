@@ -2,27 +2,30 @@
 <h2>
 	<?php  __('Forum');?>
 </h2>
-<p class="small-description">
-	<?php
-		printf(
-			__('You are currently viewing the topics in the <em>%s</em> course forum.', true),
-			$html->link(
-				$course['Course']['name'],
-				array('controller' => 'courses', 'action' => 'view', $course['Course']['id'], 'plugin' => '')
-			)
-		);
+<div id="forum-head">
+	<p class="small-description">
+		<?php
+			printf(
+				__('You are currently viewing the topics in the <em>%s</em> course forum.', true),
+				$html->link(
+					$course['Course']['name'],
+					array('controller' => 'courses', 'action' => 'view', $course['Course']['id'], 'plugin' => '')
+				)
+			);
 		
-	?>
-</p>
-<p class="actions-button">
-	<?php
-		echo ' ';
-		echo $html->link(
-			__('Create a new Topic', true),
-			array('controller' => 'topics', 'action' => 'add', 'course_id' => $course['Course']['id'])
-		);
-	?>
-</p>
+		?>
+	</p>
+	<ul class="actions">
+		<li class="add">
+			<?php
+				echo $html->link(
+					__('Create a new Topic', true),
+					array('controller' => 'topics', 'action' => 'add', 'course_id' => $course['Course']['id'])
+				);
+			?>
+		</li>
+	</ul>
+</div>
 <?php if (!empty($topics)):?>
 <table cellpadding="0" cellspacing="0" class="forum-list">
 	<tr>
@@ -69,16 +72,14 @@
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
-	<div class="actions">
-		<ul>
-			<li>
-				<?php
-					echo $html->link(
-						__('Create a new Topic', true),
-						array('controller' => 'topics', 'action' => 'add', 'course_id' => $course['Course']['id'])
-					);
-				?>
-			</li>
-		</ul>
-	</div>
+	<ul class="reverse actions">
+		<li class="add">
+			<?php
+				echo $html->link(
+					__('Create a new Topic', true),
+					array('controller' => 'topics', 'action' => 'add', 'course_id' => $course['Course']['id'])
+				);
+			?>
+		</li>
+	</ul>
 </div>

@@ -29,12 +29,13 @@
 ?>
 </div>
 <div class="quick-respond">
-	<h3><?php __('Reply to this discussion'); ?></h3>
 	<?php
-	if ($discussion['Discussion']['status']=='unlocked') :
+	if ($discussion['Topic']['status']!='locked' && $discussion['Topic']['status']!='locked') :
 		echo $this->element('quick_response', array('discussion_id' => $discussion['Discussion']['id']));
 	else :
-		__('This Discussion is locked, you cannot reply.');
+	?>
+		<p><?php __('This Discussion is locked, you cannot reply.'); ?></p>
+	<?php
 	endif;
 	?>
 </div>

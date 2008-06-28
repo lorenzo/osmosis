@@ -31,6 +31,7 @@ table tr td.discussion-status {
 .discussion-status.unlocked {
 	background-image:url('../img/unlocked.png');
 }
+.closed .discussion-status,
 .discussion-status.locked {
 	background-image:url('../img/locked.png');
 }
@@ -128,21 +129,6 @@ table tr .number {
 	position:relative;
 }
 
-.responses h3 span {
-	top:0;
-	right:15px;
-	position:absolute;
-}
-.responses form label {
-	display:block;
-	width:100%;
-	float:none;
-}
-
-.forum h2 {
-	margin-bottom:0;
-}
-
 .forum p.small-description {
 	color:#666;
 	margin-top:0;
@@ -194,4 +180,14 @@ table tr .number {
 #forum-updates strong.title {
 	background:#f5f5f5 url('../img/forum.png') no-repeat 10px 0;
 	padding-left:30px;
+}
+
+#forum-head {
+	position:relative;
+}
+#forum-head ul {
+	position:absolute;
+	right:0;
+	bottom:0;
+	margin:0;
 }
