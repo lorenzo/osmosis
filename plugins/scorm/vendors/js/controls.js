@@ -30,12 +30,16 @@
  */
 var ScormControl = new function(){
 	var lastLink = null;
-	this.updateUI = function(link) {
+	var loading_msg = null;
+	this.updateUI = function(link, msg) {
 		var href = link.href;
 		var id = link.id;
 		var id_data = id.match(/([^0-9])*([0-9]+)/);
 		var local_sco_id = id_data[2];
 		var local_sco_number =  parseInt(id_data[2]);
+		if (this.loading_msg==null) {
+			this.loading_msg = msg;
+		}
 		this.lastLink = link;
 		this.updateLinks(local_sco_number-1, local_sco_number+1, local_sco_id);
 		var className = link.className;
@@ -43,7 +47,8 @@ var ScormControl = new function(){
 		var sco_id = parseInt(id_data[2]);		
 
 		$('script#api').remove();
-		$.blockUI('<h1><img src="' + webroot + '/img/loading.gif" /> Cargando...</h1>'); 
+		$.blockUI('<h1><img src="' + webroot + '/img/default/loading.gif" /> ' + this.loading_msg + '</h1>'); 
+		$('#api').remove();
 		$('head').createAppend(
 			'script',
 			{
@@ -53,10 +58,16 @@ var ScormControl = new function(){
 				'onload' : function() {
 					$('iframe#viewport')[0].src = href;
 					$.unblockUI();
+					$.scrollTo('#scorm_ui', 800, {easing : 'easein'});
 				}
-			}
+			}, ''
 		);
-		
+		// TODO: Safari sucks, correctly handle onload event
+		// if ($.browser.safari) {
+		// 			$('head').createAppend(
+		// 				'script', {}, '$("iframe#viewport")[0].src = "' + href + '";$.unblockUI();'
+		// 			);
+		// 		}
 		return false;
 	}
 	

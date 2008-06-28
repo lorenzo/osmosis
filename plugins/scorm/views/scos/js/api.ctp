@@ -1,7 +1,6 @@
 /**
-<?php var_dump($trackings); var_dump($user['full_name'])?>
+<?php// var_dump($trackings); var_dump($user['full_name'])?>
 */
-
 var adminEmail = 'joaquin@aikon.com.ve';
 function underscore(str) {
 	str = str.replace(/.N/g,".");

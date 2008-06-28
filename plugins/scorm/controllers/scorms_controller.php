@@ -45,10 +45,36 @@ class ScormsController extends ScormAppController {
 			parent::_setActiveCourse();
 	}
 	
-
 	function index() {
 		$this->Scorm->recursive = -1;
 		$this->set('scorms', $this->paginate(array('course_id' => $this->activeCourse)));
+		$this->Scorm->bindModel(
+			array('hasMany' =>
+				array('Tracking' => array('className' => 'ScormAttendeeTracking'))
+			)
+		);
+		$this->Scorm->Tracking->bindModel(
+			array('belongsTo' => 
+				array('Sco' => array('className' => 'Scorm.Sco'))
+			)
+		);
+		$this->Scorm->Tracking->Sco->bindModel(
+			array('belongsTo' =>
+				array('Scorm' => array('className' => 'Scorm.Scorm'))
+			)
+		);
+		$this->Scorm->Tracking->contain(array('Sco(id)' => 'Scorm(id,name,description)'));
+		$fields = array('DISTINCT sco_id', 'student_id');
+		$conditions = array('student_id' => $this->Auth->user('id'));
+		$recent = $this->Scorm->Tracking->find('all', compact('conditions', 'fields'));
+		$scorms = $unique = array();
+		foreach ($recent as $i => $tracking) {
+			if (in_array($tracking['Sco']['scorm_id'], $unique)) continue;
+			$scorms[] = $tracking;
+			$unique[] = $tracking['Sco']['scorm_id'];
+		}
+		$recent = $scorms;
+		$this->set(compact('recent'));
 	}
 	
 	function toc($id) {
@@ -126,7 +152,7 @@ class ScormsController extends ScormAppController {
 				
 				} elseif ($this->Scorm->save($this->data)) {
 					$this->Session->setFlash(__('The Scorm has been saved',true), 'default', array('class' => 'success'));
-					$this->redirect(array('action'=>'index'), null, true);
+					$this->redirect(array('action'=>'index', 'course_id' => $this->data['Scorm']['course_id']), null, true);
 				} else {
 					$folder = new Folder(TMP.'tests'.DS.'imsmanifests'.DS.'uploads'.DS.$uploaded_file['name'].DS);
 					$folder->delete();

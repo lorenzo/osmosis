@@ -5,6 +5,8 @@
 		$javascript->link('jquery/plugins/treeview/jquery.treeview', false);
 		$javascript->link('jquery/plugins/jquery.flydom', false);
 		$javascript->link('jquery/plugins/jquery.blockUI', false);
+		$javascript->link('jquery/plugins/jquery.easing', false);
+		$javascript->link('jquery/plugins/jquery.scrollTo', false);
 		$html->css('/scorm/css/scorm', null, null, false);
 		$html->css('/scorm/css/jquery.treeview', null, null, false);
 		echo $javascript->codeBlock('var scorm_id = "' . $scorm['Scorm']['id'] . '";');
@@ -42,14 +44,26 @@
 	</div>
 	<?php
 		if (!empty($show_sco)) {
-			echo $javascript->codeBlock(
-				'$(document).ready(function(){'. "\n" .
-				'	var link = $("a[href='.$html->url('/scorm/scos/view/' . $show_sco['id'] . '/' . $show_sco['href']).']");' . "\n" .
-				'	ScormControl.updateUI(link[0]);' . "\n" .
-				'	ScormControl.storeDataCallback();'. "\n".
-				'	ScormControl.getCompleted('.$show_sco['id'].');'.
-				'});'
+			$loading = __('Loading', true);
+			$sco_id = $show_sco['id'];
+			$link = $html->url(
+				array(
+					'plugin'		=> 'scorm',
+					'controller'	=> 'scos',
+					'action'		=> 'view',
+					$sco_id,
+					$show_sco['href']
+				)
 			);
+			$js = <<<ejs
+	$(document).ready(function() {
+		var link = $('a[href=$link]');
+		ScormControl.updateUI(link[0], '$loading');
+		ScormControl.storeDataCallback();
+		ScormControl.getCompleted($sco_id);
+	});
+ejs;
+			echo $javascript->codeBlock($js);
 		}
 	?>
 </div>
