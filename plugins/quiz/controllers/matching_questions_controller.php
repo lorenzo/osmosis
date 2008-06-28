@@ -67,10 +67,15 @@ class MatchingQuestionsController extends AppController {
 			} else return;
 			
 			if ($this->MatchingQuestion->saveAll($newData,array('validate' => false))) {
-				$this->Session->setFlash(__('The Matching Question has been saved',true), 'default', array('class' => 'success'));
-				$this->redirect(
-					array('controller' => 'quizzes', 'action'=>'edit', 	$this->data['Quiz'][0]['id'])
+				$habtm_data = array(
+					'matching_question_id' => $this->MatchingQuestion->getLastInsertID(),
+					'quiz_id' => $this->data['Quiz'][0]['id']
 				);
+				
+				if ($this->MatchingQuestion->QuizMatching->save($habtm_data)) {
+					$this->Session->setFlash(__('The Choice Question has been saved',true), 'default', array('class' => 'success'));
+					$this->redirect(array('controller' => 'quizzes', 'action'=>'edit', $this->data['Quiz'][0]['id']));
+				}
 			} else {
 				$this->Session->setFlash(__('The Matching Question could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
