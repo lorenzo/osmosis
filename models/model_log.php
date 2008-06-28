@@ -54,16 +54,6 @@ class ModelLog extends AppModel {
 	);
 
 	/**
-	 * Model contructor. Adds sql find support
-	 *
-	 * @see Model::__construct
-	 */
-	function __construct($id = false, $table = null, $ds = null) {
-		parent::__construct($id, $table, $ds);
-		$this->__findMethods['sql'] = true;
-	}
-
-	/**
 	 * Extensión de la función find para admitir find('log',...)
 	 *
 	 * @see Model::find 
