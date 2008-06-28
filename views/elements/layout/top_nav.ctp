@@ -19,7 +19,7 @@
 		<li>
 			<?php
 				echo $html->link(
-					$Osmosis['active_member']['full_name'],
+					$Osmosis['active_member']['username'],
 					array('plugin' => null, 'controller' => 'members', 'action' => 'view', 'admin' => false, $Osmosis['active_member']['id'])
 				);
 			?>

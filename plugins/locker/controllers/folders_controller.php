@@ -36,9 +36,6 @@ class FoldersController extends LockerAppController {
 	var $uses = array('Locker.LockerFolder');
 	
 	function _ownerAuthorization() {
-		if($this->action == 'view')
-			return parent::_ownerAuthorization();
-			
 		switch ($this->action) {
 			case 'view' :
 				return true;
@@ -49,12 +46,13 @@ class FoldersController extends LockerAppController {
 			case 'edit' :
 			case 'move' :
 			case 'delete' :
+				$owner = false;
 				if (isset($this->data['LockerFolder']['id']))
-					return $this->LockerFolder->isOwner($this->Auth->user('id'),$this->data['LockerFolder']['id']);
+					$owner = $this->LockerFolder->isOwner($this->Auth->user('id'),$this->data['LockerFolder']['id']);
 				
 				if (isset($this->params['pass'][0]))
-					return $this->LockerFolder->isOwner($this->Auth->user('id'),$this->params['pass'][0]);
-				break;
+					$owner = $this->LockerFolder->isOwner($this->Auth->user('id'),$this->params['pass'][0]);
+				return $owner;
 		}
 			
 		return false;

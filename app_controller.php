@@ -223,7 +223,8 @@ class AppController extends Controller {
 		$valid = $this->Auth->Acl->check($this->_currentRole(),$aclPrefix.$this->Auth->action()) && $this->_ownerAuthorization();
 		if($valid || Configure::read('Auth.disabled'))
 			return true;
-
+			
+		$this->denied = true;
 		return false;
 	}
 	
@@ -308,6 +309,9 @@ class AppController extends Controller {
 	function redirect($url, $status = null, $redirect = true) {
 		if ($this->RequestHandler->isAjax()) {
 			$this->set('redirect', $url);
+			if ($redirect && isset($this->denied)) {
+				exit;
+			}
 		} else {
 			parent::redirect($url, $status, $redirect);
 		}

@@ -20,9 +20,11 @@
 	$javascript->link('jquery/plugins/jquery.ui.droppable', false);
 	$html->css('jquery.cluetip', null, null, false);
 ?>
+
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		var settings = {
+			editable	: <?php echo ($session->read('Auth.Member.id') == $parentFolder['LockerFolder']['member_id']) ? "true" : "false" ?>,
  			updating	: <?php echo "'" . __("Updating...", true) . "'"; ?>,
 			cancel		: <?php echo "'" . __("Cancel", true) . "'"; ?>,
 			ok			: <?php echo "'" . __("OK", true) . "'"; ?>,

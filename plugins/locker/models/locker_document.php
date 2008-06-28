@@ -256,8 +256,11 @@ class LockerDocument extends LockerAppModel {
 		
 		$this->data['Document']['folder_id'] = $folder_id;
 		$this->id = $document['Document']['id'];
-		
 		return $this->save();
+	}
+	
+	function isOwner($member,$id) {
+		return $this->find('count',array('conditions' => array($this->alias.'.id' => $id, 'Folder.member_id' => $member))) == 1;
 	}
 }
 ?>

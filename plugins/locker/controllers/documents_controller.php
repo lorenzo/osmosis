@@ -34,6 +34,32 @@ class DocumentsController extends LockerAppController {
 	var $name = 'Documents';
 	var $helpers = array('Html', 'Form');
 	var $uses = array('Locker.LockerDocument');
+	
+	function _ownerAuthorization() {	
+		switch ($this->action) {
+			case 'view' :
+			case 'download' :
+			case 'drop' :
+				return true;
+			case 'add' :
+				if (isset($this->data['LockerDocument']['folder_id']))
+					return $this->LockerDocument->Folder->isOwner($this->Auth->user('id'),$this->data['LockerDocument']['folder_id']);
+				break;
+			case 'edit' :
+			case 'move' :
+			case 'delete' :
+				$check = false;
+				if (isset($this->data['LockerDocument']['id']))
+					$check = $this->data['LockerDocument']['id'];
+					
+				elseif (isset($this->params['pass'][0]))
+					$check = $this->params['pass'][0];
+				
+				return $this->LockerDocument->isOwner($this->Auth->user('id'),$check);
+		}
+			
+		return false;
+	}
 
 
 	function view($id = null) {
