@@ -33,6 +33,17 @@ class ChoiceQuestionsController extends AppController {
 
 	var $name = 'ChoiceQuestions';
 	var $helpers = array('Html', 'Form' );
+	
+	function _setActiveCourse() {
+		parent::_setActiveCourse();
+		if (empty($this->activeCourse) && isset($this->data['Quiz'][0]['id'])) {
+			$this->activeCourse = $this->ChoiceQuestion->Quiz->field('course_id',array('Quiz.id' => $this->data['Quiz'][0]['id']));
+		}
+		$actions = array('add');
+		if (empty($this->activeCourse) && in_array($this->action,$actions) &&isset($this->params['named']['quiz'])) {
+			$this->activeCourse = $this->ChoiceQuestion->Quiz->field('course_id',array('Quiz.id' => $this->params['named']['quiz']));
+		}
+	}
 
 	function index() {
 		$this->ChoiceQuestion->recursive = 0;
@@ -74,6 +85,7 @@ class ChoiceQuestionsController extends AppController {
 		if(isset($this->params['named']['quiz'])) {
 			$this->data['Quiz']['id'] = $this->params['named']['quiz'];
 		}
+		$this->set('course_id',$this->activeCourse);
 	}
 	
 	private function _updateChoiceCount() {

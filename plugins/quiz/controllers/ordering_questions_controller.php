@@ -33,6 +33,17 @@ class OrderingQuestionsController extends AppController {
 
 	var $name = 'OrderingQuestions';
 	var $helpers = array('Html', 'Form' );
+	
+	function _setActiveCourse() {
+		parent::_setActiveCourse();
+		if (empty($this->activeCourse) && isset($this->data['Quiz'][0]['id'])) {
+			$this->activeCourse = $this->OrderingQuestion->Quiz->field('course_id',array('Quiz.id' => $this->data['Quiz'][0]['id']));
+		}
+		$actions = array('add');
+		if (empty($this->activeCourse) && in_array($this->action,$actions) &&isset($this->params['named']['quiz'])) {
+			$this->activeCourse = $this->OrderingQuestion->Quiz->field('course_id',array('Quiz.id' => $this->params['named']['quiz']));
+		}
+	}
 
 	function index() {
 		$this->OrderingQuestion->recursive = 0;

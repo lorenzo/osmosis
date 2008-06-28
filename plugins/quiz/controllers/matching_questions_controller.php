@@ -34,6 +34,17 @@ class MatchingQuestionsController extends AppController {
 	var $name = 'MatchingQuestions';
 	var $helpers = array('Html', 'Form' );
 
+	function _setActiveCourse() {
+		parent::_setActiveCourse();
+		if (empty($this->activeCourse) && isset($this->data['Quiz'][0]['id'])) {
+			$this->activeCourse = $this->MatchingQuestion->Quiz->field('course_id',array('Quiz.id' => $this->data['Quiz'][0]['id']));
+		}
+		$actions = array('add');
+		if (empty($this->activeCourse) && in_array($this->action,$actions) &&isset($this->params['named']['quiz'])) {
+			$this->activeCourse = $this->MatchingQuestion->Quiz->field('course_id',array('Quiz.id' => $this->params['named']['quiz']));
+		}
+	}
+	
 	function index() {
 		$this->MatchingQuestion->recursive = 0;
 		$this->set('matchingQuestions', $this->paginate());
@@ -109,7 +120,7 @@ class MatchingQuestionsController extends AppController {
 		
 		$this->set('totalQuestions',$totalQuestions);
 		$this->set('totalAnswers',$totalAnswers);
-		return false;
+		return $added;
 	}
 	
 	private function _cleanupEmpty() {

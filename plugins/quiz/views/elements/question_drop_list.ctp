@@ -9,7 +9,8 @@
 					'controller' => 'quizzes',
 					'action' => 'edit',
 					$this->data['Quiz']['id'],
-					'question_type' =>  $question_type_key
+					'question_type' =>  $question_type_key,
+					'course_id'		=> $course_id
 				);
 				if ($question_type_key == $question_type) {
 					$question_type_key  = $question_type;
@@ -36,7 +37,7 @@
 <p class="add">
 	<?php
 		if ($question_type!='all') {
-			echo '&mdash; ' . $html->link(__('create one', true), array('controller'=>Inflector::pluralize($question_type), 'action' => 'add', 'quiz' => $quiz_id));
+			echo '&mdash; ' . $html->link(__('create one', true), array('controller'=>Inflector::pluralize($question_type), 'action' => 'add', 'quiz' => $quiz_id,'course_id' => $course_id));
 		}
 	?>
 	&nbsp;

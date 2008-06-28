@@ -40,8 +40,5 @@ foreach ($quizzes as $quiz):
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(sprintf(__('New %s', true), __('Quiz', true)), array('action'=>'add')); ?></li>
-		<li><?php echo $html->link(sprintf(__('List %s', true), __('Association Questions', true)), array('controller'=> 'association_questions', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(sprintf(__('New %s',  true), __('Association Question', true)), array('controller'=> 'association_questions', 'action'=>'add')); ?> </li>
-	</ul>
+		<li><?php echo $html->link(sprintf(__('New %s', true), __('Quiz', true)), array('action'=>'add','course_id' => $course_id)); ?></li>
 </div>

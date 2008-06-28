@@ -5,8 +5,12 @@ class QuizSchema extends CakeSchema {
 	var $quiz_quizzes = array(
 			'id' => array('type'=>'string', 'null' => false, 'length' => 36, 'key' => 'primary'),
 			'name' => array('type'=>'string', 'null' => false),
+			'course_id' => array('type'=>'integer', 'null' => false),
+			'member_id' => array('type'=>'integer', 'null' => false),
+			'published' => array('type'=>'boolean', 'null' => false, 'default' => '0'),
+			'created' => array('type'=>'datetime', 'null' => false),
 			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
-			);
+		);
 	var $quiz_choice_choices = array(
 			'id' => array('type'=>'string', 'null' => false, 'length' => 36, 'key' => 'primary'),
 			'choice_question_id' => array('type'=>'string', 'null' => false, 'length' => 36),

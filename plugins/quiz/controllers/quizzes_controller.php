@@ -51,9 +51,20 @@ class QuizzesController extends QuizAppController {
 		$this->set('question_types', $this->question_types);
 	}
 	
+	function _setActiveCourse() {
+		$actions = array('view','edit','rename','add_question','answer','delete');
+		if (in_array($this->action,$actions) && isset ($this->params['pass'][0])) {
+			$course_id = $this->Quiz->field('course_id',array('Quiz.id' => $this->params['pass'][0]));
+			if (!empty($course_id))
+				$this->activeCourse = $course_id;
+		} else
+			parent::_setActiveCourse();
+	}
+	
 	function index() {
 		$this->Quiz->recursive = 0;
-		$this->set('quizzes', $this->paginate());
+		$this->set('quizzes', $this->paginate(array('Quiz.course_id' => $this->activeCourse)));
+		$this->set('course_id',$this->activeCourse);
 	}
 
 	function view($id = null) {
@@ -67,13 +78,15 @@ class QuizzesController extends QuizAppController {
 	function add() {
 		if (!empty($this->data)) {
 			$this->Quiz->create();
+			$this->data['Quiz']['member_id'] = $this->Auth->user('id');
 			if ($this->Quiz->save($this->data)) {
 				$this->Session->setFlash(__('The Quiz has been saved',true), 'default', array('class' => 'success'));
-				$this->redirect(array('action'=>'edit', $this->Quiz->getLastInsertId()), null, true);
+				$this->redirect(array('action'=>'edit', $this->Quiz->id,'course_id' => $this->data['Quiz']['course_id']));
 			} else {
 				$this->Session->setFlash(__('The Quiz could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
+		$this->set('course_id',$this->activeCourse);
 	}
 
 	function edit($id = null) {
@@ -102,28 +115,29 @@ class QuizzesController extends QuizAppController {
 		if (empty($this->data))
 			$this->data = $quiz;
 		$this->set('question_list', $questions);
+		$this->set('course_id',$this->activeCourse);
 	}
 
 	function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for Quiz',true), 'default', array('class' => 'error'));
-			$this->redirect(array('action'=>'index'), null, true);
+			$this->redirect('/');
 		}
 		if ($this->Quiz->del($id)) {
 			$this->Session->setFlash(__('Quiz deleted',true), 'default', array('class' => 'success'));
-			$this->redirect(array('action'=>'index'), null, true);
+			$this->redirect(array('action'=>'index','course_id' => $this->activeCourse));
 		}
 	}
 	
 	function rename($id=null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Quiz',true), 'default', array('class' => 'error'));
-			$this->redirect(array('action'=>'index'), null, true);
+			$this->redirect('/');
 		}
 		if (!empty($this->data)) {
 			if ($this->Quiz->save($this->data)) {
 				$this->Session->setFlash(__('The Quiz has been saved',true), 'default', array('class' => 'success'));
-				$this->redirect(array('action'=>'index'), null, true);
+				$this->redirect(array('action'=>'index','course_id' => $this->activeCourse));
 			} else {
 				$this->Session->setFlash(__('The Quiz could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
@@ -143,12 +157,12 @@ class QuizzesController extends QuizAppController {
 			if ($this->Quiz->addQuestions($this->data)) {
 				$this->Session->setFlash(__('The questions where added to the quiz.', true), 'default', array('class' => 'success'));
 				$this->redirect(
-					array('controller' => 'quizzes', 'action' => 'edit', $id)
+					array('controller' => 'quizzes', 'action' => 'edit','course_id' => $this->activeCourse)
 				);
 			} else {
 				$this->Session->setFlash(__('The questions could not be added to the quiz.', true), 'default', array('class' => 'error'));
 				$this->redirect(
-					array('controller' => 'quizzes', 'action' => 'edit', $id)
+					array('controller' => 'quizzes', 'action' => 'edit', $id,'course_id' => $this->activeCourse)
 				);
 			}
 		}
