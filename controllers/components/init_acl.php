@@ -45,6 +45,16 @@ class InitAclComponent extends Object {
 		return true;
 	}
 	
+	/**
+	 * Creates a new Aro
+	 *
+	 * @param string $model 
+	 * @param string $foreign 
+	 * @param string $parent 
+	 * @param string $alias 
+	 * @return mixed Last Aro created id
+	 */
+	
 	function createAro($model, $foreign, $parent, $alias) {
 		$this->Acl->Aro->create();
 		$this->Acl->Aro->save(array(
@@ -56,6 +66,16 @@ class InitAclComponent extends Object {
 		return $this->Acl->Aro->getLastInsertId();
 	}
 
+	/**
+	 * Creates a new Aco
+	 *
+	 * @param string $model 
+	 * @param string $foreign 
+	 * @param string $parent 
+	 * @param string $alias 
+	 * @return string created Aco id
+	 */
+	
 	function createAco($model, $foreign, $parent, $alias) {
 		$this->Acl->Aco->create();
 		$this->Acl->Aco->save(array(
@@ -67,6 +87,12 @@ class InitAclComponent extends Object {
 		return $this->Acl->Aco->getLastInsertId();
 	}
   
+	/**
+	 * Truncates the members and ACL tables
+	 *
+	 * @return void
+	 */
+	
 	function deleteDB() {
 		$this->Acl->Aco->query('TRUNCATE '.$this->Acl->Aco->table);
 		$this->Acl->Aro->query('TRUNCATE '.$this->Acl->Aro->table);
@@ -74,6 +100,14 @@ class InitAclComponent extends Object {
 		$this->Member->query('TRUNCATE '.$this->Member->table);
 		$this->Role->query('TRUNCATE '.$this->Role->table);
 	}
+	
+	/**
+	 * Creates a new Role
+	 *
+	 * @param string $role_name 
+	 * @param string $parent_id
+	 * @return string Role id
+	 */
 	
 	function initRole($role_name, $parent_id = null) {
 		$this->Role->create();
@@ -83,6 +117,13 @@ class InitAclComponent extends Object {
 		return $this->Role->getLastInsertId();
 	}
 	
+	/**
+	 * Creates a new Member
+	 *
+	 * @param array $data 
+	 * @return string Member id
+	 */
+	
 	function initMember($data) {
 		$this->Member->create();
 		$this->Auth->userModel = 'Member';
@@ -90,6 +131,13 @@ class InitAclComponent extends Object {
 		$this->Member->save($data,false);
 		return $this->Member->getLastInsertId();
 	}
+	
+	/**
+	 * Loads permission file from plugin or main application and loads them in ACL
+	 *
+	 * @param string $plugin plugin folder to look for permissions.php file
+	 * @return boolean true on succes or if not found the permissions file
+	 */
 	
 	function loadPermissions($plugin = null) {
 		if (!$plugin && isset($this->controller->plugin) && !empty($this->controller->plugin))
@@ -101,9 +149,9 @@ class InitAclComponent extends Object {
 			$plugin = Inflector::camelize($plugin);
 			$instance = ClassRegistry::init('Plugin');
 			$path = $instance->getPath($plugin);
-			
+
 			if (!$path || !App::import('File','permissions',array('search' => $path.DS.'config')))
-				return false;
+				return true;
 			
 			$class = $plugin.'Permissions';
 			$permissions = new $class;
@@ -134,6 +182,29 @@ class InitAclComponent extends Object {
 			}
 		}
 		
+		return true;
+	}
+	
+	/**
+	 * Removes ACL entries made by a plugin
+	 *
+	 * @param string $plugin name of the plugin y camelCase
+	 * @return boolean true on success
+	 */
+	
+	function unLoadPermissions($plugin) {
+		$db =& ConnectionManager::getDataSource($this->Acl->Aco->useDbConfig);
+		$db->begin($this->Acl->Aco);
+		$parentAco = $this->Acl->Aco->field('id',array('alias' => $plugin));
+		
+		if (!$parentAco)
+			return true;
+			
+		if (!$this->Acl->Aco->del($parentAco)) {
+			$db->rollback($this->Acl->Aco);
+			return false;
+		}
+		$db->commit($this->Acl->Aco);
 		return true;
 	}
 	

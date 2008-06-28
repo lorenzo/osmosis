@@ -33,26 +33,9 @@
 class InstallerController extends AppController {
 
 	var $name = 'Installer';
-	var $helpers = array('Html', 'Form');
+	var $helpers = array();
 	var $uses = array('Plugin');
 	var $components = array('Installer','InitAcl');
 
-	/**
-	 * Load plugin tables in the database and installs the plugin in the database.
-	 *
-	 * @return void
-	 */
-	
-	function admin_install() {
-		if (!$this->InitAcl->loadPermissions()) {
-			$this->Session->setFlash(__('An error occurred while setting plugin permissions',true), 'default', array('class' => 'error'));
-		} elseif (!$this->Installer->createSchema('Locker')) {
-			$this->Session->setFlash(__('An error occurred while installing the plugin',true), 'default', array('class' => 'error'));
-		} elseif ($this->Plugin->install('Locker'))
-			$this->Session->setFlash(__('Plugin Locker installed',true), 'default', array('class' => 'success'));
-			
-		
-		$this->redirect(array('plugin'=>'','admin' => true,'controller' => 'plugins'));
-	}
 }
 ?>

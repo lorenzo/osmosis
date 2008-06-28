@@ -141,7 +141,8 @@ class Plugin extends AppModel {
 		if (!array_key_exists($plugin,$stored)) {
 			return false;
 		}
-		$data = array('Plugin' => Set::merge($stored[$plugin],array('name' => $plugin, 'active' => 1)));
+		$types = (isset($stored[$plugin]['type']) && !empty($stored[$plugin]['type'])) ? $stored[$plugin]['type'] : array('other');
+		$data = array('Plugin' => Set::merge($stored[$plugin],array('name' => $plugin, 'active' => 1, 'types' => join(',',$types))));
 		
 		return $this->save($data);
 	}
@@ -275,6 +276,41 @@ class Plugin extends AppModel {
 			}	
 		}
 		return $path;
+	}
+	
+	/**
+	 * Sets a plugin as active
+	 *
+	 * @param string $id plugins id
+	 * @return boolean true on success
+	 */
+	
+	function activate($id) {
+		$this->id = $id;
+		return $this->saveField('active',true);
+	}
+	
+	/**
+	 * Sets a plugin as inactive
+	 *
+	 * @param string $id plugins id
+	 * @return boolean true on success
+	 */
+	
+	function deactivate($id) {
+		$this->id = $id;
+		return $this->saveField('active',false);
+	}
+	
+	/**
+	 * Deletes the plugin reference in the database
+	 *
+	 * @param string $id 
+	 * @return boolean true on success
+	 */
+	
+	function uninstall($id) {
+		return $this->del($id);
 	}
 }
 ?>

@@ -254,7 +254,7 @@ class CoursesController extends AppController {
 					$this->Session->setFlash(__('The Tool could not be removed',true), 'default', array('class' => 'error'));
 			}
 		}
-		$tools = $this->Course->Tool->actives();
+		$tools = $this->Course->Tool->actives(null,array('types' => 'tool'));
 		$this->set(compact('tools','id'));
 	}
 

@@ -33,6 +33,7 @@ class PluginsController extends AppController {
 
 	var $name = 'Plugins';
 	var $helpers = array('Html', 'Form');
+	var $components = array('Installer','InitAcl');
 
 	
 	function admin_index() {
@@ -54,20 +55,47 @@ class PluginsController extends AppController {
 			$this->Session->setFlash(__('Invalid Plugin.', true), 'default', array('class' => 'error'));
 		}
 		
+		$plugin = Inflector::camelize($plugin);
 		if ($this->Plugin->find('count',array('conditions' => array('name' => $plugin)))) {
 			$this->Session->setFlash(__('Plugin already Installed.', true), 'default', array('class' => 'info'));
 			$this->redirect(array('action'=>'index'));
 		}
 		
 		// Check if the plugin has it's own installation method
-		if (App::import('Controller',$plugin.'.'.'Installer')) {
+		if (App::import('Controller',$plugin.'.'.'Installer') && method_exists('InstallerController','install')) {
 			$this->redirect(array('controller' => 'installer', 'action' => 'install', 'plugin' => $plugin,'admin' => true));
-		}
-
-		if ($this->Plugin->install(Inflector::camelize($plugin))) {
-			$this->Session->setFlash(__('Plugin Instaled.', true), 'default', array('class' => 'success'));
+			
 		} else {
-			$this->Session->setFlash(__('An error ocurred while installing the plugin. Try again', true), 'default', array('class' => 'error'));
+			if (!$this->InitAcl->loadPermissions($plugin))
+				$this->Session->setFlash(__('An error occurred while setting plugin permissions',true), 'default', array('class' => 'error'));
+				
+			elseif (!$this->Installer->createSchema($plugin))
+				$this->Session->setFlash(__('An error occurred while installing the plugin',true), 'default', array('class' => 'error'));
+				
+			elseif (!$this->Plugin->install($plugin)) {
+				$this->Session->setFlash(__('An error ocurred while installing the plugin. Try again', true), 'default', array('class' => 'error'));
+			}
+				
+				
+			else 
+				$this->Session->setFlash(__('Plugin installed',true), 'default', array('class' => 'success'));
+		}
+			
+		$this->redirect(array('action'=>'index'));
+	}
+	
+	function admin_uninstall($id) {
+		$this->Plugin->id = $id;
+		$this->_redirectIf(!$plugin = $this->Plugin->field('name'));
+		// Check if the plugin has it's own installation method
+		if (App::import('Controller',$plugin.'.'.'Installer') && method_exists('InstallerController','uninstall')) {
+			$this->redirect(array('controller' => 'installer', 'action' => 'uninstall', 'plugin' => $plugin,'admin' => true));
+		} else {
+			if ($this->InitAcl->unLoadPermissions($plugin) && $this->Installer->dropSchema($plugin) && $this->Plugin->uninstall($id)) {
+					$this->Session->setFlash(__('The Plugin has been uninstalled', true), 'default', array('class' => 'success'));
+			} else {
+				$this->Session->setFlash(__('The Plugin could not be uninstalled', true), 'default', array('class' => 'error'));
+			}
 		}
 		$this->redirect(array('action'=>'index'));
 	}
@@ -114,7 +142,7 @@ class PluginsController extends AppController {
 		$this->set(compact('courses'));
 	}
 
-	function admin_delete($id = null) {
+	function admin_delete($id) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for Plugin', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
@@ -123,6 +151,28 @@ class PluginsController extends AppController {
 			$this->Session->setFlash(__('Plugin deleted', true), 'default', array('class' => 'success'));
 			$this->redirect(array('action'=>'index'));
 		}
+	}
+	
+	function admin_activate($id) {
+		$this->Plugin->id = $id;
+		$this->_redirectIf(!$this->Plugin->exists());
+		if ($this->Plugin->activate($id)) {
+			$this->Session->setFlash(__('Plugin activated', true), 'default', array('class' => 'success'));
+		} else {
+			$this->Session->setFlash(__('Unable to activate the plugin', true), 'default', array('class' => 'error'));
+		}
+		$this->redirect(array('action'=>'index'));
+	}
+	
+	function admin_deactivate($id) {
+		$this->Plugin->id = $id;
+		$this->_redirectIf(!$this->Plugin->exists());
+		if ($this->Plugin->deactivate($id)) {
+			$this->Session->setFlash(__('Plugin deactivated', true), 'default', array('class' => 'success'));
+		} else {
+			$this->Session->setFlash(__('Unable to deactivate plugin', true), 'default', array('class' => 'error'));
+		}
+		$this->redirect(array('action'=>'index'));
 	}
 
 }

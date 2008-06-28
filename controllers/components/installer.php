@@ -30,6 +30,11 @@
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 App::import('Core','Schema');
+/**
+ * Utilities to install plugins in the database
+ *
+ */
+
 class InstallerComponent extends Object {
 	var $controller;
 	var $errors  = array();
@@ -46,16 +51,14 @@ class InstallerComponent extends Object {
 	}
 	
 	/**
-	 * Reads schema.php file from the calling plugin and enerates the tables specified in it
+	 * Reads schema.php file from the calling plugin and denerates the tables specified in it
 	 *
 	 * @return boolean
 	 */
 	
-	function createSchema() {
-		if (isset($this->controller->plugin) && !empty($this->controller->plugin))
+	function createSchema($plugin = null) {
+		if (!$plugin && isset($this->controller->plugin) && !empty($this->controller->plugin))
 			$plugin = $this->controller->plugin;
-		else 
-			return false;
 		
 		$instance = ClassRegistry::init('Plugin');
 		$path = $instance->getPath($plugin);
@@ -63,6 +66,10 @@ class InstallerComponent extends Object {
 			return false;
 		
 		$PluginSchema = $schema->load();
+		
+		if (!$PluginSchema)
+			return true;
+			
 		$db =& ConnectionManager::getDataSource('default');
 		foreach ($PluginSchema->tables as $table => $fields) {
 			$create[$table] = $db->createSchema($PluginSchema, $table);
@@ -77,6 +84,38 @@ class InstallerComponent extends Object {
 					$this->errors[] = $db->lastError();
 				}
 				$schema->after(array('create' => $table, 'errors'=> $this->errors));
+			}
+		}
+		return empty($this->errors);
+	}
+	
+	/**
+	 * Reads schema.php file from the calling plugin and drop the tables specified in it
+	 *
+	 * @param string $plugin 
+	 * @return true on success
+	 */
+	
+	function dropSchema($plugin) {
+		$instance = ClassRegistry::init('Plugin');
+		$path = $instance->getPath($plugin);
+		if (empty($path) || !($schema = new CakeSchema(array('name' => $plugin,'path' => $path.DS.'config'.DS.'sql'))))
+			return true;
+			
+		$PluginSchema = $schema->load();
+		if (!$PluginSchema)
+			return true;
+			
+		$db =& ConnectionManager::getDataSource('default');
+		foreach ($PluginSchema->tables as $table => $fields) {
+			$create[$table] = $db->dropSchema($PluginSchema, $table);
+		}
+		
+		foreach($create as $table => $sql) {
+			if (!empty($sql)) {
+				if (!$db->_execute($sql)) {
+					$this->errors[] = $db->lastError();
+				}
 			}
 		}
 		return empty($this->errors);
