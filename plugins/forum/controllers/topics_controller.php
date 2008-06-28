@@ -34,6 +34,7 @@ class TopicsController extends ForumAppController {
 	var $name = 'Topics';
 	var $helpers = array('Html', 'Form');
 	
+	
 	function _setActiveCourse() {
 		if (parent::_setActiveCourse()) return;
 		if (isset($this->params['named']['topic_id'])) {

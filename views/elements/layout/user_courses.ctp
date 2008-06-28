@@ -32,7 +32,7 @@
 	endif;
 	echo $html->link(
 		__('Find a Course to enroll', true),
-		array('controller' => 'departments', 'action' => 'index'),
+		array('controller' => 'departments', 'action' => 'index','plugin' => null),
 		array('class' => 'enroll')
 	);
 ?>

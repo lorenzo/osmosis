@@ -33,6 +33,17 @@ class DiscussionsController extends ForumAppController {
 
 	var $name = 'Discussions';
 	var $helpers = array('Html', 'Form');
+	
+	function _ownerAuthorization() {	
+		if ($this->action == 'edit') {
+			if (isset($this->data['Discussion']['id']))
+				return $this->Discussion->isOwner($this->Auth->user('id'),$this->data['Discussion']['id']);
+				
+			return false;
+		}
+			
+		return parent::_ownerAuthorization();
+	}
 
 	function _setActiveCourse() {
 		if (parent::_setActiveCourse()) return;

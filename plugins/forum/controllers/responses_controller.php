@@ -34,6 +34,22 @@ class ResponsesController extends ForumAppController {
 	var $name = 'Responses';
 	var $helpers = array('Html', 'Form');
 	
+	function _ownerAuthorization() {	
+		if ($this->action == 'edit') {
+			$check = false;
+			if (isset($this->data['Response']['id']))
+				$check = $this->data['Response']['id'];
+				
+			elseif (isset($this->params['named']['response_id']))
+				$check = $this->params['named']['response_id'];
+				return $this->Response->isOwner($this->Auth->user('id'),$check);
+					
+			return false;
+		}
+			
+		return parent::_ownerAuthorization();
+	}
+	
 	function _setActiveCourse() {
 		if (parent::_setActiveCourse()) return;
 		if (isset($this->params['named']['response_id']) || isset($this->params['named']['discussion_id'])) {
