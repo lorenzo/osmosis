@@ -128,5 +128,10 @@ class Post extends BlogAppModel {
 		);
 		parent::__construct($id,$table,$ds);
 	}
+	
+	function isOwner($member,$post) {
+		$this->contain('Blog');
+		return $this->find('count',array('conditions' => array('Post.id' => $post,'Blog.member_id' => $member)));
+	} 
 }
 ?>

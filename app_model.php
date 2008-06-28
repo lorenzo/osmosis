@@ -91,7 +91,7 @@ class AppModel extends Model{
 						$this->alias.'.id' => $id,
 						$this->belongsTo[$foreign]['foreignKey'] => $member 
 						)
-					)) > 0;
+					)) == 1;
 		}
 		return false;
 	}

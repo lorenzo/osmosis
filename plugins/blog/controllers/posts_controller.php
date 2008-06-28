@@ -34,6 +34,30 @@ class PostsController extends BlogAppController {
 	var $name = 'Posts';
 	var $helpers = array('Html', 'Form' );
 	var $components = array('HtmlPurifier');
+	
+	function _ownerAuthorization() {
+		switch ($this->action) {
+			case 'view' :
+				return true;
+			case 'add' :
+				if (isset($this->data['Post']['blog_id']))
+					return $this->Post->Blog->isOwner($this->Auth->user('id'),$this->data['Post']['blog_id']);
+				
+				if (isset($this->params['pass'][0]))
+					return $this->Post->Blog->isOwner($this->Auth->user('id'),$this->params['pass'][0]);
+				break;
+			case 'edit' :
+			case 'delete' :
+				if (isset($this->data['Post']['id']))
+					return $this->Post->isOwner($this->Auth->user('id'),$this->data['Post']['id']);
+				
+				if (isset($this->params['pass'][0]))
+					return $this->Post->isOwner($this->Auth->user('id'),$this->params['pass'][0]);
+				break;
+		}
+			
+		return false;
+	}
 
 	function add($blog_id = null) {
 		if (!$blog_id && empty($this->data)) {		

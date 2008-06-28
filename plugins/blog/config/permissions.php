@@ -2,11 +2,7 @@
 class BlogPermissions extends Object {
 	
 	var $Blogs = array(
-		'index'	=> 'Member',
 		'view'	=> 'Public',
-		'add' => 'Member',
-		'edit'	=> 'Member',
-		'delete' => 'Member'
 	);
 		
 	var $Posts = array(

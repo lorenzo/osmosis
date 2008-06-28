@@ -69,7 +69,7 @@ class BlogsController extends BlogAppController {
 			$this->data['Blog']['member_id'] = $this->Auth->user('id');
 			if ($this->Blog->save($this->data)) {
 				$this->Session->setFlash(__('The Blog has been saved',true), 'default', array('class' => 'success'));
-				$this->redirect(array('action'=>'index'), null, true);
+				$this->redirect(array('action'=>'index'));
 			} else {
 				$this->Session->setFlash(__('The Blog could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
@@ -84,7 +84,7 @@ class BlogsController extends BlogAppController {
 		if (!empty($this->data)) {
 			if ($this->Blog->save($this->data)) {
 				$this->Session->setFlash(__('The Blog has been saved',true), 'default', array('class' => 'success'));
-				$this->redirect(array('action'=>'index'), null, true);
+				$this->redirect(array('action'=>'index'));
 			} else {
 				$this->Session->setFlash(__('The Blog could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
@@ -97,11 +97,11 @@ class BlogsController extends BlogAppController {
 	function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for Blog',true), 'default', array('class' => 'error'));
-			$this->redirect(array('action'=>'index'), null, true);
+			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Blog->del($id)) {
 			$this->Session->setFlash(__('Blog deleted',true), 'default', array('class' => 'success'));
-			$this->redirect(array('action'=>'index'), null, true);
+			$this->redirect(array('action'=>'index'));
 		}
 		
 	}

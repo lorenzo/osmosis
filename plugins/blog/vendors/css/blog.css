@@ -2,6 +2,7 @@ h1 a {
 	color:#000!important;
 	text-decoration:none;
 }
+
 h2.post-title a {
 	text-decoration:none;
 	color:#333;
@@ -32,6 +33,9 @@ div.comments .comment.altrow {
 }
 div.comments .comment.owner {
 	background:#EFFFFF;
+}
+div.post {
+	margin-bottom:100px;
 }
 .post-date {
 	background:transparent url('../img/calendar.jpg') no-repeat 0 0;

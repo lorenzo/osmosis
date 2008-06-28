@@ -44,5 +44,9 @@ class DashboardsController extends AppController {
 	
 	function messages() {
 	}
+	
+	function isAuthorized() {
+		return $this->Auth->user('id');
+	}
 }
 ?>
