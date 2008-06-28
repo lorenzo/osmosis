@@ -38,7 +38,7 @@
 ?>
 <div class="boxed dashboard-element">
 	<strong class="title">
-		<?php echo __(Inflector::pluralize($role)); ?> &mdash;
+		<?php __(Inflector::pluralize($role)); ?> &mdash;
 		<?php
 			echo $html->link(
 				__('add someone', true),

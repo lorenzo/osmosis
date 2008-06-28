@@ -2982,7 +2982,7 @@ msgstr "Curso"
 
 #: /views/courses/admin_add.ctp:4
 msgid "Add Course"
-msgstr "Agregar curso"
+msgstr "Agregar Curso"
 
 #: /views/courses/admin_add.ctp:18 /views/courses/admin_edit.ctp:20
 #: /views/courses/admin_index.ctp:67 /views/departments/admin_add.ctp:14
@@ -2994,7 +2994,7 @@ msgstr "Listar departamentos"
 #: /views/courses/admin_index.ctp:68 /views/departments/admin_index.ctp:66
 #: /views/departments/admin_view.ctp:26
 msgid "New Department"
-msgstr "Nuevo Departamento"
+msgstr "Nuevo departamento"
 
 #: /views/courses/admin_add.ctp:21 /views/courses/admin_edit.ctp:23
 #: /views/courses/admin_index.ctp:70
@@ -3030,7 +3030,7 @@ msgstr "Miembros"
 
 #: /views/courses/admin_view.ctp:44
 msgid "add someone"
-msgstr ""
+msgstr "Agregar"
 
 #: /views/courses/edit.ctp:20 /views/departments/add.ctp:14
 #: /views/departments/admin_index.ctp:2 /views/departments/edit.ctp:16
@@ -3082,11 +3082,11 @@ msgstr "Conexiones"
 
 #: /views/departments/admin_add.ctp:4
 msgid "Add Department"
-msgstr "Agregar departamento"
+msgstr "Agregar Departamento"
 
 #: /views/departments/admin_edit.ctp:4 /views/departments/admin_view.ctp:23
 msgid "Edit Department"
-msgstr "Editar departamento"
+msgstr "Editar Departamento"
 
 #: /views/departments/admin_view.ctp:24
 msgid "Delete Department"
@@ -3944,3 +3944,47 @@ msgstr ""
 #: /plugins/wiki/models/entry.php:135
 msgid "Please write a content for this entry"
 msgstr "Por favor, indique el contenido de esta página."
+
+#: /plugins/scorm/views/scorms/index.ctp:8
+msgid "add lesson"
+msgstr "Agregar Lección"
+
+#: /plugins/scorm/views/scorms/index.ctp:19
+msgid "Lessons Taken Recently"
+msgstr "Lecciones revisadas recientemente"
+
+#: /plugins/scorm/views/scorms/index.ctp:44
+msgid "You have not taken any lesson yet"
+msgstr "Usted aún no ha visto una lección"
+
+#: /plugins/scorm/views/scorms/index.ctp:75
+msgid "Take this lesson"
+msgstr "Ver esta lección"
+
+#: /plugins/scorm/views/scorms/view.ctp:47
+msgid "Loading"
+msgstr "Cargando"
+
+#: /models/enrollment.php:84
+msgid "Attendee"
+msgstr "Estudiante"
+
+#: /models/enrollment.php:84
+msgid "Attendees"
+msgstr "Estudiantes"
+
+#: /models/enrollment.php:84
+msgid "Professor"
+msgstr "Profesor"
+
+#: /models/enrollment.php:84
+msgid "Professors"
+msgstr "Profesores"
+
+#: /models/enrollment.php:84
+msgid "Assistant"
+msgstr "Ayudante"
+
+#: /models/enrollment.php:84
+msgid "Assistants"
+msgstr "Ayudantes"

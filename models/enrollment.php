@@ -81,8 +81,8 @@ class Enrollment extends AppModel {
 	 **/
 	function enrollableRoles() {
 		$this->Role->recursive = -1;
-		$enrollable_roles = array('Attendee', 'Professor', 'Assistant');
-		return $this->Role->find('all', array('conditions' => array('role' => $enrollable_roles)));
+		$enrollable_roles = array('Attendee'=>__('Attendee', true), 'Professor'=>__('Professor', true), 'Assistant'=>__('Assistant', true));
+		return $this->Role->find('all', array('conditions' => array('role' => array_keys($enrollable_roles))));
 	}
 }
 ?>

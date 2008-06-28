@@ -2,14 +2,15 @@
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
 #  Revision: 472 /osmosis/app_controller.php
-#  Revision: 463 /osmosis/plugins/locker/controllers/folders_controller.php
-#  Revision: 483 /osmosis/app_model.php
+#  Revision: 485 /osmosis/plugins/locker/controllers/folders_controller.php
+#  Revision: 485 /osmosis/app_model.php
 #  Revision: 476 /osmosis/controllers/courses_controller.php
 #  Revision: 463 /osmosis/controllers/departments_controller.php
 #  Revision: 463 /osmosis/controllers/members_controller.php
 #  Revision: 476 /osmosis/controllers/plugins_controller.php
 #  Revision: 468 /osmosis/models/course.php
 #  Revision: 468 /osmosis/models/department.php
+#  Revision: 468 /osmosis/models/enrollment.php
 #  Revision: 468 /osmosis/models/member.php
 #  Revision: 323 /osmosis/models/behaviors/bindable.php
 #  Revision: 463 /osmosis/plugins/blog/config/description.php
@@ -25,13 +26,13 @@
 #  Revision: 403 /osmosis/plugins/forum/models/response.php
 #  Revision: 463 /osmosis/plugins/forum/controllers/topics_controller.php
 #  Revision: 469 /osmosis/plugins/forum/models/discussion.php
-#  Revision: 466 /osmosis/plugins/wiki/models/entry.php
+#  Revision: 488 /osmosis/plugins/wiki/models/entry.php
 #  Revision: 403 /osmosis/plugins/forum/models/topic.php
 #  Revision: 458 /osmosis/plugins/quiz/models/quiz.php
 #  Revision: 463 /osmosis/plugins/locker/config/description.php
-#  Revision: 484 /osmosis/plugins/locker/controllers/documents_controller.php
-#  Revision: 476 /osmosis/plugins/locker/models/locker_document.php
-#  Revision: 474 /osmosis/plugins/locker/models/locker_folder.php
+#  Revision: 485 /osmosis/plugins/locker/controllers/documents_controller.php
+#  Revision: 485 /osmosis/plugins/locker/models/locker_document.php
+#  Revision: 485 /osmosis/plugins/locker/models/locker_folder.php
 #  Revision: 454 /osmosis/plugins/quiz/config/description.php
 #  Revision: 482 /osmosis/plugins/quiz/controllers/choice_questions_controller.php
 #  Revision: 482 /osmosis/plugins/quiz/controllers/matching_questions_controller.php
@@ -46,7 +47,7 @@
 #  Revision: 458 /osmosis/plugins/quiz/models/ordering_question.php
 #  Revision: 452 /osmosis/plugins/quiz/models/text_question.php
 #  Revision: 454 /osmosis/plugins/scorm/config/description.php
-#  Revision: 472 /osmosis/plugins/scorm/controllers/scorms_controller.php
+#  Revision: 486 /osmosis/plugins/scorm/controllers/scorms_controller.php
 #  Revision: 454 /osmosis/plugins/wiki/config/description.php
 #  Revision: 466 /osmosis/plugins/wiki/models/wiki.php
 #  Revision: 466 /osmosis/plugins/wiki/controllers/entries_controller.php
@@ -59,7 +60,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2008-06-28 15:13-0430\n"
+"POT-Creation-Date: 2008-06-28 17:02-0430\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -77,7 +78,7 @@ msgid "Invalid access"
 msgstr ""
 
 #: /app_controller.php:299
-#: /plugins/locker/controllers/folders_controller.php:134
+#: /plugins/locker/controllers/folders_controller.php:155
 msgid "Invalid Access"
 msgstr ""
 
@@ -269,6 +270,18 @@ msgstr ""
 msgid "Please write a description for the Department"
 msgstr ""
 
+#: /models/enrollment.php:84
+msgid "Attendee"
+msgstr ""
+
+#: /models/enrollment.php:84
+msgid "Professor"
+msgstr ""
+
+#: /models/enrollment.php:84
+msgid "Assistant"
+msgstr ""
+
 #: /models/member.php:104
 msgid "Please write your full name"
 msgstr ""
@@ -426,8 +439,6 @@ msgstr ""
 #: /plugins/forum/views/subjects/edit.ctp:18
 #: /plugins/forum/views/subjects/index.ctp:53
 #: /plugins/forum/views/subjects/view.ctp:44;88
-#: /plugins/locker/views/documents/index.ctp:45
-#: /plugins/locker/views/folders/index.ctp:37
 #: /plugins/quiz/views/choice_questions/edit.ctp:18
 #: /plugins/quiz/views/choice_questions/index.ctp:45
 #: /plugins/quiz/views/choice_questions/view.ctp:34;66;102
@@ -624,10 +635,8 @@ msgstr ""
 #: /plugins/forum/views/subjects/edit.ctp:18
 #: /plugins/forum/views/subjects/index.ctp:53
 #: /plugins/forum/views/subjects/view.ctp:88
-#: /plugins/locker/views/documents/index.ctp:45
 #: /plugins/locker/views/documents/view.ctp:41
 #: /plugins/locker/views/documents/ajax/view.ctp:13
-#: /plugins/locker/views/folders/index.ctp:37
 #: /plugins/quiz/views/choice_questions/edit.ctp:18
 #: /plugins/quiz/views/choice_questions/index.ctp:45
 #: /plugins/quiz/views/choice_questions/view.ctp:66;102
@@ -685,8 +694,6 @@ msgstr ""
 #: /plugins/blog/views/comments/index.ctp:6
 #: /plugins/blog/views/posts/index.ctp:6
 #: /plugins/forum/views/subjects/index.ctp:6
-#: /plugins/locker/views/documents/index.ctp:6
-#: /plugins/locker/views/folders/index.ctp:6
 #: /plugins/quiz/views/choice_questions/index.ctp:6
 #: /plugins/quiz/views/matching_questions/index.ctp:6
 #: /plugins/quiz/views/ordering_questions/index.ctp:6
@@ -705,8 +712,6 @@ msgstr ""
 #: /plugins/blog/views/posts/index.ctp:17
 #: /plugins/forum/views/subjects/index.ctp:18
 #: /plugins/forum/views/subjects/view.ctp:67
-#: /plugins/locker/views/documents/index.ctp:16
-#: /plugins/locker/views/folders/index.ctp:14
 #: /plugins/quiz/views/choice_questions/index.ctp:16
 #: /plugins/quiz/views/choice_questions/view.ctp:49;86
 #: /plugins/quiz/views/matching_questions/index.ctp:16
@@ -732,8 +737,6 @@ msgstr ""
 #: /plugins/blog/views/posts/index.ctp:47
 #: /plugins/forum/views/subjects/index.ctp:51
 #: /plugins/forum/views/subjects/view.ctp:86
-#: /plugins/locker/views/documents/index.ctp:43
-#: /plugins/locker/views/folders/index.ctp:35
 #: /plugins/quiz/views/choice_questions/index.ctp:43
 #: /plugins/quiz/views/choice_questions/view.ctp:64;100
 #: /plugins/quiz/views/matching_questions/index.ctp:43
@@ -761,9 +764,7 @@ msgstr ""
 #: /plugins/forum/views/elements/forum_message.ctp:34
 #: /plugins/forum/views/subjects/index.ctp:52
 #: /plugins/forum/views/subjects/view.ctp:87
-#: /plugins/locker/views/documents/index.ctp:44
 #: /plugins/locker/views/documents/view.ctp:29
-#: /plugins/locker/views/folders/index.ctp:36
 #: /plugins/quiz/views/choice_questions/index.ctp:44
 #: /plugins/quiz/views/choice_questions/view.ctp:65;101
 #: /plugins/quiz/views/matching_questions/index.ctp:44
@@ -775,6 +776,7 @@ msgstr ""
 #: /plugins/quiz/views/text_questions/index.ctp:40
 #: /plugins/quiz/views/text_questions/view.ctp:58
 #: /plugins/scorm/views/scorms/edit.ctp:4
+#: /plugins/scorm/views/scorms/index.ctp:84
 #: /plugins/wiki/views/entries/index.ctp:49
 #: /plugins/wiki/views/wikis/index.ctp:40
 #: /plugins/wiki/views/wikis/view.ctp:46
@@ -791,8 +793,6 @@ msgstr ""
 #: /plugins/blog/views/posts/index.ctp:56
 #: /plugins/forum/views/elements/discussion_responses.ctp:41
 #: /plugins/forum/views/subjects/index.ctp:60
-#: /plugins/locker/views/documents/index.ctp:52
-#: /plugins/locker/views/folders/index.ctp:44
 #: /plugins/quiz/views/choice_questions/index.ctp:52
 #: /plugins/quiz/views/matching_questions/index.ctp:52
 #: /plugins/quiz/views/ordering_questions/index.ctp:52
@@ -814,8 +814,6 @@ msgstr ""
 #: /plugins/blog/views/posts/index.ctp:58
 #: /plugins/forum/views/elements/discussion_responses.ctp:43
 #: /plugins/forum/views/subjects/index.ctp:62
-#: /plugins/locker/views/documents/index.ctp:54
-#: /plugins/locker/views/folders/index.ctp:46
 #: /plugins/quiz/views/choice_questions/index.ctp:54
 #: /plugins/quiz/views/matching_questions/index.ctp:54
 #: /plugins/quiz/views/ordering_questions/index.ctp:54
@@ -881,6 +879,10 @@ msgstr ""
 #: /plugins/blog/views/comments/view.ctp:9
 #: /plugins/locker/views/documents/add.ctp:8
 #: /plugins/scorm/views/scorms/add.ctp:14
+#: /views/courses/add.ctp:9
+#: /views/courses/admin_add.ctp:10
+#: /views/courses/admin_edit.ctp:11
+#: /views/courses/edit.ctp:11
 #: /views/departments/admin_view.ctp:14;41
 #: /views/plugins/admin_view.ctp:46
 msgid "Description"
@@ -1376,77 +1378,77 @@ msgstr ""
 msgid "Locker"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:45;97
+#: /plugins/locker/controllers/documents_controller.php:41;92
 msgid "Invalid LockerDocument"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:62;102
+#: /plugins/locker/controllers/documents_controller.php:58;97
 msgid "The LockerDocument has been saved"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:65;106
+#: /plugins/locker/controllers/documents_controller.php:61;101
 msgid "The LockerDocument could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:116
+#: /plugins/locker/controllers/documents_controller.php:111
 msgid "Invalid id for LockerDocument"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:120
+#: /plugins/locker/controllers/documents_controller.php:115
 msgid "LockerDocument deleted"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:127;133
+#: /plugins/locker/controllers/documents_controller.php:122;128
 msgid "Invalid Document"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:180
+#: /plugins/locker/controllers/documents_controller.php:174
 msgid "The file was dropped correctly"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:183
+#: /plugins/locker/controllers/documents_controller.php:177
 msgid "The file could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:47
+#: /plugins/locker/controllers/folders_controller.php:68
 msgid "Invalid Locker"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:71;88
+#: /plugins/locker/controllers/folders_controller.php:92;109
 msgid "The LockerFolder has been saved"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:83
+#: /plugins/locker/controllers/folders_controller.php:104
 msgid "Invalid LockerFolder"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:91
+#: /plugins/locker/controllers/folders_controller.php:112
 msgid "The LockerFolder could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:103
+#: /plugins/locker/controllers/folders_controller.php:124
 msgid "Invalid id for LockerFolder"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:107
+#: /plugins/locker/controllers/folders_controller.php:128
 msgid "LockerFolder deleted"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:121
+#: /plugins/locker/controllers/folders_controller.php:142
 #: /plugins/locker/views/documents/add.ctp:9
 #: /views/plugins/admin_view.ctp:19
 msgid "Folder"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:124
+#: /plugins/locker/controllers/folders_controller.php:145
 msgid "Document"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:128
+#: /plugins/locker/controllers/folders_controller.php:149
 msgid "The %s was moved successfully"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:130
+#: /plugins/locker/controllers/folders_controller.php:151
 msgid "The %s could not be moved"
 msgstr ""
 
@@ -1492,14 +1494,6 @@ msgstr ""
 
 #: /plugins/locker/views/documents/edit.ctp:4
 msgid "Edit Document Info"
-msgstr ""
-
-#: /plugins/locker/views/documents/index.ctp:2
-msgid "LockerDocuments"
-msgstr ""
-
-#: /plugins/locker/views/documents/index.ctp:58
-msgid "New LockerDocument"
 msgstr ""
 
 #: /plugins/locker/views/documents/view.ctp:17
@@ -1559,14 +1553,6 @@ msgstr ""
 
 #: /plugins/locker/views/folders/edit.ctp:4
 msgid "Change Folder Name"
-msgstr ""
-
-#: /plugins/locker/views/folders/index.ctp:2
-msgid "LockerFolders"
-msgstr ""
-
-#: /plugins/locker/views/folders/index.ctp:50
-msgid "New LockerFolder"
 msgstr ""
 
 #: /plugins/locker/views/folders/view.ctp:2
@@ -2058,6 +2044,10 @@ msgstr ""
 #: /plugins/quiz/views/quizzes/view.ctp:9
 #: /plugins/quiz/views/text_questions/view.ctp:42
 #: /plugins/scorm/views/scorms/add.ctp:12
+#: /views/courses/add.ctp:7
+#: /views/courses/admin_add.ctp:9
+#: /views/courses/admin_edit.ctp:10
+#: /views/courses/edit.ctp:10
 #: /views/departments/admin_view.ctp:9;40
 #: /views/plugins/admin_view.ctp:9;45
 msgid "Name"
@@ -2319,43 +2309,43 @@ msgid "TextQuestions"
 msgstr ""
 
 #: /plugins/scorm/config/description.php:33
-#: /plugins/scorm/views/scorms/index.ctp:2
+#: /plugins/scorm/views/scorms/index.ctp:3
 msgid "Lessons"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:111
+#: /plugins/scorm/controllers/scorms_controller.php:137
 msgid "The Scorm file could not be unzipped"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:119
+#: /plugins/scorm/controllers/scorms_controller.php:145
 msgid "The Scorm file could not be parsed"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:125
+#: /plugins/scorm/controllers/scorms_controller.php:151
 msgid "The Scorm doesn't have the right version"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:128
+#: /plugins/scorm/controllers/scorms_controller.php:154
 msgid "The Scorm has been saved"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:135
+#: /plugins/scorm/controllers/scorms_controller.php:161
 msgid "The Scorm could not be uploaded. Please, try again."
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:143
+#: /plugins/scorm/controllers/scorms_controller.php:169
 msgid "Invalid Scorm"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:148
+#: /plugins/scorm/controllers/scorms_controller.php:174
 msgid "The Scorm saved"
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:151
+#: /plugins/scorm/controllers/scorms_controller.php:177
 msgid "The Scorm could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/scorm/controllers/scorms_controller.php:161
+#: /plugins/scorm/controllers/scorms_controller.php:187
 msgid "Invalid id for Scorm"
 msgstr ""
 
@@ -2380,16 +2370,36 @@ msgstr ""
 msgid "File Name"
 msgstr ""
 
-#: /plugins/scorm/views/scorms/view.ctp:16
+#: /plugins/scorm/views/scorms/index.ctp:8
+msgid "add lesson"
+msgstr ""
+
+#: /plugins/scorm/views/scorms/index.ctp:19
+msgid "Lessons Taken Recently"
+msgstr ""
+
+#: /plugins/scorm/views/scorms/index.ctp:43
+msgid "You have not taken any lesson yet"
+msgstr ""
+
+#: /plugins/scorm/views/scorms/index.ctp:74
+msgid "Take this lesson"
+msgstr ""
+
+#: /plugins/scorm/views/scorms/view.ctp:18
 msgid "&laquo; Previous"
 msgstr ""
 
-#: /plugins/scorm/views/scorms/view.ctp:23
+#: /plugins/scorm/views/scorms/view.ctp:25
 msgid "Exit Scorm"
 msgstr ""
 
-#: /plugins/scorm/views/scorms/view.ctp:25
+#: /plugins/scorm/views/scorms/view.ctp:27
 msgid "Next &raquo;"
+msgstr ""
+
+#: /plugins/scorm/views/scorms/view.ctp:47
+msgid "Loading"
 msgstr ""
 
 #: /plugins/wiki/config/description.php:33
@@ -2624,8 +2634,35 @@ msgstr ""
 msgid "Course"
 msgstr ""
 
+#: /views/courses/add.ctp:6
+#: /views/courses/admin_add.ctp:6
+#: /views/courses/admin_edit.ctp:7
+#: /views/courses/admin_view.ctp:8
+#: /views/courses/edit.ctp:7;21
+#: /views/departments/add.ctp:4
+#: /views/departments/admin_view.ctp:2
+#: /views/departments/edit.ctp:4
+msgid "Department"
+msgstr ""
+
+#: /views/courses/add.ctp:8
+#: /views/courses/admin_add.ctp:8
+#: /views/courses/admin_edit.ctp:9
+#: /views/courses/edit.ctp:9
+#: /views/departments/admin_view.ctp:39
+#: /views/plugins/admin_view.ctp:44
+msgid "Code"
+msgstr ""
+
 #: /views/courses/admin_add.ctp:4
 msgid "Add Course"
+msgstr ""
+
+#: /views/courses/admin_add.ctp:7
+#: /views/courses/admin_edit.ctp:8
+#: /views/courses/admin_view.ctp:17
+#: /views/courses/edit.ctp:8
+msgid "Owner"
 msgstr ""
 
 #: /views/courses/admin_add.ctp:18
@@ -2662,18 +2699,6 @@ msgstr ""
 #: /views/departments/view.ctp:14
 #: /views/layouts/admin.ctp:28
 msgid "Courses"
-msgstr ""
-
-#: /views/courses/admin_view.ctp:8
-#: /views/courses/edit.ctp:21
-#: /views/departments/add.ctp:4
-#: /views/departments/admin_view.ctp:2
-#: /views/departments/edit.ctp:4
-msgid "Department"
-msgstr ""
-
-#: /views/courses/admin_view.ctp:17
-msgid "Owner"
 msgstr ""
 
 #: /views/courses/admin_view.ctp:31
@@ -2778,11 +2803,6 @@ msgstr ""
 #: /views/departments/admin_view.ctp:38
 #: /views/plugins/admin_view.ctp:43
 msgid "Owner Id"
-msgstr ""
-
-#: /views/departments/admin_view.ctp:39
-#: /views/plugins/admin_view.ctp:44
-msgid "Code"
 msgstr ""
 
 #: /views/departments/index.ctp:8

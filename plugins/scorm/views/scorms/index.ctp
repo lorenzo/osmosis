@@ -35,7 +35,6 @@
 			</li>
 			<?php
 			}
-			// debug($recent);
 	?>
 		</ul>
 	<?php
@@ -70,12 +69,24 @@
 				<ul class="reverse actions">
 					<li class="info">
 						<?php
-							echo $html->link(
+							echo
+								$html->link(
 								__('Take this lesson', true),
 								array('controller'=> 'scorms', 'action'=>'view', $scorm['Scorm']['id'])
+								
 							);
 						?>
 					</li>
+					<li class="edit">
+						<?php
+							echo
+								$html->link(
+								__('Edit', true),
+								array('controller'=> 'scorms', 'action'=>'edit', $scorm['Scorm']['id'])
+								
+							);
+						?>
+					</li>	
 				</ul>
 			</li>
 		<?php endforeach; ?>

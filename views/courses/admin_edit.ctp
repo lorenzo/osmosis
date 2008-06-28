@@ -4,11 +4,11 @@
  		<legend><?php __('Edit Course');?></legend>
 	<?php
 		echo $form->input('id');
-		echo $form->input('department_id');
-		echo $form->input('owner_id');
-		echo $form->input('code');
-		echo $form->input('name');
-		echo $form->input('description');
+		echo $form->input('department_id', array('label'=>__('Department', true)));
+		echo $form->input('owner_id', array('label'=>__('Owner', true)));
+		echo $form->input('code', array('label'=>__('Code', true)));
+		echo $form->input('name', array('label'=>__('Name', true)));
+		echo $form->input('description', array('label'=>__('Description', true)));
 	?>
 	</fieldset>
 <?php echo $form->end(__('Submit', true));?>
