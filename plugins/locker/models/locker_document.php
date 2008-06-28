@@ -237,14 +237,14 @@ class LockerDocument extends LockerAppModel {
 		if (!$document) {
 			return false;
 		}
-		$this->data = Set::merge($document,$this->data);
-		$destiny = $this->Folder->find('first', array('Folder.id' => $folder_id));
+
+		$destiny = $this->Folder->find('first', array('conditions' => array('Folder.id' => $folder_id)));
 		if (!$destiny) {
 			return false;
 		}
 		if ($document['Document']['member_id'] != $destiny['Folder']['member_id']) {
 			$parent = $document['Folder']['ParentFolder'];
-			if ($parent['name'] != 'locker' || $parent['parent_id']!=null) {
+			if ($parent['parent_id'] != null || $parent['name'] != 'locker') {
 				return false;
 			}
 			$data = $this->updateAll(

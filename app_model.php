@@ -89,7 +89,7 @@ class AppModel extends Model{
 				return $this->find('count',array(
 					'conditions' => array(
 						$this->alias.'.id' => $id,
-						$this->belongsTo[$foreign]['foreignKey'] => $member 
+						$this->alias.'.'.$this->belongsTo[$foreign]['foreignKey'] => $member 
 						)
 					)) == 1;
 		}

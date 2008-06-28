@@ -171,7 +171,7 @@ class LockerFolder extends LockerAppModel {
 				}
 				return false;
 			}
-			$username = $this->Member->field('username', $this->data[$this->alias]['member_id']);
+			$username = $this->Member->field('username',array('Member.id' => $this->data[$this->alias]['member_id']));
 			$old = $this->getDirectory($this->data[$this->alias]['id'], $username);
 			$new = $this->getDirectory($this->data[$this->alias]['parent_id'], $username) . DS . $this->data[$this->alias]['folder_name'];
 			return !is_dir($new) && rename($old, $new);
@@ -290,7 +290,8 @@ class LockerFolder extends LockerAppModel {
 	 * @return string path to the folder
 	 */
 	function getDirectory($id,$username) {
-		return $this->getFolder($id,$username)->pwd();
+		$directory = $this->getFolder($id,$username)->pwd();
+		return $directory;
 	}
 
 	/**
@@ -342,7 +343,6 @@ class LockerFolder extends LockerAppModel {
 			);
 			$parent_folder = $this->find('first', compact('conditions'));
 		}
-		
 		if (!$parent_folder) {
 			$parent_folder = $this->createLocker($member_id);
 		}
@@ -358,7 +358,7 @@ class LockerFolder extends LockerAppModel {
 	function createLocker($member_id) {
 		if ($this->Member->find('count', array('conditions' => array('id' => $member_id)))) {
 			$this->create();
-			$data = $this->save(array('name' => 'locker', 'member_id' => $member_id));
+			$data = $this->save(array('LockerFolder' => array('name' => 'locker', 'member_id' => $member_id)));
 			$parent_id = $data['LockerFolder']['id'] = $this->id;
 			$this->create();
 			$dropbox_data = $this->save(array('name' => 'dropbox', 'member_id' => $member_id, 'parent_id' => $parent_id));
@@ -424,6 +424,7 @@ class LockerFolder extends LockerAppModel {
 		$this->data['LockerFolder']['name']	= $source['LockerFolder']['name'];
 		$this->data['LockerFolder']['folder_name']	= $source['LockerFolder']['folder_name'];
 		$this->data['LockerFolder']['id']	= $source['LockerFolder']['id'];
+		$this->data['LockerFolder']['member_id'] = $source['LockerFolder']['member_id'];
 		$this->id = $source['LockerFolder']['id'];
 		return $this->save();
 	}

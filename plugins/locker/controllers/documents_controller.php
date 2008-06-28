@@ -35,10 +35,6 @@ class DocumentsController extends LockerAppController {
 	var $helpers = array('Html', 'Form');
 	var $uses = array('Locker.LockerDocument');
 
-	function index() {
-		$this->LockerDocument->recursive = 0;
-		$this->set('lockerDocuments', $this->paginate());
-	}
 
 	function view($id = null) {
 		if (!$id) {
@@ -88,7 +84,6 @@ class DocumentsController extends LockerAppController {
 		} else {
 			$this->data['LockerDocument']['member_username'] = $this->Auth->user('username');
 		}
-		// debug($this->data);die;
 		return $this->LockerDocument->save($this->data);
 	}
 	
@@ -144,7 +139,6 @@ class DocumentsController extends LockerAppController {
 			$mime = $info['LockerDocument']['type'];
 
 		$this->set(compact('path','extension','download','mime','name'));
-		
 	}
 	
 	/**

@@ -34,11 +34,32 @@ class FoldersController extends LockerAppController {
 	var $name = 'Folders';
 	var $helpers = array('Html', 'Form');
 	var $uses = array('Locker.LockerFolder');
-
-	function index() {
-		$this->LockerFolder->recursive = 0;
-		$this->set('lockerFolders', $this->paginate());
+	
+	function _ownerAuthorization() {
+		if($this->action == 'view')
+			return parent::_ownerAuthorization();
+			
+		switch ($this->action) {
+			case 'view' :
+				return true;
+			case 'add' :
+				if (isset($this->data['LockerFolder']['parent_id']))
+					return $this->LockerFolder->isOwner($this->Auth->user('id'),$this->data['LockerFolder']['parent_id']);
+				break;
+			case 'edit' :
+			case 'move' :
+			case 'delete' :
+				if (isset($this->data['LockerFolder']['id']))
+					return $this->LockerFolder->isOwner($this->Auth->user('id'),$this->data['LockerFolder']['id']);
+				
+				if (isset($this->params['pass'][0]))
+					return $this->LockerFolder->isOwner($this->Auth->user('id'),$this->params['pass'][0]);
+				break;
+		}
+			
+		return false;
 	}
+
 
 	function view($id = null) {
 		$member = $parentFolder = $path = null;
@@ -84,7 +105,7 @@ class FoldersController extends LockerAppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->LockerFolder->save($this->data)) {
+			if ($this->LockerFolder->save($this->data,array('name'))) {
 				$this->Session->setFlash(__('The LockerFolder has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'));
 			} else {

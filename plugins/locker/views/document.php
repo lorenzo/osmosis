@@ -74,7 +74,6 @@ class DocumentView extends MediaView {
 		if (!$extension) {
 			$extension = 'bin';
 		}
-		
 		if (file_exists($path) && isset($extension) && array_key_exists($extension, $this->mimeType) && connection_status() == 0) {
 			$chunkSize = 1 * (1024 * 8);
 			$buffer = '';

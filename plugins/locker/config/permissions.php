@@ -44,7 +44,7 @@ class LockerPermissions extends Object {
 		'add'	=> 'Member',
 		'edit'	=> 'Member',
 		'view'	=> 'Public',
-		'download' => 'Member',
+		'download' => 'Public',
 		'delete'	=> 'Member',
 		'drop'	=> 'Member'
 	);
