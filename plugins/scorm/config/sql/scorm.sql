@@ -194,16 +194,6 @@ CREATE TABLE IF NOT EXISTS `scorm_rules` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `scorm_schema_info`
---
-
-CREATE TABLE IF NOT EXISTS `scorm_schema_info` (
-  `version` int(10) unsigned NOT NULL default '0'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `scorm_scorms`
 --
 
