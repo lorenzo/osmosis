@@ -125,9 +125,26 @@ a:visited {
 
 #main-content .main h2  {
 	color:#666;
-	letter-spacing:1px;
+	border-left:#6EA6D5 10px solid;
+	background:#fafafa;
+	padding-left:10px;
+	letter-spacing:2px;
 	font-size:2em;
-	margin-bottom:2px;
+}
+.content-title {
+	margin-top:15px;
+}
+.content-title h2 {
+/*	display:inline;*/
+}
+.content-title ul {
+	margin-top:-27px;
+	text-align:right;
+	padding-bottom:27px;
+}
+.content-title ul li {
+	float:none;
+	display:inline;
 }
 /* Styles "Abstract" list */
 .abstract strong.title {
