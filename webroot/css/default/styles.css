@@ -135,7 +135,7 @@ a:visited {
 	margin-top:15px;
 }
 .content-title h2 {
-/*	display:inline;*/
+	margin-bottom:0;
 }
 .content-title ul {
 	margin-top:-27px;
@@ -463,4 +463,8 @@ ul.actions li.add a:hover {
 	border-color:#FFD100;
 	color:#DAA600;
 	background:#FCFFDD url('../../img/default/messagebox_warning.png') no-repeat 4px 50%;
+}
+h3 {
+	color:#333;
+	border-bottom:#888 1px solid;
 }

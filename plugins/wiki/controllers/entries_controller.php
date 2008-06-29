@@ -44,7 +44,7 @@ class EntriesController extends WikiAppController {
 	
 	function index() {
 		$this->Entry->recursive = 0;
-		$this->set('entries', $this->paginate());
+		$this->set('entries', $this->paginate(array('wiki_id' => $this->params['named']['wiki_id'])));
 	}
 
 	function view($slug = null) {
@@ -138,7 +138,7 @@ class EntriesController extends WikiAppController {
 		}
 	}
 	
-	function restore($entry_id,$revision = null) {
+	function restore($entry_id, $revision = null) {
 		if($this->Entry->restore($entry_id,$revision)) {
 			$this->Session->setFlash(__('Entry revision restored',true), 'default', array('class' => 'success'));
 		}else{

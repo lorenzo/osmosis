@@ -4,7 +4,7 @@
  		<legend><?php __('Add Wiki');?></legend>
 	<?php
 		echo $form->input('course_id');
-		echo $form->input('name');
+		echo $form->input('name', array('label' => __('Title', true), 'size' => 60));
 		echo $form->input('description');
 	?>
 	</fieldset>

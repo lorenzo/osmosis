@@ -1203,7 +1203,7 @@ class HtmlDiffFormatter extends DiffFormatter
 
 		while ( $line = array_shift( $del ) ) {
 			$aline = array_shift( $add );
-			echo '<ins class="diff-addedline">'. $aline .'</ins>';
+			echo '<span class="diff-addedline">'. $aline .'</span>';
 		}
 		foreach ($add as $line) {	# If any leftovers
 			echo $line;

@@ -134,13 +134,20 @@ class Wiki extends AppModel {
 			array(
 				'wiki_id'	=> $this->id,
 				'member_id'	=> $member_id,
-				'title'		=> __('Main Page', true),
-				'content'	=> __('<p>Wellcome to the wiki, start by editing this page!</p>', true)
+				'title'		=> __('Welcome', true),
+				'content'	=> __('<p>Welcome to the wiki, start by editing this message!</p>', true)
 			)
 		);
 		$entry['Entry']['id'] = $this->Entry->id;
 		$data['Entry'][] = $entry['Entry'];
 		return $data;
+	}
+	
+	
+	function mainPage($wiki_id) {
+		$conditions = compact('wiki_id');
+		$this->Entry->recursive = -1;
+		return $this->Entry->find('first', compact('conditions'));
 	}
 }
 ?>

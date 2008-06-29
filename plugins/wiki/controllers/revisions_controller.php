@@ -49,13 +49,32 @@ class RevisionsController extends WikiAppController {
 		$this->set('revisions', $this->paginate(array('entry_id'=>$entry_id)));
 	}
 	
-	function diff($entry_id,$revision_id) {
+	function diff($entry_id, $revision_id = null) {
 		$this->Revision->Entry->recursive = 0;
-		$entry = $this->Revision->Entry->read(null,$entry_id);
-		$this->Revision->recursive = 0;
-		$revision = $this->Revision->find(array('entry_id'=>$entry_id,'Revision.id'=>$revision_id));
-		$diff = $this->Diff->formatted_diff($revision['Revision']['content'],$entry['Entry']['content']);
-		$this->set(compact('entry','revision','diff'));
+		$entry = $this->Revision->Entry->read(null, $entry_id);
+		
+		$this->Revision->recursive = -1;
+		$order = 'created DESC';
+		if ($revision_id) {
+			$conditions = array('entry_id' => $entry_id, 'Revision.id <=' => $revision_id);
+			$limit = 2;
+			$revisions = $this->Revision->find('all', compact('conditions', 'limit', 'order'));
+			$content1 = $revisions[0]['Revision']['content'];
+			$rev1 = $revisions[0]['Revision']['revision'];
+			$content2 = $revisions[1]['Revision']['content'];
+			$rev2 = $revisions[1]['Revision']['revision'];
+		} else {
+			$conditions = array('entry_id' => $entry_id);
+			$limit = 1;
+			$revision = $this->Revision->find('first', compact('conditions', 'limit', 'order'));
+			$content1 = $entry['Entry']['content'];
+			$rev1 = null;
+			$content2 = $revision['Revision']['content'];
+			$rev2 = $revision['Revision']['revision'];
+		}
+		
+		$diff = $this->Diff->formatted_diff($content2, $content1);
+		$this->set(compact('entry', 'diff', 'content1', 'content2', 'rev1', 'rev2', 'entry'));
 	}
 	
 	function view($id = null) {

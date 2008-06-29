@@ -34,6 +34,13 @@ class WikisController extends WikiAppController {
 	var $name = 'Wikis';
 	var $helpers = array('Html', 'Form' );
 
+	function _setActiveCourse() {
+		if (!isset($this->params['named']['course_id']) && isset($this->params['named']['wiki_id'])) {
+			$this->activeCourse = $this->Wiki->field('course_id', array('id' => $this->params['named']['wiki_id']));
+		} else
+			parent::_setActiveCourse();
+	}
+
 	function index() {
 		$this->Wiki->recursive = 0;
 		$this->set('wikis', $this->paginate());
@@ -46,6 +53,7 @@ class WikisController extends WikiAppController {
 		}
 		$wiki = null;
 		$course_id = $this->params['named']['course_id'];
+		$this->Wiki->contain('Entry(id,title,slug,revision,updated)');
 		if (!$id){
 			$wiki = $this->Wiki->findByCourseId($course_id);
 			if (!$wiki) {
@@ -68,7 +76,8 @@ class WikisController extends WikiAppController {
 				)
 			);
 		}
-		$this->set(array('data' => $wiki));
+		$main = $this->Wiki->mainPage($wiki['Wiki']['id']);
+		$this->set(array('data' => $wiki, 'main' => $main['Entry']));
 	}
 
 	function add() { 
@@ -86,6 +95,9 @@ class WikisController extends WikiAppController {
 	}
 
 	function edit($id = null) {
+		if (isset($this->params['named']['wiki_id'])) {
+			$id = $this->params['named']['wiki_id'];
+		}
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Wiki',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
@@ -93,7 +105,7 @@ class WikisController extends WikiAppController {
 		if (!empty($this->data)) {
 			if ($this->Wiki->save($this->data)) {
 				$this->Session->setFlash(__('The Wiki has been saved',true), 'default', array('class' => 'success'));
-				$this->redirect(array('action'=>'index'), null, true);
+				$this->redirect(array('action'=>'view', 'course_id' => $this->Wiki->field('course_id')), null, true);
 			} else {
 				$this->Session->setFlash(__('The Wiki could not be saved. Please, try again',true), 'default', array('class' => 'error'));
 			}
@@ -101,7 +113,6 @@ class WikisController extends WikiAppController {
 		if (empty($this->data)) {
 			$this->data = $this->Wiki->read(null, $id);
 		}
-		$courses = @$this->Wiki->Course->generateList();
 		$this->set(compact('courses'));
 	}
 

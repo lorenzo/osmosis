@@ -1,13 +1,3 @@
-<div class="entries view">
-	<h2>
-		<?php echo $entry['Entry']['title']?>
-		<span class="note">&mdash; <?php echo $html->link(__('edit', true), array(
-			'action' => 'edit', 
-			$entry['Entry']['id'],
-			'wiki_id' =>$entry['Entry']['wiki_id']))?>
-		</span>
-	</h2>
-	<div class="wiki-content">
-		<?php echo $wiki->format($filter->filter($entry['Entry']['content'])); ?>
-	</div>
-</div>
+<?php
+	echo $this->element('entry', array('entry' => $entry['Entry']));
+?>
