@@ -8,5 +8,6 @@
 	
 </div>
 <?php
-	echo $this->element('dashboard/profile', array('cache' => array('time' => '+ 30day', 'key' => $user['id']), 'user' => $user));
+	//'cache' => array('time' => '+ 30day', 'key' => $user['id']), 
+	echo $this->element('dashboard/profile', compact('user'));
 ?>

@@ -26,7 +26,7 @@
 	</dl>
 	<p>
 		<?php
-			echo $html->link(__('Modify your profile', true), array('controller' => 'members', 'action' => 'edit', $user['id']));
+			echo $html->link(__('Modify your profile', true), array('admin' => false, 'controller' => 'members', 'action' => 'edit', $user['id']));
 		?>
 	</p>
 </div>
