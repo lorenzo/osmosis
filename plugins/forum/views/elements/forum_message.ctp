@@ -26,7 +26,7 @@
 			echo $filter->filter($message['content']);
 		?>
 		<?php
-		if ($author['id'] == $session->read('Auth.Member.id')):
+		if ($author['id'] == $session->read('Auth.Member.id') || in_array($Osmosis['currentRole'],a('Assistant','Professor','Admin'))):
 		?>
 		<p class="actions">
 			<?php

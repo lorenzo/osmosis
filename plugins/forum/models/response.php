@@ -93,5 +93,17 @@ class Response extends AppModel {
 		);
 		parent::__construct($id, $table, $ds);
 	}
+	
+	/**
+	 * Returns if the Discussion the Response belongs to, or the topic is locked
+	 *
+	 * @param string $id 
+	 * @return boolean
+	 */
+	
+	function isLocked($id) {
+		$response = $this->findById($id);
+		return $this->Discussion->isLocked($response['Response']['discussion_id']);
+	}
 }
 ?>

@@ -184,5 +184,23 @@ class Discussion extends AppModel {
 		$this->Topic->read(null, $this->data['Discussion']['topic_id']);
 		return $this->Topic->getParentCourse();
 	}
+	
+	/**
+	 * Returns true if the Discussion or the topic it belongs to is locked
+	 *
+	 * @param string $id 
+	 * @return boolean
+	 */
+	
+	function islocked($id) {
+		return $this->find('count',array(
+			'conditions' => array(
+				'Discussion.id' => $id,
+				'OR' => array('Discussion.status' => 'locked', 'Topic.status' => 'locked')
+			),
+			'contain' 	=> array('Topic(status)')
+			)
+		) == 1;
+	}
 }
 ?>

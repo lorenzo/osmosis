@@ -30,7 +30,7 @@
 </div>
 <div class="quick-respond">
 	<?php
-	if ($discussion['Topic']['status']!='locked' && $discussion['Topic']['status']!='locked') :
+	if ($discussion['Discussion']['status']!='locked' && $discussion['Topic']['status']!='locked') :
 		echo $this->element('quick_response', array('discussion_id' => $discussion['Discussion']['id']));
 	else :
 	?>

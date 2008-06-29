@@ -83,7 +83,7 @@ class Role extends AppModel {
 		if ($a == $b)
 			return 0;
 		$roles =  $this->find('all',array('conditions' => array('role' => array($a,$b)),'recursive' => -1));
-		return ($roles[0]['Role']['id'] > $roles[1]['Role']['id']) ? 1 : -1;
+		return (Set::extract('/Role[role='.$a.']/id',$roles) > Set::extract('/Role[role='.$b.']/id',$roles)) ? 1 : -1;
 	}
 }
 ?>

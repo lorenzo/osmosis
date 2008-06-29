@@ -33,7 +33,7 @@ class ResponsesController extends ForumAppController {
 
 	var $name = 'Responses';
 	var $helpers = array('Html', 'Form');
-	
+
 	function _ownerAuthorization() {	
 		if ($this->action == 'edit') {
 			$check = false;
@@ -42,9 +42,18 @@ class ResponsesController extends ForumAppController {
 				
 			elseif (isset($this->params['named']['response_id']))
 				$check = $this->params['named']['response_id'];
-				return $this->Response->isOwner($this->Auth->user('id'),$check);
-					
-			return false;
+			
+			if (!$check)
+				return false;
+				
+			if ($this->Response->isOwner($this->Auth->user('id'),$check))
+				return true;
+			
+			
+			$member = $this->Response->field('member_id',array('id' => $check));
+			$role = $this->Response->Member->role($member,$this->activeCourse);
+			return $this->Response->Member->compareRoles($this->currentRole,$role) >= 0;
+
 		}
 			
 		return parent::_ownerAuthorization();
@@ -61,6 +70,7 @@ class ResponsesController extends ForumAppController {
 	
 	function add() {
 		if (!empty($this->data)) {
+			$this->_checkLocked();
 			$this->Response->create();
 			$this->data['Response']['member_id'] = $this->Auth->user('id');
 			$this->data['Response']['content'] = $this->HtmlPurifier->purify($this->data['Response']['content']);
@@ -82,6 +92,7 @@ class ResponsesController extends ForumAppController {
 
 	function edit() {
 		if (!empty($this->data)) {
+			$this->_checkLocked();
 			if ($this->Response->save($this->data)) {
 				$this->Session->setFlash(__('The Response has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(
@@ -98,6 +109,22 @@ class ResponsesController extends ForumAppController {
 			$this->_redirectIf(!isset($this->params['named']['response_id']));
 			$this->Response->recursive = -1;
 			$this->data = $this->Response->read(null, $this->params['named']['response_id']);
+		}
+	}
+	
+	function _checkLocked() {
+		$locked = false;
+		if (isset($this->data['Response']['discussion_id'])) { 
+			$locked = $this->Response->Discussion->isLocked($this->data['Response']['discussion_id']);
+			$redirect = array('controller' => 'discussions', 'action' => 'view', 'discussion_id' => $this->data['Response']['discussion_id']);
+		} elseif (isset($this->data['Response']['id'])) {
+			$locked = $this->Response->isLocked($this->data['Response']['id']);
+			$this->Response->id = $this->data['Response']['id'];
+			$redirect = array('controller' => 'topics', 'action' => 'view', 'discussion_id' => $this->Response->field('discussion_id'));
+		}
+		if ($locked) {
+			$this->Session->setFlash(__('The Discussion is locked', true), 'default', array('class' => 'error'));
+			$this->redirect($redirect);
 		}
 	}
 }

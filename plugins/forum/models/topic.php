@@ -181,5 +181,16 @@ class Topic extends AppModel {
 		}
 		return $this->data['Topic']['course_id'];		
 	}
+	
+	/**
+	 * Returns true if the topic is locked
+	 *
+	 * @param string $id 
+	 * @return boolean
+	 */
+	
+	function isLocked($id) {
+		return $this->find('count',array('conditions' => array('Topic.id' => $id),'recursive' => -1)) == 1;
+	}
 }
 ?>

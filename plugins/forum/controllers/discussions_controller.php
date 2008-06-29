@@ -78,6 +78,7 @@ class DiscussionsController extends ForumAppController {
 
 	function add() {
 		if (!empty($this->data)) {
+			$this->_checkLocked();
 			$this->Discussion->create();
 			$this->data['Discussion']['member_id'] = $this->Auth->user('id');
 			if ($this->Discussion->save($this->data)) {
@@ -94,6 +95,7 @@ class DiscussionsController extends ForumAppController {
 
 	function edit() {
 		if (!empty($this->data)) {
+			$this->_checkLocked();
 			$this->data['Discussion']['member_id'] = $this->Auth->user('id');
 			if ($this->Discussion->save($this->data)) {
 				$this->Session->setFlash(__('The Discussion has been saved', true), 'default', array('class' => 'success'));
@@ -122,6 +124,21 @@ class DiscussionsController extends ForumAppController {
 		if ($this->Discussion->del($id)) {
 			$this->Session->setFlash(__('Topic deleted', true), 'default', array('class' => 'success'));
 			$this->redirect(array('controller' => 'topics', 'action' => 'index', 'topic_id' => $topic_id));
+		}
+	}
+	
+	function _checkLocked() {
+		$locked = false;
+		if (isset($this->data['Discussion']['topic_id'])) { 
+			$locked = $this->Discussion->Topic->isLocked($this->data['Discussion']['topic_id']);
+			$redirect = array('controller' => 'topics', 'action' => 'view', 'topic_id' => $this->data['Discussion']['topic_id']);
+		} elseif (isset($this->data['Discussion']['id'])) {
+			$locked = $this->Discussion->isLocked($this->data['Discussion']['id']);
+			$redirect = array('controller' => 'discussions', 'action' => 'view', 'discussions_id' => $this->data['Discussion']['id']);
+		}
+		if ($locked) {
+			$this->Session->setFlash(__('The Topic or Discussion is locked', true), 'default', array('class' => 'error'));
+			$this->redirect($redirect);
 		}
 	}
 
