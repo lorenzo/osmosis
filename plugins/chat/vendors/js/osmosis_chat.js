@@ -103,8 +103,9 @@ OsmosisChat = {
 		$(this).parents('.chat_window_container')
 			.find('a.chat_minimize').removeClass('chat_restore')
 		.parents('.chat_window_container')
-			.find('.chat_canvas').slideDown('fast')
-				.find('textarea').focus();
+			.find('.chat_canvas').slideDown('fast', function() {
+				$(this).find('textarea').focus();
+			})
 	},
 
 	onBoxMinimize: function(evt) {
@@ -224,6 +225,12 @@ OsmosisChat = {
 				win.parents('.chat_window_container').css('display', 'inline-block')
 					.find('.chat_window').css('display', 'inline-block');
 			}
+			console.debug(win.find('.chat_canvas'));
+			if (win.find('.chat_canvas').css('display') == 'none') {
+				win.find('.chat_canvas').each(OsmosisChat.onBoxRestore);
+			}
+			win.find('textarea').focus();
+			console.debug(win);
 			return win;
 		}
 		OsmosisChat.container.createAppend(
@@ -249,7 +256,7 @@ OsmosisChat = {
 		container.parents('.chat_window_container').css('display', 'inline-block')
 			.find('.chat_window').css('display', 'inline-block');
 		
-		container.find('textarea').autogrow();
+		container.find('textarea').autogrow().focus();
 		container.find('.chat_messages').minmax();
 		return container;
 	},
