@@ -30,3 +30,12 @@
 		?>
 	</p>
 </div>
+
+<div id="connect" class="boxed dashboard-element">
+	<strong class="title"><?php __('Connect'); ?></strong>
+	<ul>
+		<?php
+			echo $placeholder->render('profile_connect');
+		?>
+	</ul>
+</div>

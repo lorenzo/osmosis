@@ -8,7 +8,9 @@ class LockerHolderComponent extends PlaceholderDataComponent {
 	function head() {
 		$plugin_name = $this->controller->plugin;
 		$controller = $this->controller;
-		return $plugin_name == 'locker' || ($controller->name=='Dashboards' && $controller->action == 'connections');
+		return $plugin_name == 'locker'
+				|| ($controller->name=='Dashboards' && $controller->action == 'connections')
+				|| $this->controller->name == 'Members' && $this->controller->action == 'view';
 	}
 	
 	/**
@@ -22,6 +24,10 @@ class LockerHolderComponent extends PlaceholderDataComponent {
 		$dropbox = $folder->dropbox(Configure::read('ActiveUser.Member.id'));
 		$dropbox['Member']['id'] = Configure::read('ActiveUser.Member.id');
 		return $dropbox;
+	}
+	
+	function profileConnect() {
+		return array('member_id' => $this->controller->Auth->user('id'));
 	}
 }
 ?>

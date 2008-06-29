@@ -38,7 +38,9 @@ class BlogHolderComponent extends PlaceholderDataComponent {
 	
 	function head() {
 		
-		return $this->controller->plugin == 'blog' || $this->controller->name == 'Dashboards' && $this->controller->action == 'messages';
+		return $this->controller->plugin == 'blog'
+				|| $this->controller->name == 'Dashboards' && $this->controller->action == 'messages'
+				|| $this->controller->name == 'Members' && $this->controller->action == 'view';
 	}
 	
 	/**
@@ -62,6 +64,10 @@ class BlogHolderComponent extends PlaceholderDataComponent {
 			$data = array();
 		}
 		return $data;
+	}
+	
+	function profileConnect() {
+		return array('member_id' => $this->controller->Auth->user('id'));
 	}
 }
 ?>

@@ -523,3 +523,6 @@ body.hideBlocker .blockUI,
 .boxed #locker-contents.mini ul li a.item:hover {
 	border:none;
 }
+#connect.dashboard-element .locker a {
+	background-image:url('../img/mini/mail_receive.png');
+}

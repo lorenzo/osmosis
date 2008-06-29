@@ -105,3 +105,6 @@ blockquote {
 	color:#ccc;
 	font-size:0.8em;
 }
+#connect.dashboard-element .blog a {
+	background-image:url('../img/journal.png');
+}

@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `blog_comments` (
 
 CREATE TABLE IF NOT EXISTS `blog_posts` (
   `id` int(10) unsigned NOT NULL auto_increment,
-  `title` varchar(50) default NULL,
+  `title` varchar(200) default NULL,
   `body` text,
   `created` datetime default NULL,
   `modified` datetime default NULL,
