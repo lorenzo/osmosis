@@ -127,8 +127,13 @@ table tr .number {
 	letter-spacing:1px;
 	text-align:left;
 	position:relative;
+	border:none;
 }
 
+.responses h3 span {
+	position:absolute;
+	right:5px;
+}
 .forum p.small-description {
 	color:#666;
 	margin-top:0;
