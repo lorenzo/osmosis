@@ -488,6 +488,7 @@ h3 {
 }
 #connect.dashboard-element ul li a {
 	padding-left:26px;
+	padding-bottom:2px;
 	display:block;
 	background:transparent url('../../img/default/go.png') no-repeat 0 0;
 }
