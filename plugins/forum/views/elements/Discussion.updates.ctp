@@ -18,7 +18,7 @@ echo String::insert(
 	__(':member_links :action the discussion <em>:discussion_name</em>.', true),
 	array(
 		'member_links' => $member_links,
-		'action'			=> $events[0]['ModelLog']['created'] ? 'created' : 'modified',
+		'action'			=> $events[0]['ModelLog']['created'] ? __('created', true) : __('modified', true),
 		'discussion_name' => $html->link(
 			$discussion['title'],
 			array(

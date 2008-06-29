@@ -1014,19 +1014,19 @@ msgstr ""
 
 #: /plugins/forum/controllers/topics_controller.php:47;56
 msgid "Invalid Topic."
-msgstr "Tópico no válido."
+msgstr "Tema no válido."
 
 #: /plugins/forum/controllers/topics_controller.php:66;79
 msgid "The Topic has been saved"
-msgstr "El tópico ha sido guardado."
+msgstr "El tema ha sido guardado."
 
 #: /plugins/forum/controllers/topics_controller.php:69;88
 msgid "The Topic could not be saved. Please, try again."
-msgstr "El tópico no pudo ser guardado. Por favor, intente de nuevo."
+msgstr "El tema no pudo ser guardado. Por favor, intente de nuevo."
 
 #: /plugins/forum/controllers/topics_controller.php:94
 msgid "This topic is locked, you cannot edit it anymore."
-msgstr "Este tópico se encuentra bloquedo y no puede ser editado."
+msgstr "Este tema se encuentra bloquedo y no puede ser editado."
 
 #: /plugins/forum/controllers/topics_controller.php:108
 msgid "Invalid id for Topic"
@@ -1034,7 +1034,7 @@ msgstr ""
 
 #: /plugins/forum/controllers/topics_controller.php:113
 msgid "Topic deleted"
-msgstr "Tópico eliminado."
+msgstr "Tema eliminado."
 
 #: /plugins/forum/models/discussion.php:120
 msgid "Please set a title"
@@ -1080,7 +1080,7 @@ msgstr "Discusión"
 
 #: /plugins/forum/views/discussions/view.ctp:11
 msgid "You are currently viewing a discussion inside the <em>%s</em> topic."
-msgstr "Usted está viendo una discusión dentro del tópico <em>%s</em>."
+msgstr "Usted está viendo una discusión dentro del tema <em>%s</em>."
 
 #: /plugins/forum/views/discussions/view.ctp:32
 msgid "Reply to this discussion"
@@ -1100,7 +1100,7 @@ msgstr "y"
 
 #: /plugins/forum/views/elements/Discussion.updates.ctp:18
 msgid ":member_links :action the discussion <em>:discussion_name</em>."
-msgstr ":member_links :action la discussión <em>:discussion_name</em>."
+msgstr ":member_links ha :action la discusión <em>:discussion_name</em>."
 
 #: /plugins/forum/views/elements/Response.updates.ctp:9
 msgid "response"
@@ -1136,11 +1136,11 @@ msgstr ""
 
 #: /plugins/forum/views/elements/Topic.updates.ctp:10
 msgid ":member_name :action the Topic: :topic_name"
-msgstr ":member_name :action el Tópico :topic_name"
+msgstr ":member_name ha :action el tema :topic_name"
 
 #: /plugins/forum/views/elements/Topic.updates.ctp:16
 msgid "created"
-msgstr "Creado"
+msgstr "creado"
 
 #: /plugins/forum/views/elements/Topic.updates.ctp:16
 msgid "modified"
@@ -1364,31 +1364,31 @@ msgstr "Contenido"
 
 #: /plugins/forum/views/topics/add.ctp:4;11
 msgid "Create Topic"
-msgstr "Crear Tópico"
+msgstr "Crear Tema"
 
 #: /plugins/forum/views/topics/edit.ctp:4
 msgid "Edit Topic"
-msgstr "Editar Tópico"
+msgstr "Editar Tema"
 
 #: /plugins/forum/views/topics/edit.ctp:16
 msgid "Lock this topic"
-msgstr "Bloquear este tópico"
+msgstr "Bloquear este tema"
 
 #: /plugins/forum/views/topics/edit.ctp:17
 msgid "(Nobody will be able to create more discussions on this topic)"
-msgstr "(No se podrán crear discusiones en este tópico)"
+msgstr "(No se podrán crear discusiones en este tema)"
 
 #: /plugins/forum/views/topics/index.ctp:8
 msgid "You are currently viewing the topics in the <em>%s</em> course forum."
-msgstr "Usted está viendo los tópico en el foro del curso <em>%s</em>"
+msgstr "Usted está viendo los tema en el foro del curso <em>%s</em>"
 
 #: /plugins/forum/views/topics/index.ctp:16;72
 msgid "Create a new Topic"
-msgstr "Crear un nuevo tópico"
+msgstr "Crear un nuevo tema"
 
 #: /plugins/forum/views/topics/index.ctp:25
 msgid "Topic"
-msgstr "Tópico"
+msgstr "Tema"
 
 #: /plugins/forum/views/topics/index.ctp:49
 #: /plugins/wiki/views/entries/view.ctp:4
@@ -1401,18 +1401,18 @@ msgstr "eliminar"
 
 #: /plugins/forum/views/topics/index.ctp:58
 msgid "This will also delete all discussions on this topic"
-msgstr "Se eliminarán todas las discusiones en este tópico."
+msgstr "Se eliminarán todas las discusiones en este tema."
 
 #: /plugins/forum/views/topics/view.ctp:4
 msgid "Topic:"
-msgstr "Tópico:"
+msgstr "Tema:"
 
 #: /plugins/forum/views/topics/view.ctp:12
 msgid ""
 "You are currently viewing the discussions started around this topic <strong>"
 "\"%s\"</strong> inside the <em>%s</em> course forum."
 msgstr ""
-"Usted está viendo las discusiones del tópico <strong>\"%s\"</strong> en el "
+"Usted está viendo las discusiones del tema <strong>\"%s\"</strong> en el "
 "foro del curso <em>%s</em> "
 
 #: /plugins/forum/views/topics/view.ctp:21;108
@@ -1421,7 +1421,7 @@ msgstr "Comenzar una discusión"
 
 #: /plugins/forum/views/topics/view.ctp:36
 msgid "Author &mdash; Created"
-msgstr "Autor &mdash; Creado"
+msgstr "Autor &mdash; ha creado"
 
 #: /plugins/forum/views/topics/view.ctp:37
 msgid "Last Response"
@@ -1446,14 +1446,6 @@ msgstr "Aún no se han registrado discusiones."
 #: /plugins/locker/controllers/documents_controller.php:45
 msgid "Invalid LockerDocument."
 msgstr "Documento no válido."
-
-#: /plugins/locker/controllers/documents_controller.php:57;74
-msgid "The LockerDocument has been saved"
-msgstr "El documento ha sido guardado."
-
-#: /plugins/locker/controllers/documents_controller.php:60;77
-msgid "The LockerDocument could not be saved. Please, try again."
-msgstr "El documento no pudo ser guardado. Por favor, intente de nuevo."
 
 #: /plugins/locker/controllers/documents_controller.php:69
 msgid "Invalid LockerDocument"
@@ -3516,7 +3508,7 @@ msgstr ""
 
 #: /plugins/locker/models/locker_document.php:95
 msgid "Please write a name for this file"
-msgstr ""
+msgstr "Por favor, indique un nombre para este archivo."
 
 #: /plugins/locker/models/locker_document.php:98
 msgid "Please limit the name to a maximum of 30 characters"
@@ -3524,19 +3516,19 @@ msgstr ""
 
 #: /plugins/locker/models/locker_document.php:101
 msgid "The file is incorrect"
-msgstr ""
+msgstr "El archivo es incorrecto."
 
 #: /plugins/locker/models/locker_folder.php:145
 msgid "The Dropbox cannot be modified"
-msgstr ""
+msgstr "La buzón de entrega no puede ser modificada."
 
 #: /plugins/locker/models/locker_folder.php:148
 msgid "Folders need a name, please write one"
-msgstr ""
+msgstr "Las carpetas requieren un nombre, por favor, indique uno."
 
 #: /plugins/locker/models/locker_folder.php:154
 msgid "This Folder name is repeated"
-msgstr ""
+msgstr "Este nombre de carpeta ya existe."
 
 #: /plugins/locker/views/documents/view.ctp:17
 #: /plugins/locker/views/documents/ajax/view.ctp:4
@@ -3555,7 +3547,7 @@ msgstr "Descargar"
 
 #: /plugins/locker/views/elements/file_info.ctp:11
 msgid "Dropbox"
-msgstr ""
+msgstr "Buzón de entrega"
 
 #: /plugins/locker/views/folders/view.ctp:27
 msgid "Updating..."
@@ -3855,7 +3847,7 @@ msgstr "La respuesta no pudo ser guardada. Por favor, intente de nuevo."
 
 #: /plugins/forum/controllers/topics_controller.php:47;56
 msgid "Invalid Topic"
-msgstr "Tópico no válido."
+msgstr "Tema no válido."
 
 #: /plugins/locker/config/description.php:32
 msgid "A file manager and sharing tool for each member."
@@ -3978,13 +3970,41 @@ msgid "Professor"
 msgstr "Profesor"
 
 #: /models/enrollment.php:84
-msgid "Professors"
-msgstr "Profesores"
-
-#: /models/enrollment.php:84
 msgid "Assistant"
 msgstr "Ayudante"
 
 #: /models/enrollment.php:84
 msgid "Assistants"
 msgstr "Ayudantes"
+
+#: /plugins/locker/controllers/documents_controller.php:84;123
+msgid "The document has been saved"
+msgstr "El documento ha sido guardado."
+
+#: /plugins/locker/controllers/documents_controller.php:127
+msgid "The document could not be saved. Please, try again."
+msgstr "El documento no pudo ser guardado. Por favor, intente de nuevo."
+
+#: /plugins/locker/controllers/documents_controller.php:137
+msgid "Invalid id for document"
+msgstr ""
+
+#: /plugins/locker/controllers/documents_controller.php:141
+msgid "Document deleted"
+msgstr "Documento eliminado."
+
+#: /plugins/locker/controllers/folders_controller.php:90;107
+msgid "The folder has been saved"
+msgstr "La carpeta ha sido guardada."
+
+#: /plugins/locker/controllers/folders_controller.php:102
+msgid "Invalid folder"
+msgstr "Carpeta no válida."
+
+#: /plugins/locker/controllers/folders_controller.php:122
+msgid "Invalid id for folder"
+msgstr ""
+
+#: /plugins/locker/controllers/folders_controller.php:126
+msgid "Folder deleted"
+msgstr "Carpeta eliminada."

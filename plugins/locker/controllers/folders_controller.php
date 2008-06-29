@@ -87,7 +87,7 @@ class FoldersController extends LockerAppController {
 			$this->LockerFolder->create();
 			$this->data['LockerFolder']['member_id'] = $this->Auth->user('id');
 			if ($this->LockerFolder->save($this->data)) {
-				$this->Session->setFlash(__('The LockerFolder has been saved', true), 'default', array('class' => 'success'));
+				$this->Session->setFlash(__('The folder has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(array('action' => 'view', $this->data['LockerFolder']['parent_id']));
 			} else {
 				$this->Session->setFlash($this->LockerFolder->validationErrors['name']);
@@ -99,12 +99,12 @@ class FoldersController extends LockerAppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid LockerFolder', true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__('Invalid folder', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->LockerFolder->save($this->data,array('name'))) {
-				$this->Session->setFlash(__('The LockerFolder has been saved', true), 'default', array('class' => 'success'));
+				$this->Session->setFlash(__('The folder has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'));
 			} else {
 				$this->Session->setFlash(__('The LockerFolder could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
@@ -119,11 +119,11 @@ class FoldersController extends LockerAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for LockerFolder', true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__('Invalid id for folder', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->LockerFolder->del($id)) {
-			$this->Session->setFlash(__('LockerFolder deleted', true), 'default', array('class' => 'success'));
+			$this->Session->setFlash(__('Folder deleted', true), 'default', array('class' => 'success'));
 			$this->redirect(array('action'=>'index'));
 		}
 	}

@@ -1,8 +1,8 @@
 # LANGUAGE translation of CakePHP Application
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  Revision: 472 /osmosis/app_controller.php
-#  Revision: 485 /osmosis/plugins/locker/controllers/folders_controller.php
+#  Revision: 490 /osmosis/app_controller.php
+#  Revision: 490 /osmosis/plugins/locker/controllers/folders_controller.php
 #  Revision: 485 /osmosis/app_model.php
 #  Revision: 476 /osmosis/controllers/courses_controller.php
 #  Revision: 463 /osmosis/controllers/departments_controller.php
@@ -10,7 +10,7 @@
 #  Revision: 476 /osmosis/controllers/plugins_controller.php
 #  Revision: 468 /osmosis/models/course.php
 #  Revision: 468 /osmosis/models/department.php
-#  Revision: 468 /osmosis/models/enrollment.php
+#  Revision: 491 /osmosis/models/enrollment.php
 #  Revision: 468 /osmosis/models/member.php
 #  Revision: 323 /osmosis/models/behaviors/bindable.php
 #  Revision: 463 /osmosis/plugins/blog/config/description.php
@@ -30,8 +30,8 @@
 #  Revision: 403 /osmosis/plugins/forum/models/topic.php
 #  Revision: 458 /osmosis/plugins/quiz/models/quiz.php
 #  Revision: 463 /osmosis/plugins/locker/config/description.php
-#  Revision: 485 /osmosis/plugins/locker/controllers/documents_controller.php
-#  Revision: 485 /osmosis/plugins/locker/models/locker_document.php
+#  Revision: 490 /osmosis/plugins/locker/controllers/documents_controller.php
+#  Revision: 490 /osmosis/plugins/locker/models/locker_document.php
 #  Revision: 485 /osmosis/plugins/locker/models/locker_folder.php
 #  Revision: 454 /osmosis/plugins/quiz/config/description.php
 #  Revision: 482 /osmosis/plugins/quiz/controllers/choice_questions_controller.php
@@ -60,7 +60,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2008-06-28 17:02-0430\n"
+"POT-Creation-Date: 2008-06-28 20:53-0430\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -77,8 +77,8 @@ msgstr ""
 msgid "Invalid access"
 msgstr ""
 
-#: /app_controller.php:299
-#: /plugins/locker/controllers/folders_controller.php:155
+#: /app_controller.php:300
+#: /plugins/locker/controllers/folders_controller.php:153
 msgid "Invalid Access"
 msgstr ""
 
@@ -1086,6 +1086,16 @@ msgstr ""
 msgid ":member_links :action the discussion <em>:discussion_name</em>."
 msgstr ""
 
+#: /plugins/forum/views/elements/Discussion.updates.ctp:21
+#: /plugins/forum/views/elements/Topic.updates.ctp:16
+msgid "created"
+msgstr ""
+
+#: /plugins/forum/views/elements/Discussion.updates.ctp:21
+#: /plugins/forum/views/elements/Topic.updates.ctp:16
+msgid "modified"
+msgstr ""
+
 #: /plugins/forum/views/elements/Response.updates.ctp:9
 msgid "response"
 msgstr ""
@@ -1116,14 +1126,6 @@ msgstr ""
 
 #: /plugins/forum/views/elements/Topic.updates.ctp:10
 msgid ":member_name :action the Topic: :topic_name"
-msgstr ""
-
-#: /plugins/forum/views/elements/Topic.updates.ctp:16
-msgid "created"
-msgstr ""
-
-#: /plugins/forum/views/elements/Topic.updates.ctp:16
-msgid "modified"
 msgstr ""
 
 #: /plugins/forum/views/elements/discussion_responses.ctp:6
@@ -1378,77 +1380,85 @@ msgstr ""
 msgid "Locker"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:41;92
-msgid "Invalid LockerDocument"
+#: /plugins/locker/controllers/documents_controller.php:67
+msgid "Invalid document"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:58;97
-msgid "The LockerDocument has been saved"
+#: /plugins/locker/controllers/documents_controller.php:84;123
+msgid "The document has been saved"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:61;101
+#: /plugins/locker/controllers/documents_controller.php:87
 msgid "The LockerDocument could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:111
-msgid "Invalid id for LockerDocument"
+#: /plugins/locker/controllers/documents_controller.php:118
+msgid "Invalid LockerDocument"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:115
-msgid "LockerDocument deleted"
+#: /plugins/locker/controllers/documents_controller.php:127
+msgid "The document could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:122;128
+#: /plugins/locker/controllers/documents_controller.php:137
+msgid "Invalid id for document"
+msgstr ""
+
+#: /plugins/locker/controllers/documents_controller.php:141
+msgid "Document deleted"
+msgstr ""
+
+#: /plugins/locker/controllers/documents_controller.php:148;154
 msgid "Invalid Document"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:174
+#: /plugins/locker/controllers/documents_controller.php:200
 msgid "The file was dropped correctly"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:177
+#: /plugins/locker/controllers/documents_controller.php:203
 msgid "The file could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:68
+#: /plugins/locker/controllers/folders_controller.php:66
 msgid "Invalid Locker"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:92;109
-msgid "The LockerFolder has been saved"
+#: /plugins/locker/controllers/folders_controller.php:90;107
+msgid "The folder has been saved"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:104
-msgid "Invalid LockerFolder"
+#: /plugins/locker/controllers/folders_controller.php:102
+msgid "Invalid folder"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:112
+#: /plugins/locker/controllers/folders_controller.php:110
 msgid "The LockerFolder could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:124
-msgid "Invalid id for LockerFolder"
+#: /plugins/locker/controllers/folders_controller.php:122
+msgid "Invalid id for folder"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:128
-msgid "LockerFolder deleted"
+#: /plugins/locker/controllers/folders_controller.php:126
+msgid "Folder deleted"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:142
+#: /plugins/locker/controllers/folders_controller.php:140
 #: /plugins/locker/views/documents/add.ctp:9
 #: /views/plugins/admin_view.ctp:19
 msgid "Folder"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:145
+#: /plugins/locker/controllers/folders_controller.php:143
 msgid "Document"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:149
+#: /plugins/locker/controllers/folders_controller.php:147
 msgid "The %s was moved successfully"
 msgstr ""
 
-#: /plugins/locker/controllers/folders_controller.php:151
+#: /plugins/locker/controllers/folders_controller.php:149
 msgid "The %s could not be moved"
 msgstr ""
 
@@ -1559,15 +1569,15 @@ msgstr ""
 msgid "%s's Locker"
 msgstr ""
 
-#: /plugins/locker/views/folders/view.ctp:26
+#: /plugins/locker/views/folders/view.ctp:28
 msgid "Updating..."
 msgstr ""
 
-#: /plugins/locker/views/folders/view.ctp:27
+#: /plugins/locker/views/folders/view.ctp:29
 msgid "Cancel"
 msgstr ""
 
-#: /plugins/locker/views/folders/view.ctp:28
+#: /plugins/locker/views/folders/view.ctp:30
 msgid "OK"
 msgstr ""
 
@@ -2878,11 +2888,11 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: /views/elements/layout/top_nav.ctp:20
+#: /views/elements/layout/top_nav.ctp:34
 msgid "Logout"
 msgstr ""
 
-#: /views/elements/layout/top_nav.ctp:25
+#: /views/elements/layout/top_nav.ctp:39
 #: /views/members/login.ctp:4;10
 msgid "Login"
 msgstr ""
