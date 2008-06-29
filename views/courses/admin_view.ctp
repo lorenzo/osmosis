@@ -1,7 +1,3 @@
-<?php
-	$javascript->link('jquery/plugins/osmosis-selector', false);
-	$html->css('jquery.osmosis-selector', null, null, false);
-?>
 <div class="courses view">
 <h2>[<?php echo $course['Course']['code']; ?>] <?php echo $course['Course']['name'];?></h2>
 <p>

@@ -1,5 +1,5 @@
 /**
-<?php// var_dump($trackings); var_dump($user['full_name'])?>
+<?php var_dump($trackings); var_dump($user['full_name'])?>
 */
 var adminEmail = 'joaquin@aikon.com.ve';
 function underscore(str) {
@@ -96,7 +96,7 @@ var Scorm_2004 = function(){
 		'cmi.comments_from_learner.n.timestamp':{
 			'format': this.CMITime,
 			'mode':'rw'
-		},/*
+		},
 		// cmi.comments_from_lms is a Collection of records of data
 		'cmi.comments_from_lms._children':{
 			'defaultvalue': this.comments_children,
@@ -117,7 +117,7 @@ var Scorm_2004 = function(){
 		'cmi.comments_from_lms.n.timestamp':{
 			'format': this.CMITime,
 			'mode':'r'
-		},*/
+		},
 		'cmi.completion_status':{
 			'defaultvalue':'<?php echo isset($trackings['cmi__completion_status']) ? $trackings['cmi__completion_status']:'unknown' ?>',
 			'format': this.CMICStatus,
@@ -128,7 +128,7 @@ var Scorm_2004 = function(){
 			'mode':'r'
 		},
 		'cmi.credit':{
-//			'defaultvalue':'<?php echo isset($userdata->credit)?$userdata->credit:'' ?>',
+//			'defaultvalue':'',
 			'mode':'r'
 		},*/
 		'cmi.entry':{
@@ -136,7 +136,7 @@ var Scorm_2004 = function(){
 			'mode':'r'
 		},
 		'cmi.exit':{
-//			'defaultvalue':'<?php echo isset($userdata->{'cmi.exit'})?$userdata->{'cmi.exit'}:'' ?>',
+			'defaultvalue':'<?php echo isset($trackings['cmi__exit']) ? $trackings['cmi__exit']: '' ?>',
 			'format': this.CMIExit,
 			'mode':'w'
 		},
@@ -210,7 +210,7 @@ var Scorm_2004 = function(){
 			'mode':'rw'
 		},/*
 		'cmi.launch_data':{
-//			'defaultvalue':<?php echo isset($userdata->datafromlms)?'\''.$userdata->datafromlms.'\'':'null' ?>,
+//			'defaultvalue':'',
 			'mode':'r'
 		},*/
 		'cmi.learner_id':{
@@ -254,11 +254,11 @@ var Scorm_2004 = function(){
 			'mode':'rw'
 		},/*
 		'cmi.max_time_allowed':{
-//			'defaultvalue':<?php echo isset($userdata->maxtimeallowed)?'\''.$userdata->maxtimeallowed.'\'':'null' ?>,
+//			'defaultvalue':'',
 			'mode':'r'
 		},
 		'cmi.mode':{
-//			'defaultvalue':'<?php echo $userdata->mode ?>',
+//			'defaultvalue':'',
 			'mode':'r'
 		},
 		// cmi.objectives is a Collection of records of data
@@ -332,13 +332,13 @@ var Scorm_2004 = function(){
 			'mode':'rw'
 		},
 		'cmi.progress_measure':{
-//			'defaultvalue':<?php echo isset($userdata->{'cmi.progess_measure'})?'\''.$userdata->{'cmi.progress_measure'}.'\'':'null' ?>,
+//			'defaultvalue':null,
 			'format': this.CMIDecimal,
 			'range': this.progress_range,
 			'mode':'rw'
 		},
 		'cmi.scaled_passing_score':{
-//			'defaultvalue':<?php echo isset($userdata->{'cmi.scaled_passing_score'})?'\''.$userdata->{'cmi.scaled_passing_score'}.'\'':'null' ?>,
+//			'defaultvalue':null,
 			'format': this.CMIDecimal,
 			'range': this.scaled_range,
 			'mode':'r'
@@ -348,23 +348,23 @@ var Scorm_2004 = function(){
 			'mode':'r'
 		},
 		'cmi.score.scaled':{
-//			'defaultvalue':<?php echo isset($userdata->{'cmi.score.scaled'})?'\''.$userdata->{'cmi.score.scaled'}.'\'':'null' ?>,
+//			'defaultvalue':null,
 			'format': this.CMIDecimal,
 			'range': this.scaled_range,
 			'mode':'rw'
 		},
 		'cmi.score.raw':{
-//			'defaultvalue':<?php echo isset($userdata->{'cmi.score.raw'})?'\''.$userdata->{'cmi.score.raw'}.'\'':'null' ?>,
+//			'defaultvalue':null,
 			'format': this.CMIDecimal,
 			'mode':'rw'
 		},
 		'cmi.score.min':{
-//			'defaultvalue':<?php echo isset($userdata->{'cmi.score.min'})?'\''.$userdata->{'cmi.score.min'}.'\'':'null' ?>,
+//			'defaultvalue':null,
 			'format': this.CMIDecimal,
 			'mode':'rw'
 		},
 		'cmi.score.max':{
-//			'defaultvalue':<?php echo isset($userdata->{'cmi.score.max'})?'\''.$userdata->{'cmi.score.max'}.'\'':'null' ?>,
+//			'defaultvalue':null,
 			'format': this.CMIDecimal,
 			'mode':'rw'
 		},
@@ -374,21 +374,21 @@ var Scorm_2004 = function(){
 			'defaultvalue':'PT0H0M0S'
 		},
 		'cmi.success_status':{
-//			'defaultvalue':'<?php echo isset($userdata->{'cmi.success_status'})?$userdata->{'cmi.success_status'}:'unknown' ?>',
+//			'defaultvalue':'unknown',
 			'format': this.CMISStatus,
 			'mode':'rw'
 		},
 		'cmi.suspend_data':{
-//			'defaultvalue':<?php echo isset($userdata->{'cmi.suspend_data'})?'\''.$userdata->{'cmi.suspend_data'}.'\'':'null' ?>,
+//			'defaultvalue':null,
 			'format': this.CMIString64000,
 			'mode':'rw'
 		},
 		'cmi.time_limit_action':{
-//			'defaultvalue':<?php echo isset($userdata->timelimitaction)?'\''.$userdata->timelimitaction.'\'':'null' ?>,
+//			'defaultvalue':null,
 			'mode':'r'
 		},
 		'cmi.total_time':{
-//			'defaultvalue':'<?php echo isset($userdata->{'cmi.total_time'})?$userdata->{'cmi.total_time'}:'PT0H0M0S' ?>',
+//			'defaultvalue':PT0H0M0S,
 			'mode':'r'
 		},*/
 		'adl.nav.request':{
@@ -818,11 +818,11 @@ var Scorm_2004 = function(){
 	likelihood that data is lost because the communication session is interrupted; ends
 	abnormally or otherwise terminates prematurely prior to a call to Terminate("").
 	*/
-	this.Commit = function(empty){
+	this.Commit = function(param){
 		errorCode = "0";
 		if (param == "") {
 			if ((this.Initialized) && (!this.Terminated)) {
-				result = StoreData(cmi,false);
+				result = this.StoreData(this.cmi,false);
 				return "true";
 			} else {
 				if (this.Terminated) {
@@ -834,7 +834,7 @@ var Scorm_2004 = function(){
 		} else {
 			errorCode = "201";
 		}
-		return "false";
+		return errorCode;
 	};
 	
 	/*Description: This method requests the error code for the current error state of the API

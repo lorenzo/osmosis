@@ -82,8 +82,13 @@ class Plugin extends AppModel {
 	 * @return array result as in Model::find
 	 */
 	function actives($fields=null,$conditions = array()) {
-		$conditions = am($conditions, array('active' => 1));
-		return $this->find('all', array('conditions' => $conditions, 'fields' => $fields, 'recursive' => 1));
+		$plugins = Cache::read('Plugin.actives');
+		if (!$plugins) {
+			$conditions = am($conditions, array('active' => 1));
+			$plugins = $this->find('all', array('conditions' => $conditions, 'fields' => $fields, 'recursive' => 1));
+			Cache::write('Plugin.actives',$plugins,'60');
+		}
+		return $plugins;
 	}
 
 	/**

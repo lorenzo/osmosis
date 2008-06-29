@@ -1,6 +1,7 @@
 <div class="scorm index">
 	<div class="content-title">
 		<h2><?php  __('Lessons');?></h2>
+		<?php if (in_array($Osmosis['currentRole'],a('Professor','Admin'))) :?>
 		<ul class="reverse actions">
 			<li class="add">
 				<?php
@@ -14,6 +15,7 @@
 				?>
 			</li>
 		</ul>
+		<?php endif;?>
 	</div>
 <div id="recent-lessons">
 	<h3><?php __('Lessons Taken Recently');?></h3>
@@ -46,7 +48,7 @@
 	?>
 </div>
 	<div class="lesson-list">
-		<h3>Cosa</h3>
+		<h3><?php __('Available lessons')?></h3>
 <?php if (!empty($scorms)):?>
 		<ul>
 		<?php foreach ($scorms as $scorm): ?>
@@ -77,6 +79,7 @@
 							);
 						?>
 					</li>
+					<?php if (in_array($Osmosis['currentRole'],a('Professor','Admin'))) :?>
 					<li class="edit">
 						<?php
 							echo
@@ -86,11 +89,25 @@
 								
 							);
 						?>
-					</li>	
+					</li>
+					<li class="delete">
+						<?php
+							echo
+								$html->link(
+								__('Delete', true),
+								array('controller'=> 'scorms', 'action'=>'delete', $scorm['Scorm']['id']),
+								null,
+								__('This wil also delete any student tracking information on this lessons',true)
+							);
+						?>
+					</li>
+					<?php endif;?>	
 				</ul>
 			</li>
 		<?php endforeach; ?>
 		</ul>
+<?php else: ?>
+	<p><?php __('No lessons yet') ?></p>
 <?php endif; ?>
 	</div>
 </div>

@@ -45,6 +45,13 @@ class ScormsController extends ScormAppController {
 			parent::_setActiveCourse();
 	}
 	
+	function isAuthorized() {
+		if ($this->action == 'toc')
+			return $this->params['requested'];
+			
+		return parent::isAuthorized();;
+	}
+	
 	function index() {
 		$this->Scorm->recursive = -1;
 		$this->set('scorms', $this->paginate(array('course_id' => $this->activeCourse)));

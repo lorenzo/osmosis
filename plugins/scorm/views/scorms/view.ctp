@@ -22,7 +22,7 @@
 					'style' => 'display:none'
 				), false, false
 			);
-			echo " | " .$html->link(__('Exit Scorm', true), array('action' => 'index')) . " | ";
+			echo " | " .$html->link(__('Exit Scorm', true), array('action' => 'index','course_id' => $scorm['Scorm']['course_id'])) . " | ";
 			echo $html->link(
 				__('Next &raquo;', true), '/',
 				array(

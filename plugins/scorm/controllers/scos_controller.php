@@ -34,6 +34,19 @@ class ScosController extends ScormAppController {
 	var $name = 'Scos';
 	var $helpers = array('Html','Javascript');
 	var $uses = array('Scorm.Sco', 'Scorm.Scorm', 'Scorm.ScormAttendeeTracking');
+	
+	function _setActiveCourse() {
+		if ($this->params['pass'][0]) {
+			$this->Sco->bindModel(array('belongsTo' => array('Scorm')));
+			$sco = $this->Sco->find('first',array(
+				'conditions' => array('Sco.id' => $this->params['pass'][0]), 
+				'contain' => 'Scorm.course_id')
+			);
+			if ($sco) {
+				$this->activeCourse = $sco['Scorm']['course_id'];
+			}
+		}
+	}
 
 	function api($id) {
 		$trackings = $this->ScormAttendeeTracking->findAll(

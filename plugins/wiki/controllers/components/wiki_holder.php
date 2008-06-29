@@ -34,7 +34,7 @@ App::import('Component', 'PlaceholderData');
 class WikiHolderComponent extends PlaceholderDataComponent {
 	var $name = 'WikiHolder';
 	var $auto = true;
-	var $cache = false;
+	var $cache = true;
 	var $useful_fields = array(
 		'Entry' => array(
 			'fields' =>  array('Entry.id', 'Entry.title','Entry.slug'),

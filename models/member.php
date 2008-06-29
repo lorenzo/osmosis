@@ -214,15 +214,21 @@ class Member extends AppModel {
 	 * @return string role name
 	 */
 	function role($id, $course) {
-		$this->Enrollment->bind('Role');
-		$conditions = array('course_id' => $course, 'member_id' => $id);
-		// TODO: use Model::field instead
-		$enrollment = $this->Enrollment->find('first', compact('conditions'));
-		
-		if (!empty($enrollment))
-			return $enrollment['Role']['role'];
-			
-		return 'Member';
+		$role = Cache::read('Member.Role.'.$id.'.'.$course);
+		if (!$role) {
+			$this->Enrollment->bind('Role');
+			$conditions = array('course_id' => $course, 'member_id' => $id);
+			$fields = array('Role.role');
+			// TODO: use Model::field instead
+			$enrollment = $this->Enrollment->find('first', compact('conditions','fields'));
+
+			if (!empty($enrollment))
+				$role = $enrollment['Role']['role'];
+			else 
+				$role =  'Member';
+			Cache::write('Member.Role.'.$id.'.'.$course,$role,'60');
+		}
+		return $role;
 	}
 	
 	/**

@@ -141,8 +141,13 @@ class AppController extends Controller {
 	
 	function __setActiveCourseData() {
 		if ($this->activeCourse) {
-			$course = ClassRegistry::init('Course');
-			$this->set('course', $course->read(null, $this->activeCourse));
+			$data = Cache::read('Course.'.$this->activeCourse);
+			if (!$data) {
+				$course = ClassRegistry::init('Course');
+				$data = $course->read(null, $this->activeCourse);
+				Cache::write('Course.'.$this->activeCourse,$data,60);
+			}
+			$this->set('course',$data);		
 		}
 	}
 	

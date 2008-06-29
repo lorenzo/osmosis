@@ -32,6 +32,13 @@
 class ScormAttendeeTrackingsController extends ScormAppController {
 
 	var $name = 'ScormAttendeeTrackings';
+	
+	function _setActiveCourse() {
+		if (isset($this->params['named']['scorm'])) {
+			$scorm = ClassRegistry::init('Scorm.Scorm');
+			$this->activeCourse = $scorm->field('course_id',array('Scorm.id' => $this->params['named']['scorm']));
+		}
+	}
 
 	function store_data() {
 		Configure::write('debug',0);

@@ -32,23 +32,28 @@
 class MembersController extends AppController {
 
 	var $name = 'Members';
-	var $helpers = array('Html', 'Form' );
+	var $helpers = array('Html', 'Form');
 	var $uses = array('Member');
 
 	function admin_index() {
 		$this->Member->recursive = 0;
 		$conditions = array();
-		if (isset($this->params['url']['q'])) {
-			$conditions['full_name like'] = $this->params['url']['q'] . '%';
+		if ($this->RequestHandler->prefers('json')) {
+			if (isset($this->params['url']['q'])) {
+				$conditions['full_name like'] = $this->params['url']['q'] . '%';
+			}
+			if (isset($this->params['named']['course_id'])) {
+				$conditions['not'] = array('id' => $this->Member->members($this->params['named']['course_id']));
+			}
+			if (isset($this->params['named']['role'])) {
+				$conditions['Role.id'] = $this->params['named']['role'];
+			}
+			$fields = array('id', 'username', 'full_name', 'institution_id');
+			$this->set('members', $this->Member->find('all', compact('conditions', 'fields')));
+		} else {
+			$this->set('members',$this->paginate());
 		}
-		if (isset($this->params['named']['course_id'])) {
-			$conditions['not'] = array('id' => $this->Member->members($this->params['named']['course_id']));
-		}
-		if (isset($this->params['named']['role'])) {
-			$conditions['Role.id'] = $this->params['named']['role'];
-		}
-		$fields = array('id', 'username', 'full_name', 'institution_id');
-		$this->set('members', $this->Member->find('all', compact('conditions', 'fields')));
+		
 	}
 
 	/**

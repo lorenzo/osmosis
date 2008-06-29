@@ -3,7 +3,7 @@ App::import('Component', 'PlaceholderData');
 class LockerHolderComponent extends PlaceholderDataComponent {
 	var $name = 'LockerHolder';
 	var $auto = true;
-	var $cache = false;
+	var $cache = true;
 	
 	function head() {
 		$plugin_name = $this->controller->plugin;

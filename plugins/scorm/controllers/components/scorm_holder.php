@@ -34,7 +34,7 @@ App::import('Component', 'PlaceholderData');
 class ScormHolderComponent extends PlaceholderDataComponent {
 	var $name = 'ScormHolder';
 	var $auto = true;
-	var $cache = false;
+	var $cache = true;
 	var $types = array('course_toolbar');
 	
 	function courseToolBar() {
