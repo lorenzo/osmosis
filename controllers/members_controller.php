@@ -47,7 +47,8 @@ class MembersController extends AppController {
 		if (isset($this->params['named']['role'])) {
 			$conditions['Role.id'] = $this->params['named']['role'];
 		}
-		$this->set('members', $this->paginate(null, $conditions));
+		$fields = array('id', 'username', 'full_name', 'institution_id');
+		$this->set('members', $this->Member->find('all', compact('conditions', 'fields')));
 	}
 
 	/**

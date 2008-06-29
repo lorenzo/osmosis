@@ -86,7 +86,6 @@ class CoursesController extends AppController {
 	 *
 	 * @param string $id course id
 	 * @return void
-	 * @author José Lorenzo
 	 */
 	function admin_view($id = null) {
 		if (!$id) {
@@ -175,7 +174,6 @@ class CoursesController extends AppController {
 	 *
 	 * @param string $id the course identifier
 	 * @return void
-	 * @author José Lorenzo
 	 */
 	function enroll($id) {
 		$this->__enroll($id, $this->Auth->user('id'));
@@ -187,7 +185,6 @@ class CoursesController extends AppController {
 	 * @return void 
 	 * @param int $id the course identifier 
 	 * @param int $member_id the member id to enroll
-	 * @author Joaquín Windmüller
 	 **/
 	function admin_enroll($id) {
 		Configure::write('debug', 2);
@@ -201,7 +198,7 @@ class CoursesController extends AppController {
 			$member_id = $this->data['Member']['id'];
 			$success = $this->__enroll($id, $member_id, $role, false);
 			$this->Course->Owner->recursive = -1;
-			$member = $this->Course->Owner->read(array('id', 'full_name'), $member_id);
+			$member = $this->Course->Owner->read(array('id', 'full_name', 'username', 'institution_id'), $member_id);
 			$member = $member['Owner'];
 		}
 		$this->set(compact('success', 'member'));
@@ -211,7 +208,6 @@ class CoursesController extends AppController {
 	 * undocumented function
 	 *
 	 * @return void
-	 * @author Joaquín Windmüller
 	 **/
 	function __enroll($id, $member_id, $role = 'attendee', $redirect = true) {
 		$this->Course->id = $id;

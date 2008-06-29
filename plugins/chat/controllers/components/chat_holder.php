@@ -38,7 +38,7 @@ class ChatHolderComponent extends PlaceholderDataComponent {
 	var $types = array('head','course_sidebar');
 	
 	function head() {
-		return true;
+		return $this->controller->layout == 'default';
 	}
 	
 	function courseSidebar() {

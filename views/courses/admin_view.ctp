@@ -1,3 +1,7 @@
+<?php
+	$javascript->link('jquery/plugins/osmosis-selector', false);
+	$html->css('jquery.osmosis-selector', null, null, false);
+?>
 <div class="courses view">
 <h2>[<?php echo $course['Course']['code']; ?>] <?php echo $course['Course']['name'];?></h2>
 <p>
@@ -83,7 +87,8 @@ $url = sprintf("'%s'",
 		$(this).click(function(evt) {
 			evt.preventDefault();
 			$('#' + link.id + "-holder input").focus();
-		}).parent().after('<div id="' + link.id + '-holder" style="position:relative;" class="addPanel"></div>');
+		})
+		.parent().after('<div id="' + link.id + '-holder" style="position:relative;" class="addPanel"></div>');
 		$('#' + link.id + "-holder")
 			.osmosisSelector({
 				urlLookup	: <?php echo $url; ?>,
@@ -91,7 +96,10 @@ $url = sprintf("'%s'",
 					dataType : "json",
 					attachTo : '#' + link.id + '-holder .attach',
 					formatItem : function(item) {
-						return item.Member.full_name;
+						var member = item.Member;
+						var str = member.full_name + '<br />';
+						str += '<span class="note">' + member.username + ' &mdash; ' + member.institution_id + '</span>'
+						return str;
 					},
 					parse : function(items) {
 						items = items.response;
