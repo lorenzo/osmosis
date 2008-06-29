@@ -105,9 +105,13 @@ class MembersController extends AppController {
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
+			if (empty($this->data['Member']['password_confirm']) && empty($this->data['Member']['password'])) {
+				unset($this->data['Member']['password_confirm']);
+				unset($this->data['Member']['password']);
+			}
 			if ($this->Member->save($this->data)) {
 				$this->Session->setFlash(__('The Member has been saved',true), 'default', array('class' => 'success'));
-				$this->redirect(array('action'=>'index'), null, true);
+				$this->redirect(array('action'=>'view', $this->Member->id), null, true);
 			} else {
 				$this->Session->setFlash(__('The Member could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
@@ -115,6 +119,7 @@ class MembersController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Member->read(null, $id);
 		}
+		unset($this->data['Member']['password']);
 	}
 
 	/**

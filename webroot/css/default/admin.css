@@ -29,47 +29,6 @@ p.author strong {
 	margin-top:10px;
 }
 
-#profile.dashboard-element dl {
-	line-height: 2em;
-	padding:5px 0;
-	margin:0;
-	width: 100%;
-}
-#profile.dashboard-element dt {
-	font-weight: bold;
-	padding-left: 4px;
-	vertical-align: top;
-}
-#profile.dashboard-element dd {
-	margin-left: 10em;
-	margin-top: -2em;
-	vertical-align: top;
-}
-
-
-.dashboard-element dl.altrow {
-	background: #f4f4f4;
-}
-.dashboard-element dt {
-	text-indent:10px;
-	font-weight: bold;
-	vertical-align: top;
-}
-.dashboard-element dd {
-		line-height:1.8em;
-	margin-left: 10em;
-	vertical-align: top;
-}
-
-#profile.dashboard-element p {
-	padding:3px 10px;
-	margin:0;
-	text-align:right;
-}
-#profile.dashboard-element p a {
-	text-decoration:none;
-}
-
 ul.course-details {
 	padding:5px 10px;
 	list-style:none;

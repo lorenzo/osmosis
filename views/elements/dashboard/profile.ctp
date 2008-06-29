@@ -14,7 +14,7 @@
 	</dl>
 	<dl class="altrow">
 		<dt><?php __('Country:')?></dt>
-		<dd><?php echo $user['country'] ?></dd>
+		<dd><?php echo $user['country'] ?>&nbsp;</dd>
 	</dl>
 	<dl>
 		<dt><?php __('Age:')?></dt>

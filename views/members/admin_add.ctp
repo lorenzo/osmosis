@@ -9,7 +9,7 @@
 				echo $form->input('email');
 				echo $form->input('phone');
 				echo $form->input('age');
-				echo $form->input('sex');
+				echo $form->input('sex', array('options' => array('F' => __('Female', true), 'M' => __('Male', true)), 'empty' => true));
 			?>
 		</fieldset>
 		<fieldset class="col">

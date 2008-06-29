@@ -60,18 +60,20 @@ class Member extends AppModel {
 			),
 			'unique' => array(
 				'rule' => array('validateUnique', 'username'),
-				'required' => true
+				'required' => true,
+				'on'	=> 'create'
 			)
 		),
 		'password' =>  array(
 			'confirmation' => array(
-				'rule' => array('confirmPassword')
+				'rule' => array('confirmPassword'),
+				'required' => false
 			)
 		),
 		'password_confirm' => array(
 			'required' => array(
 				'rule' => 'alphanumeric',
-				'required' => true
+				'required' => false
 			)
 		)
 	);
