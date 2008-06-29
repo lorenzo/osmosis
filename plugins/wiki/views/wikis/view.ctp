@@ -7,6 +7,7 @@
 		<div class="wiki-description">
 			<p><?php echo $filter->filter($data['Wiki']['description']); ?></p>
 			<ul class="reverse actions">
+				<?php if(in_array($Osmosis['currentRole'],a('Professor','Admin'))) :?>
 				<li class="edit">
 					<?php
 						$link = __('Modify this information', true);
@@ -22,6 +23,7 @@
 						);
 					?>
 				</li>
+				<?php endif;?>
 			</ul>
 		</div>
 		

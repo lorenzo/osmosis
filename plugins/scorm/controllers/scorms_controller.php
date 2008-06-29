@@ -57,7 +57,7 @@ class ScormsController extends ScormAppController {
 		$this->set('scorms', $this->paginate(array('course_id' => $this->activeCourse)));
 		$this->Scorm->bindModel(
 			array('hasMany' =>
-				array('Tracking' => array('className' => 'ScormAttendeeTracking'))
+				array('Tracking' => array('className' => 'Scorm.ScormAttendeeTracking'))
 			)
 		);
 		$this->Scorm->Tracking->bindModel(
@@ -73,7 +73,8 @@ class ScormsController extends ScormAppController {
 		$this->Scorm->Tracking->contain(array('Sco(id)' => 'Scorm(id,name,description)'));
 		$fields = array('DISTINCT sco_id', 'student_id');
 		$conditions = array('student_id' => $this->Auth->user('id'));
-		$recent = $this->Scorm->Tracking->find('all', compact('conditions', 'fields'));
+		$limit = 20;
+		$recent = $this->Scorm->Tracking->find('all', compact('conditions', 'fields','limit'));
 		$scorms = $unique = array();
 		foreach ($recent as $i => $tracking) {
 			if (in_array($tracking['Sco']['scorm_id'], $unique)) continue;

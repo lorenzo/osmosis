@@ -8,7 +8,7 @@
 				<?php
 					echo  $html->link(
 						'<span class="given-name">' . $professor['full_name'] . '</span>',
-						array('controller' => 'members', 'action' => 'view', $professor['id']),
+						array('controller' => 'members', 'action' => 'view','plugin' => '',$professor['id']),
 						array('class' => 'url fn n'),
 						null, false
 					);
