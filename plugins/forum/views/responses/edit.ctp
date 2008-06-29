@@ -1,5 +1,5 @@
 <div class="responses form">
-<?php echo $form->create('Response');?>
+<?php echo $form->create('Response',array('url' => array('response_id' => $this->data['Response']['id'])));?>
 	<fieldset>
  		<legend><?php __('Edit Response');?></legend>
 	<?php

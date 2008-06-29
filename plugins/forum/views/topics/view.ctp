@@ -5,9 +5,9 @@
 	 	echo ' ' . $topic['Topic']['name'];
 	?>
 </h2>
+<div id="forum-head">
 <p class="small-description">
 	<?php
-	// debug($topic);
 		printf(
 			__('You are currently viewing the discussions started around this topic <strong>"%s"</strong> inside the <em>%s</em> course forum.', true),
 			$topic['Topic']['name'],
@@ -18,15 +18,17 @@
 		);
 	?>
 </p>
-<p class="actions-button">
-	<?php
-		echo ' ';
-		echo  $html->link(
-			__('Start a discussion', true),
-			array('controller'=> 'discussions','action'=>'add','topic_id' => $topic['Topic']['id'])
-		);
-	?>
-</p>
+<ul class="actions">
+	<li class="add">
+		<?php
+			echo  $html->link(
+				__('Start a discussion', true),
+				array('controller'=> 'discussions','action'=>'add','topic_id' => $topic['Topic']['id'])
+			);
+		?>
+	</li>
+</ul>
+</div>
 <?php
 	if (!empty($topic['Discussion'])):
 ?>
@@ -60,8 +62,24 @@
 						),
 						array('title' => $text->truncate(strip_tags($discussion['content'])))
 					);
-				?> <br />
-				<?php echo $discussion['Member']['full_name']; ?> &mdash; 
+				?> 	<?php
+						if (!in_array($Osmosis['currentRole'],a('Member','Public','Attendee'))) :
+							echo '&mdash; '.$html->link(
+								__('edit', true),
+								array('controller' => 'discussions', 'action' => 'edit', 'discussion_id' =>  $discussion['id'])
+							);
+					?>
+					<?php
+						endif;
+						if (in_array($Osmosis['currentRole'],a('Professor','Admin')))
+						echo ' &mdash; '.$html->link(
+							__('delete', true),
+							array('controller' => 'discussions', 'action' => 'delete', $discussion['id']),
+							array('confirm' => __('This will also delete all responses on this discussion', true))
+						);
+					?>
+				<br />
+				<?php echo $discussion['Member']['full_name']; ?> &mdash;
 				<span class="date"><?php echo $time->nice($discussion['created']); ?></span>
 			</td>
 			<td class="last-response date">
@@ -99,21 +117,14 @@
 <?php
 	endif;
 ?>
-
-	<div class="actions">
-		<ul>
-			<li>
-				<?php
-					echo  $html->link(
-						__('Start a discussion', true),
-						array(
-							'controller'=> 'discussions',
-							'action'=>'add',
-							'topic_id' => $topic['Topic']['id']
-						)
-					);
-				?>
-			</li>
-		</ul>
-	</div>
+<ul class="reverse actions">
+	<li class="add">
+		<?php
+			echo  $html->link(
+				__('Start a discussion', true),
+				array('controller'=> 'discussions','action'=>'add','topic_id' => $topic['Topic']['id'])
+			);
+		?>
+	</li>
+</ul>
 </div>

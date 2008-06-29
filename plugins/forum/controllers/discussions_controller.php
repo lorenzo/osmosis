@@ -36,12 +36,17 @@ class DiscussionsController extends ForumAppController {
 	
 	function _ownerAuthorization() {	
 		if ($this->action == 'edit') {
-			if (isset($this->data['Discussion']['id']))
-				return $this->Discussion->isOwner($this->Auth->user('id'),$this->data['Discussion']['id']);
-				
-			return false;
-		}
-			
+			if (isset($this->params['named']['discussion_id'])) {
+				if ($this->Discussion->isOwner($this->Auth->user('id'),$this->params['named']['discussion_id']))
+					return true;
+					
+					$member = $this->Discussion->field('member_id',array('id' => $this->params['named']['discussion_id']));
+					$role = $this->Discussion->Member->role($member,$this->activeCourse); 
+					return $this->Discussion->Member->compareRoles($this->currentRole,$role) >= 0;
+				}
+				return false;	
+			}
+								
 		return parent::_ownerAuthorization();
 	}
 
@@ -100,16 +105,24 @@ class DiscussionsController extends ForumAppController {
 			$this->_redirectIf(!isset($this->params['named']['discussion_id']));
 			$id = $this->params['named']['discussion_id'];
 			$this->data = $this->Discussion->read(null, $id);
-			if ($this->data['Discussion']['status']=='locked') {
-				$this->Session->setFlash(__('This discussion is locked, you cannot edit it anymore.', true), 'default', array('class' => 'info'));
-				$this->redirect(array('controller' => 'discussions', 'action'=>'view', $id));
-			}
 		}
 	}
 	
 	function beforeFilter() {
 		parent::beforeFilter();
 		$this->Security->requireAuth('edit');
+	}
+	
+	function delete($id = null) {
+		if (!$id) {
+			$this->Session->setFlash(__('Invalid id for Discussion', true), 'default', array('class' => 'error'));
+			$this->redirect(array('action'=>'index'));
+		}
+		$topic_id = $this->Discussion->field('topic_id', $id);
+		if ($this->Discussion->del($id)) {
+			$this->Session->setFlash(__('Topic deleted', true), 'default', array('class' => 'success'));
+			$this->redirect(array('controller' => 'topics', 'action' => 'index', 'topic_id' => $topic_id));
+		}
 	}
 
 }

@@ -50,17 +50,18 @@
 						$topic['name'],
 						array('controller'=> 'topics', 'action'=>'view', 'topic_id' =>  $topic['id'])
 					);
-				?> <br /> <?php echo $filter->filter($topic['description']); ?> &mdash;
+				?> <br /> <?php echo $filter->filter($topic['description']); ?>
 				<?php
-					if ($topic['status']!='locked') :
-						echo $html->link(
+					if (!in_array($Osmosis['currentRole'],a('Member','Public','Attendee'))) :
+						echo '&mdash; '.$html->link(
 							__('edit', true),
 							array('controller' => 'topics', 'action' => 'edit', 'topic_id' =>  $topic['id'])
 						);
-				?> &mdash;
+				?>
 				<?php
 					endif;
-					echo $html->link(
+					if (in_array($Osmosis['currentRole'],a('Professor','Admin')))
+					echo ' &mdash; '.$html->link(
 						__('delete', true),
 						array('controller' => 'topics', 'action' => 'delete', $topic['id']),
 						array('confirm' => __('This will also delete all discussions on this topic', true))

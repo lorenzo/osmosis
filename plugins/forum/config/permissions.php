@@ -12,7 +12,8 @@ class ForumPermissions extends Object {
 	var $Discussions = array(
 		'view'	=> 'Public',
 		'add' => 'Attendee',
-		'edit'	=> 'Attendee'
+		'edit'	=> 'Attendee',
+		'delete' => 'Assistant'
 	);
 		
 	var $Responses = array(

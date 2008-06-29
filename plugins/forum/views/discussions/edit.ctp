@@ -1,5 +1,5 @@
 <div class="discussions form">
-<?php echo $form->create('Discussion',array('url' => array('topic_id' => $this->data['Discussion']['topic_id'])));?>
+<?php echo $form->create('Discussion',array('url' => array('discussion_id' =>$this->data['Discussion']['id'] ,'topic_id' => $this->data['Discussion']['topic_id'])));?>
 	<fieldset>
  		<legend><?php __('Edit Discussion');?></legend>
 	<?php

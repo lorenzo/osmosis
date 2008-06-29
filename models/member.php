@@ -223,6 +223,20 @@ class Member extends AppModel {
 			return $enrollment['Role']['role'];
 			
 		return 'Member';
-	}		
+	}
+	
+	/**
+	 * Returns if $a has mor access priviledges than $b as a typical comparator that returns 0, 1 and -1
+	 *
+	 * @param string $a Human readable role name
+	 * @param string $b Human readable role name
+	 * @return int
+	 * @see Role
+	 */
+	
+	function compareRoles($a,$b) {
+		$this->Enrollment->bind('Role');
+		return $this->Enrollment->Role->compare($a,$b);
+	}
 }
 ?>

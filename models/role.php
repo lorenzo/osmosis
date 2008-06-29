@@ -70,5 +70,20 @@ class Role extends AppModel {
             return array('model' => 'Role', 'foreign_key' => $data[$this->name]['parent_id']);
         }
     }
+	
+	/**
+	 * Compares 2 roles based on their permission degree, a Higher ranked role means it has access clearance
+	 *
+	 * @param string $a Human readable role name
+	 * @param string $b Human readable role name
+	 * @return int o if $a == $b, 1 if $a > $b, 0 otherwise
+	 */
+	
+	function compare($a,$b) {
+		if ($a == $b)
+			return 0;
+		$roles =  $this->find('all',array('conditions' => array('role' => array($a,$b)),'recursive' => -1));
+		return ($roles[0]['Role']['id'] > $roles[1]['Role']['id']) ? 1 : -1;
+	}
 }
 ?>

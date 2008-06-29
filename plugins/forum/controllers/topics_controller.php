@@ -91,16 +91,6 @@ class TopicsController extends ForumAppController {
 		} else {
 			$this->_redirectIf(!isset($this->params['named']['topic_id']));
 			$this->data = $this->Topic->read(null, $this->params['named']['topic_id']);
-			if ($this->data['Topic']['status']=='locked') {
-				$this->Session->setFlash(__('This topic is locked, you cannot edit it anymore.', true), 'default', array('class' => 'info'));
-				$this->redirect(
-					array(
-						'controller'	=> 'topics',
-						'action'		=> 'index',
-						'course_id'		=> $this->Topic->field('course_id')
-					)
-				);
-			}
 		}
 	}
 	

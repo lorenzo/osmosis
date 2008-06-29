@@ -33,7 +33,7 @@ App::import('Core', 'Sanitize');
 class AppController extends Controller {
 	var $components = array('Acl','Auth','RequestHandler','OsmosisComponents','Placeholder');
 	var $helpers = array('Javascript', 'Html', 'Form', 'Time', 'Placeholder', 'Text','Filter');
-
+	
 	/**
 	 * Contains the id of the course the member is visiting. False if the member is viewing a page outside a course
 	 *
@@ -41,6 +41,8 @@ class AppController extends Controller {
 	 */
 	
 	protected $activeCourse = false;
+	
+	protected $currentRole = 'Public';
 	
 	/**
 	 * Things to be done before calling to the requested action.
@@ -213,14 +215,19 @@ class AppController extends Controller {
 		if( $this->name == 'Pages')
 			return true;
 			
-		if ($this->Auth->user('admin')) // Admin User
+		if ($this->Auth->user('admin')) {
+			$this->viewVars['Osmosis']['currentRole'] = 'Admin';
 			return true;
+		}
+			
 
 		$aclPrefix = 'App/';
 		if (isset($this->plugin) && !empty($this->plugin))
 			$aclPrefix = Inflector::camelize($this->plugin).'/';
-			
-		$valid = $this->Auth->Acl->check($this->_currentRole(),$aclPrefix.$this->Auth->action()) && $this->_ownerAuthorization();
+		
+		$this->currentRole = $this->_currentRole();
+		$this->viewVars['Osmosis']['currentRole'] = $this->currentRole;
+		$valid = $this->Auth->Acl->check($this->currentRole,$aclPrefix.$this->Auth->action()) && $this->_ownerAuthorization();
 		if($valid || Configure::read('Auth.disabled'))
 			return true;
 			
