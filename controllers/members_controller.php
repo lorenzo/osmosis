@@ -108,6 +108,8 @@ class MembersController extends AppController {
 			if (empty($this->data['Member']['password_confirm']) && empty($this->data['Member']['password'])) {
 				unset($this->data['Member']['password_confirm']);
 				unset($this->data['Member']['password']);
+			} else {
+				$this->data['Member']['password'] = $this->Auth->password($this->data['Member']['password']);
 			}
 			if ($this->Member->save($this->data)) {
 				$this->Session->setFlash(__('The Member has been saved',true), 'default', array('class' => 'success'));

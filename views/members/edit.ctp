@@ -4,6 +4,7 @@
 		<fieldset class="col">
 			<legend><?php __('Personal Data')?></legend>
 			<?php
+				echo $form->input('id');
 				echo $form->input('full_name');
 				echo $form->input('email');
 				echo $form->input('phone');
@@ -29,7 +30,8 @@
 			<?php
 				echo $form->input('password');
 				echo $form->input('password_confirm', array('type' => 'password'));
-				echo $form->input('admin', array('label' => __('Give this user administrative access', true)));
+				if ($Osmosis['active_member']['admin'])
+					echo $form->input('admin', array('label' => __('Give this user administrative access', true)));
 			?>
 		</fieldset>
 	</fieldset>

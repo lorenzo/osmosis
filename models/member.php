@@ -72,7 +72,7 @@ class Member extends AppModel {
 		),
 		'password_confirm' => array(
 			'required' => array(
-				'rule' => 'alphanumeric',
+				'rule' => array('custom', '/.+/'),
 				'required' => false
 			)
 		)
@@ -178,7 +178,7 @@ class Member extends AppModel {
 	 * @return boolean true if the passwords are the same
 	 */
 	function confirmPassword($data) {
-		$valid = false; 
+		$valid = false;
 		if ($data['password'] == Security::hash(Configure::read('Security.salt') . $this->data['Member']['password_confirm'])) {
 		   $valid = true;
 		}

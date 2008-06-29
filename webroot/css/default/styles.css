@@ -491,6 +491,7 @@ h3 {
 	display:block;
 	background:transparent url('../../img/default/go.png') no-repeat 0 0;
 }
+
 .dashboard-element dl.altrow {
 	background: #f4f4f4;
 }
@@ -507,7 +508,6 @@ h3 {
 
 #profile.dashboard-element p {
 	padding:3px 10px;
-	margin:0;
 	text-align:right;
 }
 #profile.dashboard-element p a {

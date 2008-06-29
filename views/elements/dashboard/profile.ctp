@@ -24,13 +24,28 @@
 		<dt><?php __('Sex:')?></dt>
 		<dd><?php echo $user['sex'] ?></dd>	
 	</dl>
-	<p>
+	<p class="go">
 		<?php
-			echo $html->link(__('Modify your profile', true), array('admin' => false, 'controller' => 'members', 'action' => 'edit', $user['id']));
+			$edit = false;
+			if ($Osmosis['active_member']['id'] == $user['id']){
+				$edit = true;
+				$message = __('Modify your profile', true);
+			}
+			if ($Osmosis['active_member']['admin']) {
+				$edit = true;
+				$message = __('Modify this profile', true);
+			}
+			if ($edit)
+				echo $html->link(
+					$message,
+					array('admin' => false, 'controller' => 'members', 'action' => 'edit', $user['id'])
+				);
 		?>
 	</p>
 </div>
-
+<?php
+	if (isset($connect)) :
+?>
 <div id="connect" class="boxed dashboard-element">
 	<strong class="title"><?php __('Connect'); ?></strong>
 	<ul>
@@ -39,3 +54,6 @@
 		?>
 	</ul>
 </div>
+<?php
+	endif;
+?>

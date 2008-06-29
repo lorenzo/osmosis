@@ -1,13 +1,11 @@
 <div id="top">
 	<ul>
-		<!-- <li><a href="#">Buscar</a></li> -->
-		<!-- <li><a href="#">Ayuda</a></li> -->
 		<?php
 			if ($Osmosis['active_member']['admin']) :
 		?>
 		<li>
 			<?php
-				echo $html->link(__('Admin', true), array('controller' => 'dashboards', 'action' => 'dashboard', 'admin' => true, 'plugin' => null));
+				echo $html->link(__('Admin Area', true), array('controller' => 'dashboards', 'action' => 'dashboard', 'admin' => true, 'plugin' => null));
 			?>
 		</li>
 		<?php
