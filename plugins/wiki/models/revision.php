@@ -30,25 +30,34 @@
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 class Revision extends AppModel {
-
 	var $name = 'Revision';
 	var $useTable = 'wiki_revisions';
 	var $validate = false;
-
+	
+	/**
+	 * BelongsTo (1-N) relation descriptors
+	 *
+	 * @var array
+	 **/
 	var $belongsTo = array(
-			'Entry' => array('className' => 'wiki.Entry',
-								'foreignKey' => 'entry_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
-			'Member' => array('className' => 'Member',
-								'foreignKey' => 'member_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => ''),
+		// Revision BelongsTo Entry (entry modified)
+		'Entry' => array(
+			'className'		=> 'wiki.Entry',
+			'foreignKey'	=> 'entry_id',
+			'conditions'	=> '',
+			'fields'		=> '',
+			'order'			=> '',
+			'counterCache'	=> ''
+		),
+		// Revision BelongsTo Member (author of the modification)
+		'Member' => array(
+			'className'		=> 'Member',
+			'foreignKey'	=> 'member_id',
+			'conditions'	=> '',
+			'fields'		=> '',
+			'order'			=> '',
+			'counterCache'	=> ''
+		)
 	);
-
 }
 ?>

@@ -143,7 +143,12 @@ class Wiki extends AppModel {
 		return $data;
 	}
 	
-	
+	/**
+	 * Returns the main page of a wiki
+	 *
+	 * @param string $wiki_id Id of the wiki
+	 * @return mixed data of false if not found
+	 */
 	function mainPage($wiki_id) {
 		$conditions = compact('wiki_id');
 		$this->Entry->recursive = -1;
