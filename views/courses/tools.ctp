@@ -1,5 +1,5 @@
 <div class="tools">
-<h1><?php __('Available Tools'); ?></h1>
+<h2><?php __('Available Tools'); ?></h2>
 
 <?php 
 if(!empty($tools)) :

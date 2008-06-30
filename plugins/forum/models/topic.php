@@ -190,7 +190,7 @@ class Topic extends AppModel {
 	 */
 	
 	function isLocked($id) {
-		return $this->find('count',array('conditions' => array('Topic.id' => $id),'recursive' => -1)) == 1;
+		return $this->find('count',array('conditions' => array('Topic.id' => $id,'Topic.status' => 'locked'),'recursive' => -1)) == 1;
 	}
 }
 ?>

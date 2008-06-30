@@ -35,7 +35,6 @@ class MessagesController extends ChatAppController {
 	
 	function beforeFilter() {
 		parent::beforeFilter();
-		Configure::write('debug',1);
 	}
 
 	function send($to) {
@@ -48,12 +47,9 @@ class MessagesController extends ChatAppController {
 		if (!$since) {
 			$since = ($this->Session->check('Chat.lastPoll')) ? $this->Session->read('Chat.lastPoll') : time();
 		}
-		//$tries = 500;
-		//while($tries-- > 0) {
-			$messages = $this->Message->receive($this->Auth->user('id'),$since);
-		//	if (count($messages) > 0) {break;}
-		//	$this->_sleeper(200);
-		//}
+
+		$messages = $this->Message->receive($this->Auth->user('id'),$since);
+		
 		if (!empty($messages)) {
 			$since = time();
 			$this->Session->write('Chat.lastPoll',$since);
@@ -61,19 +57,7 @@ class MessagesController extends ChatAppController {
 		$this->set('messages',$messages);
 		$this->set('timestamp',$since);
 	}
-	
-/*	function _sleeper($mSec) {
-	    static $socket=false;
-	    if($socket===false){
-	        $socket=array(socket_create(AF_INET,SOCK_STREAM,0));
-	    }
-	    $pSock=$socket;
-	    $uSex = $mSec * 1000;
-	    socket_select($read=NULL,$write=NULL,$pSock,0,$mSec);
-	    return true;
-	}
-*/
-	
+
 	function isAuthorized() {
 		return $this->Auth->user();
 	}

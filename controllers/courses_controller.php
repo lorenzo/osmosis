@@ -35,7 +35,7 @@ class CoursesController extends AppController {
 	var $helpers = array('Html', 'Form','Rating','Javascript');
 	
 	function _setActiveCourse() {
-		if ($this->action == 'view' && isset($this->params['pass'][0])) 
+		if (in_array($this->action,a('view','tools')) && isset($this->params['pass'][0])) 
 			$this->activeCourse = $this->params['pass'][0];
 		else
 			parent::_setActiveCourse();
@@ -237,8 +237,9 @@ class CoursesController extends AppController {
 		if (!empty($this->data)) {
 			if (isset($this->data['CourseTool']['add'])) {
 				
-				if ($this->Course->Tool->CourseTool->save($this->data))
+				if ($this->Course->Tool->CourseTool->save($this->data)) {
 					$this->Session->setFlash(__('The Tool has been added',true), 'default', array('class' => 'success'));
+				}	
 				else
 					$this->Session->setFlash(__('The could not be added',true), 'default', array('class' => 'error'));
 			} elseif (isset($this->data['CourseTool']['remove'])) {

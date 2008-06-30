@@ -69,8 +69,7 @@ class EntriesController extends WikiAppController {
 		if (isset($this->params['named']['wiki_id']))
 			$wiki_id = $this->params['named']['wiki_id'];
 		elseif (isset($this->params['named']['course_id'])) {
-			$wiki_id = $this->Entry->Wiki->field('id',array(
-				'conditions' => array('course_id' =>$this->params['named']['course_id']))
+			$wiki_id = $this->Entry->Wiki->field('id',array('Wiki.course_id' =>$this->params['named']['course_id'])
 			);
 		}
 

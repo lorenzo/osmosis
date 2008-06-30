@@ -233,8 +233,8 @@ class Entry extends AppModel {
 			$conditions['wiki_id'] = $locators['wiki_id'];
 			
 		if (isset($locators['course_id']))
-			$conditions['course_id'] = $locators['course_id'];
-		$count = $this->find('count',array('conditions' => $conditions));
+			$conditions['Wiki.course_id'] = $locators['course_id'];
+		$count = $this->find('count',array('conditions' => $conditions,'contain' => array('Wiki')));
 		return $count === 1;
 	}
 

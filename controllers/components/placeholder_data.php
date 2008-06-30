@@ -61,7 +61,7 @@ abstract class PlaceholderDataComponent extends Object {
 	 * @var string
 	 */
 	
-	var $cacheExpires = '+1 hour';
+	var $cacheExpires = '+1 minute';
 	
 	/**
 	 * Default key for storing cache data
@@ -168,8 +168,17 @@ abstract class PlaceholderDataComponent extends Object {
 		$key[] = 'Placeholder';
 		$key[] = $this->name;
 		$key[] = $type;
+		$course = $this->controller->_getActiveCourse();
+		if (!empty($course)) {
+			$key[] = 'course';
+			$key[] = $course;
+		}
+		$user = $this->controller->Auth->user('id');
+		if (!empty($user)) {
+			$key[] = 'member';
+			$key[] = $user;
+		}
 		$cacheKey= implode($key, '.');
-		
 		return $cacheKey;
 	}
 	
@@ -205,7 +214,8 @@ abstract class PlaceholderDataComponent extends Object {
 			if (!$this->cache) {
 				$elementData['cache'] = false;
 			} else if (!Configure::read('Cache.disabled') && $this->cacheExpires) {
-				$elementData['cache'] = $this->cacheExpires;
+				$elementData['cache']['time'] = $this->cacheExpires;
+				$elementData['cache']['key'] = $this->getCacheKey($type);
 			}
 			
 			if (isset($this->config[$type]))

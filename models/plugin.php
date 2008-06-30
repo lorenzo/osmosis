@@ -89,7 +89,7 @@ class Plugin extends AppModel {
 		$plugins = Cache::read('Plugin.actives');
 		if (!$plugins) {
 			$plugins = $this->find('all', array('conditions' => array('active' => 1), 'recursive' => 1));
-			Cache::write('Plugin.actives',$plugins,'60');
+			Cache::write('Plugin.actives',$plugins,15);
 		}
 		return $plugins;
 	}

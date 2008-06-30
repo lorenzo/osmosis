@@ -13,7 +13,8 @@ class OsmosisPermissions extends Object {
 	var $Dashboards = array();
 	var $Members = array(
 			'view'	=> 'Member',
-			'edit'	=> 'Member'
+			'edit'	=> 'Member',
+			'online' => 'Member'
 		);
 }
 ?>
