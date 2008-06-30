@@ -927,7 +927,7 @@ msgstr "Nuevo comentario"
 
 #: /plugins/blog/views/comments/view.ctp:2
 msgid "Comment"
-msgstr "Comentario"
+msgstr "Comentar"
 
 #: /plugins/blog/views/comments/view.ctp:9
 #: /plugins/locker/views/documents/view.ctp:14
@@ -1064,7 +1064,7 @@ msgstr "Crear discusión"
 
 #: /plugins/forum/views/discussions/edit.ctp:4
 msgid "Edit Discussion"
-msgstr "Editar discusión"
+msgstr "Editar Discusión"
 
 #: /plugins/forum/views/discussions/edit.ctp:16
 msgid "Lock this discussion"
@@ -1072,7 +1072,7 @@ msgstr "Bloquear esta discusión"
 
 #: /plugins/forum/views/discussions/edit.ctp:17
 msgid "(Nobody will be able to reply anymore. Cannot be undone.)"
-msgstr ""
+msgstr "(No se podrá responder en la discusión. Este cambio no se puede deshacer.)"
 
 #: /plugins/forum/views/discussions/view.ctp:4
 msgid "Discussion:"
@@ -1445,10 +1445,6 @@ msgstr "Aún no se han registrado discusiones."
 
 #: /plugins/locker/controllers/documents_controller.php:45
 msgid "Invalid LockerDocument."
-msgstr "Documento no válido."
-
-#: /plugins/locker/controllers/documents_controller.php:69
-msgid "Invalid LockerDocument"
 msgstr "Documento no válido."
 
 #: /plugins/locker/controllers/documents_controller.php:90
@@ -3118,7 +3114,7 @@ msgstr "Perfil"
 
 #: /views/elements/dashboard/profile.ctp:4
 msgid "Full Name:"
-msgstr "Nombre completo:"
+msgstr "Nombre:"
 
 #: /views/elements/dashboard/profile.ctp:8
 msgid "Email:"
@@ -3909,10 +3905,6 @@ msgstr "Por favor, indique el nombre del wiki."
 msgid "Main Page"
 msgstr "Página principal"
 
-#: /plugins/wiki/models/wiki.php:138
-msgid "<p>Wellcome to the wiki, start by editing this page!</p>"
-msgstr "<p>Bienvenido al wiki, puede comenzar editando esta página</p>"
-
 #: /plugins/wiki/views/wikis/view.ctp:8
 msgid "Recent changes"
 msgstr "Cambios recientes"
@@ -3931,7 +3923,7 @@ msgstr "Información Institucional"
 
 #: /views/members/admin_add.ctp:18
 msgid "Institution ID"
-msgstr ""
+msgstr "Carnet"
 
 #: /plugins/wiki/models/entry.php:135
 msgid "Please write a content for this entry"
@@ -4008,3 +4000,137 @@ msgstr ""
 #: /plugins/locker/controllers/folders_controller.php:126
 msgid "Folder deleted"
 msgstr "Carpeta eliminada."
+
+#: /plugins/forum/controllers/discussions_controller.php:120
+msgid "Invalid id for Discussion"
+msgstr ""
+
+#: /plugins/forum/controllers/discussions_controller.php:140
+msgid "The Topic or Discussion is locked"
+msgstr "El tema o la discusión están bloquedos."
+
+#: /plugins/forum/controllers/responses_controller.php:126
+msgid "The Discussion is locked"
+msgstr "La discusión está bloqueda."
+
+#: /plugins/forum/views/topics/view.ctp:78
+msgid "This will also delete all responses on this discussion"
+msgstr ""
+
+#: /plugins/locker/controllers/documents_controller.php:67
+msgid "Invalid document"
+msgstr "Documento no válido."
+
+#: /plugins/locker/controllers/documents_controller.php:87
+msgid "The LockerDocument could not be saved. Please, try again."
+msgstr ""
+
+#: /plugins/scorm/views/scorms/index.ctp:51
+msgid "Available lessons"
+msgstr "Lecciones disponibles"
+
+#: /plugins/scorm/views/scorms/index.ctp:100
+msgid "This wil also delete any student tracking information on this lessons"
+msgstr ""
+
+#: /plugins/scorm/views/scorms/index.ctp:110
+msgid "No lessons yet"
+msgstr "Aún no hay lecciones"
+
+#: /plugins/wiki/models/wiki.php:138
+msgid "<p>Welcome to the wiki, start by editing this message!</p>"
+msgstr "<p>Bienvenido al wiki, comience editando este mensaje</p>"
+
+#: /plugins/wiki/views/elements/entry.ctp:7
+msgid "edit this entry"
+msgstr "editar esta página"
+
+#: /plugins/wiki/views/elements/entry.ctp:23
+#: /plugins/wiki/views/elements/recent_entry.ctp:27
+msgid "view history"
+msgstr "ver historial"
+
+#: /plugins/wiki/views/entries/index.ctp:2
+#: /plugins/wiki/views/wikis/view.ctp:55
+msgid "Index of Entries"
+msgstr "Índice de páginas"
+
+#: /plugins/wiki/views/revisions/diff.ctp:9
+msgid "keep this revision"
+msgstr "conservar esta revisión"
+
+#: /plugins/wiki/views/revisions/diff.ctp:18;32;42
+msgid "return to this revision"
+msgstr "volver a esta revisión"
+
+#: /plugins/wiki/views/revisions/diff.ctp:27
+msgid "Current Version"
+msgstr "Versión actual"
+
+#: /plugins/wiki/views/revisions/diff.ctp:29
+msgid "Differences between current revision and previous"
+msgstr "Diferencias entre la revisión actual y la anterior"
+
+#: /plugins/wiki/views/revisions/diff.ctp:53
+msgid "Differences between revisions %s and %s"
+msgstr "Diferencias entre las revisiones %s y %s"
+
+#: /plugins/wiki/views/revisions/history.ctp:2
+msgid "Revision history of \"%s\""
+msgstr "Historial de revisión de \"%s\""
+
+#: /plugins/wiki/views/revisions/history.ctp:6
+msgid "Modified by"
+msgstr "Modificado por"
+
+#: /plugins/wiki/views/revisions/history.ctp:13
+msgid "Current revision"
+msgstr "Revisión actual"
+
+#: /plugins/wiki/views/revisions/history.ctp:18;55
+msgid "View this revision"
+msgstr "Ver esta revisión"
+
+#: /plugins/wiki/views/revisions/history.ctp:27;66
+msgid "compare to previous"
+msgstr "comparar con anterior"
+
+#: /plugins/wiki/views/revisions/history.ctp:58
+msgid "by %s at"
+msgstr "%s"
+
+#: /plugins/wiki/views/wikis/view.ctp:13
+msgid "Modify this information"
+msgstr "Modificar esta información"
+
+#: /plugins/wiki/views/wikis/view.ctp:15
+msgid "Add a description"
+msgstr "Agregar una descripción"
+
+#: /views/elements/dashboard/profile.ctp:36
+msgid "Modify this profile"
+msgstr "Modificar este perfil"
+
+#: /views/elements/dashboard/profile.ctp:50
+msgid "Connect"
+msgstr "Conectar"
+
+#: /views/elements/layout/top_nav.ctp:8
+msgid "Admin Area"
+msgstr "Área Admin"
+
+#: /views/members/admin_add.ctp:12 /views/members/edit.ctp:12
+msgid "Female"
+msgstr "Femenino"
+
+#: /views/members/admin_add.ctp:12 /views/members/edit.ctp:12
+msgid "Male"
+msgstr "Masculino"
+
+#: /views/members/edit.ctp:3
+msgid "Edit Profile"
+msgstr "Editar Perfil"
+
+#: /views/members/edit.ctp:32
+msgid "Password confirm"
+msgstr "Confirmar contraseña"

@@ -28,8 +28,8 @@
 		<fieldset class="full">
 			<legend><?php __('Access Information')?></legend>
 			<?php
-				echo $form->input('password');
-				echo $form->input('password_confirm', array('type' => 'password'));
+				echo $form->input('password', array ('label' => __('Password', true)));
+				echo $form->input('password_confirm', array('type' => 'password', 'label' => __('Password confirm', true)));
 				if ($Osmosis['active_member']['admin'])
 					echo $form->input('admin', array('label' => __('Give this user administrative access', true)));
 			?>
