@@ -85,6 +85,7 @@ class DocumentsController extends LockerAppController {
 				$this->redirect(array('controller' => 'folders', 'action'=>'view', $this->data['LockerDocument']['folder_id']));
 			} else {
 				$this->Session->setFlash(__('The LockerDocument could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
+				$this->redirect($this->referer());
 			}
 		}
 		$folders = $this->LockerDocument->Folder->find('list');
@@ -201,6 +202,7 @@ class DocumentsController extends LockerAppController {
 				$this->redirect(array('controller' => 'folders', 'action'=>'view', $folder_id));
 			} else {
 				$this->Session->setFlash(__('The file could not be saved. Please, try again.', true));
+				$this->redirect($this->referer());
 			}
 		}
 		$folders = $this->LockerDocument->Folder->find('list');
