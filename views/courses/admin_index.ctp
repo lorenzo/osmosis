@@ -8,12 +8,9 @@ echo $paginator->counter(array(
 ?></p>
 <table cellpadding="0" cellspacing="0">
 <tr>
-	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('department_id');?></th>
-	<th><?php echo $paginator->sort('owner_id');?></th>
 	<th><?php echo $paginator->sort('code');?></th>
 	<th><?php echo $paginator->sort('name');?></th>
-	<th><?php echo $paginator->sort('description');?></th>
 	<th><?php echo $paginator->sort('created');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
@@ -27,22 +24,13 @@ foreach ($courses as $course):
 ?>
 	<tr<?php echo $class;?>>
 		<td>
-			<?php echo $course['Course']['id']; ?>
-		</td>
-		<td>
 			<?php echo $html->link($course['Department']['name'], array('controller'=> 'departments', 'action'=>'view', $course['Department']['id'])); ?>
-		</td>
-		<td>
-			<?php echo $html->link($course['Owner']['id'], array('controller'=> 'members', 'action'=>'view', $course['Owner']['id'])); ?>
 		</td>
 		<td>
 			<?php echo $course['Course']['code']; ?>
 		</td>
 		<td>
 			<?php echo $course['Course']['name']; ?>
-		</td>
-		<td>
-			<?php echo $course['Course']['description']; ?>
 		</td>
 		<td>
 			<?php echo $course['Course']['created']; ?>
@@ -60,13 +48,4 @@ foreach ($courses as $course):
 	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
  | 	<?php echo $paginator->numbers();?>
 	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
-</div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('New Course', true), array('action'=>'add')); ?></li>
-		<li><?php echo $html->link(__('List Departments', true), array('controller'=> 'departments', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Department', true), array('controller'=> 'departments', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Members', true), array('controller'=> 'members', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Owner', true), array('controller'=> 'members', 'action'=>'add')); ?> </li>
-	</ul>
 </div>
