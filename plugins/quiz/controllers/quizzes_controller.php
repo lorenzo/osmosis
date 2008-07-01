@@ -72,6 +72,7 @@ class QuizzesController extends QuizAppController {
 			$this->Session->setFlash(__('Invalid Quiz',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
+		$this->Quiz->recursive = 2;
 		$this->set('quiz', $this->Quiz->read(null, $id));
 	}
 
