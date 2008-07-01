@@ -108,3 +108,13 @@ blockquote {
 #connect.dashboard-element .blog a {
 	background-image:url('../img/journal.png');
 }
+
+input.post-title {
+	width:75%;
+}
+
+div.body {
+	line-height:1.6em;
+	font-size:1.1em;
+	color:#333;
+}

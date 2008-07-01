@@ -33,7 +33,7 @@
 					)
 				);
 			?>
-		</cite> <?php __('wrote:'); ?>
+		</cite> <?php echo sprintf(__('wrote %s:',true),$time->timeAgoInWords($comment['created'])); ?>
 		<?php
 			echo $html->link(
 				'#',

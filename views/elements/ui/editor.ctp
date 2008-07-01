@@ -1,6 +1,6 @@
 <?php echo $javascript->link('tiny_mce/tiny_mce',null,null,false); ?>
 <?php
-$width = 700;
+$width = '"90%"';
 $height = 300;
 if (isset($settings['width']))
 	$width = $settings['width'];

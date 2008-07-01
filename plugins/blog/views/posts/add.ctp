@@ -3,7 +3,7 @@
 	<fieldset>
  		<legend><?php __('Add Post');?></legend>
 	<?php
-		echo $form->input('title', array('size' => 60));
+		echo $form->input('title', array('class' => 'post-title'));
 		echo $form->input('body', array('label' => array('class' => 'hidden')));
 		echo $form->hidden('blog_id');
 	?>

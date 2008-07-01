@@ -11,12 +11,12 @@ class BlogSchema extends CakeSchema {
 			);
 	var $blog_posts = array(
 			'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary'),
-			'title' => array('type'=>'string', 'null' => true, 'default' => NULL, 'length' => 50),
+			'title' => array('type'=>'string', 'null' => false, 'default' => NULL, 'length' => 200),
 			'body' => array('type'=>'text', 'null' => true, 'default' => NULL),
 			'created' => array('type'=>'datetime', 'null' => true, 'default' => NULL),
 			'modified' => array('type'=>'datetime', 'null' => true, 'default' => NULL),
 			'blog_id' => array('type'=>'integer', 'null' => false),
-			'slug' => array('type'=>'text', 'null' => false),
+			'slug' =>  array('type'=>'string', 'null' => false, 'default' => NULL, 'length' => 200),
 			'member_id' => array('type'=>'integer', 'null' => false),
 			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
 			);
