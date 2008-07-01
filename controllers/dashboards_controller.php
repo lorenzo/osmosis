@@ -46,6 +46,9 @@ class DashboardsController extends AppController {
 	}
 	
 	function isAuthorized() {
+		if (isset($this->params['admin']) && $this->params['admin'] == true && !$this->Auth->user('admin')) {
+			$this->redirect('/');
+		}
 		return $this->Auth->user('id');
 	}
 }

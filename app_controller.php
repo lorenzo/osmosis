@@ -110,7 +110,6 @@ class AppController extends Controller {
 			$this->Auth->loginAction = array('controller' => 'members', 'action' => 'login', 'plugin' => '', 'admin' => false);
 			$this->Auth->loginError = __('Login or password incorrect', true);
 			$this->Auth->loginRedirect = array('controller' => 'courses');
-			// $this->Auth->autoRedirect = true;
 			$this->set('user', $this->Session->read('Auth.Member'));
 			//TODO: Borrar lo siguiente cuando sea el momento
 			if ($this->name == 'InitAcl') {
@@ -120,6 +119,8 @@ class AppController extends Controller {
 				return;
 			}
 			Configure::write('ActiveUser', $this->Auth->user());
+			if (strpos($this->Session->read('Auth.redirect'),'admin') !== false && !$this->Auth->user('admin'))
+				$this->Session->del('Auth.message');
 		}
 	}
 	
@@ -224,7 +225,10 @@ class AppController extends Controller {
 			$this->viewVars['Osmosis']['currentRole'] = 'Admin';
 			return true;
 		}
-			
+		
+		if (isset($this->params['admin']) && $this->params['admin'] == true && !$this->Auth->user('admin')) {
+			$this->redirect('/');
+		}			
 
 		$aclPrefix = 'App/';
 		if (isset($this->plugin) && !empty($this->plugin))
