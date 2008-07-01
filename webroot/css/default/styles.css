@@ -206,7 +206,6 @@ a:visited {
 
 #my-courses h1 a.goto {
 	float:right;
-	overflow:hidden;
 	display:block;
 	background-image:url('../../img/default/go.png');
 	background-repeat:no-repeat;
@@ -220,7 +219,6 @@ a:visited {
 
 #my-courses h1 a.goto:hover {
 	float:right;
-	overflow:hidden;
 	display:block;
 	margin-right:20px;
 	margin-top:0px;

@@ -330,3 +330,7 @@ fieldset.question-choices .choice.set ol label {
 ol li div ol {
 	margin-top:10px;
 }
+
+div.textQuestion input[type=text] {
+	width:75%;
+}

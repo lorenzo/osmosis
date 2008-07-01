@@ -7,7 +7,7 @@
 	?>
 	<div class="body">
 	<?php
-		echo $form->input('body', array('label' => __('Something', true)));
+		echo $form->input('body', array('label' => array('text' => __('Something', true), 'class' => 'hidden')));
 		echo $form->input('format');
 	?>
 	</div>
