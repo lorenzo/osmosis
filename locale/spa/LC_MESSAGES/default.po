@@ -1001,16 +1001,16 @@ msgstr "El plugin Foro ha sido instalado."
 
 #: /plugins/forum/controllers/responses_controller.php:52;70
 msgid "The Response has been saved"
-msgstr ""
+msgstr "La respuesta ha sido guardada."
 
 #: /plugins/forum/controllers/responses_controller.php:54
 #: /plugins/forum/models/response.php:92
 msgid "Please write a response"
-msgstr ""
+msgstr "Por favor, escriba una respuesta"
 
 #: /plugins/forum/controllers/responses_controller.php:79
 msgid "The Response could not be saved. Please, try again."
-msgstr ""
+msgstr "La respuesta no pudo ser guardada. Por favor, intente de nuevo."
 
 #: /plugins/forum/controllers/topics_controller.php:47;56
 msgid "Invalid Topic."
@@ -1072,7 +1072,8 @@ msgstr "Bloquear esta discusión"
 
 #: /plugins/forum/views/discussions/edit.ctp:17
 msgid "(Nobody will be able to reply anymore. Cannot be undone.)"
-msgstr "(No se podrá responder en la discusión. Este cambio no se puede deshacer.)"
+msgstr ""
+"(No se podrá responder en la discusión. Este cambio no se puede deshacer.)"
 
 #: /plugins/forum/views/discussions/view.ctp:4
 msgid "Discussion:"
@@ -1100,7 +1101,7 @@ msgstr "y"
 
 #: /plugins/forum/views/elements/Discussion.updates.ctp:18
 msgid ":member_links :action the discussion <em>:discussion_name</em>."
-msgstr ":member_links ha :action la discusión <em>:discussion_name</em>."
+msgstr ":member_links ha :action la discusión <em>:discussion_name</em>"
 
 #: /plugins/forum/views/elements/Response.updates.ctp:9
 msgid "response"
@@ -1132,7 +1133,7 @@ msgid ""
 "discussion_name</em>:<br /> :link_list"
 msgstr ""
 "Los siguientes compañeros de clases respondieron en la discusión <em>:"
-"discussion_name</em>:<br /> :link_list."
+"discussion_name</em><br /> :link_list"
 
 #: /plugins/forum/views/elements/Topic.updates.ctp:10
 msgid ":member_name :action the Topic: :topic_name"
@@ -3667,7 +3668,7 @@ msgstr "Estos documentos han sido enviados por otros miembros"
 
 #: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:8
 msgid "Go to your dropbox"
-msgstr ""
+msgstr "Ir al buzón de entrega"
 
 #: /plugins/locker/views/elements/placeholders/connections_dashboard.ctp:36
 msgid "Go to your locker"
@@ -3687,7 +3688,7 @@ msgstr "han modificado"
 
 #: /plugins/wiki/views/elements/updates.ctp:29
 msgid "<li>:member_links :action the page <em>:entry_title</em>.</li>"
-msgstr "<li>:member_links :action la página <em>:entry_title</em>.</li>"
+msgstr "<li>:member_links :action la página <em>:entry_title</em></li>"
 
 #: /plugins/wiki/views/elements/placeholders/plugin_updates.ctp:2
 msgid "Wiki"
@@ -3711,11 +3712,11 @@ msgstr "dijo:"
 
 #: /plugins/forum/views/elements/Response.updates.ctp:34
 msgid ""
-"The following classmates wrote a response on the discussion <em>:"
-"discussion_name</em><br /> :link_list"
+"The following classmates wrote a response on the discussion "
+"<em>discussion_name</em><br /> :link_list"
 msgstr ""
 "Los siguientes compañeros de clases respondieron en la discusión <em>:"
-"discussion_name</em>:<br /> :link_list."
+"discussion_name</em>:<br /> :link_list"
 
 #: /plugins/blog/models/comment.php:99
 msgid "Please write your comment"
@@ -3819,7 +3820,7 @@ msgstr "Plugin desactivado."
 
 #: /controllers/plugins_controller.php:173
 msgid "Unable to deactivate plugin"
-msgstr ""
+msgstr "Imposible desactivar el plugin"
 
 #: /models/department.php:83
 msgid "Please write the name of the Department"
@@ -4015,7 +4016,7 @@ msgstr "La discusión está bloqueda."
 
 #: /plugins/forum/views/topics/view.ctp:78
 msgid "This will also delete all responses on this discussion"
-msgstr ""
+msgstr "Se eliminarán todas las respuestas de esta discusión."
 
 #: /plugins/locker/controllers/documents_controller.php:67
 msgid "Invalid document"
@@ -4023,7 +4024,7 @@ msgstr "Documento no válido."
 
 #: /plugins/locker/controllers/documents_controller.php:87
 msgid "The LockerDocument could not be saved. Please, try again."
-msgstr ""
+msgstr "El documento no pudo ser guardado. Por favor, intente de nuevo."
 
 #: /plugins/scorm/views/scorms/index.ctp:51
 msgid "Available lessons"
@@ -4117,7 +4118,7 @@ msgstr "Conectar"
 
 #: /views/elements/layout/top_nav.ctp:8
 msgid "Admin Area"
-msgstr "Área Admin"
+msgstr "Administración"
 
 #: /views/members/admin_add.ctp:12 /views/members/edit.ctp:12
 msgid "Female"
@@ -4134,3 +4135,52 @@ msgstr "Editar Perfil"
 #: /views/members/edit.ctp:32
 msgid "Password confirm"
 msgstr "Confirmar contraseña"
+
+#: /plugins/blog/config/description.php:32
+msgid ""
+"A blog (or web log) is a website, for each member, with regular entries of "
+"commentary, descriptions of events, or other material such as graphics or "
+"video."
+msgstr ""
+
+#: /plugins/blog/views/posts/view.ctp:36
+msgid "wrote %s:"
+msgstr ""
+
+#: /plugins/chat/config/description.php:33
+msgid "A chat is a person to person instant messaging application"
+msgstr "Un chat es una aplicación de mensajería instantánea"
+
+#: /plugins/forum/config/description.php:32
+msgid ""
+"A forum is an application that allows people to discuss in various topics."
+msgstr "Un foro es una aplicación que permite a las personas discutir sobre varios temas de interés."
+
+#: /plugins/forum/views/elements/Topic.updates.ctp:27
+msgid "<li>:member_links :action the topic <em>:topic_title</em>.</li>"
+msgstr "<li>:member_links :action el tema <em>:topic_title</em>.</li>"
+
+#: /plugins/locker/controllers/documents_controller.php:118
+msgid "Invalid LockerDocument"
+msgstr "Documento no válido."
+
+#: /plugins/scorm/config/description.php:32
+msgid ""
+"Sharable Content Object Reference Model (SCORM) is a collection of standards "
+"and specifications for web-based e-learning. This plugin is a player for "
+"SCORM 2004 files"
+msgstr "Sharable Content Object Reference Model (SCORM) es una colección de estándares "
+"y especificaciones para el aprendizaje a distancia. Este plugin es un player de archivos "
+"del tipo SCORM 2004"
+
+#: /plugins/wiki/config/description.php:32
+msgid ""
+"A wiki is a collection of web pages designed to enable anyone who accesses "
+"it to contribute or modify content, like in a document file."
+msgstr ""
+"Un wiki es una colección de páginas web diseñada para que aquellos que las visiten, "
+"contribuyan o modifiquen su contenido al igual que en los documentos."
+
+#: /views/courses/index.ctp:18
+msgid "Go to course"
+msgstr "Ir al curso"
