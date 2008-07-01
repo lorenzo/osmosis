@@ -91,6 +91,10 @@ class MembersController extends AppController {
 		}
 		$this->set(compact('roles'));
 	}
+	
+	function admin_edit($id = null) {
+		$this->edit($id);
+	}
 
 	/**
 	 * Edit the details of a member

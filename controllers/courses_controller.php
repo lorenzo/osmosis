@@ -217,10 +217,12 @@ class CoursesController extends AppController {
 		}
 		if($this->Course->alreadyEnrolled($member_id, $id)===true) {
 			$this->Session->setFlash(__('You have been already enrolled in this course',true), 'default', array('class' => 'info'));
-			$this->redirect(array('action' => 'index'));
+			$this->redirect(array('action' => 'view',$id));
 		} else if ($this->Course->enroll($member_id, $role, $id)) {
 			$this->Session->setFlash(__('You have been enrolled',true), 'default', array('class' => 'success'));
-			$this->_redirectIf($redirect, array('action' => 'view', $id));
+			if ($redirect) {
+				$this->redirect(array('action' => 'view',$id));
+			}
 			return true;
 		}
 		$this->Session->setFlash(__('Enrollment failed',true), 'default', array('class' => 'error'));

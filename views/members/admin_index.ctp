@@ -60,7 +60,7 @@ foreach ($members as $member):
 			<?php echo $member['Member']['username']; ?>
 		</td>
 		<td class="actions">
-			<?php echo $html->link(__('View', true), array('action'=>'view', $member['Member']['id'])); ?>
+			<?php echo $html->link(__('View', true), array('admin' => false,'action'=>'view', $member['Member']['id'])); ?>
 			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $member['Member']['id'])); ?>
 			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $member['Member']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $member['Member']['id'])); ?>
 		</td>
