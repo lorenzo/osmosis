@@ -49,7 +49,7 @@ class TopicsController extends ForumAppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		$course_id = $this->params['named']['course_id'];
-		$this->set('topics', $this->Topic->find('all', array('course_id' => $course_id)));
+		$this->set('topics', $this->Topic->find('all',array('conditions' => array('course_id' => $course_id))));
 	}
 	
 	function view() {
