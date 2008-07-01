@@ -1,5 +1,12 @@
 <div class="content">	
-	<h1><?php echo $course['Course']['name']; ?></h1>
+	<h1><?php echo $html->link($course['Course']['name'],array(
+			'controller' => 'courses', 
+			'action' => 'view' , 
+			'plugin' => '',
+			$course['Course']['id']
+			)
+		); ?>
+	</h1>
 	<div class="course-data">
 		<p class="course-description"><?php echo $filter->filter($course['Course']['description']); ?></p>
 		<?php

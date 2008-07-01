@@ -233,6 +233,11 @@ a:visited {
 	width:30%;
 }
 
+div.main div.content h1 a {
+	color:#000;
+	text-decoration:none;
+}
+
 #main-content #footer p a {
 	color:#ccc;
 	text-decoration:none;
