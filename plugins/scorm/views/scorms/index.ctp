@@ -24,8 +24,9 @@
 	?>
 		<ul>
 	<?php
-			foreach ($recent as $i => $tracking) {
-				$scorm = $tracking['Sco']['Scorm'];
+			foreach ($recent as $i => $scorm) {
+				$visited = $scorm[0]['created'];
+				$scorm = $scorm['Scorm'];
 			?>
 			<li>
 				<?php
@@ -33,6 +34,7 @@
 						$scorm['name'],
 						array('controller' => 'scorms', 'action'=>'view', $scorm['id'])
 					);
+					echo '<div class="recent-time">'.$time->niceShort($visited).'</div>';
 				?>
 			</li>
 			<?php

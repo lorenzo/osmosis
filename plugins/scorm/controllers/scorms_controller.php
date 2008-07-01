@@ -34,7 +34,7 @@ class ScormsController extends ScormAppController {
 
 	var $name = 'Scorms';
 	var $components = array('Zip');
-	var $helpers = array('Html', 'Form', 'Tree', 'Javascript','Dynamicjs');
+	var $helpers = array('Html', 'Form', 'Tree', 'Javascript','Dynamicjs','Time');
 	var $uses = array('Scorm.Scorm', 'Scorm.ScormAttendeeTracking');
 	
 	function _setActiveCourse() {
@@ -55,33 +55,7 @@ class ScormsController extends ScormAppController {
 	function index() {
 		$this->Scorm->recursive = -1;
 		$this->set('scorms', $this->paginate(array('course_id' => $this->activeCourse)));
-		$this->Scorm->bindModel(
-			array('hasMany' =>
-				array('Tracking' => array('className' => 'Scorm.ScormAttendeeTracking'))
-			)
-		);
-		$this->Scorm->Tracking->bindModel(
-			array('belongsTo' => 
-				array('Sco' => array('className' => 'Scorm.Sco'))
-			)
-		);
-		$this->Scorm->Tracking->Sco->bindModel(
-			array('belongsTo' =>
-				array('Scorm' => array('className' => 'Scorm.Scorm'))
-			)
-		);
-		$this->Scorm->Tracking->contain(array('Sco(id)' => 'Scorm(id,name,description)'));
-		$fields = array('DISTINCT sco_id', 'student_id');
-		$conditions = array('student_id' => $this->Auth->user('id'));
-		$limit = 20;
-		$recent = $this->Scorm->Tracking->find('all', compact('conditions', 'fields','limit'));
-		$scorms = $unique = array();
-		foreach ($recent as $i => $tracking) {
-			if (in_array($tracking['Sco']['scorm_id'], $unique)) continue;
-			$scorms[] = $tracking;
-			$unique[] = $tracking['Sco']['scorm_id'];
-		}
-		$recent = $scorms;
+		$recent = $this->Scorm->recent($this->Auth->user('id'));
 		$this->set(compact('recent'));
 	}
 	
@@ -93,7 +67,6 @@ class ScormsController extends ScormAppController {
 	}
 	
 	function view($id = null) {
-		Configure::write('debug',0);
 		if (!$id) {
 			$this->Session->setFlash('Invalid Scorm', 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
@@ -208,7 +181,7 @@ class ScormsController extends ScormAppController {
 	
 	function __selectLayout() {
 		if ($this->action == 'view') {
-			$this->layout = 'default';
+			$this->layout = 'viewport';
 		} else {
 			parent::__selectLayout();
 		}

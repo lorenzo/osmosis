@@ -24,11 +24,13 @@
 	text-align: center;
 	font-weight: bold;
 	background-color: #eee;
+	color:#000;
 	font-size: 0.7em;
 	padding: 5px;
 }
 
 ._calendar table td {
+	position:relative;
 	width: 14%;
 	font-size: 0.8em;
 	border-bottom: 1px solid #ccc;
@@ -36,30 +38,38 @@
 	height: 50px;
 	padding: 5px;
 	vertical-align: top;
-}
-
-._calendar table td b {
-	color: #333;
-	font-size: 11px;
+	background:transparent;
 }
 
 ._calendar ul {
-	border-top: 1px dotted #ccc;
-	margin-top: 2px;
+	list-style:none;
+	padding-left:0;
+	padding-top:2px;
+	margin-top:-50px;
 }
 
-._calendar ul li {
-	font-size: 0.8em;
-	border: 1px dotted #ccc;
-	border-width: 0px 0 1px 0;
-	padding: 5px 2px 5px 2px;
+._calendar ul li.event {
 }
 
-._calendar ul li:hover {
-	background-color: #fff9d9;
+._calendar ul li.event:hover {
+	background-color: #f6f6f6;
 	color: #897444;
 }
 
 ._calendar ul li.toggle {
 	text-align: right;
+}
+
+._calendar div.month-day {
+	height:60px;
+	font-size:2em;
+	color:#eee;
+	text-align:left;
+/*	position:relative;*/
+/*	text-align:left;*/
+}
+._calendar div.month-day strong  {
+/*	position:absolute;*/
+/*	font-size:1.5em;*/
+/*	z-index:0;*/
 }

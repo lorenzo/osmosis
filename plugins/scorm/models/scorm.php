@@ -606,5 +606,23 @@ class Scorm extends ScormAppModel {
 		}
 		return $saved;
 	}
+	
+	function recent($member) {
+		$this->bindModel(
+			array('hasMany' =>
+				array('Tracking' => array('className' => 'Scorm.ScormAttendeeTracking'))
+			)
+		);
+		
+		$member = Sanitize::paranoid($member);
+		$query = "SELECT DISTINCT `Scorm`.`id`, `Scorm`.`name`, `Scorm`.`description`, MAX(`Tracking`.`created`) AS `created`
+				FROM `".$this->Tracking->table."` AS `Tracking`
+				LEFT JOIN `".$this->Sco->table."` AS `Sco` ON (`Tracking`.`sco_id` = `Sco`.`id`)
+				LEFT JOIN `".$this->table."` AS `Scorm` ON (`Sco`.`scorm_id` = `Scorm`.`id`) 
+				WHERE `student_id` = $member 
+				GROUP BY `Scorm`.`id`
+				LIMIT 20";
+		return $this->query($query);
+	}
 }
 ?>

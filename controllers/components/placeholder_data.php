@@ -53,7 +53,7 @@ abstract class PlaceholderDataComponent extends Object {
 	var $components = array('RequestHandler');
 	
 	
-	var $cache = true;
+	var $cache = false;
 	
 	/**
 	 * Default time to expire the cache data

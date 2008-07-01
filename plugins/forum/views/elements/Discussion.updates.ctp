@@ -1,18 +1,28 @@
 <li>
 <?php
 $members = Set::extract('/Member', $events);
-$member_links = array();
-foreach ($members as $i => $member) {
+$member_links = $repeated = array();
+foreach ($members as $i => $member) {	
+	if (in_array($member['Member']['id'],$repeated)) {
+		continue;
+	}
+		
 	$member = $member['Member'];
+	$repeated[] = $member['id'];
 	$member_links[] = $html->link($member['full_name'], array('controller' => 'members', 'action' => 'view', $member['id']));
-	if ($i>=6) {
+	if (count($member_links) == 6) {
 		$member_links[] = __('others...', true);
 		break;
 	}
 }
 $member_links = array_unique($member_links);
-$member_links = $text->toList($member_links, __('and', true));
+
+$action = $events[0]['ModelLog']['created'] ? __(' has created',true) : __('has modified',true);
+if (count($member_links) > 1)
+	$action = __('have modified',true);
+
 $discussion = $events[0]['ModelLog']['data']['Discussion'];
+$member_links = $text->toList($member_links, __('and', true));
 
 echo String::insert(
 	__(':member_links :action the discussion <em>:discussion_name</em>.', true),

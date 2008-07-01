@@ -34,7 +34,7 @@ App::import('Component', 'PlaceholderData');
 class ForumHolderComponent extends PlaceholderDataComponent {
 	var $name = 'ForumHolder';
 	var $auto = true;
-	var $cache = true;
+	var $cache = false;
 	var $types = array('head','course_toolbar');
 	var $useful_fields = array(
 		'Topic' => array(

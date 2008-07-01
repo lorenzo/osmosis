@@ -31,5 +31,9 @@
  */
 class QuizAppController extends AppController {
 	var $helpers = array('Text');
+	
+	function isAuthorized(){
+		return true;
+	}
 }
 ?>

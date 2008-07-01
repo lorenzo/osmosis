@@ -34,7 +34,7 @@ App::import('Component', 'PlaceholderData');
 class QuizHolderComponent extends PlaceholderDataComponent {
 	var $name = 'QuizHolder';
 	var $auto = true;
-	var $cache = true;
+	var $cache = false;
 	var $types = array('head','course_toolbar');
 	
 	function head() {

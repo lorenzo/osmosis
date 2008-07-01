@@ -69,8 +69,8 @@
 <?php endfor; ?>
 </tr>
 
-<?php /*** WEEK SIX ***/ ?>
-<?php if ($next < strftime("%d",$lastdate)): /* check if there is a sixth line */?>
+<?php /*** WEEK SIX ***/ ?> 
+<?php if ($next <= strftime("%d",$lastdate)): /* check if there is a sixth line */?>
 <tr>
 <?php for ($i=36; $i<=42; $i++): ?>
 <?php if (strftime("%d",$lastdate) < $next): ?>

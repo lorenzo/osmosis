@@ -1,10 +1,10 @@
 <?
 class CalendarHelper extends Helper {
 	
-	var $helpers = array('Html','Ajax');
+	var $helpers = array('Html','Text');
 	
 	function day($day = null, $month = null, $year = null, $events = null) {
-		$out = $this->today($day,$month,$year);
+		$out = "<div class='month-day'>".$this->today($day,$month,$year)."</div>";
 		$out .= $this->events($day,$month,$year,$events);
 		return $this->output($out);
 	}
@@ -39,7 +39,7 @@ class CalendarHelper extends Helper {
 				foreach ($entry as $item) {
 					$output .= 
 					'<li class="event">'.
-					$this->Html->link($item['headline'],array('plugin' => 'agenda','controller' => 'events','action' => 'view', $item['id'],'course_id' => $item['course_id'])).
+					$this->Html->link($this->Text->truncate($item['headline'],20),array('plugin' => 'agenda','controller' => 'events','action' => 'view', $item['id'],'course_id' => $item['course_id'])).
 					'</li>';
 				}
 				$output .= '</ul>';
