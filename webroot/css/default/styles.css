@@ -203,6 +203,33 @@ a:visited {
 #my-courses .abstract {
 	margin-top:0;
 }
+
+#my-courses h1 a.goto {
+	float:right;
+	overflow:hidden;
+	display:block;
+	background-image:url('../../img/default/go.png');
+	background-repeat:no-repeat;
+	background-position:center right;
+	margin-right:20px;
+	margin-top:0px;
+	font-size:0.5em;
+	color:#F5F5F5;
+	padding-right:20px;
+}
+
+#my-courses h1 a.goto:hover {
+	float:right;
+	overflow:hidden;
+	display:block;
+	margin-right:20px;
+	margin-top:0px;
+	font-size:0.6em;
+	color:#000;
+	padding-right:20px;
+	text-decoration:none;
+}
+
 .professors {
 	float:left;
 	width:30%;
