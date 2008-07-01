@@ -32,5 +32,5 @@
 Configure::write('Locker.description',__('A file manager and sharing tool for each member.',true));
 Configure::write('Locker.title', __('Locker', true));
 Configure::write('Locker.type', array('other'));
-Configure::write('Loecker.author','Ósmosis Team');
+Configure::write('Locker.author','Ósmosis Team');
 ?>

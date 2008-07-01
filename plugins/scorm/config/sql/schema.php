@@ -8,6 +8,7 @@ class ScormSchema extends CakeSchema {
 			'student_id' => array('type'=>'integer', 'null' => false),
 			'datamodel_element' => array('type'=>'string', 'null' => false),
 			'value' => array('type'=>'string', 'null' => false),
+			'created' => array('type'=>'datetime', 'null' => false),
 			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1), 'scorm_id' => array('column' => array('sco_id', 'student_id', 'datamodel_element'), 'unique' => 1))
 		);
 	var $scorm_choice_considerations = array(

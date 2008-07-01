@@ -123,18 +123,13 @@ class Plugin extends AppModel {
 	 * @return array
 	 */
 	private function getpluginPackages() {
-		$packages = Cache::read('Plugin.packages');
-		if (!$packages) {
-			$plugins = Configure::listObjects('plugin');
-			Configure::load('plugin_descriptions');
-			$packages = array();
-			foreach ($plugins as $plugin) {
-				$result[$plugin] = Configure::read($plugin);
-				unset($result[$plugin]['id'],$result[$plugin]['name'],$result[$plugin]['active']);
-			}
-			Cache::write('Plugin.packages',$packages,60);
+		$plugins = Configure::listObjects('plugin');
+		Configure::load('plugin_descriptions');
+		foreach ($plugins as $plugin) {
+			$result[$plugin] = Configure::read($plugin);
+			unset($result[$plugin]['id'],$result[$plugin]['name'],$result[$plugin]['active']);
 		}
-		return $packages;
+		return $result;
 	}
 
 	/**
