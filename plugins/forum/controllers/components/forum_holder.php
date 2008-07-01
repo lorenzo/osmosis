@@ -38,7 +38,7 @@ class ForumHolderComponent extends PlaceholderDataComponent {
 	var $types = array('head','course_toolbar');
 	var $useful_fields = array(
 		'Topic' => array(
-			'fields' => array(),
+			'fields' => array('Topic.id','Topic.name','Topic.status'),
 			'contain' => false
 		),
 		'Discussion' => array(
@@ -46,8 +46,8 @@ class ForumHolderComponent extends PlaceholderDataComponent {
 			'contain' => false
 		),
 		'Response' => array(
-			'fields' => array(),
-			'contain' => array('Discussion'),
+			'fields' => array('Response.id','Response.modified','Response.member_id'),
+			'contain' => array('Discussion(id,title,status)'),
 			'order_by' => '/Discussion/id'
 		)
 	);
@@ -80,6 +80,19 @@ class ForumHolderComponent extends PlaceholderDataComponent {
 				array('models' => $this->useful_fields,'plugin' => 'Forum','course_id' => $user_courses)
 			);
 		return $logs;
+	}
+	
+	function courseDashboard() {
+		$modelLog = ClassRegistry::getObject('ModelLog');
+		$logs = $modelLog->find('log',
+			array(
+				'models' => $this->useful_fields,
+				'plugin' => 'Forum',
+				'course_id' => $this->controller->_getActiveCourse(),
+				'limit'	=> 25
+				)
+		);
+		return $logs[$this->controller->_getActiveCourse()];
 	}
 	
 }

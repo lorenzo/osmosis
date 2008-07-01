@@ -15,7 +15,6 @@ if (!empty($data)) :
 		<li>
 			<span class="author">
 				<?php
-				// debug($comment);
 					__('Comment by');
 				?>
 				<cite><?php echo $comment['Member']['full_name']; ?></cite>

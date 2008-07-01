@@ -74,6 +74,9 @@ class ModelLog extends AppModel {
 	 * @return array Logs
 	 */	
 	function _findLog($options) {
+		$limit = 50;
+		if (isset($options['limit']))
+			$limit = $options['limit'];
 		$logs = $this->find('all',
 			array(
 				'conditions' => array(
@@ -81,7 +84,8 @@ class ModelLog extends AppModel {
 					'model' => array_keys($options['models']),
 					'course_id' => $options['course_id']
 				),
-				'limit' => 50
+				'limit' => $limit,
+				'order' => 'created DESC'
 			)
 		);
 
@@ -92,6 +96,8 @@ class ModelLog extends AppModel {
 			$entity_id = $modelLog['entity_id'];
 			
 			if (isset($queried[$modelName][$entity_id])) {
+				if ($queried[$modelName][$entity_id] === false)
+					continue;
 				$data = $queried[$modelName][$entity_id];
 			} else {
 				$contain = array();
@@ -99,11 +105,13 @@ class ModelLog extends AppModel {
 					$contain = $options['models'][$modelName]['contain'];
 				}
 				$data = $this->__getModelData($modelName, ${$modelName}, $options['plugin'], $entity_id, $contain, $options['models'][$modelName]['fields']);
-					
+				
+				$queried[$modelName][$entity_id] = false;
+				
 				if (!$data) {
 					continue;
 				}
-				$queried[$modelName][$entity_id] = $data;
+				
 			}
 			
 			$log['ModelLog']['data'] = $data;

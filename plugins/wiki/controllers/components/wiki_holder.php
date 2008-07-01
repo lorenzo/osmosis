@@ -64,5 +64,18 @@ class WikiHolderComponent extends PlaceholderDataComponent {
 		return $logs;
 	}
 	
+	function courseDashboard() {
+		$modelLog = ClassRegistry::getObject('ModelLog');
+		$logs = $modelLog->find('log',
+			array(
+				'models' => $this->useful_fields,
+				'plugin' => 'Wiki',
+				'course_id' => $this->controller->_getActiveCourse(),
+				'limit'	=> 10
+				)
+		);
+		return $logs[$this->controller->_getActiveCourse()];
+	}
+	
 }
 ?>

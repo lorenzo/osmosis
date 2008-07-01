@@ -92,7 +92,7 @@ table tr .number {
 	margin:0;
 }
 
-.forum-message .message a {
+.forum-message .message .actions a {
 	text-decoration:none;
 	padding:0 5px 3px 5px;
 	color:#000;
@@ -100,7 +100,7 @@ table tr .number {
 	border:#ccc 1px dashed;
 	border-top:none;
 }
-.forum-message .message a:hover {
+.forum-message .message .actions a:hover {
 	background:#6EA6D5;
 	color:#fff;
 }
