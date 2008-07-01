@@ -101,13 +101,17 @@ class PlaceholderHelper extends AppHelper {
 	}
 	
 	function renderToolBar($type = 'course_toolbar') {
+		$view =& ClassRegistry::getObject('view');
 		$subscribers = $this->getSubscribers($type);
 		ob_start();
 		echo '<ul>';
 		foreach ($subscribers as $subscriber => $data) {
 			$title = $data['data']['title'];
 			$url = $data['data']['url'];
-			echo '<li>'.$this->Html->link($title,$url).'</li>';
+			$class = '';
+			if (isset($data['data']['url']['plugin']) && Inflector::underscore($view->plugin) == $data['data']['url']['plugin'])
+				$class = 'active';
+			echo '<li>'.$this->Html->link($title,$url,compact('class')).'</li>';
 		}
 		echo '</ul>';
 		return ob_get_clean();

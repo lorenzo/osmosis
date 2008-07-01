@@ -299,10 +299,19 @@ div.main div.content h1 a {
 #tools ul li a {
 	color:#000;
 	text-decoration:none;
+	background: url('../../img/default/arrow_g.gif') no-repeat 0 3px;
+	padding-left:10px;
 }
 #tools ul li a:hover,
 #tools ul li a:focus {
 	color:#666;
+}
+
+#tools ul li a.active {
+	color:#6EA6D5;
+	text-decoration:none;
+	background: url('../../img/default/arrow_b.gif') no-repeat 0px 3px;
+	padding-left:13px;
 }
 
 .vcard {
