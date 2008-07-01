@@ -157,7 +157,7 @@ class QuizzesController extends QuizAppController {
 			if ($this->Quiz->addQuestions($this->data)) {
 				$this->Session->setFlash(__('The questions where added to the quiz.', true), 'default', array('class' => 'success'));
 				$this->redirect(
-					array('controller' => 'quizzes', 'action' => 'edit','course_id' => $this->activeCourse)
+					array('controller' => 'quizzes', 'action' => 'edit',$id,'course_id' => $this->activeCourse)
 				);
 			} else {
 				$this->Session->setFlash(__('The questions could not be added to the quiz.', true), 'default', array('class' => 'error'));
