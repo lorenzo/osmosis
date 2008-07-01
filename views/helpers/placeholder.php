@@ -57,14 +57,14 @@ class PlaceholderHelper extends AppHelper {
 			list($plugin, ) = explode('_',Inflector::underscore($subscriber));
 			$placeholder_data = $data['data'];
 			if (!empty($path)) {
-				if(!isset($placeholder_data[$path])) {
+				if(!Set::check($placeholder_data,$path)) {
 					continue;
 				}
-				$placeholder_data = $placeholder_data[$path];
+				$placeholder_data = Set::extract($placeholder_data,$path);
 			}
 			echo $view->element(
 				'placeholders/' . $type,
-				array('plugin' => $plugin, 'cache' => $data['cache'], 'data' => $placeholder_data)
+				array('plugin' => $plugin, 'cache' => $data['cache'], 'data' => $placeholder_data,'path' => $path)
 			);
 		}
 		return ob_get_clean();

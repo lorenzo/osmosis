@@ -72,7 +72,6 @@
 		</tr>
 	<?php endforeach; ?>
 	</table>
-<?php endif; ?>
 	<ul class="reverse actions">
 		<li class="add">
 			<?php
@@ -83,4 +82,5 @@
 			?>
 		</li>
 	</ul>
+<?php endif; ?>
 </div>

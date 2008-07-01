@@ -1,5 +1,13 @@
 <div id="wiki-updates">
-<strong class="title"><?php __('Wiki'); ?></strong>
+	<strong class="title"><?php 
+	echo $html->link(
+		__('Wiki',true),array(
+			'plugin' => 'wiki', 
+			'controller' => 'wikis',
+			'action' => 'view',
+			'course_id' => $path
+			)
+		); ?></strong>
 <?php
 foreach ($data as $modelName => $entity) :
 ?>
