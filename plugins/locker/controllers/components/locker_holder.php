@@ -27,7 +27,7 @@ class LockerHolderComponent extends PlaceholderDataComponent {
 	}
 	
 	function profileConnect() {
-		return array('member_id' => $this->controller->Auth->user('id'));
+		return array('member_id' => $this->controller->params['pass'][0]);
 	}
 }
 ?>
