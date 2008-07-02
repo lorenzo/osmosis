@@ -669,9 +669,7 @@ msgstr "Blogs"
 msgid ""
 "Page %page% of %pages%, showing %current% records out of %count% total, "
 "starting on record %start%, ending on %end%"
-msgstr ""
-"Página %page% de %page%, mostrando %current% resultados de %count% totales, "
-"comenzando en el resultado %start%, finalizando en %end%"
+msgstr "Resultados totales: %count%. Mostrando del %start% al %end%"
 
 #: /plugins/blog/views/blogs/index.ctp:15
 #: /plugins/blog/views/comments/index.ctp:14
@@ -3848,7 +3846,7 @@ msgstr "Tema no válido."
 
 #: /plugins/locker/config/description.php:32
 msgid "A file manager and sharing tool for each member."
-msgstr ""
+msgstr "Permite, a cada miembro almacenar, organizar y compartir archivos."
 
 #: /plugins/locker/controllers/documents_controller.php:180
 msgid "The file was dropped correctly"
@@ -3865,6 +3863,7 @@ msgstr ""
 #: /plugins/quiz/config/description.php:32
 msgid "Create Quizzes the easy way"
 msgstr ""
+"Permite crear preguntas de distintos tipos y diseñar pruebas o quizzes."
 
 #: /plugins/quiz/controllers/quizzes_controller.php:179
 msgid "You have completed the Quiz."
@@ -4133,7 +4132,7 @@ msgid "Edit Profile"
 msgstr "Editar Perfil"
 
 #: /views/members/edit.ctp:32
-msgid "Password confirm"
+msgid "Password Confirm"
 msgstr "Confirmar contraseña"
 
 #: /plugins/blog/config/description.php:32
@@ -4142,10 +4141,12 @@ msgid ""
 "commentary, descriptions of events, or other material such as graphics or "
 "video."
 msgstr ""
+"Un blog (o web log) es un sitio web, para cada miembro, con comentarios  "
+"descripciones de eventos, o cualquier otro material, como fotos o videos."
 
 #: /plugins/blog/views/posts/view.ctp:36
 msgid "wrote %s:"
-msgstr ""
+msgstr "escribió %s:"
 
 #: /plugins/chat/config/description.php:33
 msgid "A chat is a person to person instant messaging application"
@@ -4154,11 +4155,13 @@ msgstr "Un chat es una aplicación de mensajería instantánea"
 #: /plugins/forum/config/description.php:32
 msgid ""
 "A forum is an application that allows people to discuss in various topics."
-msgstr "Un foro es una aplicación que permite a las personas discutir sobre varios temas de interés."
+msgstr ""
+"Un foro es una aplicación que permite a las personas discutir sobre varios "
+"temas de interés."
 
 #: /plugins/forum/views/elements/Topic.updates.ctp:27
 msgid "<li>:member_links :action the topic <em>:topic_title</em>.</li>"
-msgstr "<li>:member_links :action el tema <em>:topic_title</em>.</li>"
+msgstr "<li>:member_links :action el tema <em>:topic_title</em></li>"
 
 #: /plugins/locker/controllers/documents_controller.php:118
 msgid "Invalid LockerDocument"
@@ -4169,18 +4172,32 @@ msgid ""
 "Sharable Content Object Reference Model (SCORM) is a collection of standards "
 "and specifications for web-based e-learning. This plugin is a player for "
 "SCORM 2004 files"
-msgstr "Sharable Content Object Reference Model (SCORM) es una colección de estándares "
-"y especificaciones para el aprendizaje a distancia. Este plugin es un player de archivos "
-"del tipo SCORM 2004"
+msgstr ""
+"Sharable Content Object Reference Model (SCORM) es una colección de "
+"estándares y especificaciones para el aprendizaje a distancia. Este plugin "
+"es un player de archivos del tipo SCORM 2004"
 
 #: /plugins/wiki/config/description.php:32
 msgid ""
 "A wiki is a collection of web pages designed to enable anyone who accesses "
 "it to contribute or modify content, like in a document file."
 msgstr ""
-"Un wiki es una colección de páginas web diseñada para que aquellos que las visiten, "
-"contribuyan o modifiquen su contenido al igual que en los documentos."
+"Un wiki es una colección de páginas web diseñada para que aquellos que las "
+"visiten, contribuyan o modifiquen su contenido al igual que en los "
+"documentos."
 
 #: /views/courses/index.ctp:18
 msgid "Go to course"
 msgstr "Ir al curso"
+
+#: /plugins/forum/views/elements/placeholders/course_dashboard.ctp:64
+msgid "No forum updates yet, be the firts one!"
+msgstr "No hay actualizaciones en el foro."
+
+#: /plugins/wiki/views/elements/placeholders/course_dashboard.ctp:35
+msgid "No wiki updates yet, be the firts one!"
+msgstr "No hay actualizaciones en el wiki."
+
+#: /views/members/admin_edit.ctp:32
+msgid "Password confirm"
+msgstr "Confirmar contrseña"

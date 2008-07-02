@@ -31,14 +31,14 @@
 #  Revision: 510 /osmosis/plugins/forum/models/topic.php
 #  Revision: 458 /osmosis/plugins/quiz/models/quiz.php
 #  Revision: 513 /osmosis/plugins/locker/config/description.php
-#  Revision: 494 /osmosis/plugins/locker/controllers/documents_controller.php
+#  Revision: 529 /osmosis/plugins/locker/controllers/documents_controller.php
 #  Revision: 490 /osmosis/plugins/locker/models/locker_document.php
 #  Revision: 485 /osmosis/plugins/locker/models/locker_folder.php
 #  Revision: 454 /osmosis/plugins/quiz/config/description.php
 #  Revision: 482 /osmosis/plugins/quiz/controllers/choice_questions_controller.php
 #  Revision: 482 /osmosis/plugins/quiz/controllers/matching_questions_controller.php
 #  Revision: 482 /osmosis/plugins/quiz/controllers/ordering_questions_controller.php
-#  Revision: 512 /osmosis/plugins/quiz/controllers/quizzes_controller.php
+#  Revision: 528 /osmosis/plugins/quiz/controllers/quizzes_controller.php
 #  Revision: 482 /osmosis/plugins/quiz/controllers/text_questions_controller.php
 #  Revision: 323 /osmosis/plugins/quiz/models/choice_choice.php
 #  Revision: 395 /osmosis/plugins/quiz/models/matching_choice.php
@@ -61,7 +61,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2008-07-01 05:31-0430\n"
+"POT-Creation-Date: 2008-07-02 00:23-0430\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -585,7 +585,6 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/index.ctp:45
 #: /plugins/quiz/views/ordering_questions/view.ctp:66;102
 #: /plugins/quiz/views/quizzes/index.ctp:30
-#: /plugins/quiz/views/quizzes/view.ctp:55;97;135;177;219;260
 #: /plugins/quiz/views/text_questions/edit.ctp:17
 #: /plugins/quiz/views/text_questions/index.ctp:41
 #: /plugins/quiz/views/text_questions/view.ctp:59
@@ -624,7 +623,6 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/index.ctp:45
 #: /plugins/quiz/views/ordering_questions/view.ctp:34;66;102
 #: /plugins/quiz/views/quizzes/index.ctp:30
-#: /plugins/quiz/views/quizzes/view.ctp:19;55;97;135;177;219;260
 #: /plugins/quiz/views/text_questions/edit.ctp:17
 #: /plugins/quiz/views/text_questions/index.ctp:41
 #: /plugins/quiz/views/text_questions/view.ctp:29;59
@@ -694,7 +692,6 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/index.ctp:16
 #: /plugins/quiz/views/ordering_questions/view.ctp:49;86
 #: /plugins/quiz/views/quizzes/index.ctp:12
-#: /plugins/quiz/views/quizzes/view.ctp:36;78;118;158;200;242
 #: /plugins/quiz/views/text_questions/index.ctp:15
 #: /plugins/quiz/views/text_questions/view.ctp:43
 #: /plugins/wiki/views/entries/index.ctp:14
@@ -719,7 +716,6 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/index.ctp:43
 #: /plugins/quiz/views/ordering_questions/view.ctp:64;100
 #: /plugins/quiz/views/quizzes/index.ctp:28
-#: /plugins/quiz/views/quizzes/view.ctp:53;95;133;175;217;258
 #: /plugins/quiz/views/text_questions/index.ctp:39
 #: /plugins/quiz/views/text_questions/view.ctp:57
 #: /plugins/wiki/views/wikis/index.ctp:39
@@ -746,7 +742,6 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/index.ctp:44
 #: /plugins/quiz/views/ordering_questions/view.ctp:65;101
 #: /plugins/quiz/views/quizzes/index.ctp:29
-#: /plugins/quiz/views/quizzes/view.ctp:54;96;134;176;218;259
 #: /plugins/quiz/views/text_questions/index.ctp:40
 #: /plugins/quiz/views/text_questions/view.ctp:58
 #: /plugins/scorm/views/scorms/edit.ctp:4
@@ -854,7 +849,6 @@ msgstr ""
 #: /plugins/quiz/views/choice_questions/view.ctp:4;46;84
 #: /plugins/quiz/views/matching_questions/view.ctp:4;46;86
 #: /plugins/quiz/views/ordering_questions/view.ctp:4;46;84
-#: /plugins/quiz/views/quizzes/view.ctp:4;31;73;115;153;195;238
 #: /plugins/quiz/views/text_questions/view.ctp:4;41
 #: /views/departments/admin_view.ctp:4;36
 #: /views/members/admin_view.ctp:4
@@ -894,15 +888,15 @@ msgstr ""
 msgid "These are the last comments received in your posts"
 msgstr ""
 
-#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:19
+#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:18
 msgid "Comment by"
 msgstr ""
 
-#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:44
+#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:43
 msgid "No comments in your blog"
 msgstr ""
 
-#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:50
+#: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:49
 msgid "Go to your blog"
 msgstr ""
 
@@ -1173,10 +1167,15 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
+#: /plugins/forum/views/elements/placeholders/course_dashboard.ctp:2
 #: /plugins/forum/views/elements/placeholders/plugin_updates.ctp:4
 #: /plugins/forum/views/subjects/view.ctp:14
 #: /plugins/forum/views/topics/index.ctp:3
 msgid "Forum"
+msgstr ""
+
+#: /plugins/forum/views/elements/placeholders/course_dashboard.ctp:64
+msgid "No forum updates yet, be the firts one!"
 msgstr ""
 
 #: /plugins/forum/views/responses/edit.ctp:4
@@ -1253,7 +1252,6 @@ msgstr ""
 
 #: /plugins/forum/views/subjects/view.ctp:9;63
 #: /plugins/forum/views/topics/view.ctp:38
-#: /plugins/quiz/views/quizzes/view.ctp:116;239
 #: /plugins/quiz/views/text_questions/view.ctp:9
 #: /plugins/wiki/views/wikis/add.ctp:7
 #: /plugins/wiki/views/wikis/edit.ctp:7
@@ -1403,7 +1401,7 @@ msgstr ""
 msgid "Invalid document"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:84;123
+#: /plugins/locker/controllers/documents_controller.php:84;124
 msgid "The document has been saved"
 msgstr ""
 
@@ -1411,31 +1409,31 @@ msgstr ""
 msgid "The LockerDocument could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:118
+#: /plugins/locker/controllers/documents_controller.php:119
 msgid "Invalid LockerDocument"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:127
+#: /plugins/locker/controllers/documents_controller.php:128
 msgid "The document could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:137
+#: /plugins/locker/controllers/documents_controller.php:138
 msgid "Invalid id for document"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:141
+#: /plugins/locker/controllers/documents_controller.php:142
 msgid "Document deleted"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:148;154
+#: /plugins/locker/controllers/documents_controller.php:149;155
 msgid "Invalid Document"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:200
+#: /plugins/locker/controllers/documents_controller.php:201
 msgid "The file was dropped correctly"
 msgstr ""
 
-#: /plugins/locker/controllers/documents_controller.php:203
+#: /plugins/locker/controllers/documents_controller.php:204
 msgid "The file could not be saved. Please, try again."
 msgstr ""
 
@@ -1614,7 +1612,6 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/view.ctp:80
 #: /plugins/quiz/views/quizzes/index.ctp:2
 #: /plugins/quiz/views/quizzes/rename.ctp:13
-#: /plugins/quiz/views/quizzes/view.ctp:20
 #: /plugins/quiz/views/text_questions/edit.ctp:19
 #: /plugins/quiz/views/text_questions/index.ctp:55
 #: /plugins/quiz/views/text_questions/view.ctp:32;37
@@ -1683,55 +1680,51 @@ msgid "Ordering Question deleted"
 msgstr ""
 
 #: /plugins/quiz/controllers/quizzes_controller.php:45
-#: /plugins/quiz/views/quizzes/view.ctp:106
 msgid "Choice Question"
 msgstr ""
 
 #: /plugins/quiz/controllers/quizzes_controller.php:47
-#: /plugins/quiz/views/quizzes/view.ctp:186
 msgid "Matching Question"
 msgstr ""
 
 #: /plugins/quiz/controllers/quizzes_controller.php:48
-#: /plugins/quiz/views/quizzes/view.ctp:227
 msgid "Ordering Question"
 msgstr ""
 
 #: /plugins/quiz/controllers/quizzes_controller.php:49
-#: /plugins/quiz/views/quizzes/view.ctp:267
 #: /plugins/quiz/views/text_questions/add.ctp:4
 msgid "Text Question"
 msgstr ""
 
-#: /plugins/quiz/controllers/quizzes_controller.php:72;94;134;152;173
+#: /plugins/quiz/controllers/quizzes_controller.php:72;95;135;153;174
 msgid "Invalid Quiz"
 msgstr ""
 
-#: /plugins/quiz/controllers/quizzes_controller.php:83;139
+#: /plugins/quiz/controllers/quizzes_controller.php:84;140
 msgid "The Quiz has been saved"
 msgstr ""
 
-#: /plugins/quiz/controllers/quizzes_controller.php:86;142
+#: /plugins/quiz/controllers/quizzes_controller.php:87;143
 msgid "The Quiz could not be saved. Please, try again."
 msgstr ""
 
-#: /plugins/quiz/controllers/quizzes_controller.php:123
+#: /plugins/quiz/controllers/quizzes_controller.php:124
 msgid "Invalid id for Quiz"
 msgstr ""
 
-#: /plugins/quiz/controllers/quizzes_controller.php:127
+#: /plugins/quiz/controllers/quizzes_controller.php:128
 msgid "Quiz deleted"
 msgstr ""
 
-#: /plugins/quiz/controllers/quizzes_controller.php:158
+#: /plugins/quiz/controllers/quizzes_controller.php:159
 msgid "The questions where added to the quiz."
 msgstr ""
 
-#: /plugins/quiz/controllers/quizzes_controller.php:163
+#: /plugins/quiz/controllers/quizzes_controller.php:164
 msgid "The questions could not be added to the quiz."
 msgstr ""
 
-#: /plugins/quiz/controllers/quizzes_controller.php:179
+#: /plugins/quiz/controllers/quizzes_controller.php:180
 msgid "You have completed the Quiz."
 msgstr ""
 
@@ -1901,7 +1894,6 @@ msgstr ""
 #: /plugins/quiz/views/matching_questions/view.ctp:33
 #: /plugins/quiz/views/ordering_questions/edit.ctp:4
 #: /plugins/quiz/views/ordering_questions/view.ctp:33
-#: /plugins/quiz/views/quizzes/view.ctp:18
 #: /plugins/quiz/views/text_questions/edit.ctp:4
 #: /plugins/quiz/views/text_questions/view.ctp:28
 #: /views/courses/edit.ctp:4
@@ -1939,7 +1931,6 @@ msgstr ""
 #: /plugins/quiz/views/quizzes/edit.ctp:1
 #: /plugins/quiz/views/quizzes/index.ctp:43
 #: /plugins/quiz/views/quizzes/rename.ctp:4
-#: /plugins/quiz/views/quizzes/view.ctp:2;18;19;21
 #: /plugins/quiz/views/text_questions/edit.ctp:20
 #: /plugins/quiz/views/text_questions/index.ctp:56
 #: /plugins/quiz/views/text_questions/view.ctp:33;68
@@ -1956,7 +1947,6 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/index.ctp:59
 #: /plugins/quiz/views/ordering_questions/view.ctp:35;37
 #: /plugins/quiz/views/quizzes/rename.ctp:13
-#: /plugins/quiz/views/quizzes/view.ctp:20;22
 #: /plugins/quiz/views/text_questions/edit.ctp:18;19
 #: /plugins/quiz/views/text_questions/index.ctp:55
 #: /plugins/quiz/views/text_questions/view.ctp:30;32
@@ -1990,7 +1980,6 @@ msgstr ""
 #: /plugins/quiz/views/ordering_questions/index.ctp:58;60
 #: /plugins/quiz/views/ordering_questions/view.ctp:36;38;75;111
 #: /plugins/quiz/views/quizzes/index.ctp:43
-#: /plugins/quiz/views/quizzes/view.ctp:21;23;64;106;144;186;227;267
 #: /plugins/quiz/views/text_questions/edit.ctp:20
 #: /plugins/quiz/views/text_questions/index.ctp:54;56
 #: /plugins/quiz/views/text_questions/view.ctp:31;33;68
@@ -2010,7 +1999,6 @@ msgstr ""
 #: /plugins/quiz/views/choice_questions/view.ctp:9
 #: /plugins/quiz/views/matching_questions/view.ctp:9
 #: /plugins/quiz/views/ordering_questions/view.ctp:9
-#: /plugins/quiz/views/quizzes/view.ctp:32;74;117;154;196;240
 #: /plugins/quiz/views/text_questions/view.ctp:14
 msgid "Body"
 msgstr ""
@@ -2018,26 +2006,22 @@ msgstr ""
 #: /plugins/quiz/views/choice_questions/view.ctp:14
 #: /plugins/quiz/views/matching_questions/view.ctp:14
 #: /plugins/quiz/views/ordering_questions/view.ctp:14
-#: /plugins/quiz/views/quizzes/view.ctp:33;75;155;197
 msgid "Shuffle"
 msgstr ""
 
 #: /plugins/quiz/views/choice_questions/view.ctp:19
 #: /plugins/quiz/views/ordering_questions/view.ctp:19
-#: /plugins/quiz/views/quizzes/view.ctp:76;198
 msgid "Max Choices"
 msgstr ""
 
 #: /plugins/quiz/views/choice_questions/view.ctp:24
 #: /plugins/quiz/views/ordering_questions/view.ctp:24
-#: /plugins/quiz/views/quizzes/view.ctp:77;199
 msgid "Min Choices"
 msgstr ""
 
 #: /plugins/quiz/views/choice_questions/view.ctp:34
 #: /plugins/quiz/views/matching_questions/view.ctp:34
 #: /plugins/quiz/views/ordering_questions/view.ctp:34
-#: /plugins/quiz/views/quizzes/view.ctp:19
 #: /plugins/quiz/views/text_questions/view.ctp:29
 msgid "Delete %s"
 msgstr ""
@@ -2045,7 +2029,6 @@ msgstr ""
 #: /plugins/quiz/views/choice_questions/view.ctp:42;80
 #: /plugins/quiz/views/matching_questions/view.ctp:42;82
 #: /plugins/quiz/views/ordering_questions/view.ctp:42;80
-#: /plugins/quiz/views/quizzes/view.ctp:27;69;111;149;192
 #: /plugins/quiz/views/text_questions/view.ctp:37
 msgid "Related %s"
 msgstr ""
@@ -2063,7 +2046,6 @@ msgstr ""
 #: /plugins/quiz/views/choice_questions/view.ctp:85
 #: /plugins/quiz/views/matching_questions/view.ctp:87
 #: /plugins/quiz/views/ordering_questions/view.ctp:85
-#: /plugins/quiz/views/quizzes/view.ctp:9
 #: /plugins/quiz/views/text_questions/view.ctp:42
 #: /plugins/scorm/views/scorms/add.ctp:12
 #: /views/courses/add.ctp:7
@@ -2173,12 +2155,10 @@ msgid "Matching Choice"
 msgstr ""
 
 #: /plugins/quiz/views/matching_questions/view.ctp:19
-#: /plugins/quiz/views/quizzes/view.ctp:34;156
 msgid "Max Associations"
 msgstr ""
 
 #: /plugins/quiz/views/matching_questions/view.ctp:24
-#: /plugins/quiz/views/quizzes/view.ctp:35;157
 msgid "Min Associations"
 msgstr ""
 
@@ -2273,43 +2253,6 @@ msgstr ""
 msgid "Rename"
 msgstr ""
 
-#: /plugins/quiz/views/quizzes/view.ctp:22;27
-msgid "Association Questions"
-msgstr ""
-
-#: /plugins/quiz/views/quizzes/view.ctp:23;64
-msgid "Association Question"
-msgstr ""
-
-#: /plugins/quiz/views/quizzes/view.ctp:69
-msgid "Choice Questions"
-msgstr ""
-
-#: /plugins/quiz/views/quizzes/view.ctp:111
-msgid "Cloze Questions"
-msgstr ""
-
-#: /plugins/quiz/views/quizzes/view.ctp:144
-msgid "Cloze Question"
-msgstr ""
-
-#: /plugins/quiz/views/quizzes/view.ctp:149
-msgid "Matching Questions"
-msgstr ""
-
-#: /plugins/quiz/views/quizzes/view.ctp:192
-msgid "Ordering Questions"
-msgstr ""
-
-#: /plugins/quiz/views/quizzes/view.ctp:235
-msgid "Text Questions"
-msgstr ""
-
-#: /plugins/quiz/views/quizzes/view.ctp:241
-#: /plugins/quiz/views/text_questions/view.ctp:19
-msgid "Format"
-msgstr ""
-
 #: /plugins/quiz/views/text_questions/add.ctp:4
 msgid "Create %s"
 msgstr ""
@@ -2328,6 +2271,10 @@ msgstr ""
 #: /plugins/quiz/views/text_questions/index.ctp:2
 #: /plugins/quiz/views/text_questions/view.ctp:30
 msgid "TextQuestions"
+msgstr ""
+
+#: /plugins/quiz/views/text_questions/view.ctp:19
+msgid "Format"
 msgstr ""
 
 #: /plugins/scorm/config/description.php:32
@@ -2446,6 +2393,7 @@ msgstr ""
 
 #: /plugins/wiki/config/description.php:33
 #: /plugins/wiki/models/wiki.php:125
+#: /plugins/wiki/views/elements/placeholders/course_dashboard.ctp:2
 #: /plugins/wiki/views/elements/placeholders/plugin_updates.ctp:4
 msgid "Wiki"
 msgstr ""
@@ -2547,6 +2495,10 @@ msgstr ""
 
 #: /plugins/wiki/views/elements/updates.ctp:29
 msgid "<li>:member_links :action the page <em>:entry_title</em>.</li>"
+msgstr ""
+
+#: /plugins/wiki/views/elements/placeholders/course_dashboard.ctp:35
+msgid "No wiki updates yet, be the firts one!"
 msgstr ""
 
 #: /plugins/wiki/views/entries/add.ctp:4;14
@@ -3040,7 +2992,6 @@ msgid "Password"
 msgstr ""
 
 #: /views/members/admin_edit.ctp:32
-#: /views/members/edit.ctp:32
 msgid "Password confirm"
 msgstr ""
 
@@ -3094,6 +3045,10 @@ msgstr ""
 
 #: /views/members/admin_view.ctp:73
 msgid "New Role"
+msgstr ""
+
+#: /views/members/edit.ctp:32
+msgid "Password Confirm"
 msgstr ""
 
 #: /views/pages/home.ctp:10
