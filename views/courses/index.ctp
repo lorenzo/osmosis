@@ -22,7 +22,7 @@ foreach ($courses as $course):
 	?>
 	<?php
 		echo $html->link(
-			$course['Course']['name'],
+			$text->truncate($course['Course']['name'],45),
 			array('controller' => 'courses', 'action' => 'view', $course['Course']['id']),
 			array('class' => 'title')
 		);
