@@ -15,7 +15,12 @@
 			<strong><?php echo $text->truncate($question['body'], 200) ?></strong><br />
 			<?php
 			 	echo sprintf($num, $num_choices) . ' | ';
-				echo $html->link(__('view', true), array('controller' => 'choice_questions', 'action' => 'view', $question['id']));
+				echo $html->link(__('view', true), array(
+					'controller' => 'matching_questions', 
+					'action' => 'view', 
+					$question['id'],
+					'course_id' => $course['Course']['id']
+					));
 				echo $this->element(
 					'selection_list.add_question',
 					array('question_id' => $question['id'], 'i' => $i++, 'type'=>'MatchingQuestion')

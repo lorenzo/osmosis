@@ -34,7 +34,7 @@ class EventsController extends AgendaAppController {
 			$this->data['Event']['member_id'] = $this->Auth->user('id');
 			if ($this->Event->save($this->data)) {
 				$this->Session->setFlash(__('The Event has been saved', true), 'default', array('class' => 'success'));
-				$this->redirect(array('action'=>'index'));
+				$this->redirect(array('action'=>'index','course_id' => $this->data['Event']['course_id']));
 			} else {
 				$this->Session->setFlash(__('The Event could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
 			}

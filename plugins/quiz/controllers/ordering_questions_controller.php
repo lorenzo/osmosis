@@ -55,6 +55,7 @@ class OrderingQuestionsController extends AppController {
 			$this->Session->setFlash(__('Invalid Ordering Question',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
+		$this->OrderingQuestion->recursive = 2;
 		$this->set('orderingQuestion', $this->OrderingQuestion->read(null, $id));
 	}
 

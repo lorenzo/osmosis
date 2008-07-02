@@ -3,7 +3,7 @@
 	<fieldset>
  		<legend><?php __('Add Event');?></legend>
 	<?php
-		echo $form->input('date');
+		echo $form->input('date',array('type' => 'date'));
 		echo $form->input('location');
 		echo $form->input('all_day');
 		echo $form->input('headline');

@@ -1,3 +1,13 @@
+<ul class="reverse actions">
+	<li class="add">
+		<?php
+			echo $html->link(
+				__('Create a new Event', true),
+				array('controller' => 'events', 'action' => 'add', 'course_id' => $course['Course']['id'])
+			);
+		?>
+	</li>
+</ul>
 <div class='_calendar'>
 <?php
 	$firstdate = mktime(0, 0, 0, $data['month'], 1, $data['year']);

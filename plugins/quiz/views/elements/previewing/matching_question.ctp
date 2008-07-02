@@ -3,7 +3,11 @@
 	<div class="choice question set">
 		<ol>
 	<?php
-		foreach ($question['MatchingQuestion']['SourceChoice'] as $key => $value) {
+		if (isset($question['MatchingQuestion']['SourceChoice']))
+			$sources = $question['MatchingQuestion']['SourceChoice'];
+		else
+			$sources = $question['SourceChoice'];
+		foreach ($sources as $key => $value) {
 			echo '<li>'.$filter->filter($value['text']).'</li>';
 		}
 	?>
@@ -12,7 +16,11 @@
 	<div class="choice answer set">
 		<ol>
 	<?php
-		foreach ($question['MatchingQuestion']['TargetChoice'] as $key => $value) {
+		if (isset($question['MatchingQuestion']['TargetChoice']))
+			$targets = $question['MatchingQuestion']['TargetChoice'];
+		else
+			$targets = $question['TargetChoice'];
+		foreach ($targets as $key => $value) {
 			echo '<li>'.$filter->filter($value['text']).'</li>';
 		}
 	?>

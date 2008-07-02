@@ -4,7 +4,11 @@
 	?>
 	<ol>
 		<?php
-			foreach ($question['ChoiceQuestion']['ChoiceChoice'] as $i => $choice) {
+			if (isset($question['ChoiceQuestion']['ChoiceChoice']))
+				$choices = $question['ChoiceQuestion']['ChoiceChoice'];
+			else
+				$choices = $question['ChoiceChoice'];
+			foreach ($choices as $i => $choice) {
 		?>
 		<li><?php echo $filter->filter($choice['text']); ?></li>
 		<?php

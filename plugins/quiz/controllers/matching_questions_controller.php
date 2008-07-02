@@ -55,6 +55,7 @@ class MatchingQuestionsController extends AppController {
 			$this->Session->setFlash(__('Invalid Matching Question',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
+		$this->MatchingQuestion->recursive = 2;
 		$this->set('matchingQuestion', $this->MatchingQuestion->read(null, $id));
 	}
 

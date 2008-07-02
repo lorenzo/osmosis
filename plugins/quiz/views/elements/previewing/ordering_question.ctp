@@ -2,7 +2,11 @@
 	<?php echo $question['OrderingQuestion']['body'] ?>
 	<ol>
 	<?php
-		foreach ($question['OrderingQuestion']['OrderingChoice'] as $i => $choice) {
+		if (isset($question['OrderingQuestion']['OrderingChoice']))
+			$choices = $question['OrderingQuestion']['OrderingChoice'];
+		else
+			$choices = $question['OrderingChoice'];
+		foreach ($choices as $i => $choice) {
 	?>
 		<li><?php echo $filter->filter($choice['text']) ?></li>
 	<?php
