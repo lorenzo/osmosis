@@ -43,8 +43,8 @@ foreach ($courses as $course):
 			<div class="abstract">
 				<strong class="title"><?php __('Professors'); ?></strong>
 				<?php
-					$professors = isset($professors[$course['Course']['id']]) ? $professors[$course['Course']['id']] : array();
-					echo $this->element('professor_list', array('professors' => $professors));
+					$prof = isset($professors[$course['Course']['id']]) ? $professors[$course['Course']['id']] : array();
+					echo $this->element('professor_list', array('professors' => $prof));
 				?>
 			</div>
 		</div>
