@@ -47,13 +47,15 @@ class InstallerController extends Controller {
 					$result = $db->execute("drop TABLE $randomtablename"); 
 			    }
 			    if (!isset($db->error)) {
-					$config = 'var $default = ' . var_export($db->config, true);
+					$dbconfig = $db->config;
+					unset($dbconfig['connect']);
+					unset($dbconfig['schema']);
+					$config = 'var $default = ' . var_export($dbconfig, true);
 					$config = str_replace("\n", "\n\t", $config);
-					$config = "<?php\nclass DATABASE_CONFIG {\n\t$config\n}\n?>";
+					$config = "<?php\nclass DATABASE_CONFIG {\n\t$config;\n}\n?>";
 					App::import('core', 'File');
 					$config_file = new File($config_file_location);
-					if ($config_file->writable()) {
-						$config_file->create();
+					if ($config_file->create()) {
 						$config_file->write($config);
 						$config_file->close();
 						$this->redirect(array('action' => 'step', 'configure_users'));
