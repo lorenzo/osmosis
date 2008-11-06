@@ -29,11 +29,17 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
+if (!file_exists(CONFIGS.'database.php')) {
+    //Default route
+	Router::connect('/', array('controller' => 'installer', 'action' => 'index'));
+} else {
 	Router::parseExtensions('js','xml', 'json');
 	// Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 	Router::connect('/', array('controller' => 'courses', 'action' => 'index'));
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-	Router::connect('/tests', array('controller' => 'tests', 'action' => 'index'));
-	
+	Router::connect('/tests', array('controller' => 'tests', 'action' => 'index'));	
 	Router::connect('/admin', array('controller' => 'dashboards', 'action' => 'dashboard', 'admin' => true));
+}
+
+Router::connect('/installer/*', array('controller' => 'installer', 'action' => 'index'));
 ?>

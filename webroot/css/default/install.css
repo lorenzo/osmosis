@@ -1,0 +1,80 @@
+#install .main .content {
+	padding:30px!important;
+}
+#install .main h1 {
+	border:none;
+	margin:0;
+	padding:0;
+	background:none;
+	font-size:1.5em;
+	text-indent:0;
+}
+
+#install .main h2 {
+	margin:0;
+	padding:0;
+	border:none;
+	color:#333;
+	font-size:1em;
+}
+
+#install .main p.error strong {
+	color:red;
+}
+#install .main fieldset {
+	border:none;
+}
+#install .main input{
+	width:180px;
+}
+#install .main .submit {
+	text-align:left;
+	padding-left:210px;
+}
+#install .main .submit input {
+	width:auto;
+}
+
+#install .main .group {
+	margin-bottom:10px;
+	float:left;
+	clear:both;
+}
+#install .main .group strong {
+	margin-bottom:5px;
+	float:left;
+	width:100%;
+}
+#install .main .group .input {
+	display:inline;
+}
+#install .main .group label {
+	float:left;
+	margin-top:23px;
+	margin-left:10px;
+	display:inline;
+	width:120px;
+	color:#666;
+	font-size:0.9em;
+}
+#install .main .group input {
+	float:left;
+	width:120px;
+	margin-left:-125px;
+}
+#install .main .group .small {
+	width:53px;
+}
+#install .main .group input.small {
+	margin-left:-58px;
+}
+
+#install pre {
+	margin-left:30px;
+	background:#efefef;
+	width:300px;
+	padding:10px;
+	border:#ccc 1px dashed;
+	font-size:1.2em;
+	
+}

@@ -49,10 +49,9 @@ class AppController extends Controller {
 	 *
 	 * @see Controller::beforeFilter
 	 * @return void
-	 * @author José Lorenzo
 	 */
-	
 	function beforeFilter() {
+		Configure::write('Config.language', 'spa');
 		if (isset($this->Auth)) {
 			$this->_initializeAuth();
 		}
@@ -216,7 +215,6 @@ class AppController extends Controller {
 	 *
 	 * @return boolean
 	 */
-	
 	function isAuthorized() {
 		if( $this->name == 'Pages')
 			return true;
