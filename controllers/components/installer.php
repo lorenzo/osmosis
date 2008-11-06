@@ -60,19 +60,24 @@ class InstallerComponent extends Object {
 		if (!$plugin && isset($this->controller->plugin) && !empty($this->controller->plugin))
 			$plugin = $this->controller->plugin;
 		
-		$instance = ClassRegistry::init('Plugin');
-		$path = $instance->getPath($plugin);
-		if (empty($path) || !($schema = new CakeSchema(array('name' => $plugin,'path' => $path.DS.'config'.DS.'sql'))))
-			return false;
+		if (!empty($plugin)) {
+			$instance = ClassRegistry::init('Plugin');
+			$path = $instance->getPath($plugin);
+			if (empty($path) || !($schema = new CakeSchema(array('name' => $plugin,'path' => $path.DS.'config'.DS.'sql'))))
+				return false;
+		} else {
+			$schema = new CakeSchema();
+		}
 		
-		$PluginSchema = $schema->load();
 		
-		if (!$PluginSchema)
+		$AppSchema = $schema->load();
+		
+		if (!$AppSchema)
 			return true;
 			
 		$db =& ConnectionManager::getDataSource('default');
-		foreach ($PluginSchema->tables as $table => $fields) {
-			$create[$table] = $db->createSchema($PluginSchema, $table);
+		foreach ($AppSchema->tables as $table => $fields) {
+			$create[$table] = $db->createSchema($AppSchema, $table);
 		}
 		
 		foreach($create as $table => $sql) {

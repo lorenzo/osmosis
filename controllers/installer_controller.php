@@ -83,8 +83,7 @@ class InstallerController extends Controller {
 		}
 		App::import('Component', 'Installer');
 		$installer = new InstallerComponent();
-		// $installer = ClassRegistry::init('InstallerComponent', 'Component');
-		// debug($installer);
+		$installer->startup(&$this);
 		$installer->createSchema();
 		// die;
 	}
