@@ -4,7 +4,12 @@ class InstallerController extends Controller {
 	var $uses = null;
     var $components = null;
 
-	function beforeFilter() {}
+	function beforeFilter() {
+		$this->components = array('Session');
+		App::import('Component','Session');
+		$this->Session = new SessionComponent();
+	}
+	
 	function beforeRender() {}
 	function afterFilter() {}
 
