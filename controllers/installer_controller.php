@@ -36,17 +36,23 @@ class InstallerController extends Controller {
 	var $config_file_location;
 	var $helpers = array('Javascript', 'Html', 'Form');
 	
+	
 	function beforeFilter() {
 		$this->config_file_location = CONFIGS . 'database.php';
 		$this->components = array('Session');
 		App::import('Component','Session');
 		$this->Session = new SessionComponent();
-		// $this->Session->delete('Message.flash');
 	}
 	
 	function beforeRender() {}
 	function afterFilter() {}
 
+	/**
+	 * Dispatcher function that calls the actual step action.
+	 *
+	 * @param string $step step name
+	 * @return void
+	 */
 	function index($step = 'start') {
 		$valid_steps = array(
 			'database_info',
@@ -60,6 +66,12 @@ class InstallerController extends Controller {
 		$this->render($step, 'install');
 	}
 	
+	/**
+	 * First step in the installation process. Allows the user to create the database.php file.
+	 * Handles only MySQL (tested) and PostgreSQL (not tested).
+	 *
+	 * @return void
+	 */	
 	function database_info() {		
 		if (!empty($this->data)) {
 			@$db = &ConnectionManager::create('default',
@@ -79,7 +91,7 @@ class InstallerController extends Controller {
 			if ($db->connected) {
 				$config = $this->__createDatabaseConfiguration($db->config);
 				if (file_exists($this->config_file_location)) {
-					$this->load_database(false);
+					$this->load_database();
 				} else {
 					$this->Session->setFlash(
 						__('Database configuration file not writable.',true),
@@ -102,8 +114,14 @@ class InstallerController extends Controller {
 		$this->set(compact('drivers'));
 	}
 	
-	function load_database($requested = true) {
-		if ($requested && !file_exists($this->config_file_location)) {
+	/**
+	 * Second step in the installation process. Creates loads Ósmosis tables into the database.
+	 *
+	 * @return void
+	 */
+	function load_database() {
+		$direct_request = $this->params['pass'][0] == 'load_database';
+		if ($direct_request && !file_exists($this->config_file_location)) {
 			$this->Session->setFlash(
 				__('Database configuration file not found.',true),
 				'default', array('class' => 'error')
@@ -134,6 +152,11 @@ class InstallerController extends Controller {
 		}
 	}
 
+	/**
+	 * Third step in the installation process. Creates a new admin user.
+	 *
+	 * @return void
+	 */
 	function configure_users() {
 		if (!file_exists($this->config_file_location)) {
 			$this->redirect(array('action' => 'index'));
@@ -177,6 +200,12 @@ class InstallerController extends Controller {
 		$this->set(compact('member'));
 	}
 	
+	/**
+	 * Helper function that writes the database.php file based on some Datasource configuration array.
+	 *
+	 * @param array $configs Datasource configuration array
+	 * @return string database.php file contents
+	 */
 	function __createDatabaseConfiguration($configs) {
 		unset($configs['connect']);
 		unset($configs['schema']);
