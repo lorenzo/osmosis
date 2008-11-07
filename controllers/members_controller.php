@@ -151,9 +151,16 @@ class MembersController extends AppController {
 	* @return void
 	*/
 	function login() {
-		//Let the auth component manage login action
-		$this->set('isLogin', true);
+		$this->layout = 'install';
+		if (!empty($this->data)) {
+			if ($this->Session->read('Auth.Member.admin')) {
+				$this->redirect(array('controller' => 'dashboards', 'action' => 'dashboard', 'admin' => true));
+			} else {
+				$this->redirect(array('controller' => 'courses', 'action' => 'index'));
+			}
+		}
 	}
+	
 	
 	/**
 	 * Logs an user out of the system and redirects him to the logout action set

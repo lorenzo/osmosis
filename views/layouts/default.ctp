@@ -9,7 +9,7 @@
 	<?php echo $placeholder->render('head'); ?> 
 	<!-- End plugins header -->
 	<?php echo $scripts_for_layout ?>
-	<title>Ósmosis - Default :: <?php echo $title_for_layout;?></title> 
+	<title>Ósmosis :: <?php echo $title_for_layout;?></title> 
 </head>
 <body>
 	<?php

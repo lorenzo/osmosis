@@ -9,7 +9,7 @@
 	<?php echo $placeholder->render('head'); ?> 
 	<!-- End plugins header --> 
 	<?php echo $scripts_for_layout; ?> 
-	<title>Ósmosis - NoCourse :: <?php echo $title_for_layout;?></title> 
+	<title>Ósmosis :: <?php echo $title_for_layout;?></title> 
 </head>
 <body>
 	<?php
@@ -19,12 +19,8 @@
 		<div class="contentcolumn">
 			<?php
 				echo $this->element('layout/top_nav');
-				$class = null;
-				if ($this->action == 'login') {
-					$class = 'class="login"';
-				}
 			?>
-			<div id="upper-content"<?php echo $class?>>
+			<div id="upper-content">
 				<div id="wrap">
 					<?php
 						echo $this->element('layout/conectivism');

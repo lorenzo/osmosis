@@ -24,9 +24,6 @@
 								if ($session->check('Message.flash')) {
 									$session->flash();
 								}
-								if ($session->check('Message.auth')) {
-									$session->flash('auth');
-								}
 								echo $content_for_layout;
 							?>
 						</div>

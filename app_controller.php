@@ -108,10 +108,10 @@ class AppController extends Controller {
 			$this->Auth->userModel = 'Member';
 			$this->Auth->loginAction = array('controller' => 'members', 'action' => 'login', 'plugin' => '', 'admin' => false);
 			$this->Auth->loginError = __('Login or password incorrect', true);
-			$this->Auth->loginRedirect = array('controller' => 'courses');
+			$this->Auth->autoRedirect = false;
 			$this->set('user', $this->Session->read('Auth.Member'));
 			//TODO: Borrar lo siguiente cuando sea el momento
-			if ($this->name == 'InitAcl') {
+ 			if ($this->name == 'InitAcl') {
 				if(Configure::read('Auth.disabled')) {
 					$this->Auth->allow();
 				}
@@ -181,6 +181,8 @@ class AppController extends Controller {
 	function __selectLayout() {
 		if (isset($this->params['admin']) && $this->params['admin']) {
 			$this->layout = 'admin';
+		} elseif ($this->action == 'login') {
+			$this->layout = 'install';
 		} elseif (empty($this->activeCourse)) {
 			$this->layout = 'no_course';
 		}

@@ -6,7 +6,7 @@
 if (!isset($dbFileNotWritable)) :
 	echo $form->create('Installer', array('url' => array('controller' => 'installer', 'action' => 'index', 'database_info')));
 ?>
-<p<?php echo isset($dberror) ? ' class="error"' : null; ?>>
+<p>
 	<?php __('Please write the database configuration.'); ?>
 	<strong><?php __('The selected database must exist and be empty.'); ?></strong>
 </p>
@@ -66,7 +66,7 @@ if (!isset($dbFileNotWritable)) :
 			array(
 				'controller'	=> 'installer',
 				'action'		=> 'index',
-				'configure_users'
+				'load_database'
 			)
 		);
 	?>
