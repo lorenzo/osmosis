@@ -1,5 +1,8 @@
 <ul class="professors-list">
 	<?php
+		if (empty($professors)) {
+			echo '<li>' . __('There are no professors for this course', true) . '</li>';
+		}
 		foreach ($professors as $i => $professor):
 			$professor = $professor['Member'];
 	?>

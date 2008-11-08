@@ -34,7 +34,10 @@ foreach ($courses as $course):
 				<strong class="title"><?php __('Updates'); ?></strong>
 				<div id="plugin-updates">
 					<?php
-						echo $placeholder->render('plugin_updates', $course['Course']['id']);
+						$updates = $placeholder->render('plugin_updates', $course['Course']['id']);
+						if (empty($updates)) {
+							echo '<ul><li class="nothing">' . __('No updates!', true) . '</li></ul>';
+						}
 					?>
 				</div>
 			</div>

@@ -75,13 +75,17 @@ class PlaceholderComponent extends Object {
 	 * @return void
 	 */
 	
-	function attach($types) {		
+	function attach($types, $course_id = 0) {
 		if (is_string($types)) {
 			$types = array($types);
 		}
 		$holders = array();
 		foreach ($types as $type) {
+			if ($course_id == 0) {
 				$holders[$type] = $this->getPlaceholderObjects($type);
+			} else {
+				$holders[$type] = $this->getPlaceholderObjects($course_id, true);
+			}
 		}
 		$this->startupHolders($holders);
 	}
@@ -105,8 +109,9 @@ class PlaceholderComponent extends Object {
 				}
 			}
 				$this->startupHolders($holders);
-		} else
+		} else {
 			$this->attach($type);
+		}
 	}
 	
 	/**
@@ -177,7 +182,7 @@ class PlaceholderComponent extends Object {
 	 */
 	
 	public function pullData($type) {
-		if (in_array($type,$this->attached)) {
+		if (in_array($type, $this->attached)) {
 			return array();
 		}
 		$this->attach($type);

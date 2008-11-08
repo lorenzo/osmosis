@@ -162,7 +162,6 @@ class OrderingQuestion extends QuizAppModel {
 	 *
 	 * @param array $choices set of choices to shuffle.
 	 * @return array shuffled choices 
-	 * @author Joaquín Windmüller
 	 */
 	function shuffleChoices(&$question) {
 		if (!isset($question['shuffle']) || !$question['shuffle'])

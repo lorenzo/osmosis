@@ -41,7 +41,6 @@ class DepartmentsController extends AppController {
 	/**
 	 * Lists available departments
 	 *
-	 * @author José Lorenzo
 	 */
 	
 	function index() {

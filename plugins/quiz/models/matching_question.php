@@ -1,3 +1,4 @@
+
 <?php
 /* SVN FILE: $Id$ */
 /**
@@ -137,7 +138,6 @@ class MatchingQuestion extends QuizAppModel {
 	 * Validates that the minimum associations requested to be made are less or equal than the number of target choices
 	 *
 	 * @return boolean
-	 * @author José Lorenzo
 	 */
 	
 	function validMinAssocs() {

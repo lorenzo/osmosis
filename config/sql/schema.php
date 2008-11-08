@@ -78,7 +78,7 @@ class OsmosisSchema extends CakeSchema {
 			'phone' => array('type'=>'string', 'null' => true, 'default' => NULL, 'length' => 20),
 			'country' => array('type'=>'string', 'null' => false, 'length' => 20),
 			'city' => array('type'=>'string', 'null' => false, 'length' => 50),
-			'age' => array('type'=>'integer', 'null' => false, 'length' => 2),
+			'age' => array('type'=>'integer', 'null' => true, 'length' => 2),
 			'sex' => array('type'=>'string', 'null' => false, 'default' => 'M', 'length' => 1),
 			'username' => array('type'=>'string', 'null' => false, 'length' => 15),
 			'password' => array('type'=>'string', 'null' => false, 'length' => 50),

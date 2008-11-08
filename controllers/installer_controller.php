@@ -107,11 +107,12 @@ class InstallerController extends Controller {
 				);
 			}
 		}
+		$configFileExists = file_exists($this->config_file_location);
 		$drivers =	array(
 			'mysql' => 'MySQL',
 			'postgres' => 'PostgreSQL'
 		);
-		$this->set(compact('drivers'));
+		$this->set(compact('drivers', 'configFileExists'));
 	}
 	
 	/**

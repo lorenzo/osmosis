@@ -1,5 +1,12 @@
 <div class="courses index">
 <h2><?php __('Courses');?></h2>
+<ul class="reverse actions">
+	<li class="add">
+		<?php
+			echo $html->link(__('Add Course', true), array('action' => 'add'));
+		?>
+	</li>
+</ul>
 <p>
 <?php
 echo $paginator->counter(array(

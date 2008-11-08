@@ -11,6 +11,13 @@ a:focus {
 a:visited {
 	color:#025893;
 }
+
+a.course_name {
+	background:url(../../img/default/go.png) no-repeat center left;
+	padding-left:20px;
+	font-size:1.3em;
+	text-decoration:none;
+}
 /* Styles for upper tabs */
 #top ul li {
 	padding:7px 13px 0 0;
@@ -283,6 +290,9 @@ div.main div.content h1 a {
 	padding:5px 0;
 	list-style:none;
 }
+#plugin-updates ul li.nothing {
+	background:url(../../img/default/messagebox_warning.png) no-repeat center left;
+}
 
 /* Tool list */
 #tools strong {
@@ -432,6 +442,15 @@ ul.actions li {
 	-webkit-border-radius:5px;
 	padding:2px 5px 2px 0;
 }
+ul.continuous.actions {
+	float:none;
+	display:inline;
+	padding-left:10px;
+}
+ul.continuous.actions li {
+	float:none;
+	display:inline;
+}
 ul.actions.reverse li {
 	float:right;
 }
@@ -563,4 +582,12 @@ h3 {
 }
 #profile.dashboard-element p a {
 	text-decoration:none;
+}
+dd {
+	color:#333;
+	margin-top:10px;
+	margin-left:20px;
+}
+#tools strong a.title {
+	color:#fff;
 }

@@ -38,7 +38,6 @@ class AppModel extends Model{
 	 * @param array $data 
 	 * @param string $name 
 	 * @return void
-	 * @author Joaquín Windmüller
 	 */
 	
 	function validateUnique($data, $name) {
@@ -59,7 +58,6 @@ class AppModel extends Model{
 	 *
 	 * @param mixed $args 
 	 * @return void
-	 * @author José Lorenzo
 	 */
 	
 	function restrict($args) {

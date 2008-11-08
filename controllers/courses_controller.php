@@ -45,7 +45,6 @@ class CoursesController extends AppController {
 	 * Lists available courses
 	 *
 	 * @return void
-	 * @author José Lorenzo
 	 */
 	
 	function index() {
@@ -56,7 +55,7 @@ class CoursesController extends AppController {
 			$professors = $this->Course->professors(Set::extract('/Course/id', $user_courses));
 		}
 		$this->layout = 'no_course';
-		$this->Placeholder->attach('plugin_updates');
+		$this->Placeholder->attach('plugin_updates', $this->activeCourse);
 		$this->set(compact('professors'));
 	}
 
@@ -70,9 +69,9 @@ class CoursesController extends AppController {
 	 *
 	 * @param string $id course id
 	 * @return void
-	 * @author José Lorenzo
 	 */
 	function view($id = null) {
+		$this->Placeholder->attach('course_dashboard', $this->activeCourse);
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Course',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
@@ -102,7 +101,6 @@ class CoursesController extends AppController {
 	 * Adds a new course
 	 *
 	 * @return void
-	 * @author José Lorenzo
 	 */
 	
 	function admin_add() {
@@ -126,7 +124,6 @@ class CoursesController extends AppController {
 	 *
 	 * @param string $id course id
 	 * @return void
-	 * @author José Lorenzo
 	 */
 	
 	function admin_edit($id = null) {
@@ -155,7 +152,6 @@ class CoursesController extends AppController {
 	 *
 	 * @param string $id course id
 	 * @return void
-	 * @author José Lorenzo
 	 */
 	
 	function admin_delete($id = null) {

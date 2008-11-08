@@ -3,12 +3,27 @@
 	<?php printf(__('Step', true) . ' %d: %s', 1, __('Database Information', true)); ?>
 </h2>
 <?php
-if (!isset($dbFileNotWritable)) :
+if (!isset($dbFileNotWritable)) {
 	echo $form->create('Installer', array('url' => array('controller' => 'installer', 'action' => 'index', 'database_info')));
 ?>
 <p>
 	<?php __('Please write the database configuration.'); ?>
 	<strong><?php __('The selected database must exist and be empty.'); ?></strong>
+</p>
+<p>
+	<?php
+		if ($configFileExists) {
+			__('The configuration file exists');
+			echo ' ' . $html->link(
+				__('you can skip this step', true),
+				array(
+					'controller'	=> 'installer',
+					'action'		=> 'index',
+					'load_database'
+				)
+			);
+		}
+	?>.
 </p>
 	<fieldset>
  		<legend><?php echo sprintf(__('Configure database access'));?></legend>
@@ -48,9 +63,9 @@ if (!isset($dbFileNotWritable)) :
 		?>
 	</div>
 	</fieldset>
-<?php echo $form->end(__('Submit', true));?>
+	<?php echo $form->end(__('Submit', true)); ?>
 <?php
-	else :
+	} else {
 ?>
 <p>
 	<?php __('The database configuration file could not be written to the disk.'); ?>
@@ -72,5 +87,5 @@ if (!isset($dbFileNotWritable)) :
 	?>
 </p>
 <?php
-	endif;
+	}
 ?>

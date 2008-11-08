@@ -40,7 +40,20 @@
 				</div>
 			</div>
 			<div id="tools">
-				<strong><?php echo (isset($layoutToolbarName)) ?  $layoutToolbarName : __('Tools',true) ?></strong>
+				<strong>
+					<?php
+						$toolbarTitle = (isset($layoutToolbarName)) ?  $layoutToolbarName : __('Tools',true);
+						if ($Osmosis['currentRole'] == 'Professor') {
+							echo $html->link(
+								$toolbarTitle,
+								array('controller' => 'courses', 'action' => 'tools', $Osmosis['active_course']['id']),
+								array('class' => 'title', 'title' => __('Select this course tools', true))
+							);
+						} else {
+							echo $toolbarTitle;
+						}
+					?>
+				</strong>
 					<?php echo $placeholder->renderToolBar(); ?>
 			</div>
 			<div id="main-content">

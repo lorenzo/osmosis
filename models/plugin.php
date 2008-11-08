@@ -113,7 +113,6 @@ class Plugin extends AppModel {
 	 */
 	function inServer() {
 		$stored = $this->getpluginPackages();
-		
 		return $stored;
 	}
 

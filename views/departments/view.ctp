@@ -1,15 +1,10 @@
 <?php 
 $paginator->options(array('url'=>$this->params['pass']));
 ?>
-<div class="department">
 <h2><?php echo $department['Department']['name'] ?></h2>
-<p><?php echo $department['Department']['description'] ?></p>
-</div>
-<!-- <div class="actions">
-	<ul>
-		<li><?php echo $html->link(sprintf(__('List %s', true), __('Departments', true)), array('action'=>'index')); ?> </li>
-	</ul>
-</div> -->
+<p>
+	<?php echo $department['Department']['description'] ?>
+</p>
 <div class="related">
 	<h3><?php __('Courses')?></h3>
 	<?php if (!empty($courses)):?>
@@ -30,19 +25,23 @@ $paginator->options(array('url'=>$this->params['pass']));
 						'controller'=>'courses',
 						'action'=>'view',
 						$course['Course']['id']
-					)
-				);
-			?> &mdash;
-			<?php
-				echo $html->link(
-					__('Enroll', true),
-					array(
-						'controller' => 'courses',
-						'action'	=> 'enroll',
-						$course['Course']['id']
-					)
+					), array('class' => "course_name")
 				);
 			?>
+			<ul class="continuous actions">
+				<li class="edit">
+					<?php
+						echo $html->link(
+							__('Enroll', true),
+							array(
+								'controller' => 'courses',
+								'action'	=> 'enroll',
+								$course['Course']['id']
+							), array('class' => 'edit')
+						);
+					?>
+				</li>
+			</ul>
 		</dt>
 		<dd<?php echo $class;?>>
 			<?php echo $course['Course']['description'];?>

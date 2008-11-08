@@ -117,7 +117,6 @@ class LockerDocument extends LockerAppModel {
 	 *
 	 * @param string $check 
 	 * @return boolean true if it is a n uploaded file
-	 * @author Joaquín Windmüller
 	 */
 	function validFile($check) {
 		extract($check); 

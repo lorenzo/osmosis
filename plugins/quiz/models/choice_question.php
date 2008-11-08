@@ -157,7 +157,6 @@ class ChoiceQuestion extends QuizAppModel {
 	 * Validates taht the max_choices are greater or equal than min_choices
 	 *
 	 * @return void
-	 * @author José Lorenzo
 	 */
 	
 	function minLessThanMax() {

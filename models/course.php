@@ -199,7 +199,6 @@ class Course extends AppModel {
 	 *
 	 * @param int $id ID of the course.
 	 * @return Array professors of the course.
-	 * @author Joaquín Windmüller
 	 */
 	function professors($id) {
 		return $this->enrolled($id, 'professor', true);
@@ -285,7 +284,6 @@ class Course extends AppModel {
 	 * undocumented function
 	 *
 	 * @return void
-	 * @author Joaquín Windmüller
 	 **/
 	function find($conditions = null, $fields = array(), $order = null, $recursive = null) {
 		if (is_string($conditions) && $conditions == 'enrolled') {

@@ -133,7 +133,6 @@ class OsmosisShell extends Shell {
 	 * Adds a file to subversions
 	 *
 	 * @return boolean true if added
-	 * @author Joaquín Windmüller
 	 **/
 	function svn_add($file) {
 		$add = "svn add $file";
@@ -151,7 +150,6 @@ class OsmosisShell extends Shell {
 	 * Sets keywords to a file
 	 *
 	 * @return boolean
-	 * @author Joaquín Windmüller
 	 **/
 	function svn_keywords($file) {
 		$propset = "svn propset svn:keywords 'LastChangedBy Date Revision Id' $file";
