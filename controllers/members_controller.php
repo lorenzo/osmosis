@@ -158,6 +158,10 @@ class MembersController extends AppController {
 			} else {
 				$this->redirect(array('controller' => 'courses', 'action' => 'index'));
 			}
+		} else {
+			if ($this->Auth->user()) {
+				$this->redirect(array('controller' => 'courses', 'action' => 'index'));
+			}
 		}
 	}
 	

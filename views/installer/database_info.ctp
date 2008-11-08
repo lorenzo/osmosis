@@ -21,9 +21,9 @@ if (!isset($dbFileNotWritable)) {
 					'action'		=> 'index',
 					'load_database'
 				)
-			);
+			) . '.';
 		}
-	?>.
+	?>
 </p>
 	<fieldset>
  		<legend><?php echo sprintf(__('Configure database access'));?></legend>

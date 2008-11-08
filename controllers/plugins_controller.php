@@ -54,7 +54,7 @@ class PluginsController extends AppController {
 		if (!$plugin || !array_key_exists(Inflector::camelize($plugin),$inServer)) {
 			$this->Session->setFlash(__('Invalid Plugin.', true), 'default', array('class' => 'error'));
 		}
-		
+
 		$plugin = Inflector::camelize($plugin);
 		if ($this->Plugin->find('count',array('conditions' => array('name' => $plugin)))) {
 			$this->Session->setFlash(__('Plugin already Installed.', true), 'default', array('class' => 'info'));
@@ -73,11 +73,9 @@ class PluginsController extends AppController {
 				
 			elseif (!$this->Plugin->install($plugin)) {
 				$this->Session->setFlash(__('An error ocurred while installing the plugin. Try again', true), 'default', array('class' => 'error'));
-			}
-				
-				
-			else 
+			} else  {
 				$this->Session->setFlash(__('Plugin installed',true), 'default', array('class' => 'success'));
+			}
 		}
 			
 		$this->redirect(array('action'=>'index'));

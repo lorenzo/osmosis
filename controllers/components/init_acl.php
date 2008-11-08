@@ -150,9 +150,9 @@ class InitAclComponent extends Object {
 			$instance = ClassRegistry::init('Plugin');
 			$path = $instance->getPath($plugin);
 
-			if (!$path || !App::import('File', 'permissions', array('search' => $path . DS . 'config')))
+			if (!$path || !App::import('File', 'permissions', array('search' => $path . DS . 'config'))) {
 				return true;
-
+			}
 			$class = $plugin.'Permissions';
 			$permissions = new $class;
 			$parentAco = $this->Acl->Aco->field('id',array('alias' => 'Controllers'));

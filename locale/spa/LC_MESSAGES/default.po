@@ -3646,7 +3646,7 @@ msgstr "Aún no hay entradas escritas."
 
 #: /plugins/blog/views/elements/placeholders/messages_dashboard.ctp:2
 msgid "Blog Comments"
-msgstr "Comentarios del blog."
+msgstr "Comentarios del blog"
 
 #: /plugins/blog/views/posts/view.ctp:28
 msgid "No comments yet"

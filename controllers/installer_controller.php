@@ -145,7 +145,7 @@ class InstallerController extends Controller {
 				$message,
 				'default', array('class' => 'error')
 			);
-			if ($requested) {
+			if ($direct_request) {
 				$this->redirect(array('action' => 'index', 'database_info'));
 			}
 		} else {
