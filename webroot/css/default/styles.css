@@ -414,6 +414,9 @@ ul.dashboard-elements {
 	margin-right:2%;
 	margin-bottom:15px;
 }
+.boxed.dashboard-element dl.plugin {
+	margin:0;
+}
 .boxed.dashboard-element dl.plugin dd {
 	padding: 0 10px;
 	margin-left:0;
@@ -573,6 +576,7 @@ h3 {
 .dashboard-element dd {
 		line-height:1.8em;
 	margin-left:8em;
+	margin-top:0;
 	vertical-align: top;
 }
 
