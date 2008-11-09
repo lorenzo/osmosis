@@ -37,7 +37,7 @@ App::import('Model','Plugin');
 class PlaceholderComponent extends Object {
 	
 	/**
-	 * contains the list of objects that are responsible to sent placeholder data to the view
+	 * contains the list of objects that are responsible to send placeholder data to the view
 	 *
 	 * @var array
 	 */

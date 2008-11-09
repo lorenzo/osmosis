@@ -102,10 +102,12 @@ class InstallerController extends Controller {
 				}
 			} else {
 				$this->Session->setFlash(
-					__('Could not connect to the database with the configuration given', true),
+					__('Could not connect to the database with the given configuration', true),
 					'default', array('class' => 'error')
 				);
 			}
+		} else {
+			$this->data['Installer']['host'] = 'localhost';
 		}
 		$configFileExists = file_exists($this->config_file_location);
 		$drivers =	array(
@@ -162,9 +164,9 @@ class InstallerController extends Controller {
 		if (!file_exists($this->config_file_location)) {
 			$this->redirect(array('action' => 'index'));
 		}
+		App::import('Component', 'Acl');
 		App::import('Component', 'Auth');
 		App::import('Component', 'InitAcl');
-		App::import('Component', 'Acl');
 		App::import('Model', 'Member');
 		App::import('Model', 'Role');
 		App::import('Model', 'Aro');
