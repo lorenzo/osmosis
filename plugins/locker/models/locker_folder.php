@@ -33,6 +33,7 @@ App::import('Core','Folder');
 class LockerFolder extends LockerAppModel {
 
 	var $name = 'Folder';
+	var $useTable = 'locker_folders';
 	
 	/**
 	 * Validation Rules for Fields

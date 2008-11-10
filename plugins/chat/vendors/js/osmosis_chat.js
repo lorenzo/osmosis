@@ -225,12 +225,10 @@ OsmosisChat = {
 				win.parents('.chat_window_container').css('display', 'inline-block')
 					.find('.chat_window').css('display', 'inline-block');
 			}
-			console.debug(win.find('.chat_canvas'));
 			if (win.find('.chat_canvas').css('display') == 'none') {
 				win.find('.chat_canvas').each(OsmosisChat.onBoxRestore);
 			}
 			win.find('textarea').focus();
-			console.debug(win);
 			return win;
 		}
 		OsmosisChat.container.createAppend(
