@@ -62,7 +62,7 @@ class PluginsController extends AppController {
 		}
 		
 		// Check if the plugin has it's own installation method
-		if (App::import('Controller',$plugin.'.'.'Installer') && method_exists('InstallerController','install')) {
+		if (App::import('Controller',$plugin.'.'.'Installer') && method_exists('InstallerController','admin_install')) {
 			$this->redirect(array('controller' => 'installer', 'action' => 'install', 'plugin' => $plugin,'admin' => true));
 		} else {
 			if (!$this->InitAcl->loadPermissions($plugin))

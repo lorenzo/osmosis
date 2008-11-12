@@ -313,7 +313,7 @@ class LockerFolder extends LockerAppModel {
 	 * @return string physical path to the locker
 	 */
 	function baseDirectory($username) { 
-		return $this->getBaseFolder($username)->pwd();
+		return LockerFolder::getBaseFolder($username)->pwd();
 	}
 
 	/**
