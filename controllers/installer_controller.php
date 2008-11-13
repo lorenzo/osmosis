@@ -131,6 +131,10 @@ class InstallerController extends Controller {
 			);
 			$this->redirect(array('action' => 'index', 'database_info'));
 		}
+		$db = ConnectionManager::getDataSource('default');
+		if (strpos($db->config['driver'], 'mysql') !== false) {
+			$db->execute('ALTER DATABASE ' . $db->startQuote . $db->config['database'] . $db->endQuote . ' CHARACTER SET utf8 COLLATE utf8_unicode_ci');
+		}
 		App::import('Component', 'Installer');
 		$installer = new InstallerComponent();
 		$installer->startup(&$this);
