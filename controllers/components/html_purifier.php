@@ -41,6 +41,8 @@ class HtmlPurifierComponent extends Object {
 			$config->set('Cache','SerializerPath',CACHE);
 			$config->set('HTML', 'TidyLevel', 'heavy');
 			$config->set('Filter', 'YouTube', true);
+			$config->set('Filter', 'Custom', array(new HTMLPurifier_Filter_Ustream()));
+
 			$this->lib = new HTMLPurifier($config);
 			return $this->lib;
 		}
