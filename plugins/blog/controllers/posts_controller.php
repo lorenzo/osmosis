@@ -96,6 +96,7 @@ class PostsController extends BlogAppController {
 			$this->redirect(array('action'=>'view', 'controller' => 'blogs', $this->data['Post']['blog_id']));
 		}
 		if (!empty($this->data)) {
+			$this->data['Post']['body'] = $this->HtmlPurifier->purify($this->data['Post']['body']);	
 			if ($this->Post->save($this->data)) {
 				$this->Session->setFlash(__('The Post has been saved',true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'view', 'controller' => 'blogs', $this->data['Post']['blog_id']));
