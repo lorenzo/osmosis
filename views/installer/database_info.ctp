@@ -1,6 +1,6 @@
 <h1><?php __('Installation'); ?></h1>
 <h2>
-	<?php printf(__('Step', true) . ' %d: %s', 1, __('Database Information', true)); ?>
+	<?php printf(__('Step', true) . ' %d: %s', $current_step_position, $current_step_name); ?>
 </h2>
 <?php
 if (!isset($dbFileNotWritable)) {

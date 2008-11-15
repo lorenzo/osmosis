@@ -66,9 +66,8 @@ class InstallerComponent extends Object {
 			if (empty($path) || !($schema = new CakeSchema(array('name' => $plugin,'path' => $path.DS.'config'.DS.'sql'))))
 				return false;
 		} else {
-			$schema = new CakeSchema();
+			$schema = new CakeSchema(array('name' => 'Osmosis'));
 		}
-		
 		
 		$AppSchema = $schema->load();
 		

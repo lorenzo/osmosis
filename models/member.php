@@ -75,6 +75,18 @@ class Member extends AppModel {
 				'rule' => array('custom', '/.+/'),
 				'required' => false
 			)
+		),
+		'question' => array(
+			'required' => array(
+				'rule' => 'notEmpty',
+				'on' => 'update'
+			)
+		),
+		'answer' => array(
+			'required' => array(
+				'rule' => 'notEmpty',
+				'on' => 'update'
+			)
 		)
 	);
 
@@ -129,6 +141,15 @@ class Member extends AppModel {
 			'password_confirm.required',
 			__('Please confirm the password',true)
 		);
+		$this->setErrorMessage(
+			'question.required',
+			__('Please select a security question',true)
+		);
+		$this->setErrorMessage(
+			'answer.required',
+			__('Please write your security answer',true)
+		);
+		$this->_findMethods = $this->_findMethods + array('usernameOrEmail' => true);
 		parent::__construct($id, $table, $ds);
     }
 
@@ -241,10 +262,40 @@ class Member extends AppModel {
 	 * @return int
 	 * @see Role
 	 */
-	
 	function compareRoles($a,$b) {
 		$this->Enrollment->bind('Role');
 		return $this->Enrollment->Role->compare($a,$b);
+	}
+	
+	/**
+	 * Custom find function that searches for a value in email or username.
+	 *
+	 * @param string $state 
+	 * @param string $query 
+	 * @param string $results 
+	 * @return void
+	 * @see Model::find
+	 */
+	function _findUsernameOrEmail($state, $query, $results = array()) {
+		if ($state == 'before') {
+			$value = $query['conditions'];
+			$query['conditions'] = array('or' => array('username' => $value, 'email' => $value));
+			$query['recursive'] = -1;
+			$query['limit'] = 1;
+			return $query;
+		}
+		if (!empty($results)) {
+			$results = $results[0];
+		}
+		return $results;
+	}
+	
+	function beforeSave() {
+		if (isset($this->data['Member']['answer'])) {
+			$this->data['Member']['answer'] = Security::hash($this->data['Member']['answer']);
+			return $this->data;
+		}
+		return true;
 	}
 }
 ?>

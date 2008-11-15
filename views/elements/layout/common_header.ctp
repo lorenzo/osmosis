@@ -20,7 +20,6 @@ globaljs;
 	echo $javascript->codeBlock($js);
 ?> 
 <?php echo $javascript->link('jquery/jquery'); ?> 
-
 <?php echo $javascript->link('jquery/plugins/jquery.flydom'); ?> 
 <?php echo $html->css('jquery.osmosis-selector'); ?> 
 <?php echo $javascript->link('jquery/plugins/jquery.osmosis-selector'); ?>

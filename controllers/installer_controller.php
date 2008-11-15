@@ -35,18 +35,24 @@ class InstallerController extends Controller {
     var $components = null;
 	var $config_file_location;
 	var $helpers = array('Javascript', 'Html', 'Form');
-	
+	var $current_step;
+	var $current_step_position = 0;
+	var $current_step_name;
+	var $valid_steps;
 	
 	function beforeFilter() {
+		$this->valid_steps = array(
+			'database_info'		=> __('Database Info', true),
+			'load_database'		=> false,
+			'configure_mailing' => __('Configure Mailing', true),
+			'init_acl'			=> __('Done!', true)
+		);
 		$this->config_file_location = CONFIGS . 'database.php';
 		$this->components = array('Session');
 		App::import('Component','Session');
 		$this->Session = new SessionComponent();
 	}
 	
-	function beforeRender() {}
-	function afterFilter() {}
-
 	/**
 	 * Dispatcher function that calls the actual step action.
 	 *
@@ -54,14 +60,28 @@ class InstallerController extends Controller {
 	 * @return void
 	 */
 	function index($step = 'start') {
-		$valid_steps = array(
-			'database_info',
-			'load_database',
-			'configure_users'
-		);
-		if (!in_array($step, $valid_steps)) {
-			$this->redirect(array('action' => 'index', $valid_steps[0]));
+		$steps = array_keys($this->valid_steps);
+		if (!in_array($step, $steps)) {
+			$this->redirect(array('action' => 'index', $steps[0]));
 		}
+		foreach ($steps as $pos => $_step) {
+			if ($_step == $step) {
+				$this->current_step_position = $pos;
+				$this->current_step_name = $this->valid_steps[$_step];
+				break;
+			}
+		}
+		if ($step != $steps[0] && !file_exists($this->config_file_location)) {
+			$this->Session->setFlash(
+				__('Database configuration file not found.',true),
+				'default', array('class' => 'error')
+			);
+			$this->redirect(array('action' => 'index'));
+		}
+		$this->current_step = $step;
+		$this->set('current_step_name', $this->current_step_name);
+		$this->set('current_step', $this->current_step);
+		$this->set('current_step_position', $this->current_step_position+1);
 		$this->{$step}();
 		$this->render($step, 'install');
 	}
@@ -72,7 +92,7 @@ class InstallerController extends Controller {
 	 *
 	 * @return void
 	 */	
-	function database_info() {		
+	function database_info() {
 		if (!empty($this->data)) {
 			@$db = &ConnectionManager::create('default',
 				array(
@@ -91,7 +111,7 @@ class InstallerController extends Controller {
 			if ($db->connected) {
 				$config = $this->__createDatabaseConfiguration($db->config);
 				if (file_exists($this->config_file_location)) {
-					$this->load_database();
+					$this->__step();
 				} else {
 					$this->Session->setFlash(
 						__('Database configuration file not writable.',true),
@@ -123,14 +143,6 @@ class InstallerController extends Controller {
 	 * @return void
 	 */
 	function load_database() {
-		$direct_request = $this->params['pass'][0] == 'load_database';
-		if ($direct_request && !file_exists($this->config_file_location)) {
-			$this->Session->setFlash(
-				__('Database configuration file not found.',true),
-				'default', array('class' => 'error')
-			);
-			$this->redirect(array('action' => 'index', 'database_info'));
-		}
 		$db = ConnectionManager::getDataSource('default');
 		if (strpos($db->config['driver'], 'mysql') !== false) {
 			$db->execute('ALTER DATABASE ' . $db->startQuote . $db->config['database'] . $db->endQuote . ' CHARACTER SET utf8 COLLATE utf8_unicode_ci');
@@ -146,16 +158,14 @@ class InstallerController extends Controller {
 					break;
 				}
 			}
-			@unlink($this->config_file_location);
+			// @unlink($this->config_file_location);
 			$this->Session->setFlash(
 				$message,
 				'default', array('class' => 'error')
 			);
-			if ($direct_request) {
-				$this->redirect(array('action' => 'index', 'database_info'));
-			}
+			$this->__step(-1);
 		} else {
-			$this->redirect(array('action' => 'index', 'configure_users'));
+			$this->__step();
 		}
 	}
 
@@ -164,10 +174,7 @@ class InstallerController extends Controller {
 	 *
 	 * @return void
 	 */
-	function configure_users() {
-		if (!file_exists($this->config_file_location)) {
-			$this->redirect(array('action' => 'index'));
-		}
+	function init_acl() {
 		App::import('Component', 'Acl');
 		App::import('Component', 'Auth');
 		App::import('Component', 'InitAcl');
@@ -208,6 +215,45 @@ class InstallerController extends Controller {
 	}
 	
 	/**
+	 * This step asks the information necesary to allow Ósmosis send emails.
+	 *
+	 * @return void
+	 */	
+	function configure_mailing() {
+		if (!empty($this->data)) {
+			if (!$this->data['Installer']['usesmtp']) {
+				unset($this->data['Installer']['smtphost']);
+				unset($this->data['Installer']['smtplogin']);
+				unset($this->data['Installer']['smtppassword']);
+			}
+			$configurations = array();
+			foreach ($this->data['Installer'] as $key => $value) {
+				if (trim($value) == '') {
+					$configurations = null;
+					break;
+				}
+				$key = 'Mailer.' . $key;
+				$configurations[] = compact('key', 'value');
+			}
+			App::import('Model', 'Setting');
+			$this->Setting = new Setting;
+			$this->Setting->deleteAll(array('key' => array_keys($configurations)));
+			if ($this->Setting->saveAll($configurations)) {
+				$this->__step();
+			} else {
+				$this->Session->setFlash(
+					__('Error saving configurations.',true),
+					'default', array('class' => 'error')
+				);
+			}
+		} else {
+			$this->data['Installer']['name'] = 'Ósmosis LMS';
+			$this->data['Installer']['username'] = 'osmosis';
+			$this->data['Installer']['domain'] = $_SERVER['HTTP_HOST'];
+			$this->data['Installer']['usesmtp'] = false;
+		}
+	}
+	/**
 	 * Helper function that writes the database.php file based on some Datasource configuration array.
 	 *
 	 * @param array $configs Datasource configuration array
@@ -226,6 +272,21 @@ class InstallerController extends Controller {
 			$config_file->close();
 		}
 		return $config;
+	}
+	
+	/**
+	 * Redirect to next step or to login page on finish.
+	 * This way, step order can be changed in valid_steps array.
+	 *
+	 * @return void
+	 */	
+	function __step($direction = +1) {
+		$next_position = $this->current_step_position + $direction;
+		if ($next_position == count($this->valid_steps)) {
+			$this->redirect(array('controller' => 'members', 'action' => 'login'));
+		}
+		$steps = array_keys($this->valid_steps);
+		$this->redirect(array('action' => 'index', $steps[$next_position]));
 	}
 }
 ?>

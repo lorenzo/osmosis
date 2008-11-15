@@ -14,7 +14,9 @@ class OsmosisPermissions extends Object {
 	var $Members = array(
 			'view'	=> 'Member',
 			'edit'	=> 'Member',
-			'online' => 'Member'
+			'online' => 'Member',
+			'login'	=> 'Public',
+			'recover' => 'Public'
 		);
 }
 ?>

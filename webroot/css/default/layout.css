@@ -11,6 +11,10 @@ body {
 	font-family:"Trebuchet MS", Arial, sans-serif;
 	background: #fff url('../../img/default/osmosis_bg.jpg');
 }
+body.wide .main .content {
+	padding:10px!important;
+}
+
 
 #logo {
 	display:block;

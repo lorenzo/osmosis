@@ -34,6 +34,7 @@ class MembersController extends AppController {
 	var $name = 'Members';
 	var $helpers = array('Html', 'Form');
 	var $uses = array('Member');
+	var $components = array('OsmosisMailer');
 
 	function admin_index() {
 		$this->Member->recursive = 0;
@@ -177,11 +178,73 @@ class MembersController extends AppController {
 		$this->redirect($action);
 	}
 	
-	function isAuthorized() {
-		if ($this->action == 'logout' || $this->action == 'login') {
-			return true;
+	function recover() {
+		if (!empty($this->data)) {
+			$member = $this->Member->find('usernameOrEmail', array('conditions' => $this->data['Member']['field']));
+			if ($member) {
+				if (isset($this->data['Member']['password'])) {
+					$data = $this->data;
+					unset($data['Member']['answer']);
+					$data['Member']['id'] = $member['Member']['id'];
+					$data['Member']['username'] = $member['Member']['username'];
+					$data = $this->Auth->hashPasswords($data);
+					$this->set('site', 'localhost');
+					$this->set('name', $member['Member']['full_name']);
+					if ($this->Member->save($data)) {
+						$this->OsmosisMailer->sendEmail(
+							array(
+								'template'	=> 'password_recover',
+								'to'		=> $member['Member']['email'],
+								'subject'	=>  __('Welcome back: password recovered!', true),
+							)
+						);
+						$this->Session->setFlash(__('Your password was reset',true), 'default', array('class' => 'success'));
+						$this->redirect(array('controller' => 'courses', 'action' => 'index'));
+					}
+					$this->render('recover_complete_change');
+				} elseif (isset($this->data['Member']['answer'])) {
+					$answer = Security::hash($this->data['Member']['answer']);
+					if ($member['Member']['answer'] == $answer) {
+						$this->render('recover_complete_change');
+					} else {
+						$this->Session->setFlash(__('Wrong Answer',true), 'default', array('class' => 'error'));
+						$this->redirect(array('action' => 'recover'));
+					}
+				} elseif (isset($this->data['Member']['field'])) {
+					$this->set('question', $member['Member']['question']);
+					$this->render('recover_ask_question');
+				} else {
+					$this->redirect(array('action' => 'recover'));
+				}
+			}
 		}
-		return parent::isAuthorized();
+	}
+	
+	/**
+	 * Allows the user to change the security question
+	 *
+	 * @return void
+	 */
+	function security() {
+		if (!empty($this->data)) {
+			$this->data['Member']['id'] = $this->Auth->user('id');
+			if ($this->Member->save($this->data)) {
+				$member_info = $this->Member->read();
+				$this->Session->write('Auth.Member', $member_info['Member']);
+				$this->Session->setFlash(__('Your security question was saved!',true), 'default', array('class' => 'success'));
+				$this->redirect(array('controller' => 'courses', 'action'=>'index'));
+			}
+		}
+		unset($this->data['Member']['id']);
+		$questions = array(
+			__('What street did you live on in third grade?', true)	=> __('What street did you live on in third grade?', true),
+			__('What is the first name of the boy or girl that you first kissed?', true) => __('What is the first name of the boy or girl that you first kissed?', true),
+			__('What was the name of your first stuffed animal?', true) => __('What was the name of your first stuffed animal?', true),
+			__('What was your childhood nickname? ', true) => __('What was your childhood nickname? ', true),
+			__('What is your maternal grandmother\'s maiden name?', true) => __('What is your maternal grandmother\'s maiden name?', true),
+			__('What was your favorite place to visit as a child?', true) => __('What was your favorite place to visit as a child?', true),
+		);
+		$this->set(compact('questions'));
 	}
 	
 	/**
@@ -202,7 +265,6 @@ class MembersController extends AppController {
 	function _initializeAuth() {
 		parent::_initializeAuth();
 		if ($this->action =='login' && !empty($this->data) && $this->Member->isAdmin($this->data['Member']['username'])) {
-			// die('jo');
 			$this->Auth->loginRedirect = array('controller' => 'dashboards', 'action' => 'dashboard', 'admin' => true);
 		}
 	}
@@ -269,7 +331,6 @@ class MembersController extends AppController {
 				}
 			}
 		}
-		// debug($classmates);die;
 		$this->set(compact('classmates'));
 	}
 }

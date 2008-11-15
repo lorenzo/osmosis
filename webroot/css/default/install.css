@@ -1,5 +1,5 @@
 #install .main .content {
-	padding:30px!important;
+	padding:20px 30px!important;
 }
 #install .main h1 {
 	border:none;
@@ -68,7 +68,12 @@
 #install .main .group input.small {
 	margin-left:-58px;
 }
-
+#install .main .group span {
+	float:left;
+	font-size:1.3em;
+	display:inline;
+	margin-right:-10px;
+}
 #install .main pre {
 	margin-left:30px;
 	background:#efefef;
@@ -79,7 +84,21 @@
 	
 }
 #install .main #flashMessage {
-	margin-top:-30px;
+	margin-top:-20px;
+}
+#install .main fieldset p {
+	margin-top:0;
+}
+#install .main .checkbox {
+	padding:0 0 0 25px;
+	margin:0;
+}
+#install .main .checkbox label {
+	float:keep-a;
+}
+#install .main .checkbox input {
+	padding:0;
+	margin:0 10px 0 0;
 }
 #install .main .credentials {
 	margin-left:30px;
@@ -89,4 +108,11 @@
 	padding:10px;
 	font-family:monospace;
 	font-size:1.5em;
+}
+#install .main #smtp {
+	display:none;
+}
+#install .main p#smtp-alternative {
+	font-size:1.1em;
+	margin-left:30px;
 }

@@ -5,7 +5,8 @@ fieldset {
 	margin:10px;
 }
 
-label {
+label,
+fieldset .label {
 	margin-right:5px;
 	width:80px;
 	float:left;
@@ -15,8 +16,18 @@ label {
 	width:400px;
 	margin:30px auto;
 }
-#login label {
+#login label,
+label.wide {
 	width:120px;
+}
+#login .recover-password {
+	font-size:1em;
+	padding-left:125px;
+	margin:-10px 0 10px 0;
+}
+.main #login .submit {
+	text-align:left;
+	padding-left:148px;
 }
 form .help {
 	display:block;

@@ -39,7 +39,6 @@ class AppController extends Controller {
 	 *
 	 * @var mixed
 	 */
-	
 	protected $activeCourse = false;
 	
 	protected $currentRole = 'Public';
@@ -71,12 +70,26 @@ class AppController extends Controller {
 	}
 	
 	/**
+	 * Processed after Auth does its job.
+	 *
+	 * @return void
+	 */
+	function afterFilter() {
+		$user = $this->Session->read('Auth.Member');
+		if ($user) {
+			if ((empty($user['question']) || empty($user['answer']))
+			 		&& !($this->name == 'Members' && $this->action == 'security' )) {
+				$this->Session->setFlash(__('Fill this security information before anything goes wrong', true), 'default', array('class' => 'info'));
+				$this->redirect(array('controller' => 'members', 'action' => 'security', 'admin' => false));
+			}
+		}
+	}
+	/**
 	 * Returns true if the plugin that the user is trying to access is installed and
 	 * associated to the active course if there's any. Otherwise returns false
 	 *
 	 * @return boolean
 	 */
-	
 	function __authorizedPlugin() {
 		if (isset($this->plugin) && !empty($this->plugin)) {
 			
@@ -100,27 +113,32 @@ class AppController extends Controller {
 	 *
 	 * @return void
 	 */
-	
 	function _initializeAuth() {
-		if (isset($this->Auth)) {
 			$this->Auth->Acl =& $this->Acl;
+			$aclPrefix = 'App/';
+			if (isset($this->plugin) && !empty($this->plugin))
+				$aclPrefix = Inflector::camelize($this->plugin).'/';
+
 			$this->Auth->authorize = 'controller';
 			$this->Auth->userModel = 'Member';
 			$this->Auth->loginAction = array('controller' => 'members', 'action' => 'login', 'plugin' => '', 'admin' => false);
 			$this->Auth->loginError = __('Login or password incorrect', true);
+			$this->Auth->authError = __('Login or password incorrect', true);
+			if (Configure::read('debug')>0) {
+				$this->Auth->authError .= '[' . $this->name . '::' . $this->action . ']';
+			}
 			$this->Auth->autoRedirect = false;
-			$this->set('user', $this->Session->read('Auth.Member'));
-			//TODO: Borrar lo siguiente cuando sea el momento
- 			if ($this->name == 'InitAcl') {
-				if(Configure::read('Auth.disabled')) {
+			$user = $this->Session->read('Auth.Member');
+			$this->set(compact('user'));
+			if (!$user) {
+				$valid = $this->Auth->Acl->check("Public", $aclPrefix.$this->Auth->action());
+				if ($valid) {
 					$this->Auth->allow();
 				}
-				return;
 			}
 			Configure::write('ActiveUser', $this->Auth->user());
 			if (strpos($this->Session->read('Auth.redirect'),'admin') !== false && !$this->Auth->user('admin'))
 				$this->Session->del('Auth.message');
-		}
 	}
 	
 	/**
@@ -128,7 +146,6 @@ class AppController extends Controller {
 	 *
 	 * @return mixed
 	 */
-	
 	function _getActiveCourse() {
 		return $this->activeCourse;
 	}
@@ -138,7 +155,6 @@ class AppController extends Controller {
 	 *
 	 * @return void
 	 */
-	
 	function __setActiveCourseData() {
 		if ($this->activeCourse) {
 			$data = Cache::read('Course.'.$this->activeCourse);
@@ -156,7 +172,6 @@ class AppController extends Controller {
 	 *
 	 * @return void
 	 */
-	
 	function __instatiateLogger() {
 		ClassRegistry::init('ModelLog');
 	}
@@ -166,7 +181,6 @@ class AppController extends Controller {
 	 *
 	 * @return void
 	 */
-	
 	function _blackHoledAction() {
 		$this->Session->setFlash(__('Invalid access', true), 'default', array('class' => 'error'));
 		$this->redirect(array('controller' => 'members', 'action' => 'login', 'plugin' => ''));
@@ -177,11 +191,10 @@ class AppController extends Controller {
 	 *
 	 * @return void
 	 */
-	
 	function __selectLayout() {
 		if (isset($this->params['admin']) && $this->params['admin']) {
 			$this->layout = 'admin';
-		} elseif ($this->action == 'login') {
+		} elseif (!$this->Auth->user()) {
 			$this->layout = 'install';
 		} elseif (empty($this->activeCourse)) {
 			$this->layout = 'no_course';
@@ -205,7 +218,6 @@ class AppController extends Controller {
 	 *
 	 * @return void
 	 */
-	
 	protected function __updateOnlineUser() {
 		$member = ClassRegistry::init('Member');
 		$member->id = $this->Auth->user('id');
@@ -249,7 +261,6 @@ class AppController extends Controller {
 	 *
 	 * @return string
 	 */
-	
 	function _currentRole() {
 		if (!$this->Auth->user())
 			return 'Public';
@@ -266,7 +277,6 @@ class AppController extends Controller {
 	 *
 	 * @return boolean
 	 */
-	
 	function _ownerAuthorization() {
 		return true;
 	}
@@ -277,7 +287,6 @@ class AppController extends Controller {
 	 *
 	 * @return void
 	 */
-	
 	function beforeRender() {
 		if (isset($this->Placeholder->started) && $this->activeCourse) {
 			$this->Placeholder->attachToolbar($this->activeCourse);
@@ -295,7 +304,6 @@ class AppController extends Controller {
 	 *
 	 * @return void
 	 */
-	
 	function _setActiveCourse() {
 		if (isset($this->params['named']['course_id'])) {
 			$this->activeCourse = $this->params['named']['course_id'];

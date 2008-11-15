@@ -8,6 +8,9 @@
 	<?php echo $html->css('default/install'); ?>
 	<?php echo $html->css('default/forms'); ?>
 	<title>Ósmosis :: <?php echo $title_for_layout;?></title> 
+	<?php
+		echo $scripts_for_layout;
+	?>
 </head>
 <body id="install">
 	<?php
