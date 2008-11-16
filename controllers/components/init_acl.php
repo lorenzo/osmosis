@@ -86,20 +86,6 @@ class InitAclComponent extends Object {
                 );
 		return $this->Acl->Aco->getLastInsertId();
 	}
-  
-	/**
-	 * Truncates the members and ACL tables
-	 *
-	 * @return void
-	 */
-	
-	function deleteDB() {
-		$this->Acl->Aco->query('TRUNCATE '.$this->Acl->Aco->table);
-		$this->Acl->Aro->query('TRUNCATE '.$this->Acl->Aro->table);
-		$this->Acl->Aro->query('TRUNCATE '.$this->Acl->Aco->hasAndBelongsToMany['Aro']['joinTable']);
-		$this->Member->query('TRUNCATE '.$this->Member->table);
-		$this->Role->query('TRUNCATE '.$this->Role->table);
-	}
 	
 	/**
 	 * Creates a new Role
@@ -150,9 +136,13 @@ class InitAclComponent extends Object {
 			$instance = ClassRegistry::init('Plugin');
 			$path = $instance->getPath($plugin);
 
-			if (!$path || !App::import('File', $plugin.'Permissions', array('search' => $path . DS . 'config'))) {
+			if (!$path || ! file_exists($path . DS . 'config' . DS . 'permissions.php')) {
 				return true;
 			}
+			
+			if (!App::import('File', $plugin.'Permissions', array('search' => $path . DS . 'config','file' => 'permissions.php')))
+				return false;
+				
 			$class = $plugin.'Permissions';
 			$permissions = new $class;
 			$parentAco = $this->Acl->Aco->field('id',array('alias' => 'Controllers'));
