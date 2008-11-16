@@ -52,34 +52,126 @@ class OsmosisShell extends Shell {
 		$this->__header = $header->read();
 		$this->out('');
 		foreach ($modified as $n => $line) {
+			$line = trim($line);
+			if (strlen($line) == 0 || !in_array($line[0], array('M', 'A', '?'))) {
+				continue;
+			}
 			list($svn_info, $file) = preg_split('/[\s]+/', $line, -1, PREG_SPLIT_NO_EMPTY);
-			if ($svn_info == '?' && preg_match('/\.(php)|\.(js)/', $file, $matches)) {
-				$processing = "Processing $file";
-				$this->out($processing);
-				if (!$this->askContinue()) {
-					$this->out('skipped...');
-					$this->out('');
-					continue;
+			if (strlen($svn_info) > 1) {
+				$svn_info = substr($svn_info, 0, 1);
+			}
+
+			$file_info = $this->__needsProcessing($svn_info, $file);
+			if ($file_info===false) {
+				continue;
+			}
+
+			$processing = 'Processing ' . str_replace(getcwd(), '', $file);
+			$separator = str_repeat('=', strlen($processing));
+			$this->out($separator);
+			$this->out($processing);
+			$this->out($separator);
+			$this->out('>> ' . $file_info['status']);
+			
+			if (!$file_info['has_header']) {
+				$this->out('   - Adding Ósmosis header');
+				if ($this->askContinue('    - Do you wish to add Ósmosis\' header to this file?')) {
+					$file_info['has_header'] = $this->add_header($file_info);
+					if($file_info['has_header']) {
+						$this->out('    - Header added');
+					} else {
+						$this->err('Header could not be added');
+					}
 				}
-				if (!$this->add_header($file, array_pop($matches))) {
-					$this->err('Header could not be added');
-					$this->out('');
-					continue;
+			}
+			
+			if (!$file_info['versioned']) {
+				$this->out('   - Adding file to subversion');
+				if (!$file_info['versioned'] = $this->svn_add($file)) {
+					$this->err('    - Could not add this file to subversion!');
+				} else {
+					$this->out('    - File added to subversion!');
 				}
-				if (!$this->svn_add($file)) {
-					$this->out('skipped...');
-					$this->out('');
-					continue;
-				}
-				if (!$this->svn_keywords($file)) {
+			}
+			
+			if ($file_info['versioned']) {
+				$this->out('   - Setting svn:keywords');
+				if ($this->svn_keywords($file_info)) {
+					$this->out('    - Keywords set: ' . $file_info['keywords']);
+				} else {
 					$this->err('Keywords could not be set');
 				}
-				$this->out(str_repeat('=', strlen($processing)) . "\n");
-				$this->out('');
 			}
+			
+			$this->out('');
 		}
 	}
 	
+	
+	function __needsProcessing($svn_info, $file) {
+		$status = '';
+		$versioned = $svn_info != '?';
+		$statuses = array(
+			'M' => 'File is in svn but has modifications',
+			'A' => 'File is new in svn',
+			'?' => 'File has not been added to svn'
+		);
+		if (in_array($svn_info, array_keys($statuses))) {
+			$status = $statuses[$svn_info];
+		} else {
+			return false;
+		}
+		if (preg_match('/php|js$/', $file, $extension) !=1) {
+			return false;
+		}
+		$extension = $extension[0];
+		$keywords = $this->__getKeywords($file, $versioned);
+		$has_header = $this->__hasHeader($file);
+		return compact('file', 'extension', 'versioned', 'svn_info', 'status', 'keywords', 'has_header');
+	}
+	
+	/**
+	 * Returns the keywords to set to the file (merges the existing ones with the ones needed in the header)
+	 *
+	 * @param string $file path to file
+	 * @param string $versioned if this file is already in svn
+	 * @param string $keywords keywords needed by the header
+	 * @return string list of space separated keywords
+	 */
+	function __getKeywords($file, $versioned, $keywords = array('LastChangedBy', 'Date', 'Revision', 'Id')) {
+		if (!$versioned) {
+			return $keywords;
+		}
+		$propget = "svn propget svn:keywords $file";
+		exec($propget, $output, $status);
+		foreach ($output as $i => $value) {
+			if (empty($value)) unset($output[$i]);
+		}
+		$output = trim(implode(' ', $output));
+		$output = explode(' ', $output);
+		
+		// array_merge doesn't work as we want here (only with string keys)
+		$output = array_combine($output, $output);
+		$keywords = array_combine($keywords, $keywords);
+		$output = array_merge($output, $keywords);
+		return implode(' ', array_keys($output));
+	}
+	
+	/**
+	 * Determines if a file has the header already
+	 *
+	 * @param string $file path to file
+	 * @return boolean
+	 */
+	function __hasHeader($file) {
+		$file = new File($file);
+		$contents = $file->read();
+		$file->close();
+		if (strpos($contents, 'This file is part of Ósmosis LMS.')===false) {
+			return false;
+		}
+		return true;
+	}
 	/**
 	 * Add Ósmosis header information to file if does't have it.
 	 *
@@ -87,14 +179,11 @@ class OsmosisShell extends Shell {
 	 * @param string $extension php or js
 	 * @return boolean True if header added 
 	 **/
-	function add_header($file, $extension) {
-		$file = new File($file);
+	function add_header($file_info) {
+		$file = new File($file_info['file']);
 		$contents = $file->read();
-		if (strpos($contents, 'This file is part of Ósmosis LMS.')!==false) {
-			return false;
-		}
-		$contents = preg_replace('/^[\s]+/', '', $contents);
-		switch ($extension) {
+		$contents = trim($contents);
+		switch ($file_info['extension']) {
 			case 'php':
 				if (strpos($contents, '<?php')===0) {
 					$new_content = preg_replace('/^<\?php/', "<?php\n" . $this->__header, $contents);
@@ -136,14 +225,11 @@ class OsmosisShell extends Shell {
 	 **/
 	function svn_add($file) {
 		$add = "svn add $file";
-		if (!$this->askContinue("$add?")) {
-			return false;
-		}
+		// if (!$this->askContinue("$add?")) {
+		// 	return false;
+		// }
 		exec($add, $output, $status);
-		if ($status === 0) {
-			return true;
-		}
-		return false;
+		return $status === 0;
 	}
 	
 	/**
@@ -151,14 +237,10 @@ class OsmosisShell extends Shell {
 	 *
 	 * @return boolean
 	 **/
-	function svn_keywords($file) {
-		$propset = "svn propset svn:keywords 'LastChangedBy Date Revision Id' $file";
+	function svn_keywords($file_info) {
+		$propset = 'svn propset svn:keywords \' ' . $file_info['keywords'] . '\' ' . $file_info['file'];
 		exec($propset, $output, $status);
-		if ($status === 0) {
-			$this->out("\nKeywords set");
-			return true;
-		}
-		return false;
+		return $status === 0;
 	}
 }
 ?>
