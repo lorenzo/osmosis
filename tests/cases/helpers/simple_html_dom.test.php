@@ -30,26 +30,42 @@
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 
-class OsmosisPermissions extends Object {
-	var $Courses = array(
-			'index'	=> 'Member',
-			'view'	=> 'Member',
-			'enroll' => 'Member',
-			'tools'	=> 'Professor'
-		);
-	var $Departments = array(
-			'index'	=> 'Public',
-			'view'	=> 'Public'
-		);
-	var $Dashboards = array();
-	var $Members = array(
-			'view'	=> 'Member',
-			'edit'	=> 'Member',
-			'online' => 'Member',
-			'login'	=> 'Public',
-			'logout' => 'Member',
-			'recover' => 'Public',
-			'security' => 'Member'
-		);
+App::import('Helper','SimpleHtmlDom');
+class SimpleHtmlDomHelperTest extends CakeTestCase {
+	var $fixtures = null;
+	var $SimpleHtmlDom;
+	
+	function setUp() {
+		parent::setUp();
+		Router::reload();
+		$this->SimpleHtmlDom = new SimpleHtmlDomHelper();
+	}
+	
+	function tearDown() {
+		if (isset($this->SimpleHtmlDom)) {
+			unset($this->SimpleHtmlDom);
+		}
+	}	
+	
+	function testGlobalStylesToAttibutes() {
+		$input = <<<eohtml
+<style type="text/css" media="screen">
+	.note {border:#ccc 1px dashed;
+		background:#f5f5f5;}
+	.baz {border:red 1px solid;}
+</style>
+	<style type="text/css" media="screen">
+		.note1 {border:#ccc 1px dashed;background:#f5f5f5;}
+		.baz1 {border:red 1px solid;}
+	</style>
+<p>Hello, this doesn't have any styling</p>
+<p class="note">This should be styled</p>
+eohtml;
+		$expected = <<<eohtml
+<p>Hello, this doesn't have any styling</p>
+<p style="border:#ccc 1px dashed;background:#f5f5f5;">This should be styled</p>
+eohtml;
+		$this->assertEqual($this->SimpleHtmlDom->globalStylesToAttibutes($input), $expected);
+	}
 }
 ?>

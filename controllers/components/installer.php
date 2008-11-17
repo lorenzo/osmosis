@@ -51,7 +51,7 @@ class InstallerComponent extends Object {
 	}
 	
 	/**
-	 * Reads schema.php file from the calling plugin and denerates the tables specified in it
+	 * Reads schema.php file from the calling plugin and generates the tables specified in it
 	 *
 	 * @return boolean
 	 */
@@ -105,7 +105,7 @@ class InstallerComponent extends Object {
 		$path = $instance->getPath($plugin);
 		if (empty($path) || !($schema = new CakeSchema(array('name' => $plugin,'path' => $path.DS.'config'.DS.'sql'))))
 			return true;
-			
+
 		$PluginSchema = $schema->load();
 		if (!$PluginSchema)
 			return true;

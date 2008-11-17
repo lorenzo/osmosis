@@ -32,7 +32,7 @@
 class MembersController extends AppController {
 
 	var $name = 'Members';
-	var $helpers = array('Html', 'Form');
+	var $helpers = array('Html', 'Form', 'SimpleHtmlDom');
 	var $uses = array('Member');
 	var $components = array('OsmosisMailer');
 

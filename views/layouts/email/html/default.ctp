@@ -4,9 +4,8 @@
 	<title><?php echo $title_for_layout;?></title>
 </head>
 <body>
-	<?php echo $content_for_layout;?>
-
-	<p>
+	<?php echo $simpleHtmlDom->globalStylesToAttibutes($content_for_layout);?>
+	<p style="border-top:#ccc 1px dashed;text-align:right;padding:10px;margin-top:20px;">
 		<?php
 			__('Ósmosis is Opensource');
 		?>
