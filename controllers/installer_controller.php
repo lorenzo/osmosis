@@ -158,7 +158,6 @@ class InstallerController extends Controller {
 					break;
 				}
 			}
-			// @unlink($this->config_file_location);
 			$this->Session->setFlash(
 				$message,
 				'default', array('class' => 'error')
@@ -186,7 +185,6 @@ class InstallerController extends Controller {
 		$initAcl->Member = new Member();
 		$initAcl->Role = new Role();
 		$initAcl->Role->Aro = new Aro();
-		$initAcl->deleteDB();
 		$initAcl->Auth = new AuthComponent();
 		$public_id = $initAcl->initRole('Public');
 		$member_id = $initAcl->initRole('Member', $public_id);
