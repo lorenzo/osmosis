@@ -1,14 +1,6 @@
-<style type="text/css">
-	h1 {
-		font-size:18px;
-		color:#6EA6D5;
-	}
-	.warning {
-		border:#DAA600 1px dashed;
-		background:#FCFFDD;
-		padding:10px;
-	}
-</style>
+<?php
+	echo $this->element('email/html/styles_simple_email');
+?>
 <h1><?php __('Your password was successfully reset'); ?></h1>
 <p>
 	<?php 
@@ -27,7 +19,8 @@
 	?>
 </p>
 <p class="warning">
-	<strong><?php __('Note:'); ?></strong><?php __('If you didn\'t do any password recovery, this could mean that somebody guessed your security question.'); ?><br /><br />
+	<strong><?php __('Note:'); ?></strong>
+	<?php __('If you didn\'t do any password recovery, this could mean that somebody guessed your security question.'); ?><br /><br />
 	<?php
 	
 		echo String::insert(

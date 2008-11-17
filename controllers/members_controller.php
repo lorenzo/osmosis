@@ -178,6 +178,10 @@ class MembersController extends AppController {
 		$this->redirect($action);
 	}
 	
+	/**
+	 * Wizard-like function that allows members to reset its forgotten password.
+	 *
+	 */
 	function recover() {
 		if (!empty($this->data)) {
 			$member = $this->Member->find('usernameOrEmail', array('conditions' => $this->data['Member']['field']));
@@ -220,6 +224,20 @@ class MembersController extends AppController {
 		}
 	}
 	
+	function __welcome($member, $password_same = true) {
+		$site = 'localhost';
+		$name = $member['Member']['full_name'];
+		$username = $member['Member']['username'];
+		$this->set(compact('site', 'name', 'username', 'password_same'));
+		return $this->OsmosisMailer->sendEmail(
+			array(
+				'template'	=> 'welcome',
+				'to'		=> $member['Member']['email'],
+				'subject'	=>  String::insert(__('Welcome to :site', true), array('site' => $site))
+			)
+		);
+		
+	}
 	/**
 	 * Allows the user to change the security question
 	 *

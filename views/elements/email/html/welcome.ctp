@@ -1,6 +1,6 @@
-<style type="text/css" media="screen">
-	.note {border:#ccc 1px dashed;background:#f5f5f5;padding:10px;}
-</style>
+<?php
+	echo $this->element('email/html/styles_simple_email');
+?>
 <h1>
 	<?php
 		echo String::insert(
@@ -15,23 +15,23 @@
 			__('Hi :name,', true),
 			array('name' => $name)
 		); ?>
-</p>
-<p class="note">
+<br />
 	<?php 
 		echo String::insert(
-			__('You have been registered into :site!'),
+			__('You have been registered into :site!', true),
 			array('site' => $site)
 		);
 	?>
-	<br />
+</p>
+<p class="info">
 	<?php 
 		echo String::insert(
-			__('To access the site please use this username: <strong>:username</strong>:password_same'),
+			__('To log into access the site please use this username: <strong>:username</strong> :password_same'),
 			array(
 				'username' => $username,
 				'password_same' => $password_same ? 
 							__('(Your password is the same as your username, remember to change it soon)', true) :
-							''
+							__('and the password you selected', true)
 			)
 		);
 	?>
