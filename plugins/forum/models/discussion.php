@@ -117,10 +117,10 @@ class Discussion extends AppModel {
 	 */
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
-			'title.required', __('Please set a title',true)
+			'title.required', __d('forum','Please set a title',true)
 		);
 		$this->setErrorMessage(
-			'status.valid', __('Incorrect status',true)
+			'status.valid', __d('forum','Incorrect status',true)
 		);
 		parent::__construct($id,$table,$ds);
 	}

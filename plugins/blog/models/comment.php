@@ -96,13 +96,13 @@ class Comment extends BlogAppModel {
 	 */
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
-			'comment.required', __('Please write your comment', true)
+			'comment.required', __d('blog','Please write your comment', true)
 		);
 		$this->setErrorMessage(
-			'post_id.required', __('Post ID missing', true)
+			'post_id.required', __d('blog','Post ID missing', true)
 		);
 		$this->setErrorMessage(
-			'member_id.required', __('Member ID missing', true)
+			'member_id.required', __d('blog','Member ID missing', true)
 		);
 		parent::__construct($id,$table,$ds);
 	}

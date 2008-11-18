@@ -29,8 +29,8 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-Configure::write('Blog.description',__('A blog (or web log) is a website, for each member, with regular entries of commentary, descriptions of events, or other material such as graphics or video.',true));
-Configure::write('Blog.title',__('Blog',true));
+Configure::write('Blog.description',__d('blog','A blog (or web log) is a website, for each member, with regular entries of commentary, descriptions of events, or other material such as graphics or video.',true));
+Configure::write('Blog.title',__d('blog','Blog',true));
 Configure::write('Blog.type',array('other'));
 Configure::write('Blog.author','Ósmosis Team');
 ?>

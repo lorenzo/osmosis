@@ -1,12 +1,12 @@
 <div class="forum forums view">
 <h2>
-	<?php  __('Forum');?>
+	<?php  __d('forum','Forum');?>
 </h2>
 <div id="forum-head">
 	<p class="small-description">
 		<?php
 			printf(
-				__('You are currently viewing the topics in the <em>%s</em> course forum.', true),
+				__d('forum','You are currently viewing the topics in the <em>%s</em> course forum.', true),
 				$html->link(
 					$course['Course']['name'],
 					array('controller' => 'courses', 'action' => 'view', $course['Course']['id'], 'plugin' => '')
@@ -19,7 +19,7 @@
 		<li class="add">
 			<?php
 				echo $html->link(
-					__('Create a new Topic', true),
+					__d('forum','Create a new Topic', true),
 					array('controller' => 'topics', 'action' => 'add', 'course_id' => $course['Course']['id'])
 				);
 			?>
@@ -29,9 +29,9 @@
 <?php if (!empty($topics)):?>
 <table cellpadding="0" cellspacing="0" class="forum-list">
 	<tr>
-		<th><?php __('Status'); ?></th>
-		<th><?php __('Topic'); ?></th>
-		<th class="plain date"><?php __('Created'); ?></th>
+		<th><?php __d('forum','Status'); ?></th>
+		<th><?php __d('forum','Topic'); ?></th>
+		<th class="plain date"><?php __d('forum','Created'); ?></th>
 	</tr>
 	<?php
 		$i = 0;
@@ -54,7 +54,7 @@
 				<?php
 					if (!in_array($Osmosis['currentRole'],a('Member','Public','Attendee'))) :
 						echo '&mdash; '.$html->link(
-							__('edit', true),
+							__d('forum','edit', true),
 							array('controller' => 'topics', 'action' => 'edit', 'topic_id' =>  $topic['id'])
 						);
 				?>
@@ -62,9 +62,9 @@
 					endif;
 					if (in_array($Osmosis['currentRole'],a('Professor','Admin')))
 					echo ' &mdash; '.$html->link(
-						__('delete', true),
+						__d('forum','delete', true),
 						array('controller' => 'topics', 'action' => 'delete', $topic['id']),
-						array('confirm' => __('This will also delete all discussions on this topic', true))
+						array('confirm' => __d('forum','This will also delete all discussions on this topic', true))
 					);
 				?>
 			</td>
@@ -76,7 +76,7 @@
 		<li class="add">
 			<?php
 				echo $html->link(
-					__('Create a new Topic', true),
+					__d('forum','Create a new Topic', true),
 					array('controller' => 'topics', 'action' => 'add', 'course_id' => $course['Course']['id'])
 				);
 			?>

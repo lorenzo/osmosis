@@ -1,7 +1,7 @@
 <div id="document-description"><?php
 		$description = $lockerDocument['LockerDocument']['description'];
 		if (empty($description)) {
-			__('This file has no description');
+			__d('locker','This file has no description');
 		} else {
 			echo $description;
 		}
@@ -10,16 +10,16 @@
 <div class="actions">
 	<?php
 		echo $html->link(
-			__('Delete', true),
+			__d('locker','Delete', true),
 			array(
 				'controller'	=> 'documents',
 				'action'		=> 'delete',
 				$lockerDocument['LockerDocument']['id']
 			), array('class' => 'delete'),
-			sprintf(__('Please confirm the deletion of %s', true), $lockerDocument['LockerDocument']['name'])
+			sprintf(__d('locker','Please confirm the deletion of %s', true), $lockerDocument['LockerDocument']['name'])
 		);
 		echo $html->link(
-			__('Download', true),
+			__d('locker','Download', true),
 			array(
 				'controller'	=> 'documents',
 				'action'		=> 'download',

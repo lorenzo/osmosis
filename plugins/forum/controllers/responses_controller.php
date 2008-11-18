@@ -75,9 +75,9 @@ class ResponsesController extends ForumAppController {
 			$this->data['Response']['member_id'] = $this->Auth->user('id');
 			$this->data['Response']['content'] = $this->HtmlPurifier->purify($this->data['Response']['content']);
 			if ($this->Response->save($this->data)) {
-				$this->Session->setFlash(__('The Response has been saved', true), 'default', array('class' => 'success'));
+				$this->Session->setFlash(__d('forum','The Response has been saved', true), 'default', array('class' => 'success'));
 			} else {
-				$this->Session->setFlash(__('Please write a response', true), 'default', array('class' => 'info'));
+				$this->Session->setFlash(__d('forum','Please write a response', true), 'default', array('class' => 'info'));
 			}
 			$this->redirect(
 				array(
@@ -94,7 +94,7 @@ class ResponsesController extends ForumAppController {
 		if (!empty($this->data)) {
 			$this->_checkLocked();
 			if ($this->Response->save($this->data)) {
-				$this->Session->setFlash(__('The Response has been saved', true), 'default', array('class' => 'success'));
+				$this->Session->setFlash(__d('forum','The Response has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(
 					array(
 						'controller' => 'discussions',
@@ -103,7 +103,7 @@ class ResponsesController extends ForumAppController {
 					)
 				);
 			} else {
-				$this->Session->setFlash(__('The Response could not be saved. Please, try again', true), 'default', array('class' => 'error'));
+				$this->Session->setFlash(__d('forum','The Response could not be saved. Please, try again', true), 'default', array('class' => 'error'));
 			}
 		} else {
 			$this->_redirectIf(!isset($this->params['named']['response_id']));
@@ -123,7 +123,7 @@ class ResponsesController extends ForumAppController {
 			$redirect = array('controller' => 'topics', 'action' => 'view', 'discussion_id' => $this->Response->field('discussion_id'));
 		}
 		if ($locked) {
-			$this->Session->setFlash(__('The Discussion is locked', true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('forum','The Discussion is locked', true), 'default', array('class' => 'error'));
 			$this->redirect($redirect);
 		}
 	}

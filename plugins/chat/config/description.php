@@ -30,8 +30,8 @@
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 
-Configure::write('Chat.description',__('A chat is a person to person instant messaging application',true));
-Configure::write('Chat.title',__('Chat',true));
+Configure::write('Chat.description',__d('chat','A chat is a person to person instant messaging application',true));
+Configure::write('Chat.title',__d('chat','Chat',true));
 Configure::write('Chat.type',array('other'));
 Configure::write('Chat.author','Ósmosis Team');
 ?>

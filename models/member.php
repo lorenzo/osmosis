@@ -41,12 +41,12 @@ class Member extends AppModel {
 	var $validate = array(
 		'full_name' => array(
 			'required' => array(
-				'rule' => array('custom', '/.+/')
+				'rule' => array('notEmpty')
 			)
 		),
 		'email' => array(
 			'required' => array(
-				'rule' => array('custom', '/.+/'),
+				'rule' => array('notEmpty'),
 				'last' => true
 			),
 			'valid' => array(
@@ -55,7 +55,7 @@ class Member extends AppModel {
 		),
 		'username' =>  array(
 			'required' => array(
-				'rule' => array('custom', '/.+/'),
+				'rule' => array('notEmpty'),
 				'last' => true
 			),
 			'unique' => array(
@@ -72,7 +72,7 @@ class Member extends AppModel {
 		),
 		'password_confirm' => array(
 			'required' => array(
-				'rule' => array('custom', '/.+/'),
+				'rule' => array('notEmpty'),
 				'required' => false
 			)
 		),
@@ -106,6 +106,8 @@ class Member extends AppModel {
 			'unique'				=> true
 		)
 	);
+	
+	var $actsAs = array('Importable');
 
 	/**
 	 * Model contructor. Initializes the validation error messages with i18n
@@ -296,6 +298,27 @@ class Member extends AppModel {
 			return $this->data;
 		}
 		return true;
+	}
+	
+	function batchLoad($data,$returnSaved = false) {
+		$validateBackup = $this->validate;
+		$this->validate['password'] = array('required' => array('rule' => array('notEmpty')));
+		$this->setErrorMessage('password.required',__('Password can not be empty',true));
+		
+		$result = false;
+		if (isset($data[$this->alias]['file']['tmp_name']) && is_uploaded_file($data[$this->alias]['file']['tmp_name'])) {
+			$result = $this->importCSV($data[$this->alias]['file']['tmp_name'],$returnSaved);
+		}
+
+		$this->validate = $validateBackup;
+		return $result;
+	}
+	
+	function beforeImport($data) {
+		if (!isset($data[$this->alias]['password']) || empty($data[$this->alias]['password'])) {
+			$data[$this->alias]['password'] = Security::hash(Configure::read('Security.salt') .$data[$this->alias]['username']);
+		}
+		return $data;
 	}
 }
 ?>

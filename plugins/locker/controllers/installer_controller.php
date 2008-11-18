@@ -41,20 +41,20 @@ class InstallerController extends AppController {
 		
 		$tmp = LockerFolder::baseDirectory(null).uniqid().'.tmp';
 		if (!@touch($tmp) && @!unlink($tmp))
-			$this->Session->setFlash(__('The upload directory is not writable, could not install',true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('locker','The upload directory is not writable, could not install',true), 'default', array('class' => 'error'));
 		else if (!$this->InitAcl->loadPermissions('Locker'))
-			$this->Session->setFlash(__('An error occurred while setting plugin permissions',true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('locker','An error occurred while setting plugin permissions',true), 'default', array('class' => 'error'));
 			
 		elseif (!$this->Installer->createSchema('Locker'))
-			$this->Session->setFlash(__('An error occurred while installing the plugin',true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('locker','An error occurred while installing the plugin',true), 'default', array('class' => 'error'));
 			
 		elseif (!$this->Plugin->install('Locker')) 
-			$this->Session->setFlash(__('An error ocurred while installing the plugin. Try again', true), 'default', array('class' => 'error'));	
+			$this->Session->setFlash(__d('locker','An error ocurred while installing the plugin. Try again', true), 'default', array('class' => 'error'));	
 	}
 	
 	function _checkInstallation() {
 		if ($this->Plugin->find('count',array('conditions' => array('name' => 'Locker')))) {
-			$this->Session->setFlash(__('Plugin already Installed.', true), 'default', array('class' => 'info'));
+			$this->Session->setFlash(__d('locker','Plugin already Installed.', true), 'default', array('class' => 'info'));
 			$this->redirect(array('controller' => 'plugins','action' => 'index', 'plugin' => '', 'admin' => true));
 		}
 	}

@@ -1,0 +1,44 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  Revision: 513 /chat/config/description.php
+#  Revision: 510 /chat/controllers/messages_controller.php
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-11-14 17:47-0430\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /config/description.php:33
+msgid "A chat is a person to person instant messaging application"
+msgstr ""
+
+#: /config/description.php:34
+#: /views/elements/placeholders/course_sidebar.ctp:2
+msgid "Chat"
+msgstr ""
+
+#: /controllers/messages_controller.php:42
+msgid "The message could not be delivered"
+msgstr ""
+
+#: /views/elements/placeholders/course_sidebar.ctp:8
+msgid "me"
+msgstr ""
+
+#: /views/elements/placeholders/course_sidebar.ctp:9
+msgid "minimize"
+msgstr ""
+
+#: /views/elements/placeholders/course_sidebar.ctp:10
+msgid "close"
+msgstr ""
+

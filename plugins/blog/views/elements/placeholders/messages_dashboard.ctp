@@ -1,8 +1,8 @@
 <div id="blog-messages" class="boxed dashboard-element">
-	<strong class="title"><?php __('Blog Comments'); ?></strong>
+	<strong class="title"><?php __d('blog','Blog Comments'); ?></strong>
 	<p>
 		<?php
-			__('These are the last comments received in your posts');
+			__d('blog','These are the last comments received in your posts');
 		?>
 	</p>
 <?php
@@ -15,7 +15,7 @@ if (!empty($data)) :
 		<li>
 			<span class="author">
 				<?php
-					__('Comment by');
+					__d('blog','Comment by');
 				?>
 				<cite><?php echo $comment['Member']['full_name']; ?></cite>
 				<?php
@@ -40,13 +40,13 @@ if (!empty($data)) :
 	</ul>
 <?php
 else :
-	echo '<p>' . __('No comments in your blog', true) . '</p>';
+	echo '<p>' . __d('blog','No comments in your blog', true) . '</p>';
 endif;
 ?>
 	<p class="go">
 		<?php
 			echo $html->link(
-				__('Go to your blog', true),
+				__d('blog','Go to your blog', true),
 				array(
 					'controller' => 'blogs',
 					'action'	=> 'view',

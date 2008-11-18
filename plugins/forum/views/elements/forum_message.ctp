@@ -1,7 +1,7 @@
 <p class="author">
 	<?php
 		printf(
-			__('By %s', true),
+			__d('forum','By %s', true),
 			$html->link(
 				$author['full_name'],
 				array('controller' => 'members', 'action' => 'view', $author['id'], 'plugin' => '')
@@ -16,9 +16,9 @@
 		?>
 		<span class="last date">
 			<?php
-				printf(__('Posted: %s', true), $message['created']);
+				printf(__d('forum','Posted: %s', true), $message['created']);
 				if ($message['created']!=$message['modified']) {
-					printf(' // ' . __('Modified: %s', true), $message['modified']);
+					printf(' // ' . __d('forum','Modified: %s', true), $message['modified']);
 				}
 			?>
 		</span>
@@ -31,7 +31,7 @@
 		<p class="actions">
 			<?php
 				echo $html->link(
-					__('Edit', true),
+					__d('forum','Edit', true),
 					array(
 						'controller' => $controller,
 						'action' => 'edit',

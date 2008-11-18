@@ -29,8 +29,8 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-Configure::write('Locker.description',__('A file manager and sharing tool for each member.',true));
-Configure::write('Locker.title', __('Locker', true));
+Configure::write('Locker.description',__d('locker','A file manager and sharing tool for each member.',true));
+Configure::write('Locker.title', __d('locker','Locker', true));
 Configure::write('Locker.type', array('other'));
 Configure::write('Locker.author','Ósmosis Team');
 ?>

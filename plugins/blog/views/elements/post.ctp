@@ -13,10 +13,10 @@
 	if ($post['member_id'] == $Osmosis['active_member']['id']) :
 ?>
 	<li class="delete">
-		<?php echo $html->link(__('Delete', true), array('controller'=>'posts', 'action' => 'delete', $post['id'])); ?>		
+		<?php echo $html->link(__d('blog','Delete', true), array('controller'=>'posts', 'action' => 'delete', $post['id'])); ?>		
 	</li>
 	<li class="edit">
-		<?php echo $html->link(__('Edit', true), array('controller'=>'posts', 'action' => 'edit', $post['id'])); ?>		
+		<?php echo $html->link(__d('blog','Edit', true), array('controller'=>'posts', 'action' => 'edit', $post['id'])); ?>		
 	</li>
 <?php
 	endif;
@@ -27,7 +27,7 @@ if (!$single) :
 	<li class="info comments">
 		<?php
 			echo $html->link(
-				__('Comments', true),
+				__d('blog','Comments', true),
 				array('controller'=>'posts', 'action' => 'view', $post['slug'], '#' => 'comments')
 			);
 		?>		

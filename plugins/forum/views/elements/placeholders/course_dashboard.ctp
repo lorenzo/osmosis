@@ -1,5 +1,5 @@
 <div class="boxed dashboard-element">
-	<strong class="title"><?php echo $html->link(__('Forum',true),array(
+	<strong class="title"><?php echo $html->link(__d('forum','Forum',true),array(
 		'plugin' => 'forum', 'controller' => 'topics', 'action' => 'index', 'course_id' => $course['Course']['id'])); ?>
 	</strong>
 	<?php
@@ -21,7 +21,7 @@
 								'course_id' => $course['Course']['id']
 								));
 		?>
-							<li><?php __(sprintf('%s new responses in discussion %s',count($all),$link))?></li>
+							<li><?php sprintf(__d('forum','%s new responses in discussion %s'),count($all),$link)?></li>
 		<?php
 						endforeach;
 					endforeach;
@@ -37,7 +37,7 @@
 						$last = Set::extract($discussion,'{n}.ModelLog.time');
 						$last = array_pop($last);
 		?>
-						<li><?php __(sprintf('%s last modified %s',$link,$time->timeAgoInWords($last)))?></li>
+						<li><?php sprintf(__d('forum','%s last modified %s'),$link,$time->timeAgoInWords($last))?></li>
 		<?php
 					endforeach;
 				elseif ($model == 'Topic') :
@@ -52,7 +52,7 @@
 						$last = Set::extract($topic,'{n}.ModelLog.time');
 						$last = array_pop($last);
 		?>
-						<li><?php __(sprintf('%s last modified %s',$link,$time->timeAgoInWords($last)))?></li>
+						<li><?php sprintf(__d('forum','%s last modified %s'),$link,$time->timeAgoInWords($last))?></li>
 		<?php
 					endforeach;
 				endif;
@@ -61,7 +61,7 @@
 		</ul>
 	<?php
 	else :
-		echo '<p>' . __('No forum updates yet, be the firts one!', true) . '</p>';
+		echo '<p>' . __d('forum','No forum updates yet, be the firts one!', true) . '</p>';
 	endif;
 	?>
 </div>

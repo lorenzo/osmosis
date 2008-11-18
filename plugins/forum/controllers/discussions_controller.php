@@ -82,10 +82,10 @@ class DiscussionsController extends ForumAppController {
 			$this->Discussion->create();
 			$this->data['Discussion']['member_id'] = $this->Auth->user('id');
 			if ($this->Discussion->save($this->data)) {
-				$this->Session->setFlash(__('The Discussion has been saved', true), 'default', array('class' => 'success'));
+				$this->Session->setFlash(__d('forum','The Discussion has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(array('controller' => 'topics', 'action'=>'view', 'topic_id' => $this->data['Discussion']['topic_id']));
 			} else {
-				$this->Session->setFlash(__('The Discussion could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
+				$this->Session->setFlash(__d('forum','The Discussion could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
 			}
 		} else {
 			$this->_redirectIf(!isset($this->params['named']['topic_id']));
@@ -98,10 +98,10 @@ class DiscussionsController extends ForumAppController {
 			$this->_checkLocked();
 			$this->data['Discussion']['member_id'] = $this->Auth->user('id');
 			if ($this->Discussion->save($this->data)) {
-				$this->Session->setFlash(__('The Discussion has been saved', true), 'default', array('class' => 'success'));
+				$this->Session->setFlash(__d('forum','The Discussion has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(array('controller' => 'discussions', 'action'=>'view', 'discussion_id' => $this->Discussion->field('id')));
 			} else {
-				$this->Session->setFlash(__('The Discussion could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
+				$this->Session->setFlash(__d('forum','The Discussion could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
 			}
 		} else {
 			$this->_redirectIf(!isset($this->params['named']['discussion_id']));
@@ -117,12 +117,12 @@ class DiscussionsController extends ForumAppController {
 	
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Discussion', true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('forum','Invalid id for Discussion', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		$topic_id = $this->Discussion->field('topic_id', $id);
 		if ($this->Discussion->del($id)) {
-			$this->Session->setFlash(__('Topic deleted', true), 'default', array('class' => 'success'));
+			$this->Session->setFlash(__d('forum','Topic deleted', true), 'default', array('class' => 'success'));
 			$this->redirect(array('controller' => 'topics', 'action' => 'index', 'topic_id' => $topic_id));
 		}
 	}
@@ -137,7 +137,7 @@ class DiscussionsController extends ForumAppController {
 			$redirect = array('controller' => 'discussions', 'action' => 'view', 'discussions_id' => $this->data['Discussion']['id']);
 		}
 		if ($locked) {
-			$this->Session->setFlash(__('The Topic or Discussion is locked', true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('forum','The Topic or Discussion is locked', true), 'default', array('class' => 'error'));
 			$this->redirect($redirect);
 		}
 	}

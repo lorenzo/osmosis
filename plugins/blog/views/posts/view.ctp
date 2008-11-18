@@ -1,13 +1,13 @@
 <h1>
 	<?php
-		$title = sprintf(__('%s\' Blog', true), $post['Blog']['Member']['full_name']);
+		$title = sprintf(__d('blog','%s\' Blog', true), $post['Blog']['Member']['full_name']);
 		echo $html->link($title, array('controller'=> 'blogs', 'action'=>'view', $post['Post']['blog_id']));
 	?>
 </h1>
 <?php
 	echo $this->element('post', array('post' => $post['Post'], 'single' => true));
 ?>
-<h3 id="comments"><?php __('Comments');?></h3>
+<h3 id="comments"><?php __d('blog','Comments');?></h3>
 <div class="comments">
 <?php
 	if (!empty($post['Comment'])) :
@@ -33,7 +33,7 @@
 					)
 				);
 			?>
-		</cite> <?php echo sprintf(__('wrote %s:',true),$time->timeAgoInWords($comment['created'])); ?>
+		</cite> <?php echo sprintf(__d('blog','wrote %s:',true),$time->timeAgoInWords($comment['created'])); ?>
 		<?php
 			echo $html->link(
 				'#',
@@ -56,7 +56,7 @@
 	endforeach;
 	else :
 ?>
-	<p><?php __('No comments yet'); ?></p>
+	<p><?php __d('blog','No comments yet'); ?></p>
 <?php
 	endif;
 ?>

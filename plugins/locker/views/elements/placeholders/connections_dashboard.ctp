@@ -1,12 +1,12 @@
 <div id="actions" class="boxed dashboard-element">
-	<strong class="title"><?php __('Locker'); ?></strong>
+	<strong class="title"><?php __d('locker','Locker'); ?></strong>
 	<div id="locker-contents" class="mini">
 		<p>
-			<?php __('These are the Documents sent to you by other members.'); ?> 
+			<?php __d('locker','These are the Documents sent to you by other members.'); ?> 
 			<?php
 				if (isset($data['LockerFolder']['id'])) {
 					echo $html->link(
-						__('Go to your dropbox', true),
+						__d('locker','Go to your dropbox', true),
 						array(
 							'plugin'		=> 'locker',
 							'controller'	=> 'folders',
@@ -41,7 +41,7 @@
 		<p class='go'>
 			<?php
 				echo $html->link(
-					__('Go to your locker', true),
+					__d('locker','Go to your locker', true),
 					array(
 						'plugin'		=> 'locker',
 						'controller'	=> 'folders',

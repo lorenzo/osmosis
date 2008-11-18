@@ -64,7 +64,7 @@ class DocumentsController extends LockerAppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid document', true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('locker','Invalid document', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		$this->LockerDocument->contain('Member');
@@ -81,10 +81,10 @@ class DocumentsController extends LockerAppController {
 		if (!empty($this->data)) {
 			$this->LockerDocument->create();
 			if ($this->__saveFile()) {
-				$this->Session->setFlash(__('The document has been saved', true), 'default', array('class' => 'success'));
+				$this->Session->setFlash(__d('locker','The document has been saved', true), 'default', array('class' => 'success'));
 				$this->redirect(array('controller' => 'folders', 'action'=>'view', $this->data['LockerDocument']['folder_id']));
 			} else {
-				$this->Session->setFlash(__('The LockerDocument could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
+				$this->Session->setFlash(__d('locker','The LockerDocument could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
 				$this->redirect($this->referer());
 			}
 		}
@@ -116,16 +116,16 @@ class DocumentsController extends LockerAppController {
 	
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid LockerDocument', true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('locker','Invalid LockerDocument', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->LockerDocument->save($this->data)) {
-				$this->Session->setFlash(__('The document has been saved', true), 'default', array('class' => 'success'));
+				$this->Session->setFlash(__d('locker','The document has been saved', true), 'default', array('class' => 'success'));
 				$folder_id = $this->LockerDocument->field('folder_id');
 				$this->redirect(array('controller' => 'folders', 'action'=>'view', $folder_id));
 			} else {
-				$this->Session->setFlash(__('The document could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
+				$this->Session->setFlash(__d('locker','The document could not be saved. Please, try again.', true), 'default', array('class' => 'error'));
 			}
 		}
 		if (empty($this->data)) {
@@ -135,24 +135,24 @@ class DocumentsController extends LockerAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for document', true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('locker','Invalid id for document', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->LockerDocument->del($id)) {
-			$this->Session->setFlash(__('Document deleted', true), 'default', array('class' => 'success'));
+			$this->Session->setFlash(__d('locker','Document deleted', true), 'default', array('class' => 'success'));
 			$this->redirect(array('action'=>'index'));
 		}
 	}
 	
 	function download($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Document', true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('locker','Invalid Document', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		$this->LockerDocument->recursive = false;
 		$this->LockerDocument->id = $id;
 		if (!$this->LockerDocument->exists()) {
-			$this->Session->setFlash(__('Invalid Document', true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('locker','Invalid Document', true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		$this->view = 'Locker.Document';
@@ -198,10 +198,10 @@ class DocumentsController extends LockerAppController {
 			$dropbox = $this->LockerDocument->Folder->field('id', $conditions);
 
 			if ($this->__saveFile(null, $dropbox, $username)) {
-				$this->Session->setFlash(__('The file was dropped correctly', true));
+				$this->Session->setFlash(__d('locker','The file was dropped correctly', true));
 				$this->redirect(array('controller' => 'folders', 'action'=>'view', $folder_id));
 			} else {
-				$this->Session->setFlash(__('The file could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__d('locker','The file could not be saved. Please, try again.', true));
 				$this->redirect($this->referer());
 			}
 		}

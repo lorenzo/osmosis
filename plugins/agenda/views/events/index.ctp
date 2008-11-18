@@ -2,7 +2,7 @@
 	<li class="add">
 		<?php
 			echo $html->link(
-				__('Create a new Event', true),
+				__d('agenda','Create a new Event', true),
 				array('controller' => 'events', 'action' => 'add', 'course_id' => $course['Course']['id'])
 			);
 		?>
@@ -17,7 +17,7 @@
 ?>
 
 <table class="calendar" cellspacing="0">
-<?php echo $html->tableHeaders(array(__('Mon',true),__('Tue',true),__('Wed',true),__('Thu',true),__('Fri',true),__('Sat',true),__('Sun',true)));?>
+<?php echo $html->tableHeaders(array(__d('agenda','Mon',true),__('Tue',true),__('Wed',true),__('Thu',true),__('Fri',true),__('Sat',true),__('Sun',true)));?>
 
 <?php /*** WEEK ONE ***/ ?>
 <tr>

@@ -1,7 +1,7 @@
 <div class="events form">
 <?php echo $form->create('Event', array('url' => array('course_id' => $course_id)));?>
 	<fieldset>
- 		<legend><?php __('Add Event');?></legend>
+ 		<legend><?php __d('agenda','Add Event');?></legend>
 	<?php
 		echo $form->input('date',array('type' => 'date'));
 		echo $form->input('location');
@@ -11,5 +11,5 @@
 		echo $form->input('course_id',array('type' => 'hidden', 'value' => $course_id));
 	?>
 	</fieldset>
-<?php echo $form->end(__('Add Event',true));?>
+<?php echo $form->end(__d('agenda','Add Event',true));?>
 </div>

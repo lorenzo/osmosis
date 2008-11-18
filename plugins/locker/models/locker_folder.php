@@ -143,16 +143,16 @@ class LockerFolder extends LockerAppModel {
 	 */
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
-			'name.dropbox', __('The Dropbox cannot be modified', true)
+			'name.dropbox', __d('locker','The Dropbox cannot be modified', true)
 		);
 		$this->setErrorMessage(
-			'name.required', __('Folders need a name, please write one',true)
+			'name.required', __d('locker','Folders need a name, please write one',true)
 		);
 		$this->setErrorMessage(
-			'name.max', __('Folder names have a maximum length 20 characters',true)
+			'name.max', __d('locker','Folder names have a maximum length 20 characters',true)
 		);
 		$this->setErrorMessage(
-			'name.unique', __('This Folder name is repeated',true)
+			'name.unique', __d('locker','This Folder name is repeated',true)
 		);
 		parent::__construct($id,$table,$ds);
 	}

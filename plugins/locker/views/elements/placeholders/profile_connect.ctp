@@ -1,7 +1,7 @@
 <li class="locker">
 	<?php
 		echo $html->link(
-			__('Locker', true),
+			__d('locker','Locker', true),
 			array(
 				'plugin'		=>'locker',
 				'controller'	=> 'folders',

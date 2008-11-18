@@ -1,7 +1,7 @@
 <li class="blog">
 	<?php
 		echo $html->link(
-			__('Blog', true),
+			__d('blog','Blog', true),
 			array(
 				'plugin'		=>'blog',
 				'controller'	=> 'blogs',

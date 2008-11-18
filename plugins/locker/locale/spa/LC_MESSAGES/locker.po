@@ -1,0 +1,270 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Locker Plugin\n"
+"POT-Creation-Date: 2008-11-17 13:58-0430\n"
+"PO-Revision-Date: \n"
+"Last-Translator: José Lorenzo Rodríguez <jose.zap at gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: Venezuela\n"
+
+#: /config/description.php:32
+msgid "A file manager and sharing tool for each member."
+msgstr "Permite, a cada miembro almacenar, organizar y compartir archivos."
+
+#: /config/description.php:33
+#: /views/elements/placeholders/connections_dashboard.ctp:2
+#: /views/elements/placeholders/profile_connect.ctp:4
+msgid "Locker"
+msgstr "Casillero"
+
+#: /controllers/documents_controller.php:67
+msgid "Invalid document"
+msgstr "Documento no válido"
+
+#: /controllers/documents_controller.php:84;124
+msgid "The document has been saved"
+msgstr "El documento se ha guardado"
+
+#: /controllers/documents_controller.php:87
+msgid "The LockerDocument could not be saved. Please, try again."
+msgstr "El documento no pudo ser guardado, intente de nuevo"
+
+#: /controllers/documents_controller.php:119
+msgid "Invalid LockerDocument"
+msgstr "Documento no válido"
+
+#: /controllers/documents_controller.php:128
+msgid "The document could not be saved. Please, try again."
+msgstr "El documento no pudo ser guardado, intente de nuevo."
+
+#: /controllers/documents_controller.php:138
+msgid "Invalid id for document"
+msgstr "Identificador de documento no válido."
+
+#: /controllers/documents_controller.php:142
+msgid "Document deleted"
+msgstr "Documento eliminado."
+
+#: /controllers/documents_controller.php:149;155
+msgid "Invalid Document"
+msgstr "Documento no válido."
+
+#: /controllers/documents_controller.php:201
+msgid "The file was dropped correctly"
+msgstr "El archivo fue entregado correctamente."
+
+#: /controllers/documents_controller.php:204
+msgid "The file could not be saved. Please, try again."
+msgstr "El archivo no pudo ser guardado, intente de nuevo."
+
+#: /controllers/folders_controller.php:66
+msgid "Invalid Locker"
+msgstr "Casillero no válido"
+
+#: /controllers/folders_controller.php:90;107
+msgid "The folder has been saved"
+msgstr "La carpeta ha sido guardada."
+
+#: /controllers/folders_controller.php:102
+msgid "Invalid folder"
+msgstr "Carpeta no válida.."
+
+#: /controllers/folders_controller.php:110
+msgid "The LockerFolder could not be saved. Please, try again."
+msgstr "La carpeta no pudo ser guardada, intente de nuevo."
+
+#: /controllers/folders_controller.php:122
+msgid "Invalid id for folder"
+msgstr "Identificador de carpeta no válido"
+
+#: /controllers/folders_controller.php:126
+msgid "Folder deleted"
+msgstr "Carpeta eliminada"
+
+#: /controllers/folders_controller.php:140
+#: /views/documents/add.ctp:9
+msgid "Folder"
+msgstr "Carpeta"
+
+#: /controllers/folders_controller.php:143
+msgid "Document"
+msgstr "Docuemento"
+
+#: /controllers/folders_controller.php:147
+msgid "The %s was moved successfully"
+msgstr "La carpeta fue movida correctamente."
+
+#: /controllers/folders_controller.php:149
+msgid "The %s could not be moved"
+msgstr "La carpeta no pudo ser movida"
+
+#: /controllers/folders_controller.php:153
+msgid "Invalid Access"
+msgstr "Acceso no válido"
+
+#: /controllers/installer_controller.php:44
+msgid "The upload directory is not writable, could not install"
+msgstr "El directorio de carga de archivos no pudo ser creado, no es posible instalar."
+
+#: /controllers/installer_controller.php:46
+msgid "An error occurred while setting plugin permissions"
+msgstr "Ha ocurrido un error en la creación de los permisos"
+
+#: /controllers/installer_controller.php:49
+msgid "An error occurred while installing the plugin"
+msgstr "Ha ocurrido un error al instalar el plugin"
+
+#: /controllers/installer_controller.php:52
+msgid "An error ocurred while installing the plugin. Try again"
+msgstr "Ha ocurrido un error al instalar el plugin, intente de nuevo."
+
+#: /controllers/installer_controller.php:57
+msgid "Plugin already Installed."
+msgstr "Este plugin ya fue instalado"
+
+#: /models/locker_document.php:101
+msgid "Please write a name for this file"
+msgstr "Por favor escriba un nombre para este archivo"
+
+#: /models/locker_document.php:104
+msgid "Please limit the name to a maximum of 30 characters"
+msgstr "Por favor limite el nombre a un máximo de 30 caracteres"
+
+#: /models/locker_document.php:107
+msgid "The file is incorrect"
+msgstr "El archivo es incorrecto"
+
+#: /models/locker_document.php:110
+msgid "The Member ID is invalid"
+msgstr "El identificador de Miembro no es válido"
+
+#: /models/locker_folder.php:146
+msgid "The Dropbox cannot be modified"
+msgstr "El Buzón de Entrega no puede ser modificado"
+
+#: /models/locker_folder.php:149
+msgid "Folders need a name, please write one"
+msgstr "Las carpetas necesitan un nombre, por favor escriba uno."
+
+#: /models/locker_folder.php:152
+msgid "Folder names have a maximum length 20 characters"
+msgstr "Los nombres de carpeta tienen un máximo de 20 caracteres"
+
+#: /models/locker_folder.php:155
+msgid "This Folder name is repeated"
+msgstr "El nombre de la carpeta está repetido"
+
+#: /views/documents/add.ctp:4
+msgid "Add File"
+msgstr "Agregar Archivo"
+
+#: /views/documents/add.ctp:7
+msgid "File"
+msgstr "Archivo"
+
+#: /views/documents/add.ctp:8
+msgid "Description"
+msgstr "Descripción"
+
+#: /views/documents/add.ctp:12
+#: /views/documents/edit.ctp:11
+#: /views/folders/edit.ctp:10
+msgid "Save"
+msgstr "Guardar"
+
+#: /views/documents/edit.ctp:4
+msgid "Edit Document Info"
+msgstr "Editar información de Documetno"
+
+#: /views/documents/view.ctp:17
+#: /views/documents/ajax/view.ctp:4
+msgid "This file has no description"
+msgstr "El archivo no tiene descripción"
+
+#: /views/documents/view.ctp:29
+msgid "Edit"
+msgstr "Editar"
+
+#: /views/documents/view.ctp:41
+#: /views/documents/ajax/view.ctp:13
+msgid "Delete"
+msgstr "Eliminar"
+
+#: /views/documents/view.ctp:47
+#: /views/documents/ajax/view.ctp:19
+msgid "Please confirm the deletion of %s"
+msgstr "Por favor confirme la eliminación de %s"
+
+#: /views/documents/view.ctp:57
+#: /views/documents/ajax/view.ctp:22
+msgid "Download"
+msgstr "Descargar"
+
+#: /views/elements/file_info.ctp:12
+msgid "Dropbox"
+msgstr "Buzón de Entrega"
+
+#: /views/elements/folder_actions.ctp:10
+msgid "Add Folder:"
+msgstr "Agregar Carpeta:"
+
+#: /views/elements/folder_actions.ctp:12
+msgid "Create Folder"
+msgstr "Crear Carpeta"
+
+#: /views/elements/folder_actions.ctp:18
+msgid "Upload File:"
+msgstr "Subir Archivo:"
+
+#: /views/elements/folder_actions.ctp:20;34
+msgid "Upload File"
+msgstr "Subir Archivo"
+
+#: /views/elements/folder_actions.ctp:32
+msgid "Leave a File to this user:"
+msgstr "Dejar un archivo a este usuario:"
+
+#: /views/elements/folder_contents.ctp:24
+msgid "This folder is empty"
+msgstr "La carpeta está vacía"
+
+#: /views/elements/placeholders/connections_dashboard.ctp:5
+msgid "These are the Documents sent to you by other members."
+msgstr "Estos son los Documentos que te han enviado otros miembros."
+
+#: /views/elements/placeholders/connections_dashboard.ctp:9
+msgid "Go to your dropbox"
+msgstr "Ir a tu buzón de entrega"
+
+#: /views/elements/placeholders/connections_dashboard.ctp:44
+msgid "Go to your locker"
+msgstr "Ir a tu casillero"
+
+#: /views/folders/edit.ctp:4
+msgid "Change Folder Name"
+msgstr "Cambiar el nombre de carpeta"
+
+#: /views/folders/view.ctp:2
+msgid "%s's Locker"
+msgstr "Casillero de %s"
+
+#: /views/folders/view.ctp:28
+msgid "Updating..."
+msgstr "Actualizando..."
+
+#: /views/folders/view.ctp:29
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: /views/folders/view.ctp:30
+msgid "OK"
+msgstr "OK"
+
+#: /views/folders/ajax/view.ctp:4
+msgid "View this Folder's Content"
+msgstr "Ver contenido de esta carpeta"
+

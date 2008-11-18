@@ -89,7 +89,7 @@ class Response extends AppModel {
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
 			'content.required',
-			__('Please write a response',true)
+			__d('forum','Please write a response',true)
 		);
 		parent::__construct($id, $table, $ds);
 	}

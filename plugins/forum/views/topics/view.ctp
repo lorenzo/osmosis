@@ -1,7 +1,7 @@
 <div class="forum topics view">
 <h2>
 	<?php
-		__('Topic:');
+		__d('forum','Topic:');
 	 	echo ' ' . $topic['Topic']['name'];
 	?>
 </h2>
@@ -9,7 +9,7 @@
 <p class="small-description">
 	<?php
 		printf(
-			__('You are currently viewing the discussions started around this topic <strong>"%s"</strong> inside the <em>%s</em> course forum.', true),
+			__d('forum','You are currently viewing the discussions started around this topic <strong>"%s"</strong> inside the <em>%s</em> course forum.', true),
 			$topic['Topic']['name'],
 			$html->link(
 				$topic['Course']['name'],
@@ -22,7 +22,7 @@
 	<li class="add">
 		<?php
 			echo  $html->link(
-				__('Start a discussion', true),
+				__d('forum','Start a discussion', true),
 				array('controller'=> 'discussions','action'=>'add','topic_id' => $topic['Topic']['id'])
 			);
 		?>
@@ -34,11 +34,11 @@
 ?>
 	<table cellpadding="0" cellspacing="0" class="forum-list">
 	<tr>
-		<th><?php __('Status'); ?></th>
-		<th><?php __('Title'); ?> / <?php __('Author &mdash; Created'); ?> </th>
-		<th class="date"><?php __('Last Response'); ?></th>
-		<th class="number"><?php __('Responses'); ?></th>
-		<th class="number"><?php __('Views'); ?></th>
+		<th><?php __d('forum','Status'); ?></th>
+		<th><?php __d('forum','Title'); ?> / <?php __('Author &mdash; Created'); ?> </th>
+		<th class="date"><?php __d('forum','Last Response'); ?></th>
+		<th class="number"><?php __d('forum','Responses'); ?></th>
+		<th class="number"><?php __d('forum','Views'); ?></th>
 	</tr>
 	<?php
 		$i = 0;
@@ -65,7 +65,7 @@
 				?> 	<?php
 						if (!in_array($Osmosis['currentRole'],a('Member','Public','Attendee'))) :
 							echo '&mdash; '.$html->link(
-								__('edit', true),
+								__d('forum','edit', true),
 								array('controller' => 'discussions', 'action' => 'edit', 'discussion_id' =>  $discussion['id'])
 							);
 					?>
@@ -73,9 +73,9 @@
 						endif;
 						if (in_array($Osmosis['currentRole'],a('Professor','Admin')))
 						echo ' &mdash; '.$html->link(
-							__('delete', true),
+							__d('forum','delete', true),
 							array('controller' => 'discussions', 'action' => 'delete', $discussion['id']),
-							array('confirm' => __('This will also delete all responses on this discussion', true))
+							array('confirm' => __d('forum','This will also delete all responses on this discussion', true))
 						);
 					?>
 				<br />
@@ -89,7 +89,7 @@
 						$last_response = $last_response[0];
 						echo $time->nice($last_response['created']) . '<br />';
 						printf(
-							__('By: %s', true),
+							__d('forum','By: %s', true),
 							$html->link(
 								$last_response['Member']['full_name'],
 								array(
@@ -101,7 +101,7 @@
 							)
 						);
 					 } else {
-						__('No responses yet');
+						__d('forum','No responses yet');
 					}
 				?>
 			</td>
@@ -113,7 +113,7 @@
 <?php
 	else :
 ?>
-	<p><?php __('No discussions registered yet'); ?>
+	<p><?php __d('forum','No discussions registered yet'); ?>
 <?php
 	endif;
 ?>
@@ -121,7 +121,7 @@
 	<li class="add">
 		<?php
 			echo  $html->link(
-				__('Start a discussion', true),
+				__d('forum','Start a discussion', true),
 				array('controller'=> 'discussions','action'=>'add','topic_id' => $topic['Topic']['id'])
 			);
 		?>

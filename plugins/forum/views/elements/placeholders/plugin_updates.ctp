@@ -1,7 +1,7 @@
 <div id="forum-updates">
 <strong class="title"><?php 
 echo $html->link(
-	__('Forum',true),array(
+	__d('forum','Forum',true),array(
 		'plugin' => 'forum', 
 		'controller' => 'topics',
 		'action' => 'index',

@@ -1,0 +1,493 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Forum Plugin\n"
+"POT-Creation-Date: 2008-11-14 18:02-0430\n"
+"PO-Revision-Date: \n"
+"Last-Translator: José Lorenzo Rodríguez <jose.zap at gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: Venezuela\n"
+
+#: /config/description.php:32
+msgid "A forum is an application that allows people to discuss in various topics."
+msgstr "Un foro es una aplicación que permite a las personas discutir sobre varios temas de interés. "
+
+#: /config/description.php:33
+msgid "Forums"
+msgstr "Foros"
+
+#: /controllers/discussions_controller.php:85;101
+msgid "The Discussion has been saved"
+msgstr "La Discusión ha sido guardada"
+
+#: /controllers/discussions_controller.php:88;104
+msgid "The Discussion could not be saved. Please, try again."
+msgstr "La Discusión no pudo ser guardada, intente de nuevo."
+
+#: /controllers/discussions_controller.php:120
+msgid "Invalid id for Discussion"
+msgstr "Identificador de Discusión no válido"
+
+#: /controllers/discussions_controller.php:125
+#: /controllers/topics_controller.php:104
+msgid "Topic deleted"
+msgstr "Tópico eliminado"
+
+#: /controllers/discussions_controller.php:140
+msgid "The Topic or Discussion is locked"
+msgstr "El Tópico o Discusión está bloquedo"
+
+#: /controllers/responses_controller.php:78;97
+msgid "The Response has been saved"
+msgstr "La Respuesta ha sido guardada"
+
+#: /controllers/responses_controller.php:80
+#: /models/response.php:92
+msgid "Please write a response"
+msgstr "Por favor escriba una respuesta"
+
+#: /controllers/responses_controller.php:106
+msgid "The Response could not be saved. Please, try again"
+msgstr "La Respuesta no pudo ser guardada, intente de nuevo"
+
+#: /controllers/responses_controller.php:126
+msgid "The Discussion is locked"
+msgstr "La Discusión está bloqueada"
+
+#: /controllers/topics_controller.php:48;57
+msgid "Invalid Topic"
+msgstr "Tópico no válido"
+
+#: /controllers/topics_controller.php:67;80
+msgid "The Topic has been saved"
+msgstr "El tópico ha sido guardado"
+
+#: /controllers/topics_controller.php:70;89
+msgid "The Topic could not be saved. Please, try again."
+msgstr "El Tópico no pudo ser guardado, intente de nuevo."
+
+#: /controllers/topics_controller.php:99
+msgid "Invalid id for Topic"
+msgstr "Identificador de Tópico no válido"
+
+#: /models/discussion.php:120
+msgid "Please set a title"
+msgstr "Por favor, escribe un título"
+
+#: /models/discussion.php:123
+msgid "Incorrect status"
+msgstr "Estado incorrecto"
+
+#: /models/topic.php:114
+msgid "The name can not be empty"
+msgstr "El nombre no puede dejarse vacío"
+
+#: /views/discussions/add.ctp:4
+#: /views/subjects/add.ctp:23
+#: /views/subjects/edit.ctp:25
+#: /views/subjects/index.ctp:72
+#: /views/subjects/view.ctp:52;97
+msgid "New Discussion"
+msgstr "Nueva Discusión"
+
+#: /views/discussions/add.ctp:11
+#: /views/discussions/edit.ctp:22
+msgid "Keep this discussion on top"
+msgstr "Mantener esta discusión sobre el resto"
+
+#: /views/discussions/add.ctp:14
+msgid "Create Discussion"
+msgstr "Crear Discusión"
+
+#: /views/discussions/edit.ctp:4
+msgid "Edit Discussion"
+msgstr "Editar Discusión"
+
+#: /views/discussions/edit.ctp:16
+msgid "Lock this discussion"
+msgstr "Bloquear esta Discusión"
+
+#: /views/discussions/edit.ctp:17
+msgid "(Nobody will be able to reply anymore. Cannot be undone.)"
+msgstr "(Nadie más podrá responder. No puede deshacerse esta acción)"
+
+#: /views/discussions/edit.ctp:26
+#: /views/elements/quick_response.ctp:10
+#: /views/responses/edit.ctp:10
+#: /views/subjects/add.ctp:13
+#: /views/subjects/edit.ctp:14
+#: /views/topics/edit.ctp:23
+msgid "Submit"
+msgstr "Enviar"
+
+#: /views/discussions/view.ctp:4
+msgid "Discussion:"
+msgstr "Discusión:"
+
+#: /views/discussions/view.ctp:11
+msgid "You are currently viewing a discussion inside the <em>%s</em> topic."
+msgstr "Estás viendo la discusión dentro del tópico <em>%s</em>."
+
+#: /views/discussions/view.ctp:37
+msgid "This Discussion is locked, you cannot reply."
+msgstr "La Discusión está bloqueada, no puedes responder."
+
+#: /views/elements/Discussion.updates.ctp:14
+#: /views/elements/Topic.updates.ctp:14
+msgid "others..."
+msgstr "otros..."
+
+#: /views/elements/Discussion.updates.ctp:20
+#: /views/elements/Topic.updates.ctp:20
+msgid " has created"
+msgstr "ha creado"
+
+#: /views/elements/Discussion.updates.ctp:20
+#: /views/elements/Topic.updates.ctp:20
+msgid "has modified"
+msgstr "ha modificado"
+
+#: /views/elements/Discussion.updates.ctp:22
+#: /views/elements/Topic.updates.ctp:22
+msgid "have modified"
+msgstr "han modificado"
+
+#: /views/elements/Discussion.updates.ctp:25
+#: /views/elements/Topic.updates.ctp:25
+msgid "and"
+msgstr "y"
+
+#: /views/elements/Discussion.updates.ctp:28
+msgid ":member_links :action the discussion <em>:discussion_name</em>."
+msgstr ":member_links :action la discusión <em>:discussion_name</em>."
+
+#: /views/elements/Discussion.updates.ctp:31
+msgid "created"
+msgstr "creado"
+
+#: /views/elements/Discussion.updates.ctp:31
+msgid "modified"
+msgstr "modificado"
+
+#: /views/elements/Response.updates.ctp:9
+msgid "response"
+msgstr "respuesta"
+
+#: /views/elements/Response.updates.ctp:18
+msgid "read :pronoun :response"
+msgstr "lee :pronoun :response"
+
+#: /views/elements/Response.updates.ctp:20
+msgid "his"
+msgstr "su"
+
+#: /views/elements/Response.updates.ctp:20
+msgid "her"
+msgstr "su"
+
+#: /views/elements/Response.updates.ctp:20
+msgid "the"
+msgstr "el"
+
+#: /views/elements/Response.updates.ctp:26
+msgid "and others..."
+msgstr "y otros..."
+
+#: /views/elements/Response.updates.ctp:34
+msgid "The following classmates wrote a response on the discussion <em>discussion_name</em><br /> :link_list"
+msgstr "Los siguientes compañeros de clase escribieron una respuesta en la discusión <em>discussion_name</em><br /> :link_list"
+
+#: /views/elements/Topic.updates.ctp:27
+msgid "<li>:member_links :action the topic <em>:topic_title</em>.</li>"
+msgstr "<li>:member_links :action el tópico <em>:topic_title</em>.</li>"
+
+#: /views/elements/discussion_responses.ctp:6
+#: /views/topics/view.ctp:40
+msgid "Responses"
+msgstr "Respuestas"
+
+#: /views/elements/discussion_responses.ctp:10
+msgid "Page %page% of %pages%"
+msgstr "Página %page% de %pages%"
+
+#: /views/elements/discussion_responses.ctp:41
+#: /views/subjects/index.ctp:60
+msgid "previous"
+msgstr "anterior"
+
+#: /views/elements/discussion_responses.ctp:43
+#: /views/subjects/index.ctp:62
+msgid "next"
+msgstr "siguiente"
+
+#: /views/elements/forum_message.ctp:4
+msgid "By %s"
+msgstr "Por %s"
+
+#: /views/elements/forum_message.ctp:19
+msgid "Posted: %s"
+msgstr "Publicó: %s"
+
+#: /views/elements/forum_message.ctp:21
+msgid "Modified: %s"
+msgstr "Modificó: %s"
+
+#: /views/elements/forum_message.ctp:34
+#: /views/subjects/index.ctp:52
+#: /views/subjects/view.ctp:87
+msgid "Edit"
+msgstr "Editar"
+
+#: /views/elements/quick_response.ctp:4
+msgid "Reply to this discussion"
+msgstr "Responder a esta discusión"
+
+#: /views/elements/quick_response.ctp:7
+msgid "Message"
+msgstr "Mensaje"
+
+#: /views/elements/placeholders/course_dashboard.ctp:2
+#: /views/elements/placeholders/plugin_updates.ctp:4
+#: /views/subjects/view.ctp:14
+#: /views/topics/index.ctp:3
+msgid "Forum"
+msgstr "Foro"
+
+#: /views/elements/placeholders/course_dashboard.ctp:24
+msgid "%s new responses in discussion %s"
+msgstr "%s nuevas respuestas en la discusión %s"
+
+#: /views/elements/placeholders/course_dashboard.ctp:40;55
+msgid "%s last modified %s"
+msgstr "%s modifico por último %s"
+
+#: /views/elements/placeholders/course_dashboard.ctp:64
+msgid "No forum updates yet, be the firts one!"
+msgstr "No hay actualizaciones del foro aún. ¡Sé el primero!"
+
+#: /views/responses/edit.ctp:4
+msgid "Edit Response"
+msgstr "Editar Respuesta"
+
+#: /views/subjects/add.ctp:4
+msgid "Add Subject"
+msgstr "Agregar Tema"
+
+#: /views/subjects/add.ctp:17
+#: /views/subjects/edit.ctp:19
+#: /views/subjects/view.ctp:45
+msgid "List Subjects"
+msgstr "Listar Temas"
+
+#: /views/subjects/add.ctp:18
+#: /views/subjects/edit.ctp:20
+#: /views/subjects/index.ctp:67
+#: /views/subjects/view.ctp:47
+msgid "List Forums"
+msgstr "Listar Foros"
+
+#: /views/subjects/add.ctp:19
+#: /views/subjects/edit.ctp:21
+#: /views/subjects/index.ctp:68
+#: /views/subjects/view.ctp:48
+msgid "New Forum"
+msgstr "Nuevo Foro"
+
+#: /views/subjects/add.ctp:20
+#: /views/subjects/edit.ctp:22
+#: /views/subjects/index.ctp:69
+#: /views/subjects/view.ctp:49
+msgid "List Members"
+msgstr "Listar Miembros"
+
+#: /views/subjects/add.ctp:21
+#: /views/subjects/edit.ctp:23
+#: /views/subjects/index.ctp:70
+#: /views/subjects/view.ctp:50
+msgid "New Member"
+msgstr "Nuevo Miembro"
+
+#: /views/subjects/add.ctp:22
+#: /views/subjects/edit.ctp:24
+#: /views/subjects/index.ctp:71
+#: /views/subjects/view.ctp:51
+msgid "List Discussions"
+msgstr "Listar Discusiones"
+
+#: /views/subjects/edit.ctp:4
+#: /views/subjects/view.ctp:43
+msgid "Edit Subject"
+msgstr "Editar Tema"
+
+#: /views/subjects/edit.ctp:18
+#: /views/subjects/index.ctp:53
+#: /views/subjects/view.ctp:88
+msgid "Delete"
+msgstr "Eliminar"
+
+#: /views/subjects/edit.ctp:18
+#: /views/subjects/index.ctp:53
+#: /views/subjects/view.ctp:44;88
+msgid "Are you sure you want to delete # %s?"
+msgstr "¿Estás seguro que deseas eliminar # %s?"
+
+#: /views/subjects/index.ctp:2
+msgid "Subjects"
+msgstr "Temas"
+
+#: /views/subjects/index.ctp:6
+msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
+msgstr "Página %page% de %pages%, mostrando %current% registros de  %count% en total, empezando en el registro %start%, terminando en %end%"
+
+#: /views/subjects/index.ctp:18
+#: /views/subjects/view.ctp:67
+msgid "Actions"
+msgstr "Acciones"
+
+#: /views/subjects/index.ctp:51
+#: /views/subjects/view.ctp:86
+msgid "View"
+msgstr "Ver"
+
+#: /views/subjects/index.ctp:66
+#: /views/subjects/view.ctp:46
+msgid "New Subject"
+msgstr "Nuevo Tema"
+
+#: /views/subjects/view.ctp:2
+msgid "Subject"
+msgstr "Tema"
+
+#: /views/subjects/view.ctp:4;60
+msgid "Id"
+msgstr "Id"
+
+#: /views/subjects/view.ctp:9;63
+#: /views/topics/view.ctp:38
+msgid "Title"
+msgstr "Título"
+
+#: /views/subjects/view.ctp:19
+msgid "Member"
+msgstr "Miembro"
+
+#: /views/subjects/view.ctp:24
+#: /views/topics/index.ctp:34
+msgid "Created"
+msgstr "Creado"
+
+#: /views/subjects/view.ctp:29;65
+msgid "Locked"
+msgstr "Bloqueado"
+
+#: /views/subjects/view.ctp:34;66
+#: /views/topics/index.ctp:32
+#: /views/topics/view.ctp:37
+msgid "Status"
+msgstr "Estado"
+
+#: /views/subjects/view.ctp:44
+msgid "Delete Subject"
+msgstr "Eliminar Tema"
+
+#: /views/subjects/view.ctp:56
+msgid "Related Discussions"
+msgstr "Discusiones Realcionadas"
+
+#: /views/subjects/view.ctp:61
+msgid "Subject Id"
+msgstr ""
+
+#: /views/subjects/view.ctp:62
+msgid "Member Id"
+msgstr ""
+
+#: /views/subjects/view.ctp:64
+msgid "Content"
+msgstr ""
+
+#: /views/topics/add.ctp:4;11
+msgid "Create Topic"
+msgstr "Crear Tópico"
+
+#: /views/topics/edit.ctp:4
+msgid "Edit Topic"
+msgstr "Editar Tópico"
+
+#: /views/topics/edit.ctp:16
+msgid "Lock this topic"
+msgstr "Bloquear este tópico"
+
+#: /views/topics/edit.ctp:17
+msgid "(Nobody will be able to create more discussions on this topic)"
+msgstr "(Nadie más podrá crear discusiones en este tópico)"
+
+#: /views/topics/index.ctp:9
+msgid "You are currently viewing the topics in the <em>%s</em> course forum."
+msgstr "Estás viendo los tópicos en el foro del curso <em>%s</em>."
+
+#: /views/topics/index.ctp:22;79
+msgid "Create a new Topic"
+msgstr "Crear nuevo Tópico"
+
+#: /views/topics/index.ctp:33
+msgid "Topic"
+msgstr "Tópico"
+
+#: /views/topics/index.ctp:57
+#: /views/topics/view.ctp:68
+msgid "edit"
+msgstr "editar"
+
+#: /views/topics/index.ctp:65
+#: /views/topics/view.ctp:76
+msgid "delete"
+msgstr "eliminar"
+
+#: /views/topics/index.ctp:67
+msgid "This will also delete all discussions on this topic"
+msgstr "Esto también eliminará todas las discusiones del tópico"
+
+#: /views/topics/view.ctp:4
+msgid "Topic:"
+msgstr "Tópico:"
+
+#: /views/topics/view.ctp:12
+msgid "You are currently viewing the discussions started around this topic <strong>\"%s\"</strong> inside the <em>%s</em> course forum."
+msgstr "Estás viendo las discusiones iniciadas sobre el Tópico <strong>\"%s\"</strong> dentro del foro del curso <em>%s</em>."
+
+#: /views/topics/view.ctp:25;124
+msgid "Start a discussion"
+msgstr "Empezar discusión"
+
+#: /views/topics/view.ctp:38
+msgid "Author &mdash; Created"
+msgstr "Autor &mdash; Creado"
+
+#: /views/topics/view.ctp:39
+msgid "Last Response"
+msgstr "Última Respuesta"
+
+#: /views/topics/view.ctp:41
+msgid "Views"
+msgstr "Vistas"
+
+#: /views/topics/view.ctp:78
+msgid "This will also delete all responses on this discussion"
+msgstr "Esto también eliminará todas las respuestas dentro de la discusión"
+
+#: /views/topics/view.ctp:92
+msgid "By: %s"
+msgstr "Por:%s"
+
+#: /views/topics/view.ctp:104
+msgid "No responses yet"
+msgstr "No hay respuestas aún"
+
+#: /views/topics/view.ctp:116
+msgid "No discussions registered yet"
+msgstr "No hay discusiones registradas"
+

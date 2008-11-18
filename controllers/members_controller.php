@@ -147,6 +147,18 @@ class MembersController extends AppController {
 		}
 	}
 	
+	function admin_batch_load() {
+		if (!empty($this->data)) {
+			$result = $this->Member->batchLoad();
+			if ($result !== false) {
+				$this->Session->setFlash(__('The members were succesfully created',true), 'default', array('class' => 'success'));
+				$this->redirect(array('action'=>'index'), null, true);
+			} else {
+				$this->Session->setFlash(__('An error occurred while while saving the members, check your file and try again',true), 'default', array('class' => 'error'));
+			}
+		}
+	}
+	
 	/*
 	* Logs an user into the system
 	* @return void

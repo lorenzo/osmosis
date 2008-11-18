@@ -1,6 +1,6 @@
 <h1>
 	<?php
-		printf(__('%s\' Blog', true), $blog['Member']['full_name']);
+		printf(__d('blog','%s\' Blog', true), $blog['Member']['full_name']);
 	?>
 </h1>
 <?php
@@ -10,7 +10,7 @@
 		<li class="add">
 			<?php
 				echo $html->link(
-					__('New Post', true),
+					__d('blog','New Post', true),
 					array('controller'=> 'posts', 'action'=>'add', $blog['Blog']['id'])
 				);
 			?>
@@ -34,7 +34,7 @@
 ?>
 	<p>
 		<?php
-			__('No Posts written yet');
+			__d('blog','No Posts written yet');
 		?>
 	</p>
 <?php

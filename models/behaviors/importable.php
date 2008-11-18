@@ -67,13 +67,18 @@ class ImportableBehavior extends ModelBehavior {
         return $header;
 	}
 	
-	function importCSV(&$Model,$file) {
+	function importCSV(&$Model,$file,$returnSaved = false) {
 	
 		if (!file_exists($file))
 			return false;
 		
         $handle = fopen($file, "r");
         $header = $this->_getHeader($Model,$handle);
+        
+        $db =& ConnectionManager::getDataSource($Model->useDbConfig);
+        $db->begin($Model);
+        
+        $saved = array();
         $i = 0;
         while (($row = $this->_getCSVLine(&$Model,$handle)) !== false) {
                 $data = array();
@@ -92,7 +97,10 @@ class ImportableBehavior extends ModelBehavior {
                 
                 $Model->id = isset($data[$Model->alias][$Model->primaryKey]) ? $data[$Model->alias][$Model->primaryKey] : false;
                
-                // validate the row
+                //beforeImport callback
+                if (method_exists($Model,'beforeImport'))
+                	$data = $Model->beforeImport($data);
+                	
                 $error = false;
                 $Model->set($data);
                 if (!$Model->validates()) {
@@ -101,15 +109,29 @@ class ImportableBehavior extends ModelBehavior {
                 }
 
                 // save the row
-                if (!$error && !$Model->saveAll($data,array('validate' => false)))
+                if (!$error && !$Model->saveAll($data,array('validate' => false,'atomic' => false)))
                          $this->errors[$Model->alias][$i]['save'] = __(sprintf('%s for Row %d failed to save.',$Model->alias,$i), true);
 
+				if ($returnSaved)
+					$saved[] = $data;
                 $i++;
         }
         
         fclose($handle);
        	$success = empty($this->errors);
-       	return $success;
+       	
+       	if (!$success) {
+       		$db->rollback($Model);
+       		return false;
+       	}
+       	
+       	$db->commit($Model);
+       	
+       	if ($returnSaved) {
+       		return $saved;
+       	}
+       	
+       	return true;
    }
 }
 ?>

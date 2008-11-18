@@ -1,7 +1,7 @@
 <h2>
 	<?php
 		echo $html->link(
-			__('View this Folder\'s Content', true),
+			__d('locker','View this Folder\'s Content', true),
 			array(
 				'controller'	=> 'folders',
 				'action'		=> 'view',

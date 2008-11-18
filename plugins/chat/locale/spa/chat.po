@@ -1,0 +1,38 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Chat Plugin\n"
+"POT-Creation-Date: 2008-11-14 17:47-0430\n"
+"PO-Revision-Date: \n"
+"Last-Translator: José Lorenzo Rodríguez <jose.zap at gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: VENEZUELA\n"
+
+#: /config/description.php:33
+msgid "A chat is a person to person instant messaging application"
+msgstr "Un chat es una aplicación de mensajería instantánea "
+
+#: /config/description.php:34
+#: /views/elements/placeholders/course_sidebar.ctp:2
+msgid "Chat"
+msgstr "Chat"
+
+#: /controllers/messages_controller.php:42
+msgid "The message could not be delivered"
+msgstr "El mensaje no puso ser enviado"
+
+#: /views/elements/placeholders/course_sidebar.ctp:8
+msgid "me"
+msgstr "Yo"
+
+#: /views/elements/placeholders/course_sidebar.ctp:9
+msgid "minimize"
+msgstr "minimizar"
+
+#: /views/elements/placeholders/course_sidebar.ctp:10
+msgid "close"
+msgstr "cerrar"
+

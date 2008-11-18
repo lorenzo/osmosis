@@ -9,7 +9,7 @@
 			);
 			$class = 'item folder';
 			if ($file['name'] == 'dropbox' && $parentFolder['parent_id'] == null) {
-				$file['name'] = __('Dropbox', true);
+				$file['name'] = __d('locker','Dropbox', true);
 				$class .= ' dropbox';
 			}
 			list($rev, $rel, $title) = array($file['id'], $html->url($url), $file['name']);

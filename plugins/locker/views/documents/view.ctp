@@ -14,7 +14,7 @@ echo $this->element('folder_path', compact('path', 'member', 'document'));
 		<?php
 			$description = $document['description'];
 			if (empty($description)) {
-				__('This file has no description');
+				__d('locker','This file has no description');
 			} else {
 				echo $description;
 			}
@@ -26,7 +26,7 @@ echo $this->element('folder_path', compact('path', 'member', 'document'));
 			<li class="edit">
 			<?php
 				echo $html->link(
-					__('Edit', true),
+					__d('locker','Edit', true),
 					array(
 						'controller'	=> 'documents',
 						'action'		=> 'edit',
@@ -38,13 +38,13 @@ echo $this->element('folder_path', compact('path', 'member', 'document'));
 			<li class="delete">
 			<?php
 				echo $html->link(
-					__('Delete', true),
+					__d('locker','Delete', true),
 					array(
 						'controller'	=> 'documents',
 						'action'		=> 'delete',
 						$document['id']
 					), null,
-					sprintf(__('Please confirm the deletion of %s', true), $document['name'])
+					sprintf(__d('locker','Please confirm the deletion of %s', true), $document['name'])
 				);
 			?>
 			</li>
@@ -54,7 +54,7 @@ echo $this->element('folder_path', compact('path', 'member', 'document'));
 			<li class="info download">
 			<?php
 				echo $html->link(
-					__('Download', true),
+					__d('locker','Download', true),
 					array(
 						'controller'	=> 'documents',
 						'action'		=> 'download',

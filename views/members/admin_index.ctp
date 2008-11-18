@@ -76,5 +76,6 @@ foreach ($members as $member):
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('New Member', true), array('action'=>'add')); ?></li>
+		<li><?php echo $html->link(__('Batch Load', true), array('action'=>'batch_load')); ?></li>
 	</ul>
 </div>

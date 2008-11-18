@@ -1,5 +1,5 @@
 <div id="locker">
-<h1><?php printf(__("%s's Locker", true), $member['full_name']);?></h1>
+<h1><?php printf(__d('locker',"%s's Locker", true), $member['full_name']);?></h1>
 <?php
 	echo $this->element('folder_path', compact('path', 'member'));
 	echo $this->element('folder_contents', compact('parentFolder'));
@@ -25,9 +25,9 @@
 	$(document).ready(function() {
 		var settings = {
 			editable	: <?php echo ($session->read('Auth.Member.id') == $parentFolder['LockerFolder']['member_id']) ? "true" : "false" ?>,
- 			updating	: <?php echo "'" . __("Updating...", true) . "'"; ?>,
-			cancel		: <?php echo "'" . __("Cancel", true) . "'"; ?>,
-			ok			: <?php echo "'" . __("OK", true) . "'"; ?>,
+ 			updating	: <?php echo "'" . __d('locker',"Updating...", true) . "'"; ?>,
+			cancel		: <?php echo "'" . __d('locker',"Cancel", true) . "'"; ?>,
+			ok			: <?php echo "'" . __d('locker',"OK", true) . "'"; ?>,
 			urlDocuments : <?php
 				echo "'" . $html->url(
 					array(

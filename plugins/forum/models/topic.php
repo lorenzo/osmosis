@@ -111,7 +111,7 @@ class Topic extends AppModel {
 	 */
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
-			'name.required', __('The name can not be empty',true)
+			'name.required', __d('forum','The name can not be empty',true)
 		);
 		parent::__construct($id,$table,$ds);
 	}

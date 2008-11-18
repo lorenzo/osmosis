@@ -21,7 +21,7 @@
 <?php
 	else:
 ?>
-	<p class="empty">&mdash; <?php __('This folder is empty'); ?> &mdash;</p>
+	<p class="empty">&mdash; <?php __d('locker','This folder is empty'); ?> &mdash;</p>
 <?php
 	endif;
 ?>

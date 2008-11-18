@@ -98,16 +98,16 @@ class LockerDocument extends LockerAppModel {
 	 */
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
-			'name.required', __('Please write a name for this file',true)
+			'name.required', __d('locker','Please write a name for this file',true)
 		);
 		$this->setErrorMessage(
-			'name.max', __('Please limit the name to a maximum of 30 characters',true)
+			'name.max', __d('locker','Please limit the name to a maximum of 30 characters',true)
 		);
 		$this->setErrorMessage(
-			'file.valid', __('The file is incorrect',true)
+			'file.valid', __d('locker','The file is incorrect',true)
 		);
 		$this->setErrorMessage(
-			'member_id.valid', __('The Member ID is invalid',true)
+			'member_id.valid', __d('locker','The Member ID is invalid',true)
 		);
 		parent::__construct($id,$table,$ds);
 	}

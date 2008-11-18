@@ -29,8 +29,8 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-Configure::write('Forum.description',__('A forum is an application that allows people to discuss in various topics.',true));
-Configure::write('Forum.title',__('Forums',true));
+Configure::write('Forum.description',__d('forum','A forum is an application that allows people to discuss in various topics.',true));
+Configure::write('Forum.title',__d('forum','Forums',true));
 Configure::write('Forum.type',array('tool'));
 Configure::write('Forum.author','Ósmosis Team');
 ?>

@@ -39,7 +39,7 @@ class MessagesController extends ChatAppController {
 
 	function send($to) {
 		if (!$this->Message->send($this->Auth->user('id'),$to,$this->data['Message']['text']))
-			$error = __('The message could not be delivered');
+			$error = __d('chat','The message could not be delivered',true);
 		$this->set(compact('error'));
 	}
 	

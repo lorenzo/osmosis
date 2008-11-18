@@ -118,13 +118,13 @@ class Post extends BlogAppModel {
 	 */
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
-			'title.required', __('Please write the title of the post', true)
+			'title.required', __d('blog','Please write the title of the post', true)
 		);
 		$this->setErrorMessage(
-			'body.required', __('Please write the content of the posts', true)
+			'body.required', __d('blog','Please write the content of the posts', true)
 		);
 		$this->setErrorMessage(
-			'blog_id.required', __('Blog ID missing', true)
+			'blog_id.required', __d('blog','Blog ID missing', true)
 		);
 		parent::__construct($id,$table,$ds);
 	}
