@@ -23,10 +23,10 @@
 
 <?php 
 	echo String::insert(
-		__('To log into access the site please use this username: :username :password_same'),
+		__('To log into access the site please use this username: :username :password_same',true),
 		array(
 			'username' => $username,
-			'password_same' => $password_same ? 
+			'password_same' => $passwordSame ? 
 						__('(Your password is the same as your username, remember to change it soon)', true) :
 						__('and the password you selected', true)
 		)

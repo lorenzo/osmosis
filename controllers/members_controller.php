@@ -149,8 +149,11 @@ class MembersController extends AppController {
 	
 	function admin_batch_load() {
 		if (!empty($this->data)) {
-			$result = $this->Member->batchLoad();
+			$result = $this->Member->batchLoad($this->data,true);
 			if ($result !== false) {
+				foreach ($result as $member) {
+					$this->__welcome($member);
+				}
 				$this->Session->setFlash(__('The members were succesfully created',true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {

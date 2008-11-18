@@ -226,9 +226,9 @@ class InstallerController extends Controller {
 			}
 			$configurations = array();
 			foreach ($this->data['Installer'] as $key => $value) {
-				if (trim($value) == '') {
-					$configurations = null;
-					break;
+				$value = trim($value);
+				if (empty($value)) {
+					continue;
 				}
 				$key = 'Mailer.' . $key;
 				$configurations[] = compact('key', 'value');
