@@ -4,7 +4,7 @@
 		<li class="edit">
 			<?php
 				echo $html->link(
-					__('edit this entry', true),
+					__d('wiki','edit this entry', true),
 					array(
 						'controller'	=> 'entries',
 						'action'		=> 'edit', 
@@ -20,7 +20,7 @@
 		<li class="info">
 			<?php
 				echo $html->link(
-					__('view history', true),
+					__d('wiki','view history', true),
 					array(
 						'controller'	=> 'revisions',
 						'action'		=> 'history', 

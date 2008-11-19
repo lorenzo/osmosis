@@ -6,7 +6,7 @@
 		?><span class="note"><?php
 			if ($rev1==null) {
 				$link1 = $html->link(
-					__('keep this revision', true),
+					__d('wiki','keep this revision', true),
 					array(
 						'controller'	=> 'entries',
 						'action'		=> 'view',
@@ -15,7 +15,7 @@
 					)
 				);
 				$link2 = $html->link(
-					__('return to this revision', true),
+					__d('wiki','return to this revision', true),
 					array(
 						'controller'	=> 'entries',
 						'action'		=> 'restore',
@@ -24,12 +24,12 @@
 						'wiki_id'		=> $this->params['named']['wiki_id']
 					)
 				);
-				$rev1 = __('Current Version', true);
-				$rev2 = __('Revision', true) . $rev2;
-				__('Differences between current revision and previous');
+				$rev1 = __d('wiki','Current Version', true);
+				$rev2 = __d('wiki','Revision', true) . $rev2;
+				__d('wiki','Differences between current revision and previous');
 			} else {
 				$link1 = $html->link(
-					__('return to this revision', true),
+					__d('wiki','return to this revision', true),
 					array(
 						'controller'	=> 'entries',
 						'action'		=> 'restore',
@@ -39,7 +39,7 @@
 					)
 				);
 				$link2 = $html->link(
-					__('return to this revision', true),
+					__d('wiki','return to this revision', true),
 					array(
 						'controller'	=> 'entries',
 						'action'		=> 'restore',
@@ -48,9 +48,9 @@
 						'wiki_id'		=> $this->params['named']['wiki_id']
 					)
 				);
-				$rev1 = __('Revision', true) . $rev1;
-				$rev2 = __('Revision', true) . $rev2;
-				$msg = printf(__('Differences between revisions %s and %s', true), $rev1, $rev2);
+				$rev1 = __d('wiki','Revision', true) . $rev1;
+				$rev2 = __d('wiki','Revision', true) . $rev2;
+				$msg = printf(__d('wiki','Differences between revisions %s and %s', true), $rev1, $rev2);
 			}
 		?>
 		</span>

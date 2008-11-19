@@ -1,20 +1,20 @@
 <div class="revisions view">
 	<h1><?php echo $revision['Revision']['title']?></h1>
 	<p>
-		<?php echo sprintf(__('Revision as of %s, modified by %s',true),
+		<?php echo sprintf(__d('wiki','Revision as of %s, modified by %s',true),
 			$time->format('H:i, d M Y',$revision['Revision']['created']),
 			$revision['Member']['username']
 		); 
 		?>
 	</p>
 	<p>
-	<?php echo $html->link(__('current version',true),array(
+	<?php echo $html->link(__d('wiki','current version',true),array(
 		'controller'=>'entries',
 		'action'=>'view',
 		$revision['Entry']['slug'],
 		'wiki_id' => $revision['Entry']['wiki_id']
 		))?> 
-	<?php echo $html->link(__('restore',true),array(
+	<?php echo $html->link(__d('wiki','restore',true),array(
 		'controller'=>'entries',
 		'action'=>'restore',
 		$revision['Revision']['entry_id'],

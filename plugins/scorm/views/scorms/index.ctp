@@ -1,12 +1,12 @@
 <div class="scorm index">
 	<div class="content-title">
-		<h2><?php  __('Lessons');?></h2>
+		<h2><?php  __d('scorm','Lessons');?></h2>
 		<?php if (in_array($Osmosis['currentRole'],a('Professor','Admin'))) :?>
 		<ul class="reverse actions">
 			<li class="add">
 				<?php
 					echo $html->link(
-						__('add lesson', true),
+						__d('scorm','add lesson', true),
 						array(
 							'action'	=> 'add',
 							'course_id'	=> $this->params['named']['course_id']
@@ -18,7 +18,7 @@
 		<?php endif;?>
 	</div>
 <div id="recent-lessons">
-	<h3><?php __('Lessons Taken Recently');?></h3>
+	<h3><?php __d('scorm','Lessons Taken Recently');?></h3>
 	<?php
 		if (!empty($recent)) :
 	?>
@@ -44,13 +44,13 @@
 	<?php
 		else :
 	?>
-		<p><?php __('You have not taken any lesson yet'); ?></p>
+		<p><?php __d('scorm','You have not taken any lesson yet'); ?></p>
 	<?php			
 		endif;
 	?>
 </div>
 	<div class="lesson-list">
-		<h3><?php __('Available lessons')?></h3>
+		<h3><?php __d('scorm','Available lessons')?></h3>
 <?php if (!empty($scorms)):?>
 		<ul>
 		<?php foreach ($scorms as $scorm): ?>
@@ -75,7 +75,7 @@
 						<?php
 							echo
 								$html->link(
-								__('Take this lesson', true),
+								__d('scorm','Take this lesson', true),
 								array('controller'=> 'scorms', 'action'=>'view', $scorm['Scorm']['id'])
 								
 							);
@@ -86,7 +86,7 @@
 						<?php
 							echo
 								$html->link(
-								__('Edit', true),
+								__d('scorm','Edit', true),
 								array('controller'=> 'scorms', 'action'=>'edit', $scorm['Scorm']['id'])
 								
 							);
@@ -96,10 +96,10 @@
 						<?php
 							echo
 								$html->link(
-								__('Delete', true),
+								__d('scorm','Delete', true),
 								array('controller'=> 'scorms', 'action'=>'delete', $scorm['Scorm']['id']),
 								null,
-								__('This wil also delete any student tracking information on this lessons',true)
+								__d('scorm','This wil also delete any student tracking information on this lessons',true)
 							);
 						?>
 					</li>
@@ -109,7 +109,7 @@
 		<?php endforeach; ?>
 		</ul>
 <?php else: ?>
-	<p><?php __('No lessons yet') ?></p>
+	<p><?php __d('scorm','No lessons yet') ?></p>
 <?php endif; ?>
 	</div>
 </div>

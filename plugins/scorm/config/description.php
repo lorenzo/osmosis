@@ -29,8 +29,8 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-Configure::write('Scorm.description',__('Sharable Content Object Reference Model (SCORM) is a collection of standards and specifications for web-based e-learning. This plugin is a player for SCORM 2004 files',true));
-Configure::write('Scorm.title',__('Lessons', true));
+Configure::write('Scorm.description',__d('scorm','Sharable Content Object Reference Model (SCORM) is a collection of standards and specifications for web-based e-learning. This plugin is a player for SCORM 2004 files',true));
+Configure::write('Scorm.title',__d('scorm','Lessons', true));
 Configure::write('Scorm.author','Ósmosis Team');
 Configure::write('Scorm.type',array('tool'));
 ?>

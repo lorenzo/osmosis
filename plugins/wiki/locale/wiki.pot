@@ -1,0 +1,363 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  Revision: 513 /wiki/config/description.php
+#  Revision: 498 /wiki/models/wiki.php
+#  Revision: 510 /wiki/controllers/entries_controller.php
+#  Revision: 497 /wiki/controllers/wikis_controller.php
+#  Revision: 497 /wiki/controllers/revisions_controller.php
+#  Revision: 510 /wiki/models/entry.php
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-11-19 09:23-0430\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /config/description.php:32
+msgid "A wiki is a collection of web pages designed to enable anyone who accesses it to contribute or modify content, like in a document file."
+msgstr ""
+
+#: /config/description.php:33
+#: /models/wiki.php:125
+#: /views/elements/placeholders/course_dashboard.ctp:2
+#: /views/elements/placeholders/plugin_updates.ctp:4
+msgid "Wiki"
+msgstr ""
+
+#: /controllers/entries_controller.php:52
+msgid "Invalid Entry."
+msgstr ""
+
+#: /controllers/entries_controller.php:78
+#: /controllers/wikis_controller.php:51;102
+msgid "Invalid Wiki"
+msgstr ""
+
+#: /controllers/entries_controller.php:86;111
+msgid "The Entry has been saved"
+msgstr ""
+
+#: /controllers/entries_controller.php:92;120
+msgid "The Entry could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/entries_controller.php:103
+msgid "Invalid Entry"
+msgstr ""
+
+#: /controllers/entries_controller.php:126
+msgid "Editing Entry %s"
+msgstr ""
+
+#: /controllers/entries_controller.php:131
+msgid "Invalid id for Entry"
+msgstr ""
+
+#: /controllers/entries_controller.php:135
+msgid "Entry deleted"
+msgstr ""
+
+#: /controllers/entries_controller.php:142
+msgid "Entry revision restored"
+msgstr ""
+
+#: /controllers/entries_controller.php:145
+msgid "An error occured. The entry revision was not restored"
+msgstr ""
+
+#: /controllers/revisions_controller.php:82
+msgid "Invalid Revision"
+msgstr ""
+
+#: /controllers/wikis_controller.php:68
+msgid "The wiki for this course could not be found"
+msgstr ""
+
+#: /controllers/wikis_controller.php:87;107
+msgid "The Wiki has been saved"
+msgstr ""
+
+#: /controllers/wikis_controller.php:90;110
+msgid "The Wiki could not be saved. Please, try again"
+msgstr ""
+
+#: /controllers/wikis_controller.php:121
+msgid "Invalid id for Wiki"
+msgstr ""
+
+#: /controllers/wikis_controller.php:125
+msgid "Wiki deleted"
+msgstr ""
+
+#: /models/entry.php:132
+msgid "Please set a title"
+msgstr ""
+
+#: /models/entry.php:135
+msgid "Please write a content for this entry"
+msgstr ""
+
+#: /models/wiki.php:107
+msgid "No Course ID set"
+msgstr ""
+
+#: /models/wiki.php:110
+msgid "Please set the wikis name"
+msgstr ""
+
+#: /models/wiki.php:137
+msgid "Welcome"
+msgstr ""
+
+#: /models/wiki.php:138
+msgid "<p>Welcome to the wiki, start by editing this message!</p>"
+msgstr ""
+
+#: /views/elements/entry.ctp:7
+msgid "edit this entry"
+msgstr ""
+
+#: /views/elements/entry.ctp:23
+#: /views/elements/recent_entry.ctp:27
+msgid "view history"
+msgstr ""
+
+#: /views/elements/recent_entry.ctp:24
+msgid "created"
+msgstr ""
+
+#: /views/elements/recent_entry.ctp:36
+msgid "modified"
+msgstr ""
+
+#: /views/elements/updates.ctp:14
+msgid "others..."
+msgstr ""
+
+#: /views/elements/updates.ctp:20
+msgid " has created"
+msgstr ""
+
+#: /views/elements/updates.ctp:20
+msgid "has modified"
+msgstr ""
+
+#: /views/elements/updates.ctp:22
+msgid "have modified"
+msgstr ""
+
+#: /views/elements/updates.ctp:24
+msgid "and"
+msgstr ""
+
+#: /views/elements/updates.ctp:29
+msgid "<li>:member_links :action the page <em>:entry_title</em>.</li>"
+msgstr ""
+
+#: /views/elements/placeholders/course_dashboard.ctp:26
+msgid "Last modified %s"
+msgstr ""
+
+#: /views/elements/placeholders/course_dashboard.ctp:35
+msgid "No wiki updates yet, be the firts one!"
+msgstr ""
+
+#: /views/entries/add.ctp:4;14
+msgid "Add Entry"
+msgstr ""
+
+#: /views/entries/add.ctp:11
+#: /views/entries/edit.ctp:8
+msgid "Content"
+msgstr ""
+
+#: /views/entries/edit.ctp:5;12
+msgid "Edit Entry"
+msgstr ""
+
+#: /views/entries/index.ctp:2
+#: /views/wikis/view.ctp:55
+msgid "Index of Entries"
+msgstr ""
+
+#: /views/entries/index.ctp:6
+#: /views/wikis/index.ctp:6
+msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
+msgstr ""
+
+#: /views/entries/index.ctp:14
+#: /views/wikis/index.ctp:15
+msgid "Actions"
+msgstr ""
+
+#: /views/entries/index.ctp:47
+msgid "History"
+msgstr ""
+
+#: /views/entries/index.ctp:52
+#: /views/wikis/index.ctp:40
+msgid "Edit"
+msgstr ""
+
+#: /views/entries/index.ctp:53
+#: /views/wikis/index.ctp:41
+msgid "Delete"
+msgstr ""
+
+#: /views/entries/index.ctp:53
+#: /views/wikis/index.ctp:41
+msgid "Are you sure you want to delete # %s?"
+msgstr ""
+
+#: /views/entries/index.ctp:60
+#: /views/revisions/history.ctp:86
+#: /views/wikis/index.ctp:48
+msgid "previous"
+msgstr ""
+
+#: /views/entries/index.ctp:62
+#: /views/revisions/history.ctp:88
+#: /views/wikis/index.ctp:50
+msgid "next"
+msgstr ""
+
+#: /views/revisions/diff.ctp:9
+msgid "keep this revision"
+msgstr ""
+
+#: /views/revisions/diff.ctp:18;32;42
+msgid "return to this revision"
+msgstr ""
+
+#: /views/revisions/diff.ctp:27
+msgid "Current Version"
+msgstr ""
+
+#: /views/revisions/diff.ctp:28;51;52
+#: /views/revisions/history.ctp:5;50
+msgid "Revision"
+msgstr ""
+
+#: /views/revisions/diff.ctp:29
+msgid "Differences between current revision and previous"
+msgstr ""
+
+#: /views/revisions/diff.ctp:53
+msgid "Differences between revisions %s and %s"
+msgstr ""
+
+#: /views/revisions/history.ctp:2
+msgid "Revision history of \"%s\""
+msgstr ""
+
+#: /views/revisions/history.ctp:6
+msgid "Modified by"
+msgstr ""
+
+#: /views/revisions/history.ctp:7
+msgid "Date"
+msgstr ""
+
+#: /views/revisions/history.ctp:13
+msgid "Current revision"
+msgstr ""
+
+#: /views/revisions/history.ctp:18;55
+msgid "View this revision"
+msgstr ""
+
+#: /views/revisions/history.ctp:27;66
+msgid "compare to previous"
+msgstr ""
+
+#: /views/revisions/history.ctp:58
+msgid "by %s at"
+msgstr ""
+
+#: /views/revisions/view.ctp:4
+msgid "Revision as of %s, modified by %s"
+msgstr ""
+
+#: /views/revisions/view.ctp:11
+msgid "current version"
+msgstr ""
+
+#: /views/revisions/view.ctp:17
+msgid "restore"
+msgstr ""
+
+#: /views/wikis/add.ctp:4
+msgid "Add Wiki"
+msgstr ""
+
+#: /views/wikis/add.ctp:7
+#: /views/wikis/edit.ctp:7
+msgid "Title"
+msgstr ""
+
+#: /views/wikis/add.ctp:11
+#: /views/wikis/edit.ctp:11
+msgid "Submit"
+msgstr ""
+
+#: /views/wikis/add.ctp:15
+msgid "List Wikis"
+msgstr ""
+
+#: /views/wikis/add.ctp:16
+#: /views/wikis/index.ctp:55
+msgid "List Courses"
+msgstr ""
+
+#: /views/wikis/add.ctp:17
+#: /views/wikis/index.ctp:56
+msgid "New Course"
+msgstr ""
+
+#: /views/wikis/add.ctp:18
+#: /views/wikis/index.ctp:57
+msgid "List Entries"
+msgstr ""
+
+#: /views/wikis/add.ctp:19
+#: /views/wikis/index.ctp:58
+#: /views/wikis/view.ctp:48
+msgid "New Entry"
+msgstr ""
+
+#: /views/wikis/edit.ctp:4
+msgid "Edit Wiki"
+msgstr ""
+
+#: /views/wikis/index.ctp:2
+msgid "Wikis"
+msgstr ""
+
+#: /views/wikis/index.ctp:39
+msgid "View"
+msgstr ""
+
+#: /views/wikis/index.ctp:54
+msgid "New Wiki"
+msgstr ""
+
+#: /views/wikis/view.ctp:13
+msgid "Modify this information"
+msgstr ""
+
+#: /views/wikis/view.ctp:15
+msgid "Add a description"
+msgstr ""
+
+#: /views/wikis/view.ctp:30
+msgid "Recent changes"
+msgstr ""
+

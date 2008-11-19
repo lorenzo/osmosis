@@ -10,9 +10,9 @@
 				<?php if(in_array($Osmosis['currentRole'],a('Professor','Admin'))) :?>
 				<li class="edit">
 					<?php
-						$link = __('Modify this information', true);
+						$link = __d('wiki','Modify this information', true);
 						if (empty($data['Wiki']['description'])) {
-							$link = __('Add a description', true);
+							$link = __d('wiki','Add a description', true);
 						}
 						echo $html->link($link,
 							array(
@@ -27,7 +27,7 @@
 			</ul>
 		</div>
 		
-		<h5><?php __('Recent changes'); ?></h5>
+		<h5><?php __d('wiki','Recent changes'); ?></h5>
 		<div class="wiki-recent">
 			<ul>
 			<?php
@@ -45,14 +45,14 @@
 				<li class="add">
 					<?php
 						echo $html->link(
-							__('New Entry', true),
+							__d('wiki','New Entry', true),
 							array('controller'=> 'entries', 'action'=>'add', 'wiki_id' => $data['Wiki']['id']));
 					?>
 				</li>
 				<li class="info">
 					<?php
 						echo $html->link(
-							__('Index of Entries', true),
+							__d('wiki','Index of Entries', true),
 							array(
 								'controller'	=> 'entries',
 								'action'		=> 'index',

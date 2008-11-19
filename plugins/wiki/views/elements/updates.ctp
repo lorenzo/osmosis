@@ -11,22 +11,22 @@ foreach ($members as $i => $member) {
 	$repeated[] = $member['id'];
 	$member_links[] = $html->link($member['full_name'], array('controller' => 'members', 'action' => 'view', $member['id']));
 	if (count($member_links) == 6) {
-		$member_links[] = __('others...', true);
+		$member_links[] = __d('wiki','others...', true);
 		break;
 	}
 }
 $member_links = array_unique($member_links);
 
-$action = $events[0]['ModelLog']['created'] ? __(' has created',true) : __('has modified',true);
+$action = $events[0]['ModelLog']['created'] ? __d('wiki',' has created',true) : __('has modified',true);
 if (count($member_links) > 1)
-	$action = __('have modified',true);
+	$action = __d('wiki','have modified',true);
 	
-$member_links = $text->toList($member_links, __('and', true));
+$member_links = $text->toList($member_links, __d('wiki','and', true));
 $entry = $events[0]['ModelLog']['data']['Entry'];
 
 	
 echo String::insert(
-	__('<li>:member_links :action the page <em>:entry_title</em>.</li>', true),
+	__d('wiki','<li>:member_links :action the page <em>:entry_title</em>.</li>', true),
 	array(
 		'member_links' => $member_links,
 		'action'			=> $action,

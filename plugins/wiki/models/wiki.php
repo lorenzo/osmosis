@@ -104,10 +104,10 @@ class Wiki extends AppModel {
 	 */
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
-			'course_id.required', __('No Course ID set',true)
+			'course_id.required', __d('wiki','No Course ID set',true)
 		);
 		$this->setErrorMessage(
-			'name.required', __('Please set the wikis name',true)
+			'name.required', __d('wiki','Please set the wikis name',true)
 		);
 		parent::__construct($id,$table,$ds);
 	}
@@ -122,7 +122,7 @@ class Wiki extends AppModel {
 		$data = $this->save(
 			array(
 				'course_id'	=> $course_id,
-				'name'		=> __('Wiki', true),
+				'name'		=> __d('wiki','Wiki', true),
 				'description' => ''
 			)
 		);
@@ -134,8 +134,8 @@ class Wiki extends AppModel {
 			array(
 				'wiki_id'	=> $this->id,
 				'member_id'	=> $member_id,
-				'title'		=> __('Welcome', true),
-				'content'	=> __('<p>Welcome to the wiki, start by editing this message!</p>', true)
+				'title'		=> __d('wiki','Welcome', true),
+				'content'	=> __d('wiki','<p>Welcome to the wiki, start by editing this message!</p>', true)
 			)
 		);
 		$entry['Entry']['id'] = $this->Entry->id;

@@ -15,16 +15,16 @@
 	<div id="scorm_controls">
 		<?php
 			echo $html->link(
-				__('&laquo; Previous', true), '/',
+				__d('scorm','&laquo; Previous', true), '/',
 				array(
 					'id' => 'scorm_control_previous',
 					'target' => 'viewport',
 					'style' => 'display:none'
 				), false, false
 			);
-			echo " | " .$html->link(__('Exit Scorm', true), array('action' => 'index','course_id' => $scorm['Scorm']['course_id'])) . " | ";
+			echo " | " .$html->link(__d('scorm','Exit Scorm', true), array('action' => 'index','course_id' => $scorm['Scorm']['course_id'])) . " | ";
 			echo $html->link(
-				__('Next &raquo;', true), '/',
+				__d('scorm','Next &raquo;', true), '/',
 				array(
 					'id' => 'scorm_control_next',
 					'target' => 'viewport',
@@ -44,7 +44,7 @@
 	</div>
 	<?php
 		if (!empty($show_sco)) {
-			$loading = __('Loading', true);
+			$loading = __d('scorm','Loading', true);
 			$sco_id = $show_sco['id'];
 			$link = $html->url(
 				array(

@@ -1,7 +1,7 @@
 <div id="wiki-updates">
 	<strong class="title"><?php 
 	echo $html->link(
-		__('Wiki',true),array(
+		__d('wiki','Wiki',true),array(
 			'plugin' => 'wiki', 
 			'controller' => 'wikis',
 			'action' => 'view',

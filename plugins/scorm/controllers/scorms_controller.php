@@ -115,7 +115,7 @@ class ScormsController extends ScormAppController {
 				$scorm_files_location = TMP.'tests'.DS.'imsmanifests'.DS.'uploads'.DS.$uploaded_file['name'].DS;
 				$this->data['Scorm']['path']= str_replace(APP, '', $scorm_files_location);
 				if ($this->Zip->extract($scorm_files_location)===false) {
-					$this->Session->setFlash(__('The Scorm file could not be unzipped',true), 'default', array('class' => 'error'));
+					$this->Session->setFlash(__d('scorm','The Scorm file could not be unzipped',true), 'default', array('class' => 'error'));
 					return;
 				}
 				$this->Zip->close();
@@ -123,23 +123,23 @@ class ScormsController extends ScormAppController {
 				if (!$this->Scorm->parseManifest($scorm_files_location)){
 					$folder = new Folder($scorm_files_location);
 					$folder->delete($scorm_files_location);
-					$this->Session->setFlash(__('The Scorm file could not be parsed',true), 'default', array('class' => 'error'));
+					$this->Session->setFlash(__d('scorm','The Scorm file could not be parsed',true), 'default', array('class' => 'error'));
 					return;
 				}
 				if ($this->Scorm->data['Scorm']['version']!= '2004 3rd Edition'){
 					$folder = new Folder($scorm_files_location);
 					$folder->delete($scorm_files_location);
-					$this->Session->setFlash(__('The Scorm doesn\'t have the right version',true), 'default', array('class' => 'error'));
+					$this->Session->setFlash(__d('scorm','The Scorm doesn\'t have the right version',true), 'default', array('class' => 'error'));
 				
 				} elseif ($this->Scorm->save($this->data)) {
-					$this->Session->setFlash(__('The Scorm has been saved',true), 'default', array('class' => 'success'));
+					$this->Session->setFlash(__d('scorm','The Scorm has been saved',true), 'default', array('class' => 'success'));
 					$this->redirect(array('action'=>'index', 'course_id' => $this->data['Scorm']['course_id']), null, true);
 				} else {
 					$folder = new Folder(TMP.'tests'.DS.'imsmanifests'.DS.'uploads'.DS.$uploaded_file['name'].DS);
 					$folder->delete();
 				}
 			} else { 
-				$this->Session->setFlash(__('The Scorm could not be uploaded. Please, try again.',true), 'default', array('class' => 'error'));
+				$this->Session->setFlash(__d('scorm','The Scorm could not be uploaded. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 		$this->set('course_id',$this->activeCourse);
@@ -147,15 +147,15 @@ class ScormsController extends ScormAppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Scorm',true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('scorm','Invalid Scorm',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
 			if ($this->Scorm->save($this->data)) {
-				$this->Session->setFlash(__('The Scorm saved',true), 'default', array('class' => 'success'));
+				$this->Session->setFlash(__d('scorm','The Scorm saved',true), 'default', array('class' => 'success'));
 				$this->redirect(array('action'=>'index'), null, true);
 			} else {
-				$this->Session->setFlash(__('The Scorm could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
+				$this->Session->setFlash(__d('scorm','The Scorm could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 		if (empty($this->data)) {
@@ -165,7 +165,7 @@ class ScormsController extends ScormAppController {
 	
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Scorm',true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('scorm','Invalid id for Scorm',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$this->data = $this->Scorm->find(array('id'=> $id),null,null,null);			
@@ -174,7 +174,7 @@ class ScormsController extends ScormAppController {
 			$folder = new Folder($scorm_files_location);
 			$folder->delete($scorm_files_location);
 		if ($this->Scorm->del($id)) {			
-			$this->Session->setFlash(__('Scorm #'.$id.' deleted',true), 'default', array('class' => 'success'));
+			$this->Session->setFlash(__d('scorm','Scorm deleted',true), 'default', array('class' => 'success'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}

@@ -40,7 +40,7 @@
 				</div>
 			</div>
 			<div id="tools">
-				<strong><?php echo (isset($layoutToolbarName)) ?  $layoutToolbarName : __('Tools',true) ?></strong>
+				<strong><?php echo (isset($layoutToolbarName)) ?  $layoutToolbarName : __d('scorm','Tools',true) ?></strong>
 					<?php echo $placeholder->renderToolBar(); ?>
 			</div>
 			<div id="main-content">

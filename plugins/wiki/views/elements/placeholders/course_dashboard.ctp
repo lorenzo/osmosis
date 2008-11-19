@@ -1,5 +1,5 @@
 <div class="boxed dashboard-element">
-	<strong class="title"><?php echo $html->link(__('Wiki',true),array(
+	<strong class="title"><?php echo $html->link(__d('wiki','Wiki',true),array(
 		'plugin' => 'wiki', 'controller' => 'wikis', 'action' => 'view', 'course_id' => $course['Course']['id'])); ?>
 	</strong>
 	<?php
@@ -23,7 +23,7 @@
 				<?php 
 				$last = Set::extract($entry,'{n}.ModelLog.time');
 				$last = array_pop($last);
-				__(sprintf('Last modified %s',$time->timeAgoInWords($last))); 
+				sprintf(__d('wiki','Last modified %s'),$time->timeAgoInWords($last)); 
 				?>
 			</li>
 		<?php
@@ -32,7 +32,7 @@
 		</ul>
 	<?php
 	else :
-		echo '<p>' . __('No wiki updates yet, be the firts one!', true) . '</p>';
+		echo '<p>' . __d('wiki','No wiki updates yet, be the firts one!', true) . '</p>';
 	endif;
 	?>
 </div>

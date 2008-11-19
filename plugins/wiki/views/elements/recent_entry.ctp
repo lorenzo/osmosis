@@ -21,10 +21,10 @@
 		<?php
 			$extra = '';
 			if ($entry['revision']>1):
-				__('created');
+				__d('wiki','created');
 				$extra = '&mdash ' .
 					$html->link(
-						__('view history', true),
+						__d('wiki','view history', true),
 						array(
 							'controller'	=> 'revisions',
 							'action'		=> 'history',
@@ -33,7 +33,7 @@
 						)
 					);
 			else :
-				__('modified');
+				__d('wiki','modified');
 			endif;
 		?>
 		&mdash;

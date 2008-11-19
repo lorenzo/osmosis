@@ -49,7 +49,7 @@ class EntriesController extends WikiAppController {
 
 	function view($slug = null) {
 		if (!$slug) {
-			$this->Session->setFlash(__('Invalid Entry.',true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('wiki','Invalid Entry.',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		$conditions = array('conditions' => array('slug' => $slug));
@@ -75,7 +75,7 @@ class EntriesController extends WikiAppController {
 
 			
 		if (!$wiki_id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Wiki',true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('wiki','Invalid Wiki',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
@@ -83,13 +83,13 @@ class EntriesController extends WikiAppController {
 			$this->data['Entry']['member_id'] = $this->Auth->user('id');
 			$this->data['Entry']['content'] = $this->HtmlPurifier->purify($this->data['Entry']['content']);
 			if ($data = $this->Entry->save($this->data)) {
-				$this->Session->setFlash(__('The Entry has been saved',true), 'default', array('class' => 'success'));
+				$this->Session->setFlash(__d('wiki','The Entry has been saved',true), 'default', array('class' => 'success'));
 				$this->redirect(array(
 					'action'=>'view',
 					 $data['Entry']['slug'],
 					'wiki_id' => $data['Entry']['wiki_id']));
 			} else {
-				$this->Session->setFlash(__('The Entry could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
+				$this->Session->setFlash(__d('wiki','The Entry could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 		
@@ -100,7 +100,7 @@ class EntriesController extends WikiAppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Entry',true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('wiki','Invalid Entry',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if (!empty($this->data)) {
@@ -108,7 +108,7 @@ class EntriesController extends WikiAppController {
 			$this->data['Entry']['content'] = $this->HtmlPurifier->purify($this->data['Entry']['content']);
 			if ($data = $this->Entry->save($this->data)) {
 				$this->Entry->read();
-				$this->Session->setFlash(__('The Entry has been saved',true), 'default', array('class' => 'success'));
+				$this->Session->setFlash(__d('wiki','The Entry has been saved',true), 'default', array('class' => 'success'));
 				$this->redirect(
 					array(
 						'action'=>'view',
@@ -117,32 +117,32 @@ class EntriesController extends WikiAppController {
 					)
 				);
 			} else {
-				$this->Session->setFlash(__('The Entry could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
+				$this->Session->setFlash(__d('wiki','The Entry could not be saved. Please, try again.',true), 'default', array('class' => 'error'));
 			}
 		}
 		if (empty($this->data)) {
 			$this->data = $this->Entry->read(null, $id);
 		}
-		$this->pageTitle = sprintf(__('Editing Entry %s',true),$this->data['Entry']['title']);
+		$this->pageTitle = sprintf(__d('wiki','Editing Entry %s',true),$this->data['Entry']['title']);
 	}
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Entry',true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('wiki','Invalid id for Entry',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 		if ($this->Entry->del($id)) {
-			$this->Session->setFlash(__('Entry deleted',true), 'default', array('class' => 'success'));
+			$this->Session->setFlash(__d('wiki','Entry deleted',true), 'default', array('class' => 'success'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
 	}
 	
 	function restore($entry_id, $revision = null) {
 		if($this->Entry->restore($entry_id,$revision)) {
-			$this->Session->setFlash(__('Entry revision restored',true), 'default', array('class' => 'success'));
+			$this->Session->setFlash(__d('wiki','Entry revision restored',true), 'default', array('class' => 'success'));
 		}else{
 			die;
-			$this->Session->setFlash(__('An error occured. The entry revision was not restored',true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__d('wiki','An error occured. The entry revision was not restored',true), 'default', array('class' => 'error'));
 		}
 		$this->Entry->read(null,$entry_id);
 		$this->redirect(array(

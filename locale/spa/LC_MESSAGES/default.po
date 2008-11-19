@@ -4135,14 +4135,6 @@ msgstr "Editar Perfil"
 msgid "Password Confirm"
 msgstr "Confirmar contraseña"
 
-#: /plugins/blog/config/description.php:32
-msgid ""
-"A blog (or web log) is a website, for each member, with regular entries of "
-"commentary, descriptions of events, or other material such as graphics or "
-"video."
-msgstr ""
-"Un blog (o web log) es un sitio web, para cada miembro, con comentarios  "
-"descripciones de eventos, o cualquier otro material, como fotos o videos."
 
 #: /plugins/blog/views/posts/view.ctp:36
 msgid "wrote %s:"

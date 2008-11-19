@@ -129,10 +129,10 @@ class Entry extends AppModel {
 	 */
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
-			'title.required', __('Please set a title',true)
+			'title.required', __d('wiki','Please set a title',true)
 		);
 		$this->setErrorMessage(
-			'content.required', __('Please write a content for this entry',true)
+			'content.required', __d('wiki','Please write a content for this entry',true)
 		);
 		parent::__construct($id,$table,$ds);
 	}

@@ -1,9 +1,9 @@
 <div class="entries index">
-<h2><?php __('Index of Entries');?></h2>
+<h2><?php __d('wiki','Index of Entries');?></h2>
 <p>
 <?php
 echo $paginator->counter(array(
-'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
+'format' => __d('wiki','Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
 ));
 ?></p>
 <table cellpadding="0" cellspacing="0">
@@ -11,7 +11,7 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('title');?></th>
 	<th><?php echo $paginator->sort('revision');?></th>
 	<th><?php echo $paginator->sort('updated');?></th>
-	<th class="actions"><?php __('Actions');?></th>
+	<th class="actions"><?php __d('wiki','Actions');?></th>
 </tr>
 <?php
 $i = 0;
@@ -44,20 +44,20 @@ foreach ($entries as $entry):
 			<?php
 			if ($entry['Entry']['revision']>1) {
 				echo $html->link(
-					__('History', true),
+					__d('wiki','History', true),
 					array('controller'=> 'revisions', 'action'=>'history', $entry['Entry']['id'])
 				);
 			}
 			?>
-			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $entry['Entry']['id'])); ?>
-			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $entry['Entry']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $entry['Entry']['id'])); ?>
+			<?php echo $html->link(__d('wiki','Edit', true), array('action'=>'edit', $entry['Entry']['id'])); ?>
+			<?php echo $html->link(__d('wiki','Delete', true), array('action'=>'delete', $entry['Entry']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $entry['Entry']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
 </table>
 </div>
 <div class="paging">
-	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
+	<?php echo $paginator->prev('<< '.__d('wiki','previous', true), array(), null, array('class'=>'disabled'));?>
  | 	<?php echo $paginator->numbers();?>
-	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
+	<?php echo $paginator->next(__d('wiki','next', true).' >>', array(), null, array('class'=>'disabled'));?>
 </div>

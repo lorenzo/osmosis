@@ -29,8 +29,8 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-Configure::write('Wiki.description',__('A wiki is a collection of web pages designed to enable anyone who accesses it to contribute or modify content, like in a document file.',true));
-Configure::write('Wiki.title',__('Wiki', true));
+Configure::write('Wiki.description',__d('wiki','A wiki is a collection of web pages designed to enable anyone who accesses it to contribute or modify content, like in a document file.',true));
+Configure::write('Wiki.title',__d('wiki','Wiki', true));
 Configure::write('Wiki.type',array('tool'));
 Configure::write('Wiki.author','Ósmosis Team');
 ?>
