@@ -36,6 +36,16 @@ class Setting extends AppModel {
 	var $validate = array(
 		'key' => array('notempty')
 	);
+	
+	function get($setting) {
+		$result = $this->find('all', array('conditions' => array('key LIKE' => "${setting}.%")));
+		$set = Set::combine($result,'{n}.Setting.key', '{n}.Setting.value');
+		foreach ($set as $key => $value) {
+			unset($set[$key]);
+			$set[str_replace('Mailer.', '', $key)] = $value;
+		}
+		return $set;
+	}
 
 }
 ?>

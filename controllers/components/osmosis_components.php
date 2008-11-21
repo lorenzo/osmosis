@@ -29,15 +29,20 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-App::import('Model', 'Member');
-class OsmosisComponentsComponent extends Object {
+class OsmosisComponentsComponent extends Overloadable {
 	
 	var $controller;
-	var $Member;
+	
+	function __get($var) {
+		if ($var == 'Member') {
+			$this->Member =& ClassRegistry::init('Member');
+			return $this->Member;
+		}
+		return parent::__get($var);
+	}
 	
 	function startup(&$controller) {
 		$this->controller =& $controller;
-		$this->Member = ClassRegistry::init('Member');
 	}
 	
 	function getUserCourses() {

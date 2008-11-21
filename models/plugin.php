@@ -73,6 +73,8 @@ class Plugin extends AppModel {
 			'with' => 'CourseTool'
 		)
 	);
+	
+	var $_activePlugins = array();
 
 	/**
 	 * Returns the active plugins
@@ -85,13 +87,17 @@ class Plugin extends AppModel {
 		if (!empty($conditions)) {
 			$conditions = am($conditions, array('active' => 1));
 			return $this->find('all', array('conditions' => $conditions, 'fields' => $fields, 'recursive' => 1));
-		}		
-		$plugins = Cache::read('Plugin.actives');
-		if (!$plugins) {
-			$plugins = $this->find('all', array('conditions' => array('active' => 1), 'recursive' => 1));
-			Cache::write('Plugin.actives',$plugins,15);
 		}
-		return $plugins;
+
+		if (empty($this->_activePlugins)) {
+			$this->_activePlugins = Cache::read('Plugin.actives');
+			if (!$this->_activePlugins) {
+				$this->_activePlugins = $this->find('all', array('conditions' => array('active' => 1), 'recursive' => 1));
+				Cache::write('Plugin.actives',$this->_activePlugins,15);
+			}
+		}
+		
+		return $this->_activePlugins;
 	}
 
 	/**

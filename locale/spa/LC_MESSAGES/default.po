@@ -48,18 +48,18 @@
 #  Revision: 323 /osmosis/webroot/css.php
 #  Revision: 323 /osmosis/webroot/test.php
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
+"Project-Id-Version: Ósmosis LMS\n"
 "POT-Creation-Date: 2008-06-20 15:44-0430\n"
-"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
-"Last-Translator: NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2008-11-21 10:01-0400\n"
+"Last-Translator: José Lorenzo Rodríguez <jose.zap at gmail.com>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: Venezuela\n"
 
 #: /app_controller.php:164
 msgid "Invalid access"
@@ -171,8 +171,7 @@ msgstr "El plugin ha sido instalado."
 
 #: /controllers/plugins_controller.php:70
 msgid "An error ocurred while installing the plugin. Try again"
-msgstr ""
-"Ha ocurrido un error durante la instalación del plugin. Intente de nuevo."
+msgstr "Ha ocurrido un error durante la instalación del plugin. Intente de nuevo."
 
 #: /controllers/plugins_controller.php:87;104
 msgid "The Plugin has been saved"
@@ -218,12 +217,14 @@ msgstr ""
 msgid "Please write the course description"
 msgstr "Por favor, indique la descripción del curso."
 
-#: /models/department.php:62 /plugins/forum/models/topic.php:114
+#: /models/department.php:62
+#: /plugins/forum/models/topic.php:114
 #: /plugins/quiz/models/quiz.php:87
 msgid "The name can not be empty"
 msgstr "El nombre no puede ser vacío."
 
-#: /models/department.php:63 /plugins/blog/models/blog.php:83
+#: /models/department.php:63
+#: /plugins/blog/models/blog.php:83
 msgid "The description can not be empty"
 msgstr ""
 
@@ -351,7 +352,8 @@ msgstr "Evento"
 #: /plugins/quiz/views/quizzes/view.ctp:4;31;73;115;153;195;238
 #: /plugins/quiz/views/text_questions/view.ctp:4;41
 #: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:4
-#: /views/departments/admin_view.ctp:4;36 /views/members/admin_view.ctp:4
+#: /views/departments/admin_view.ctp:4;36
+#: /views/members/admin_view.ctp:4
 #: /views/plugins/admin_view.ctp:4;41
 msgid "Id"
 msgstr ""
@@ -360,7 +362,8 @@ msgstr ""
 msgid "Date"
 msgstr "Día"
 
-#: /plugins/agenda/views/events/view.ctp:14 /views/members/admin_add.ctp:16
+#: /plugins/agenda/views/events/view.ctp:14
+#: /views/members/admin_add.ctp:16
 msgid "Location"
 msgstr "Lugar"
 
@@ -413,13 +416,20 @@ msgstr "Eliminar evento"
 #: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:39
 #: /plugins/wiki/views/entries/index.ctp:50
 #: /plugins/wiki/views/wikis/edit.ctp:16
-#: /plugins/wiki/views/wikis/index.ctp:41 /views/courses/admin_edit.ctp:18
-#: /views/courses/admin_index.ctp:53 /views/courses/edit.ctp:18
-#: /views/departments/admin_edit.ctp:15 /views/departments/admin_index.ctp:51
-#: /views/departments/admin_view.ctp:24;64 /views/departments/edit.ctp:15
-#: /views/members/admin_edit.ctp:24 /views/members/admin_index.ctp:65
-#: /views/members/admin_view.ctp:69 /views/members/edit.ctp:24
-#: /views/members/view.ctp:49 /views/plugins/admin_edit.ctp:17
+#: /plugins/wiki/views/wikis/index.ctp:41
+#: /views/courses/admin_edit.ctp:18
+#: /views/courses/admin_index.ctp:53
+#: /views/courses/edit.ctp:18
+#: /views/departments/admin_edit.ctp:15
+#: /views/departments/admin_index.ctp:51
+#: /views/departments/admin_view.ctp:24;64
+#: /views/departments/edit.ctp:15
+#: /views/members/admin_edit.ctp:24
+#: /views/members/admin_index.ctp:65
+#: /views/members/admin_view.ctp:69
+#: /views/members/edit.ctp:24
+#: /views/members/view.ctp:49
+#: /views/plugins/admin_edit.ctp:17
 #: /views/plugins/admin_view.ctp:29;69
 msgid "Are you sure you want to delete # %s?"
 msgstr "¿Está seguro de que desea eliminar #?"
@@ -508,7 +518,8 @@ msgstr ""
 msgid "Post deleted"
 msgstr "Entrada eliminada."
 
-#: /plugins/blog/models/blog.php:82 /plugins/blog/models/post.php:88
+#: /plugins/blog/models/blog.php:82
+#: /plugins/blog/models/post.php:88
 msgid "The title can not be empty"
 msgstr "Por favor, indique un título."
 
@@ -540,11 +551,13 @@ msgstr "La entrada debe pertenecer a un blog."
 msgid "Add Blog"
 msgstr "Agregar blog."
 
-#: /plugins/blog/views/blogs/add.ctp:10 /plugins/wiki/views/wikis/edit.ctp:12
+#: /plugins/blog/views/blogs/add.ctp:10
+#: /plugins/wiki/views/wikis/edit.ctp:12
 msgid "Submit"
 msgstr "Enviar"
 
-#: /plugins/blog/views/blogs/add.ctp:14 /plugins/blog/views/blogs/edit.ctp:17
+#: /plugins/blog/views/blogs/add.ctp:14
+#: /plugins/blog/views/blogs/edit.ctp:17
 #: /plugins/blog/views/posts/index.ctp:63
 msgid "List Blogs"
 msgstr "Listar blogs"
@@ -618,12 +631,18 @@ msgstr "Editar blog"
 #: /plugins/scorm/views/scos/view.ctp:84;388;432;480;518
 #: /plugins/wiki/views/entries/index.ctp:50
 #: /plugins/wiki/views/wikis/edit.ctp:16
-#: /plugins/wiki/views/wikis/index.ctp:41 /views/courses/admin_edit.ctp:18
-#: /views/courses/admin_index.ctp:53 /views/courses/edit.ctp:18
-#: /views/departments/admin_edit.ctp:15 /views/departments/admin_index.ctp:49
-#: /views/departments/admin_view.ctp:64 /views/departments/edit.ctp:15
-#: /views/members/admin_edit.ctp:24 /views/members/admin_index.ctp:65
-#: /views/members/edit.ctp:24 /views/plugins/admin_edit.ctp:17
+#: /plugins/wiki/views/wikis/index.ctp:41
+#: /views/courses/admin_edit.ctp:18
+#: /views/courses/admin_index.ctp:53
+#: /views/courses/edit.ctp:18
+#: /views/departments/admin_edit.ctp:15
+#: /views/departments/admin_index.ctp:49
+#: /views/departments/admin_view.ctp:64
+#: /views/departments/edit.ctp:15
+#: /views/members/admin_edit.ctp:24
+#: /views/members/admin_index.ctp:65
+#: /views/members/edit.ctp:24
+#: /views/plugins/admin_edit.ctp:17
 #: /views/plugins/admin_view.ctp:69
 msgid "Delete"
 msgstr "Eliminar"
@@ -638,7 +657,8 @@ msgstr "Eliminar"
 msgid "List Posts"
 msgstr "Listar entradas"
 
-#: /plugins/blog/views/blogs/edit.ctp:19 /plugins/blog/views/blogs/view.ctp:33
+#: /plugins/blog/views/blogs/edit.ctp:19
+#: /plugins/blog/views/blogs/view.ctp:33
 #: /plugins/blog/views/comments/add.ctp:18
 #: /plugins/blog/views/comments/edit.ctp:18
 #: /plugins/blog/views/comments/view.ctp:28
@@ -664,11 +684,11 @@ msgstr "Blogs"
 #: /plugins/quiz/views/text_questions/index.ctp:6
 #: /plugins/scorm/views/scorm_attendee_trackings/index.ctp:6
 #: /plugins/wiki/views/entries/index.ctp:6
-#: /plugins/wiki/views/wikis/index.ctp:6 /views/courses/admin_index.ctp:6
-#: /views/departments/admin_index.ctp:6 /views/members/admin_index.ctp:6
-msgid ""
-"Page %page% of %pages%, showing %current% records out of %count% total, "
-"starting on record %start%, ending on %end%"
+#: /plugins/wiki/views/wikis/index.ctp:6
+#: /views/courses/admin_index.ctp:6
+#: /views/departments/admin_index.ctp:6
+#: /views/members/admin_index.ctp:6
+msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
 msgstr "Resultados totales: %count%. Mostrando del %start% al %end%"
 
 #: /plugins/blog/views/blogs/index.ctp:15
@@ -706,9 +726,12 @@ msgstr "Resultados totales: %count%. Mostrando del %start% al %end%"
 #: /plugins/scorm/views/scos/index.ctp:20
 #: /plugins/scorm/views/scos/view.ctp:359;412;458;501
 #: /plugins/wiki/views/entries/index.ctp:17
-#: /plugins/wiki/views/wikis/index.ctp:15 /views/courses/admin_index.ctp:18
-#: /views/departments/admin_index.ctp:14 /views/departments/admin_view.ctp:43
-#: /views/members/admin_index.ctp:21 /views/plugins/admin_view.ctp:48
+#: /plugins/wiki/views/wikis/index.ctp:15
+#: /views/courses/admin_index.ctp:18
+#: /views/departments/admin_index.ctp:14
+#: /views/departments/admin_view.ctp:43
+#: /views/members/admin_index.ctp:21
+#: /views/plugins/admin_view.ctp:48
 msgid "Actions"
 msgstr "Acciones"
 
@@ -747,9 +770,12 @@ msgstr "Acciones"
 #: /plugins/scorm/views/scos/index.ctp:77
 #: /plugins/scorm/views/scos/view.ctp:386;430;478;516
 #: /plugins/wiki/views/entries/index.ctp:47
-#: /plugins/wiki/views/wikis/index.ctp:39 /views/courses/admin_index.ctp:51
-#: /views/departments/admin_index.ctp:37 /views/departments/admin_view.ctp:62
-#: /views/members/admin_index.ctp:63 /views/plugins/admin_view.ctp:67
+#: /plugins/wiki/views/wikis/index.ctp:39
+#: /views/courses/admin_index.ctp:51
+#: /views/departments/admin_index.ctp:37
+#: /views/departments/admin_view.ctp:62
+#: /views/members/admin_index.ctp:63
+#: /views/plugins/admin_view.ctp:67
 msgid "View"
 msgstr "Ver"
 
@@ -806,13 +832,17 @@ msgstr "Ver"
 #: /plugins/scorm/views/scorms/edit.ctp:4
 #: /plugins/scorm/views/scorms/index.ctp:54
 #: /plugins/scorm/views/scorms/index2.ctp:54
-#: /plugins/scorm/views/scos/edit.ctp:4 /plugins/scorm/views/scos/index.ctp:78
+#: /plugins/scorm/views/scos/edit.ctp:4
+#: /plugins/scorm/views/scos/index.ctp:78
 #: /plugins/scorm/views/scos/view.ctp:83;123;159;191;219;259;303;335;387;431;479;517
 #: /plugins/wiki/views/entries/index.ctp:49
 #: /plugins/wiki/views/wikis/index.ctp:40
-#: /plugins/wiki/views/wikis/view.ctp:29 /views/courses/admin_index.ctp:52
-#: /views/departments/admin_index.ctp:43 /views/departments/admin_view.ctp:63
-#: /views/members/admin_index.ctp:64 /views/plugins/admin_view.ctp:68
+#: /plugins/wiki/views/wikis/view.ctp:29
+#: /views/courses/admin_index.ctp:52
+#: /views/departments/admin_index.ctp:43
+#: /views/departments/admin_view.ctp:63
+#: /views/members/admin_index.ctp:64
+#: /views/plugins/admin_view.ctp:68
 msgid "Edit"
 msgstr "Editar"
 
@@ -844,9 +874,12 @@ msgstr "Editar"
 #: /plugins/scorm/views/scos/index.ctp:86
 #: /plugins/wiki/views/entries/index.ctp:57
 #: /plugins/wiki/views/revisions/history.ctp:43
-#: /plugins/wiki/views/wikis/index.ctp:48 /views/courses/admin_index.ctp:60
-#: /views/departments/admin_index.ctp:60 /views/departments/index.ctp:13
-#: /views/departments/view.ctp:53 /views/members/admin_index.ctp:72
+#: /plugins/wiki/views/wikis/index.ctp:48
+#: /views/courses/admin_index.ctp:60
+#: /views/departments/admin_index.ctp:60
+#: /views/departments/index.ctp:13
+#: /views/departments/view.ctp:53
+#: /views/members/admin_index.ctp:72
 msgid "previous"
 msgstr "Anterior"
 
@@ -878,9 +911,12 @@ msgstr "Anterior"
 #: /plugins/scorm/views/scos/index.ctp:88
 #: /plugins/wiki/views/entries/index.ctp:59
 #: /plugins/wiki/views/revisions/history.ctp:45
-#: /plugins/wiki/views/wikis/index.ctp:50 /views/courses/admin_index.ctp:62
-#: /views/departments/admin_index.ctp:62 /views/departments/index.ctp:15
-#: /views/departments/view.ctp:55 /views/members/admin_index.ctp:74
+#: /plugins/wiki/views/wikis/index.ctp:50
+#: /views/courses/admin_index.ctp:62
+#: /views/departments/admin_index.ctp:62
+#: /views/departments/index.ctp:15
+#: /views/departments/view.ctp:55
+#: /views/members/admin_index.ctp:74
 msgid "next"
 msgstr "Siguiente"
 
@@ -929,7 +965,8 @@ msgstr "Comentar"
 
 #: /plugins/blog/views/comments/view.ctp:9
 #: /plugins/locker/views/documents/view.ctp:14
-#: /views/departments/admin_view.ctp:14;41 /views/plugins/admin_view.ctp:46
+#: /views/departments/admin_view.ctp:14;41
+#: /views/plugins/admin_view.ctp:46
 msgid "Description"
 msgstr "Descripción"
 
@@ -1070,8 +1107,7 @@ msgstr "Bloquear esta discusión"
 
 #: /plugins/forum/views/discussions/edit.ctp:17
 msgid "(Nobody will be able to reply anymore. Cannot be undone.)"
-msgstr ""
-"(No se podrá responder en la discusión. Este cambio no se puede deshacer.)"
+msgstr "(No se podrá responder en la discusión. Este cambio no se puede deshacer.)"
 
 #: /plugins/forum/views/discussions/view.ctp:4
 msgid "Discussion:"
@@ -1126,12 +1162,8 @@ msgid "and others..."
 msgstr ""
 
 #: /plugins/forum/views/elements/Response.updates.ctp:34
-msgid ""
-"The following classmates wrote a response on the discussion <em>:"
-"discussion_name</em>:<br /> :link_list"
-msgstr ""
-"Los siguientes compañeros de clases respondieron en la discusión <em>:"
-"discussion_name</em><br /> :link_list"
+msgid "The following classmates wrote a response on the discussion <em>:discussion_name</em>:<br /> :link_list"
+msgstr "Los siguientes compañeros de clases respondieron en la discusión <em>:discussion_name</em><br /> :link_list"
 
 #: /plugins/forum/views/elements/Topic.updates.ctp:10
 msgid ":member_name :action the Topic: :topic_name"
@@ -1190,9 +1222,12 @@ msgstr "Listar discusiones"
 #: /plugins/forum/views/subjects/add.ctp:20
 #: /plugins/forum/views/subjects/edit.ctp:22
 #: /plugins/forum/views/subjects/index.ctp:69
-#: /plugins/forum/views/subjects/view.ctp:49 /views/courses/admin_add.ctp:20
-#: /views/courses/admin_edit.ctp:22 /views/courses/admin_index.ctp:69
-#: /views/members/admin_edit.ctp:25 /views/members/admin_view.ctp:70
+#: /plugins/forum/views/subjects/view.ctp:49
+#: /views/courses/admin_add.ctp:20
+#: /views/courses/admin_edit.ctp:22
+#: /views/courses/admin_index.ctp:69
+#: /views/members/admin_edit.ctp:25
+#: /views/members/admin_view.ctp:70
 msgid "List Members"
 msgstr "Listar miembros"
 
@@ -1200,7 +1235,8 @@ msgstr "Listar miembros"
 #: /plugins/forum/views/subjects/add.ctp:21
 #: /plugins/forum/views/subjects/edit.ctp:23
 #: /plugins/forum/views/subjects/index.ctp:70
-#: /plugins/forum/views/subjects/view.ctp:50 /views/members/admin_index.ctp:78
+#: /plugins/forum/views/subjects/view.ctp:50
+#: /views/members/admin_index.ctp:78
 #: /views/members/admin_view.ctp:71
 msgid "New Member"
 msgstr "Nuevo miembro"
@@ -1211,32 +1247,31 @@ msgstr "Nuevo miembro"
 msgid "Forum"
 msgstr "Foro"
 
-#: /plugins/forum/views/pages/home.ctp:12 /views/pages/home.ctp:10
+#: /plugins/forum/views/pages/home.ctp:12
+#: /views/pages/home.ctp:10
 msgid "Your tmp directory is writable."
 msgstr ""
 
-#: /plugins/forum/views/pages/home.ctp:16 /views/pages/home.ctp:12
+#: /plugins/forum/views/pages/home.ctp:16
+#: /views/pages/home.ctp:12
 msgid "Your tmp directory is NOT writable."
 msgstr ""
 
 #: /plugins/forum/views/pages/home.ctp:26
-msgid ""
-"The %s is being used for caching. To change the config edit APP/config/core."
-"php "
+msgid "The %s is being used for caching. To change the config edit APP/config/core.php "
 msgstr ""
 
 #: /plugins/forum/views/pages/home.ctp:30
-msgid ""
-"Your cache is NOT working. Please check the settings in APP/config/core.php"
-msgstr ""
-"Su caché no está funcionando. Por favor, verifique la configuración en APP/"
-"config/core.php"
+msgid "Your cache is NOT working. Please check the settings in APP/config/core.php"
+msgstr "Su caché no está funcionando. Por favor, verifique la configuración en APP/config/core.php"
 
-#: /plugins/forum/views/pages/home.ctp:40 /views/pages/home.ctp:50
+#: /plugins/forum/views/pages/home.ctp:40
+#: /views/pages/home.ctp:50
 msgid "Your database configuration file is present."
 msgstr ""
 
-#: /plugins/forum/views/pages/home.ctp:45 /views/pages/home.ctp:53
+#: /plugins/forum/views/pages/home.ctp:45
+#: /views/pages/home.ctp:53
 msgid "Your database configuration file is NOT present."
 msgstr ""
 
@@ -1244,15 +1279,18 @@ msgstr ""
 msgid "Rename config/database.php.default to config/database.php"
 msgstr ""
 
-#: /plugins/forum/views/pages/home.ctp:62 /views/pages/home.ctp:70
+#: /plugins/forum/views/pages/home.ctp:62
+#: /views/pages/home.ctp:70
 msgid "Cake is able to connect to the database."
 msgstr ""
 
-#: /plugins/forum/views/pages/home.ctp:66 /views/pages/home.ctp:72
+#: /plugins/forum/views/pages/home.ctp:66
+#: /views/pages/home.ctp:72
 msgid "Cake is NOT able to connect to the database."
 msgstr ""
 
-#: /plugins/forum/views/pages/home.ctp:72 /views/pages/home.ctp:80
+#: /plugins/forum/views/pages/home.ctp:72
+#: /views/pages/home.ctp:80
 msgid "Editing this Page"
 msgstr ""
 
@@ -1316,15 +1354,20 @@ msgstr "Materia"
 msgid "Title"
 msgstr "Título"
 
-#: /plugins/forum/views/subjects/view.ctp:19 /views/courses/edit.ctp:23
-#: /views/members/add.ctp:4 /views/members/admin_view.ctp:2
-#: /views/members/edit.ctp:4 /views/members/view.ctp:48;49;51
+#: /plugins/forum/views/subjects/view.ctp:19
+#: /views/courses/edit.ctp:23
+#: /views/members/add.ctp:4
+#: /views/members/admin_view.ctp:2
+#: /views/members/edit.ctp:4
+#: /views/members/view.ctp:48;49;51
 msgid "Member"
 msgstr "Miembro"
 
 #: /plugins/forum/views/subjects/view.ctp:24
-#: /plugins/forum/views/topics/index.ctp:26 /views/courses/admin_view.ctp:26
-#: /views/departments/admin_view.ctp:42 /views/plugins/admin_view.ctp:47
+#: /plugins/forum/views/topics/index.ctp:26
+#: /views/courses/admin_view.ctp:26
+#: /views/departments/admin_view.ctp:42
+#: /views/plugins/admin_view.ctp:47
 msgid "Created"
 msgstr "Creado"
 
@@ -1407,12 +1450,8 @@ msgid "Topic:"
 msgstr "Tema:"
 
 #: /plugins/forum/views/topics/view.ctp:12
-msgid ""
-"You are currently viewing the discussions started around this topic <strong>"
-"\"%s\"</strong> inside the <em>%s</em> course forum."
-msgstr ""
-"Usted está viendo las discusiones del tema <strong>\"%s\"</strong> en el "
-"foro del curso <em>%s</em> "
+msgid "You are currently viewing the discussions started around this topic <strong>\"%s\"</strong> inside the <em>%s</em> course forum."
+msgstr "Usted está viendo las discusiones del tema <strong>\"%s\"</strong> en el foro del curso <em>%s</em> "
 
 #: /plugins/forum/views/topics/view.ctp:21;108
 msgid "Start a discussion"
@@ -1513,7 +1552,8 @@ msgstr "Documento"
 #: /plugins/quiz/views/ordering_questions/view.ctp:85
 #: /plugins/quiz/views/quizzes/view.ctp:9
 #: /plugins/quiz/views/text_questions/view.ctp:42
-#: /views/departments/admin_view.ctp:9;40 /views/plugins/admin_view.ctp:9;45
+#: /views/departments/admin_view.ctp:9;40
+#: /views/plugins/admin_view.ctp:9;45
 msgid "Name"
 msgstr "Nombre"
 
@@ -1591,8 +1631,7 @@ msgstr "La pregunta de selección ha sido guardada."
 
 #: /plugins/quiz/controllers/choice_questions_controller.php:70;123
 msgid "The Choice Question could not be saved. Please, try again."
-msgstr ""
-"La pregunta de selección no pudo ser guardada. Por favor, intente de nuevo."
+msgstr "La pregunta de selección no pudo ser guardada. Por favor, intente de nuevo."
 
 #: /plugins/quiz/controllers/choice_questions_controller.php:106
 msgid "Invalid Choice Question"
@@ -1620,9 +1659,7 @@ msgstr "La pregunta de emparejamiento ha sido guardada."
 
 #: /plugins/quiz/controllers/matching_questions_controller.php:75;140
 msgid "The Matching Question could not be saved. Please, try again."
-msgstr ""
-"La pregunta de emparejamiento no pudo ser guardada. Por favor, intente de "
-"nuevo."
+msgstr "La pregunta de emparejamiento no pudo ser guardada. Por favor, intente de nuevo."
 
 #: /plugins/quiz/controllers/matching_questions_controller.php:131
 msgid "Invalid Matching Question"
@@ -1646,9 +1683,7 @@ msgstr "La pregunta de ordenamiento ha sido guardada."
 
 #: /plugins/quiz/controllers/ordering_questions_controller.php:71;113
 msgid "The Ordering Question could not be saved. Please, try again."
-msgstr ""
-"La pregunta de ordenamiento no pudo ser guardada. Por favor, intente de "
-"nuevo."
+msgstr "La pregunta de ordenamiento no pudo ser guardada. Por favor, intente de nuevo."
 
 #: /plugins/quiz/controllers/ordering_questions_controller.php:105
 msgid "Invalid Ordering Question"
@@ -1725,8 +1760,7 @@ msgstr "La pregunta de desarrollo ha sido guardada."
 
 #: /plugins/quiz/controllers/text_questions_controller.php:66;94
 msgid "The Text Question could not be saved. Please, try again."
-msgstr ""
-"La pregunta de desarrollo no pudo ser guardada. Por favor, intente de nuevo."
+msgstr "La pregunta de desarrollo no pudo ser guardada. Por favor, intente de nuevo."
 
 #: /plugins/quiz/controllers/text_questions_controller.php:73
 msgid "No format"
@@ -1760,9 +1794,7 @@ msgstr "Por favor, indique el texto de esta pregunta."
 #: /plugins/quiz/models/choice_choice.php:63
 #: /plugins/quiz/models/ordering_choice.php:76
 msgid "This position is higher the total number of choices available"
-msgstr ""
-"Esta posición tiene un número mayor al total de número de opciones "
-"disponibles."
+msgstr "Esta posición tiene un número mayor al total de número de opciones disponibles."
 
 #: /plugins/quiz/models/choice_question.php:102
 #: /plugins/quiz/models/matching_question.php:111
@@ -1813,12 +1845,10 @@ msgstr "El mínimo de opciones debe ser indicada con un número."
 
 #: /plugins/quiz/models/matching_question.php:127
 msgid "Min Associations should be less than Max Associations"
-msgstr ""
-"El mínimo de asociaciones debe ser menor que el máximo de asociaciones."
+msgstr "El mínimo de asociaciones debe ser menor que el máximo de asociaciones."
 
 #: /plugins/quiz/models/matching_question.php:131
-msgid ""
-"The number of correct answers is not enough compared to Min Associations"
+msgid "The number of correct answers is not enough compared to Min Associations"
 msgstr ""
 
 #: /plugins/quiz/models/matching_question.php:179
@@ -1835,12 +1865,8 @@ msgstr "Crear Pregunta de Selección"
 
 #: /plugins/quiz/views/choice_questions/add.ctp:8
 #: /plugins/quiz/views/ordering_questions/add.ctp:8
-msgid ""
-"This type of question has many options (with one or more correct answers) "
-"and requests the student to select the correct answer."
-msgstr ""
-"Este tipo de pregunta tiene varias opciones (con una o más respuestas "
-"correctas) y el estudiante debe seleccionar la respuesta correcta"
+msgid "This type of question has many options (with one or more correct answers) and requests the student to select the correct answer."
+msgstr "Este tipo de pregunta tiene varias opciones (con una o más respuestas correctas) y el estudiante debe seleccionar la respuesta correcta"
 
 #: /plugins/quiz/views/choice_questions/add.ctp:13
 #: /plugins/quiz/views/matching_questions/add.ctp:13
@@ -1883,8 +1909,10 @@ msgstr "Crear pregunta"
 #: /plugins/quiz/views/text_questions/view.ctp:28
 #: /plugins/scorm/views/scorm_attendee_trackings/edit.ctp:4
 #: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:38
-#: /views/courses/edit.ctp:4 /views/departments/edit.ctp:4
-#: /views/members/edit.ctp:4 /views/members/view.ctp:48
+#: /views/courses/edit.ctp:4
+#: /views/departments/edit.ctp:4
+#: /views/members/edit.ctp:4
+#: /views/members/view.ctp:48
 msgid "Edit %s"
 msgstr "Editar %s"
 
@@ -1913,9 +1941,12 @@ msgstr "Pregunta de Selección"
 #: /plugins/scorm/views/scorm_attendee_trackings/add.ctp:17
 #: /plugins/scorm/views/scorm_attendee_trackings/edit.ctp:19
 #: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:40
-#: /views/courses/edit.ctp:19;20;22 /views/departments/add.ctp:14;15
-#: /views/departments/edit.ctp:16;17 /views/departments/view.ctp:10
-#: /views/members/add.ctp:23;24 /views/members/edit.ctp:25;26
+#: /views/courses/edit.ctp:19;20;22
+#: /views/departments/add.ctp:14;15
+#: /views/departments/edit.ctp:16;17
+#: /views/departments/view.ctp:10
+#: /views/members/add.ctp:23;24
+#: /views/members/edit.ctp:25;26
 #: /views/members/view.ctp:50;52
 msgid "List %s"
 msgstr "Listar %s"
@@ -1948,9 +1979,12 @@ msgstr ""
 #: /plugins/quiz/views/text_questions/view.ctp:31;33;68
 #: /plugins/scorm/views/scorm_attendee_trackings/index.ctp:62
 #: /plugins/scorm/views/scorm_attendee_trackings/view.ctp:41
-#: /views/courses/edit.ctp:21;23 /views/departments/add.ctp:16
-#: /views/departments/edit.ctp:18 /views/members/add.ctp:25
-#: /views/members/edit.ctp:27 /views/members/view.ctp:51;53
+#: /views/courses/edit.ctp:21;23
+#: /views/departments/add.ctp:16
+#: /views/departments/edit.ctp:18
+#: /views/members/add.ctp:25
+#: /views/members/edit.ctp:27
+#: /views/members/view.ctp:51;53
 msgid "New %s"
 msgstr "Crear %s"
 
@@ -2084,15 +2118,8 @@ msgid "Create a Matching Question"
 msgstr "Crear una Pregunta de Emparejamiento"
 
 #: /plugins/quiz/views/matching_questions/add.ctp:8
-msgid ""
-"This type of question has two sets of options: each element &mdash; question "
-"&mdash; in the first, has one correct answer in the other. This question "
-"requests the student to select a correct answer for each question."
-msgstr ""
-"Esta pregunta tiene dos grupos de opciones: cada elemento &mdash;"
-"pregunta&mdash; en el primer conjunto tiene una respuesta correcta en el "
-"segundo. El estudiante debe seleccionar una respuesta correcta para cada "
-"pregunta."
+msgid "This type of question has two sets of options: each element &mdash; question &mdash; in the first, has one correct answer in the other. This question requests the student to select a correct answer for each question."
+msgstr "Esta pregunta tiene dos grupos de opciones: cada elemento &mdash;pregunta&mdash; en el primer conjunto tiene una respuesta correcta en el segundo. El estudiante debe seleccionar una respuesta correcta para cada pregunta."
 
 #: /plugins/quiz/views/matching_questions/add.ctp:31
 msgid "Questions"
@@ -2161,11 +2188,8 @@ msgid "Create Ordering Question"
 msgstr "Crear Pregunta de Ordenamiento"
 
 #: /plugins/quiz/views/ordering_questions/add.ctp:32
-msgid ""
-"Write the choices in the correct order. Leave both fields empty to ignore."
-msgstr ""
-"Escriba las opciones en el orden correcto. Deje ambos campos vacíos si desea "
-"ignorar la opción"
+msgid "Write the choices in the correct order. Leave both fields empty to ignore."
+msgstr "Escriba las opciones en el orden correcto. Deje ambos campos vacíos si desea ignorar la opción"
 
 #: /plugins/quiz/views/ordering_questions/add.ctp:49
 msgid "Fixed Position"
@@ -2201,7 +2225,8 @@ msgstr ""
 
 #: /plugins/quiz/views/quizzes/add.ctp:4
 #: /plugins/scorm/views/scorm_attendee_trackings/add.ctp:4
-#: /views/courses/add.ctp:4 /views/departments/add.ctp:4
+#: /views/courses/add.ctp:4
+#: /views/departments/add.ctp:4
 #: /views/members/add.ctp:4
 msgid "Add %s"
 msgstr "Agregar %s"
@@ -2352,9 +2377,11 @@ msgstr ""
 #: /plugins/scorm/views/objectives/add.ctp:4
 #: /plugins/scorm/views/randomizations/add.ctp:4
 #: /plugins/scorm/views/rollup_considerations/add.ctp:4
-#: /plugins/scorm/views/rollups/add.ctp:4 /plugins/scorm/views/rules/add.ctp:4
+#: /plugins/scorm/views/rollups/add.ctp:4
+#: /plugins/scorm/views/rules/add.ctp:4
 #: /plugins/scorm/views/sco_presentations/add.ctp:4
-#: /plugins/scorm/views/scorms/add.ctp:4 /plugins/scorm/views/scos/add.ctp:4
+#: /plugins/scorm/views/scorms/add.ctp:4
+#: /plugins/scorm/views/scos/add.ctp:4
 msgid "Add"
 msgstr "Agregar"
 
@@ -2473,7 +2500,8 @@ msgstr ""
 #: /plugins/scorm/views/scorms/edit.ctp:22
 #: /plugins/scorm/views/scorms/index.ctp:68;70
 #: /plugins/scorm/views/scorms/index2.ctp:68;70
-#: /plugins/scorm/views/scos/add.ctp:28 /plugins/scorm/views/scos/edit.ctp:30
+#: /plugins/scorm/views/scos/add.ctp:28
+#: /plugins/scorm/views/scos/edit.ctp:30
 #: /plugins/scorm/views/scos/index.ctp:92;94
 #: /plugins/scorm/views/scos/view.ctp:86;88;397;441;489;527
 msgid "New"
@@ -2487,7 +2515,8 @@ msgstr ""
 #: /plugins/scorm/views/rollups/edit.ctp:20
 #: /plugins/scorm/views/rollups/index.ctp:54
 #: /plugins/scorm/views/rollups/view.ctp:38;85
-#: /plugins/scorm/views/rules/add.ctp:4 /plugins/scorm/views/rules/edit.ctp:4
+#: /plugins/scorm/views/rules/add.ctp:4
+#: /plugins/scorm/views/rules/edit.ctp:4
 #: /plugins/scorm/views/rules/index.ctp:64
 #: /plugins/scorm/views/rules/view.ctp:2;48;49;51
 #: /plugins/scorm/views/scos/view.ctp:489
@@ -2579,7 +2608,8 @@ msgstr ""
 #: /plugins/scorm/views/objectives/edit.ctp:4
 #: /plugins/scorm/views/objectives/index.ctp:56
 #: /plugins/scorm/views/objectives/view.ctp:2;38;39;41
-#: /plugins/scorm/views/scos/add.ctp:28 /plugins/scorm/views/scos/edit.ctp:30
+#: /plugins/scorm/views/scos/add.ctp:28
+#: /plugins/scorm/views/scos/edit.ctp:30
 #: /plugins/scorm/views/scos/index.ctp:94
 #: /plugins/scorm/views/scos/view.ctp:88;441
 msgid "Objective"
@@ -2589,7 +2619,8 @@ msgstr ""
 #: /plugins/scorm/views/objectives/edit.ctp:19
 #: /plugins/scorm/views/objectives/index.ctp:2
 #: /plugins/scorm/views/objectives/view.ctp:40
-#: /plugins/scorm/views/scos/add.ctp:27 /plugins/scorm/views/scos/edit.ctp:29
+#: /plugins/scorm/views/scos/add.ctp:27
+#: /plugins/scorm/views/scos/edit.ctp:29
 #: /plugins/scorm/views/scos/index.ctp:93
 #: /plugins/scorm/views/scos/view.ctp:87;402
 msgid "Objectives"
@@ -2730,8 +2761,10 @@ msgstr "Scorms"
 #: /plugins/scorm/views/scorms/edit.ctp:21
 #: /plugins/scorm/views/scorms/index.ctp:69
 #: /plugins/scorm/views/scorms/index2.ctp:69
-#: /plugins/scorm/views/scos/add.ctp:26 /plugins/scorm/views/scos/edit.ctp:28
-#: /plugins/scorm/views/scos/index.ctp:2 /plugins/scorm/views/scos/view.ctp:85
+#: /plugins/scorm/views/scos/add.ctp:26
+#: /plugins/scorm/views/scos/edit.ctp:28
+#: /plugins/scorm/views/scos/index.ctp:2
+#: /plugins/scorm/views/scos/view.ctp:85
 msgid "Scos"
 msgstr "Scos"
 
@@ -2739,7 +2772,8 @@ msgstr "Scos"
 #: /plugins/scorm/views/scorms/edit.ctp:22
 #: /plugins/scorm/views/scorms/index.ctp:70
 #: /plugins/scorm/views/scorms/index2.ctp:70
-#: /plugins/scorm/views/scos/add.ctp:4 /plugins/scorm/views/scos/edit.ctp:4
+#: /plugins/scorm/views/scos/add.ctp:4
+#: /plugins/scorm/views/scos/edit.ctp:4
 #: /plugins/scorm/views/scos/index.ctp:92
 #: /plugins/scorm/views/scos/view.ctp:2;83;84;86
 msgid "Sco"
@@ -2832,8 +2866,7 @@ msgstr "La página restaurada a la revisión que seleccionó."
 
 #: /plugins/wiki/controllers/entries_controller.php:146
 msgid "An error occured. The entry revision was not restored"
-msgstr ""
-"Ha ocurrido un error. La página no fue restaurada a la revisión seleccionada."
+msgstr "Ha ocurrido un error. La página no fue restaurada a la revisión seleccionada."
 
 #: /plugins/wiki/controllers/installer_controller.php:51
 msgid "Plugin Wiki installed"
@@ -2910,35 +2943,50 @@ msgstr "versión actual"
 msgid "Add Wiki"
 msgstr "Agregar Wiki"
 
-#: /plugins/wiki/views/wikis/add.ctp:15 /plugins/wiki/views/wikis/edit.ctp:17
+#: /plugins/wiki/views/wikis/add.ctp:15
+#: /plugins/wiki/views/wikis/edit.ctp:17
 msgid "List Wikis"
 msgstr "Listar Wikis"
 
-#: /plugins/wiki/views/wikis/add.ctp:16 /plugins/wiki/views/wikis/edit.ctp:18
-#: /plugins/wiki/views/wikis/index.ctp:55 /views/courses/admin_add.ctp:17
-#: /views/courses/admin_edit.ctp:19 /views/departments/admin_add.ctp:15
-#: /views/departments/admin_edit.ctp:17 /views/departments/admin_index.ctp:67
-#: /views/departments/admin_view.ctp:27 /views/plugins/admin_add.ctp:17
-#: /views/plugins/admin_edit.ctp:19 /views/plugins/admin_view.ctp:32
+#: /plugins/wiki/views/wikis/add.ctp:16
+#: /plugins/wiki/views/wikis/edit.ctp:18
+#: /plugins/wiki/views/wikis/index.ctp:55
+#: /views/courses/admin_add.ctp:17
+#: /views/courses/admin_edit.ctp:19
+#: /views/departments/admin_add.ctp:15
+#: /views/departments/admin_edit.ctp:17
+#: /views/departments/admin_index.ctp:67
+#: /views/departments/admin_view.ctp:27
+#: /views/plugins/admin_add.ctp:17
+#: /views/plugins/admin_edit.ctp:19
+#: /views/plugins/admin_view.ctp:32
 msgid "List Courses"
 msgstr "Listar cursos"
 
-#: /plugins/wiki/views/wikis/add.ctp:17 /plugins/wiki/views/wikis/edit.ctp:19
-#: /plugins/wiki/views/wikis/index.ctp:56 /views/courses/admin_index.ctp:66
-#: /views/departments/admin_add.ctp:16 /views/departments/admin_edit.ctp:18
+#: /plugins/wiki/views/wikis/add.ctp:17
+#: /plugins/wiki/views/wikis/edit.ctp:19
+#: /plugins/wiki/views/wikis/index.ctp:56
+#: /views/courses/admin_index.ctp:66
+#: /views/departments/admin_add.ctp:16
+#: /views/departments/admin_edit.ctp:18
 #: /views/departments/admin_index.ctp:68
-#: /views/departments/admin_view.ctp:28;73 /views/plugins/admin_add.ctp:18
-#: /views/plugins/admin_edit.ctp:20 /views/plugins/admin_view.ctp:33;78
+#: /views/departments/admin_view.ctp:28;73
+#: /views/plugins/admin_add.ctp:18
+#: /views/plugins/admin_edit.ctp:20
+#: /views/plugins/admin_view.ctp:33;78
 msgid "New Course"
 msgstr "Nuevo Curso"
 
-#: /plugins/wiki/views/wikis/add.ctp:18 /plugins/wiki/views/wikis/edit.ctp:20
+#: /plugins/wiki/views/wikis/add.ctp:18
+#: /plugins/wiki/views/wikis/edit.ctp:20
 #: /plugins/wiki/views/wikis/index.ctp:57
 msgid "List Entries"
 msgstr "Listar páginas"
 
-#: /plugins/wiki/views/wikis/add.ctp:19 /plugins/wiki/views/wikis/edit.ctp:21
-#: /plugins/wiki/views/wikis/index.ctp:58 /plugins/wiki/views/wikis/view.ctp:5
+#: /plugins/wiki/views/wikis/add.ctp:19
+#: /plugins/wiki/views/wikis/edit.ctp:21
+#: /plugins/wiki/views/wikis/index.ctp:58
+#: /plugins/wiki/views/wikis/view.ctp:5
 msgid "New Entry"
 msgstr "Nueva Página"
 
@@ -2962,8 +3010,10 @@ msgstr "Páginas recientes"
 msgid "history"
 msgstr "historial"
 
-#: /views/courses/add.ctp:4 /views/courses/edit.ctp:4
-#: /views/departments/add.ctp:16 /views/departments/edit.ctp:18
+#: /views/courses/add.ctp:4
+#: /views/courses/edit.ctp:4
+#: /views/departments/add.ctp:16
+#: /views/departments/edit.ctp:18
 msgid "Course"
 msgstr "Curso"
 
@@ -2971,19 +3021,25 @@ msgstr "Curso"
 msgid "Add Course"
 msgstr "Agregar Curso"
 
-#: /views/courses/admin_add.ctp:18 /views/courses/admin_edit.ctp:20
-#: /views/courses/admin_index.ctp:67 /views/departments/admin_add.ctp:14
-#: /views/departments/admin_edit.ctp:16 /views/departments/admin_view.ctp:25
+#: /views/courses/admin_add.ctp:18
+#: /views/courses/admin_edit.ctp:20
+#: /views/courses/admin_index.ctp:67
+#: /views/departments/admin_add.ctp:14
+#: /views/departments/admin_edit.ctp:16
+#: /views/departments/admin_view.ctp:25
 msgid "List Departments"
 msgstr "Listar departamentos"
 
-#: /views/courses/admin_add.ctp:19 /views/courses/admin_edit.ctp:21
-#: /views/courses/admin_index.ctp:68 /views/departments/admin_index.ctp:66
+#: /views/courses/admin_add.ctp:19
+#: /views/courses/admin_edit.ctp:21
+#: /views/courses/admin_index.ctp:68
+#: /views/departments/admin_index.ctp:66
 #: /views/departments/admin_view.ctp:26
 msgid "New Department"
 msgstr "Nuevo departamento"
 
-#: /views/courses/admin_add.ctp:21 /views/courses/admin_edit.ctp:23
+#: /views/courses/admin_add.ctp:21
+#: /views/courses/admin_edit.ctp:23
 #: /views/courses/admin_index.ctp:70
 msgid "New Owner"
 msgstr "Nuevo dueño"
@@ -2992,14 +3048,19 @@ msgstr "Nuevo dueño"
 msgid "Edit Course"
 msgstr "Editar Curso"
 
-#: /views/courses/admin_index.ctp:2 /views/courses/edit.ctp:19
-#: /views/departments/add.ctp:15 /views/departments/edit.ctp:17
-#: /views/departments/view.ctp:14 /views/layouts/admin.ctp:28
+#: /views/courses/admin_index.ctp:2
+#: /views/courses/edit.ctp:19
+#: /views/departments/add.ctp:15
+#: /views/departments/edit.ctp:17
+#: /views/departments/view.ctp:14
+#: /views/layouts/admin.ctp:28
 msgid "Courses"
 msgstr "Cursos"
 
-#: /views/courses/admin_view.ctp:8 /views/courses/edit.ctp:21
-#: /views/departments/add.ctp:4 /views/departments/admin_view.ctp:2
+#: /views/courses/admin_view.ctp:8
+#: /views/courses/edit.ctp:21
+#: /views/departments/add.ctp:4
+#: /views/departments/admin_view.ctp:2
 #: /views/departments/edit.ctp:4
 msgid "Department"
 msgstr "Departamento"
@@ -3008,9 +3069,12 @@ msgstr "Departamento"
 msgid "Owner"
 msgstr "Dueño"
 
-#: /views/courses/admin_view.ctp:31 /views/courses/edit.ctp:22
-#: /views/layouts/admin.ctp:38 /views/members/add.ctp:23
-#: /views/members/admin_index.ctp:2 /views/members/edit.ctp:25
+#: /views/courses/admin_view.ctp:31
+#: /views/courses/edit.ctp:22
+#: /views/layouts/admin.ctp:38
+#: /views/members/add.ctp:23
+#: /views/members/admin_index.ctp:2
+#: /views/members/edit.ctp:25
 #: /views/members/view.ctp:50
 msgid "Members"
 msgstr "Miembros"
@@ -3019,9 +3083,12 @@ msgstr "Miembros"
 msgid "add someone"
 msgstr "Agregar"
 
-#: /views/courses/edit.ctp:20 /views/departments/add.ctp:14
-#: /views/departments/admin_index.ctp:2 /views/departments/edit.ctp:16
-#: /views/departments/index.ctp:2 /views/departments/view.ctp:10
+#: /views/courses/edit.ctp:20
+#: /views/departments/add.ctp:14
+#: /views/departments/admin_index.ctp:2
+#: /views/departments/edit.ctp:16
+#: /views/departments/index.ctp:2
+#: /views/departments/view.ctp:10
 #: /views/layouts/admin.ctp:33
 msgid "Departments"
 msgstr "Departamentos"
@@ -3034,11 +3101,13 @@ msgstr "Actualizaciones"
 msgid "Professors"
 msgstr "Profesores"
 
-#: /views/courses/tools.ctp:2 /views/layouts/default.ctp:41
+#: /views/courses/tools.ctp:2
+#: /views/layouts/default.ctp:41
 msgid "Tools"
 msgstr "Herramientas"
 
-#: /views/courses/tools.ctp:25 /views/plugins/admin_index.ctp:25;66
+#: /views/courses/tools.ctp:25
+#: /views/plugins/admin_index.ctp:25;66
 msgid "Author"
 msgstr "Autor"
 
@@ -3071,7 +3140,8 @@ msgstr "Conexiones"
 msgid "Add Department"
 msgstr "Agregar Departamento"
 
-#: /views/departments/admin_edit.ctp:4 /views/departments/admin_view.ctp:23
+#: /views/departments/admin_edit.ctp:4
+#: /views/departments/admin_view.ctp:23
 msgid "Edit Department"
 msgstr "Editar Departamento"
 
@@ -3079,19 +3149,23 @@ msgstr "Editar Departamento"
 msgid "Delete Department"
 msgstr "Eliminar departamento"
 
-#: /views/departments/admin_view.ctp:32 /views/plugins/admin_view.ctp:37
+#: /views/departments/admin_view.ctp:32
+#: /views/plugins/admin_view.ctp:37
 msgid "Related Courses"
 msgstr "Cursos relacionados"
 
-#: /views/departments/admin_view.ctp:37 /views/plugins/admin_view.ctp:42
+#: /views/departments/admin_view.ctp:37
+#: /views/plugins/admin_view.ctp:42
 msgid "Department Id"
 msgstr ""
 
-#: /views/departments/admin_view.ctp:38 /views/plugins/admin_view.ctp:43
+#: /views/departments/admin_view.ctp:38
+#: /views/plugins/admin_view.ctp:43
 msgid "Owner Id"
 msgstr ""
 
-#: /views/departments/admin_view.ctp:39 /views/plugins/admin_view.ctp:44
+#: /views/departments/admin_view.ctp:39
+#: /views/plugins/admin_view.ctp:44
 msgid "Code"
 msgstr "Código"
 
@@ -3107,7 +3181,8 @@ msgstr "Inscribir"
 msgid "There are no professors for this course"
 msgstr "No hay profesores asignados a este curso."
 
-#: /views/elements/dashboard/profile.ctp:2 /views/members/view.ctp:2
+#: /views/elements/dashboard/profile.ctp:2
+#: /views/members/view.ctp:2
 msgid "Profile"
 msgstr "Perfil"
 
@@ -3163,17 +3238,21 @@ msgstr "Usted no se ha inscrito en un curso"
 msgid "Find a Course to enroll"
 msgstr "Inscribirse en un curso"
 
-#: /views/layouts/admin.ctp:43 /views/plugins/admin_index.ctp:2
+#: /views/layouts/admin.ctp:43
+#: /views/plugins/admin_index.ctp:2
 msgid "Plugins"
 msgstr "Plugins"
 
-#: /views/members/add.ctp:24 /views/members/edit.ctp:26
+#: /views/members/add.ctp:24
+#: /views/members/edit.ctp:26
 #: /views/members/view.ctp:52
 msgid "Roles"
 msgstr "Roles"
 
-#: /views/members/add.ctp:25 /views/members/admin_view.ctp:49
-#: /views/members/edit.ctp:27 /views/members/view.ctp:53
+#: /views/members/add.ctp:25
+#: /views/members/admin_view.ctp:49
+#: /views/members/edit.ctp:27
+#: /views/members/view.ctp:53
 msgid "Role"
 msgstr "Rol"
 
@@ -3193,47 +3272,58 @@ msgstr "Información de Acceso"
 msgid "Give this user administrative access"
 msgstr "Permitir a este usuario tener acceso administrativo"
 
-#: /views/members/admin_edit.ctp:4 /views/members/admin_view.ctp:68
+#: /views/members/admin_edit.ctp:4
+#: /views/members/admin_view.ctp:68
 msgid "Edit Member"
 msgstr "Editar miembro"
 
-#: /views/members/admin_edit.ctp:26 /views/members/admin_view.ctp:72
+#: /views/members/admin_edit.ctp:26
+#: /views/members/admin_view.ctp:72
 msgid "List Roles"
 msgstr "Listar Roles"
 
-#: /views/members/admin_edit.ctp:27 /views/members/admin_view.ctp:73
+#: /views/members/admin_edit.ctp:27
+#: /views/members/admin_view.ctp:73
 msgid "New Role"
 msgstr "Nuevo Rol"
 
-#: /views/members/admin_view.ctp:9 /views/members/view.ctp:9
+#: /views/members/admin_view.ctp:9
+#: /views/members/view.ctp:9
 msgid "Institution Id"
 msgstr ""
 
-#: /views/members/admin_view.ctp:14 /views/members/view.ctp:4
+#: /views/members/admin_view.ctp:14
+#: /views/members/view.ctp:4
 msgid "Full Name"
 msgstr "Nombre completo"
 
-#: /views/members/admin_view.ctp:19 /views/members/view.ctp:14
+#: /views/members/admin_view.ctp:19
+#: /views/members/view.ctp:14
 msgid "Email"
 msgstr "Email"
 
-#: /views/members/admin_view.ctp:24 /views/members/view.ctp:19
+#: /views/members/admin_view.ctp:24
+#: /views/members/view.ctp:19
 msgid "Phone"
 msgstr "Teléfono"
 
-#: /views/members/admin_view.ctp:29 /views/members/view.ctp:24
+#: /views/members/admin_view.ctp:29
+#: /views/members/view.ctp:24
 msgid "Country"
 msgstr "País"
 
-#: /views/members/admin_view.ctp:34 /views/members/view.ctp:29
+#: /views/members/admin_view.ctp:34
+#: /views/members/view.ctp:29
 msgid "City"
 msgstr "Ciudad"
 
-#: /views/members/admin_view.ctp:39 /views/members/view.ctp:34
+#: /views/members/admin_view.ctp:39
+#: /views/members/view.ctp:34
 msgid "Age"
 msgstr "Edad"
 
-#: /views/members/admin_view.ctp:44 /views/members/view.ctp:39
+#: /views/members/admin_view.ctp:44
+#: /views/members/view.ctp:39
 msgid "Sex"
 msgstr "Sexo"
 
@@ -3279,12 +3369,9 @@ msgstr ""
 
 #: /views/pages/home.ctp:82
 msgid ""
-"To change the content of this page, edit: /Users/phpnut/Sites/helloworld/1.2."
-"x.x/sampleapp/pages/home.ctp.<br />\n"
-"To change its layout, edit: /Users/phpnut/Sites/helloworld/1.2.x.x/sampleapp/"
-"layouts/default.ctp.<br />\n"
-"You can also add some CSS styles for your pages at: /Users/phpnut/Sites/"
-"helloworld/1.2.x.x/sampleapp/webroot/css.\n"
+"To change the content of this page, edit: /Users/phpnut/Sites/helloworld/1.2.x.x/sampleapp/pages/home.ctp.<br />\n"
+"To change its layout, edit: /Users/phpnut/Sites/helloworld/1.2.x.x/sampleapp/layouts/default.ctp.<br />\n"
+"You can also add some CSS styles for your pages at: /Users/phpnut/Sites/helloworld/1.2.x.x/sampleapp/webroot/css.\n"
 msgstr ""
 
 #: /views/pages/home.ctp:86
@@ -3304,17 +3391,11 @@ msgid "More about Cake"
 msgstr ""
 
 #: /views/pages/home.ctp:93
-msgid ""
-"CakePHP is a rapid development framework for PHP which uses commonly known "
-"design patterns like Active Record, Association Data Mapping, Front "
-"Controller and MVC."
+msgid "CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC."
 msgstr ""
 
 #: /views/pages/home.ctp:96
-msgid ""
-"Our primary goal is to provide a structured framework that enables PHP users "
-"at all levels to rapidly develop robust web applications, without any loss "
-"to flexibility."
+msgid "Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility."
 msgstr ""
 
 #: /views/pages/home.ctp:100
@@ -3330,9 +3411,7 @@ msgid "The Show"
 msgstr ""
 
 #: /views/pages/home.ctp:103
-msgid ""
-"The Show is a weekly live internet radio broadcast where we discuss CakePHP-"
-"related topics and answer questions live via IRC, Skype, and telephone."
+msgid "The Show is a weekly live internet radio broadcast where we discuss CakePHP-related topics and answer questions live via IRC, Skype, and telephone."
 msgstr ""
 
 #: /views/pages/home.ctp:104
@@ -3396,8 +3475,7 @@ msgid "CakePHP Trac"
 msgstr ""
 
 #: /views/pages/home.ctp:119
-msgid ""
-"For the Development of CakePHP (Tickets, SVN browser, Roadmap, Changelogs)"
+msgid "For the Development of CakePHP (Tickets, SVN browser, Roadmap, Changelogs)"
 msgstr ""
 
 #: /views/pages/home.ctp:120
@@ -3416,12 +3494,14 @@ msgstr ""
 msgid "Add Plugin"
 msgstr "Agregar plugin"
 
-#: /views/plugins/admin_add.ctp:16 /views/plugins/admin_edit.ctp:18
+#: /views/plugins/admin_add.ctp:16
+#: /views/plugins/admin_edit.ctp:18
 #: /views/plugins/admin_view.ctp:30
 msgid "List Plugins"
 msgstr "Listar plugins"
 
-#: /views/plugins/admin_edit.ctp:4 /views/plugins/admin_view.ctp:28
+#: /views/plugins/admin_edit.ctp:4
+#: /views/plugins/admin_view.ctp:28
 msgid "Edit Plugin"
 msgstr "Editar plugin"
 
@@ -3569,20 +3649,12 @@ msgid "Login"
 msgstr ""
 
 #: /plugins/quiz/views/choice_questions/add.ctp:17
-msgid ""
-"Maximum number of choices that the student is allowed to select. Leave empty "
-"to have no restriction."
-msgstr ""
-"Número máximo de opciones que el estudiante puede seleccionar. Dejar en "
-"blanco si no hay límite para ello."
+msgid "Maximum number of choices that the student is allowed to select. Leave empty to have no restriction."
+msgstr "Número máximo de opciones que el estudiante puede seleccionar. Dejar en blanco si no hay límite para ello."
 
 #: /plugins/quiz/views/choice_questions/add.ctp:23
-msgid ""
-"Minimum number of choices that the student is required to select. Leave "
-"empty to have no restriction."
-msgstr ""
-"Número mínimo de opciones que el estudiante puede seleccionar. Dejar en "
-"blanco si no hay límite para ello."
+msgid "Minimum number of choices that the student is required to select. Leave empty to have no restriction."
+msgstr "Número mínimo de opciones que el estudiante puede seleccionar. Dejar en blanco si no hay límite para ello."
 
 #: /plugins/quiz/views/choice_questions/edit.ctp:7
 msgid "body"
@@ -3601,42 +3673,27 @@ msgid "min_choices"
 msgstr ""
 
 #: /plugins/quiz/views/matching_questions/add.ctp:17
-msgid ""
-"Maximum number of associations that the student is allowed to create. Leave "
-"empty to have no restriction."
-msgstr ""
-"Número máximo de asociaciones que el estudiante debe crear. Dejar en blanco "
-"si no hay límite para ello."
+msgid "Maximum number of associations that the student is allowed to create. Leave empty to have no restriction."
+msgstr "Número máximo de asociaciones que el estudiante debe crear. Dejar en blanco si no hay límite para ello."
 
 #: /plugins/quiz/views/matching_questions/add.ctp:23
-msgid ""
-"Minimum number of associations that the student is required to create. Leave "
-"empty to have no restriction."
-msgstr ""
-"Número mínimo de asociaciones que el estudiante debe crear. Dejar en blanco "
-"si no hay límite para ello."
+msgid "Minimum number of associations that the student is required to create. Leave empty to have no restriction."
+msgstr "Número mínimo de asociaciones que el estudiante debe crear. Dejar en blanco si no hay límite para ello."
 
 #: /plugins/quiz/views/ordering_questions/add.ctp:18
-msgid ""
-"Maximum number of choices that the student is allowed to select to create an "
-"answer. Leave empty to have no restriction."
-msgstr ""
-"Número máximo de opciones que el estudiante debe seleccionar para crear una "
-"respuesta. Dejar en blanco si no hay límite para ello."
+msgid "Maximum number of choices that the student is allowed to select to create an answer. Leave empty to have no restriction."
+msgstr "Número máximo de opciones que el estudiante debe seleccionar para crear una respuesta. Dejar en blanco si no hay límite para ello."
 
 #: /plugins/quiz/views/ordering_questions/add.ctp:24
-msgid ""
-"Minimum number of choices that the student is required to select to create "
-"an answer. Leave empty to have no restriction."
-msgstr ""
-"Número mínimo de opciones que el estudiante debe seleccionar para crear una "
-"respuesta. Dejar en blanco si no hay límite para ello."
+msgid "Minimum number of choices that the student is required to select to create an answer. Leave empty to have no restriction."
+msgstr "Número mínimo de opciones que el estudiante debe seleccionar para crear una respuesta. Dejar en blanco si no hay límite para ello."
 
 #: /plugins/quiz/views/quizzes/edit.ctp:39
 msgid "Add to quiz"
 msgstr "Agregar al quiz"
 
-#: /plugins/blog/views/blogs/view.ctp:3 /plugins/blog/views/posts/view.ctp:3
+#: /plugins/blog/views/blogs/view.ctp:3
+#: /plugins/blog/views/posts/view.ctp:3
 msgid "%s' Blog"
 msgstr "Blog de %s"
 
@@ -3692,7 +3749,8 @@ msgstr "<li>:member_links :action la página <em>:entry_title</em></li>"
 msgid "Wiki"
 msgstr "Wiki"
 
-#: /views/dashboards/messages.ctp:1 /views/elements/layout/conectivism.ctp:15
+#: /views/dashboards/messages.ctp:1
+#: /views/elements/layout/conectivism.ctp:15
 msgid "Messages"
 msgstr "Mensajes"
 
@@ -3709,12 +3767,8 @@ msgid "said:"
 msgstr "dijo:"
 
 #: /plugins/forum/views/elements/Response.updates.ctp:34
-msgid ""
-"The following classmates wrote a response on the discussion "
-"<em>discussion_name</em><br /> :link_list"
-msgstr ""
-"Los siguientes compañeros de clases respondieron en la discusión <em>:"
-"discussion_name</em>:<br /> :link_list"
+msgid "The following classmates wrote a response on the discussion <em>discussion_name</em><br /> :link_list"
+msgstr "Los siguientes compañeros de clases respondieron en la discusión <em>:discussion_name</em>:<br /> :link_list"
 
 #: /plugins/blog/models/comment.php:99
 msgid "Please write your comment"
@@ -3862,8 +3916,7 @@ msgstr ""
 
 #: /plugins/quiz/config/description.php:32
 msgid "Create Quizzes the easy way"
-msgstr ""
-"Permite crear preguntas de distintos tipos y diseñar pruebas o quizzes."
+msgstr "Permite crear preguntas de distintos tipos y diseñar pruebas o quizzes."
 
 #: /plugins/quiz/controllers/quizzes_controller.php:179
 msgid "You have completed the Quiz."
@@ -3913,7 +3966,8 @@ msgstr "Cambios recientes"
 msgid "Available Tools"
 msgstr "Herramientas disponibles"
 
-#: /views/courses/tools.ctp:25 /views/elements/plugin_box.ctp:18
+#: /views/courses/tools.ctp:25
+#: /views/elements/plugin_box.ctp:18
 msgid "This plugin has no description."
 msgstr "Este plugin no tiene descripción."
 
@@ -4119,11 +4173,13 @@ msgstr "Conectar"
 msgid "Admin Area"
 msgstr "Administración"
 
-#: /views/members/admin_add.ctp:12 /views/members/edit.ctp:12
+#: /views/members/admin_add.ctp:12
+#: /views/members/edit.ctp:12
 msgid "Female"
 msgstr "Femenino"
 
-#: /views/members/admin_add.ctp:12 /views/members/edit.ctp:12
+#: /views/members/admin_add.ctp:12
+#: /views/members/edit.ctp:12
 msgid "Male"
 msgstr "Masculino"
 
@@ -4135,7 +4191,6 @@ msgstr "Editar Perfil"
 msgid "Password Confirm"
 msgstr "Confirmar contraseña"
 
-
 #: /plugins/blog/views/posts/view.ctp:36
 msgid "wrote %s:"
 msgstr "escribió %s:"
@@ -4145,11 +4200,8 @@ msgid "A chat is a person to person instant messaging application"
 msgstr "Un chat es una aplicación de mensajería instantánea"
 
 #: /plugins/forum/config/description.php:32
-msgid ""
-"A forum is an application that allows people to discuss in various topics."
-msgstr ""
-"Un foro es una aplicación que permite a las personas discutir sobre varios "
-"temas de interés."
+msgid "A forum is an application that allows people to discuss in various topics."
+msgstr "Un foro es una aplicación que permite a las personas discutir sobre varios temas de interés."
 
 #: /plugins/forum/views/elements/Topic.updates.ctp:27
 msgid "<li>:member_links :action the topic <em>:topic_title</em>.</li>"
@@ -4160,23 +4212,12 @@ msgid "Invalid LockerDocument"
 msgstr "Documento no válido."
 
 #: /plugins/scorm/config/description.php:32
-msgid ""
-"Sharable Content Object Reference Model (SCORM) is a collection of standards "
-"and specifications for web-based e-learning. This plugin is a player for "
-"SCORM 2004 files"
-msgstr ""
-"Sharable Content Object Reference Model (SCORM) es una colección de "
-"estándares y especificaciones para el aprendizaje a distancia. Este plugin "
-"es un player de archivos del tipo SCORM 2004"
+msgid "Sharable Content Object Reference Model (SCORM) is a collection of standards and specifications for web-based e-learning. This plugin is a player for SCORM 2004 files"
+msgstr "Sharable Content Object Reference Model (SCORM) es una colección de estándares y especificaciones para el aprendizaje a distancia. Este plugin es un player de archivos del tipo SCORM 2004"
 
 #: /plugins/wiki/config/description.php:32
-msgid ""
-"A wiki is a collection of web pages designed to enable anyone who accesses "
-"it to contribute or modify content, like in a document file."
-msgstr ""
-"Un wiki es una colección de páginas web diseñada para que aquellos que las "
-"visiten, contribuyan o modifiquen su contenido al igual que en los "
-"documentos."
+msgid "A wiki is a collection of web pages designed to enable anyone who accesses it to contribute or modify content, like in a document file."
+msgstr "Un wiki es una colección de páginas web diseñada para que aquellos que las visiten, contribuyan o modifiquen su contenido al igual que en los documentos."
 
 #: /views/courses/index.ctp:18
 msgid "Go to course"
@@ -4193,3 +4234,4 @@ msgstr "No hay actualizaciones en el wiki."
 #: /views/members/admin_edit.ctp:32
 msgid "Password confirm"
 msgstr "Confirmar contrseña"
+

@@ -40,20 +40,22 @@ class OsmosisMailerComponent extends Object {
 		'delivery'	=> 'mail'
 	);
 	var $components = array('Email', 'SwiftEmail');
+	var $configured = false;
 	
 	function initialize(&$controller) {
 		$this->controller =& $controller;
 		$this->Email = $this->SwiftEmail;
 		$this->Email->Controller =& $controller;
-		$this->Setting = ClassRegistry::init('Setting');
-		$dbconfigs = $this->Setting->find('all', array('conditions' => array('key LIKE' => 'Mailer.%')));
-		$dbconfigs =Set::combine($dbconfigs, '{n}.Setting.key', '{n}.Setting.value');
-		foreach ($dbconfigs as $key => $value) {
-			unset($dbconfigs[$key]);
-			$dbconfigs[str_replace('Mailer.', '', $key)] = $value;
-		}
-		$this->configs = array_merge($this->configs, $dbconfigs);
 		return true;
+	}
+	
+	function configure() {
+		if ($this->$configured)
+			return;
+		$this->Setting = ClassRegistry::init('Setting');
+		$dbconfigs = $this->Setting->get('Mailer');
+		$this->configs = array_merge($this->configs, $dbconfigs);
+		$this->configured = true;
 	}
 	
 	function __from($only = false) {
@@ -73,6 +75,7 @@ class OsmosisMailerComponent extends Object {
 	}
 	
 	function sendEmail($configs) {
+		$this->configure();
 		$configs = array_merge($this->configs, $configs);
 		$this->Email->to		= $configs['to'];
 		$this->Email->from		= $this->__from('email');

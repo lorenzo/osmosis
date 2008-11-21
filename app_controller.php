@@ -96,7 +96,7 @@ class AppController extends Controller {
 			if ($this->name == 'Installer' && $this->Auth->user('admin')) // Verify that only admin can access this controller
 				return true;
 				
-			$plugin = ClassRegistry::init('Plugin','Model');
+			$plugin =& ClassRegistry::init('Plugin','Model');
 			$plugID = $plugin->findByName($this->plugin);
 			if (empty($plugID))
 				return false;
@@ -122,8 +122,7 @@ class AppController extends Controller {
 			$this->Auth->authorize = 'controller';
 			$this->Auth->userModel = 'Member';
 			$this->Auth->loginAction = array('controller' => 'members', 'action' => 'login', 'plugin' => '', 'admin' => false);
-			$this->Auth->loginError = __('Login or password incorrect', true);
-			$this->Auth->authError = __('Login or password incorrect', true);
+			$this->Auth->authError = __('Sorry, you are not logged in', true);
 			if (Configure::read('debug')>0) {
 				$this->Auth->authError .= '[' . $this->name . '::' . $this->action . ']';
 			}

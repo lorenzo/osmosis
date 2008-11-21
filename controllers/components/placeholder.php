@@ -33,7 +33,7 @@
  * A Facade to attach various placeholders to a view
  *
  */
-App::import('Model','Plugin');
+
 class PlaceholderComponent extends Object {
 	
 	/**
@@ -54,6 +54,13 @@ class PlaceholderComponent extends Object {
 	
 	
 	
+	function __get($var) {
+		if ($var == 'Plugin') {
+			$this->Plugin =& ClassRegistry::init('Plugin');
+			return $this->Plugin;
+		}
+	}
+	
 	/**
 	 * Startup function. Sets the this component instance in the ClassRegistry for further use (Probably breaking some MVC rules)
 	 *
@@ -62,7 +69,7 @@ class PlaceholderComponent extends Object {
 	 */
 	
 	function startup(&$controller) {
-		$this->controller =& $controller;		
+		$this->controller = $controller;		
 		$this->started = true;
 		// Sets this component instance in the class registry to be able to pull data from the view if needed
 		ClassRegistry::addObject('Placeholder',$this);
@@ -81,6 +88,8 @@ class PlaceholderComponent extends Object {
 		}
 		$holders = array();
 		foreach ($types as $type) {
+			if (isset($this->attached[$type]))
+				continue;
 			if ($course_id == 0) {
 				$holders[$type] = $this->getPlaceholderObjects($type);
 			} else {
@@ -132,10 +141,10 @@ class PlaceholderComponent extends Object {
 				$this->controller->components[] = $name;
 				$this->controller->{$name} = $object;
 				$this->holders[$type][] = $name;
-				$this->{$name} =& $this->controller->{$name};
+				$this->{$name} = $this->controller->{$name};
 				$this->{$name}->startup($this->controller, $type);
 			}
-			$this->attached[] = $type;
+			$this->attached[$type] = $type;
 		}
 	}
 	
@@ -163,14 +172,10 @@ class PlaceholderComponent extends Object {
 	 */
 	
 	private function getPlaceholderObjects($type){
-		if (!isset($this->Plugin))
-			$this->Plugin = new Plugin;
 		return $this->Plugin->getHolders($type);
 	}
 	
 	private function getCourseToolbarObjects($course_id) {
-		if (!isset($this->Plugin))
-			$this->Plugin = new Plugin;
 		return $this->Plugin->getCourseTools($course_id,true);
 	}
 	
@@ -182,7 +187,7 @@ class PlaceholderComponent extends Object {
 	 */
 	
 	public function pullData($type) {
-		if (in_array($type, $this->attached)) {
+		if (isset($this->attached[$type])) {
 			return array();
 		}
 		$this->attach($type);

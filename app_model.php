@@ -30,7 +30,7 @@
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
 class AppModel extends Model{
-	var $actsAs = array('Containable', 'Hookable');
+	var $actsAs = array('Containable');
 	
 	/**
 	 * Validation rule to check if a field is unique.cnl
@@ -102,5 +102,7 @@ class AppModel extends Model{
 	function getParentCourse() {
 		return false;
 	}
+	
+
 }
 ?>
