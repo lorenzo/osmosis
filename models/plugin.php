@@ -174,10 +174,10 @@ class Plugin extends AppModel {
 		$holders = array();
 		foreach ($plugins as $plugin) {
 			$className = $plugin['Plugin']['name'] . 'Holder';
-			if (ClassRegistry::isKeySet($className.'Component') || App::import('Component',$plugin['Plugin']['name'] . '.' . $className)) {
+			if (ClassRegistry::isKeySet($className) || App::import('Component',$plugin['Plugin']['name'] . '.' . $className)) {
 				$class = $className. 'Component';
-				if (ClassRegistry::isKeySet($class)) {
-					$holderClass =& ClassRegistry::getObject($class);
+				if (ClassRegistry::isKeySet($className)) {
+					$holderObject =& ClassRegistry::getObject($className);
 				} else {
 					$holderObject =& new $class;
 					ClassRegistry::addObject($className,$holderObject);
