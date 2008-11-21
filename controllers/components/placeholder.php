@@ -65,7 +65,7 @@ class PlaceholderComponent extends Object {
 		$this->controller =& $controller;		
 		$this->started = true;
 		// Sets this component instance in the class registry to be able to pull data from the view if needed
-		ClassRegistry::addObject('Placeholder',&$this);
+		ClassRegistry::addObject('Placeholder',$this);
 	}
 	
 	/**

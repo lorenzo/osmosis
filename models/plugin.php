@@ -174,7 +174,7 @@ class Plugin extends AppModel {
 					$holderClass =& ClassRegistry::getObject($class);
 				} else {
 					$holderObject =& new $class;
-					ClassRegistry::addObject($className,&$holderObject);
+					ClassRegistry::addObject($className,$holderObject);
 				}
 					if (in_array($type,$holderObject->types) || method_exists($holderObject,Inflector::variable($type)))
 						$holders[] = $holderObject;

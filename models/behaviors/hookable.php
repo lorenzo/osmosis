@@ -65,7 +65,7 @@ class HookableBehavior extends ModelBehavior {
 					$hookClass =& ClassRegistry::getObject($className);
 				}else {
 					$hookClass =& new $className;
-					ClassRegistry::addObject($className,&$hookClass);
+					ClassRegistry::addObject($className,$hookClass);
 				}
 				if(method_exists($hookClass,$hookName)) {
 					$hooks[] =& $hookClass;

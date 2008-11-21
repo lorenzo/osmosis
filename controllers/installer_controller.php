@@ -149,7 +149,7 @@ class InstallerController extends Controller {
 		}
 		App::import('Component', 'Installer');
 		$installer = new InstallerComponent();
-		$installer->startup(&$this);
+		$installer->startup($this);
 		if (!$installer->createSchema()) {
 			$message = __('The user does not have enough privileges over the database', true);
 			foreach ($installer->errors as $error_message) {

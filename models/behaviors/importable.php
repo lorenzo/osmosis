@@ -60,7 +60,7 @@ class ImportableBehavior extends ModelBehavior {
 	
 	function _getHeader(&$Model,$handle) {
 		if ($this->settings[$Model->alias]['hasHeader'] === true) {
-        	$header = $this->_getCSVLine(&$Model,$handle);
+        	$header = $this->_getCSVLine($Model,$handle);
         } else {
         	$header = array_keys($Model->schema());
         }
@@ -80,7 +80,7 @@ class ImportableBehavior extends ModelBehavior {
         
         $saved = array();
         $i = 0;
-        while (($row = $this->_getCSVLine(&$Model,$handle)) !== false) {
+        while (($row = $this->_getCSVLine($Model,$handle)) !== false) {
                 $data = array();
 
                 foreach ($header as $k => $col) {
