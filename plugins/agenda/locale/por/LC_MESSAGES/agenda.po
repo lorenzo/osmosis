@@ -1,0 +1,102 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Agenda Plugin\n"
+"POT-Creation-Date: 2008-11-14 15:02-0430\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Henrique Machado <Henri.mjr@gmail.com>\n"
+"Language-Team: Osmosis Team\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: /config/description.php:2
+msgid "A calendar tool for organizing events by date and tags"
+msgstr "Calendário que permite organizar eventos por data e palavras chave"
+
+#: /config/description.php:3
+msgid "Schedule"
+msgstr "Agenda"
+
+#: /controllers/events_controller.php:23;49
+msgid "Invalid Event"
+msgstr "Evento inválido"
+
+#: /controllers/events_controller.php:36;54
+msgid "The Event has been saved"
+msgstr "O Evento foi salvo"
+
+#: /controllers/events_controller.php:39;57
+msgid "The Event could not be saved. Please, try again."
+msgstr "O Evento não pôde ser salvo. Por favor, tente novamente."
+
+#: /controllers/events_controller.php:70
+msgid "Invalid id for Event"
+msgstr "O Identificador do Evento não é válido"
+
+#: /controllers/events_controller.php:74
+msgid "Event deleted"
+msgstr "Evento eliminado"
+
+#: /views/events/add.ctp:4;14
+msgid "Add Event"
+msgstr "Adicionar Evento"
+
+#: /views/events/edit.ctp:4
+msgid "Edit Event"
+msgstr "Editar Evento"
+
+#: /views/events/edit.ctp:14
+msgid "Save"
+msgstr "Salvar"
+
+#: /views/events/index.ctp:5
+msgid "Create a new Event"
+msgstr "Criar novo Evento"
+
+#: /views/events/index.ctp:20
+msgid "Mon"
+msgstr "Seg"
+
+#: /views/events/index.ctp:20
+msgid "Tue"
+msgstr "Ter"
+
+#: /views/events/index.ctp:20
+msgid "Wed"
+msgstr "Qua"
+
+#: /views/events/index.ctp:20
+msgid "Thu"
+msgstr "Qui"
+
+#: /views/events/index.ctp:20
+msgid "Fri"
+msgstr "Sex"
+
+#: /views/events/index.ctp:20
+msgid "Sat"
+msgstr "Sáb"
+
+#: /views/events/index.ctp:20
+msgid "Sun"
+msgstr "Dom"
+
+#: /views/events/view.ctp:2
+msgid "Event"
+msgstr "Evento"
+
+#: /views/events/view.ctp:5
+msgid "All Day"
+msgstr "Todo o Dia"
+
+#: /views/events/view.ctp:8
+msgid "Date"
+msgstr "Data"
+
+#: /views/events/view.ctp:13
+msgid "Location"
+msgstr "Localização"
+

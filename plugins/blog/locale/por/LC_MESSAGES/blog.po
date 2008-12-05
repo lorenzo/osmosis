@@ -1,0 +1,315 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Blog Plugin\n"
+"POT-Creation-Date: 2008-11-14 11:21-0430\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Henrique Machado <Henri.mjr@gmail.com>\n"
+"Language-Team: Osmosis Team\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: /config/description.php:32
+msgid "A blog (or web log) is a website, for each member, with regular entries of commentary, descriptions of events, or other material such as graphics or video."
+msgstr "Um blog (ou web log) é um website, para cada membro, com comentário frequentes, descrições de eventos, ou outro material como gráficos ou videos."
+
+#: /config/description.php:33
+#: /views/elements/placeholders/profile_connect.ctp:4
+msgid "Blog"
+msgstr "Blog"
+
+#: /controllers/blogs_controller.php:49;81
+#: /controllers/posts_controller.php:64
+msgid "Invalid Blog"
+msgstr "Blog Inválido"
+
+#: /controllers/blogs_controller.php:71;86
+msgid "The Blog has been saved"
+msgstr "O Blog foi salvo"
+
+#: /controllers/blogs_controller.php:74;89
+msgid "The Blog could not be saved. Please, try again."
+msgstr "O Blog não pôde ser salvo. Por favor, tente novamente."
+
+#: /controllers/blogs_controller.php:99
+msgid "Invalid id for Blog"
+msgstr "O Identificador do Blog não é válido"
+
+#: /controllers/blogs_controller.php:103
+msgid "Blog deleted"
+msgstr "Blog Eliminado"
+
+#: /controllers/comments_controller.php:44
+msgid "Invalid Comment"
+msgstr "Comentário Inválido"
+
+#: /controllers/comments_controller.php:52
+#: /controllers/posts_controller.php:94
+msgid "Invalid Post"
+msgstr "Entrada inválida"
+
+#: /controllers/comments_controller.php:59
+msgid "The Comment has been saved"
+msgstr "O Comentário foi salvo"
+
+#: /controllers/comments_controller.php:61
+msgid "The Comment could not be saved. Please, try again."
+msgstr "O Comentário não pôde ser salvo. Por favor, tente novamente."
+
+#: /controllers/comments_controller.php:70
+msgid "Invalid id for Comment"
+msgstr "O Identificador do Comentário não é válido"
+
+#: /controllers/comments_controller.php:74
+msgid "Comment deleted"
+msgstr "Comentário eliminado"
+
+#: /controllers/posts_controller.php:78;101
+msgid "The Post has been saved"
+msgstr "A Entrada foi salva"
+
+#: /controllers/posts_controller.php:81;104
+msgid "The Post could not be saved. Please, try again."
+msgstr "A Entrada não pôde ser salva. Por favor, tente novamente."
+
+#: /controllers/posts_controller.php:114
+msgid "Invalid id for Post"
+msgstr "O Identificador da Entrada não é válido"
+
+#: /controllers/posts_controller.php:121
+msgid "Post deleted"
+msgstr "Entrada Eliminada"
+
+#: /models/comment.php:99
+msgid "Please write your comment"
+msgstr "Por favor escreva seu comentário"
+
+#: /models/comment.php:102
+msgid "Post ID missing"
+msgstr "O Identificador da Entrada não foi encontrado"
+
+#: /models/comment.php:105
+msgid "Member ID missing"
+msgstr "O Identificado do membro não foi encontrado"
+
+#: /models/post.php:121
+msgid "Please write the title of the post"
+msgstr "Por favor escreva o título da entrada"
+
+#: /models/post.php:124
+msgid "Please write the content of the posts"
+msgstr "Por favor escreva o conteúdo da entrada"
+
+#: /models/post.php:127
+msgid "Blog ID missing"
+msgstr "O Identificador do Blog não foi encontrado"
+
+#: /views/blogs/add.ctp:4
+msgid "Add Blog"
+msgstr "Adicionar Blog"
+
+#: /views/blogs/add.ctp:10
+#: /views/blogs/edit.ctp:12
+#: /views/comments/add.ctp:12
+#: /views/comments/edit.ctp:11
+#: /views/elements/add_comment.ctp:11
+#: /views/posts/add.ctp:11
+#: /views/posts/edit.ctp:11
+msgid "Submit"
+msgstr "Enviar"
+
+#: /views/blogs/add.ctp:14
+#: /views/blogs/edit.ctp:17
+#: /views/posts/index.ctp:63
+msgid "List Blogs"
+msgstr "Listar Blogs"
+
+#: /views/blogs/edit.ctp:4
+msgid "Edit Blog"
+msgstr "Editar Blogs"
+
+#: /views/blogs/edit.ctp:16
+#: /views/blogs/index.ctp:41
+#: /views/comments/edit.ctp:15
+#: /views/comments/index.ctp:37
+#: /views/elements/post.ctp:16
+#: /views/posts/index.ctp:49
+msgid "Delete"
+msgstr "Eliminar"
+
+#: /views/blogs/edit.ctp:16
+#: /views/blogs/index.ctp:41
+#: /views/comments/edit.ctp:15
+#: /views/comments/index.ctp:37
+#: /views/comments/view.ctp:24
+#: /views/posts/index.ctp:49
+msgid "Are you sure you want to delete # %s?"
+msgstr "Você tem certeza que deseja eliminar # %s?"
+
+#: /views/blogs/edit.ctp:18
+#: /views/comments/add.ctp:17
+#: /views/comments/edit.ctp:17
+#: /views/comments/index.ctp:50
+#: /views/comments/view.ctp:27
+msgid "List Posts"
+msgstr "Listar Entradas"
+
+#: /views/blogs/edit.ctp:19
+#: /views/blogs/view.ctp:13
+#: /views/comments/add.ctp:18
+#: /views/comments/edit.ctp:18
+#: /views/comments/view.ctp:28
+#: /views/posts/index.ctp:62
+msgid "New Post"
+msgstr "Nova Entrada"
+
+#: /views/blogs/index.ctp:2
+msgid "Blogs"
+msgstr "Blogs"
+
+#: /views/blogs/index.ctp:6
+#: /views/comments/index.ctp:6
+#: /views/posts/index.ctp:6
+msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
+msgstr "Página %page% de %pages%, mostrado %current% registros de %count% ao total, começando do registro %start% até o %end%"
+
+#: /views/blogs/index.ctp:15
+#: /views/comments/index.ctp:14
+#: /views/posts/index.ctp:17
+msgid "Actions"
+msgstr "Ações"
+
+#: /views/blogs/index.ctp:39
+#: /views/comments/index.ctp:35
+#: /views/posts/index.ctp:47
+msgid "View"
+msgstr "Ver"
+
+#: /views/blogs/index.ctp:40
+#: /views/comments/index.ctp:36
+#: /views/elements/post.ctp:19
+#: /views/posts/index.ctp:48
+msgid "Edit"
+msgstr "Editar"
+
+#: /views/blogs/index.ctp:48
+#: /views/comments/index.ctp:44
+#: /views/posts/index.ctp:56
+msgid "previous"
+msgstr "anterior"
+
+#: /views/blogs/index.ctp:50
+#: /views/comments/index.ctp:46
+#: /views/posts/index.ctp:58
+msgid "next"
+msgstr "próxima"
+
+#: /views/blogs/index.ctp:54
+#: /views/posts/index.ctp:64
+msgid "New Blog"
+msgstr "Novo Blog"
+
+#: /views/blogs/view.ctp:3
+#: /views/posts/view.ctp:3
+msgid "%s' Blog"
+msgstr "%s' Blog"
+
+#: /views/blogs/view.ctp:37
+msgid "No Posts written yet"
+msgstr "Nenhuma entrada foi escrita ainda"
+
+#: /views/comments/add.ctp:5
+#: /views/elements/add_comment.ctp:4
+msgid "Add Comment"
+msgstr "Adicionar Comentário"
+
+#: /views/comments/add.ctp:16
+#: /views/comments/edit.ctp:16
+#: /views/comments/view.ctp:25
+msgid "List Comments"
+msgstr "Listar Comentários"
+
+#: /views/comments/edit.ctp:4
+#: /views/comments/view.ctp:23
+msgid "Edit Comment"
+msgstr "Editar Comentários"
+
+#: /views/comments/index.ctp:2
+#: /views/elements/post.ctp:30
+#: /views/posts/view.ctp:10
+msgid "Comments"
+msgstr "Comentários"
+
+#: /views/comments/index.ctp:51
+#: /views/comments/view.ctp:26
+msgid "New Comment"
+msgstr "Novo Comentário"
+
+#: /views/comments/view.ctp:2
+#: /views/elements/comments/add_comment.ctp:10
+msgid "Comment"
+msgstr "Comentário"
+
+#: /views/comments/view.ctp:4
+msgid "Id"
+msgstr "Id"
+
+#: /views/comments/view.ctp:9
+msgid "Description"
+msgstr "Descrição"
+
+#: /views/comments/view.ctp:14
+msgid "Post"
+msgstr "Entrada"
+
+#: /views/comments/view.ctp:24
+msgid "Delete Comment"
+msgstr "Eliminar Comentário"
+
+#: /views/elements/comments/add_comment.ctp:4
+msgid "Leave a Comment"
+msgstr "Deixar um Comentário"
+
+#: /views/elements/placeholders/messages_dashboard.ctp:2
+msgid "Blog Comments"
+msgstr "Comentários do Blog"
+
+#: /views/elements/placeholders/messages_dashboard.ctp:5
+msgid "These are the last comments received in your posts"
+msgstr "Estes são os últimos comentários recebidos na entrada"
+
+#: /views/elements/placeholders/messages_dashboard.ctp:18
+msgid "Comment by"
+msgstr "Comentário feito por"
+
+#: /views/elements/placeholders/messages_dashboard.ctp:43
+msgid "No comments in your blog"
+msgstr "Nenhum comentário no seu blog"
+
+#: /views/elements/placeholders/messages_dashboard.ctp:49
+msgid "Go to your blog"
+msgstr "Ir para seu blog"
+
+#: /views/posts/add.ctp:4
+msgid "Add Post"
+msgstr "Adicionar Entrada"
+
+#: /views/posts/edit.ctp:4
+msgid "Edit Post"
+msgstr "Editar Entrada"
+
+#: /views/posts/index.ctp:2
+msgid "Posts"
+msgstr "Entradas"
+
+#: /views/posts/view.ctp:36
+msgid "wrote %s:"
+msgstr "escreveu %s:"
+
+#: /views/posts/view.ctp:59
+msgid "No comments yet"
+msgstr "Nenhum comentário"
+
