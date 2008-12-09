@@ -239,7 +239,7 @@ class CoursesController extends AppController {
 					$this->Session->setFlash(__('The Tool has been added',true), 'default', array('class' => 'success'));
 				}	
 				else
-					$this->Session->setFlash(__('The could not be added',true), 'default', array('class' => 'error'));
+					$this->Session->setFlash(__('The Tool could not be added',true), 'default', array('class' => 'error'));
 			} elseif (isset($this->data['CourseTool']['remove'])) {
 
 				unset($this->data['CourseTool']['remove']);
