@@ -56,7 +56,6 @@ class TaggableBehavior extends ModelBehavior {
 			'finderQuery' => '',
 			'deleteQuery' => '',
 			'insertQuery' => '',
-			'with' => 'Tagged'.$model->alias,
 			'useDbConfig' => $model->useDbConfig
 			);
 
@@ -79,9 +78,12 @@ class TaggableBehavior extends ModelBehavior {
 			'finderQuery' => $this->settings[$model->alias]['finderQuery'],
 			'deleteQuery' => $this->settings[$model->alias]['deleteQuery'],
 			'insertQuery' => $this->settings[$model->alias]['insertQuery'],
-			'with' => $this->settings[$model->alias]['with']
 			)
 		);
+		
+		if (isset($this->settings[$model->alias]['with']))
+			$assoc['Tag']['with'] = $this->settings[$model->alias]['with'];
+			
 		$model->bindModel(array('hasAndBelongsToMany' => $assoc),false);
 		$model->Tag->useDbConfig = $this->settings[$model->alias]['useDbConfig'];
 	}
@@ -109,7 +111,7 @@ class TaggableBehavior extends ModelBehavior {
 		$alreadyAssigned = array();
 		
 		if (!empty($model->id)) {
-			$alreadyAssigned = $model->{$this->settings[$model->alias]['with']}->find('all',
+			$alreadyAssigned = $model->{$model->hasAndBelongsToMany['Tag']['with']}->find('all',
 			array('conditions' => array(
 					$this->settings[$model->alias]['foreignKey'] => $model->id
 					)
@@ -133,13 +135,13 @@ class TaggableBehavior extends ModelBehavior {
 				$this->settings[$model->alias]['associationForeignKey'] => $tag
 			);
 			if (isset($model->data[$model->alias]['tagging_user']) && !empty($model->data[$model->alias]['tagging_user'])
-				&& $model->{$this->settings[$model->alias]['with']}->hasField('member_id')
+				&& $model->{$model->hasAndBelongsToMany['Tag']['with']}->hasField('member_id')
 			) {
 				$data['member_id'] = $model->data[$model->alias]['tagging_user'];
 			}
 				
-			$model->{$this->settings[$model->alias]['with']}->create();
-			$model->{$this->settings[$model->alias]['with']}->save($data);
+			$model->{$model->hasAndBelongsToMany['Tag']['with']}->create();
+			$model->{$model->hasAndBelongsToMany['Tag']['with']}->save($data);
 		}
 		return true;
 	}

@@ -102,7 +102,7 @@ class MatchingQuestion extends QuizAppModel {
 				'joinTable' => 'quiz_matching_questions_quizzes',
 				'foreignKey' => 'matching_question_id',
 				'associationForeignKey' => 'quiz_id',
-				'with' => 'QuizMatching'
+				'with' => 'Quiz.QuizMatching'
 			)
 	);
 	

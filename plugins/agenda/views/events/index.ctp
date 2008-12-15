@@ -17,7 +17,18 @@
 ?>
 
 <table class="calendar" cellspacing="0">
-<?php echo $html->tableHeaders(array(__d('agenda','Mon',true),__('Tue',true),__('Wed',true),__('Thu',true),__('Fri',true),__('Sat',true),__('Sun',true)));?>
+<?php echo $html->tableHeaders(
+	array(
+		__d('agenda','Mon',true),
+		__d('agenda','Tue',true),
+		__d('agenda','Wed',true),
+		__d('agenda','Thu',true),
+		__d('agenda','Fri',true),
+		__d('agenda','Sat',true),
+		__d('agenda','Sun',true)
+	)
+	);
+?>
 
 <?php /*** WEEK ONE ***/ ?>
 <tr>

@@ -92,7 +92,7 @@ class ChoiceQuestion extends QuizAppModel {
 			'finderQuery' => '',
 			'deleteQuery' => '',
 			'insertQuery' => '',
-			'with' => 'QuizChoice'
+			'with' => 'Quiz.QuizChoice'
 		)
 	);
 	

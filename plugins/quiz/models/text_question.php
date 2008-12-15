@@ -55,7 +55,7 @@ class TextQuestion extends QuizAppModel {
 				'joinTable' => 'quiz_text_questions_quizzes',
 				'foreignKey' => 'text_question_id',
 				'associationForeignKey' => 'quiz_id',
-				'with' => 'QuizText'
+				'with' => 'Quiz.QuizText'
 			),
 	);
 	

@@ -87,7 +87,7 @@ class OrderingQuestion extends QuizAppModel {
 			'finderQuery' => '',
 			'deleteQuery' => '',
 			'insertQuery' => '',
-			'with' => 'QuizOrdering'
+			'with' => 'Quiz.QuizOrdering'
 		)
 	);
 	

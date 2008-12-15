@@ -321,7 +321,7 @@ msgstr "Por favor escribe tu nombre completo"
 
 #: /models/member.php:124
 msgid "Please write a valid email address"
-msgstr "Pro favor escribe una dirección de correo válida"
+msgstr "Por favor escribe una dirección de correo válida"
 
 #: /models/member.php:128
 msgid "Please write your email address"
