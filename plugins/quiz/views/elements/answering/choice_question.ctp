@@ -9,7 +9,7 @@
 		$empty = false;
 	}
 		
-	$options = Set::combine($question['ChoiceQuestion']['ChoiceChoice'],'{n}.id','{n}.text');
+	$options = Set::combine($question['ChoiceChoice'],'{n}.id','{n}.text');
 ?>
 <div class="question choiceQuestion">
 	<?php

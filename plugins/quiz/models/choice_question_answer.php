@@ -10,13 +10,6 @@ class ChoiceQuestionAnswer extends QuizAppModel {
 			'conditions'	=> '',
 			'fields'		=> array('id','username', 'full_name'),
 			'order'			=> ''
-		),
-		'ChoiceQuestion' => array(
-			'className'		=> 'Quiz.ChoiceQuestion',
-			'foreignKey'	=> 'choice_questions_quiz_id',
-			'conditions'	=> '',
-			'fields'		=> '',
-			'order'			=> ''
 		)
 	);
 	

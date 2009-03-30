@@ -29,34 +29,34 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-class TextQuestion extends QuizAppModel {
+App::import('Model','Quiz.Question');
+class TextQuestion extends Question {
 
 	var $name = 'TextQuestion';
 	var $validate = array(
 		'title' => array(
 			'required' => array(
-				'rule' => array('custom', '/.+/'),
+				'rule' => array('notEmpty'),
 				'allowEmpty' => false
 		)
 	),
 		'body' => array(
 				'required' => array(
-					'rule' => array('custom', '/.+/'),
+					'rule' => array('notEmpty'),
 					'allowEmpty' => false
 			)
 		),
-		'format' => VALID_NOT_EMPTY,
+		'format' => array(
+				'required' => array(
+					'rule' => array('notEmpty'),
+					'allowEmpty' => false
+			)
+		)
 	);
 
 	var $useTable = 'quiz_text_questions';
-	var $hasAndBelongsToMany = array(
-			'Quiz' => array(
-				'className' => 'quiz.Quiz',
-				'joinTable' => 'quiz_text_questions_quizzes',
-				'foreignKey' => 'text_question_id',
-				'associationForeignKey' => 'quiz_id',
-				'with' => 'Quiz.QuizText'
-			),
+	var $actsAs = array(
+			'Quiz.Inheritable' => array('method' => 'CTI')
 	);
 	
 	/**
@@ -71,7 +71,20 @@ class TextQuestion extends QuizAppModel {
 		$this->setErrorMessage(
 			'body.required', __('The content of the question can not be empty',true)
 		);
-		parent::__construct($id,$table,$ds);
+		parent::__construct($id,$table,$ds);	
 	}
+	
+	function saveAnswers($answers,$member_id) {
+		$result = true;
+		$this->Answer = ClassRegistry::init('Quiz.TextQuestionAnswer');
+		foreach ($answers as $question_id => $answer) {
+			$data = array();
+			$data['TextQuestionAnswer'] = array('member_id' => $member_id, 'questions_quiz_id' => $question_id,'answer' => $answer['answer']);
+			if (!$result = $this->Answer->save($data))
+				break;
+		}
+		return $result;
+	}
+	
 }
 ?>

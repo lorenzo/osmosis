@@ -33,7 +33,6 @@ class QuizzesController extends QuizAppController {
 
 	var $name = 'Quizzes';
 	var $helpers = array('Html', 'Form' );
-
 	/**
 	 * question_types: used on the list of available question types
 	 */	
@@ -178,7 +177,7 @@ class QuizzesController extends QuizAppController {
 		if (!empty($this->data)) {
 			if ($this->Quiz->saveAnswers($id,$this->data,$this->Auth->user('id'))) {
 				$this->Session->setFlash(__('You have completed the Quiz.', true), 'default', array('class' => 'success'));
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => 'index','course_id' => $this->activeCourse));
 			}
 		}
 		

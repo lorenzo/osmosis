@@ -1,4 +1,3 @@
-
 <?php
 /* SVN FILE: $Id$ */
 /**
@@ -30,13 +29,15 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-class MatchingQuestion extends QuizAppModel {
+App::import('Model','Quiz.Question');
+class MatchingQuestion extends Question {
 
 	var $name = 'MatchingQuestion';
+	var $useTable = 'quiz_matching_questions';
 	var $validate = array(
 		'body' => array(
 			'required' => array(
-				'rule' => array('/.+/'),
+				'rule' => array('notEmpty'),
 				'required' => true,
 				'allowEmpty' => false
 			)
@@ -47,8 +48,8 @@ class MatchingQuestion extends QuizAppModel {
 				'required' => false,
 				'allowEmpty' => true
 			),
-			'nonzero' => array(
-				'rule' => array('comparison','>',0),
+			'positive' => array(
+				'rule' => array('comparison','>=',0),
 			),
 		),
 		'min_associations' => array(
@@ -66,11 +67,15 @@ class MatchingQuestion extends QuizAppModel {
 		)
 	);
 
-	var $useTable = 'quiz_matching_questions';
 
+	
+	var $actsAs = array(
+			'Quiz.Inheritable' => array('method' => 'CTI')
+	);
+	
 	var $hasMany = array(
 		'SourceChoice' => array(
-			'className' => 'quiz.MatchingChoice',
+			'className' => 'Quiz.MatchingChoice',
 			'foreignKey' => 'matching_question_id',
 			'conditions' => 'target_id IS NOT NULL',
 			'fields' => '',
@@ -83,7 +88,7 @@ class MatchingQuestion extends QuizAppModel {
 			'counterQuery' => ''
 		),
 		'TargetChoice' => array(
-			'className' => 'quiz.MatchingChoice',
+			'className' => 'Quiz.MatchingChoice',
 			'foreignKey' => 'matching_question_id',
 			'conditions' => 'target_id IS NULL',
 			'fields' => '',
@@ -95,15 +100,6 @@ class MatchingQuestion extends QuizAppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-	);
-	var $hasAndBelongsToMany = array(
-			'Quiz' => array(
-				'className' => 'quiz.Quiz',
-				'joinTable' => 'quiz_matching_questions_quizzes',
-				'foreignKey' => 'matching_question_id',
-				'associationForeignKey' => 'quiz_id',
-				'with' => 'Quiz.QuizMatching'
-			)
 	);
 	
 	function __construct($id = false, $table = null, $ds = null) {
@@ -162,7 +158,6 @@ class MatchingQuestion extends QuizAppModel {
 	
 	function beforeValidate() {
 		parent::beforeValidate();
-		
 		if(!isset($this->data['SourceChoice']) || !isset($this->data['TargetChoice']))
 			return false;
 		
@@ -224,7 +219,7 @@ class MatchingQuestion extends QuizAppModel {
 	 */
 	
 	function shuffleChoices(&$question) {
-		if (!isset($question['shuffle']) || !$question['shuffle'])
+		if (!isset($question[$this->alias]['shuffle']) || !$question[$this->alias]['shuffle'])
 			return;
 			
 		if (isset($question['SourceChoice'])) {
@@ -234,6 +229,22 @@ class MatchingQuestion extends QuizAppModel {
 		if (isset($question['TargetChoice'])) {
 			shuffle($question['TargetChoice']);
 		}
+	}
+	
+	function saveAnswers($answers,$member_id) {
+		$result = true;
+		$this->Answer = ClassRegistry::init('Quiz.MatchingQuestionAnswer');
+		foreach ($answers as $question_id => $matchings) {
+			$data = array();
+			$data['MatchingQuestionAnswer'] = array('member_id' => $member_id, 'questions_quiz_id' => $question_id);
+			foreach ($matchings['answer'] as $source => $targetNumber) {
+				if (!empty($source) && isset($matchings['TargetChoice'][$targetNumber]))
+					$data['AnswerMatching'][] = array('source_id' => $source, 'target_id' => $matchings['TargetChoice'][$targetNumber]);
+			}
+			if (!$result = $this->Answer->saveAll($data))
+				break;
+		}
+		return $result;
 	}
 
 }

@@ -3,21 +3,17 @@
 
 <?php echo $form->create('Quiz',array('url' => array('action' => 'answer', $quiz['Quiz']['id'] ))) ?>
 
-<?php $quizData = $quiz['Quiz']; unset($quiz['Quiz']) ?>
-<?php foreach ($quiz as $type => $questions) :?>
+<?php $quizData = $quiz['Quiz']; unset($quiz['Quiz']);?>
+<ol>
+<?php foreach ($quiz['Question'] as $i => $question) :?>
 	<?php
-		if (empty($questions)) continue;
-		
-		echo '<h2>' . __(Inflector::humanize(Inflector::tableize($type)), true) . '</h2>';
-		echo '<ol>';
-		foreach ($questions as $i => $question) {
-			$question = array($type => $question);
+			$type = $question['type'];
+			echo '<h2>' . __(Inflector::humanize(Inflector::underscore($type)), true) . '</h2>';
 			echo '<li>' . $this->element('answering/'.Inflector::underscore($type), array('question' => $question)) . '&nbsp;</li>';
-		}
-		echo '</ol>';
 	?>
 <?php endforeach;?>
+</ol>
 <?php echo $this->element('ui/editor');?>
-<?php echo $form->end('Sumit'); ?>
+<?php echo $form->end('Submit'); ?>
 </div>
 

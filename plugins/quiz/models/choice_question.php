@@ -29,18 +29,19 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-class ChoiceQuestion extends QuizAppModel {
+App::import('Model','Quiz.Question');
+class ChoiceQuestion extends Question {
 
 	var $name = 'ChoiceQuestion';
 	var $validate = array(
 		'body' => array(
 			'required' => array(
-				'rule' => array('custom', '/.+/')
+				'rule' => array('notEmpty')
 			)
 		),
 		'max_choices' => array(
 			'positive' => array(
-				'rule' => array('comparison', '>', 0),
+				'rule' => array('comparison', '>=', 0),
 				'allowEmpty' => true
 			)
 		),
@@ -50,7 +51,7 @@ class ChoiceQuestion extends QuizAppModel {
 				'allowEmpty' => true
 			),
 			'positive' => array(
-				'rule' => array('comparison', '>', 0)
+				'rule' => array('comparison', '>=', 0)
 			)
 		),
 		'num_correct' => array(
@@ -63,7 +64,7 @@ class ChoiceQuestion extends QuizAppModel {
 	var $useTable = 'quiz_choice_questions';
 	var $hasMany = array(
 		'ChoiceChoice' => array(
-			'className' => 'quiz.ChoiceChoice',
+			'className' => 'Quiz.ChoiceChoice',
 			'foreignKey' => 'choice_question_id',
 			'conditions' => '',
 			'fields' => '',
@@ -76,24 +77,9 @@ class ChoiceQuestion extends QuizAppModel {
 			'counterQuery' => ''
 		)
 	);
-
-	var $hasAndBelongsToMany = array(
-		'Quiz' => array(
-			'className' => 'quiz.Quiz',
-			'joinTable' => 'quiz_choice_questions_quizzes',
-			'foreignKey' => 'choice_question_id',
-			'associationForeignKey' => 'quiz_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'unique' => '',
-			'finderQuery' => '',
-			'deleteQuery' => '',
-			'insertQuery' => '',
-			'with' => 'Quiz.QuizChoice'
-		)
+	
+	var $actsAs = array(
+			'Quiz.Inheritable' => array('method' => 'CTI')
 	);
 	
 	function __construct($id = false, $table = null, $ds = null) {
@@ -196,7 +182,7 @@ class ChoiceQuestion extends QuizAppModel {
 	 */
 	
 	function shuffleChoices(&$question) {
-		if (!isset($question['shuffle']) || !$question['shuffle'])
+		if (!isset($question[$this->alias]['shuffle']) || !$question[$this->alias]['shuffle'])
 			return;
 
 		if (isset($question['ChoiceChoice'])) {
@@ -219,6 +205,25 @@ class ChoiceQuestion extends QuizAppModel {
 			ksort($new);
 			$question['ChoiceChoice'] = $new;
 		}
+	}
+	
+	function saveAnswers($answers,$member_id) {
+		$result = true;
+		$this->Answer = ClassRegistry::init('Quiz.ChoiceQuestionAnswer');
+		foreach ($answers as $question_id => $selectedChoices) {
+			$data = array();
+			$data['ChoiceQuestionAnswer'] = array('member_id' => $member_id, 'questions_quiz_id' => $question_id);
+			if (is_array($selectedChoices)) {
+				foreach ($selectedChoices as $choice) {
+					$data['AnswerChoice'][] = array('choice_choice_id' => $choice);
+				}
+			} else {
+				$data['AnswerChoice'][] =  array('choice_choice_id' => $selectedChoices);
+			}
+			if (!$result = $this->Answer->saveAll($data))
+				break;
+		}
+		return $result;
 	}
 }
 ?>

@@ -67,12 +67,12 @@ class OrderingQuestionsController extends AppController {
 			$this->_cleanupEmpty();			
 			$this->OrderingQuestion->create();
 			$this->OrderingQuestion->set($this->data);
-			if ($this->OrderingQuestion->validates() && $this->OrderingQuestion->saveAll($this->data, array('validate' => false))) {
+			if ($this->OrderingQuestion->validates() && $this->OrderingQuestion->saveAll($this->data, array('validate' => false)) === true) {
 				$habtm_data = array(
-					'ordering_question_id' => $this->OrderingQuestion->getLastInsertID(),
+					'question_id' => $this->OrderingQuestion->getLastInsertID(),
 					'quiz_id' => $this->data['Quiz'][0]['id']
 				);
-				if ($this->OrderingQuestion->QuizOrdering->save($habtm_data)) {
+				if ($this->OrderingQuestion->QuizQuestion->save($habtm_data)) {
 					$this->Session->setFlash(__('The Ordering Question has been saved',true), 'default', array('class' => 'success'));
 					$this->redirect(
 						array('controller' => 'quizzes', 'action'=>'edit', 	$this->data['Quiz'][0]['id'])

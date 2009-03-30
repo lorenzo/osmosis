@@ -29,7 +29,7 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-class ChoiceQuestionsController extends AppController {
+class ChoiceQuestionsController extends QuizAppController {
 
 	var $name = 'ChoiceQuestions';
 	var $helpers = array('Html', 'Form' );
@@ -69,10 +69,10 @@ class ChoiceQuestionsController extends AppController {
 			$this->ChoiceQuestion->set($this->data);
 			if ($this->ChoiceQuestion->validates() && $this->ChoiceQuestion->saveAll($this->data, array('validate' => false))) {
 				$habtm_data = array(
-					'choice_question_id' => $this->ChoiceQuestion->getLastInsertID(),
+					'question_id' => $this->ChoiceQuestion->getLastInsertID(),
 					'quiz_id' => $this->data['Quiz'][0]['id']
 				);
-				if ($this->ChoiceQuestion->QuizChoice->save($habtm_data)) {
+				if ($this->ChoiceQuestion->QuizQuestion->save($habtm_data)) {
 					$this->Session->setFlash(__('The Choice Question has been saved',true), 'default', array('class' => 'success'));
 					$this->redirect(array('controller' => 'quizzes', 'action'=>'edit', $this->data['Quiz'][0]['id']));
 				}

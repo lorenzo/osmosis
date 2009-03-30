@@ -32,11 +32,11 @@
 class ChoiceChoice extends QuizAppModel {
 
 	var $name = 'ChoiceChoice';
+	var $useTable = 'quiz_choice_choices';
 	var $validate = array(
-		// 'choice_question_id' => VALID_NOT_EMPTY,
 		'text' => array(
 			'required' => array(
-				'rule' => array('custom', '/.+/')
+				'rule' => array('notEmpty')
 			)
 		),
 		'position' => array(
@@ -50,8 +50,6 @@ class ChoiceChoice extends QuizAppModel {
 			// 			),
 		)
 	);
-
-	var $useTable = 'quiz_choice_choices';
 
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(

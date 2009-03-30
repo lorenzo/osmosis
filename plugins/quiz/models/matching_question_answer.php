@@ -10,13 +10,6 @@ class MatchingQuestionAnswer extends AppModel {
 			'conditions'	=> '',
 			'fields'		=> array('id','username', 'full_name'),
 			'order'			=> ''
-		),
-		'MatchingQuestionQuestion' => array(
-			'className'		=> 'Quiz.MatchingQuestion',
-			'foreignKey'	=> 'matching_questions_quiz_id',
-			'conditions'	=> '',
-			'fields'		=> '',
-			'order'			=> ''
 		)
 	);
 	

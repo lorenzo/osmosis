@@ -43,6 +43,7 @@ class TextQuestionsController extends QuizAppController {
 		if (empty($this->activeCourse) && in_array($this->action,$actions) &&isset($this->params['named']['quiz'])) {
 			$this->activeCourse = $this->TextQuestion->Quiz->field('course_id',array('Quiz.id' => $this->params['named']['quiz']));
 		}
+		$this->activeCourse = 1;
 	}
 
 	function index() {
@@ -66,10 +67,10 @@ class TextQuestionsController extends QuizAppController {
 			}
 			if ($this->TextQuestion->save($this->data)) {
 				$habtm_data = array(
-					'text_question_id' => $this->TextQuestion->getLastInsertID(),
+					'question_id' => $this->TextQuestion->getLastInsertID(),
 					'quiz_id' => $this->data['Quiz'][0]['id']
 				);
-				if ($this->TextQuestion->QuizText->save($habtm_data)) {
+				if ($this->TextQuestion->QuizQuestion->save($habtm_data)) {
 					$this->Session->setFlash(__('The Text Question has been saved',true), 'default', array('class' => 'success'));
 					$this->redirect(array('controller' => 'quizzes', 'action'=>'edit', $this->data['Quiz'][0]['id']));
 				}

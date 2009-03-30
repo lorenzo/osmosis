@@ -33,10 +33,10 @@ class MatchingChoice extends QuizAppModel {
 
 	var $name = 'MatchingChoice';
 	var $validate = array(
-		'matching_question_id' => VALID_NOT_EMPTY,
+		'matching_question_id' => array('rule' => array('notEmpty')),
 		'text' => array(
 			'required' => array(
-				'rule' => array('custom','/.+/'),
+				'rule' => array('notEmpty'),
 				'allowEmpty' => false,
 				'required' => true,
 				'last' => true
@@ -50,18 +50,19 @@ class MatchingChoice extends QuizAppModel {
 	var $useTable = 'quiz_matching_choices';
 	
 	var $belongsTo = array(
-			'MatchingQuestion' => array('className' => 'quiz.MatchingQuestion',
-								'foreignKey' => 'matching_question_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'counterCache' => '')
+		'MatchingQuestion' => array(
+			'className' => 'Quiz.MatchingQuestion',
+			'foreignKey' => 'matching_question_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'counterCache' => '')
 	);
 	
 	
 	var $hasMany = array(
 		'SourceChoice' => array(
-			'className' => 'quiz.MatchingChoice',
+			'className' => 'Quiz.MatchingChoice',
 			'foreignKey' => 'target_id',
 			'fields' => '',
 			'order' => '',
@@ -100,7 +101,7 @@ class MatchingChoice extends QuizAppModel {
 	}
 	
 	function save($data, $validate = true, $fields = array()) {
-		if (isset($data['SourceChoice'])) {
+		if (isset($data['SourceChoice'][0]['SourceChoice'])) {
 			$newData['SourceChoice'] = Set::extract($data['SourceChoice'],'{n}.SourceChoice');
 			foreach ($newData['SourceChoice'] as $i => $d) {
 				$newData['SourceChoice'][$i]['matching_question_id'] = $data['matching_question_id'];

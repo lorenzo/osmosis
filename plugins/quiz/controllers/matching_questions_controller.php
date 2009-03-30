@@ -29,10 +29,10 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-class MatchingQuestionsController extends AppController {
+class MatchingQuestionsController extends QuizAppController {
 
 	var $name = 'MatchingQuestions';
-	var $helpers = array('Html', 'Form' );
+	var $helpers = array('Html', 'Form');
 
 	function _setActiveCourse() {
 		parent::_setActiveCourse();
@@ -80,11 +80,11 @@ class MatchingQuestionsController extends AppController {
 			
 			if ($this->MatchingQuestion->saveAll($newData,array('validate' => false))) {
 				$habtm_data = array(
-					'matching_question_id' => $this->MatchingQuestion->getLastInsertID(),
+					'question_id' => $this->MatchingQuestion->getLastInsertID(),
 					'quiz_id' => $this->data['Quiz'][0]['id']
 				);
 				
-				if ($this->MatchingQuestion->QuizMatching->save($habtm_data)) {
+				if ($this->MatchingQuestion->QuizQuestion->save($habtm_data)) {
 					$this->Session->setFlash(__('The Choice Question has been saved',true), 'default', array('class' => 'success'));
 					$this->redirect(array('controller' => 'quizzes', 'action'=>'edit', $this->data['Quiz'][0]['id']));
 				}

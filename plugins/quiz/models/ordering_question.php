@@ -29,19 +29,20 @@
  * @lastmodified	$Date$
  * @license			http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
  */
-class OrderingQuestion extends QuizAppModel {
+App::import('Model','Quiz.Question');
+class OrderingQuestion extends Question {
 
 	var $name = 'OrderingQuestion';
 	var $validate = array(
 		'body' => array(
 		    'required' => array(
-		        'rule' => array('custom','/.+/')
+		        'rule' => array('notEmpty')
 			),
 		),
 		'max_choices' => array(
 			'positive' => array(
-				'rule' => array('comparison', '>', 0),
-				'allowEmpty' => true
+				'rule' => array('comparison', '>=', 0),
+				'allowEmpty' => true,
 			)
 		),
 		'min_choices' => array(
@@ -50,7 +51,7 @@ class OrderingQuestion extends QuizAppModel {
 				'allowEmpty' => true
 			),
 			'positive' => array(
-				'rule' => array('comparison', '>', 0)
+				'rule' => array('comparison', '>=', 0)
 			)
 		)
 	);
@@ -71,24 +72,9 @@ class OrderingQuestion extends QuizAppModel {
 			'counterQuery' => ''
 		)
 	);
-
-	var $hasAndBelongsToMany = array(
-		'Quiz' => array(
-			'className' => 'quiz.Quiz',
-			'joinTable' => 'quiz_ordering_questions_quizzes',
-			'foreignKey' => 'ordering_question_id',
-			'associationForeignKey' => 'quiz_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'unique' => '',
-			'finderQuery' => '',
-			'deleteQuery' => '',
-			'insertQuery' => '',
-			'with' => 'Quiz.QuizOrdering'
-		)
+	
+	var $actsAs = array(
+			'Quiz.Inheritable' => array('method' => 'CTI')
 	);
 	
 	function __construct($id = false, $table = null, $ds = null) {
@@ -120,7 +106,7 @@ class OrderingQuestion extends QuizAppModel {
 	 */
 	
 	function afterFind($results,$primary = false) {
-		if (isset($results['OrderingChoice']))
+		if (isset($results[0]['OrderingChoice']))
 			array_walk($results,array(&$this,'shuffleChoices'));	
 		return $results;
 	}
@@ -164,7 +150,7 @@ class OrderingQuestion extends QuizAppModel {
 	 * @return array shuffled choices 
 	 */
 	function shuffleChoices(&$question) {
-		if (!isset($question['shuffle']) || !$question['shuffle'])
+		if (!isset($question['OrderingQuestion']['shuffle']) || !$question['OrderingQuestion']['shuffle'])
 			return;
 
 		if (isset($question['OrderingChoice'])) {
@@ -198,6 +184,21 @@ class OrderingQuestion extends QuizAppModel {
 	function minLessThanMax() {
 		if (empty($this->data['OrderingQuestion']['max_choices'])) return true;
 		return intval($this->data['OrderingQuestion']['min_choices'])<=intval($this->data['OrderingQuestion']['max_choices']);
+	}
+	
+	function saveAnswers($answers,$member_id) {
+		$result = true;
+		$this->Answer = ClassRegistry::init('Quiz.OrderingQuestionAnswer');
+		foreach ($answers as $question_id => $ordering) {
+			$data = array();
+			$data['OrderingQuestionAnswer'] = array('member_id' => $member_id, 'questions_quiz_id' => $question_id);
+			foreach ($ordering as $choice => $position) {
+				$data['AnswerOrdering'][] = array('ordering_choice_id' => $choice, 'position' => $position);
+			}
+			if (!$result = $this->Answer->saveAll($data))
+				break;
+		}
+		return $result;
 	}
 }
 ?>

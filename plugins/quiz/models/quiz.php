@@ -35,7 +35,7 @@ class Quiz extends QuizAppModel {
 	var $validate = array(
 		'name' => array(
 		    'required' => array(
-		        'rule' => array( 'custom','/.+/'),
+		        'rule' => array('notEmpty'),
 		        'required' => true,
 		        'allowEmpty' => false,
 				),
@@ -44,44 +44,18 @@ class Quiz extends QuizAppModel {
 
 	var $useTable = 'quiz_quizzes';
 	var $hasAndBelongsToMany = array(
-			'ChoiceQuestion' => array(
-				'className' => 'quiz.ChoiceQuestion',
-				'joinTable' => 'quiz_choice_questions_quizzes',
+			'Question' => array(
+				'className'	=> 'Quiz.Question',
+				'joinTable' => 'quiz_questions_quizzes',
 				'foreignKey' => 'quiz_id',
-				'associationForeignKey' => 'choice_question_id',
-				'with' => 'Quiz.QuizChoice',
-				'unique' => true
-			),
-			// 'ClozeQuestion' => array(
-			// 	'className' => 'quiz.ClozeQuestion',
-			// 	'joinTable' => 'quiz_cloze_questions_quizzes',
-			// 	'foreignKey' => 'quiz_id',
-			// 	'associationForeignKey' => 'cloze_question_id',
-			// 	'with' => 'QuizCloze'
-			// ),
-			'MatchingQuestion' => array(
-				'className' => 'quiz.MatchingQuestion',
-				'joinTable' => 'quiz_matching_questions_quizzes',
-				'foreignKey' => 'quiz_id',
-				'associationForeignKey' => 'matching_question_id',
-				'with' => 'Quiz.QuizMatching'
-			),
-			'OrderingQuestion' => array(
-				'className' => 'quiz.OrderingQuestion',
-				'joinTable' => 'quiz_ordering_questions_quizzes',
-				'foreignKey' => 'quiz_id',
-				'associationForeignKey' => 'ordering_question_id',
-				'with' => 'Quiz.QuizOrdering'
-			),
-			'TextQuestion' => array(
-				'className' => 'quiz.TextQuestion',
-				'joinTable' => 'quiz_text_questions_quizzes',
-				'foreignKey' => 'quiz_id',
-				'associationForeignKey' => 'text_question_id',
-				'with' => 'Quiz.QuizText',
-				'unique' => true
-			),
+				'associationForeignKey' => 'question_id',
+				'with' => 'Quiz.QuizQuestion',
+				'unique' => true,
+				'order' => array('QuizQuestion.position' => 'ASC')
+			)
 	);
+	
+	
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
 			'name.required', __('The name can not be empty',true)
@@ -107,33 +81,35 @@ class Quiz extends QuizAppModel {
 			$conditions = array('Quiz.id' =>$id);
 			$recursive = 2;
 			$quiz = $this->find('first', compact('conditions','recursive'));
+			
+			$questionIDs = Set::extract('/Question/id',$quiz);
+			$conditions = array('Question.id' => $questionIDs);
 		}
 		
 		foreach ($question_type as $type) {
 			$questionType = Inflector::camelize($type);
-			$exclude = Set::extract('/'.$questionType.'/id',$quiz);
-			$conditions = 	array('NOT' => array('id' => $exclude));
-			$this->{$questionType}->unbindModel(array('hasAndBelongsToMany' => array('Quiz')));
-			$questions[$questionType]  = $this->{$questionType}->find('all',compact('conditions','contain'));
+			if (isset($questionIDs))
+				$conditions = 	array('NOT' => array('Question.id' => $questionIDs));
+			
+			$questions[$questionType]  = $this->Question->find($questionType,compact('conditions','contain'));
 		}
 		return array($questions,$quiz);
 	}
 
 	function addQuestions($question_list = array()) {
 		foreach($question_list as $type => $questions) {
-			if (!isset($this->hasAndBelongsToMany[$type])) {
+			if (!isset($this->Question->questionTypes)) {
 				continue;
 			}
-			$habtm = $this->hasAndBelongsToMany[$type];
-			$with = $habtm['with'];
+			
 			foreach ($questions as $question_id) {
-				if ($question_id==0) continue;
+				if ($question_id ==0) continue;
 				$save = array(
-					$habtm['associationForeignKey'] => $question_id,
+					'question_id' => $question_id,
 					'quiz_id' => $this->id
 				);
-				$this->{$with}->create();
-				if (!$this->{$with}->save($save)) {
+				$this->QuizQuestion->create();
+				if (!$this->QuizQuestion->save($save)) {
 					return false;
 				}
 			}
@@ -142,14 +118,7 @@ class Quiz extends QuizAppModel {
 	}
 	
 	function saveAnswers($id,$answers,$member_id) {
-		foreach ($answers as $questionType => $answer) {
-			if (!isset($this->hasAndBelongsToMany[$questionType])) {
-				continue;
-			}
-			$with = $this->hasAndBelongsToMany[$questionType]['with'];
-			$this->{$with}->saveAnswers($answer,$member_id);
-		}
-		return false;
+		return $this->Question->saveAnswers($answers,$member_id);
 	}
 }
 ?>

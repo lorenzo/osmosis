@@ -11,13 +11,6 @@ class TextQuestionAnswer extends QuizAppModel {
 			'conditions'	=> '',
 			'fields'		=> array('id','username', 'full_name'),
 			'order'			=> ''
-		),
-		'TextQuestion' => array(
-			'className'		=> 'Quiz.TextQuestion',
-			'foreignKey'	=> 'text_questions_quiz_id',
-			'conditions'	=> '',
-			'fields'		=> '',
-			'order'			=> ''
 		)
 	);
 }

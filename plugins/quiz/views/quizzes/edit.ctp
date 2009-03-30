@@ -45,16 +45,12 @@
 		<h2>&mdash; <?php echo $this->data['Quiz']['name'] ?> &mdash;</h2>
 		<?php
 			unset($this->data['Quiz']);
-			foreach ($this->data as $type => $question_list) {
-				if (empty($question_list)) continue;
-				echo '<h3>' . __(Inflector::humanize(Inflector::underscore($type)), true) . '</h3>';
-				echo '<ol>';
-				foreach ($question_list as $i => $question) {
-					$question = array($type => $question);
-					echo '<li>' . $this->element('previewing/'.Inflector::underscore($type), array('question' => $question)) . '&nbsp;</li>';
-				}
-				echo '</ol>';
+			echo '<ol>';
+			foreach ($this->data['Question'] as $index => $question) {
+				echo '<h3>' . __(Inflector::humanize(Inflector::underscore($question['type'])), true) . '</h3>';
+				echo '<li>' . $this->element('previewing/'.Inflector::underscore($question['type']), array('question' => $question)) . '&nbsp;</li>';
 			}
+			echo '</ol>';
 		?>
 	</div>
 </div>

@@ -10,13 +10,6 @@ class OrderingQuestionAnswer extends AppModel {
 			'conditions'	=> '',
 			'fields'		=> array('id','username', 'full_name'),
 			'order'			=> ''
-		),
-		'OrderingQuestion' => array(
-			'className'		=> 'Quiz.OrderingQuestion',
-			'foreignKey'	=> 'ordering_questions_quiz_id',
-			'conditions'	=> '',
-			'fields'		=> '',
-			'order'			=> ''
 		)
 	);
 	
@@ -27,5 +20,19 @@ class OrderingQuestionAnswer extends AppModel {
 			'dependent'		=> true,
 		),
 	);
+	
+	function saveAnswers($answers,$member_id) {
+		$result = true;
+		foreach ($answers as $question_id => $ordering) {
+			$data = array();
+			$data['Answer'] = array('member_id' => $member_id, 'ordering_questions_quiz_id' => $question_id);
+			foreach ($ordering as $choice => $position) {
+				$data['AnswerOrdering'][] = array('ordering_choice_id' => $choice, 'position' => $position);
+			}
+			if (!$result = $this->Answer->saveAll($data))
+				break;
+		}
+		return $result;
+	}
 }
 ?>
