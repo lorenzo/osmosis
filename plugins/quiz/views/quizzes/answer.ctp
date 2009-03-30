@@ -8,8 +8,9 @@
 <?php foreach ($quiz['Question'] as $i => $question) :?>
 	<?php
 			$type = $question['type'];
-			echo '<h2>' . __(Inflector::humanize(Inflector::underscore($type)), true) . '</h2>';
-			echo '<li>' . $this->element('answering/'.Inflector::underscore($type), array('question' => $question)) . '&nbsp;</li>';
+			echo
+			'<li><h2>' . __(Inflector::humanize(Inflector::underscore($type)), true) , '</h2>' ,
+			$this->element('answering/'.Inflector::underscore($type), array('question' => $question)) . '&nbsp;</li>';
 	?>
 <?php endforeach;?>
 </ol>

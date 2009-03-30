@@ -45,10 +45,11 @@
 		<h2>&mdash; <?php echo $this->data['Quiz']['name'] ?> &mdash;</h2>
 		<?php
 			unset($this->data['Quiz']);
-			echo '<ol>';
+			echo '<ol class="quiz-question-list">';
 			foreach ($this->data['Question'] as $index => $question) {
-				echo '<h3>' . __(Inflector::humanize(Inflector::underscore($question['type'])), true) . '</h3>';
-				echo '<li>' . $this->element('previewing/'.Inflector::underscore($question['type']), array('question' => $question)) . '&nbsp;</li>';
+				echo
+				'<li><h3>' . __(Inflector::humanize(Inflector::underscore($question['type'])), true) , '</h3>' ,
+				$this->element('previewing/'.Inflector::underscore($question['type']), array('question' => $question)) , '&nbsp;</li>';
 			}
 			echo '</ol>';
 		?>

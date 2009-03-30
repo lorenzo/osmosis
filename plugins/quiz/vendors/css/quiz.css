@@ -334,3 +334,7 @@ ol li div ol {
 div.textQuestion input[type=text] {
 	width:75%;
 }
+
+ol.quiz-question-list li {
+  width:100%;
+}
