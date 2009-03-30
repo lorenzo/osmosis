@@ -13,15 +13,15 @@
 				}
 				$question = $question['ChoiceQuestion'];
 			?>
-			<strong><?php echo $text->truncate($question['body'], 200) ?></strong><br />
-			<?php
-			 	echo sprintf($num, $num_choices) . ' | ';
-				echo $html->link(__('view', true), array(
-					'controller' => 'choice_questions', 
-					'action' => 'view', 
+			<strong><?php echo $html->link($text->truncate($question['body'], 200), array(
+					'controller' => 'choice_questions',
+					'action' => 'view',
 					$question['id'],
 					'course_id' => $course['Course']['id']
-					));
+					));  ?>
+			</strong><br />
+			<?php
+			 	echo sprintf($num, $num_choices);
 				echo $this->element(
 					'selection_list.add_question',
 					array('question_id' => $question['id'], 'i' => $i++, 'type'=>'ChoiceQuestion')
