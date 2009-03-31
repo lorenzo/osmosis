@@ -81,17 +81,16 @@ class Quiz extends QuizAppModel {
 			$conditions = array('Quiz.id' =>$id);
 			$recursive = 2;
 			$quiz = $this->find('first', compact('conditions','recursive'));
-			
 			$questionIDs = Set::extract('/Question/id',$quiz);
-			$conditions = array('Question.id' => $questionIDs);
+			unset($conditions);
 		}
 		
 		foreach ($question_type as $type) {
 			$questionType = Inflector::camelize($type);
-			if (isset($questionIDs))
-				$conditions = 	array('NOT' => array('Question.id' => $questionIDs));
+			if (!empty($questionIDs))
+				$conditions = array('NOT' => array('Question.id' => $questionIDs));
 			
-			$questions[$questionType]  = $this->Question->find($questionType,compact('conditions','contain'));
+			$questions[$questionType]  = $this->Question->find($questionType,compact('conditions'));
 		}
 		return array($questions,$quiz);
 	}
