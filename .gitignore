@@ -1,0 +1,5 @@
+.DS_Store
+tmp/cache/models/*
+tmp/cache/persitent/*
+tmp/cache/views/*
+config/database.php
