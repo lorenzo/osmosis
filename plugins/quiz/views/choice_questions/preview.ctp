@@ -1,0 +1,1 @@
+<?php echo $this->element('previewing/choice_question'); ?>
