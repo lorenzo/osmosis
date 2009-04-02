@@ -26,4 +26,5 @@
 	?>
 		</ol>
 	</div>
+	<br style="clear:both" />
 </div>

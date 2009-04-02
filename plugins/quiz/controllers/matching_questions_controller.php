@@ -175,5 +175,14 @@ class MatchingQuestionsController extends QuizAppController {
 		}
 	}
 
+	function preview($id) {
+		$question = $this->MatchingQuestion->find('first',array(
+				'conditions' => array('MatchingQuestion.id' => $id),
+				'contain' => array('SourceChoice','TargetChoice')
+			)
+		);
+		$this->set('question',$question);
+	}
+
 }
 ?>

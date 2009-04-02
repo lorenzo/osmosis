@@ -143,5 +143,14 @@ class OrderingQuestionsController extends AppController {
 		}
 	}
 
+	function preview($id) {
+		$question = $this->OrderingQuestion->find('first',array(
+				'conditions' => array('OrderingQuestion.id' => $id),
+				'contain' => array('OrderingChoice')
+			)
+		);
+		$this->set('question',$question);
+	}
+
 }
 ?>

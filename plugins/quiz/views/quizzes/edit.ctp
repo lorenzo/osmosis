@@ -1,4 +1,4 @@
-<h1><?php echo sprintf(__('Edit %s %s', true), __('Quiz', true), $this->data['Quiz']['name']);?></h1>
+<h1><?php echo sprintf(__('Edit %s %s', true), __('Quiz', true), $form->value('Quiz.name'));?></h1>
 <div class="question-list">
 	<?php
 		echo $form->create('Quiz', array('action' => 'add_question'));
@@ -34,11 +34,11 @@
 					printf('<p class="empty">%s%s</p>', $message, $link);
 			?>
 		</div>
-	</div>
-	<?php
+		<?php
 		echo $form->submit(__('Add to quiz', true));
 		echo $form->end();
-	?>
+		?>
+	</div>
 </div>
 <div class="quiz-preview">
 	<div class="content">
@@ -48,10 +48,47 @@
 			echo '<ol class="quiz-question-list">';
 			foreach ($this->data['Question'] as $index => $question) {
 				echo
-				'<li><h3>' . __(Inflector::humanize(Inflector::underscore($question['type'])), true) , '</h3>' ,
-				$this->element('previewing/'.Inflector::underscore($question['type']), array('question' => $question)) , '&nbsp;</li>';
+				'<li>',
+				'<h3>' ,
+					__(Inflector::humanize(Inflector::underscore($question['type'])), true) ,
+					'&nbsp;',
+					$html->link(__('remove',true),
+						array('action' => 'remove_question',$form->value('Quiz.id'),$question['id']),
+						array('class' => 'question-remove')),
+				'</h3>' ,
+				$this->element('previewing/'.Inflector::underscore($question['type']), array('question' => $question)) ,
+				'&nbsp;',
+				'</li>';
 			}
 			echo '</ol>';
 		?>
 	</div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#questions .list ul li a.question-preview-link').click(function() {
+		var link = $(this);
+		if (!link.hasClass('content-loaded'))  {
+			$.ajax({
+				url : this.href,
+				success : function(data,status) {
+					link.parents('li')
+						.find('div.question-list-content')
+							.html(data)
+							.show('fast');
+					link.addClass('content-loaded');
+				},
+				beforeSend : function() {
+					link.parent().addClass('loading');
+				},
+				complete : function() {
+					link.parent().removeClass('loading');
+				}
+			});
+		}else{
+			link.parents('li').find('div.question-list-content').toggle('fast');
+		}
+		return false;
+	})
+});
+</script>

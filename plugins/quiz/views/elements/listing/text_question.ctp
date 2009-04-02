@@ -4,15 +4,19 @@
 		foreach ($questions as $type => $question) {
 			$question = $question['TextQuestion'];
 	?>
-		<li>
-			<strong><?php echo $html->link($text->truncate($question['title'], 200), array(
-					'controller' => 'text_questions',
-					'action' => 'view',
-					$question['id'],
-					'course_id' => $course['Course']['id']
-					)); ?></strong><br />
+		<li class="question-list-element">
+			<h4><?php echo $html->link($text->truncate($question['title'], 200), array(
+							'controller' => 'text_questions',
+							'action' => 'preview',
+							$question['id'],
+							'course_id' => $course['Course']['id']
+						),array(
+							'class' => 'question-preview-link'
+						)
+					); ?>
+			</h4>
 			<?php
-				echo $text->truncate($question['body'], 200);
+				echo $html->div('question-list-content','');
 				echo $this->element('selection_list.add_question', array('question_id' => $question['id'], 'i' => $i++, 'type' => 'TextQuestion'));
 			?>
 		</li>

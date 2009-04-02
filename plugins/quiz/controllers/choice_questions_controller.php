@@ -154,5 +154,14 @@ class ChoiceQuestionsController extends QuizAppController {
 		}
 	}
 
+	function preview($id) {
+		$question = $this->ChoiceQuestion->find('first',array(
+				'conditions' => array('ChoiceQuestion.id' => $id),
+				'contain' => array('ChoiceChoice')
+			)
+		);
+		$this->set('question',$question);
+	}
+
 }
 ?>

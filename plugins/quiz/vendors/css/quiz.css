@@ -1,17 +1,16 @@
 .question-list {
 	position:relative;
-	width:30%;
-	float:left;
+	width:90%;
+	margin:auto;
+	margin-bottom:70px;
 }
 
 .quiz-preview {
-	width:70%;
-	float:right;
+	width:90%;
 }
 
 .quiz-preview .content {
 	margin-left:10px;
-	border-left:#ccc 1px dashed;
 	padding:0 0 10px 10px!important;
 	border-top:none!important;
 }
@@ -37,6 +36,8 @@
 .droplist {
 	position:relative;
 	width:190px;
+	background-color:#fff;
+	z-index:2;
 }
 
 .question-list .add {
@@ -124,22 +125,49 @@
 	list-style:none;
 }
 
-#questions .list ul li {
+#questions .list ul li.question-list-element {
+	position:relative;
 	padding:5px 10px;
 	border-bottom:#999 1px dashed;
+	z-index:1;
 }
-#questions .list ul li input {
+#questions .list ul li.question-list-element .question-list-content {
+	margin-bottom:5px;
+	display:none;
+}
+
+#questions .list ul liv input {
 	float:left;
 	margin:0 5px 0 0;
 }
-#questions .list ul li label {
+#questions .list ul li.question-list-element label {
 	display:inline;
 	padding-top:1px;
 	vertical-align:center;
 	width:auto;
 }
-#questions .list ul li .input {
-	padding:10px 0;
+#questions .list ul li.question-list-element .input {
+	position:absolute;
+	top:0;
+	right:0;
+	margin:5px 0;
+}
+
+#questions .list ul li.question-list-element h4 {
+	margin-top:3px;
+	margin-bottom:5px;
+	font-size:1.2em;
+	width:70%;
+}
+
+#questions .list ul li.question-list-element h4 a {
+	text-decoration:none;
+}
+
+#questions .list ul li.question-list-element h4.loading {
+	background-image:url('../img/loading.gif');
+	background-position:right;
+	background-repeat:no-repeat;
 }
 
 .question-body {
