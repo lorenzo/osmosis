@@ -42,7 +42,7 @@
 </div>
 <div class="quiz-preview">
 	<div class="content">
-		<h2>&mdash; <?php echo $this->data['Quiz']['name'] ?> &mdash;</h2>
+		<h2>&mdash; <?php echo $form->value('Quiz.name') ?> &mdash;</h2>
 		<?php
 			unset($this->data['Quiz']);
 			echo '<ol class="quiz-question-list">';
@@ -51,11 +51,10 @@
 				'<li>',
 				'<h3>' ,
 					__(Inflector::humanize(Inflector::underscore($question['type'])), true) ,
-					'&nbsp;',
-					$html->link(__('remove',true),
-						array('action' => 'remove_question',$form->value('Quiz.id'),$question['id']),
-						array('class' => 'question-remove')),
 				'</h3>' ,
+				$html->link(__('remove',true),
+						array('action' => 'remove_question',$question['QuizQuestion']['id']),
+						array('class' => 'question-remove')),
 				$this->element('previewing/'.Inflector::underscore($question['type']), array('question' => $question)) ,
 				'&nbsp;',
 				'</li>';

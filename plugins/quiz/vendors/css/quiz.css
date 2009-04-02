@@ -366,3 +366,7 @@ div.textQuestion input[type=text] {
 ol.quiz-question-list li {
   width:100%;
 }
+
+ol.quiz-question-list li a.question-remove {
+  float:right;
+}

@@ -155,7 +155,7 @@ class QuizzesController extends QuizAppController {
 		if (!empty($this->data)) {
 			$this->Quiz->id = $id;
 			if ($this->Quiz->addQuestions($this->data)) {
-				$this->Session->setFlash(__('The questions where added to the quiz.', true), 'default', array('class' => 'success'));
+				$this->Session->setFlash(__('The questions were added to the quiz.', true), 'default', array('class' => 'success'));
 				$this->redirect(
 					array('controller' => 'quizzes', 'action' => 'edit',$id,'course_id' => $this->activeCourse)
 				);
@@ -165,6 +165,22 @@ class QuizzesController extends QuizAppController {
 					array('controller' => 'quizzes', 'action' => 'edit', $id,'course_id' => $this->activeCourse)
 				);
 			}
+		}
+	}
+
+	function remove_question($quizQuestion) {
+		$this->Quiz->QuizQuestion->id = $quizQuestion;
+		$question = $this->Quiz->QuizQuestion->read();
+		if (!empty($question) && $this->Quiz->removeQuestion($quizQuestion)) {
+			$this->Session->setFlash(__('The question was removed from the quiz.', true), 'default', array('class' => 'success'));
+			$this->redirect(
+				array('controller' => 'quizzes', 'action' => 'edit',$question['QuizQuestion']['quiz_id'],'course_id' => $this->activeCourse)
+			);
+		} else {
+			$this->Session->setFlash(__('The questions could not be added to the quiz.', true), 'default', array('class' => 'error'));
+			$this->redirect(
+				array('controller' => 'quizzes', 'action' => 'index', 'course_id' => $this->activeCourse)
+			);
 		}
 	}
 	

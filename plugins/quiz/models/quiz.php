@@ -115,6 +115,10 @@ class Quiz extends QuizAppModel {
 		}
 		return true;
 	}
+
+	function removeQuestion($quizQuestion) {
+		return $this->QuizQuestion->del($quizQuestion);
+	}
 	
 	function saveAnswers($id,$answers,$member_id) {
 		return $this->Question->saveAnswers($answers,$member_id);
