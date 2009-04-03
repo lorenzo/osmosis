@@ -119,6 +119,10 @@ class Quiz extends QuizAppModel {
 	function removeQuestion($quizQuestion) {
 		return $this->QuizQuestion->del($quizQuestion);
 	}
+
+	function moveQuestion($quizQuestion,$direction) {
+		return $this->QuizQuestion->{'move'.Inflector::camelize($direction)}($quizQuestion);
+	}
 	
 	function saveAnswers($id,$answers,$member_id) {
 		return $this->Question->saveAnswers($answers,$member_id);

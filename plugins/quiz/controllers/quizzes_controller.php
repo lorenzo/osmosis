@@ -168,6 +168,29 @@ class QuizzesController extends QuizAppController {
 		}
 	}
 
+	function move_question($quizQuestion,$direction) {
+		$directions = array('up','down','bottom','top');
+		if (!in_array($direction,$directions)) {
+			$this->Session->setFlash(__('Unexpected method', true), 'default', array('class' => 'error'));
+				$this->redirect(
+					array('controller' => 'quizzes', 'action' => 'index','course_id' => $this->activeCourse)
+				);
+		}
+		$this->Quiz->QuizQuestion->id = $quizQuestion;
+		$question = $this->Quiz->QuizQuestion->read();
+		if (!empty($question) && $this->Quiz->moveQuestion($quizQuestion,$direction)) {
+			$this->Session->setFlash(__('The question was moved', true), 'default', array('class' => 'success'));
+			$this->redirect(
+				array('controller' => 'quizzes', 'action' => 'edit',$question['QuizQuestion']['quiz_id'],'course_id' => $this->activeCourse)
+			);
+		}else {
+			$this->Session->setFlash(__('The question culd not be moved', true), 'default', array('class' => 'error'));
+			$this->redirect(
+				array('controller' => 'quizzes', 'action' => 'index', 'course_id' => $this->activeCourse)
+			);
+		}
+	}
+
 	function remove_question($quizQuestion) {
 		$this->Quiz->QuizQuestion->id = $quizQuestion;
 		$question = $this->Quiz->QuizQuestion->read();
@@ -177,7 +200,7 @@ class QuizzesController extends QuizAppController {
 				array('controller' => 'quizzes', 'action' => 'edit',$question['QuizQuestion']['quiz_id'],'course_id' => $this->activeCourse)
 			);
 		} else {
-			$this->Session->setFlash(__('The questions could not be added to the quiz.', true), 'default', array('class' => 'error'));
+			$this->Session->setFlash(__('The question could not be removed from the quiz.', true), 'default', array('class' => 'error'));
 			$this->redirect(
 				array('controller' => 'quizzes', 'action' => 'index', 'course_id' => $this->activeCourse)
 			);

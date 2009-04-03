@@ -46,6 +46,7 @@
 		<?php
 			unset($this->data['Quiz']);
 			echo '<ol class="quiz-question-list">';
+			$total = count($this->data['Question']);
 			foreach ($this->data['Question'] as $index => $question) {
 				echo
 				'<li>',
@@ -54,8 +55,18 @@
 				'</h3>' ,
 				$html->link(__('remove',true),
 						array('action' => 'remove_question',$question['QuizQuestion']['id']),
-						array('class' => 'question-remove')),
-				$this->element('previewing/'.Inflector::underscore($question['type']), array('question' => $question)) ,
+						array('class' => 'quiz-question-action question-remove'));
+				if ($index < $total) {
+					echo $html->link(__('move down',true),
+						array('action' => 'move_question',$question['QuizQuestion']['id'],'down'),
+						array('class' => 'quiz-question-action question-move-down'));
+				}
+				if ($index > 0) {
+					echo $html->link(__('move up',true),
+						array('action' => 'move_question',$question['QuizQuestion']['id'],'up'),
+						array('class' => 'quiz-question-action question-move-up'));
+				}
+				 echo $this->element('previewing/'.Inflector::underscore($question['type']), array('question' => $question)) ,
 				'&nbsp;',
 				'</li>';
 			}
