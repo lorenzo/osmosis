@@ -25,24 +25,8 @@ class QuizQuestion extends QuizAppModel {
 			'counterCache' => ''
 		)
 	);
-	
-	function getLastPostion($quiz_id) {
-		$result = $this->find('first',array(
-				'fields' => array('MAX(position) AS last'),
-				'conditions' => array('quiz_id' => $quiz_id),
-				'recursive' => -1
-			)
-		);
-		return $result[0]['last'];
-	}
-	
-	function beforeSave() {
-		if (!isset($this->data[$this->alias]['position']) && isset($this->data[$this->alias]['quiz_id'])) {
-			$lastPosition = $this->getLastPostion($this->data[$this->alias]['quiz_id']);
-			$this->data[$this->alias]['position'] = $lastPosition + 1;
-		}
-		return true;
-	}
+
+	var $actsAs = array('Quiz.Sortable' => array('field' => 'position'));
 	
 }
 ?>
