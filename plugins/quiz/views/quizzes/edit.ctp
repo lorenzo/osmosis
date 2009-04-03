@@ -56,16 +56,16 @@
 				$html->link(__('remove',true),
 						array('action' => 'remove_question',$question['QuizQuestion']['id']),
 						array('class' => 'quiz-question-action question-remove'));
-				if ($index < $total) {
+						
+				$hidden = ($index < ($total - 1) && $total > 1) ? '' : ' hidden';
 					echo $html->link(__('move down',true),
 						array('action' => 'move_question',$question['QuizQuestion']['id'],'down'),
-						array('class' => 'quiz-question-action question-move-down'));
-				}
-				if ($index > 0) {
+						array('class' => 'quiz-question-action question-move-down'. $hidden));
+						
+				$hidden = ($index > 0) ? '' : ' hidden';
 					echo $html->link(__('move up',true),
 						array('action' => 'move_question',$question['QuizQuestion']['id'],'up'),
-						array('class' => 'quiz-question-action question-move-up'));
-				}
+						array('class' => 'quiz-question-action question-move-up' .$hidden));
 				 echo $this->element('previewing/'.Inflector::underscore($question['type']), array('question' => $question)) ,
 				'&nbsp;',
 				'</li>';
@@ -76,7 +76,13 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#questions .list ul li a.question-preview-link').click(function() {
+	function jsonSucces(json) {
+		return ('flash' in json) &&
+			('params' in json.flash) &&
+			('class' in json.flash.params) &&
+			(json.flash.params.class == 'success');
+	}
+	function questionPreview() {
 		var link = $(this);
 		if (!link.hasClass('content-loaded'))  {
 			$.ajax({
@@ -99,6 +105,86 @@ $(document).ready(function(){
 			link.parents('li').find('div.question-list-content').toggle('fast');
 		}
 		return false;
-	})
+	}
+	
+	function removeQuestion() {
+		var link = $(this);
+		$.ajax({
+				url : this.href + '.json',
+				dataType : 'json',
+				success : function(data,status) {
+					if (jsonSucces(data)) {
+							link.parent().hide('slow',function(){
+								$(this).remove();
+							});
+					}
+				},
+				beforeSend : function() {
+					link.prevAll(':header').addClass('loading');
+				},
+				complete : function() {
+					link.prevAll(':header').removeClass('loading');
+				}
+		});
+		return false;
+	}
+
+	function moveQuestion(event) {
+		var link = $(this);
+		$.ajax({
+				url : this.href + '.json',
+				dataType : 'json',
+				success : function(data,status) {
+					if (jsonSucces(data)) {
+						var question = link.parent('li').hide('slow',function() {
+						var previous = question.prev('li');
+						var next = question.next('li');
+
+						if ($(event.target).is('a.question-move-up'))
+							previous.before(question);
+						else
+							next.after(question);
+
+						question
+							.parent()
+								.children('li:first-child')
+										.children('a.question-move-up').hide()
+									.end()
+										.children('a.question-move-down').show()
+									.end()
+									.next()
+										.children('a.question-move-up').show()
+									.end()
+										.children('a.question-move-down').show()
+									.end()
+								.end()
+							.end()
+								.children('li:last-child')
+										.children('a.question-move-up').show()
+									.end()
+										.children('a.question-move-down').hide()
+									.end()
+									.prev()
+										.children('a.question-move-down').show();
+									
+							question.show('slow',function() {
+								question.css('display','list-item');
+							});
+						});
+					}
+				},
+				beforeSend : function() {
+					link.prevAll(':header').addClass('loading');
+				},
+				complete : function() {
+					link.prevAll(':header').removeClass('loading');
+				}
+		});
+		return false;
+	}
+	$('#questions .list ul li a.question-preview-link').click(questionPreview);
+	$('ol.quiz-question-list a.question-remove').live('click',removeQuestion);
+	$('ol.quiz-question-list a.question-move-up, ol.quiz-question-list a.question-move-down').live('click',moveQuestion);
+	
 });
 </script>

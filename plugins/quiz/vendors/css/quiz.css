@@ -164,7 +164,7 @@
 	text-decoration:none;
 }
 
-#questions .list ul li.question-list-element h4.loading {
+#questions .list ul li.question-list-element h4.loading, .quiz-question-list li h3.loading {
 	background-image:url('../img/loading.gif');
 	background-position:right;
 	background-repeat:no-repeat;
@@ -367,8 +367,13 @@ ol.quiz-question-list li {
   width:100%;
 }
 
+
 ol.quiz-question-list li a.quiz-question-action {
   float:right;
   display:block;
   margin-left:7px;
+}
+
+ol.quiz-question-list li a.quiz-question-action.hidden {
+  display:none;
 }

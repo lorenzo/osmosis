@@ -59,6 +59,15 @@ class QuizzesController extends QuizAppController {
 		} else
 			parent::_setActiveCourse();
 	}
+
+	function redirect($url, $status = null, $exit = true) {
+		if ($this->RequestHandler->prefers('json')) {
+			$this->viewPath = 'elements';
+			$this->render('json');
+		} else {
+			parent::redirect($url,$status,$exit);
+		}
+	}
 	
 	function index() {
 		$this->Quiz->recursive = 0;
