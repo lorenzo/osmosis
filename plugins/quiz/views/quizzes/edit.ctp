@@ -1,3 +1,4 @@
+<?php $javascript->link(array('jquery/plugins/jquery.ui.core','jquery/plugins/jquery.ui.sortable'),false); ?>
 <h1><?php echo sprintf(__('Edit %s %s', true), __('Quiz', true), $form->value('Quiz.name'));?></h1>
 <div class="question-list">
 	<?php
@@ -49,7 +50,7 @@
 			$total = count($this->data['Question']);
 			foreach ($this->data['Question'] as $index => $question) {
 				echo
-				'<li>',
+				"<li id='".$question['QuizQuestion']['id']."'",
 				'<h3>' ,
 					__(Inflector::humanize(Inflector::underscore($question['type'])), true) ,
 				'</h3>' ,
@@ -76,11 +77,36 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
+	var setPositionURL = '<?php echo $html->url(array('controller' => 'quizzes','action' => 'move_question')); ?>';
 	function jsonSucces(json) {
 		return ('flash' in json) &&
 			('params' in json.flash) &&
 			('class' in json.flash.params) &&
 			(json.flash.params.class == 'success');
+	}
+
+	function fixMoveButtons(question) {
+		question
+			.parent()
+				.children('li:first-child')
+						.children('a.question-move-up').hide()
+					.end()
+						.children('a.question-move-down').show()
+					.end()
+					.next()
+						.children('a.question-move-up').show()
+					.end()
+						.children('a.question-move-down').show()
+					.end()
+				.end()
+			.end()
+				.children('li:last-child')
+						.children('a.question-move-up').show()
+					.end()
+						.children('a.question-move-down').hide()
+					.end()
+					.prev()
+						.children('a.question-move-down').show();
 	}
 	function questionPreview() {
 		var link = $(this);
@@ -137,36 +163,16 @@ $(document).ready(function(){
 				success : function(data,status) {
 					if (jsonSucces(data)) {
 						var question = link.parent('li').hide('slow',function() {
-						var previous = question.prev('li');
-						var next = question.next('li');
+							var previous = question.prev('li');
+							var next = question.next('li');
 
-						if ($(event.target).is('a.question-move-up'))
-							previous.before(question);
-						else
-							next.after(question);
+							if ($(event.target).is('a.question-move-up'))
+								previous.before(question);
+							else
+								next.after(question);
 
-						question
-							.parent()
-								.children('li:first-child')
-										.children('a.question-move-up').hide()
-									.end()
-										.children('a.question-move-down').show()
-									.end()
-									.next()
-										.children('a.question-move-up').show()
-									.end()
-										.children('a.question-move-down').show()
-									.end()
-								.end()
-							.end()
-								.children('li:last-child')
-										.children('a.question-move-up').show()
-									.end()
-										.children('a.question-move-down').hide()
-									.end()
-									.prev()
-										.children('a.question-move-down').show();
-									
+							fixMoveButtons(question);
+
 							question.show('slow',function() {
 								question.css('display','list-item');
 							});
@@ -185,6 +191,33 @@ $(document).ready(function(){
 	$('#questions .list ul li a.question-preview-link').click(questionPreview);
 	$('ol.quiz-question-list a.question-remove').live('click',removeQuestion);
 	$('ol.quiz-question-list a.question-move-up, ol.quiz-question-list a.question-move-down').live('click',moveQuestion);
-	
+	$(".quiz-question-list").sortable({
+		handle:'h3',
+		placeholder: 'quiz-question-placeholder',
+		opacity: 0.5,
+		axis: 'y',
+		cursor: 'move',
+		update: function (event,element) {
+			var newOrder = $(".quiz-question-list").sortable('toArray');
+			var item = $(element.item);
+			var position = $.inArray(item.attr('id'),newOrder) + 1;
+			$.ajax({
+				url : setPositionURL + '/' + item.attr('id') + '/to/' + position + '.json',
+				dataType : 'json',
+				success : function(data,status) {
+					if (jsonSucces(data)) {
+						fixMoveButtons(item);
+					}
+				},
+				beforeSend : function() {
+					item.children(':first-child :header').addClass('loading');
+				},
+				complete : function() {
+					item.children(':first-child :header').removeClass('loading');
+				}
+			});
+
+		}
+	});
 });
 </script>

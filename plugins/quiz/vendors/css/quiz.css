@@ -377,3 +377,8 @@ ol.quiz-question-list li a.quiz-question-action {
 ol.quiz-question-list li a.quiz-question-action.hidden {
   display:none;
 }
+
+.quiz-question-placeholder {
+	border:1px solid #FCEFA1;
+	background:#6EA6D5;
+}

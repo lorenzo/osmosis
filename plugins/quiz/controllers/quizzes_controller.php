@@ -177,8 +177,8 @@ class QuizzesController extends QuizAppController {
 		}
 	}
 
-	function move_question($quizQuestion,$direction) {
-		$directions = array('up','down','bottom','top');
+	function move_question($quizQuestion,$direction,$position = null) {
+		$directions = array('up','down','bottom','top','to');
 		if (!in_array($direction,$directions)) {
 			$this->Session->setFlash(__('Unexpected method', true), 'default', array('class' => 'error'));
 				$this->redirect(
@@ -187,7 +187,7 @@ class QuizzesController extends QuizAppController {
 		}
 		$this->Quiz->QuizQuestion->id = $quizQuestion;
 		$question = $this->Quiz->QuizQuestion->read();
-		if (!empty($question) && $this->Quiz->moveQuestion($quizQuestion,$direction)) {
+		if (!empty($question) && $this->Quiz->moveQuestion($quizQuestion,$direction,$position)) {
 			$this->Session->setFlash(__('The question was moved', true), 'default', array('class' => 'success'));
 			$this->redirect(
 				array('controller' => 'quizzes', 'action' => 'edit',$question['QuizQuestion']['quiz_id'],'course_id' => $this->activeCourse)

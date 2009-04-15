@@ -120,7 +120,13 @@ class Quiz extends QuizAppModel {
 		return $this->QuizQuestion->del($quizQuestion);
 	}
 
-	function moveQuestion($quizQuestion,$direction) {
+	function moveQuestion($quizQuestion,$direction,$position = null) {
+		if ($direction == 'to') {
+			if (is_numeric($position) && $position > 0)
+				return $this->QuizQuestion->setPosition($quizQuestion,$position);
+			else
+				return false;
+		}
 		return $this->QuizQuestion->{'move'.Inflector::camelize($direction)}($quizQuestion);
 	}
 	
