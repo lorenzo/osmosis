@@ -6,34 +6,42 @@
 		echo $this->element('question_drop_list', array('quiz_id' => $this->data['Quiz']['id']));
 	?>
 	<div id="questions">
+		<div class="pagination-counter">
+		<?php
+			$paginator->options(array('url' => $this->params['pass']));
+			echo $paginator->counter(array('format' => __('Page %page% of %pages%, showing %current% questions out of %count%', true)));
+		?>
+		</div>
 		<div class="list">
 			<?php
-				$haveQuestions = false;
-				foreach ($question_list as $type => $questions) {
-					if (empty($questions)) {
-						$link = '';
-						$message = __('There are no questions of this type available', true);
-						if ($question_type!='all') {
-							$link = '<br />' . $html->link(
-								__('create one', true),
-								array(
-									'controller'=>Inflector::pluralize($question_type),
-									'action' => 'add',
-									'quiz' => $this->data['Quiz']['id']
-								)
-							);
-						} else {
-							$message = __('There are no questions available', true);
-						}
-						continue;
-					}
-					$haveQuestions = true;
-					echo $this->element('listing/'.Inflector::underscore($type), array('questions' => $questions));
+			if (empty($question_list)) {
+				$link = '';
+				if ($question_type!='all') {
+					$message = __('There are no questions available', true);
+					$link = '<br />' . $html->link(
+						__('create one', true),
+						array(
+							'controller'=>Inflector::pluralize($question_type),
+							'action' => 'add',
+							'quiz' => $this->data['Quiz']['id']
+						)
+					);
+				} else {
+					$message = __('There are no questions of this type available', true);
 				}
-				
-				if (!$haveQuestions)
-					printf('<p class="empty">%s%s</p>', $message, $link);
+				printf('<p class="empty">%s%s</p>', $message, $link);
+			}
+			echo '<ul>';
+			foreach ($question_list as $questionIndex => $question) {
+				echo $this->element('listing/'.Inflector::underscore($question['Question']['type']),compact('question','questionIndex'));
+			}
+			echo '</ul>';
 			?>
+		</div>
+		<div class="paging">
+			<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
+		| 	<?php echo $paginator->numbers();?>
+			<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
 		</div>
 		<?php
 		echo $form->submit(__('Add to quiz', true));
@@ -51,7 +59,7 @@
 			foreach ($this->data['Question'] as $index => $question) {
 				echo
 				"<li id='".$question['QuizQuestion']['id']."'",
-				'<h3>' ,
+				'<h3 class="question-header">' ,
 					__(Inflector::humanize(Inflector::underscore($question['type'])), true) ,
 				'</h3>' ,
 				$html->link(__('remove',true),
@@ -146,10 +154,10 @@ $(document).ready(function(){
 					}
 				},
 				beforeSend : function() {
-					link.prevAll(':header').addClass('loading');
+					link.prevAll('.question-header').addClass('loading');
 				},
 				complete : function() {
-					link.prevAll(':header').removeClass('loading');
+					link.prevAll('.question-header').removeClass('loading');
 				}
 		});
 		return false;
@@ -180,10 +188,10 @@ $(document).ready(function(){
 					}
 				},
 				beforeSend : function() {
-					link.prevAll(':header').addClass('loading');
+					link.prevAll('.question-header').addClass('loading');
 				},
 				complete : function() {
-					link.prevAll(':header').removeClass('loading');
+					link.prevAll('.question-header').removeClass('loading');
 				}
 		});
 		return false;
@@ -197,6 +205,12 @@ $(document).ready(function(){
 		opacity: 0.5,
 		axis: 'y',
 		cursor: 'move',
+		start: function (event,element) {
+			var newOrder = $(".quiz-question-list").sortable('toArray');
+			var item = $(element.item);
+			var position = $.inArray(item.attr('id'),newOrder) + 1;
+			item.data('position',position);
+		},
 		update: function (event,element) {
 			var newOrder = $(".quiz-question-list").sortable('toArray');
 			var item = $(element.item);
@@ -207,17 +221,18 @@ $(document).ready(function(){
 				success : function(data,status) {
 					if (jsonSucces(data)) {
 						fixMoveButtons(item);
+						item.data('position',position);
 					}
 				},
 				beforeSend : function() {
-					item.children(':first-child :header').addClass('loading');
+					item.children('.question-header').addClass('loading');
 				},
 				complete : function() {
-					item.children(':first-child :header').removeClass('loading');
+					item.children('.question-header').removeClass('loading');
 				}
 			});
 
 		}
-	});
+	}).find('li .question-header').addClass('movable');
 });
 </script>

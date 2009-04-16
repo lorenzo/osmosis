@@ -50,18 +50,34 @@ class Question extends QuizAppModel {
 	);
 	
 	var $questionTypes = array('TextQuestion','OrderingQuestion','MatchingQuestion','ChoiceQuestion');
+	
+	function beforeFind($query){
+			if (!empty($query['type']) && in_array($query['type'],$this->questionTypes) &&
+				$this->recursive >= 1 || (!empty($query['recursive']) && $query['recursive'] >= 1)) {
 
+					if (empty($query['contain']) || !in_array('Quiz',$query['contain']) || isset($query['contain']['Quiz']))
+						$this->unbindModel(array('hasAndBelongsToMany' => array('Quiz')));
+			}
+			return $query;
+	}
 	function find($method,$query) {
 		if (in_array($method,$this->questionTypes))
 			return ClassRegistry::init('Quiz.'.$method)->find('all',$query);
-			
+
+		if ($method == 'count' && !empty($query['type']) && empty($query['fromParent']) && in_array($query['type'],$this->questionTypes)) {
+			$query['fromParent'] = true;
+			return ClassRegistry::init('Quiz.'.$query['type'])->find('count',$query);
+		}
 		return parent::find($method,$query);
 	}
 	
 	function afterFind($results,$primary = false) {
-		if (!isset($results[0][$this->alias][0]))
+		if (!$primary && !isset($results[0][$this->alias][0]))
 			return $results;
 			
+		if ($primary && empty($results[0][$this->alias]))
+			return $results;
+
 		$results = $this->insertChildData($results);
 		return $results;
 	}

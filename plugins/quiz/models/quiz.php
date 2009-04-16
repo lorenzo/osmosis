@@ -63,38 +63,6 @@ class Quiz extends QuizAppModel {
 		parent::__construct($id,$table,$ds);
 	}
 
-	function getQuestions($question_type=null, $id = null) {
-		if ($question_type==null) {
-			return null;
-		}
-		
-		if (!is_array($question_type)) {
-			$question_type = array($question_type);
-		} else {
-			$question_type = array_keys($question_type);
-		}
-		
-		
-		$questions = $quiz = array();
-		
-		if ($id) {
-			$conditions = array('Quiz.id' =>$id);
-			$recursive = 2;
-			$quiz = $this->find('first', compact('conditions','recursive'));
-			$questionIDs = Set::extract('/Question/id',$quiz);
-			unset($conditions);
-		}
-		
-		foreach ($question_type as $type) {
-			$questionType = Inflector::camelize($type);
-			if (!empty($questionIDs))
-				$conditions = array('NOT' => array('Question.id' => $questionIDs));
-			
-			$questions[$questionType]  = $this->Question->find($questionType,compact('conditions'));
-		}
-		return array($questions,$quiz);
-	}
-
 	function addQuestions($question_list = array()) {
 		foreach($question_list as $type => $questions) {
 			if (!isset($this->Question->questionTypes)) {

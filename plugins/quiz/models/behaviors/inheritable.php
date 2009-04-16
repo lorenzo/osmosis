@@ -51,7 +51,7 @@ class InheritableBehavior extends ModelBehavior {
         
     }
 
-    function afterFind(&$model, $results = array(), $primary = false) { 
+    /*function afterFind(&$model, $results = array(), $primary = false) {
         extract($this->settings[$model->alias]);
         if ($method == 'STI')
             return $results;
@@ -64,9 +64,8 @@ class InheritableBehavior extends ModelBehavior {
 	            }
 	        }
 		}
-		
 		return $results;
-    }
+    }*/
     
     /** 
      * Set the `type' field before saving the record. 
@@ -147,7 +146,7 @@ class InheritableBehavior extends ModelBehavior {
                 'className' => $model->parent->alias, 'foreignKey' => "{$model->primaryKey}"
             )
         ));
-        $model->bindModel($bind);
+        $model->bindModel($bind,true);
         return $query;
     }
 
@@ -174,10 +173,9 @@ class InheritableBehavior extends ModelBehavior {
 
 	function insertChildData(&$model,$results) {
 		if ($this->settings[$model->alias]['method'] != 'CTIPARENT')
-			return;
-			
+			return $results;
+
 			$types = array_unique(Set::extract("/{$model->alias}/{$model->inheritanceField}",$results));
-			
 			foreach ($types as $type) {
 				$keys = Set::extract("/{$model->alias}[$model->inheritanceField={$type}]/{$model->primaryKey}",$results);
 				$concreteObjects[$type] = ClassRegistry::init($this->settings[$model->alias]['pluginScope'] . $type);
@@ -186,13 +184,28 @@ class InheritableBehavior extends ModelBehavior {
 					)
 				);
 			}
-				
+
+			if (!Set::numeric(array_keys($results[0][$model->alias]))) {
+				foreach ($results as $i => &$result) {
+					$key = $result[$model->alias][$model->primaryKey];
+					$type = $result[$model->alias][$model->inheritanceField];
+					foreach ($concreteResults[$type] as $j => $concreteResult) {
+						if ($concreteResult[$type][$concreteObjects[$type]->primaryKey] == $key) {
+							$result = am($result,$concreteResult);
+							unset($concreteResults[$type][$j]);
+							break;
+						}
+					}
+				}
+				return $results;
+			}
+
 			foreach ($results as $i => &$dataSets) {
 				foreach ($dataSets[$model->alias] as &$result) {
-					
+
 					$key = $result[$model->primaryKey];
 					$type = $result[$model->inheritanceField];
-					
+
 					foreach ($concreteResults[$type] as $j => $concreteResult) {
 						if ($concreteResult[$type][$concreteObjects[$type]->primaryKey] == $key) {
 							$result = am($result,$concreteResult);

@@ -37,6 +37,11 @@ class QuizzesController extends QuizAppController {
 	 * question_types: used on the list of available question types
 	 */	
 	var $question_types = null;
+	var $paginate = array(
+		'Question' => array(
+			'limit' => 15
+		)
+	);
 	
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -113,12 +118,22 @@ class QuizzesController extends QuizAppController {
 		if (isset($this->question_types[$question_type])) {
 			$question_name = $this->question_types[$question_type];
 		}
+		
 		$this->set('question_name', $question_name);
-
-		if ($question_type != 'all') {
-			list($questions,$quiz) = $this->Quiz->getQuestions($question_type, $id);
+		$this->Quiz->recursive = 2;
+		$quiz = $this->Quiz->read(null,$id);
+		$quizQuestions = Set::extract('/Question/id',$quiz);
+		
+		if (!empty($quizQuestions)) {
+			$conditions = array('NOT' => array('Question.id' => $quizQuestions));
+			$this->paginate['Question']['conditions'] = $conditions;
+		}
+		
+		if ($question_type == 'all') {
+			$questions= $this->paginate($this->Quiz->Question);
 		} else {
-			list($questions,$quiz) = $this->Quiz->getQuestions($this->question_types, $id);
+			array_unshift($this->paginate['Question'],Inflector::camelize($question_type));
+			$questions = $this->paginate($this->Quiz->Question);
 		}
 		
 		if (empty($this->data))

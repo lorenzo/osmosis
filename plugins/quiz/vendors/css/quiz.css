@@ -104,6 +104,10 @@
 	clear:both;
 }
 
+#questions .pagination-counter {
+	padding-left:5px;
+}
+
 #questions .list {
 	border:#ccc 1px dashed;
 	overflow:auto;
@@ -168,6 +172,9 @@
 	background-image:url('../img/loading.gif');
 	background-position:right;
 	background-repeat:no-repeat;
+}
+.quiz-question-list .movable {
+	cursor:move;
 }
 
 .question-body {
