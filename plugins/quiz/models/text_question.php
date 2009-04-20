@@ -68,9 +68,6 @@ class TextQuestion extends Question {
 		$this->setErrorMessage(
 			'title.required', __('The title can not be empty',true)
 		);
-		$this->setErrorMessage(
-			'body.required', __('The content of the question can not be empty',true)
-		);
 		parent::__construct($id,$table,$ds);	
 	}
 	

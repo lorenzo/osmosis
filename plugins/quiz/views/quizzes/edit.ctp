@@ -2,8 +2,10 @@
 <h1><?php echo sprintf(__('Edit %s %s', true), __('Quiz', true), $form->value('Quiz.name'));?></h1>
 <div class="question-list">
 	<?php
-		echo $form->create('Quiz', array('action' => 'add_question'));
 		echo $this->element('question_drop_list', array('quiz_id' => $this->data['Quiz']['id']));
+		echo $form->create('Quiz');
+		echo $form->input('Search.body');
+		echo $form->end(__('Search',true));
 	?>
 	<div id="questions">
 		<div class="pagination-counter">
@@ -14,6 +16,7 @@
 		</div>
 		<div class="list">
 			<?php
+			echo $form->create('Quiz', array('action' => 'add_question'));
 			if (empty($question_list)) {
 				$link = '';
 				if ($question_type!='all') {

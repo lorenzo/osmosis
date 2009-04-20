@@ -34,11 +34,6 @@ class ChoiceQuestion extends Question {
 
 	var $name = 'ChoiceQuestion';
 	var $validate = array(
-		'body' => array(
-			'required' => array(
-				'rule' => array('notEmpty')
-			)
-		),
 		'max_choices' => array(
 			'positive' => array(
 				'rule' => array('comparison', '>=', 0),
@@ -83,10 +78,6 @@ class ChoiceQuestion extends Question {
 	);
 	
 	function __construct($id = false, $table = null, $ds = null) {
-		$this->setErrorMessage(
-			'body.required',
-			__('This field is required',true)
-		);
 		$this->setErrorMessage(
 			'max_choices.positive',
 			__('Max Choices should be greater than zero',true)

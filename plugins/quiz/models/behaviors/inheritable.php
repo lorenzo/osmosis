@@ -51,7 +51,7 @@ class InheritableBehavior extends ModelBehavior {
         
     }
 
-    /*function afterFind(&$model, $results = array(), $primary = false) {
+    function afterFind(&$model, $results = array(), $primary = false) {
         extract($this->settings[$model->alias]);
         if ($method == 'STI')
             return $results;
@@ -60,12 +60,43 @@ class InheritableBehavior extends ModelBehavior {
         	foreach ($results as $i => $res) {
 	            if (isset($res[$model->parent->alias]) && isset($res[$model->alias])) {
 	                $results[$i][$model->alias] = am($res[$model->parent->alias], $res[$model->alias]);
-	                unset($results[$i][$model->parent->alias]);
+	                //unset($results[$i][$model->parent->alias]);
 	            }
 	        }
 		}
 		return $results;
-    }*/
+    }
+
+	function beforeValidate(&$model) {
+		extract($this->settings[$model->alias]);
+		if ($method != 'CTI')
+			return;
+			
+        $parentSchema = $model->parent->schema();
+        $parentData = array(
+			$model->inheritanceField => $model->name
+		);
+
+        foreach ($model->data[$model->alias] as $key => $value) {
+			if (isset($parentSchema[$key])) {
+				$parentData[$key] = $value;
+			}
+        }
+		if (!empty($model->data[$model->parent->alias]))
+			$parentData = am($parentData,$model->data[$model->parent->alias]);
+
+		$model->parent->set($parentData);
+		$invalid = $model->parent->invalidFields();
+		if (!empty($invalid)) {
+			$model->validationErrors[$model->parent] = $invalid;
+			foreach ($invalid as $key => $value) {
+				if (isset($parentSchema[$key])) {
+					$model->validationErrors[$key] = $value;
+				}
+			}
+		}
+			
+	}
     
     /** 
      * Set the `type' field before saving the record. 
@@ -75,9 +106,10 @@ class InheritableBehavior extends ModelBehavior {
         if ($method == 'STI') {
             return $this->singleTableBeforeSave($model);
         } else if ($method == 'CTI') {
-			if (!$this->saveParentModel($model))
-				return false;		
-				
+			if (!$this->saveParentModel($model)) {
+				$model->validationErrors = am($model->validationErrors,$model->parent->validationErrors);
+				return false;
+			}
 			$model->data[$model->alias][$model->primaryKey] = $model->parent->getLastInsertId();
 		}
         return true;
@@ -157,18 +189,21 @@ class InheritableBehavior extends ModelBehavior {
     private function saveParentModel(&$model) {
         extract($this->settings[$model->alias]);
 
-        $fields = array_keys($model->parent->schema()); 
+        $parentSchema = $model->parent->schema();
         $parentData = array(
-			$model->inheritanceField	=> $model->name
+			$model->inheritanceField => $model->name
 		);
-        
+
         foreach ($model->data[$model->alias] as $key => $value) {
-			if (in_array($key, $fields)) {
+			if (isset($parentSchema[$key])) {
 				$parentData[$key] = $value;
 			}
         }
-        $model->parent->save($parentData);
-        return true;
+		if (!empty($model->data[$model->parent->alias]))
+			$parentData = am($parentData,$model->data[$model->parent->alias]);
+
+        
+        return $model->parent->save();
     }
 
 	function insertChildData(&$model,$results) {

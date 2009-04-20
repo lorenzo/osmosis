@@ -108,6 +108,10 @@ class QuizzesController extends QuizAppController {
 			$this->Session->setFlash(__('Invalid Quiz',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
+
+		if (!empty($this->data['Search'])) {
+			$this->redirect($this->params['pass'] + $this->data['Search']);
+		}
 		
 		$question_type = 'all';
 		if (isset($this->params['named']['question_type'])) {
@@ -123,6 +127,10 @@ class QuizzesController extends QuizAppController {
 		$this->Quiz->recursive = 2;
 		$quiz = $this->Quiz->read(null,$id);
 		$quizQuestions = Set::extract('/Question/id',$quiz);
+
+		if (!empty($this->params['named'])) {
+			$this->paginate['Question']['search'] = $this->params['named'];
+		}
 		
 		if (!empty($quizQuestions)) {
 			$conditions = array('NOT' => array('Question.id' => $quizQuestions));

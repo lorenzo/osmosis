@@ -48,8 +48,28 @@ class Question extends QuizAppModel {
 			'pluginScope' => 'Quiz'
 		)
 	);
+	var $validate = array(
+		'body' => array(
+			'required' => array(
+				'rule' => array('notEmpty'),
+				'allowEmpty' => false
+			)
+		)
+	);
 	
 	var $questionTypes = array('TextQuestion','OrderingQuestion','MatchingQuestion','ChoiceQuestion');
+
+	/**
+	 * Model contructor. Initializes the validation error messages with i18n
+	 *
+	 * @see Model::__construct
+	 */
+	function __construct($id = false, $table = null, $ds = null) {
+		$this->setErrorMessage(
+			'body.required', __('The content of the question can not be empty',true)
+		);
+		parent::__construct($id,$table,$ds);
+	}
 	
 	function beforeFind($query){
 			if (!empty($query['type']) && in_array($query['type'],$this->questionTypes) &&

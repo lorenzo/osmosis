@@ -161,7 +161,7 @@
 	margin-top:3px;
 	margin-bottom:5px;
 	font-size:1.2em;
-	width:70%;
+	width:90%;
 }
 
 #questions .list ul li.question-list-element h4 a {
@@ -172,6 +172,11 @@
 	background-image:url('../img/loading.gif');
 	background-position:right;
 	background-repeat:no-repeat;
+}
+
+#questions .list input {
+	width:1.2em;
+	height:1.2em;
 }
 .quiz-question-list .movable {
 	cursor:move;

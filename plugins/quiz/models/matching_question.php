@@ -35,13 +35,6 @@ class MatchingQuestion extends Question {
 	var $name = 'MatchingQuestion';
 	var $useTable = 'quiz_matching_questions';
 	var $validate = array(
-		'body' => array(
-			'required' => array(
-				'rule' => array('notEmpty'),
-				'required' => true,
-				'allowEmpty' => false
-			)
-		),
 		'max_associations' => array(
 			'natural' => array(
 				'rule' => array('custom','/[0-9]+/'),
@@ -103,10 +96,6 @@ class MatchingQuestion extends Question {
 	);
 	
 	function __construct($id = false, $table = null, $ds = null) {
-		$this->setErrorMessage(
-			'body.required',
-			__('This field is required',true)
-		);
 		$this->setErrorMessage(
 			'max_associations.nonzero',
 			__('Max Associations should be greater than zero',true)

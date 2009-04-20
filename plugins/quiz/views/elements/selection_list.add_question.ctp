@@ -4,7 +4,8 @@ echo $form->input(
 	array(
 		'value' => $question_id,
 		'type' => 'checkbox',
-		'label' => __('Add this question to the Quiz', true)
+		'title' => __('Add this question to the Quiz', true),
+		'label' => false,
 	)
 );
 ?>
