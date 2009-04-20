@@ -127,8 +127,7 @@ class TextQuestionsController extends QuizAppController {
 	function preview($id) {
 		$question = $this->TextQuestion->find('first',array(
 				'conditions' => array('TextQuestion.id' => $id),
-				'fields' => array('body'),
-				'recursive' => -1
+				'recursive' => 0
 			)
 		);
 		$this->set('question',$question);

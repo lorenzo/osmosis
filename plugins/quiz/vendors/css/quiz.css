@@ -43,6 +43,8 @@
 .question-list .add {
 	padding:3px 0pt 0pt 200px;
 	font-size:0.9em;
+	float:left;
+	margin-top:0;
 }
 .droplist ul{
 	margin:0;
@@ -99,6 +101,27 @@
 .question-list form {
 	margin-top:0;
 }
+
+.question-list .search .input {
+	float:left;
+	clear:none;
+	padding-right:5px;
+}
+.question-list .search .submit{
+	float:left;
+	margin:0;
+}
+
+.question-list .search .input label{
+	width:auto;
+	margin-top:3px;
+	vertical-align:center;
+}
+
+.question-list .search .input input{
+	padding:3px 0px;
+}
+
 
 #questions {
 	clear:both;

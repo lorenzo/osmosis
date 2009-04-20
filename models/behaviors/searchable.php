@@ -14,7 +14,7 @@ class SearchableBehavior extends ModelBehavior {
 	function beforeFind(&$Model,$query) {
 		if (empty($query['search']))
 			return $query;
-		
+
 		$conditions = $this->searchConditions($Model,$query['search']);
 		if (!empty($query['conditions']))
 			$query['conditions'] = am($conditions,$query['conditions']);
@@ -25,7 +25,7 @@ class SearchableBehavior extends ModelBehavior {
 
 	function searchConditions(&$Model,$searchables) {
 		$schema = $Model->schema();
-
+		$conditions = array();
 		foreach ($searchables as $modelName => $fields) {
 			foreach ($fields as $field => $comparison) {
 				$object =& $Model;

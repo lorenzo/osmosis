@@ -129,7 +129,11 @@ class QuizzesController extends QuizAppController {
 		$quizQuestions = Set::extract('/Question/id',$quiz);
 
 		if (!empty($this->params['named'])) {
-			$this->paginate['Question']['search'] = $this->params['named'];
+			$searchables = array('body','tags');
+			foreach ($searchables as $field) {
+				if (isset($field,$this->params['named'][$field]))
+					$this->paginate['Question']['search']['Question'][$field] = $this->params['named'][$field];
+			}
 		}
 		
 		if (!empty($quizQuestions)) {

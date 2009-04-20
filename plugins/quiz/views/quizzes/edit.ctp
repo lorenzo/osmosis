@@ -3,9 +3,20 @@
 <div class="question-list">
 	<?php
 		echo $this->element('question_drop_list', array('quiz_id' => $this->data['Quiz']['id']));
-		echo $form->create('Quiz');
-		echo $form->input('Search.body');
-		echo $form->end(__('Search',true));
+		echo $form->create('Quiz',array('class' => 'search'));
+		echo $form->input('Search.body',array(
+				'default' => empty($this->params['named']['body']) ? '' : $this->params['named']['body'],
+			)
+		);
+		echo $form->input('Search.tags',array(
+				'default' => empty($this->params['named']['tags']) ? '' : $this->params['named']['tags'],
+				'label' => __('Tagged',true)
+			)
+		);
+		echo $form->end(array(
+				'label' => __('Search',true),
+			)
+		);
 	?>
 	<div id="questions">
 		<div class="pagination-counter">

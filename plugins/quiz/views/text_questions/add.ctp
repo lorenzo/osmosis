@@ -9,6 +9,7 @@
 	<?php
 		echo $form->input('Question.body', array('label' => array('text' => __('Something', true), 'class' => 'hidden')));
 		echo $form->input('format');
+		echo $form->input('tags',array('class' => 'tags'));
 	?>
 	</div>
 	</fieldset>

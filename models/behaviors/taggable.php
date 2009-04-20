@@ -109,9 +109,11 @@ class TaggableBehavior extends ModelBehavior {
 		$missing = array_diff($tags,$existingTagNames);
 
 		$alreadyAssigned = array();
-		
+		$with = empty($model->hasAndBelongsToMany['Tag']['with']) ?
+			Inflector::classify($this->settings[$model->alias]['joinTable']) :
+			$model->hasAndBelongsToMany['Tag']['with'];
 		if (!empty($model->id)) {
-			$alreadyAssigned = $model->{$model->hasAndBelongsToMany['Tag']['with']}->find('all',
+			$alreadyAssigned = $model->{$with}->find('all',
 			array('conditions' => array(
 					$this->settings[$model->alias]['foreignKey'] => $model->id
 					)
@@ -135,15 +137,60 @@ class TaggableBehavior extends ModelBehavior {
 				$this->settings[$model->alias]['associationForeignKey'] => $tag
 			);
 			if (isset($model->data[$model->alias]['tagging_user']) && !empty($model->data[$model->alias]['tagging_user'])
-				&& $model->{$model->hasAndBelongsToMany['Tag']['with']}->hasField('member_id')
+				&& $model->{$with}->hasField('member_id')
 			) {
 				$data['member_id'] = $model->data[$model->alias]['tagging_user'];
 			}
 				
-			$model->{$model->hasAndBelongsToMany['Tag']['with']}->create();
-			$model->{$model->hasAndBelongsToMany['Tag']['with']}->save($data);
+			$model->{$with}->create();
+			$model->{$with}->save($data);
 		}
 		return true;
+	}
+
+	function beforeFind(&$model,$query) {
+		$conditions = array();
+		if (!empty($query['search'][$model->alias]['tags'])) {
+			$conditions = $query['search'][$model->alias]['tags'];
+			unset($query['search'][$model->alias]['tags']);
+		}
+		elseif (!empty($query['conditions']['tags'])) {
+			$conditions = $query['conditions']['tags'];
+		}
+
+		if (empty($conditions))
+			return $query;
+
+		$with = empty($model->hasAndBelongsToMany['Tag']['with']) ?
+			Inflector::classify($this->settings[$model->alias]['joinTable']) :
+			$model->hasAndBelongsToMany['Tag']['with'];
+		$query['joins'][] = array(
+			'table' => $this->settings[$model->alias]['joinTable'],
+			'alias' => $with,
+			'type' => 'inner',
+			'foreignKey' => false,
+			'conditions' => array("{$with}.{$this->settings[$model->alias]['foreignKey']} = {$model->alias}.{$model->primaryKey}")
+		);
+		$query['joins'][] = array(
+			'table' => 'tags',
+			'alias' => 'Tag',
+			'type' => 'inner',
+			'foreignKey' => false,
+			'conditions' => array(
+				"Tag.id = {$with}.{$this->settings[$model->alias]['associationForeignKey']}",
+				'Tag.name' => explode(' ',$conditions),
+			)
+		);
+		if (is_string($query['fields'])) {
+			$query['fields'] = 'DISTINCT '.$query['fields'];
+		}
+		else if (is_array($query['fields']) && current($query['fields'])) {
+			array_unshift($query['fields'],'DISTINCT '. array_shift($query['fields']));
+		}
+		if (empty($query['fields'])) {
+			$query['fields'][] = 'DISTINCT *';
+		}
+		return $query;
 	}
 
 }

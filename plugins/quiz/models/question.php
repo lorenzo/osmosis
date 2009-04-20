@@ -43,10 +43,16 @@ class Question extends QuizAppModel {
 			),
 	);
 	
-	var $actsAs = array('Quiz.Inheritable' => array(
+	var $actsAs = array(
+		'Quiz.Inheritable' => array(
 			'method' => 'CTIPARENT',
 			'pluginScope' => 'Quiz'
-		)
+		),
+		'Taggable' => array(
+			'joinTable' => 'quiz_questions_tags',
+			'foreignKey' => 'question_id'
+		),
+		'Searchable',
 	);
 	var $validate = array(
 		'body' => array(
