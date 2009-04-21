@@ -108,50 +108,13 @@ class QuizzesController extends QuizAppController {
 			$this->Session->setFlash(__('Invalid Quiz',true), 'default', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'), null, true);
 		}
-
-		if (!empty($this->data['Search'])) {
-			$this->redirect($this->params['pass'] + $this->data['Search']);
-		}
-		
-		$question_type = 'all';
-		if (isset($this->params['named']['question_type'])) {
-			$question_type = $this->params['named']['question_type'];
-		}
-		$this->set('question_type', $question_type);
-		$question_name = 'All';
-		if (isset($this->question_types[$question_type])) {
-			$question_name = $this->question_types[$question_type];
-		}
-		
-		$this->set('question_name', $question_name);
-		$this->Quiz->recursive = 2;
-		$quiz = $this->Quiz->read(null,$id);
-		$quizQuestions = Set::extract('/Question/id',$quiz);
-
-		if (!empty($this->params['named'])) {
-			$searchables = array('body','tags');
-			foreach ($searchables as $field) {
-				if (isset($field,$this->params['named'][$field]))
-					$this->paginate['Question']['search']['Question'][$field] = $this->params['named'][$field];
-			}
-		}
-		
-		if (!empty($quizQuestions)) {
-			$conditions = array('NOT' => array('Question.id' => $quizQuestions));
-			$this->paginate['Question']['conditions'] = $conditions;
-		}
-		
-		if ($question_type == 'all') {
-			$questions= $this->paginate($this->Quiz->Question);
-		} else {
-			array_unshift($this->paginate['Question'],Inflector::camelize($question_type));
-			$questions = $this->paginate($this->Quiz->Question);
-		}
-		
+		$this->view($id);
+		$this->available_questions($id);
 		if (empty($this->data))
-			$this->data = $quiz;
-		$this->set('question_list', $questions);
+			$this->data = $this->viewVars['quiz'];
 		$this->set('course_id',$this->activeCourse);
+		if ($this->RequestHandler->isAjax())
+			$this->render('available_questions');
 	}
 
 	function delete($id = null) {
@@ -181,6 +144,49 @@ class QuizzesController extends QuizAppController {
 		if (empty($this->data)) {
 			$this->data = $this->Quiz->read(null, $id);
 		}
+	}
+
+	function available_questions($quiz_id) {
+		if (!empty($this->data['Search']) && !$this->RequestHandler->isAjax()) {
+			$this->redirect($this->params['pass'] + $this->data['Search']);
+		} elseif (!empty($this->data['Search']) && $this->RequestHandler->isAjax()) {
+			$this->params['named'] = $this->data['Search'];
+		}
+		$question_type = 'all';
+		if (isset($this->params['named']['question_type'])) {
+			$question_type = $this->params['named']['question_type'];
+		}
+		$this->set('question_type', $question_type);
+		$question_name = 'All';
+		if (isset($this->question_types[$question_type])) {
+			$question_name = $this->question_types[$question_type];
+		}
+		if (!empty($this->params['named'])) {
+			$searchables = array('body','tags');
+			foreach ($searchables as $field) {
+				if (!empty($this->params['named'][$field]))
+					$this->paginate['Question']['search']['Question'][$field] = $this->params['named'][$field];
+			}
+		}
+		if (empty($this->viewVars['quiz'])) {
+			$this->view($quiz_id);
+		}
+		$quizQuestions = Set::extract('/Question/id',$this->viewVars['quiz']);
+
+		if (!empty($quizQuestions)) {
+			$conditions = array('NOT' => array('Question.id' => $quizQuestions));
+			$this->paginate['Question']['conditions'] = $conditions;
+		}
+
+		if ($question_type == 'all') {
+			$questions= $this->paginate($this->Quiz->Question);
+		} else {
+			array_unshift($this->paginate['Question'],Inflector::camelize($question_type));
+			$questions = $this->paginate($this->Quiz->Question);
+		}
+		$this->set('isAjax',$this->RequestHandler->isAjax());
+		$this->set('question_list', $questions);
+		$this->set('question_name', $question_name);
 	}
 
 	function add_question($id = null) {

@@ -24,6 +24,7 @@
 					'after' => '<span class="help">'.__('Minimum number of choices that the student is required to select to create an answer. Leave empty to have no restriction.', true).'</span>'
 				)
 			);
+			echo $form->input('tags',array('class' => 'tags'));
 	?>
 		</div>
 		<fieldset class="question-choices">

@@ -1,68 +1,12 @@
-<?php $javascript->link(array('jquery/plugins/jquery.ui.core','jquery/plugins/jquery.ui.sortable'),false); ?>
+<?php
+$javascript->link(array(
+	'jquery/plugins/jquery.ui.core',
+	'jquery/plugins/jquery.ui.sortable',
+	'jquery/plugins/jquery.form',
+	),false);
+?>
 <h1><?php echo sprintf(__('Edit %s %s', true), __('Quiz', true), $form->value('Quiz.name'));?></h1>
-<div class="question-list">
-	<?php
-		echo $this->element('question_drop_list', array('quiz_id' => $this->data['Quiz']['id']));
-		echo $form->create('Quiz',array('class' => 'search'));
-		echo $form->input('Search.body',array(
-				'default' => empty($this->params['named']['body']) ? '' : $this->params['named']['body'],
-			)
-		);
-		echo $form->input('Search.tags',array(
-				'default' => empty($this->params['named']['tags']) ? '' : $this->params['named']['tags'],
-				'label' => __('Tagged',true)
-			)
-		);
-		echo $form->end(array(
-				'label' => __('Search',true),
-			)
-		);
-	?>
-	<div id="questions">
-		<div class="pagination-counter">
-		<?php
-			$paginator->options(array('url' => $this->params['pass']));
-			echo $paginator->counter(array('format' => __('Page %page% of %pages%, showing %current% questions out of %count%', true)));
-		?>
-		</div>
-		<div class="list">
-			<?php
-			echo $form->create('Quiz', array('action' => 'add_question'));
-			if (empty($question_list)) {
-				$link = '';
-				if ($question_type!='all') {
-					$message = __('There are no questions available', true);
-					$link = '<br />' . $html->link(
-						__('create one', true),
-						array(
-							'controller'=>Inflector::pluralize($question_type),
-							'action' => 'add',
-							'quiz' => $this->data['Quiz']['id']
-						)
-					);
-				} else {
-					$message = __('There are no questions of this type available', true);
-				}
-				printf('<p class="empty">%s%s</p>', $message, $link);
-			}
-			echo '<ul>';
-			foreach ($question_list as $questionIndex => $question) {
-				echo $this->element('listing/'.Inflector::underscore($question['Question']['type']),compact('question','questionIndex'));
-			}
-			echo '</ul>';
-			?>
-		</div>
-		<div class="paging">
-			<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
-		| 	<?php echo $paginator->numbers();?>
-			<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
-		</div>
-		<?php
-		echo $form->submit(__('Add to quiz', true));
-		echo $form->end();
-		?>
-	</div>
-</div>
+<?php echo $this->element('quiz_question_list'); ?>
 <div class="quiz-preview">
 	<div class="content">
 		<h2>&mdash; <?php echo $form->value('Quiz.name') ?> &mdash;</h2>
@@ -210,7 +154,26 @@ $(document).ready(function(){
 		});
 		return false;
 	}
-	$('#questions .list ul li a.question-preview-link').click(questionPreview);
+	$('#QuizEditForm.search').ajaxForm({
+		target: '#questions',
+		url: '<?php echo $html->url(array('action' => 'available_questions') + $this->params['pass'] + $this->params['named']); ?>',
+		beforeSubmit : function() {
+			$('#questions .list').addClass('loading');
+		}
+	});
+	$('#questions .paging a').live('click',function() {
+		$.ajax({
+			url : this.href,
+			success : function(data,status) {
+				$('#questions').html(data);
+			},
+			beforeSend : function() {
+				$('#questions .list').addClass('loading');
+			}
+		});
+		return false;
+	});
+	$('#questions .list ul li a.question-preview-link').live('click',questionPreview);
 	$('ol.quiz-question-list a.question-remove').live('click',removeQuestion);
 	$('ol.quiz-question-list a.question-move-up, ol.quiz-question-list a.question-move-down').live('click',moveQuestion);
 	$(".quiz-question-list").sortable({

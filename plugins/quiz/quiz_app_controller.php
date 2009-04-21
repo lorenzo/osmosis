@@ -32,7 +32,8 @@
 class QuizAppController extends AppController {
 	var $helpers = array('Text');
 	
-	function isAuthorized(){
+	function isAuthorized() {
+		$this->viewVars['Osmosis']['currentRole']  = 'Public';
 		return true;
 	}
 }

@@ -23,6 +23,7 @@
 						'after' => '<span class="help">'.__('Minimum number of associations that the student is required to create. Leave empty to have no restriction.', true).'</span>'
 					)
 				);
+				echo $form->input('tags',array('class' => 'tags'));
 			?>
 		</div>
 		<fieldset class="question-choices matching">
