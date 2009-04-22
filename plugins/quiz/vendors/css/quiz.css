@@ -183,7 +183,6 @@
 #questions .list ul li.question-list-element label {
 	display:inline;
 	padding-top:1px;
-	vertical-align:center;
 	width:auto;
 }
 #questions .list ul li.question-list-element .input {
@@ -246,7 +245,8 @@
 }
 
 .choices fieldset.question-choices {
-	width:60%;
+	width:63%;
+	margin-right:0;
 	float:right;
 }
 
@@ -269,13 +269,22 @@ fieldset.question-choices .choice .text {
 }
 
 .information textarea,
+.information table,
 fieldset.question-choices .choice .text textarea,
-fieldset.question-choices .choice .position input {
+fieldset.question-choices .choice .text table,
+fieldset.question-choices .choice .position input[type=text] {
 	width:90%;
+	clear:both;
+}
+
+.information table,
+fieldset.question-choices .choice .text table {
+	width:70%;
 }
 fieldset.question-choices .choice .position {
-	width:40%;
+	width:15%;
 	float:left;
+	margin-left:10%;
 }
 fieldset.question-choices .choice .position label {
 	display:inline;
@@ -284,7 +293,6 @@ fieldset.question-choices .choice .position label {
 }
 fieldset.question-choices .choice label {
 	float:left;
-	width:100%;
 	display:block;
 }
 
@@ -295,22 +303,21 @@ fieldset.question-choices .choice.set {
 }
 fieldset.question-choices .choice.question.set {
 	width:55%;
-	float:left;
 }
-fieldset.question-choices .choice.question.set textarea{
-	float:right;
-	width:75%;
+fieldset.question-choices .choice.question.set textarea,
+fieldset.question-choices .choice.question.set table{
+	width:65%;
 	margin-right: 25%;
 }	
 fieldset.question-choices .choice.answer.set {
-	float:right;
+	/*float:right;*/
 }
 
-fieldset.question-choices .set textarea {
+fieldset.question-choices .set textarea, fieldset.question-choices .set table {
 	width:100%;
 }
 
-.set ol {
+fieldset .set ol {
 	padding:0;
 }
 
@@ -318,26 +325,31 @@ fieldset.question-choices .choice.set ol label {
 	display:inline;
 	float:none;
 }
+
 .set ol li  {
-	list-style-position:inside;
 	padding-bottom:0px;
 	margin-bottom:20px;
 	clear:both;
 	float:left;
-	position:relative;
+}
+fieldset .set ol li {
+	list-style-position:inside;
 }
 
+fieldset .set ol li div.sourceChoice {
+	position:relative;
+}
 .set ol li span {
-	margin:;
+	margin:0;
 }
 .set ol li span.correct {
-	display:block;
 	position:absolute;
-	right:0;
-	top:13px;
+	font-size:0.8em;
+	display:block;
+	top:5%;
+	right:3%;
 	width:15%;
 	text-align:center;
-	margin:-5px 3px 0 0;
 }
 .matching .submit {
 	clear:both;
@@ -393,7 +405,7 @@ fieldset.question-choices .choice.set ol label {
 
 .matchingQuestion.view div.answer {
 	float:left;
-	padding-left:50px;
+	padding-left:70px;
 }
 
 .set ol li div.error-message {
@@ -407,7 +419,7 @@ ol li div ol {
 	margin-top:10px;
 }
 
-div.textQuestion input[type=text] {
+div.textQuestion div.input.text input, div.textQuestion div.input.textarea textarea {
 	width:75%;
 }
 

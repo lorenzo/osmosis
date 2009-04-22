@@ -150,10 +150,10 @@ class QuizzesController extends QuizAppController {
 		if (!empty($this->data['Search']) && !$this->RequestHandler->isAjax()) {
 			$this->redirect($this->params['pass'] + $this->data['Search']);
 		} elseif (!empty($this->data['Search']) && $this->RequestHandler->isAjax()) {
-			$this->params['named'] = $this->data['Search'];
+			$this->params['named'] += $this->data['Search'];
 		}
 		$question_type = 'all';
-		if (isset($this->params['named']['question_type'])) {
+		if (!empty($this->params['named']['question_type'])) {
 			$question_type = $this->params['named']['question_type'];
 		}
 		$this->set('question_type', $question_type);
@@ -182,6 +182,7 @@ class QuizzesController extends QuizAppController {
 			$questions= $this->paginate($this->Quiz->Question);
 		} else {
 			array_unshift($this->paginate['Question'],Inflector::camelize($question_type));
+			$this->paginate['Question']['conditions'] = array('Question.type' => Inflector::camelize($question_type));
 			$questions = $this->paginate($this->Quiz->Question);
 		}
 		$this->set('isAjax',$this->RequestHandler->isAjax());

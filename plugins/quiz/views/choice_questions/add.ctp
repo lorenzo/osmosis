@@ -56,3 +56,9 @@
 	</fieldset>
 <?php echo $form->end(__('Create Question',true));?>
 </div>
+<?php echo $this->element('ui/editor',array(
+	'options' => array(
+		'theme_advanced_toolbar_location' => 'external',
+		)
+	)
+); ?>

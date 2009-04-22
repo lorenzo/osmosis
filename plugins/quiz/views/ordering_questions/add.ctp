@@ -62,4 +62,10 @@
 		?>
 	</fieldset>
 <?php echo $form->end(__('Submit', true));?>
+<?php echo $this->element('ui/editor',array(
+	'options' => array(
+		'theme_advanced_toolbar_location' => 'external'
+		)
+	)
+); ?>
 </div>

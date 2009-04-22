@@ -35,6 +35,7 @@
 					for ($i=0;$i<$totalQuestions;$i++) :
 				?>
 						<li>
+							<div class="sourceChoice">
 							<?php echo $form->input('SourceChoice.'.$i.'.text', array('rows' => 2, 'div' => false,  'label' => false)); ?>
 							<span class="correct">
 								<?php
@@ -45,6 +46,7 @@
 									
 								?>
 							</span>
+							</div>
 						</li>
 				<?php
 					endfor;
@@ -73,4 +75,10 @@
 		</fieldset>
 	</fieldset>
 <?php echo $form->end(__('Submit', true));?>
+<?php echo $this->element('ui/editor',array(
+	'options' => array(
+		'theme_advanced_toolbar_location' => 'external'
+		)
+	)
+); ?>
 </div>
