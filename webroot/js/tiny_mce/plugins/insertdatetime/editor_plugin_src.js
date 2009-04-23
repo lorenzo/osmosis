@@ -1,58 +1,80 @@
+/**
+ * $Id: editor_plugin_src.js 520 2008-01-07 16:30:32Z spocke $
+ *
+ * @author Moxiecode
+ * @copyright Copyright © 2004-2008, Moxiecode Systems AB, All rights reserved.
+ */
+
 (function() {
-	tinymce.PluginManager.requireLangPack('latex');
-	tinymce.create('tinymce.plugins.LatexPlugin', {
-		/**
-		 * Initializes the plugin, this will be executed after the plugin has been created.
-		 * This call is done before the editor instance has finished it's initialization so use the onInit event
-		 * of the editor instance to intercept that event.
-		 *
-		 * @param {tinymce.Editor} ed Editor instance that the plugin is initialized in.
-		 * @param {string} url Absolute URL to where the plugin is located.
-		 */
+	tinymce.create('tinymce.plugins.InsertDateTime', {
 		init : function(ed, url) {
-			ed.addCommand('latex', function() {
-				ed.execCommand('mceReplaceContent', false, '[tex]{$selection}[/tex]');
+			var t = this;
+
+			t.editor = ed;
+
+			ed.addCommand('mceInsertDate', function() {
+				var str = t._getDateTime(new Date(), ed.getParam("plugin_insertdate_dateFormat", ed.getLang('insertdatetime.date_fmt')));
+
+				ed.execCommand('mceInsertContent', false, str);
 			});
-		
-			// Register button
-			ed.addButton('latex', {
-				title : 'latex.desc',
-				cmd : 'latex',
-				image : url + '/img/latex.gif'
+
+			ed.addCommand('mceInsertTime', function() {
+				var str = t._getDateTime(new Date(), ed.getParam("plugin_insertdate_timeFormat", ed.getLang('insertdatetime.time_fmt')));
+
+				ed.execCommand('mceInsertContent', false, str);
 			});
+
+			ed.addButton('insertdate', {title : 'insertdatetime.insertdate_desc', cmd : 'mceInsertDate'});
+			ed.addButton('inserttime', {title : 'insertdatetime.inserttime_desc', cmd : 'mceInsertTime'});
 		},
 
-		/**
-		 * Creates control instances based in the incomming name. This method is normally not
-		 * needed since the addButton method of the tinymce.Editor class is a more easy way of adding buttons
-		 * but you sometimes need to create more complex controls like listboxes, split buttons etc then this
-		 * method can be used to create those.
-		 *
-		 * @param {String} n Name of the control to create.
-		 * @param {tinymce.ControlManager} cm Control manager to use inorder to create new control.
-		 * @return {tinymce.ui.Control} New control instance or null if no control was created.
-		 */
-		createControl : function(n, cm) {
-			return null;
-		},
-
-		/**
-		 * Returns information about the plugin as a name/value array.
-		 * The current keys are longname, author, authorurl, infourl and version.
-		 *
-		 * @return {Object} Name/value array containing information about the plugin.
-		 */
 		getInfo : function() {
 			return {
-				longname : 'LaTeX plugin',
-				author : 'Ósmosis Team. Modified from original plugin from Renato Mendes Coutinho',
-				authorurl : 'http://osmosislms.org',
-				infourl : '',
-				version : "1.0"
+				longname : 'Insert date/time',
+				author : 'Moxiecode Systems AB',
+				authorurl : 'http://tinymce.moxiecode.com',
+				infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/insertdatetime',
+				version : tinymce.majorVersion + "." + tinymce.minorVersion
 			};
+		},
+
+		// Private methods
+
+		_getDateTime : function(d, fmt) {
+			var ed = this.editor;
+
+			function addZeros(value, len) {
+				value = "" + value;
+
+				if (value.length < len) {
+					for (var i=0; i<(len-value.length); i++)
+						value = "0" + value;
+				}
+
+				return value;
+			};
+
+			fmt = fmt.replace("%D", "%m/%d/%y");
+			fmt = fmt.replace("%r", "%I:%M:%S %p");
+			fmt = fmt.replace("%Y", "" + d.getFullYear());
+			fmt = fmt.replace("%y", "" + d.getYear());
+			fmt = fmt.replace("%m", addZeros(d.getMonth()+1, 2));
+			fmt = fmt.replace("%d", addZeros(d.getDate(), 2));
+			fmt = fmt.replace("%H", "" + addZeros(d.getHours(), 2));
+			fmt = fmt.replace("%M", "" + addZeros(d.getMinutes(), 2));
+			fmt = fmt.replace("%S", "" + addZeros(d.getSeconds(), 2));
+			fmt = fmt.replace("%I", "" + ((d.getHours() + 11) % 12 + 1));
+			fmt = fmt.replace("%p", "" + (d.getHours() < 12 ? "AM" : "PM"));
+			fmt = fmt.replace("%B", "" + ed.getLang("insertdatetime.months_long").split(',')[d.getMonth()]);
+			fmt = fmt.replace("%b", "" + ed.getLang("insertdatetime.months_short").split(',')[d.getMonth()]);
+			fmt = fmt.replace("%A", "" + ed.getLang("insertdatetime.day_long").split(',')[d.getDay()]);
+			fmt = fmt.replace("%a", "" + ed.getLang("insertdatetime.day_short").split(',')[d.getDay()]);
+			fmt = fmt.replace("%%", "%");
+
+			return fmt;
 		}
 	});
 
 	// Register plugin
-	tinymce.PluginManager.add('latex', tinymce.plugins.LatexPlugin);
+	tinymce.PluginManager.add('insertdatetime', tinymce.plugins.InsertDateTime);
 })();
