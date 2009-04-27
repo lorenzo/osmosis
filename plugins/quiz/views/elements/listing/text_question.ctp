@@ -2,7 +2,7 @@
 	$question = $question['TextQuestion'];
 ?>
 <li class="question-list-element">
-	<h4><?php echo $html->link($text->truncate($question['title'], 200), array(
+	<h4><?php echo $html->link($text->truncate(strip_tags($question['title']), 200), array(
 					'controller' => 'text_questions',
 					'action' => 'preview',
 					$question['id'],

@@ -12,14 +12,20 @@ $javascript->link(array(
 		<h2>&mdash; <?php echo $form->value('Quiz.name') ?> &mdash;</h2>
 		<?php
 			unset($this->data['Quiz']);
-			echo '<ol class="quiz-question-list">';
 			$total = count($this->data['Question']);
+			echo '<ol class="quiz-question-list">';
 			foreach ($this->data['Question'] as $index => $question) {
-				echo
-				"<li id='".$question['QuizQuestion']['id']."'",
-				'<h3 class="question-header">' ,
+				$number = $index + 1;
+				echo '<li class="quiz-question"  id="'.$question['QuizQuestion']['id'].'">',
+				'<div class="quiz-question-header">',
+					$question['QuizQuestion']['header'],
+				'</div>',
+				"<div class='quiz-question-number'>
+					$number.
+				</div>",
+				'<h3 class="question-header">',
 					__(Inflector::humanize(Inflector::underscore($question['type'])), true) ,
-				'</h3>' ,
+				'</h3>',
 				$html->link(__('remove',true),
 						array('action' => 'remove_question',$question['QuizQuestion']['id']),
 						array('class' => 'quiz-question-action question-remove'));
@@ -33,6 +39,9 @@ $javascript->link(array(
 					echo $html->link(__('move up',true),
 						array('action' => 'move_question',$question['QuizQuestion']['id'],'up'),
 						array('class' => 'quiz-question-action question-move-up' .$hidden));
+				echo $html->link(__('edit header',true),
+						array('action' => 'edit_question_header',$question['QuizQuestion']['id']),
+						array('class' => 'quiz-question-action'));
 				 echo $this->element('previewing/'.Inflector::underscore($question['type']), array('question' => $question)) ,
 				'&nbsp;',
 				'</li>';
@@ -51,7 +60,7 @@ $(document).ready(function(){
 			(json.flash.params.class == 'success');
 	}
 
-	function fixMoveButtons(question) {
+	function fixThings(question) {
 		question
 			.parent()
 				.children('li:first-child')
@@ -72,7 +81,13 @@ $(document).ready(function(){
 						.children('a.question-move-down').hide()
 					.end()
 					.prev()
-						.children('a.question-move-down').show();
+						.children('a.question-move-down').show()
+					.end()
+				.end()
+			.end()
+				.children('li').each(function(i){
+					$(this).find('.quiz-question-number').html((i + 1) + '.');
+				});
 	}
 	function questionPreview() {
 		var link = $(this);
@@ -178,7 +193,7 @@ $(document).ready(function(){
 	$('ol.quiz-question-list a.question-move-up, ol.quiz-question-list a.question-move-down').live('click',moveQuestion);
 	$(".quiz-question-list").sortable({
 		handle:'h3',
-		placeholder: 'quiz-question-placeholder',
+		placeholder: 'quiz-question-placeholder quiz-question',
 		opacity: 0.5,
 		axis: 'y',
 		cursor: 'move',
@@ -197,7 +212,7 @@ $(document).ready(function(){
 				dataType : 'json',
 				success : function(data,status) {
 					if (jsonSucces(data)) {
-						fixMoveButtons(item);
+						fixThings(item);
 						item.data('position',position);
 					}
 				},

@@ -96,6 +96,7 @@ class QuizSchema extends CakeSchema {
 		'question_id' => array('type' => 'integer', 'null' => false),
 		'quiz_id' => array('type' => 'integer', 'null' => false),
 		'position' => array('type' => 'integer', 'null' => false, 'length' => 4),
+		'header' => array('type' => 'text', 'null' => false),
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
 	);
 	var $quiz_questions_tags = array(

@@ -9,7 +9,7 @@
 			$num = __('%s Match item', true);
 		}
 	?>
-	<h4><?php echo $html->link($text->truncate($question['body'], 200), array(
+	<h4><?php echo $html->link($text->truncate(strip_tags($question['body']), 200), array(
 			'controller' => 'matching_questions',
 			'action' => 'preview',
 			$question['id'],

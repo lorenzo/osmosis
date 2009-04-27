@@ -54,8 +54,7 @@ class Quiz extends QuizAppModel {
 				'order' => array('QuizQuestion.position' => 'ASC')
 			)
 	);
-	
-	
+
 	function __construct($id = false, $table = null, $ds = null) {
 		$this->setErrorMessage(
 			'name.required', __('The name can not be empty',true)

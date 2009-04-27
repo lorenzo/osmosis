@@ -10,7 +10,7 @@
 		}
 		$question = $question['ChoiceQuestion'];
 	?>
-	<h4><?php echo $html->link($text->truncate($question['body'], 200), array(
+	<h4><?php echo $html->link($text->truncate(strip_tags($question['body']), 200), array(
 			'controller' => 'choice_questions',
 			'action' => 'preview',
 			$question['id'],

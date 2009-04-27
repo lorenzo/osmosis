@@ -249,6 +249,28 @@ class QuizzesController extends QuizAppController {
 			);
 		}
 	}
+
+	function edit_question_header($quizQuestion) {
+		$this->Quiz->QuizQuestion->id = $quizQuestion;
+		$question = $this->Quiz->QuizQuestion->find('first',array(
+				'fields' => array('id','quiz_id','header'),
+				'conditions' => array('QuizQuestion.id' => $quizQuestion),
+				'recursive' => -1
+			)
+		);
+		if (!empty($this->data)) {
+			if ($this->Quiz->QuizQuestion->save($this->data,true,array('header'))) {
+				$this->Session->setFlash(__('The question header was edited', true), 'default', array('class' => 'success'));
+				$this->redirect(
+				array('controller' => 'quizzes', 'action' => 'edit',$question['QuizQuestion']['quiz_id'],'course_id' => $this->activeCourse)
+			);
+			} else {
+				$this->Session->setFlash(__('The question header could not be edited', true), 'default', array('class' => 'error'));
+			}
+		} else {
+			$this->data = $question;
+		}
+	}
 	
 	function answer($id = null) {
 		if (!$id) {
