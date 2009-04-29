@@ -1,3 +1,6 @@
+<?php if (!empty($isAjax)) :?>
+<?php echo $this->data['QuizQuestion']['header'];?>
+<?php else :?>
 <div class="quiz">
 <?php echo $form->create('QuizQuestion',array('url' => array(
 			'action' => $this->action,
@@ -16,3 +19,4 @@
 <?php echo $form->end(__('Submit', true));?>
 <?php echo $this->element('ui/editor');?>
 </div>
+<?php endif;?>

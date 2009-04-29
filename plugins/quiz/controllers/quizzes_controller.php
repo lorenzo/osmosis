@@ -259,7 +259,11 @@ class QuizzesController extends QuizAppController {
 			)
 		);
 		if (!empty($this->data)) {
-			if ($this->Quiz->QuizQuestion->save($this->data,true,array('header'))) {
+			if ($this->data = $this->Quiz->QuizQuestion->save($this->data,true,array('header'))) {
+				if ($this->RequestHandler->isAjax()) {
+					$this->set('isAjax',true);
+					return;
+				}
 				$this->Session->setFlash(__('The question header was edited', true), 'default', array('class' => 'success'));
 				$this->redirect(
 				array('controller' => 'quizzes', 'action' => 'edit',$question['QuizQuestion']['quiz_id'],'course_id' => $this->activeCourse)

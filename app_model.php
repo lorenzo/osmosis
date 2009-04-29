@@ -102,7 +102,5 @@ class AppModel extends Model{
 	function getParentCourse() {
 		return false;
 	}
-	
-
 }
 ?>

@@ -3,6 +3,8 @@ $javascript->link(array(
 	'jquery/plugins/jquery.ui.core',
 	'jquery/plugins/jquery.ui.sortable',
 	'jquery/plugins/jquery.form',
+	'jquery/plugins/jquery.jeditable',
+	'jquery/plugins/jquery.jeditable.tinymce'
 	),false);
 ?>
 <h1><?php echo sprintf(__('Edit %s %s', true), __('Quiz', true), $form->value('Quiz.name'));?></h1>
@@ -17,7 +19,7 @@ $javascript->link(array(
 			foreach ($this->data['Question'] as $index => $question) {
 				$number = $index + 1;
 				echo '<li class="quiz-question"  id="'.$question['QuizQuestion']['id'].'">',
-				'<div class="quiz-question-header">',
+				'<div class="quiz-question-header" id="qheader-'.$question['QuizQuestion']['id'].'">',
 					$question['QuizQuestion']['header'],
 				'</div>',
 				"<div class='quiz-question-number'>
@@ -41,7 +43,7 @@ $javascript->link(array(
 						array('class' => 'quiz-question-action question-move-up' .$hidden));
 				echo $html->link(__('edit header',true),
 						array('action' => 'edit_question_header',$question['QuizQuestion']['id']),
-						array('class' => 'quiz-question-action'));
+						array('class' => 'quiz-question-action question-edit-header'));
 				 echo $this->element('previewing/'.Inflector::underscore($question['type']), array('question' => $question)) ,
 				'&nbsp;',
 				'</li>';
@@ -169,6 +171,14 @@ $(document).ready(function(){
 		});
 		return false;
 	}
+
+	function editHeader() {
+		var link = $(this);
+		var container = link.parent('li').children('.quiz-question-header');
+		container.click();
+		return false;
+	}
+
 	$('#QuizEditForm.search').ajaxForm({
 		target: '#questions',
 		url: '<?php echo $html->url(array('action' => 'available_questions') + $this->params['pass'] + $this->params['named']); ?>',
@@ -191,6 +201,7 @@ $(document).ready(function(){
 	$('#questions .list ul li a.question-preview-link').live('click',questionPreview);
 	$('ol.quiz-question-list a.question-remove').live('click',removeQuestion);
 	$('ol.quiz-question-list a.question-move-up, ol.quiz-question-list a.question-move-down').live('click',moveQuestion);
+	$('ol.quiz-question-list a.question-edit-header').live('click',editHeader);
 	$(".quiz-question-list").sortable({
 		handle:'h3',
 		placeholder: 'quiz-question-placeholder quiz-question',
@@ -226,5 +237,20 @@ $(document).ready(function(){
 
 		}
 	}).find('li .question-header').addClass('movable');
+	$(".quiz-question-header").each(function(){
+		var url = $(this).parent('li').children('a.question-edit-header').attr('href');
+		$(this).editable(url,{
+			type : 'mce',
+			name: 'data[QuizQuestion][header]',
+			submit : 'OK',
+			indicator : "Saving...",
+			tooltip : 'Click to edit...',
+			width : '90%',
+			placeholder : '',
+			height : '100px'
+		});
+	});
+
 });
 </script>
+<?php echo $this->element('ui/editor',array('options' => array('mode' => 'none'))); ?>
