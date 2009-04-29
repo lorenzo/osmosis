@@ -242,9 +242,9 @@ $(document).ready(function(){
 		$(this).editable(url,{
 			type : 'mce',
 			name: 'data[QuizQuestion][header]',
-			submit : 'OK',
-			indicator : "Saving...",
-			tooltip : 'Click to edit...',
+			submit : '<?php __('Save'); ?>',
+			indicator : '<?php __('Saving... please wait');?>',
+			tooltip : '<?php __('Click to edit') ?>',
 			width : '90%',
 			placeholder : '',
 			height : '100px'
